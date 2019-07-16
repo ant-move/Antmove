@@ -1,0 +1,57 @@
+#!/usr/bin/env node
+
+var path = require('path');
+var program = require('commander');
+var buildScript = require('../scripts/build.js');
+const inputDirPath = process.cwd();
+/**
+ * read packageJson
+ */
+const packageJson = require('../package.json');
+
+const options = {
+    input: '',
+    output: '',
+    env: 'production',
+    remote: true
+};
+program
+    .version(packageJson.version)
+    .option('-i, --input <type>', 'Input path of compiled code.')
+    .option('-o, --output <type>', 'Output path of compiled code.')
+    .option('-e, --env <type>', 'Compiling in development mode or production mode.')
+    .option('-r, --remote <type>', 'Pull ployfill from remote sources.');
+
+options.input = program.input;
+options.defaultInput = inputDirPath;
+options.output = program.output;
+options.env = program.env || options.env;
+options.remote = program.remote || options.remote;
+
+action(options);
+/**
+ * cmd options
+ * @param opts 
+ */
+function action (options) {
+    if (options.env === 'dev' || options.env === 'development') {
+        process.env.NODE_ENV = 'development';
+    } else {
+        process.env.NODE_ENV = 'production';
+    }
+
+    if (!options.output) {
+        console.log('[Error:] Missing output path.');
+        return false;
+    }
+
+    /**
+     * preprocess ouput path
+     */
+    options.output = path.join(inputDirPath, options.output);
+    buildScript(options);
+}
+
+program
+    .parse(process.argv);
+
