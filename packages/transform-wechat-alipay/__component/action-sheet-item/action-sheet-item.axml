@@ -1,0 +1,6 @@
+<view class="sheet_item"  catchTap="tapItem">
+    <view a:if="textContent">
+        {{textContent}}
+    </view>
+    <slot></slot>
+</view>
