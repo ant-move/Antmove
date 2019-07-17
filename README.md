@@ -6,6 +6,13 @@
 > 蚂蚁搬家工具，一种小程序跨平台开发解决方案。
 
 ## 安装
+* 全局安装
+
+```sh
+$ npm install antmove -g
+```
+
+* 本地安装
 
 ```sh
 $ npm install antmove --save
@@ -15,11 +22,22 @@ $ npm install antmove --save
 
 ### 命令行编译
 
+```bash
+antmove -i inputpath -o outputpath --env development
+```
+
+* `--input,-i`
+    * 可选，编译源码目录，如果不传则是当前目录
+* `--output,-o`
+    * 必传，编译输出目录
+* `--env,-e`
+    * 可选，编译模式，生产模式代码会压缩，无编译日志及运行时日志
+
 ### Node.js
 
 ```js
 const path = require('path');
-const transformFramework = require('../../src/index.js');
+const transformFramework = require('antmove');
 const WechatPlugin = require('transform-wechat-alipay');
 
 let outputPath = path.join(__dirname, '../../dist');
