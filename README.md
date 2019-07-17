@@ -15,26 +15,6 @@ $ npm install antmove --save
 
 ### 命令行编译
 
-蚂蚁搬家提供了两种类似的编译命令，如下
-
-* `build`
-  * `outout`: 编译代码输出路径地址
-  * `env`: 编译模式选择（开发模式、生产模式）
-
-```bash
-antmove build output dev
-```
-
-
-* `build2`
-  * `input`: 编码源码路径地址
-  * `outout`: 编译代码输出路径地址
-  * `env`: 编译模式选择（开发模式、生产模式）
-  
-```bash
-antmove build2 input output dev
-```
-
 ### Node.js
 
 ```js
