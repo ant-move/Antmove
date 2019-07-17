@@ -42,7 +42,6 @@ function action (options) {
     }
 
     if (!options.output) {
-        console.log(program);
         console.log('[Error:] Missing output path.');
         return false;
     }

@@ -1,5 +1,5 @@
 {
-  "name": "transform-wechat-alipay-plugin",
+  "name": "transform-wechat-alipay",
   "version": "0.0.1",
   "description": "transform wechat miniprogram to alipay miniprogram tool.",
   "main": "index.js",
@@ -9,4 +9,7 @@
   },
   "author": "amap-appx@service.autonavi.com",
   "license": "GPL",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
 }
