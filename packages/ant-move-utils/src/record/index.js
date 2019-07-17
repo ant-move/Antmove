@@ -35,10 +35,10 @@ module.exports = function (config={}) {
             let pagePath = "";
             if (fileInfo.path.indexOf('pages')!==-1) {
                 projectPath =  fileInfo.path.split('pages')[0];
-                pagePath =  fileInfo.path.split(projectPath)[1].replace(/\\/g,"/");
+                pagePath =  fileInfo.path.split(projectPath)[1].replace(/\\/g, "/");
             } else {
                 projectPath =  fileInfo.path.split('components')[0];
-                pagePath =  fileInfo.path.split(projectPath)[1].replace(/\\/g,"/");
+                pagePath =  fileInfo.path.split(projectPath)[1].replace(/\\/g, "/");
             }
              
             result.status = 1;
@@ -110,7 +110,7 @@ module.exports = function (config={}) {
             let result = {};
             result.type = "wxssModular";
             result.components = [];
-            pathInfo = pathInfo.replace(/\\/g,"/");
+            pathInfo = pathInfo.replace(/\\/g, "/");
             let pathArr = pathInfo.split('/');
             pathArr.shift();
             
@@ -145,7 +145,7 @@ module.exports = function (config={}) {
             return result;
         },
     
-        getScriptData (pathInfo,apiObj,wxoriginCode) {
+        getScriptData (pathInfo, apiObj, wxoriginCode) {
             if (!config.isShow) {
                 return {};
             }
@@ -154,27 +154,27 @@ module.exports = function (config={}) {
             result.openData = [];
             result.status = 1;
             result.components = [];
-            pathInfo = pathInfo.replace(/\\/g,"/");
+            pathInfo = pathInfo.replace(/\\/g, "/");
             let pathArr = pathInfo.split('/');
             pathArr.shift();
             
             let pagePath = pathArr.join("/");
     
             if (pagePath==='app.js') {
-                let appLifeArr = getLife(wxoriginCode,0,config);
-                makeLifeData(appLifeArr,0,result,config);  
+                let appLifeArr = getLife(wxoriginCode, 0, config);
+                makeLifeData(appLifeArr, 0, result, config);  
             }
             // page页面
             if (wxoriginCode.indexOf('Page')!==-1) {
-                let pageLifeArr = getLife(wxoriginCode,1,config);
-                makeLifeData(pageLifeArr,1,result,config);
+                let pageLifeArr = getLife(wxoriginCode, 1, config);
+                makeLifeData(pageLifeArr, 1, result, config);
             }
     
             // component
     
             if (wxoriginCode.indexOf('Component')!==-1) {
-                let compLifeArr = getLife(wxoriginCode,2,config);
-                makeLifeData(compLifeArr,2,result,config);
+                let compLifeArr = getLife(wxoriginCode, 2, config);
+                makeLifeData(compLifeArr, 2, result, config);
             }
     
            
@@ -186,7 +186,7 @@ module.exports = function (config={}) {
             }
     
             Object.keys(apiObj).forEach(item => {
-                if (testOpenAbility(item,config)) {
+                if (testOpenAbility(item, config)) {
                     let opreult = {};
                     opreult[`wx.${item}`] = {
                         path: pagePath,
@@ -272,7 +272,7 @@ module.exports = function (config={}) {
             return returnData;
         },
     
-        getJsonData (pathInfo,content) {
+        getJsonData (pathInfo, content) {
             if (!config.isShow) {
                 return {};
             }
@@ -329,7 +329,7 @@ module.exports = function (config={}) {
     
             
     
-            pathInfo = pathInfo.replace(/\\/g,"/");
+            pathInfo = pathInfo.replace(/\\/g, "/");
             let pathArr = pathInfo.split('/');
             pathArr.shift();
             let pagePath = pathArr.join("/");
@@ -356,7 +356,7 @@ module.exports = function (config={}) {
             let result = {};
             result.type = "otherModular";
             result.components = [];
-            let dirArr =  url.replace(/\\/g,"/").split('/');
+            let dirArr =  url.replace(/\\/g, "/").split('/');
             dirArr.shift(dirArr[0]);
             let newurl = dirArr.join('/');
             result.status = 1;
@@ -365,15 +365,15 @@ module.exports = function (config={}) {
             return obj;
         },
     
-        writeReportPage (data,distpath) {
+        writeReportPage (data, distpath) {
             if (!config.isShow) {
                 return false;
             }
             let dayastr = 'let pageData = '+JSON.stringify(data);
-            let local = path.join(distpath.replace(/\\/g,"/").split('/.config.json')[0]);
-            let htmlPath = path.join(local,config.pagePath,'report');
+            let local = path.join(distpath.replace(/\\/g, "/").split('/.config.json')[0]);
+            let htmlPath = path.join(local, config.pagePath, 'report');
             let dataPath = "";
-            let viewPath = path.join(__dirname,'./view');
+            let viewPath = path.join(__dirname, './view');
             if (fs.existsSync(htmlPath)) {
     
                 exists( viewPath, htmlPath, copyDir );
@@ -382,7 +382,7 @@ module.exports = function (config={}) {
                 fs.mkdirSync (htmlPath);
                 exists( viewPath, htmlPath, copyDir );
             }
-            dataPath = path.join(htmlPath,'js','data.js');
+            dataPath = path.join(htmlPath, 'js', 'data.js');
     
             if (fs.existsSync(dataPath)) {
                 fs.unlinkSync (dataPath);
@@ -390,7 +390,7 @@ module.exports = function (config={}) {
            
             fs.writeFileSync(dataPath, dayastr);
             console.log("即将打开日志页面...");
-            openBower(local,config);
+            openBower(local, config);
         },
     
         findOpenAbility (repData) {
@@ -432,7 +432,7 @@ module.exports = function (config={}) {
             let result = {};
             result.type = "modularWxs";
             result.components = [];
-            pathInfo = pathInfo.replace(/\\/g,"/");
+            pathInfo = pathInfo.replace(/\\/g, "/");
             let pathArr = pathInfo.split('/');
             pathArr.shift();
             
@@ -445,7 +445,7 @@ module.exports = function (config={}) {
         },
 
         getToolVs () {
-            let package =  fs.readFileSync(config.packagepath,'utf-8');
+            let package =  fs.readFileSync(config.packagepath, 'utf-8');
             let versionData = JSON.parse(package).version;
             return versionData;
         },
@@ -461,7 +461,7 @@ module.exports = function (config={}) {
     };
 };
 
-function testOpenAbility (api,config) {
+function testOpenAbility (api, config) {
     if (config.openAbility[api]) { 
         return true;
     } 
@@ -511,13 +511,13 @@ function exists (src, dst, callback) {
     }
 }
 
-async  function openBower (distpath,config) {
-    const pageUrl = path.join(distpath,config.pagePath,"report/index.html");
+async  function openBower (distpath, config) {
+    const pageUrl = path.join(distpath, config.pagePath, "report/index.html");
     // Opens the url in the default browser
     await open(pageUrl);
 }
 
-function getLife (wxoriginCode,num,config) {
+function getLife (wxoriginCode, num, config) {
     let resultArr = [];
     let lifeArr = Object.keys(config.lifeCycleInfo.lifeInfo[num].body);
     
@@ -537,7 +537,7 @@ function getLife (wxoriginCode,num,config) {
    
 }
 
-function makeLifeData (lifeArr,num,result,config) {
+function makeLifeData (lifeArr, num, result, config) {
     lifeArr.forEach( key => {
         let body = config.lifeCycleInfo.lifeInfo[num].body[key];
         let lifeResilt = {};
@@ -594,8 +594,6 @@ function makeLifeData (lifeArr,num,result,config) {
             lifeResilt.attrs = ["不支持"];
             result.components.push(lifeResilt);
         }
-        
-
     });
 }
 

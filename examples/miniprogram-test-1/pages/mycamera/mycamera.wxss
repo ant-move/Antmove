@@ -1,0 +1,10 @@
+.cameraBox{
+  height: 1000rpx;
+}
+.myCamera{
+  height: 100%;
+}
+.btn{
+  height: 100rpx;
+  width: 100%;
+}

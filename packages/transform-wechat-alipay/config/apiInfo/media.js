@@ -34,17 +34,11 @@ module.exports = {
         'https://developers.weixin.qq.com/miniprogram/dev/api/media/image/wx.saveImageToPhotosAlbum.html',
         'https://docs.alipay.com/mini/api/izfoiz',
         {
-            msg: '方法名称不同wx: saveImageToPhotosAlbum, alipay: saveImage,用法不同 url保存在线图片filePath不支持网络路径, 参数名称差异',
-            params: {
-                props: {
-                    filePath: {
-                        type: 1,
-                        desc: '图片文件路径，可以是临时文件路径或永久文件路径，不支持网络图片路径, wx: filePath, alipay: url'
-                    }
-                }
-            }
+            msg: '完全支持',
         }
     ),
+
+
     previewImage: createDescObj(
         0,
         '在新页面中全屏预览图片',
@@ -58,32 +52,12 @@ module.exports = {
         'https://docs.alipay.com/mini/api/yv9n6t'
     ),
     compressImage: createDescObj(
-        1,
+        0,
         '压缩图片接口，可选压缩质量',
         'https://developers.weixin.qq.com/miniprogram/dev/api/media/image/wx.compressImage.html',
         'https://docs.alipay.com/mini/api/ehndze',
         {
-            msg: '参数名称/类型差异, 返回值名称/类型差异',
-            params: {
-                props: {
-                    src: {
-                        type: 1,
-                        desc: '图片路径 wx: string, alipay: String/Array'
-                    },
-                    quality: {
-                        type: 4,
-                        desc: '压缩级别, wx: quality 范围0～100，默认80，数值越小，质量越低，压缩率越高（仅对jpg有效), alipay: compressLevel 支持 0 ~ 4 的整数，默认 4'
-                    }
-                }
-            },
-            returnValue: {
-                props: {
-                    tempFilePath: {
-                        type: 1,
-                        desc: '压缩后图片的临时文件路径, wx: tempFilePath string, alipay: apFilePaths String/Array'
-                    }
-                }
-            }
+            msg: '封装后可完全支持',
         }
     ),
     chooseMessageFile: createDescObj(
@@ -98,13 +72,9 @@ module.exports = {
         'https://developers.weixin.qq.com/miniprogram/dev/api/media/image/wx.chooseImage.html',
         'https://docs.alipay.com/mini/api/media-image#a-nameeh9ddfamychooseimage',
         {
-            msg: '返回值属性差异/缺失',
+            msg: '返回值属性缺失',
             returnValue: {
                 props: {
-                    tempFilePaths: {
-                        type: 1,
-                        desc: '图片的本地临时文件路径列表wx: tempFilePaths, alipay: apFilePaths'
-                    },
                     tempFiles: {
                         type: 0,
                         desc: '图片的本地临时文件列表'

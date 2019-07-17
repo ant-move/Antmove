@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "nodes":"/components/nodes/nodes",
+    "custom-li":"/components/comtest/custom-li"
+  }
+}

@@ -1,0 +1,4 @@
+<view>
+  <button type="default" bindtap="getExtConfigSync">getExtConfigSync</button>
+  <button type="default" bindtap="getExtConfig">getExtConfig</button>
+</view>

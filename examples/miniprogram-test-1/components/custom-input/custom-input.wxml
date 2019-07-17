@@ -1,0 +1,4 @@
+<!--components/custom-input/custom-input.wxml-->
+<view>
+  <input placeholder='123'></input>
+</view>

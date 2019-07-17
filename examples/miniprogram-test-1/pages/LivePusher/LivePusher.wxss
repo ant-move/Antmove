@@ -1,0 +1,5 @@
+/* pages/LivePusher/LivePusher.wxss */
+.btn{
+  width: 750rpx;
+  height: 100rpx
+}

@@ -5,10 +5,6 @@ const path = require('path');
 const fs = require('fs-extra');
 const Config = require('../config.js');
 const { generateLogPage } = require('./generateRuntimeLogPage');
-const {
-    minifyJs,
-    transformEs6
-} = require('ant-move-utils');
 const customComponentPrefix = Config.library.customComponentPrefix;
 let entry = path.join(__dirname, `../__component`);
 Config.compile.customComponent = Object.assign({}, Config.compile.customComponent);
