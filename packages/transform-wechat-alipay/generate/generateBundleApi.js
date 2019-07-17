@@ -7,7 +7,7 @@ const fs = require('fs-extra');
 const {
     minifyJs,
     transformEs6
-} = require('ant-move-utils');
+} = require('@antmove/utils');
 let Config = require('../config.js');
 let customComponentPrefix = Config.library.customComponentPrefix;
 const wrapApis = require('../__api/my.js');
@@ -69,7 +69,7 @@ function generateRuntimeConfig (output, isDev = false) {
     module.exports = {
         env: ${isDev ? '"development"': '"production"'}
     }
-    `
+    `;
     let outputPath = path.join(output, `${customComponentPrefix}/api/config.js`);
 
     fs.outputFileSync(outputPath, code);

@@ -1,6 +1,6 @@
 const utils = require('./src/index');
 
 module.exports = {
-    name: 'antmove-utils',
+    name: '@antmove/utils',
     ...utils
 };

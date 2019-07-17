@@ -35,14 +35,7 @@ action(options);
  * @param opts 
  */
 function action (options) {
-    if (options.env === 'dev' || options.env === 'development') {
-        process.env.NODE_ENV = 'development';
-    } else {
-        process.env.NODE_ENV = 'production';
-    }
-
     if (!options.output) {
-        console.log(program);
         console.log('[Error:] Missing output path.');
         return false;
     }
@@ -53,5 +46,4 @@ function action (options) {
     options.output = path.join(inputDirPath, options.output);
     buildScript(options);
 }
-
 

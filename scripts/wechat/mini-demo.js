@@ -1,17 +1,15 @@
 const path = require('path');
 const transformFramework = require('../../src/index.js');
-const WechatPlugin = require('transform-wechat-alipay');
+const WechatPlugin = require('@antmove/wx-alipay');
 let outputPath = path.join(__dirname, '../../dist');
 
 let inputDirPath = path.join(__dirname, '../../examples/miniprogram-demo/miniprogram');
-transformFramework({
+
+const App = transformFramework();
+
+App.use(WechatPlugin, {
     entry: inputDirPath,
-    plugins: [
-        {
-            plugin: WechatPlugin,
-            options: {
-                dist: outputPath + '/alipaymini-demo'
-            }
-        }
-    ]
-});
+    dist: outputPath + '/alipaymini-demo',
+    env: 'development'
+})
+    .start();
