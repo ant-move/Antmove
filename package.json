@@ -1,6 +1,6 @@
 {
   "name": "antmove",
-  "version": "0.2.0",
+  "version": "0.0.2",
   "description": "transform wechat miniapp to alipay miniapp",
   "bin": {
     "antmove": "./bin/index"
@@ -14,10 +14,9 @@
     "updata": "node ./src/utils/updataTool/index.js",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
-  "author": "",
-  "license": "MIT",
+  "author": "amap-appx@service.autonavi.com",
+  "license": "GPL",
   "dependencies": {
-    "@ant-basement/miniprogram-sdk": "^2.3.0-alpha.6",
     "@babel/core": "^7.4.3",
     "@babel/plugin-proposal-export-default-from": "^7.2.0",
     "@babel/plugin-transform-object-super": "^7.2.0",
@@ -33,9 +32,12 @@
     "open": "^6.3.0",
     "parsimmon": "^1.12.0",
     "prettier": "^1.17.0",
-    "urlencode": "^1.1.0"
+    "urlencode": "^1.1.0",
+    "antmove-utils": "^0.0.1",
+    "transform-wechat-alipay": "^0.0.1"
   },
   "devDependencies": {
+    "@ant-basement/miniprogram-sdk": "^2.3.0-alpha.6",
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
     "eslint": "^5.15.1",
@@ -57,5 +59,8 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "npm run lint"
     }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }

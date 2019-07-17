@@ -20,7 +20,8 @@ program
     .option('-i, --input <type>', 'Input path of compiled code.')
     .option('-o, --output <type>', 'Output path of compiled code.')
     .option('-e, --env <type>', 'Compiling in development mode or production mode.')
-    .option('-r, --remote <type>', 'Pull ployfill from remote sources.');
+    .option('-r, --remote <type>', 'Pull ployfill from remote sources.')
+    .parse(process.argv);
 
 options.input = program.input;
 options.defaultInput = inputDirPath;
@@ -41,6 +42,7 @@ function action (options) {
     }
 
     if (!options.output) {
+        console.log(program);
         console.log('[Error:] Missing output path.');
         return false;
     }
@@ -52,6 +54,4 @@ function action (options) {
     buildScript(options);
 }
 
-program
-    .parse(process.argv);
 
