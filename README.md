@@ -1,12 +1,3 @@
-<style>
-.user-title {
-    height: 18px;
-    line-height: 18px;
-    display: inline-block;
-    vertical-align: top;
-    padding-left: 5px;
-}
-</style>
 <h1 align="center">蚂蚁搬家（antmove)</h1>
 
 > 蚂蚁搬家工具，让小程序跨平台开发变得简单。
@@ -102,9 +93,9 @@ const App = transformFramework();   // 得到的 app 实例即可进行转换处
 
 ## 用户
 
-* <img height='18' src='https://ant-move.github.io/website/img/e.JPG'/><span class='user-title'>e 代驾<span>
-* <img height='18' src='https://ant-move.github.io/website/img/we.JPG'/><span class='user-title'>微代驾<span>
-* <img height='18' src='https://ant-move.github.io/website/img/qumanman.JPG'/><span class='user-title'>趣满满<span>
+* <img height='18' src='https://ant-move.github.io/website/img/e.JPG'/><span style='height: 18px;line-height: 18px;display: inline-block;vertical-align: top;padding-left: 5px;'>e 代驾<span>
+* <img height='18' src='https://ant-move.github.io/website/img/we.JPG'/><span style='height: 18px;line-height: 18px;display: inline-block;vertical-align: top;padding-left: 5px;'>微代驾<span>
+* <img height='18' src='https://ant-move.github.io/website/img/qumanman.JPG'/><span style='height: 18px;line-height: 18px;display: inline-block;vertical-align: top;padding-left: 5px;'>趣满满<span>
 
 
 ## 贡献
