@@ -445,7 +445,7 @@ module.exports = function (config={}) {
         },
 
         getToolVs () {
-            let package =  fs.readFileSync(config.packagepath, 'utf-8');
+            let package =  fs.readFileSync(path.join(__dirname, '../../package.json'), 'utf-8');
             let versionData = JSON.parse(package).version;
             return versionData;
         },
