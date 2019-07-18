@@ -1,4 +1,4 @@
-<h1 align="center">蚂蚁搬家（antmove</h1>
+<h1 align="center">蚂蚁搬家（antmove)</h1>
 
 > 蚂蚁搬家工具，让小程序跨平台开发变得简单。
 
