@@ -4,24 +4,12 @@ const { createDescObj } = require('./utils');
  */
 module.exports = {
     setStorageSync: createDescObj(
-        1,
+        0,
         '将数据存储在本地缓存中指定的 key 中',
         'https://developers.weixin.qq.com/miniprogram/dev/api/storage/wx.setStorageSync.html',
         'https://docs.alipay.com/mini/api/cog0du',
         {
-            msg: '传参方式不同',
-            params: {
-                props: {
-                    key: {
-                        type: 3,
-                        desc: 'wx: String, alipay: Object'
-                    },
-                    data: {
-                        type: 3,
-                        desc: 'wx: String, alipay: Object'
-                    }
-                }
-            }
+            msg: '封装后完全支持'
         }
     ),
     setStorage: createDescObj(
@@ -31,20 +19,12 @@ module.exports = {
         'https://docs.alipay.com/mini/api/eocm6v'
     ),
     removeStorageSync: createDescObj(
-        1,
+        0,
         '从本地缓存中同步移除指定 key',
         'https://developers.weixin.qq.com/miniprogram/dev/api/storage/wx.removeStorageSync.html',
         'https://docs.alipay.com/mini/api/ytfrk4',
         {
-            msg: '传参方式不同',
-            params: {
-                props: {
-                    key: {
-                        type: 3,
-                        desc: 'wx: String, alipay: Object'
-                    }
-                }
-            }
+            msg: '封装后完全支持'
         }
     ),
     removeStorage: createDescObj(
@@ -54,28 +34,12 @@ module.exports = {
         'https://docs.alipay.com/mini/api/of9hze'
     ),
     getStorageSync: createDescObj(
-        1,
+        0,
         '获取缓存数据',
         'https://developers.weixin.qq.com/miniprogram/dev/api/storage/wx.getStorageSync.html',
         'https://docs.alipay.com/mini/api/ox0wna',
         {
-            msg: '参数类型不同/返回值类型不同',
-            params: {
-                props: {
-                    key: {
-                        type: 3,
-                        desc: 'wx: String, alipay: Object'
-                    }
-                }
-            },
-            returnValue: {
-                props: {
-                    data: {
-                        type: 3,
-                        desc: 'wx: String, alipay: Object/String'
-                    }
-                }
-            }
+            msg: '封装后完全支持'
         }
     ),
     getStorageInfoSync: createDescObj(

@@ -1,7 +1,7 @@
 const utils = require('../../api/utils');
 const { warnLife } = utils;
 const config = require('../../api/config');
-config.env = 'production';
+config.env = 'development';
 
 const getUrl = function () {
     let pages = getCurrentPages();
@@ -15,6 +15,7 @@ const getUrl = function () {
             pagePath: url
         }
     });
+    return url
 };
 
 const watchShakes = function () {
@@ -23,7 +24,7 @@ const watchShakes = function () {
     let logUrl = "pages/ant-move-runtime-logs/index"; 
     let specificUrl = "pages/ant-move-runtime-logs/specific/index";
     if ( url ===logUrl || url===specificUrl ) {
-        return ;
+        watchShakes();
     }  
     my.watchShake({
         success: function () {
@@ -39,6 +40,9 @@ const watchShakes = function () {
                             url: '../../pages/ant-move-runtime-logs/index'
                         });
                     }
+                },
+                fail: function () {
+                    watchShakes();
                 }
             });
         }
@@ -65,7 +69,7 @@ module.exports = {
             let body = {};
             function pre (params = {}) {
                 return utils.defineGetter(params, body.params, function (obj, prop) {
-                    warnLife(`onLaunch's return value is not support ${prop} attribute!`, "onLaunch");
+                    warnLife(`onLaunch's return value is not support ${prop} attribute!`, `onLaunch/${prop}`);
                 });
             }
             if (options.onLaunch) {
@@ -90,7 +94,7 @@ module.exports = {
             let body = {};
             function pre (params = {}) {
                 return utils.defineGetter(params, body.params, function (obj, prop) {
-                    warnLife(`onShow's return value is not support ${prop} attribute!`, "onShow");
+                    warnLife(`onShow's return value is not support ${prop} attribute!`, `onShow/${prop}`);
                 });
             }
             if (options.onShow) {
@@ -112,6 +116,8 @@ module.exports = {
         };
         if (options.onHide) {
             _opts.onHide = function () {
+                let url = getUrl();
+                warnLife(url,'app/onHide')
                 options.onHide.call(this);
             };
         }

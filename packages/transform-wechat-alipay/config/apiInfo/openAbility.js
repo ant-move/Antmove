@@ -4,20 +4,12 @@ const { createDescObj } = require('./utils');
  */
 module.exports = {
     login: createDescObj(
-        1,
+        0,
         '调用接口获取登录凭证（code）',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/login/wx.login.html',
         'https://docs.alipay.com/mini/api/openapi-authorize',
         {
-            msg: '返回值名称差异',
-            returnValue: {
-                props: {
-                    code: {
-                        type: 1,
-                        desc: '授权码, wx: code, alipay: authCode'
-                    }
-                }
-            }
+            msg: '封装后完全支持'
         }
     ),
     checkSession: createDescObj(
@@ -110,24 +102,16 @@ module.exports = {
         '无'
     ),
     reportAnalytics: createDescObj(
-        1,
+        0,
         '自定义分析数据上报接口',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/data-analysis/wx.reportAnalytics.html',
         'https://docs.alipay.com/mini/api/report',
         {
-            msg: '参数差异',
-            params: {
-                props: {
-                    eventName: {
-                        type: 1,
-                        desc: 'wx: 配置中的字段名, alipay: 自定义事件名'
-                    }
-                }
-            }
+            msg: '封装后完全支持'
         }
     ),
     requestPayment: createDescObj(
-        2,
+        1,
         '发起支付',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/payment/wx.requestPayment.html',
         'https://docs.alipay.com/mini/api/openapi-pay',
@@ -201,7 +185,7 @@ module.exports = {
         '无'
     ),
     openCard: createDescObj(
-        2,
+        1,
         '查看微信卡包中的卡券',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/card/wx.openCard.html',
         'https://docs.alipay.com/mini/api/qxxpsh',

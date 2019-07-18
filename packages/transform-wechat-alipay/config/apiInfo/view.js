@@ -172,58 +172,58 @@ module.exports = {
         'https://docs.alipay.com/mini/api/set-background#mysetBackgroundColor'
     ),
     showTabBarRedDot: createDescObj(
-        2,
+        0,
         '显示tabBar某一项的右上角的红点',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/tab-bar/wx.showTabBarRedDot.html',
-        '无'
+        'https://docs.alipay.com/mini/api/dquxiq'
     ),
     showTabBar: createDescObj(
-        2,
+        0,
         '显示 tabBar',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/tab-bar/wx.showTabBar.html',
-        '无'
+        'https://docs.alipay.com/mini/api/dpq5dh'
     ),
     setTabBarStyle: createDescObj(
-        2,
+        0,
         '动态设置 tabBar 的整体样式',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/tab-bar/wx.setTabBarStyle.html',
-        '无'
+        'https://docs.alipay.com/mini/api/wcf0sv'
     ),
     setTabBarItem: createDescObj(
-        2,
+        0,
         '动态设置 tabBar 某一项的内容',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/tab-bar/wx.setTabBarItem.html',
-        '无'
+        'https://docs.alipay.com/mini/api/zu37bk'
     ),
     setTabBarBadge: createDescObj(
-        2,
+        0,
         '为 tabBar 某一项的右上角添加文本',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/tab-bar/wx.setTabBarBadge.html',
-        '无'
+        'https://docs.alipay.com/mini/api/qm7t3v'
     ),
     removeTabBarBadge: createDescObj(
-        2,
+        0,
         '移除 tabBar 某一项右上角的文本',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/tab-bar/wx.removeTabBarBadge.html',
-        '无'
+        'https://docs.alipay.com/mini/api/lpbp5g'
     ),
     hideTabBarRedDot: createDescObj(
-        2,
+        0,
         '隐藏 tabBar 某一项的右上角的红点',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/tab-bar/wx.hideTabBarRedDot.html',
-        '无'
+        'https://docs.alipay.com/mini/api/mg428a'
     ),
     hideTabBar: createDescObj(
-        2,
+        0,
         '隐藏 tabBar',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/tab-bar/wx.hideTabBar.html',
-        '无'
+        'https://docs.alipay.com/mini/api/at18z8'
     ),
     loadFontFace: createDescObj(
-        2,
+        0,
         '动态加载网络字体',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/font/wx.loadFontFace.html',
-        '无'
+        'https://docs.alipay.com/mini/api/ggawf0'
     ),
     stopPullDownRefresh: createDescObj(
         0,

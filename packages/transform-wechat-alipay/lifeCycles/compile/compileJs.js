@@ -10,7 +10,7 @@ const {
     ifProcessHandleFn,
     ConstructorHandle,
     prettierCode
-} = require('ant-move-utils');
+} = require('@antmove/utils');
 
 module.exports = function (fileInfo, ctx, originCode, apis) {
     originCode = behavourHandle(originCode);
@@ -19,7 +19,7 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
     let isMatchPlatformApi = originCode.match(/\bwx\.(\w+)/g);
             
     originCode = replaceCalleeHandleFn(originCode, 'wx', '_my', apis);
-    Config.compile.wrapApis = Object.assign(Config.compile.wrapApis,apis);
+    Config.compile.wrapApis = Object.assign(Config.compile.wrapApis, apis);
     originCode = commentBlock(originCode);
     originCode = requireModuleFn(originCode, ctx);
     originCode = ifProcessHandleFn(originCode);

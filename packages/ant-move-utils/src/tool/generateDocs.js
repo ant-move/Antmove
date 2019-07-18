@@ -49,11 +49,11 @@ function returnType ( type ) {
     }
     return typeDoc;
 }
-module.exports = function ( config = {} ,target) {
-    let befor = target.split("-")[0]
-    let after = target.split("-")[1]
+module.exports = function ( config = {}, target) {
+    let befor = target.split("-")[0];
+    let after = target.split("-")[1];
     function tansformTarget (target) {
-        let str = ""
+        let str = "";
         switch (target) {
         case "wechat" :str = "微信";
             break;
@@ -64,7 +64,7 @@ module.exports = function ( config = {} ,target) {
         case "baidu" :str = "百度";
             break;       
         }
-        return str
+        return str;
     }
     let tansformBefor = tansformTarget(befor);
     let tansformAfter = tansformTarget(after);
@@ -73,24 +73,24 @@ module.exports = function ( config = {} ,target) {
         ApiInfo,
         LifeInfo,
         JsonInfo
-    } = config
-    function generateSideBarJson () {
+    } = config;
+    function generateSideBarJson (res) {
         let json = fs.readFileSync(outputDist);
         json = JSON.parse(json);
-        json['docs-other'][`${tansformBefor}转${tansformAfter}`] = wx2alipay;    
-        json['docs-other'][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-components`);
-        json['docs-other'][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-apis`);
+        json[`${res}`][`${tansformBefor}转${tansformAfter}`] = wx2alipay;    
+        // json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-components`);
+        // json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-apis`);
         fs.outputFileSync(outputDist, JSON.stringify(json));
     }
      
     
     
-    function renderApiDoc (_apiAll,type) {  
+    function renderApiDoc (_apiAll, type) {  
         let apiDoc = [];
         let _str = '' ;
-        let header = ['函数名','说明',`${tansformBefor}小程序`,`${tansformAfter}小程序`,'是否支持'];
-        let retValheader = ['差异属性','说明','差异类型'];
-        let paramsHeader = ['差异参数','说明','差异类型'];
+        let header = ['函数名', '说明', `${tansformBefor}小程序`, `${tansformAfter}小程序`, '是否支持'];
+        let retValheader = ['差异属性', '说明', '差异类型'];
+        let paramsHeader = ['差异参数', '说明', '差异类型'];
         let apiAll = [];
         if (type === "api") {
             apiAll = _apiAll.apiInfo;
@@ -125,16 +125,16 @@ module.exports = function ( config = {} ,target) {
                         arr.push(" ");
                     }    
                     if (_apiInfo.url.original) {
-                        arr.push(a('doc', _apiInfo.url.original));
+                        arr.push(a('查看文档', _apiInfo.url.original));
                         if (_apiInfo.url.target) {
-                            arr.push(a('doc', _apiInfo.url.target));
+                            arr.push(a('查看文档', _apiInfo.url.target));
                         } else {
                             arr.push("无");
                         } 
                     } else {
-                         arr.push(a('doc', _apiInfo.url[`${befor}`]));
+                        arr.push(a('查看文档', _apiInfo.url[`${befor}`]));
                         if (_apiInfo.url[`${after}`]) {
-                            arr.push(a('doc', _apiInfo.url[`${after}`]));
+                            arr.push(a('查看文档', _apiInfo.url[`${after}`]));
                         } else {
                             arr.push("无");
                         }  
@@ -148,7 +148,7 @@ module.exports = function ( config = {} ,target) {
                         break ;                      
                     }
                     _str += h2(fnName);          
-                    _str += table(header,arr);
+                    _str += table(header, arr);
                     if ( _apiInfo.body.msg ) {
                         _str += h4("\n* "+_apiInfo.body.msg + '\n'); 
                     }
@@ -160,7 +160,7 @@ module.exports = function ( config = {} ,target) {
                                 valType = returnType(_apiInfo.body.params.props[val].type);
                                 paramsArr.push(valType);
                             });      
-                        _str += table(paramsHeader,paramsArr);
+                        _str += table(paramsHeader, paramsArr);
                     }
                     if (typeof _apiInfo.body.returnValue !== "undefined" ) {        
                         Object.keys(_apiInfo.body.returnValue.props)
@@ -171,7 +171,7 @@ module.exports = function ( config = {} ,target) {
                                 retValArr.push(valType);
                             });
                                
-                        _str += table(retValheader,retValArr);
+                        _str += table(retValheader, retValArr);
                     }
                 });
             apiObj[apiName.type] = _str ;
@@ -180,29 +180,29 @@ module.exports = function ( config = {} ,target) {
         return apiDoc;
         
     }
-    function renderComponentDoc (obj ,type) {
+    function renderComponentDoc (obj, type) {
         let componentDoc = [];
         let _str = '' ;
-        let header = ['差异属性','说明','是否支持','返回值差异','备注'];
+        let header = ['属性名', '说明', '是否支持', '备注'];
         let ComponentsInfo = [];
-        let urlHeader = [`${tansformBefor}小程序`,`${tansformAfter}小程序`]
+        let urlHeader = [`${tansformBefor}小程序`, `${tansformAfter}小程序`];
         if ( type === "components" ) {
             ComponentsInfo = obj.ComponentsInfo ;
         } else {
             ComponentsInfo = obj.jsonInfo ; 
         }
-        ComponentsInfo.forEach(function (fnName,i) {
+        ComponentsInfo.forEach(function (fnName, i) {
             let componentObj = {};
             _str = '';
             _str += `---\n`;
-            _str += `id: ${befor}-${after}-component-${fnName.type}\n` ; 
+            _str += `id: ${befor}-${after}-${type}-${fnName.type}\n` ; 
             _str += `title: ${fnName.name}\n`;
             _str += `---\n\n`;           
             wx2alipay[0].ids.push(`${befor}-${after}-${type}-${fnName.type}`);
             Object.keys(ComponentsInfo[i].body)
                 .forEach(function (attrName) {              
                     let arr = [] ;
-                    let _arr = []
+                    let _arr = [];
                     let attrInfo =  ComponentsInfo[i].body[attrName] ;
                     _str += h2(attrName);
                     let propsObj = {} ;
@@ -214,14 +214,14 @@ module.exports = function ( config = {} ,target) {
                             _arr.push("无");
                         } 
                     } else if (attrInfo.url && attrInfo.url[`${befor}`]) {
-                         _arr.push(a('doc', attrInfo.url[`${befor}`]));
+                        _arr.push(a('doc', attrInfo.url[`${befor}`]));
                         if (attrInfo.url[`${after}`]) {
                             _arr.push(a('doc', attrInfo.url[`${after}`]));
                         } else {
                             _arr.push("无");
                         }  
                     }
-                    _str += table(urlHeader,_arr)
+                    // _str += table(urlHeader, _arr);
                     if (attrInfo.props) {
                         propsObj = attrInfo.props;
                         Object.keys(propsObj)
@@ -247,6 +247,7 @@ module.exports = function ( config = {} ,target) {
                                     arr.push(" ");
                                 }
                                 let attrParams = attrInfo.props[attr].params ;
+                                /*
                                 if  (attrParams) {
                                     let params = "";
                                     Object.keys(attrParams)
@@ -257,7 +258,7 @@ module.exports = function ( config = {} ,target) {
                                         });                                 
                                 } else {
                                     arr.push(" ");
-                                }
+                                }*/
                                 let attrMsg = "" ;  
                                 if (attrInfo.props[attr].msg) {
                                     attrMsg = attrInfo.props[attr].msg;
@@ -266,9 +267,9 @@ module.exports = function ( config = {} ,target) {
                                     arr.push(" ");
                                 } 
                             });                       
-                        _str += table(header,arr);
+                        _str += table(header, arr);
                     } else {
-                        _str += `*暂不支持\n`;
+                        _str += `* 暂不支持\n`;
                     }  
                 });       
             componentObj[fnName.type] = _str;
@@ -307,11 +308,11 @@ module.exports = function ( config = {} ,target) {
         return str;
     }
     
-    let apiRes = renderApiDoc(ApiInfo,"api");
-    let componentRes =  renderComponentDoc(ComponentInfo,"components");
-    let lifeRes = renderApiDoc(LifeInfo,"life") ; 
-    let jsonRes = renderComponentDoc(JsonInfo,"json");
-    generateSideBarJson();
+    let apiRes = renderApiDoc(ApiInfo, "api");
+    let componentRes =  renderComponentDoc(ComponentInfo, "components");
+    let lifeRes = renderApiDoc(LifeInfo, "life") ; 
+    let jsonRes = renderComponentDoc(JsonInfo, "json");
+    generateSideBarJson(target);
     return {
         lifeRes,
         apiRes,
