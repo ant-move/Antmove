@@ -1,5 +1,5 @@
 const fs = require('fs-extra');
-const { prettierCode } = require('ant-move-utils');
+const { prettierCode } = require('@antmove/utils');
 const generateAppCssStyle = require('../../generate/generateApp.css.js');
 
 module.exports = function (fileInfo, ctx) {

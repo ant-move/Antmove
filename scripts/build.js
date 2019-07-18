@@ -1,27 +1,20 @@
 const transformFramework = require('../src/index.js');
-const WechatPlugin = require('transform-wechat-alipay');
+const WechatPlugin = require('@antmove/wx-alipay');
+
+const App = transformFramework();
 
 module.exports = function (options = {}) {
-    const inputDirPath = options.input || options.defaultInput;
-    const outputDirPath = options.output;
-
-    transformFramework({
+    const inputDirPath = options.input;
+    const outputDirPath = options.output || options.defaultOutput;
+    const opts = {
+        dist: outputDirPath,
         entry: inputDirPath,
-        options: {
-            exclude: [
-                /^\.\w+/,
-                'project.config.json'
-            ]
-        },
-        plugins: [
-            {
-                plugin: WechatPlugin,
-                options: {
-                    dist: outputDirPath,
-                    ...options
-                }
-            }
-        ]
-    });
+        ...options
+    };
 
+    App.use(
+        WechatPlugin,
+        opts
+    )
+        .start();
 };

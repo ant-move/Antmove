@@ -1,14 +1,39 @@
 const Transform = require('./transform/index.js');
+const chalk = require('chalk');
 
-module.exports = function (transformConfig) {
+module.exports = function () {
+    const app = {
+        plugins: []
+    };
 
-    const {
-        entry,
-        plugins
-    } = transformConfig;
+    app.use = function (plugin, options) {
+        options.env = processEnv(options.env);
+        app.plugins.push({
+            plugin,
+            options
+        });
 
-    plugins.forEach(function (plugin) {
-        let opts = Object.assign({entry}, transformConfig.options, plugin.options);
-        new Transform(plugin.plugin, opts).beforeRun();
-    });
+        return app;
+    };
+
+    app.start = function () {
+        app.plugins.forEach(function (plugin) {
+            new Transform(plugin.plugin, plugin.options).beforeRun();
+        });
+        
+        return app;
+    };
+
+    return app;
 };
+
+function processEnv (env) {
+    if (!env) return false;
+    if (env === 'dev' || env === 'development') {
+        process.env.NODE_ENV = 'development';
+    } else if (env === 'prod' || env === 'production') {
+        process.env.NODE_ENV = 'production';
+    } else {
+        console.log(chalk('Invalid env value, use production instead.'));
+    }
+}

@@ -1,11 +1,11 @@
 {
-  "name": "transform-wechat-alipay",
+  "name": "@antmove/wx-alipay",
   "version": "0.0.1",
   "description": "transform wechat miniprogram to alipay miniprogram tool.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "transformDoc": "node config/index"
+    "transformDoc": "node utils/transformDoc.js"
   },
   "author": "amap-appx@service.autonavi.com",
   "license": "GPL",

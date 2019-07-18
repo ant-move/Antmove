@@ -6,7 +6,7 @@ const renderMD = require('./renderMD/index');
 const common = require('./common');
 const transformDoc = require('./tool/TransformationDoc/index');
 const record = require("./record");
-const reprotMethods = require("./reprotMethods");
+const reportMethods = require("./reportMethods");
 const childProcess = require('./childProcess');
 
 module.exports = {
@@ -18,7 +18,7 @@ module.exports = {
     ...common,
     transformDoc,
     record,
-    reprotMethods,
+    reportMethods,
     ...childProcess,
     /**
      * defineGetter

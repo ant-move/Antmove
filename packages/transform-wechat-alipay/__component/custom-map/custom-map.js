@@ -49,7 +49,7 @@ Component({
                     utils.warn(
                         'markers暂不支持zIndex',
                         {
-                            apiName: 'map',
+                            apiName: 'map/markers/zIndex',
                             errorType: 0,
                             type: 'component'
                         });
@@ -58,7 +58,7 @@ Component({
                     utils.warn(
                         'markers暂不支持aria-label',
                         {
-                            apiName: 'map',
+                            apiName: 'map/markers/aria-label',
                             errorType: 0,
                             type: 'component'
                         });
@@ -79,7 +79,7 @@ Component({
                         utils.warn(
                             'markers callout暂不支持color',
                             {
-                                apiName: 'map',
+                                apiName: 'map/markers callout/color',
                                 errorType: 0,
                                 type: 'component'
                             });
@@ -88,7 +88,7 @@ Component({
                         utils.warn(
                             'markers callout暂不支持fontSize',
                             {
-                                apiName: 'map',
+                                apiName: 'map/markers callout/fontSize',
                                 errorType: 0,
                                 type: 'component'
                             });
@@ -97,7 +97,7 @@ Component({
                         utils.warn(
                             'markers callout暂不支持borderRadius',
                             {
-                                apiName: 'map',
+                                apiName: 'map/markers callout/borderRadius',
                                 errorType: 0,
                                 type: 'component'
                             });
@@ -106,7 +106,7 @@ Component({
                         utils.warn(
                             'markers callout暂不支持borderWidth',
                             {
-                                apiName: 'map',
+                                apiName: 'map/markers callout/borderWidth',
                                 errorType: 0,
                                 type: 'component'
                             });
@@ -115,7 +115,7 @@ Component({
                         utils.warn(
                             'markers callout暂不支持borderColor',
                             {
-                                apiName: 'map',
+                                apiName: 'map/markers callout/borderColor',
                                 errorType: 0,
                                 type: 'component'
                             });
@@ -124,28 +124,28 @@ Component({
                         utils.warn(
                             'markers callout暂不支持bgColor',
                             {
-                                apiName: 'map',
+                                apiName: 'map/markers callout/bgColor',
                                 errorType: 0,
                                 type: 'component'
                             });
                     }
                     if (el.callout.padding) {
                         utils.warn('markers callout暂不支持padding',{
-                            apiName: 'map',
+                            apiName: 'map/markers callout/padding',
                             errorType: 0,
                             type: 'component'
                         });
                     }
                     if (el.callout.display) {
                         utils.warn('markers callout暂不支持display',{
-                            apiName: 'map',
+                            apiName: 'map/markers callout/display',
                             errorType: 0,
                             type: 'component'
                         });
                     }
                     if (el.callout.textAlign) {
                         utils.warn('markers callout暂不支持textAlign',{
-                            apiName: 'map',
+                            apiName: 'map/markers callout/textAlign',
                             errorType: 0,
                             type: 'component'
                         });
@@ -166,28 +166,28 @@ Component({
             this.props.polyline.map(el => {
                 if (el.arrowLine) {
                     utils.warn('polyline暂不支持arrowLine',{
-                        apiName: 'map',
+                        apiName: 'map/polyline/arrowLine',
                         errorType: 0,
                         type: 'component'
                     });
                 }
                 if (el['arrowIconPath']) {
                     utils.warn('polyline暂不支持arrowIconPath',{
-                        apiName: 'map',
+                        apiName: 'map/polyline/arrowIconPath',
                         errorType: 0,
                         type: 'component'
                     });
                 }
                 if (el['borderColor']) {
                     utils.warn('polyline暂不支持borderColor',{
-                        apiName: 'map',
+                        apiName: 'map/polyline/borderColor',
                         errorType: 0,
                         type: 'component'
                     });
                 }
                 if (el['borderWidth']) {
                     utils.warn('polyline暂不支持borderWidth',{
-                        apiName: 'map',
+                        apiName: 'map/polyline/borderWidth',
                         errorType: 0,
                         type: 'component'
                     });
@@ -197,7 +197,7 @@ Component({
             this.props.polygons.map(el => {
                 if (el.zIndex) {
                     utils.warn('polygons暂不支持zIndex',{
-                        apiName: 'map',
+                        apiName: 'map/polygons/zIndex',
                         errorType: 0,
                         type: 'component'
                     });
@@ -211,63 +211,63 @@ Component({
             });
             if (this.props.subkey) {
                 utils.warn('暂不支持subkey',{
-                    apiName: 'map',
+                    apiName: 'map/subkey',
                     errorType: 0,
                     type: 'component'
                 });
             }
             if (this.props['enable-3D']) {
                 utils.warn('暂不支持enable-3D',{
-                    apiName: 'map',
+                    apiName: 'map/nable-3D',
                     errorType: 0,
                     type: 'component'
                 });
             }
             if (this.props['show-compass']) {
                 utils.warn('暂不支持show-compass',{
-                    apiName: 'map',
+                    apiName: 'map/show-compass',
                     errorType: 0,
                     type: 'component'
                 });
             }
             if (this.props['enable-overlooking']) {
                 utils.warn('暂不支持enable-overlooking',{
-                    apiName: 'map',
+                    apiName: 'map/enable-overlooking',
                     errorType: 0,
                     type: 'component'
                 });
             }
             if (this.props['enable-zoom']) {
                 utils.warn('暂不支持enable-zoom',{
-                    apiName: 'map',
+                    apiName: 'map/enable-zoom',
                     errorType: 0,
                     type: 'component'
                 });
             }
             if (this.props['enable-scroll']) {
                 utils.warn('暂不支持enable-scroll',{
-                    apiName: 'map',
+                    apiName: 'map/enable-scroll',
                     errorType: 0,
                     type: 'component'
                 });
             }
             if (this.props['enable-rotate']) {
                 utils.warn('暂不支持enable-rotate',{
-                    apiName: 'map',
+                    apiName: 'map/enable-rotate',
                     errorType: 0,
                     type: 'component'
                 });
             }
             if (this.props['onUpdated']) {
                 utils.warn('暂不支持onupdated',{
-                    apiName: 'map',
+                    apiName: 'map/onupdated',
                     errorType: 0,
                     type: 'component'
                 });
             }
             if (this.props['onPoiTap']) {
                 utils.warn('暂不支持onpoitap',{
-                    apiName: 'map',
+                    apiName: 'map/onpoitap',
                     errorType: 0,
                     type: 'component'
                 });

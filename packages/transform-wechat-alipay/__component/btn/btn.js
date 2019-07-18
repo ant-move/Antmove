@@ -79,7 +79,7 @@ Component({
                 utils.warn(
                     `小程序open-type值不支持${opentype}`,
                     {
-                        apiName: 'button',
+                        apiName: 'button/pen-type/${opentype}',
                         errorType: 0,
                         type: 'component'
                     }
