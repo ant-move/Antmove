@@ -15,7 +15,7 @@ module.exports = function (configObj ,type) {
     });
     componentRes.forEach(function (componentName) {
         let _ = Object.keys(componentName)[0] ;
-        fs.outputFile(`${outputDist}/${type}-component-${_}.md`,componentName[_]);
+        fs.outputFile(`${outputDist}/${type}-components-${_}.md`,componentName[_]);
     });
     jsonRes.forEach(function (jsonName) {
         let _ = Object.keys(jsonName)[0] ;

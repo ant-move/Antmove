@@ -107,6 +107,7 @@ module.exports = {
         return finishiDate;
     },
 
+    
     reportTable (table = {}) {
        
         if (!table.showReport) {
@@ -136,15 +137,15 @@ module.exports = {
             .store();
 
         new Line(outputBuffer)
-            .column('Statistical items', 28, [clc.cyan])
-            .column('Contents', 72, [clc.cyan])
+            .column('Statistical items', 20, [clc.cyan])
+            .column('Contents', 200, [clc.cyan])
             .fill()
             .store();
 
         for (let key in table.tableInfo) {
             new Line(outputBuffer)
-                .column(key, 25)
-                .column(table.tableInfo[key], 75)
+                .column(key, 16)
+                .column( table.tableInfo[key], 200)
                 .fill()
                 .store();
         }

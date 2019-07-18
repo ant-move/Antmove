@@ -1,0 +1,18 @@
+/* pages/toast/toast.wxss */
+.toast {
+  min-width: 600px;
+  height: 700px;
+   color: red
+}
+.img {
+  width:60px;
+  height: 60px;
+ 
+
+}
+.views{
+  color: red
+}
+.maps{
+  height: 800px
+}

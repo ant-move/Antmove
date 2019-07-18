@@ -9,23 +9,8 @@ module.exports = {
         'https://developers.weixin.qq.com/miniprogram/dev/api/file/wx.saveFile.html',
         'https://docs.alipay.com/mini/api/xbll1q',
         {
-            msg: '参数名称差异/返回值名称差异',
-            params: {
-                props: {
-                    tempFilePath: {
-                        type: 1,
-                        desc: '需要保存的文件的临时路径wx: tempFilePath, alipay: apFilePath'
-                    }
-                }
-            },
-            returnValue: {
-                props: {
-                    savedFilePath: {
-                        type: 1,
-                        desc: '存储后的文件路径, wx: savedFilePath, alipay: apFilePath'
-                    }
-                }
-            }
+            msg: '封装后完全支持',
+            
         }
     ),
     removeSavedFile: createDescObj(
@@ -34,15 +19,7 @@ module.exports = {
         'https://developers.weixin.qq.com/miniprogram/dev/api/file/wx.removeSavedFile.html',
         'https://docs.alipay.com/mini/api/dgi1fr',
         {
-            msg: '参数名称差异',
-            params: {
-                props: {
-                    filePath: {
-                        type: 1,
-                        desc: '需要删除的文件路径, wx: filePath, alipay: apFilePath'
-                    }
-                }
-            }
+            msg: '封装后完全支持',
         }
     ),
     openDocument: createDescObj(
@@ -57,15 +34,7 @@ module.exports = {
         'https://developers.weixin.qq.com/miniprogram/dev/api/file/wx.getSavedFileList.html',
         'https://docs.alipay.com/mini/api/cgohg1',
         {
-            msg: '返回值名称不同',
-            returnValue: {
-                props: {
-                    filePath: {
-                        type: 1,
-                        desc: '本地路径, wx: filePath, alipay: apFilePath'
-                    }
-                }
-            }
+            msg: '封装后完全支持',
         }
     ),
     getSavedFileInfo: createDescObj(
@@ -74,15 +43,7 @@ module.exports = {
         'https://developers.weixin.qq.com/miniprogram/dev/api/file/wx.getSavedFileInfo.html',
         'https://docs.alipay.com/mini/api/qrx6ze',
         {
-            msg: '参数名称差异',
-            params: {
-                props: {
-                    filePath: {
-                        type: 1,
-                        desc: '文件路径, wx: filePath, alipay: apFilePath'
-                    }
-                }
-            }
+            msg: '封装后支持',
         }
     ),
     getFileSystemManager: createDescObj(
@@ -97,15 +58,7 @@ module.exports = {
         'https://developers.weixin.qq.com/miniprogram/dev/api/file/wx.getFileInfo.html',
         'https://docs.alipay.com/mini/api/file',
         {
-            msg: '参数名称差异',
-            params: {
-                props: {
-                    filePath: {
-                        type: 1,
-                        desc: '文件路径, wx: filePath, alipay: apFilePath'
-                    }
-                }
-            }
+            msg: '封装后完全支持',
         }
     )
 };

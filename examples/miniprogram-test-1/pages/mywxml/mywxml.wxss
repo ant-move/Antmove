@@ -1,0 +1,15 @@
+.view1{
+  width: 100%;
+  height: 300rpx;
+  border: 1px solid pink;
+}
+.scroll-view{
+  height: 400rpx;
+}
+.info_box{
+  height: 500rpx;
+  margin-bottom: 50rpx;
+}
+.next_box{
+  height: 100rpx;
+}

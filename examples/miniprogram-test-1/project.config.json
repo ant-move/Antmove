@@ -1,0 +1,193 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.6.5",
+	"appid": "wx6e8eaaa6ed26a564",
+	"projectname": "miniprogram-test-1",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 20,
+			"list": [
+				{
+					"id": -1,
+					"name": "map",
+					"pathName": "pages/mymap/mymap",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "img",
+					"pathName": "pages/saveImg/saveImg",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "bgAudio",
+					"pathName": "pages/audio/audio",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "bgAudio",
+					"pathName": "pages/myaudio/myaudio",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "vioces",
+					"pathName": "pages/vioces/vioces",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "shear",
+					"pathName": "pages/myshear/myshear",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "file",
+					"pathName": "pages/myfile/myfile",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "wxml",
+					"pathName": "pages/mywxml/mywxml",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "第三方",
+					"pathName": "pages/others/others",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "map",
+					"pathName": "pages/mymap/mymap",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "map",
+					"pathName": "pages/saveImg/saveImg",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "myvedio",
+					"pathName": "pages/myvedio/myvedio",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "camera",
+					"pathName": "pages/mycamera/mycamera",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pusher",
+					"pathName": "pages/LivePusher/LivePusher",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 14,
+					"name": "location",
+					"pathName": "pages/chouseLocation/chouseLocation",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "btntest",
+					"pathName": "pages/btntest/btntest",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "modal",
+					"pathName": "pages/modal/modal",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "toast",
+					"pathName": "pages/toast/toast",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "loading",
+					"pathName": "pages/load/load",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "loadaction",
+					"pathName": "pages/loadaction/loadaction",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "nodes",
+					"pathName": "pages/newNodes/newNodes",
+					"scene": null
+				}
+			]
+		}
+	}
+}

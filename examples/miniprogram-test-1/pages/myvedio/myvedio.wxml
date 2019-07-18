@@ -1,0 +1,15 @@
+<view>
+  <video id="myvideo" src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"></video>
+  <button type="default" bindtap="savevedio" >saveVideo</button>
+  <button type="default" bindtap="testvedio"  data-evn="seek">seek</button>
+  <button type="default" bindtap="testvedio"  data-evn="exitFullScreen">exitFullScreen</button>
+  <button type="default" bindtap="testvedio"  data-evn="pause">pause</button>
+  <button type="default" bindtap="testvedio"  data-evn="play">play</button>
+  <button type="default" bindtap="testvedio"  data-evn="playbackRate">playbackRate</button>
+  <button type="default" bindtap="testvedio"  data-evn="requestFullScreen">requestFullScreen</button>
+  
+  <button type="default" bindtap="testvedio"  data-evn="showStatusBar">showStatusBar</button>
+  <button type="default" bindtap="testvedio"   data-evn="stop">stop</button>
+  <button type="default" bindtap="testvedio"   data-evn="hideStatusBar">hideStatusBar</button>
+
+</view>

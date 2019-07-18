@@ -1,0 +1,5 @@
+<button bindtap='saveImg'>保存图片</button>
+<button bindtap='showImg'>查看图片</button>
+<button bindtap='mychooseMessageFile'>chooseMessageFile</button>
+<button bindtap='compressImage'>compressImage</button>
+<button bindtap="chooseImageTap">chooseImage</button>

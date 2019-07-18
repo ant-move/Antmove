@@ -1,0 +1,12 @@
+<button type="default" bindtap="actionSheetTap">弹出action sheet</button>
+<action-sheet class="bg" hidden="{{actionSheetHidden}}" bindchange="actionSheetChange">
+    <action-sheet-item class="item" bindtap="bindItemTap">
+      测试项
+    </action-sheet-item>
+    <action-sheet-item class="item" bindtap="bindItemTap">
+      测试项
+    </action-sheet-item>
+    <action-sheet-cancel class="cancel">
+      取消
+    </action-sheet-cancel>
+</action-sheet>
