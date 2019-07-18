@@ -1,0 +1,8 @@
+
+<view wx:for="{{labels}}" wx:key="index">
+  <label>
+    <selectable disabled="{{false}}"></selectable>
+    {{item}}
+  </label>
+</view>
+

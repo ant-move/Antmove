@@ -28,12 +28,12 @@ module.exports = {
         }
     ),
     onBeaconUpdate: createDescObj(
-        1,
+        0,
         '监听 iBeacon 设备更新事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/ibeacon/wx.onBeaconUpdate.html',
         'https://docs.alipay.com/mini/api/kvdg9y',
         {
-            msg: '参数类型不同，wx: Function , alipay: Object'
+            msg: '封装后完全支持'
         }
     ),
     onBeaconServiceChange: createDescObj(
@@ -102,20 +102,12 @@ module.exports = {
     ),
     // 低功耗蓝牙
     writeBLECharacteristicValue: createDescObj(
-        1,
+        0,
         '读取低功耗蓝牙设备的特征值的二进制数据值。注意：必须设备的特征值支持 read 才可以成功调用',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/bluetooth-ble/wx.writeBLECharacteristicValue.html',
         'https://docs.alipay.com/mini/api/vmp2r4',
         {
-            msg: '参数类型不同',
-            params: {
-                props: {
-                    value: {
-                        type: 3,
-                        desc: '参数的value属性支持的数据类型不同,wx: ArrayBuffer, alipay: Hex String'
-                    }
-                }
-            }
+            msg: '封装后完全支持',
         }
     ),
     readBLECharacteristicValue: createDescObj(
@@ -125,29 +117,21 @@ module.exports = {
         'https://docs.alipay.com/mini/api/zro0ka'
     ),
     onBLEConnectionStateChange: createDescObj(
-        1,
+        0,
         '监听低功耗蓝牙连接状态的改变事件。包括开发者主动连接或断开连接，设备丢失，连接异常断开等等',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/bluetooth-ble/wx.onBLEConnectionStateChange.html',
         'https://docs.alipay.com/mini/api/utgyiu',
         {
-            msg: '命名不同, wx: onBLEConnectionStateChange, alipay: onBLEConnectionStateChanged'
+            msg: '封装后完全支持'
         }
     ),
     onBLECharacteristicValueChange: createDescObj(
-        1,
+        0,
         '监听低功耗蓝牙设备的特征值变化事件。必须先启用 notifyBLECharacteristicValueChange 接口才能接收到设备推送的 notification。',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/bluetooth-ble/wx.onBLECharacteristicValueChange.html',
         'https://docs.alipay.com/mini/api/cdu501',
         {
-            msg: '返回值类型不同',
-            returnValue: {
-                props: {
-                    value: {
-                        type: 3,
-                        desc: '蓝牙设备特征值的value支持数据类型不同,wx: ArrayBuffer, alipay: Hex String'
-                    }
-                }
-            }
+            msg: '封装后完全支持',
         }
     ),
     notifyBLECharacteristicValueChange: createDescObj(
@@ -160,37 +144,21 @@ module.exports = {
         }
     ),
     getBLEDeviceServices: createDescObj(
-        1,
+        0,
         '获取蓝牙设备所有服务(service)',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/bluetooth-ble/wx.getBLEDeviceServices.html',
         'https://docs.alipay.com/mini/api/uzsg75',
         {
-            msg: '返回值差异',
-            returnValue: {
-                props: {
-                    services: {
-                        type: 1,
-                        desc: '设备服务列表, wx: services, alipay: characteristics, 信息值也不同'
-                    }
-                }
-            }
+            msg: '封装后完全支持',
         }
     ),
     getBLEDeviceCharacteristics: createDescObj(
-        1,
+        0,
         '获取蓝牙设备某个服务中所有特征值(characteristic)。',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/bluetooth-ble/wx.getBLEDeviceCharacteristics.html',
         'https://docs.alipay.com/mini/api/fmg9gg',
         {
-            msg: '返回值属性不同',
-            returnValue: {
-                props: {
-                    characteristic: {
-                        type: 1,
-                        desc: '设备特征值列, wx: Array.<Object> uuid, alipay: Array characteristicId'
-                    }
-                }
-            }
+            msg: '封装后完全支持'
         }
     ),
     createBLEConnection: createDescObj(
@@ -212,15 +180,7 @@ module.exports = {
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/contact/wx.addPhoneContact.html',
         'https://docs.alipay.com/mini/api/contact',
         {
-            msg: '参数名不同',
-            params: {
-                props: {
-                    weChatNumber: {
-                        type: 1,
-                        desc: 'wx: weChatNumber, alipay: alipayAccount'
-                    }
-                }
-            }
+            msg: '参数名不同'
         }
     ),
     // 蓝牙
@@ -231,29 +191,21 @@ module.exports = {
         'https://docs.alipay.com/mini/api/syb4mi'
     ),
     startBluetoothDevicesDiscovery: createDescObj(
-        1,
+        0,
         '开始搜寻附近的蓝牙外围设备',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/bluetooth/wx.startBluetoothDevicesDiscovery.html',
         'https://docs.alipay.com/mini/api/ksew43',
         {
-            msg: '参数类型不同',
-            params: {
-                props: {
-                    interval: {
-                        type: 3,
-                        desc: '上报设备的间隔, wx: number, alipay: Integer'
-                    }
-                }
-            }
+            msg: '封装后完全支持',
         }
     ),
     openBluetoothAdapter: createDescObj(
-        1,
+        0,
         '初始化蓝牙模块',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/bluetooth/wx.openBluetoothAdapter.html',
         'https://docs.alipay.com/mini/api/kunuy4',
         {
-            msg: '错误码不同'
+            msg: '封装后完全支持'
         }
     ),
     onBluetoothDeviceFound: createDescObj(
@@ -292,7 +244,7 @@ module.exports = {
         'https://docs.alipay.com/mini/api/eegfbk'
     ),
     getConnectedBluetoothDevices: createDescObj(
-        0,
+        1,
         '根据 uuid 获取处于已连接状态的设备。',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/bluetooth/wx.getConnectedBluetoothDevices.html',
         'https://docs.alipay.com/mini/api/ge8nue',
@@ -396,15 +348,7 @@ module.exports = {
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/network/wx.onNetworkStatusChange.html',
         'https://docs.alipay.com/mini/api/ympi0l',
         {
-            msg: '返回值属性差异',
-            returnValue: {
-                props: {
-                    networkType: {
-                        type: 1,
-                        desc: 'wx: wifi/2g/3g/4g/unknown/none, alipay: WIFI/2G/3G/4G/UNKNOWN/NOTREACHABLE'
-                    }
-                }
-            }
+            msg: '封装后完全支持',
         }
     ),
     getNetworkType: createDescObj(
@@ -426,20 +370,13 @@ module.exports = {
     ),
     // 屏幕
     setScreenBrightness: createDescObj(
-        1,
+        0,
         '设置屏幕亮度',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/screen/wx.setScreenBrightness.html',
         'https://docs.alipay.com/mini/api/ccf32t',
         {
-            msg: '参数名称差异',
-            params: {
-                props: {
-                    value: {
-                        type: 1,
-                        desc: '屏幕亮度值，范围 0 ~ 1。0 最暗，1 最亮, wx: value, alipay: brightness'
-                    }
-                }
-            }
+            msg: '封装后完全支持',
+           
         }
     ),
     setKeepScreenOn: createDescObj(
@@ -455,20 +392,12 @@ module.exports = {
         'https://docs.alipay.com/mini/api/user-capture-screen'
     ),
     getScreenBrightness: createDescObj(
-        1,
+        0,
         '获取屏幕亮度',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/screen/wx.getScreenBrightness.html',
         'https://docs.alipay.com/mini/api/screen-brightness',
         {
-            msg: '参数名称差异',
-            params: {
-                props: {
-                    value: {
-                        type: 1,
-                        desc: '屏幕亮度值，范围 0 ~ 1。0 最暗，1 最亮, wx: value, alipay: brightness'
-                    }
-                }
-            }
+            msg: '封装后完全支持',
         }
     ),
     makePhoneCall: createDescObj(
@@ -477,13 +406,9 @@ module.exports = {
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/phone/wx.makePhoneCall.html',
         'https://docs.alipay.com/mini/api/macke-call',
         {
-            msg: '参数名称差异/缺失',
+            msg: '封装后不支持回调',
             params: {
                 props: {
-                    phoneNumber: {
-                        type: 1,
-                        desc: '需要拨打的电话号码, wx: phoneNumber, alipay: number'
-                    },
                     success: {
                         type: 0,
                         desc: '接口调用成功的回调函数'
@@ -658,7 +583,7 @@ module.exports = {
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/scan/wx.scanCode.html',
         'https://docs.alipay.com/mini/api/scan',
         {
-            msg: '名称不同wx: scanCode, alipay: scan, 参数差异, 返回值差异/缺失',
+            msg: ' 参数差异, 返回值差异/缺失',
             params: {
                 props: {
                     onlyFromCamera: {
@@ -673,10 +598,6 @@ module.exports = {
             },
             returnValue: {
                 props: {
-                    result: {
-                        type: 1,
-                        desc: '所扫码的内容wx: result, alipay: code'
-                    },
                     scanType: {
                         type: 0,
                         desc: '所扫码的类型'

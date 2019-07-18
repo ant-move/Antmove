@@ -213,6 +213,7 @@ image {
     height: 240px;
     display: inline-block;
     overflow: hidden;
+    background-origin: content-box;
 }
 
 audio {

@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+      "comtest":"/components/comtest/comtest",
+      "custom-li":"/components/comtest/custom-li",
+      "custom-submit": "/components/custom-submit/custom-submit",
+      "custom-input": "/components/custom-input/custom-input",
+      "custom-form":"/components/custom-form/custom-form"
+  }
+}

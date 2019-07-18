@@ -3,5 +3,5 @@
  */
 
 module.exports = {
-    env: "production"
+    env: "development"
 }

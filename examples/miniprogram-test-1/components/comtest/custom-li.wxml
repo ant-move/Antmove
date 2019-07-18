@@ -1,0 +1,6 @@
+<view bindtap='clicked'>
+  222
+
+<slot></slot>
+<view wx:if="{{num%2===0}}">1</view>
+</view>

@@ -1,4 +1,4 @@
-const utils = require('ant-move-utils');
+const utils = require('@antmove/utils');
 const {
     parserDirInfo,
     callIfIsFunc
@@ -18,7 +18,11 @@ module.exports = class Transform {
         let lifeCycles = this.$plugin.lifeCycles;
         let self = this;
 
-        lifeCycles.$options = this.$options;
+        lifeCycles.$options = Object.assign({}, lifeCycles.defaultOptions, this.$options);
+        /**
+         * Setting compile env
+         */
+        process.env.NODE_ENV = lifeCycles.$options.env;
         lifeCycles.beforeParse(function () {
             self.run(inputDir, outputDir);
         });

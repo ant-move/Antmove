@@ -1,0 +1,8 @@
+<view class="comtest">
+    大王叫我来巡山; by {{name}}
+    <slot></slot>
+    <button bindtap='mytap'>
+      测试点击
+    </button>
+    <button bindtap='nameChange'>改变名字</button>
+</view>
