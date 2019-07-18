@@ -2,9 +2,7 @@
 
 > 蚂蚁搬家工具，让小程序跨平台开发变得简单。
 
-antmove 的初衷是提供一种小程序跨平台开发的解决方案，帮助开发者底层本实现小程序的跨平台开发（微信小程序、支付宝小程序、百度智能小程序、头条小程序），做到一套代码开发、多小程序平台运行的目的。
-
-目前 antmove 已经帮助了多款微信小程序到支付宝小程序的迁徙，代码转换率高达 90%+，极大的降低了小程序开发企业的人力成本。工具不仅能做到运行时 diff 的抹平，也能部分做到一个 API 从无到有的过程以及缺失组件的支持。
+* [官方文档](https://ant-move.github.io/website/docs/readme.html)
 
 ## 安装
 * 全局安装
@@ -21,11 +19,12 @@ $ npm install antmove --save
 
 ## 快速开始
 
-### 命令行
+### 命令行使用
 
 ```bash
-antmove -i inputpath -o outputpath --env development
+antmove -i ./wechat-mini/project -o ./dist/alipay-mini/project --env development
 ```
+> 将 `./wechat-mini/project` 微信小程序项目转换为支付宝小程序项目，转换到 `./dist/alipay-mini/project` 目录
 
 * `--input,-i`
     * 可选，编译源码目录，如果不传则是当前目录
@@ -34,7 +33,7 @@ antmove -i inputpath -o outputpath --env development
 * `--env,-e`
     * 可选，编译模式，生产模式代码会压缩，无编译日志及运行时日志
 
-### Node.js
+### Node.js 使用方式
 
 ```js
 const path = require('path');
@@ -79,23 +78,12 @@ const App = transformFramework();   // 得到的 app 实例即可进行转换处
             * 默认开启
 * `start` | `Function` - 开始编译操作
 
-## 高级用法
-
-* [支付宝代码与微信代码混合编写](./wx-and-alipay-code.html)
-
 ## 计划（进行中）
 
 * 支付宝转百度能力支持
 * 支付宝转微信能力支持
 * 支付宝转头条能力支持
 * 页面/组件维度转换能力支持
-
-
-## 用户
-
-* <img height='18' src='https://ant-move.github.io/website/img/e.JPG'/><span style='height: 18px;line-height: 18px;display: inline-block;vertical-align: top;padding-left: 5px;'>e 代驾<span>
-* <img height='18' src='https://ant-move.github.io/website/img/we.JPG'/><span style='height: 18px;line-height: 18px;display: inline-block;vertical-align: top;padding-left: 5px;'>微代驾<span>
-* <img height='18' src='https://ant-move.github.io/website/img/qumanman.JPG'/><span style='height: 18px;line-height: 18px;display: inline-block;vertical-align: top;padding-left: 5px;'>趣满满<span>
 
 
 ## 贡献
