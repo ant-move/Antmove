@@ -12,7 +12,7 @@ module.exports = {
     },
     wxs: {
         type: 1,
-        tagName: 'sjs',
+        tagName: 'import-sjs',
         props: {
             'src': {
                 type: 1,

@@ -3,7 +3,7 @@
 var path = require('path');
 var program = require('commander');
 var buildScript = require('../scripts/build.js');
-const inputDirPath = process.cwd();
+const inputDirPath = process.env.PWD;
 /**
  * read packageJson
  */
@@ -50,13 +50,15 @@ program.parse(process.argv);
 if (!specialtypeCmd) {
     action(options);
 }
+
 /**
  * cmd options
  * @param opts 
  */
 function action (options) {
     if (!options.output) {
-        console.log('[Error:] Missing output path.');
+        program.help();
+        // console.log('[Error:] Missing output path.');
         return false;
     }
 

@@ -1,6 +1,6 @@
 {
   "name": "@antmove/utils",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,7 @@
   "license": "GPL-3.0",
   "dependencies": {
     "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "clean-css": "^4.2.1",
     "clui": "^0.3.6",
     "figlet": "^1.2.3",

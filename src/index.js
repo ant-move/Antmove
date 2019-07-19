@@ -7,7 +7,7 @@ module.exports = function () {
     };
 
     app.use = function (plugin, options) {
-        options.env = processEnv(options.env);
+        processEnv(options.env, options);
         app.plugins.push({
             plugin,
             options
@@ -27,12 +27,12 @@ module.exports = function () {
     return app;
 };
 
-function processEnv (env) {
+function processEnv (env, options = {}) {
     if (!env) return false;
     if (env === 'dev' || env === 'development') {
-        process.env.NODE_ENV = 'development';
+        options.env = process.env.NODE_ENV = 'development';
     } else if (env === 'prod' || env === 'production') {
-        process.env.NODE_ENV = 'production';
+        options.env = process.env.NODE_ENV = 'production';
     } else {
         console.log(chalk('Invalid env value, use production instead.'));
     }
