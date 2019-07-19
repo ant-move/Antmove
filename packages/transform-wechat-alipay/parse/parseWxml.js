@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const P = require('parsimmon');
+const config = require('../config');
 
 const lTagArrow = P.string('<');
 const rTagArrow = P.string('>');
@@ -14,7 +15,8 @@ const Wxml = P.createLanguage({
         return P.regexp(/[a-zA-Z_-][a-zA-Z0-9_-]*/).desc("symbol");
     },
     StringExpression: function () {
-        return P.regexp(/[^<]+/);
+        // return P.regexp(/[^<]+/);
+        return P.regex(/((?!<\/).)+/);
     },
     singleQuoteString: function () {
         return P.seqMap(
@@ -102,6 +104,7 @@ const Wxml = P.createLanguage({
             P.optWhitespace,
             // P.string('{{'),
             P.regexp(/[^<]+/),
+            // P.regex(/((?!<\/).)+/),
             P.optWhitespace,
             // P.string('}}'),
             function (...r) {
@@ -115,6 +118,36 @@ const Wxml = P.createLanguage({
         );
     },
     OpeningElement: function (r) {
+        return P.seqMap(
+            lTagArrow,
+            r.Symbol,
+            whitespaces,
+            Wxml.Attribute.many(),
+            whitespaces,
+            rTagArrow,
+            Wxml.Element.atLeast(1)
+                .or(Wxml.StringExpression.or(whitespaces)),
+            lTagArrow,
+            whitespaces,
+            endLine,
+            r.Symbol,
+            whitespaces,
+            rTagArrow,
+            function (r1, r2, r3, r4, r5, r6, r7) {
+                let _prop = {};
+                r4.forEach(function (el) {
+                    _prop[el[0]] = el[1];
+                });
+
+                return {
+                    typeof: 'wxml.element',
+                    key: null,
+                    props: _prop,
+                    type: r2.toLowerCase(),
+                    children: r7
+                };
+            }
+        )
         return P.seqMap(
             lTagArrow,
             r.Symbol,
@@ -214,9 +247,10 @@ function parseString (code) {
     return Wxml.Element.tryParse(code);
 }
 
-let code = `<!-- asdjks-d --jlksjd -->`
-
 function parseFile (filename) {
+    if (config.isDev()) {
+        console.log('[parseWxml]: ' + filename);
+    }
     return parseString(fs.readFileSync(filename, 'utf8'));
 }
 

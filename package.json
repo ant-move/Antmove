@@ -1,6 +1,6 @@
 {
   "name": "antmove",
-  "version": "0.0.13",
+  "version": "0.0.23",
   "description": "小程序跨平台开发统一解决方案.",
   "bin": {
     "antmove": "./bin/index"
@@ -17,10 +17,8 @@
   "author": "amap-appx@service.autonavi.com",
   "license": "GPL-3.0",
   "dependencies": {
-    "@antmove/wx-alipay": "^0.0.7",
-    "@babel/core": "^7.5.5",
-    "@babel/plugin-proposal-export-default-from": "^7.5.2",
-    "@babel/preset-env": "^7.5.5",
+    "@antmove/utils": "^0.0.8",
+    "@antmove/wx-alipay": "^0.0.14",
     "commander": "^2.19.0",
     "fs-extra": "^7.0.1"
   },

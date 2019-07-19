@@ -1,7 +1,7 @@
 const propsHandle = require('../props/index.js');
 const proccessComponentProps = require('../component/props');
 const os = require('os');
-
+const fs = require('fs-extra');
 const indentWidthChar = '  ';
 
 /**
@@ -44,6 +44,25 @@ module.exports = function axmlRender (ast = [], fileInfo) {
 
 
     function renderFn (_ast, _fileInfo) {
+        if (_ast.type === 'wxs') {
+            try {
+                let filename = _fileInfo.dist;
+                let sjsCode = _ast.children[0][0].value;
+                let moduleName = _ast.props.module.value[0] + '.sjs';
+
+                filename =filename + moduleName;
+                fs.outputFileSync(filename, sjsCode);
+                _ast.children[0][0].value = '';
+                let relativePath = filename.split('/');
+                let _relativePath = relativePath[relativePath.length - 1];
+    
+                _ast.props.src = { type: 'double', value: [ './' + _relativePath ] };
+            } catch (e) {
+                if (e) {
+                    console.error(e);
+                }
+            }
+        }
         let {props} = _ast;
 
         proccessComponentProps(_ast, _fileInfo, axmlRender);

@@ -27,13 +27,13 @@ module.exports = async function (  config ={} ) {
     };
     const getContent = async (rs) => {
         let  buffers=[],  nread=0;
-        return  new Promise ((resolve,reject) => {
+        return  new Promise ((resolve, reject) => {
             try {
                 rs.on("data", chuck => { 
                     buffers.push(chuck);
                     nread += chuck.length; 
                 }).on("end", () => { 
-                    let buffer = null , pos = 0;
+                    let buffer = null, pos = 0;
                     switch (buffers.length) {
                     case 0:
                         buffer = new Buffer.alloc (0);
@@ -60,8 +60,8 @@ module.exports = async function (  config ={} ) {
             
         });
     };
-    const {  isUpdata=true , showReport=false} = config;
-    const progectPath = path.join(__dirname,'../..');
+    const {  isUpdata=true, showReport=false} = config;
+    const progectPath = path.join(__dirname, '../..');
     if (!isUpdata) {
         
         return false;
@@ -71,7 +71,7 @@ module.exports = async function (  config ={} ) {
 
     let resultData = await getContent(result.data);
    
-    const versionPath = path.join(progectPath,'ant-move_v_s.json');
+    const versionPath = path.join(progectPath, 'ant-move_v_s.json');
     let versionData = {};
     if (fs.existsSync(versionPath)) {
         versionData = JSON.parse(fs.readFileSync(versionPath));
@@ -92,7 +92,7 @@ module.exports = async function (  config ={} ) {
     
     // 删除本地多余的文件
     removeFlieArr.forEach(item => {
-        let filePath = path.join(progectPath,item.substr(1));
+        let filePath = path.join(progectPath, item.substr(1));
         if (fs.existsSync(filePath)) {
             fs.unlinkSync(filePath);
             if (showReport) {
@@ -107,9 +107,9 @@ module.exports = async function (  config ={} ) {
         const updata = async function (item) {
             let dirNameArr = item.split('/');
             let filePath = progectPath;
-            dirNameArr.forEach((its,index) => {
+            dirNameArr.forEach((its, index) => {
                 if (index<dirNameArr.length-1) {
-                    filePath = path.join(filePath,its);
+                    filePath = path.join(filePath, its);
                     if (!fs.existsSync(filePath)) {
                         fs.mkdirSync(filePath);
                     }
@@ -117,7 +117,7 @@ module.exports = async function (  config ={} ) {
 
             });
             let fileName = dirNameArr[dirNameArr.length-1];
-            downloadFile(item, filePath , fileName);
+            downloadFile(item, filePath, fileName);
             if (showReport) {
                 console.log( "更新："+'\033[40;32m '+ item +' \033[0m');
             } 
@@ -125,14 +125,14 @@ module.exports = async function (  config ={} ) {
             if (i <= downFileArr.length-1) {
                 await updata(downFileArr[i++]);
             } else {
-                downloadFile('/version.json',progectPath,'ant-move_v_s.json');
-                console.log( "更新完成");
+                downloadFile('/version.json', progectPath, 'ant-move_v_s.json');
+                // console.log( "更新完成");
             }
             
         };
         await updata (downFileArr[i++]);
     }  else {
-        console.log( "更新完成");
+        // console.log( "更新完成");
     }    
 };
 
