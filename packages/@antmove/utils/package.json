@@ -1,6 +1,6 @@
 {
   "name": "@antmove/utils",
-  "version": "0.0.9",
+  "version": "0.1.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,7 @@
   "license": "GPL-3.0",
   "dependencies": {
     "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-export-default-from": "^7.5.2",
     "@babel/preset-env": "^7.5.5",
     "clean-css": "^4.2.1",
     "clui": "^0.3.6",
@@ -17,8 +18,7 @@
     "fs-extra": "^8.1.0",
     "open": "^6.4.0",
     "prettier": "^1.18.2",
-    "uglify-js": "^3.6.0",
-    "@babel/plugin-proposal-export-default-from": "^7.5.2"
+    "uglify-js": "^3.6.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
