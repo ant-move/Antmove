@@ -6,7 +6,6 @@ module.exports = {
     },
     "extends": "eslint:recommended",
     "globals": {
-        Buffer: true,
         wx: true,
         my: true,
         getApp: true,
@@ -33,6 +32,7 @@ module.exports = {
             "beforeColon": false,
             "afterColon": true
         }],
+        "comma-spacing": ["error", { "before": false, "after": true }],
         "spaced-comment": [2, "always", { "markers": ["*!"] }],
         'no-console': 0,
         'no-empty': 2,

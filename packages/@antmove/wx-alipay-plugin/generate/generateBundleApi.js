@@ -4,10 +4,7 @@
  */
 const path = require('path');
 const fs = require('fs-extra');
-const {
-    minifyJs,
-    transformEs6
-} = require('@antmove/utils');
+
 let Config = require('../config.js');
 let customComponentPrefix = Config.library.customComponentPrefix;
 const wrapApis = require('../__api/my.js');
@@ -18,7 +15,11 @@ let entry = path.join(__dirname, '../__api');
  * 
  * @param {*} output 
  */
-function generate (output) {
+function generate (output, utils = {}) {
+    // const {
+    //     minifyJs,
+    //     transformEs6
+    // } = utils;
     let outputPath = path.join(output, `${customComponentPrefix}/api`);
     let apiContent = minifyObject(wrapApis, Config.compile.wrapApis);
     let apiInfo = minifyObject(wrapApisInfo, Config.compile.wrapApis);
@@ -38,13 +39,13 @@ function generate (output) {
     let myJS = 'const utils = require("./utils");\nconst descObj = require("./desc.js");\nconst apiObj = ' + apiContent + '\nmodule.exports = apiObj;';
     let descJs = 'const utils = require("./utils");\nconst infoObj = ' + apiInfo + '\nmodule.exports = infoObj;';
 
-    if (!Config.isDev()) {
-        myJS = minifyJs(
-            transformEs6(myJS)
-        );
-        descJs = minifyJs(
-            transformEs6(descJs));
-    }
+    // if (!Config.isDev()) {
+    //     myJS = minifyJs(
+    //         transformEs6(myJS)
+    //     );
+    //     descJs = minifyJs(
+    //         transformEs6(descJs));
+    // }
 
     fs.outputFileSync(path.join(outputPath, 'my.js'), myJS);
     fs.outputFileSync(path.join(outputPath, 'desc.js'), descJs);
@@ -52,15 +53,15 @@ function generate (output) {
     function copyFile (filename) {
         let inputPath = path.join(entry, filename);
         let distPath = path.join(outputPath, filename);
-        if (!Config.isDev()) {
-            let content = fs.readFileSync(inputPath, 'utf8');
-            fs.outputFileSync(distPath, minifyJs(
-                transformEs6(content)
-            ));
-        } else {
+        // if (!Config.isDev()) {
+        //     let content = fs.readFileSync(inputPath, 'utf8');
+        //     fs.outputFileSync(distPath, minifyJs(
+        //         transformEs6(content)
+        //     ));
+        // } else {
 
-            fs.copySync(inputPath, distPath);
-        }
+        fs.copySync(inputPath, distPath);
+        // }
     }
 }
 

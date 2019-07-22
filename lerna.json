@@ -1,6 +1,7 @@
 {
   "packages": [
-    "packages/*"
+    "packages/*",
+    "packages/@antmove/*"
   ],
   "version": "0.1.0"
 }

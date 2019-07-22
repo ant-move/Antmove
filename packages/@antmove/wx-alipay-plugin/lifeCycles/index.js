@@ -373,20 +373,22 @@ module.exports = {
 
         repData.tableInfo = tableInfo;
 
-        generateConfig(ctx.output, Config, (targetPath) => {
+        generateConfig(ctx.output, Config);
+        
 
-            let nowTime = report(beginTime, {
-                showReport,
-                type: "computedTime"
-            });
-            tableInfo['总耗时'] = nowTime + "ms";
-            reportTable({ tableInfo, showReport });
-            repData.opening = findOpenAbility(repData);
-            let statisticsData = statistics(repData.transforms);
-            repData.concept = statisticsData;
-            repData.toolVs = getToolVs();
-            writeReportPage(repData, targetPath);
+        let nowTime = report(beginTime, {
+            showReport,
+            type: "computedTime"
         });
+        tableInfo['总耗时'] = nowTime + "ms";
+        reportTable({ tableInfo, showReport });
+        repData.opening = findOpenAbility(repData);
+        let statisticsData = statistics(repData.transforms);
+        repData.concept = statisticsData;
+        repData.toolVs = getToolVs();
+        let targetPath =  path.join(ctx.output, `${Config.library.customComponentPrefix}/.config.json`);
+        writeReportPage(repData, targetPath);
+        
 
 
     }
@@ -401,7 +403,8 @@ function runGenerateBundleApi (output) {
         try {
             runJs(filename, {
                 output,
-                Config
+                Config,
+                utils: require('@antmove/utils')
             }, function (code) {
                 resolve(code);
             });

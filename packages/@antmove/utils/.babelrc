@@ -1,4 +1,0 @@
-{
-    "plugins": ["@babel/plugin-transform-object-super"],
-    "presets": ["@babel/preset-env"]
-}

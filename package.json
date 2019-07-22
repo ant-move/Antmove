@@ -11,13 +11,11 @@
     "build-v2ex": "node ./scripts/wechat/v2ex.js",
     "build-mini-demo": "node ./scripts/wechat/mini-demo.js",
     "lint": "eslint ./src",
-    "updata": "node ./src/utils/updataTool/index.js",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "author": "amap-appx@service.autonavi.com",
   "license": "GPL-3.0",
   "dependencies": {
-    "@antmove/utils": "^0.0.8",
     "@antmove/wx-alipay": "^0.0.14",
     "commander": "^2.19.0",
     "fs-extra": "^7.0.1"
@@ -44,5 +42,9 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ant-move/antmove"
   }
 }
