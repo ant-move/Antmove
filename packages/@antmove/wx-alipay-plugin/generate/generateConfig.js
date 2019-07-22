@@ -5,14 +5,15 @@ const Config = require('../config');
  * generate config file which storge the compiling info.
  */
 
-module.exports = function (output, obj = {}, cb=()=>{}) {
+module.exports = function (output, obj = {}) {
     let targetPath = path.join(output, `${Config.library.customComponentPrefix}/.config.json`);
     let code = `
         ${JSON.stringify(obj)}
     `;
 
-    fs.outputFile(targetPath, code, err => {
-        if (err) throw err;
-        cb(targetPath);
-    });
+    try {
+        fs.outputFileSync(targetPath, code);
+    } catch (err) {
+        throw err;
+    }
 };
