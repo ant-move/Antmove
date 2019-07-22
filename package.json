@@ -16,7 +16,7 @@
   "author": "amap-appx@service.autonavi.com",
   "license": "GPL-3.0",
   "dependencies": {
-    "@antmove/wx-alipay": "^0.0.14",
+    "@antmove/wx-alipay": "^0.1.1",
     "commander": "^2.19.0",
     "fs-extra": "^7.0.1"
   },
