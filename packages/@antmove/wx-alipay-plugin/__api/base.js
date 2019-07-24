@@ -28,7 +28,7 @@ const apiObj = {
                     utils.warn(
                         `getSystemInfoSync的返回值不支持 ${prop} 属性!`,
                         {
-                            apiName:`getSystemInfoSync/${prop}` ,
+                            apiName: `getSystemInfoSync/${prop}`,
                             errorType: getSystemInfoSyncProps[prop].type,
                             type: 'api'
                         }
@@ -131,7 +131,7 @@ const apiObj = {
                     utils.warn(
                         `showModal的参数不支持 ${prop} 属性!`,
                         {
-                            apiName:`howModal/${prop}` ,
+                            apiName: `howModal/${prop}`,
                             errorType: showModalProps[prop].type,
                             type: 'api'
                         }
@@ -311,18 +311,19 @@ const apiObj = {
                 obj.headers = {};
             }
 
-            if (!obj.headers['content-type']) {
-                obj.headers['content-type'] = 'application/x-www-form-urlencoded';
-            }
+            // if (!obj.headers['content-type']) {
+            //     obj.headers['content-type'] = 'application/x-www-form-urlencoded';
+            // }
 
-            if (obj.responseType ) {
-                obj.dataType = obj.responseType;
-                delete obj.responseType;
-            }
+            // if (obj.responseType ) {
+            //     obj.dataType = obj.responseType;
+            //     delete obj.responseType;
+            // }
 
             if (
                 obj.method &&
-                descObj.request.body.params.method[obj.method] !== undefined
+                (obj.method !== 'GET' ||
+                obj.method !== 'POST')
             ) {
                 utils.warn(
                     `request暂不支持${obj.method}请求方式`,
@@ -332,7 +333,7 @@ const apiObj = {
                         type: 'api'
                     }
                 );
-                obj.method = 'POST';
+                obj.method = 'GET';
             }
 
             if (obj.responseType) {
@@ -345,7 +346,7 @@ const apiObj = {
                     }
                 );
             }
-            let task = my.httpRequest({
+            let task = my.request({
                 ...obj,
                 success (res) {
                     res.header = res.headers;
@@ -384,7 +385,7 @@ const apiObj = {
                     utils.warn(
                         `createMapContext的返回值不支持 ${prop} 属性!`,
                         {
-                            apiName:`createMapContext/${prop}` ,
+                            apiName: `createMapContext/${prop}`,
                             errorType: createMapContextProps[prop].type,
                             type: 'api'
                         }
@@ -496,7 +497,7 @@ const apiObj = {
                             utils.warn(
                                 `getLocation'的返回值不支持 ${prop} 属性!`,
                                 {
-                                    apiName:`getLocation/${prop}` ,
+                                    apiName: `getLocation/${prop}`,
                                     errorType: getLocationProps[prop].type,
                                     type: 'api'
                                 }
@@ -890,7 +891,7 @@ const apiObj = {
         },
     },
     setStorageSync: {
-        fn (key="",data="") {
+        fn (key="", data="") {
             if (key&&data) {
                 return my.setStorageSync ({
                     "key": key,

@@ -1,4 +1,4 @@
-const wxmlParser = require('../parse/parseWxml.js');
+const wxmlParser = require('../parse/parse.js');
 const upDataTool = require("../utils/updataTool");
 const chalk = require('chalk');
 const appJsonProcess = require('../component/appJson');
@@ -11,7 +11,6 @@ const compileWxml = require('./compile/compileWxml');
 const compileWxss = require('./compile/compileWxss');
 const compileJs = require('./compile/compileJs');
 const generateBundleComponent = require('../generate/generateWrapComponents');
-
 
 const project = {
     name: "",
@@ -30,7 +29,8 @@ const {
     isTypeFile,
     record,
     reportMethods,
-    runJs
+    runJs,
+    cjsToes
 } = require('@antmove/utils');
 const { processAppJson } = require('../generate/generateRuntimeLogPage');
 const {
@@ -159,6 +159,7 @@ module.exports = {
         }
         readtimes++;
         if (isTypeFile('.wxml', fileInfo.path)) {
+            compileWxss(fileInfo, ctx, true);
             const reptempData = getTemplateData(fileInfo);
             checkCoverView(fileInfo.ast, reptempData);
             compileWxml(fileInfo, ctx);
@@ -218,6 +219,7 @@ module.exports = {
                 nums: finishFile
             };
             date = report(date, reportData);
+            content = cjsToes(content);
             fs.outputFileSync(fileInfo.dist.replace(/\.wxs$/, '.sjs'), content);
         } else {
             let content;
@@ -388,9 +390,6 @@ module.exports = {
         repData.toolVs = getToolVs();
         let targetPath =  path.join(ctx.output, `${Config.library.customComponentPrefix}/.config.json`);
         writeReportPage(repData, targetPath);
-        
-
-
     }
 };
 
@@ -404,7 +403,6 @@ function runGenerateBundleApi (output) {
             runJs(filename, {
                 output,
                 Config,
-                utils: require('@antmove/utils')
             }, function (code) {
                 resolve(code);
             });

@@ -445,6 +445,9 @@ module.exports = function (config={}) {
         },
 
         getToolVs () {
+            /**
+             * 获取 utils 版本号，该版本号与主包保持一致
+             */
             let package =  fs.readFileSync(path.join(__dirname, '../../package.json'), 'utf-8');
             let versionData = JSON.parse(package).version;
             return versionData;

@@ -2,9 +2,10 @@ const utils = require('../../api/utils');
 const { warnLife } = utils;
 
 module.exports = {
-    processTransformationComponent (_opts,options) {
+    processTransformationComponent (_opts, options) {
 
-        _opts = Object.assign(_opts,options);
+        _opts = Object.assign(_opts, options);
+        _opts.props = options.properties;
         let _life = {};
         if (options && options.lifetimes) {
             _life = options.lifetimes;
@@ -31,12 +32,12 @@ module.exports = {
         }
 
         if (_life.error) { 
-            warnLife(`There is no error life cycle`,"error");
+            warnLife(`There is no error life cycle`, "error");
 
         }
 
         if (_life.moved) {
-            warnLife(`There is no moved life cycle`,"moved");
+            warnLife(`There is no moved life cycle`, "moved");
 
         }
 
@@ -75,10 +76,10 @@ module.exports = {
                             }
                         } else {
                             if (its==="created") { 
-                                warnLife(`created is Unsupported`,"behaviors/created");
+                                warnLife(`created is Unsupported`, "behaviors/created");
                             }
                             if (its==="attached") { 
-                                warnLife(`attached is Unsupported`,"behaviors/attached");
+                                warnLife(`attached is Unsupported`, "behaviors/attached");
                             }
                         }
                             
@@ -91,11 +92,11 @@ module.exports = {
                         }
 
                         if (its==="error") {
-                            warnLife(`error is Unsupported`,"behaviors/error");
+                            warnLife(`error is Unsupported`, "behaviors/error");
                         }
 
                         if (its==="moved") {
-                            warnLife(`moved is Unsupported`,"behaviors/moved");
+                            warnLife(`moved is Unsupported`, "behaviors/moved");
                         }
 
                     });
@@ -103,7 +104,7 @@ module.exports = {
                 }  
 
                 if (item.pageLifetimes) {
-                    warnLife(`pageLifetimes is Unsupported`,"pageLifetimes");
+                    warnLife(`pageLifetimes is Unsupported`, "pageLifetimes");
                 }
 
                 // 兼容微信低版本生命周期
@@ -111,7 +112,7 @@ module.exports = {
                     if (my.canIUse('component2')) {
                         item.onInit =  item.created;
                     } else {
-                        warnLife(`created is Unsupported`,"created");
+                        warnLife(`created is Unsupported`, "created");
                     }
                     delete item.created;
                 }
@@ -120,7 +121,7 @@ module.exports = {
                     if (my.canIUse('component2')) {
                         item.deriveDataFromProps =  item.attached;
                     } else {
-                        warnLife(`attached is Unsupported`,"attached");
+                        warnLife(`attached is Unsupported`, "attached");
                     }
                     delete item.attached;
                 }
@@ -136,12 +137,12 @@ module.exports = {
                 }
 
                 if (item.error) {
-                    warnLife(`error is Unsupported`,"error");
+                    warnLife(`error is Unsupported`, "error");
                     delete item.error;
                 }
 
                 if (item.moved) {
-                    warnLife(`moved is Unsupported`,"moved");
+                    warnLife(`moved is Unsupported`, "moved");
                     delete item.moved;
                 }
                 
@@ -155,10 +156,8 @@ module.exports = {
             
             if (typeof this.triggerEvent !== 'function') {
                 this.triggerEvent = function (event, data) {
-                    if (event.indexOf("bind")===0) {
-                        let uper = event[4].toUpperCase();
-                        event = `on${uper}${event.substring(5)}`;
-                    }
+                    event = 'on' + event[0].toUpperCase() + event.substring(1);
+
                     if (typeof this.props[event] === 'function') {
                         this.props[event]({
                             detail: data
@@ -170,7 +169,7 @@ module.exports = {
             if (typeof this.getRelationNodes !== 'function') {
                 
                 this.getRelationNodes = function () {
-                    warnLife(`getRelationNodes is Unsupported`,"getRelationNodes");
+                    warnLife(`getRelationNodes is Unsupported`, "getRelationNodes");
                     return [];
                 };
             }
@@ -181,11 +180,11 @@ module.exports = {
             }
 
             if (this.props.genericSelectable) {
-                warnLife(`generic:selectable is Unsupported`,"generic");
+                warnLife(`generic:selectable is Unsupported`, "generic");
             }
 
             if ( options.pageLifetimes) {
-                warnLife(`There is no page life cycle where the component resides,including(show,hide,resize)`,"getRelationNodes");
+                warnLife(`There is no page life cycle where the component resides,including(show,hide,resize)`, "getRelationNodes");
             }
         };
         

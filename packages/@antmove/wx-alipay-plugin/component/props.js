@@ -1,15 +1,20 @@
 const fs = require('fs-extra');
 const basicComponentMap = require('./basiccontentMap');
 const componentMap = require('./componentMap');
+// const componentMap = require('../config/componentsInfo/index').descObject;
 const eventsMap = require('./eventsMap');
 const generic = require('./generic');
 
 module.exports = function (ast, fileInfo, renderAxml) {
     let { type, props } = ast;
     let originType = type;
-    let _componentMap = Object.assign(componentMap, basicComponentMap);
+    let _componentMap = Object.assign({}, componentMap, basicComponentMap);
     let tagInfo = _componentMap[type];
 
+    /**
+     * 自定义组件预处理 - 事件
+     */
+    processCustomComponent(ast, fileInfo);
     /**
      * 检测是否已存在同名的组件
      */
@@ -53,9 +58,7 @@ module.exports = function (ast, fileInfo, renderAxml) {
         if (!tagInfo.props) {
             return false;
         }
-    }
-
-    if (tagInfo && tagInfo.type === 6) {
+    } else if (tagInfo && tagInfo.type === 6) {
         type = ast.type = tagInfo.tagName || ast.type;
     }
 
@@ -82,7 +85,8 @@ module.exports = function (ast, fileInfo, renderAxml) {
                 }
             }
         }
-    }
+    } 
+    
 };
 
 function processEvents (obj = {}) {
@@ -129,11 +133,44 @@ function checkoutCustomComponent (fileInfo, tagName) {
     let bool = false, json;
     if (fileInfo.extname === '.wxml') {
         json = fileInfo.path.replace('.wxml', '.json');
+        if (!fs.pathExistsSync(json)) return false;
         json = JSON.parse(fs.readFileSync(json, 'utf8'));
         if (json.usingComponents && json.usingComponents[tagName]) {
             bool = true;
+        } else {
+            return json.usingComponents;
         }
     }
 
     return bool;
+}
+
+
+function processCustomComponent (ast, fileInfo) {
+    /**
+     * 自定义组件事件处理
+     */
+    if (!fileInfo.customComponents) {
+        let customComponents = checkoutCustomComponent(fileInfo) || {};
+        fileInfo.customComponents = customComponents;
+    }
+
+    if (fileInfo.customComponents[ast.type]) {
+        if (ast.props) {
+            Object.keys(ast.props)
+                .forEach(function (prop) {
+                    let value = ast.props[prop].value[0];
+                    if (prop.match(/^(bind:*)(\w+)/) && !value.match(/\{/)) {
+                        let newProp = prop.replace(/^(bind:*)\w+/, function ($, $1, $2, $3) {
+                            let prop = $.substring($1.length);
+                            return 'on' + prop[0].toUpperCase() + prop.substring(1);
+                        });
+
+                        ast.props[newProp] = ast.props[prop];
+                        delete ast.props[prop];
+
+                    }
+                });
+        }
+    }
 }

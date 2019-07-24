@@ -9,7 +9,7 @@ const {
     requireModuleFn,
     ifProcessHandleFn,
     ConstructorHandle,
-    prettierCode
+    prettierCode,
 } = require('@antmove/utils');
 
 module.exports = function (fileInfo, ctx, originCode, apis) {

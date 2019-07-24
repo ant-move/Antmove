@@ -29,8 +29,8 @@ module.exports = {
         status: '1',
         props: {
             'navigationBarBackgroundColor': {
-                type: 1,
-                status: 0,
+                type: 0,
+                status: 2,
                 desc: '导航栏背景颜色，如 #000000',
                 msg: 'titleBarColor'
             },
