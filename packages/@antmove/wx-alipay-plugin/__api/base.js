@@ -28,7 +28,7 @@ const apiObj = {
                     utils.warn(
                         `getSystemInfoSync的返回值不支持 ${prop} 属性!`,
                         {
-                            apiName: `getSystemInfoSync/${prop}`,
+                            apiName: prop,
                             errorType: getSystemInfoSyncProps[prop].type,
                             type: 'api'
                         }
@@ -50,7 +50,7 @@ const apiObj = {
                             utils.warn(
                                 `getSystemInfo的返回值不支持 ${prop} 属性!`,
                                 {
-                                    apiName: `getSystemInfo/${prop}`,
+                                    apiName: prop,
                                     errorType: getSystemInfoProps[prop].type,
                                     type: 'api'
                                 }
@@ -100,7 +100,7 @@ const apiObj = {
                     utils.warn(
                         `showToast的参数不支持 ${prop} 属性!`,
                         {
-                            apiName: `showToast/${prop}`,
+                            apiName: prop,
                             errorType: showToastProps[prop].type,
                             type: 'api'
                         }
@@ -131,7 +131,7 @@ const apiObj = {
                     utils.warn(
                         `showModal的参数不支持 ${prop} 属性!`,
                         {
-                            apiName: `howModal/${prop}`,
+                            apiName: prop,
                             errorType: showModalProps[prop].type,
                             type: 'api'
                         }
@@ -166,7 +166,7 @@ const apiObj = {
                     utils.warn(
                         `showLoading的参数不支持 ${prop} 属性!`,
                         {
-                            apiName: `showLoading/${prop}`,
+                            apiName: prop,
                             errorType: showLoadingProps[prop].type,
                             type: 'api'
                         }
@@ -190,7 +190,7 @@ const apiObj = {
                     utils.warn(
                         `showActionSheet的参数不支持 ${prop} 属性!`,
                         {
-                            apiName: `showActionSheet/${prop}`,
+                            apiName: prop,
                             errorType: showActionSheetProps[prop].type,
                             type: 'api'
                         }
@@ -285,7 +285,7 @@ const apiObj = {
                     utils.warn(
                         `pageScrollTo的参数不支持 ${prop} 属性!`,
                         {
-                            apiName: `pageScrollTo/${prop}`,
+                            apiName: prop,
                             errorType: pageScrollToParams[prop].type,
                             type: 'api'
                         }
@@ -385,7 +385,7 @@ const apiObj = {
                     utils.warn(
                         `createMapContext的返回值不支持 ${prop} 属性!`,
                         {
-                            apiName: `createMapContext/${prop}`,
+                            apiName: prop,
                             errorType: createMapContextProps[prop].type,
                             type: 'api'
                         }
@@ -497,7 +497,7 @@ const apiObj = {
                             utils.warn(
                                 `getLocation'的返回值不支持 ${prop} 属性!`,
                                 {
-                                    apiName: `getLocation/${prop}`,
+                                    apiName: prop,
                                     errorType: getLocationProps[prop].type,
                                     type: 'api'
                                 }
@@ -509,11 +509,9 @@ const apiObj = {
             });
         },
     },
-    /*
     openCard: {
         fn () {},
     },
-    */
     login: {
         fn (obj = {}) {
             my.getAuthCode({
@@ -571,11 +569,9 @@ const apiObj = {
             }
         }
     },
-    /*
     requestPayment: {
         fn () {},
     },
-    */
     getNetworkType: {
         fn (obj = {}) {
             my.getNetworkType({
@@ -746,7 +742,7 @@ const apiObj = {
                     utils.warn(
                         `downloadFile的返回值不支持 ${prop} 属性!`,
                         {
-                            apiName: `downloadFile/${prop}`,
+                            apiName: prop,
                             errorType: downloadFileReturnValue[prop].type,
                             type: 'api'
                         }
@@ -778,7 +774,7 @@ const apiObj = {
                     utils.warn(
                         `uploadFile的返回值不支持 ${prop} 属性!`,
                         {
-                            apiName: `uploadFile/${prop}`,
+                            apiName: prop,
                             errorType: uploadFileValue[prop].type,
                             type: 'api'
                         }
@@ -797,7 +793,7 @@ const apiObj = {
                     utils.warn(
                         `connectSocket的参数不支持 ${prop} 属性!`,
                         {
-                            apiName: `connectSocket/${prop}`,
+                            apiName: prop,
                             errorType: connectSocketParams[prop].type,
                             type: 'api'
                         }
@@ -855,7 +851,7 @@ const apiObj = {
                     utils.warn(
                         `closeSocket的参数不支持 ${prop} 属性!`,
                         {
-                            apiName: `closeSocket/${prop}`,
+                            apiName: prop,
                             errorType: closeSocketParams[prop].type,
                             type: 'api'
                         }
@@ -881,7 +877,7 @@ const apiObj = {
                     utils.warn(
                         `getRecorderManager的返回值不支持 ${prop} 属性!`,
                         {
-                            apiName: `getRecorderManager/${prop}`,
+                            apiName: prop,
                             errorType: getRecorderManagerProps[prop].type,
                             type: 'api'
                         }

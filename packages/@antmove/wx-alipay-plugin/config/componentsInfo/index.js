@@ -38,6 +38,11 @@ let ComponentsInfo = [
             name: '开放能力',
             type: 'openAbility',
             body: require('./openAbility.js')
+        },
+        {
+            name: '交互',
+            type: 'interaction',
+            body: require('./interaction.js')
         }
     ],
     descObject = {};

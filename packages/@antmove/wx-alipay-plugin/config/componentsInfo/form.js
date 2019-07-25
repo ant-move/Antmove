@@ -343,9 +343,9 @@ module.exports = {
             'disabled': createSupportProp('是否禁用'),
             'maxlength': createSupportProp('最大长度，当设置为-1时不限制最大长度'),
             'auto-focus': {
-                type: 0,
-                status: 2,
-                desc: '自动聚焦，拉起键盘',
+                type: 1,
+                status: 0,
+                desc: 'focus',
             },
             'focus': createSupportProp('获取焦点'),
             'auto-height': createSupportProp('是否自动增高，设置auto-height时，style.height不生效'),
@@ -390,9 +390,9 @@ module.exports = {
                 desc: '无障碍访问，（属性）元素的额外描述',
             },
             'bindlinechange': {
-                type: 0,
-                status: 2,
-                desc: '输入框行数变化时调用',
+                type: 1,
+                status: 0,
+                desc: 'onLineChange',
             },
             'bindfocus': {
                 type: 1,
@@ -426,7 +426,7 @@ module.exports = {
         }
     },
     'button': {
-        type: 5,
+        type: 0,
         name: '按钮',
         url: {
             wechat: 'https://developers.weixin.qq.com/miniprogram/dev/component/button.html',
@@ -552,7 +552,7 @@ module.exports = {
                 type: 1,
                 status: 0,
                 desc: 'diff',
-                key: 'onCatchTap',
+                key: 'catchTap',
             } 
         }
     },
@@ -565,5 +565,33 @@ module.exports = {
         type: 0,
         status: 2,
         desc: '富文本编辑器，可以对图片、文字进行编辑',
+    },
+    'label': {
+        name: '表单组件标签',
+        url: {
+            wechat: 'http://www.ionic.wang/weixin/component/label.html',
+            alipay: 'https://docs.alipay.com/mini/component/label'
+        },
+        desc: '用来改进表单组件的可用性。使用for属性找到对应的id，或者将控件放在该标签下，当点击时，就会触发对应的控件。 for优先级高于内部控件，内部有多个控件的时候默认触发第一个控件。',
+        props: {
+            'for': createSupportProp('绑定控件的 id'),
+        },
+        type: 7,
+        status: 0
+    },
+    'checkbox': {
+        name: '多选项目',
+        url: {
+            wechat: 'http://www.ionic.wang/weixin/component/checkbox.html',
+            alipay: 'https://docs.alipay.com/mini/component/checkbox'
+        },
+        desc: '多选项目',
+        props: {
+            'value': createSupportProp('<checkbox/>标识，选中时触发<checkbox-group/>的 change 事件，并携带 <checkbox/> 的 value'),
+            'disabled': createSupportProp('是否禁用'),
+            'checked': createSupportProp('当前是否选中，可用来设置默认选中')
+        },
+        type: 7,
+        status: 0
     }
 };

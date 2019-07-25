@@ -16,7 +16,7 @@ Component({
         'hover-class': 'button-hover',
         'hover-stop-propagation': false,
         'hover-start-time': false,
-        onCatchTap: ()=>{},
+        className: "",
         onTap: ()=>{},
         'onGetuserInfo': ""
     },
@@ -79,7 +79,7 @@ Component({
                 utils.warn(
                     `小程序open-type值不支持${opentype}`,
                     {
-                        apiName: 'button/pen-type/${opentype}',
+                        apiName: 'button',
                         errorType: 0,
                         type: 'component'
                     }
@@ -106,7 +106,7 @@ Component({
             }
             const tapEvent = {...e};
             tapEvent.target.dataset = this.makeDataSet(this.props);
-            this.props.onCatchTap(tapEvent);
+            this.props.onCatchTap&&this.props.onCatchTap(tapEvent);
             this.props.onTap(tapEvent);
         },
         getPhone (e) {
@@ -170,7 +170,7 @@ Component({
                         },
                         fail (err) {
                             throw  err;
-                        }
+                        }     
                     });
                 }
             });
