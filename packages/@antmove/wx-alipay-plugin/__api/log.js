@@ -1,7 +1,7 @@
-const config = require('./config.js');
-const env = config.env === 'production' ? 'prod' : 'dev'; // prod, 生产环境不输出
-let oldUrl = [];
+const config = require('./config');
+let env = config.env || "prod"; // prod, 生产环境不输出
 
+if (env === 'production') env = 'prod';
 module.exports = {
     info () {},
     // 生命周期报错警告记录函数
@@ -12,21 +12,6 @@ module.exports = {
      * **/
     warnLife (msg, lifeName) {
         if (env === "prod") return false;
-        let flag = true;
-        let rs = my.getStorageSync({ key: "_pageMsg" });
-        if (lifeName==="app/onHide") {
-            oldUrl.push(msg);
-            return false
-        }
-        for (let i = 0 ; i <oldUrl.length ; i ++) {
-            if (oldUrl[i] === rs.data.pagePath) {
-                flag = false;
-                break
-            } 
-        }
-        if (!flag) {
-            return
-        } 
         let logInfo = {
             appName: "",
             appVersion: "",
@@ -53,11 +38,22 @@ module.exports = {
         if (res.data !== null) {
             logInfo = res.data;
         }
+        let rs = my.getStorageSync({ key: "_pageMsg" });
 
         page.pageName = rs.data.pageName;
         page.path = rs.data.pagePath;
         log.type = "life";
-        log.name = lifeName;
+        let reg = "";
+        if (msg.match(/support (\S*) attribute/)) {
+            reg = msg.match(/support (\S*) attribute/)[1];
+        }
+        let _name = "";
+        if (reg) {
+            _name = lifeName + "/" + reg;
+        } else {
+            _name = lifeName;
+        }
+        log.name = _name;
         log.message = msg;
 
         if (res.data !== null) {
@@ -66,17 +62,19 @@ module.exports = {
                     p = true;
                     a = i;
                     for (let j = 0; j < res.data.pages[i].logs.length; j++) {
-                        if (lifeName === res.data.pages[i].logs[j].name) {
+                        if (_name === res.data.pages[i].logs[j].name) {
                             l = true;
                             if (l) break;
                         }
                     }
+                } else {
+                    l = true;
                 }
             }
             if (p && !l) {
                 logInfo.pages[a].logs.push(log);
             }
-            if (!p && !l) {
+            if (!p && l) {
                 page.logs.push(log);
                 logInfo.pages.push(page);
             }
@@ -143,7 +141,17 @@ module.exports = {
         page.pageName = rs.data.pageName;
         page.path = rs.data.pagePath;
         log.type = _desc.type;
-        log.name = _desc.apiName;
+        let reg = "";
+        if (msg.match(/support (\S*) attribute/)) {
+            reg = msg.match(/support (\S*) attribute/)[1];
+        }
+        let _name = "";
+        if (reg) {
+            _name = _desc.apiName + "/" + reg;
+        } else {
+            _name = _desc.apiName;
+        }
+        log.name = _name;
         log.message = msg;
         log.errorType = _desc.errorType;
         if (!_desc.errorType && _desc.errorType !== 0) {
@@ -166,17 +174,19 @@ module.exports = {
                     p = true;
                     a = i;
                     for (let j = 0; j < res.data.pages[i].logs.length; j++) {
-                        if (_desc.apiName === res.data.pages[i].logs[j].name) {
+                        if (_name === res.data.pages[i].logs[j].name) {
                             l = true;
                             if (l) break;
                         }
                     }
+                } else {
+                    l = true;
                 }
             }
             if (p && !l) {
                 logInfo.pages[a].logs.push(log);
             }
-            if (!p && !l) {
+            if (!p && l) {
                 page.logs.push(log);
                 logInfo.pages.push(page);
             }

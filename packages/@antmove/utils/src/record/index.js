@@ -5,7 +5,7 @@ module.exports = function (config={}) {
     config.isShow = process.env.NODE_ENV === 'development';
     return {
         // 运行环境
-        getSurrounding () {
+        getSurrounding (obj = {}) {
             if (!config.isShow) {
                 return {};
             }
@@ -21,6 +21,7 @@ module.exports = function (config={}) {
                     val: process.version
                 },
             };
+            
             return result;
         },
     
@@ -444,12 +445,8 @@ module.exports = function (config={}) {
             return obj;
         },
 
-        getToolVs () {
-            /**
-             * 获取 utils 版本号，该版本号与主包保持一致
-             */
-            let package =  fs.readFileSync(path.join(__dirname, '../../package.json'), 'utf-8');
-            let versionData = JSON.parse(package).version;
+        getToolVs (obj = {}) {
+            let versionData = obj.version;
             return versionData;
         },
 

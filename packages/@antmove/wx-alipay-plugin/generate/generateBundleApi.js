@@ -15,11 +15,7 @@ let entry = path.join(__dirname, '../__api');
  * 
  * @param {*} output 
  */
-function generate (output, utils = {}) {
-    // const {
-    //     minifyJs,
-    //     transformEs6
-    // } = utils;
+function generate (output) {
     let outputPath = path.join(output, `${customComponentPrefix}/api`);
     let apiContent = minifyObject(wrapApis, Config.compile.wrapApis);
     let apiInfo = minifyObject(wrapApisInfo, Config.compile.wrapApis);

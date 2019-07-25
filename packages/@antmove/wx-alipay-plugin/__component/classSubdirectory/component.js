@@ -152,16 +152,35 @@ module.exports = {
             _opts.mixins = minixs; 
         }
         
+        /**
+         * process methods
+         */
+        if (options.methods) {
+            _opts.methods = {};
+            Object.keys(options.methods)
+                .forEach(function (method) {
+                    _opts.methods[method] = function (...p) {
+                        this.$currentEvent = p[0];
+                        options.methods[method].apply(this, p);
+                    };
+                });
+        }
         _opts.didMount = function () {
-            
+            this.properties = this.props;
             if (typeof this.triggerEvent !== 'function') {
-                this.triggerEvent = function (event, data) {
+                this.triggerEvent = function (event, data = {}) {
+                    let e = this.$currentEvent;
                     event = 'on' + event[0].toUpperCase() + event.substring(1);
 
+                    processDataSet(e, this.props);
                     if (typeof this.props[event] === 'function') {
-                        this.props[event]({
-                            detail: data
-                        });
+                        if (e && e.detail) {
+                            e.detail = {
+                                ...e.detail,
+                                ...data
+                            };
+                        }
+                        this.props[event](e, data);
                     }
                 };
             }
@@ -191,3 +210,23 @@ module.exports = {
         
     }
 };
+
+function processDataSet (e = {target: {}}, props = {}) {
+    Object.keys(props)
+        .forEach(function (prop) {
+            if (prop.match(/^data-/)) {
+                let originProp = prop;
+                prop = prop.replace(/[A-Z]/g, function ($) {
+                    return $.toLowerCase();
+                });
+
+
+                prop = prop.split('-');
+                prop.shift();
+                prop = prop.join('');
+
+                e.target.dataset[prop] = props[originProp];
+                e.currentTarget.dataset[prop] = props[originProp];
+            }
+        });
+}

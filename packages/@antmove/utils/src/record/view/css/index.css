@@ -439,3 +439,8 @@ html {
     color: #fff;
     text-align: center;
 }
+
+.table-box th, .table-box td.unsupported {
+    line-height: 1.3em;
+    padding-bottom: 6px;
+}

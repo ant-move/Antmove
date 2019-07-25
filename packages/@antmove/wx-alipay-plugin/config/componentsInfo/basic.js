@@ -1,4 +1,6 @@
 const { createSupportProp } = require('./utils.js');
+const Config = require('../../config.js');
+const customComponentPrefix = Config.library.customComponentPrefix;
 /**
  * type
  * 0 - missing - 不支持该属性
@@ -30,12 +32,6 @@ module.exports = {
                 type: 0,
                 status: 2,
                 desc: '无障碍访问，（属性）元素的额外描述',
-            },
-            'size': {
-                type: 3,
-                status: 1,
-                desc: 'icon的大小，单位px',
-                msg: '支付宝小程序只支持数值类型'
             },
             'color': createSupportProp('icon的颜色，同css的color'),
             'type': createSupportProp('icon的类型，有效值：success, success_no_circle, info, warn, waiting, cancel, download, search, clear')
@@ -105,11 +101,14 @@ module.exports = {
     },
     'rich-text': {
         name: '富文本',
+        type: 5,
         url: {
             wechat: 'https://developers.weixin.qq.com/miniprogram/dev/component/rich-text.html',
             alipay: 'https://docs.alipay.com/mini/component/rich-text'
         },
         desc: '富文本。',
+        tagName: 'custom-rich-text',
+        path: customComponentPrefix + '/__component/custom-rich-text/custom-rich-text',
         props: {
             'nodes': {
                 type: 3,
@@ -141,5 +140,60 @@ module.exports = {
                 desc: '隐藏该组件',
             }
         }
+    },
+    wxs: {
+        type: 1,
+        tagName: 'import-sjs',
+        props: {
+            'src': {
+                type: 1,
+                desc: 'diff',
+                key: 'from'
+            },
+            'module': {
+                type: 1,
+                desc: 'diff',
+                key: 'name'
+            }
+        },
+        desc: '微信脚本'
+    },
+    'block': {
+        name: '块',
+        url: {
+            wechat: 'https://developers.weixin.qq.com/miniprogram/dev/reference/wxml/list.html#block%20wx:for',
+            alipay: 'https://docs.alipay.com/mini/framework/list-render'
+        },
+        desc: '渲染一个包含多节点的结构块',
+        type: 1,
+        status: 0
+    },
+    'import': {
+        name: '引用',
+        url: {
+            wechat: 'https://developers.weixin.qq.com/miniprogram/dev/reference/wxml/import.html',
+            alipay: 'https://docs.alipay.com/mini/framework/import'
+        },
+        desc: 'import可以在该文件中使用目标文件定义的template',
+        props: {
+            src: createSupportProp('路径'),
+        },
+        type: 7,
+        status: 0
+    },
+    'template': {
+        name: '模板',
+        url: {
+            wechat: 'https://developers.weixin.qq.com/miniprogram/dev/reference/wxml/template.html',
+            alipay: 'https://docs.alipay.com/mini/framework/axml-template'
+        },
+        desc: '可以在模板中定义代码片段，然后在不同的地方调用',
+        props: {
+            'name': createSupportProp('名字'),
+            'is': createSupportProp('声明需要的使用的模板'),
+            'data': createSupportProp('数据'),
+        },
+        type: 7,
+        status: 0
     }
 };

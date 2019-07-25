@@ -1,16 +1,20 @@
 const fs = require('fs-extra');
-const basicComponentMap = require('./basiccontentMap');
-const componentMap = require('./componentMap');
-// const componentMap = require('../config/componentsInfo/index').descObject;
+const _componentMap = require('../config/componentsInfo/index').descObject;
 const eventsMap = require('./eventsMap');
 const generic = require('./generic');
 
 module.exports = function (ast, fileInfo, renderAxml) {
     let { type, props } = ast;
+    if (props) {
+        Object.keys(props).forEach( key => {
+            if (key && !props[key].value[0]) {
+                props[key] =  { type: 'double', value: [ ' ' ] };
+            }
+        });
+    }   
+   
     let originType = type;
-    let _componentMap = Object.assign({}, componentMap, basicComponentMap);
     let tagInfo = _componentMap[type];
-
     /**
      * 自定义组件预处理 - 事件
      */
@@ -21,7 +25,6 @@ module.exports = function (ast, fileInfo, renderAxml) {
     if (tagInfo && tagInfo.type === 5 && !checkoutCustomComponent(fileInfo, originType)) {
         processComponentMethodProp(ast.props, tagInfo.props);
         type = ast.type = tagInfo.tagName || ast.type;
-
         /**
          * support mutipule custom tags
          */
@@ -62,7 +65,7 @@ module.exports = function (ast, fileInfo, renderAxml) {
         type = ast.type = tagInfo.tagName || ast.type;
     }
 
-    processEvents(props);
+   
 
     if (tagInfo) {
         if (tagInfo.type !== undefined) {
@@ -84,9 +87,10 @@ module.exports = function (ast, fileInfo, renderAxml) {
                     props[propInfo.key] = _value;
                 }
             }
+            
         }
-    } 
-    
+    }
+    processEvents(props);
 };
 
 function processEvents (obj = {}) {
@@ -108,6 +112,7 @@ function processEvents (obj = {}) {
             let eventKey = `on${uper}${newEvent.substring(1)}`;
             
             obj[eventKey] = obj[key];
+
             delete obj[key];
 
         }
@@ -137,7 +142,7 @@ function checkoutCustomComponent (fileInfo, tagName) {
         json = JSON.parse(fs.readFileSync(json, 'utf8'));
         if (json.usingComponents && json.usingComponents[tagName]) {
             bool = true;
-        } else {
+        } else if (!tagName) {
             return json.usingComponents;
         }
     }

@@ -41,7 +41,7 @@ program
         action({
             input: inputDirPath,
             output: params[0],
-            env: 'production'
+            env: params[1] || 'prod'
         });
     });
  

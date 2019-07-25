@@ -2,6 +2,7 @@ const chalk = require('chalk');
 const figlet = require('figlet');
 const CLI = require('clui');
 const clc = require('cli-color');
+const log = require('single-line-log').stdout;
 const method = {
     report (consoleData) {
         const { time, status, reportData, after = "...", cycle = "" } = consoleData;
@@ -26,8 +27,16 @@ const method = {
         if (!speed.showReport) {
             const speedProgress = Math.floor(speed.nums/speed.length*100)/100;
             const Progress = CLI.Progress;
-            const thisPercentBar = new Progress(20);
-            console.log(thisPercentBar.update(speedProgress));
+            const thisPercentBar = new Progress(40);
+           
+            log.clear();
+            log(thisPercentBar.update(speedProgress));
+            
+            if (speedProgress===1) {
+                console.log('\n');
+            }
+            
+            
         } else {
             return false;
         }
@@ -36,13 +45,18 @@ const method = {
 
 module.exports = {
     report (date, reportData = {}) {
-        if (!reportData.showReport) {
-            return date;
-        }
+        let finishiDate = Number(new Date());
         if (reportData.type === "title") {
             console.log(figlet.textSync("ant-move"));
             return date;
         }
+        if (!reportData.showReport) {
+            if (reportData.type !== "computedTime") {
+                return date;
+            }
+            return finishiDate - date;
+        }
+        
 
         if (reportData.type === "project") {
             console.log(chalk.magenta(reportData.path));
@@ -50,9 +64,9 @@ module.exports = {
         }
 
         
-        let finishiDate = new Date();
         if (reportData.type === "computedTime") {
             let uesTime = finishiDate - date;
+
             console.log("");
             console.log(chalk.gray(`耗时${uesTime}ms`));
             return uesTime;
@@ -155,6 +169,13 @@ module.exports = {
     },
 
     reportSpeed (speed) {
+        
         method.reportSpeed(speed);
+    },
+
+    reportEnd (showData) {
+        console.log(chalk.green(showData.info));
+        console.log(chalk.green(showData.path));
     }
+
 }; 
