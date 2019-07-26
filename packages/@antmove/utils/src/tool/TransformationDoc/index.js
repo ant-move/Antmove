@@ -1,9 +1,8 @@
 const fs = require('fs-extra');
 const path = require('path');
 const fn = require('../generateDocs');
-
 module.exports = function (configObj ,type) {
-    const { apiRes, componentRes, unsupportApis, unsupportComponents ,lifeRes , jsonRes} = fn(configObj,type);
+    const { apiRes, componentRes, lifeRes,jsonRes,unsupportApis, unsupportComponents, unsupportJson, unsupportLifeCircle} = fn(configObj,type);
     const outputDist = path.join(__dirname, '../../../../../../ant-move-docs/docs');
     apiRes.forEach(function (apiName) {
         let _ = Object.keys(apiName)[0] ;
@@ -30,7 +29,12 @@ module.exports = function (configObj ,type) {
         `${outputDist}/${type}-unsupport-components.md`,
         unsupportComponents
     );
+    fs.outputFile(
+        `${outputDist}/${type}-unsupport-json.md`,
+        unsupportJson
+    );  
+    fs.outputFile(
+        `${outputDist}/${type}-unsupport-lifeCircle.md`,
+        unsupportLifeCircle
+    );    
 };
-
-
-

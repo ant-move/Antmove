@@ -1,5 +1,3 @@
-
-
 const {
     h2,
     h4,
@@ -8,14 +6,16 @@ const {
     a
 } = require('../renderMD/index');
 
-
+//external or inside
+const {isExternal} = require('./config')
 const path = require('path');
 const fs = require('fs-extra');
 const outputDist = path.join(__dirname, '../../../../../ant-move-docs/website/sidebars.json');
+const insidePath = path.join(__dirname,'../../../../../ant-move-docs/website/inside.json');
+const externalPath = path.join(__dirname,'../../../../../ant-move-docs/website/external.json');
 /**
  * generate docs sidebar.json
  */
-
 const wx2alipay = [
     {
         "type": "subcategory",
@@ -25,6 +25,16 @@ const wx2alipay = [
     {
         "type": "subcategory",
         "label": "API",
+        "ids": []
+    },
+    {
+        "type": "subcategory",
+        "label": "配置小程序",
+        "ids": []
+    },
+    {
+        "type": "subcategory",
+        "label": "生命周期",
         "ids": []
     }
 ];
@@ -62,7 +72,8 @@ module.exports = function ( config = {}, target) {
         case "toutiao" :str = "头条";
             break;
         case "baidu" :str = "百度";
-            break;       
+            break;  
+        case "amap" :str = "高德"         
         }
         return str;
     }
@@ -73,19 +84,39 @@ module.exports = function ( config = {}, target) {
         ApiInfo,
         LifeInfo,
         JsonInfo
-    } = config;
-    function generateSideBarJson (res) {
-        let json = fs.readFileSync(outputDist);
-        json = JSON.parse(json);
-        json[`${res}`][`${tansformBefor}转${tansformAfter}`] = wx2alipay;    
-        // json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-components`);
-        // json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-apis`);
-        fs.outputFileSync(outputDist, JSON.stringify(json));
+    } = config
+    function generateSideBarJson (res) { 
+        let p = path.join(__dirname,'../../../../../ant-move-docs/website/config/heardLinks.js')
+        let headA = "module.exports={heardArray:[{doc: 'readme', label: '指南'},{doc: 'wechat-alipay-components-basic', label: '微信转支付宝'},{blog: true, label: '博客'},{page: 'help', label: '帮助'}, { search: true }]}"
+        let headB = "module.exports = {heardArray : [ {doc: 'readme', label: '指南'}, {doc: 'wechat-alipay-components-basic', label: '微信转支付宝'}, {doc: 'alipay-wechat-api-basic', label: '支付宝转微信'}, {doc: 'alipay-baidu-api-currency', label: '支付宝转百度'},{doc: 'wechat-amap-components-view',label: '微信转高德'},{blog: true, label: '博客'},{page: 'help', label: '帮助'},{ search: true }]}"
+        let json = {};      
+        let getPath = "";
+        if (isExternal === "external" ) {
+            if (target === "wechat-alipay") {
+                getPath = externalPath;
+                json = fs.readFileSync(getPath); 
+                fs.outputFileSync(p,headA)
+            } else {
+                return
+            }         
+        } else {
+            getPath = insidePath
+            json = fs.readFileSync(getPath);
+            fs.outputFileSync(p,headB)
+        }
+        json = JSON.parse(json);  
+        json[`${res}`][`${tansformBefor}转${tansformAfter}`] = wx2alipay;  
+        if (isExternal === "inside") {
+            json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-components`);
+            json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-apis`);
+            json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-json`);
+            json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-lifeCircle`);
+        }        
+        fs.outputFileSync(outputDist, JSON.stringify(json,null,4));
+        fs.outputFileSync(getPath, JSON.stringify(json,null,4));
     }
      
-    
-    
-    function renderApiDoc (_apiAll, type) {  
+    function renderApiDoc (_apiAll,type) {  
         let apiDoc = [];
         let _str = '' ;
         let header = ['函数名', '说明', `${tansformBefor}小程序`, `${tansformAfter}小程序`, '是否支持'];
@@ -106,7 +137,7 @@ module.exports = function ( config = {}, target) {
                 wx2alipay[1].ids.push(`${befor}-${after}-api-${apiName.type}`);
             } else {
                 _str += `id: ${befor}-${after}-lifeCircle-${apiName.type}\n`;
-                wx2alipay[1].ids.push(`${befor}-${after}-lifeCircle-${apiName.type}`);
+                wx2alipay[3].ids.push(`${befor}-${after}-lifeCircle-${apiName.type}`);
             }       
             _str += `title: ${apiName.name}\n`;
             _str += `---\n\n`;    
@@ -183,9 +214,8 @@ module.exports = function ( config = {}, target) {
     function renderComponentDoc (obj, type) {
         let componentDoc = [];
         let _str = '' ;
-        let header = ['属性名', '说明', '是否支持', '备注'];
+        let header = ['差异属性','说明','是否支持','备注'];
         let ComponentsInfo = [];
-        let urlHeader = [`${tansformBefor}小程序`, `${tansformAfter}小程序`];
         if ( type === "components" ) {
             ComponentsInfo = obj.ComponentsInfo ;
         } else {
@@ -197,31 +227,18 @@ module.exports = function ( config = {}, target) {
             _str += `---\n`;
             _str += `id: ${befor}-${after}-${type}-${fnName.type}\n` ; 
             _str += `title: ${fnName.name}\n`;
-            _str += `---\n\n`;           
-            wx2alipay[0].ids.push(`${befor}-${after}-${type}-${fnName.type}`);
+            _str += `---\n\n`;  
+            if (type === "components") {
+                wx2alipay[0].ids.push(`${befor}-${after}-${type}-${fnName.type}`);                
+            } else {
+                wx2alipay[2].ids.push(`${befor}-${after}-${type}-${fnName.type}`); 
+            }        
             Object.keys(ComponentsInfo[i].body)
                 .forEach(function (attrName) {              
                     let arr = [] ;
-                    let _arr = [];
                     let attrInfo =  ComponentsInfo[i].body[attrName] ;
                     _str += h2(attrName);
                     let propsObj = {} ;
-                    if (attrInfo.url && attrInfo.url.original) {
-                        _arr.push(a('doc', attrInfo.url.original));
-                        if (attrInfo.url.target) {
-                            _arr.push(a('doc', attrInfo.url.target));
-                        } else {
-                            _arr.push("无");
-                        } 
-                    } else if (attrInfo.url && attrInfo.url[`${befor}`]) {
-                        _arr.push(a('doc', attrInfo.url[`${befor}`]));
-                        if (attrInfo.url[`${after}`]) {
-                            _arr.push(a('doc', attrInfo.url[`${after}`]));
-                        } else {
-                            _arr.push("无");
-                        }  
-                    }
-                    // _str += table(urlHeader, _arr);
                     if (attrInfo.props) {
                         propsObj = attrInfo.props;
                         Object.keys(propsObj)
@@ -246,19 +263,7 @@ module.exports = function ( config = {}, target) {
                                 } else {
                                     arr.push(" ");
                                 }
-                                let attrParams = attrInfo.props[attr].params ;
-                                /*
-                                if  (attrParams) {
-                                    let params = "";
-                                    Object.keys(attrParams)
-                                        .forEach(function (val) {
-                                            params += `*${val}`;                                         
-                                            params += returnType(attrParams[val].type);
-                                            arr.push(params);
-                                        });                                 
-                                } else {
-                                    arr.push(" ");
-                                }*/
+
                                 let attrMsg = "" ;  
                                 if (attrInfo.props[attr].msg) {
                                     attrMsg = attrInfo.props[attr].msg;
@@ -307,18 +312,51 @@ module.exports = function ( config = {}, target) {
         
         return str;
     }
+
+    function renderUnSupportJsonDoc (obj) {
+        let arr = [], str = '', id = `${befor}-${after}-unsupport-json`;
+        Object.keys(obj)
+            .forEach(function (key) {
+                let value = obj[key];
+                if (value.status === 2) {
+                    arr.push(a(key + ' - ' + value.desc, value.url.wechat));
+                }
+            });
+        str = `---\nid: ${id}\ntitle: 不支持 配置小程序 列表\n---\n${list(arr)}
+        `;
+        
+        return str;
+    }
+
+    function renderUnSupportLifecircleDoc (obj) {
+        let arr = [], str = '', id = `${befor}-${after}-unsupport-lifeCircle`;
+        Object.keys(obj)
+            .forEach(function (key) {
+                let value = obj[key];
+                if (value.status === 2) {
+                    arr.push(a(key + ' - ' + value.desc, value.url.wechat));
+                }
+            });
+        str = `---\nid: ${id}\ntitle: 不支持 生命周期 列表\n---\n${list(arr)}
+        `;
+        
+        return str;
+    }
     
-    let apiRes = renderApiDoc(ApiInfo, "api");
-    let componentRes =  renderComponentDoc(ComponentInfo, "components");
-    let lifeRes = renderApiDoc(LifeInfo, "life") ; 
-    let jsonRes = renderComponentDoc(JsonInfo, "json");
-    generateSideBarJson(target);
+    let apiRes = renderApiDoc(ApiInfo,"api");
+    let componentRes =  renderComponentDoc(ComponentInfo,"components");
+    let lifeRes = renderApiDoc(LifeInfo,"life") ; 
+    let jsonRes = renderComponentDoc(JsonInfo,"json");
+    generateSideBarJson(target);  
+
     return {
         lifeRes,
         apiRes,
         componentRes,
         jsonRes,
         unsupportApis: renderUnSupportApiDoc(ApiInfo.descObject),
-        unsupportComponents: renderUnSupportComponentsDoc(ComponentInfo.descObject)
+        unsupportComponents: renderUnSupportComponentsDoc(ComponentInfo.descObject),
+        unsupportJson: renderUnSupportJsonDoc(JsonInfo.descObject),
+        unsupportLifeCircle: renderUnSupportLifecircleDoc(LifeInfo.descObject)
     };
 };
