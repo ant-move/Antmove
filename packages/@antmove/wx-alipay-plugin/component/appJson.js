@@ -27,7 +27,7 @@ function mkJsonMap (props, targetJson) {
         .forEach(function (prop) {
             let value = props[prop];
             if (value.type === 1) {
-                targetJson[prop] = value.msg;
+                targetJson[prop] = value.key;
             }
         });
 }
