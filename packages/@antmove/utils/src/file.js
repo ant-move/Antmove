@@ -71,7 +71,27 @@ fileUtils.parserDirInfo = function (opts = {}, cb = () => {}, deep = 0, parent =
         let _el = files.splice(wxmlFileIndex, 1);
         files.unshift(_el[0]);
     }
-    
+   
+    const newPathArr = [...files];
+    if (newPathArr.length>4) {
+        const pathData = {};
+        newPathArr.map(obj => {
+            let baseName = obj.basename|| "null";
+            pathData[baseName] = pathData[baseName] || [];
+            pathData[baseName].push(obj);
+        });
+        let pathDataArr = [];
+        Object.keys(pathData).forEach(key => {
+            pathData[key].forEach((item, index)=> {
+                if (item.extname===".json") {
+                    pathData[key].splice(index, 1); 
+                    pathData[key].push(item);
+                }
+            });
+            pathDataArr = pathDataArr.concat(pathData[key]);
+        });
+        files = pathDataArr;
+    }
     return files;
 };
 

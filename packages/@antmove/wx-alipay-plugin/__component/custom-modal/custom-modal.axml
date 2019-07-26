@@ -1,4 +1,4 @@
-<view class="am-modal-{{hidden ? 'hide':'show'}} {{class}} " disable-scroll="{{disableScroll}}">
+<view class="am-modal-{{hidden ? 'hide':'show'}} {{className}} " disable-scroll="{{disableScroll}}">
 	<view class="am-modal-mask" />
 	<view class="am-modal-document {{advice === true ? 'am-modal-document-advice' : '' }}">
 		<view class="am-modal {{className}}">

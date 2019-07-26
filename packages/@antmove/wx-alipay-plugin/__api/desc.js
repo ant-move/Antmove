@@ -1,4 +1,3 @@
-'use strict';
 /**
  * empty file
  */

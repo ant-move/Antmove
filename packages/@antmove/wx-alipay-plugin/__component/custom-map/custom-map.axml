@@ -1,6 +1,7 @@
-<view class="map-wrap">
+<view class="map-wrap {{className}}">
     <map
         id='{{id}}'
+        setting='{{setting}}'
         class='{{class}}'
         longitude="{{longitude}}"
         latitude="{{latitude}}"

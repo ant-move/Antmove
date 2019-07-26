@@ -4,4 +4,4 @@
 
 module.exports = {
     env: "development"
-}
+};

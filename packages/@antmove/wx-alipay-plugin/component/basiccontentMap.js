@@ -19,12 +19,7 @@ module.exports = {
                 type: 0,
                 desc: 'missing',
                 msg: 'Not support'
-            },
-            'size': {
-                type: 3,
-                desc: 'diffType',
-                msg: '支付宝小程序只支持数值类型'
-            },
+            }
         }
     },
     'rich-text': {
@@ -217,6 +212,11 @@ module.exports = {
                 desc: 'missing',
                 key: 'Not support'
             },
+            'auto-focus': {
+                type: 1,
+                desc: 'diff',
+                key: 'focus'
+            },
             'adjust-position': {
                 type: 0,
                 desc: 'missing',
@@ -366,9 +366,9 @@ module.exports = {
     'textarea': {
         props: {
             'auto-focus': {
-                type: 0,
+                type: 1,
                 desc: 'missing',
-                key: 'Not support'
+                key: 'focus'
             },
             'fixed': {
                 type: 0,
@@ -411,9 +411,9 @@ module.exports = {
                 key: 'Not support'
             },
             'bindlinechange': {
-                type: 0,
+                type: 1,
                 desc: 'missing',
-                key: 'Not support'
+                key: 'onLineChange'
             },
             'bindfocus': {
                 type: 1,
@@ -469,11 +469,7 @@ module.exports = {
                 desc: 'missing',
                 key: 'Not support'
             },
-            'enable-scroll': {
-                type: 0,
-                desc: 'missing',
-                key: 'Not support'
-            },
+            
             'enable-rotate': {
                 type: 0,
                 desc: 'missing',
@@ -540,6 +536,11 @@ module.exports = {
         tagName: customComponentNamePrefix + 'btn',
         path: customComponentPrefix + '/__component/btn/btn',
         props: {
+            class: {
+                type: 1,
+                desc: 'diff',
+                key: 'className'
+            },
             "catchTap": {
                 type: 1,
                 desc: 'diff',

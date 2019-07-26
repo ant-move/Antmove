@@ -44,7 +44,7 @@ module.exports = function (jsonStr, fileInfo) {
     if (tagsInfo) {
         tagsInfo.forEach((tagInfo) => {
             if (tagInfo.type === 5) {
-                Config.compile.customComponent[tagInfo.originName] = true;
+                Config.compile.customComponent[tagInfo.tagName] = true;
                 // the __component directory will rename as component
                 let componentPath = tagInfo.path.replace('__component', 'component');
                 json.usingComponents = json.usingComponents || {};

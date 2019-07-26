@@ -6,6 +6,7 @@ const requireModule = require('./requireModule');
 const behavourHandle = require("./behavourHandle");
 const minifyObjectHandle = require('./minifyObject');
 const replaceCalleeHandle = require('./replaceCallee');
+const cjsToes = require('./cjs-to-es5');
 const fs = require('fs-extra');
 
 function ConstructorHandleFn (code, targetName = '') {
@@ -84,6 +85,15 @@ function transformEs6 (code) {
     }).code;
 }
 
+function cjsToesFn (code) {
+    return babel.transform(code, {
+        plugins: [
+            [
+                cjsToes
+            ]
+        ]
+    }).code;
+}
 
 module.exports = {
     ConstructorHandle: ConstructorHandleFn,
@@ -93,5 +103,6 @@ module.exports = {
     behavourHandle,
     replaceCalleeHandleFn,
     minifyObjectHandleFn,
-    transformEs6
+    transformEs6,
+    cjsToes: cjsToesFn
 };

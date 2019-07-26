@@ -60,10 +60,9 @@ module.exports = async function (  config ={} ) {
             
         });
     };
-    const {  isUpdata=true, showReport=false} = config;
+    const {  isUpdata = true, showReport=false} = config;
     const progectPath = path.join(__dirname, '../..');
     if (!isUpdata) {
-        
         return false;
     }
     // 获取 version 
@@ -126,13 +125,11 @@ module.exports = async function (  config ={} ) {
                 await updata(downFileArr[i++]);
             } else {
                 downloadFile('/version.json', progectPath, 'ant-move_v_s.json');
-                // console.log( "更新完成");
+                console.log( "更新完成");
             }
             
         };
         await updata (downFileArr[i++]);
-    }  else {
-        // console.log( "更新完成");
     }    
 };
 
