@@ -65,7 +65,7 @@ module.exports = {
             'project.config.json'
         ],
         env: 'production',
-        remote: true
+        remote: false
     },
     beforeParse: async function (next) {
         if (!isWechatApp(this.$options.entry)) {
