@@ -3,7 +3,7 @@
 var path = require('path');
 var program = require('commander');
 var buildScript = require('../scripts/build.js');
-const inputDirPath = process.env.PWD;
+const inputDirPath = process.cwd();// process.env.PWD;
 /**
  * read packageJson
  */
