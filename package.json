@@ -1,6 +1,6 @@
 {
   "name": "antmove",
-  "version": "0.0.23",
+  "version": "0.1.7",
   "description": "小程序跨平台开发统一解决方案.",
   "bin": {
     "antmove": "./bin/index"
@@ -16,9 +16,9 @@
   "author": "amap-appx@service.autonavi.com",
   "license": "GPL-3.0",
   "dependencies": {
-    "@antmove/wx-alipay": "^0.0.14",
+    "@antmove/wx-alipay": "^0.1.8",
     "commander": "^2.19.0",
-    "fs-extra": "^7.0.1"
+    "fs-extra": "^8.1.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",

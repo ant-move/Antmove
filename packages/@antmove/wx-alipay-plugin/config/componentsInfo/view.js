@@ -351,5 +351,16 @@ module.exports = {
                 msg: '微信默认值500，支付宝无'
             }
         }
+    },
+    'span': {
+        name: '文本',
+        url: {
+            wechat: 'https://developers.weixin.qq.com/miniprogram/dev/component/rich-text.html#%E5%8F%97%E4%BF%A1%E4%BB%BB%E7%9A%84HTML%E8%8A%82%E7%82%B9%E5%8F%8A%E5%B1%9E%E6%80%A7',
+            alipay: ''
+        },
+        desc: '文本',
+        type: 1,
+        status: 0,
+        key: 'text'
     }
 };

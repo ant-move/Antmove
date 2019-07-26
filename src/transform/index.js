@@ -1,4 +1,6 @@
 const utils = require('@antmove/utils');
+const fs = require("fs-extra");
+const path = require("path");
 const {
     parserDirInfo,
     callIfIsFunc
@@ -15,10 +17,13 @@ module.exports = class Transform {
     beforeRun () {
         let inputDir = this.$options.entry;
         let outputDir = this.$options.dist;
+
         let lifeCycles = this.$plugin.lifeCycles;
         let self = this;
-
-        lifeCycles.$options = Object.assign({}, lifeCycles.defaultOptions, this.$options);
+        const packagePath = path.join(__dirname, '../..', 'package.json');
+        const packageJson = fs.readFileSync(packagePath);
+        const versionData = { version: JSON.parse(packageJson).version};
+        lifeCycles.$options = Object.assign(lifeCycles.defaultOptions, this.$options, versionData);
         /**
          * Setting compile env
          */

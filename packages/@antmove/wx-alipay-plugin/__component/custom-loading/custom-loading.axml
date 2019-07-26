@@ -1,4 +1,4 @@
-<view>
+<view class='{{className}}'>
     <view class="Loading_mask" a:if="{{!hidden}}">
         <view class="Loading_box">
             <view class="icon" >

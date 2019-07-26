@@ -373,11 +373,13 @@ function fileInfo () {
                     let newtrStr = "";
                     let opations = "";
                     item.attrs.forEach(its => {
+
                         opations += `<div class="opation-item">
                                         ${its}
                                     </div>`;
                     });
-                    newtrStr += `<td class="name">
+                    if (item.doc&&item.doc!=='无') {
+                        newtrStr += `<td class="name">
                                     ${item.name}
                                 </td>
                                 <td class="opations">
@@ -386,6 +388,17 @@ function fileInfo () {
                                 <td class="result" path="${item.doc}">
                                     帮助文档
                                 </td>`;
+                    } else {
+                        newtrStr += `<td class="name">
+                                    ${item.name}
+                                </td>
+                                <td class="opations">
+                                    ${opations}
+                                </td>
+                                <td class="unsupported">
+                                   支付宝暂不支持，请尝试其他实现方式
+                                </td>`;
+                    }
                     newtr.innerHTML = newtrStr;
 
                     myTbody.appendChild(newtr);

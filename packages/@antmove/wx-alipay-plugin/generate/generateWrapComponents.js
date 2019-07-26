@@ -7,7 +7,6 @@ const Config = require('../config.js');
 const { generateLogPage } = require('./generateRuntimeLogPage');
 const customComponentPrefix = Config.library.customComponentPrefix;
 let entry = path.join(__dirname, `../__component`);
-Config.compile.customComponent = Object.assign({}, Config.compile.customComponent);
 
 function copyDirectory (output, directoryPath) {
     let entryPath = entry + '/' + directoryPath;
@@ -21,7 +20,7 @@ function copyDirectory (output, directoryPath) {
 
 module.exports = function (output, config) {
     generateLogPage(output);
-    Object.keys(config || Config.compile.customComponent)
+    Object.keys(config.compile.customComponent)
         .forEach(function (item) {
             copyDirectory(output, item);
         });

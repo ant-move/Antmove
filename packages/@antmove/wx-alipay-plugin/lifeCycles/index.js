@@ -1,4 +1,4 @@
-const wxmlParser = require('../parse/parseWxml.js');
+const wxmlParser = require('../parse/parse.js');
 const upDataTool = require("../utils/updataTool");
 const chalk = require('chalk');
 const appJsonProcess = require('../component/appJson');
@@ -11,7 +11,6 @@ const compileWxml = require('./compile/compileWxml');
 const compileWxss = require('./compile/compileWxss');
 const compileJs = require('./compile/compileJs');
 const generateBundleComponent = require('../generate/generateWrapComponents');
-
 
 const project = {
     name: "",
@@ -30,13 +29,15 @@ const {
     isTypeFile,
     record,
     reportMethods,
-    runJs
+    runJs,
+    cjsToes
 } = require('@antmove/utils');
 const { processAppJson } = require('../generate/generateRuntimeLogPage');
 const {
     report,
     reportTable,
-    reportSpeed
+    reportSpeed,
+    reportEnd
 } = reportMethods;
 // 制作日志
 const recordConfig = require("../utils/record/config");
@@ -46,12 +47,12 @@ const isWechatApp = require('../utils/isWechatApp');
 // 默认报告不显示具体文件
 let showCompile = true;
 // 默认查看报告
-let showReport = true;
+let showReport = false;
 let statFileNameArr = [];
 let readtimes = 0;
 let finishFile = 0;
 let projectParents = "";
-let beginTime = 0;
+let beginTime = Number(new Date());
 // 输出日志数据
 let repData = {};
 let isUpdata = true;
@@ -64,7 +65,7 @@ module.exports = {
             'project.config.json'
         ],
         env: 'production',
-        remote: true
+        remote: false
     },
     beforeParse: async function (next) {
         if (!isWechatApp(this.$options.entry)) {
@@ -74,16 +75,18 @@ module.exports = {
         Config.env = process.env.NODE_ENV ===  "development" ? 'development' : 'production';
         showReport = Config.env === 'development';
         isUpdata = this.$options.remote;    // 是否从远程拉取 polyfill 代码
-        beginTime = Number(new Date());
         let date = "";
         report(date, { type: "title", showReport });
         const {
             getSurrounding,
+            getToolVs,
             resDataInit
         } = record(recordConfig);
         repData = resDataInit();
         repData.surroundings = getSurrounding();
-
+        let versionData = {};
+        versionData.version = this.$options.version;
+        repData.toolVs = getToolVs(versionData);
         await upDataTool({ baseurl, isUpdata, showReport });
         next();
     },
@@ -111,7 +114,6 @@ module.exports = {
 
     },
     onParsed () {
-        console.log('onParsed. ');
     },
     beforeCompile (ctx) {
         fs.emptyDirSync(ctx.$options.dist);
@@ -121,7 +123,6 @@ module.exports = {
             getTemplateData,
             getStyleData,
             getCustomScript,
-           
             getScriptData,
             getJsonData,
             getOthersFile
@@ -159,6 +160,7 @@ module.exports = {
         }
         readtimes++;
         if (isTypeFile('.wxml', fileInfo.path)) {
+            compileWxss(fileInfo, ctx, true);
             const reptempData = getTemplateData(fileInfo);
             checkCoverView(fileInfo.ast, reptempData);
             compileWxml(fileInfo, ctx);
@@ -218,6 +220,7 @@ module.exports = {
                 nums: finishFile
             };
             date = report(date, reportData);
+            content = cjsToes(content);
             fs.outputFileSync(fileInfo.dist.replace(/\.wxs$/, '.sjs'), content);
         } else {
             let content;
@@ -342,23 +345,25 @@ module.exports = {
                 report(date, generateData);
             }
         }
-
-        reportSpeed({
-            showReport,
-            length: project.fileNum,
-            nums: finishFile
-        });
+        // console.log(new Date() - date)
+        if ( new Date() - date> 30 || finishFile%3===0 || finishFile === project.fileNum) {
+            reportSpeed({
+                showReport,
+                length: project.fileNum,
+                nums: finishFile
+            });
+        }
+        
         return fileInfo;
     },
     compiled: async function (ctx) {
         const {
             findOpenAbility,
             statistics,
-            getToolVs,
             writeReportPage
         } = record(recordConfig);
+        generateBundleComponent(ctx.output, Config);
         await runGenerateBundleApi(ctx.output);
-        generateBundleComponent(ctx.output);
 
 
         const tableInfo = {
@@ -385,11 +390,13 @@ module.exports = {
         repData.opening = findOpenAbility(repData);
         let statisticsData = statistics(repData.transforms);
         repData.concept = statisticsData;
-        repData.toolVs = getToolVs();
         let targetPath =  path.join(ctx.output, `${Config.library.customComponentPrefix}/.config.json`);
         writeReportPage(repData, targetPath);
         
-
+        reportEnd({
+            info: '欢迎使用蚂蚁搬家工具，您可以通过如下地址寻求帮助或是给予反馈。',
+            path: 'antmove-docs: https://github.com/ant-move/antmove'
+        });
 
     }
 };
@@ -404,7 +411,6 @@ function runGenerateBundleApi (output) {
             runJs(filename, {
                 output,
                 Config,
-                utils: require('@antmove/utils')
             }, function (code) {
                 resolve(code);
             });

@@ -21,7 +21,6 @@
 }
 .sp-input-style{
   width:calc(100vw - 2.5rem);
-  background:#ffffff;
 }
 .bg{
   background-color: #F8F8F8;

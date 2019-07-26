@@ -14,7 +14,7 @@ const apiObj = {
                 utils.warn(
                     'GetAuthUserInfo不支持 withCredentials 或 lang 参数.',
                     {
-                        apiName: 'getUserInfo/withCredentials或getUserInfo/lang',
+                        apiName: 'getUserInfo/withCredentials 或 getUserInfo/lang',
                         errorType: 0,
                         type: 'api'
                     }
@@ -27,18 +27,20 @@ const apiObj = {
                     my.getAuthUserInfo({
                         ...obj,
                         success (res) {
-                            let _res = utils.defineGetter(res, getUserInfoSuccessRes, function (obj, prop) {
+                            utils.defineGetter(res, getUserInfoSuccessRes, function (obj, prop) {
                                 utils.warn(
                                     `getUserInfo的参数不支持 ${prop} 属性!`,
                                     {
-                                        apiName: `getUserInfo/${prop}`,
+                                        apiName: prop,
                                         errorType: getUserInfoSuccessRes[prop].type,
                                         type: 'api'
                                     }
                                 );
                             });
-                            res.userInfo = _res;
-                            _res.userInfo.avatarUrl = _res.avatar;
+                            
+                            const _res = {};
+                            _res.userInfo = res;
+                            _res.userInfo.avatarUrl = res.avatar;
                             obj.success && obj.success(_res);
                         }
                     });
@@ -64,7 +66,7 @@ const apiObj = {
                 utils.warn(
                     `requestPayment的参数不支持 ${prop} 属性!`,
                     {
-                        apiName: `requestPayment/${prop}`,
+                        apiName: prop,
                         errorType: requestPaymentParams[prop].type,
                         type: 'api'
                     }
@@ -84,7 +86,7 @@ const apiObj = {
                 utils.warn(
                     `authorize的参数不支持 ${prop} 属性!`,
                     {
-                        apiName: `authorize/${prop}`,
+                        apiName: prop,
                         errorType: authorizeParams[prop].type,
                         type: 'api'
                     }
@@ -100,7 +102,7 @@ const apiObj = {
                 utils.warn(
                     `openCard的参数不支持 ${prop} 属性!`,
                     {
-                        apiName: `openCard/${prop}`,
+                        apiName: prop,
                         errorType: openCardParams[prop].type,
                         type: 'api'
                     }
@@ -116,7 +118,7 @@ const apiObj = {
                 utils.warn(
                     `addCard的参数不支持 ${prop} 属性!`,
                     {
-                        apiName: `addCard/${prop}`,
+                        apiName: prop,
                         errorType: addCardParams[prop].type,
                         type: 'api'
                     }
@@ -132,7 +134,7 @@ const apiObj = {
                 utils.warn(
                     `startSoterAuthentication的参数不支持 ${prop} 属性!`,
                     {
-                        apiName: `startSoterAuthentication/${prop}`,
+                        apiName: prop,
                         errorType: startSoterAuthenticationParams[prop].type,
                         type: 'api'
                     }

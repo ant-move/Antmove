@@ -103,8 +103,10 @@ const Wxml = P.createLanguage({
         return P.seqMap(
             P.optWhitespace,
             // P.string('{{'),
-            P.regexp(/[^<]+/),
-            // P.regex(/((?!<\/).)+/),
+            P.regexp(/[^<]/),
+            //P.regex(/(?!<\/)/),
+            //P.regex(/.+/),
+                //.notFollowedBy(P.regex(/<\w+.*>/)),
             P.optWhitespace,
             // P.string('}}'),
             function (...r) {
@@ -118,36 +120,6 @@ const Wxml = P.createLanguage({
         );
     },
     OpeningElement: function (r) {
-        return P.seqMap(
-            lTagArrow,
-            r.Symbol,
-            whitespaces,
-            Wxml.Attribute.many(),
-            whitespaces,
-            rTagArrow,
-            Wxml.Element.atLeast(1)
-                .or(Wxml.StringExpression.or(whitespaces)),
-            lTagArrow,
-            whitespaces,
-            endLine,
-            r.Symbol,
-            whitespaces,
-            rTagArrow,
-            function (r1, r2, r3, r4, r5, r6, r7) {
-                let _prop = {};
-                r4.forEach(function (el) {
-                    _prop[el[0]] = el[1];
-                });
-
-                return {
-                    typeof: 'wxml.element',
-                    key: null,
-                    props: _prop,
-                    type: r2.toLowerCase(),
-                    children: r7
-                };
-            }
-        )
         return P.seqMap(
             lTagArrow,
             r.Symbol,
@@ -241,6 +213,27 @@ const Wxml = P.createLanguage({
         )
     }
 });
+
+function notTagElement() {
+    return P(function(input, i) {
+        let str = input.substring(i);
+        if (matchText(str));
+      if (input.charAt(i) !== char) {
+        return P.makeSuccess(i + 1, input.charAt(i));
+      }
+      return P.makeFailure(i, 'anything different than "' + char + '"');
+    });
+
+    function matchText (str) {
+        for (let i = 0; i < str.length; i++) {
+            let _str = str.substring(i);
+            if (str.match(/^<\w+.*>/)) {
+                return i;
+            }
+        }
+        return false;
+    }
+  }
 
 function parseString (code) {
     if (!code) return [];

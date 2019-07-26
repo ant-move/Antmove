@@ -162,9 +162,7 @@ picker {
     display: block;
 }
 
-picker-view {
-    display: block;
-}
+
 
 picker-view-column {
     -webkit-flex: 1;
@@ -216,10 +214,6 @@ image {
     background-origin: content-box;
 }
 
-audio {
-    display: inline-block;
-    line-height: 0;
-}
 
 video {
     width: 300px;

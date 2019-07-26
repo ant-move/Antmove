@@ -5,7 +5,6 @@
     display: inline-block
 }
 button{
-    background-color: #f8f8f8;
     color: "#000";
     line-height: 2.5556;
     border: 1px solid #ccc;
@@ -47,6 +46,11 @@ button:active{
 .plain.type_primary{
     color: #179b16;
     background-color: #fff;
+}
+
+.plain:active {
+    background-color: #dedede;
+    color: rgba(0,0,0,0.6);
 }
 .disabled{
     opacity: 0.6
