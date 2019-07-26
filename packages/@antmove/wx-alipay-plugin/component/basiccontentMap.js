@@ -88,12 +88,7 @@ module.exports = {
                 type: 1,
                 desc: 'diff',
                 key: 'background-color'
-            },
-            'stroke-width': {
-                type: 3,
-                desc: 'diffType',
-                msg: '支付宝小程序只支持Number类型'
-            },
+            }
         }
     },
     // use custom button instead of primitive button

@@ -168,18 +168,6 @@ module.exports = {
         props: {
             'scroll-x': createSupportProp('允许横向滚动'),
             'scroll-y': createSupportProp('允许纵向滚动'),
-            'upper-threshold': {
-                type: 3,
-                status: 1,
-                desc: '距顶部/左边多远时，触发 scrolltoupper 事件',
-                msg: '支付宝小程序只支持number类型'
-            },
-            'lower-threshold': {
-                type: 3,
-                status: 1,
-                desc: '距顶部/左边多远时，触发 scrolltoupper 事件',
-                msg: '支付宝小程序只支持number类型'
-            },
             'scroll-top': {
                 type: 3,
                 status: 1,
@@ -351,16 +339,5 @@ module.exports = {
                 msg: '微信默认值500，支付宝无'
             }
         }
-    },
-    'span': {
-        name: '文本',
-        url: {
-            wechat: 'https://developers.weixin.qq.com/miniprogram/dev/component/rich-text.html#%E5%8F%97%E4%BF%A1%E4%BB%BB%E7%9A%84HTML%E8%8A%82%E7%82%B9%E5%8F%8A%E5%B1%9E%E6%80%A7',
-            alipay: ''
-        },
-        desc: '文本',
-        type: 1,
-        status: 0,
-        key: 'text'
     }
 };

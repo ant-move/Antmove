@@ -57,12 +57,6 @@ module.exports = {
                 status: 2,
                 desc: '右侧百分比字体大小',
             },
-            'stroke-width': {
-                type: 3,
-                status: 1,
-                desc: '进度条线的宽度',
-                msg: '支付宝小程序只支持数值类型'
-            },
             'color': {
                 type: 3,
                 status: 0,

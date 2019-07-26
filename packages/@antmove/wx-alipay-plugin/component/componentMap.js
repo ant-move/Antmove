@@ -443,6 +443,10 @@ module.exports = {
                 type: 0,
                 desc: 'missing'
             },
+            'auto-pause-if-navigate': {
+                type: 0,
+                desc: 'missing'
+            },
             'auto-pause-if-open-native': {
                 type: 0,
                 desc: 'missing'
@@ -502,6 +506,18 @@ module.exports = {
             },
             'flash': {
                 type: 0,
+                desc: 'missing'
+            },
+            'takePhoto': {
+                type: 0,
+                desc: 'missing'
+            },
+            'startRecord': {
+                tyoe: 0,
+                desc: 'missing'
+            },
+            'stopRecord': {
+                tyoe: 0,
                 desc: 'missing'
             },
             'bindstop': {
