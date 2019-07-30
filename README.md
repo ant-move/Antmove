@@ -65,7 +65,7 @@ antmove -i ./wechat-mini/project -o ./dist/alipay-mini/project --env development
 * `--output,-o`
     * 必传，编译输出目录
 * `--env,-e`
-    * 可选，编译模式，生产模式代码会压缩，无编译日志及运行时日志
+    * 可选（development/production），编译模式，生产模式代码会压缩，无编译日志及运行时日志
 
 ### Node.js 使用方式
 

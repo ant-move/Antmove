@@ -18,7 +18,16 @@ const { createSupportProp } = require('../componentsInfo/utils.js');
  */
 
 module.exports = {
-    'pages': createSupportProp('设置页面路径'),
+    'pages': {
+        name: '设置页面路径',
+        url: {
+            wechat: 'https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/app.html#pages',
+            alipay: 'https://docs.alipay.com/mini/framework/app-json'
+        },
+        desc: 'app.json 用于对小程序进行全局配置，设置页面文件的路径、窗口表现、网络超时时间、多 tab 等。',
+        status: 0,
+        type: 7
+    },
     'window': {
         name: '设置默认页面的窗口表现',
         url: {
@@ -26,68 +35,61 @@ module.exports = {
             alipay: 'https://docs.alipay.com/mini/framework/app-json'
         },
         desc: 'window 用于设置小程序的状态栏、导航条、标题、窗口背景色等。',
-        status: '1',
+        status: 1,
         props: {
             'navigationBarBackgroundColor': {
                 type: 1,
                 status: 0,
                 desc: '导航栏背景颜色，如 #000000',
-                msg: 'titleBarColor'
+                key: 'titleBarColor'
             },
             'navigationBarTextStyle': {
                 type: 0,
                 status: 2,
                 desc: '导航栏标题颜色，仅支持 black / white',
-                msg: '暂不支持'
             },
             'navigationBarTitleText': {
                 type: 1,
                 status: 0,
                 desc: '导航栏标题文字内容',
-                msg: 'defaultTitle'
+                key: 'defaultTitle'
             },
             'navigationStyle': {
                 type: 0,
                 status: 2,
                 desc: '导航栏样式',
-                msg: '暂不支持'
             },
             'backgroundColor': createSupportProp('窗口的背景色'),
             'backgroundTextStyle': {
                 type: 0,
                 status: 2,
                 desc: '下拉 loading 的样式，仅支持 dark / light',
-                msg: '暂不支持'
             },
             'backgroundColorTop': {
                 type: 0,
                 status: 2,
                 desc: '顶部窗口的背景色，仅 iOS 支持',
-                msg: '暂不支持'
             },
             'backgroundColorBottom': {
                 type: 0,
                 status: 2,
                 desc: '底部窗口的背景色，仅 iOS 支持',
-                msg: '暂不支持'
             },
             'enablePullDownRefresh': {
                 type: 1,
                 status: 0,
                 desc: '是否开启全局的下拉刷新',
-                msg: 'pullRefresh'
+                key: 'pullRefresh'
             },
             'onReachBottomDistance': {
                 type: 0,
                 status: 2,
                 desc: '页面上拉触底事件触发时距页面底部距离，单位为 px',
-                msg: '暂不支持'
             },
             'pageOrientation': {
                 type: 0,
                 status: 2,
                 desc: '屏幕旋转设置，支持 auto / portrait / landscape,详见 响应显示区域变化',
-                msg: '暂不支持'
             }
         }
     },
@@ -103,7 +105,7 @@ module.exports = {
                 type: 1,
                 status: 0,
                 desc: 'tab 上的文字默认颜色，仅支持十六进制颜色',
-                msg: 'textColor'
+                key: 'textColor'
             },
             'selectedColor': createSupportProp('选中文字颜色'),
             'backgroundColor': createSupportProp('tab 的背景色，仅支持十六进制颜色'),
@@ -111,33 +113,32 @@ module.exports = {
                 type: 0,
                 status: 2,
                 desc: 'tabbar 上边框的颜色， 仅支持 black / white',
-                msg: '暂不支持'
             },
             'list': {
                 name: 'tab 的列表',
                 type: 1,
                 status: 0,
                 desc: 'tab 的列表，详见 list 属性说明，最少 2 个、最多 5 个 tab',
-                msg: 'items',
+                key: 'items',
                 props: {
                     'pagePath': createSupportProp('设置页面路径'),
                     'text': {
                         type: 1,
                         status: 0,
                         desc: 'tab 上按钮文字',
-                        msg: 'name'
+                        key: 'name'
                     },
                     'iconPath': {
                         type: 1,
                         status: 0,
                         desc: '平常图标路径',
-                        msg: 'icon'
+                        key: 'icon'
                     },
                     'selectedIconPath': {
                         type: 1,
                         status: 0,
                         desc: '选中时的图片路径，icon 大小限制为 40kb，建议尺寸为 81px * 81px，不支持网络图片。',
-                        msg: 'activeIcon'
+                        key: 'activeIcon'
                     }
                 }
             },
@@ -145,13 +146,11 @@ module.exports = {
                 type: 0,
                 status: 2,
                 desc: 'tabBar 的位置，仅支持 bottom / top',
-                msg: '暂不支持'
             },
             'custom': {
                 type: 0,
                 status: 2,
                 desc: '自定义 tabBar',
-                msg: '暂不支持'
             }
         }
     },
@@ -164,7 +163,6 @@ module.exports = {
             alipay: ''
         },
         desc: '各类网络请求的超时时间，单位均为毫秒。',
-        msg: '暂不支持'
     },
     'debug': {
         name: '是否开启 debug 模式，默认关闭',
@@ -175,7 +173,6 @@ module.exports = {
             alipay: ''
         },
         desc: '可以在开发者工具中开启 debug 模式，在开发者工具的控制台面板，调试信息以 info 的形式给出，其信息有 Page 的注册，页面路由，数据更新，事件触发等。可以帮助开发者快速定位一些常见的问题。',
-        msg: '暂不支持'
     },
     'functionalPages': {
         name: '是否启用插件功能页，默认关闭',
@@ -186,7 +183,6 @@ module.exports = {
             alipay: ''
         },
         desc: '插件所有者小程序需要设置这一项来启用插件功能页。',
-        msg: '暂不支持'
     },
     'subpackages': {
         name: '分包结构配置',
@@ -197,7 +193,6 @@ module.exports = {
             alipay: ''
         },
         desc: '启用分包加载时，声明项目分包结构。',
-        msg: '暂不支持'
     },
     'workers': {
         name: 'Worker 代码放置的目录',
@@ -208,7 +203,6 @@ module.exports = {
             alipay: ''
         },
         desc: '使用 Worker 处理多线程任务时，设置 Worker 代码放置的目录',
-        msg: '暂不支持'
     },
     'requiredBackgroundModes': {
         name: '需要在后台使用的能力，如「音乐播放」',
@@ -219,7 +213,6 @@ module.exports = {
             alipay: ''
         },
         desc: '申明需要后台运行的能力，类型为数组。目前支持以下项目：audio后台音乐播放',
-        msg: '暂不支持'
     },
     'plugins': {
         name: '使用到的插件',
@@ -230,7 +223,6 @@ module.exports = {
             alipay: ''
         },
         desc: '声明小程序需要使用的插件。',
-        msg: '暂不支持'
     },
     'preloadRule': {
         name: '分包预下载规则',
@@ -241,7 +233,6 @@ module.exports = {
             alipay: ''
         },
         desc: '声明分包预下载的规则',
-        msg: '暂不支持'
     },
     'resizable': {
         name: 'iPad 小程序是否支持屏幕旋转，默认关闭',
@@ -252,7 +243,6 @@ module.exports = {
             alipay: ''
         },
         desc: '在 iPad 上运行的小程序可以设置支持屏幕旋转。',
-        msg: '暂不支持'
     },
     'navigateToMiniProgramAppIdList': {
         name: '需要跳转的小程序列表，详见 wx.navigateToMiniProgram',
@@ -263,7 +253,6 @@ module.exports = {
             alipay: ''
         },
         desc: '当小程序需要使用 wx.navigateToMiniProgram 接口跳转到其他小程序时，需要先在配置文件中声明需要跳转的小程序 appId 列表，最多允许填写 10 个。',
-        msg: '暂不支持'
     },
     'usingComponents': {
         name: '全局自定义组件配置',
@@ -274,7 +263,6 @@ module.exports = {
             alipay: ''
         },
         desc: '在此处声明的自定义组件视为全局自定义组件，在小程序内的页面或自定义组件中可以直接使用而无需再声明。',
-        msg: '暂不支持'
     },
     'permission': {
         name: '小程序接口权限相关设置',
@@ -285,7 +273,6 @@ module.exports = {
             alipay: ''
         },
         desc: '小程序接口权限相关设置。字段类型为 Object',
-        msg: '暂不支持'
     },
     'sitemapLocation': {
         name: '指明 sitemap.json 的位置',
@@ -296,6 +283,5 @@ module.exports = {
             alipay: ''
         },
         desc: '指明 sitemap.json 的位置',
-        msg: '暂不支持'
     }
 };

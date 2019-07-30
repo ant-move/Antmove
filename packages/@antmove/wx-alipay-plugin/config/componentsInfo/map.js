@@ -298,11 +298,6 @@ module.exports = {
                 status: 2,
                 desc: '是否支持缩放',
             },
-            'enable-scroll': {
-                type: 0,
-                status: 2,
-                desc: '是否支持拖动',
-            },
             'enable-rotate': {
                 type: 0,
                 status: 2,

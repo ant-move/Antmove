@@ -4,7 +4,6 @@ const fs = require('fs-extra');
 const path = require('path');
 const axios = require('axios');
 module.exports = async function (  config ={} ) {
-    config.baseurl = config.baseurl||'http://cache.amap.com/ecology/tool/antmove/wechat-alipay/0.2.0';
     const fileGet =  (filePath) => {
         return axios ({
             url: `${config.baseurl}${filePath}`,
@@ -117,15 +116,10 @@ module.exports = async function (  config ={} ) {
             });
             let fileName = dirNameArr[dirNameArr.length-1];
             downloadFile(item, filePath, fileName);
-            if (showReport) {
-                console.log( "更新："+'\033[40;32m '+ item +' \033[0m');
-            } 
-            
             if (i <= downFileArr.length-1) {
                 await updata(downFileArr[i++]);
             } else {
                 downloadFile('/version.json', progectPath, 'ant-move_v_s.json');
-                console.log( "更新完成");
             }
             
         };
