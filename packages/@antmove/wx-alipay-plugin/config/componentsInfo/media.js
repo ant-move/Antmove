@@ -122,6 +122,21 @@ module.exports = {
                 status: 2,
                 desc: '指定期望的相机帧数据尺寸',
             },
+            'takePhoto': {
+                type: 0,
+                status: 2,
+                desc: '拍照',
+            },
+            'startRecord': {
+                tyoe: 0,
+                status: 2,
+                desc: '开始录像',
+            },
+            'stopRecord': {
+                tyoe: 0,
+                status: 2,
+                desc: '结束录像',
+            },
             'bindstop': {
                 type: 1,
                 status: 0,
@@ -238,6 +253,11 @@ module.exports = {
                 type: 0,
                 status: 2,
                 desc: '是否开启播放手势，即双击切换播放/暂停',
+            },
+            'auto-pause-if-navigate': {
+                type: 0,
+                status: 2,
+                desc: '当跳转到其它小程序页面时，是否自动暂停本页面的视频',
             },
             'auto-pause-if-open-native': {
                 type: 0,

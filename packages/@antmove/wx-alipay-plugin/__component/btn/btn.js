@@ -106,7 +106,7 @@ Component({
             }
             const tapEvent = {...e};
             tapEvent.target.dataset = this.makeDataSet(this.props);
-            this.props.onCatchTap&&this.props.onCatchTap(tapEvent);
+            this.props.onCatchTap(tapEvent);
             this.props.onTap(tapEvent);
         },
         getPhone (e) {

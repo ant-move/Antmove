@@ -111,14 +111,14 @@ module.exports = {
                 msg: 'Not support'
             },
             'bindtransition': {
-                type: 0,
-                desc: 'missing',
-                msg: 'Not support'
+                type: 1,
+                desc: 'diff',
+                key: "onTransition"
             },
             'bindanimationfinish': {
-                type: 0,
-                desc: 'missing',
-                msg: 'Not support'
+                type: 1,
+                desc: 'diff',
+                key: "onAnimationEnd"
             },
             'bindchange': {
                 type: 1,
@@ -443,6 +443,10 @@ module.exports = {
                 type: 0,
                 desc: 'missing'
             },
+            'auto-pause-if-navigate': {
+                type: 0,
+                desc: 'missing'
+            },
             'auto-pause-if-open-native': {
                 type: 0,
                 desc: 'missing'
@@ -502,6 +506,18 @@ module.exports = {
             },
             'flash': {
                 type: 0,
+                desc: 'missing'
+            },
+            'takePhoto': {
+                type: 0,
+                desc: 'missing'
+            },
+            'startRecord': {
+                tyoe: 0,
+                desc: 'missing'
+            },
+            'stopRecord': {
+                tyoe: 0,
                 desc: 'missing'
             },
             'bindstop': {

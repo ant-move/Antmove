@@ -58,14 +58,13 @@ if (!specialtypeCmd) {
 function action (options) {
     if (!options.output) {
         program.help();
-        // console.log('[Error:] Missing output path.');
         return false;
     }
 
     /**
      * preprocess ouput path
      */
-    options.output = path.join(inputDirPath, options.output);
+    options.input = toAbsolutePath(options.input);
     options.output = toAbsolutePath(options.output);
     buildScript(options);
 }
