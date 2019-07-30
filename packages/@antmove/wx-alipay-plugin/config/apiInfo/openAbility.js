@@ -111,36 +111,12 @@ module.exports = {
         }
     ),
     requestPayment: createDescObj(
-        1,
+        2,
         '发起支付',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/payment/wx.requestPayment.html',
-        'https://docs.alipay.com/mini/api/openapi-pay',
+        '无',
         {
-            msg: '命名不同wx: requestPayment, alipay: tradePay, 参数缺失',
-            params: {
-                props: {
-                    timeStamp: {
-                        type: 0,
-                        desc: '时间戳'
-                    },
-                    nonceStr: {
-                        type: 0,
-                        desc: '随机字符串'
-                    },
-                    package: {
-                        type: 0,
-                        desc: '统一下单接口返回的 prepay_id 参数值, 提交格式如：prepay_id=***'
-                    },
-                    signType: {
-                        type: 0,
-                        desc: '签名算法'
-                    },
-                    paySign: {
-                        type: 0,
-                        desc: '签名'
-                    }
-                }
-            }
+            msg: '支付宝与微信支付功能差异较大，请参考支付宝支付文档做兼容处理',
         }
     ),
     authorize: createDescObj(

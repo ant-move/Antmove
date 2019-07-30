@@ -378,8 +378,9 @@ function fileInfo () {
                                         ${its}
                                     </div>`;
                     });
-                    if (item.doc&&item.doc!=='无') {
-                        newtrStr += `<td class="name">
+                    if (item.doc) {
+                        if (item.doc!=='无') {
+                            newtrStr += `<td class="name">
                                     ${item.name}
                                 </td>
                                 <td class="opations">
@@ -388,6 +389,18 @@ function fileInfo () {
                                 <td class="result" path="${item.doc}">
                                     帮助文档
                                 </td>`;
+                        } else {
+                            newtrStr += `<td class="name">
+                                    ${item.name}
+                                </td>
+                                <td class="opations">
+                                    ${opations}
+                                </td>
+                                <td class="unsupported" path="">
+                                    支付宝暂不支持，请尝试其他实现方式
+                                </td>`;
+                        }
+                        
                     } else {
                         newtrStr += `<td class="name">
                                     ${item.name}

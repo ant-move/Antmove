@@ -19,14 +19,14 @@ const { createSupportProp } = require('../componentsInfo/utils.js');
 
 module.exports = {
     'navigationBarBackgroundColor': {
-        type: 0,
-        status: 2,
+        type: 1,
+        status: 0,
         url: {
             wechat: 'https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/page.html',
-            alipay: ''
+            alipay: 'https://docs.alipay.com/mini/framework/page-json'
         },
+        key: 'titleBarColor',
         desc: '导航栏背景颜色，如 #000000',
-        msg: '暂不支持'
     },
     'navigationBarTextStyle': {
         type: 0,
@@ -36,17 +36,16 @@ module.exports = {
             alipay: ''
         },
         desc: '导航栏标题颜色，仅支持 black / white',
-        msg: '暂不支持'
     },
     'navigationBarTitleText': {
-        type: 0,
-        status: 2,
+        type: 1,
+        status: 0,
         url: {
             wechat: 'https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/page.html',
-            alipay: ''
+            alipay: 'https://docs.alipay.com/mini/framework/page-json'
         },
         desc: '导航栏标题文字内容',
-        msg: '暂不支持'
+        key: 'defaultTitle'
     },
     'navigationStyle': {
         type: 0,
@@ -56,17 +55,15 @@ module.exports = {
             alipay: ''
         },
         desc: '导航栏样式，仅支持以下值，default 默认样式,custom 自定义导航栏，只保留右上角胶囊按钮',
-        msg: '暂不支持'
     },
     'backgroundColor': {
-        type: 0,
-        status: 2,
+        type: 7,
+        status: 0,
         url: {
             wechat: 'https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/page.html',
-            alipay: ''
+            alipay: 'https://docs.alipay.com/mini/framework/page-json'
         },
         desc: '窗口的背景色',
-        msg: '暂不支持'
     },
     'backgroundTextStyle': {
         type: 0,
@@ -76,7 +73,6 @@ module.exports = {
             alipay: ''
         },
         desc: '下拉 loading 的样式，仅支持 dark / light',
-        msg: '暂不支持'
     },
     'backgroundColorTop': {
         type: 0,
@@ -86,7 +82,6 @@ module.exports = {
             alipay: ''
         },
         desc: '顶部窗口的背景色，仅 iOS 支持',
-        msg: '暂不支持'
     },
     'backgroundColorBottom': {
         type: 0,
@@ -96,17 +91,16 @@ module.exports = {
             alipay: ''
         },
         desc: '底部窗口的背景色，仅 iOS 支持',
-        msg: '暂不支持'
     },
     'enablePullDownRefresh': {
-        type: 0,
-        status: 2,
+        type: 1,
+        status: 0,
         url: {
             wechat: 'https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/page.html',
-            alipay: ''
+            alipay: 'https://docs.alipay.com/mini/framework/page-json'
         },
         desc: '是否开启当前页面下拉刷新。详见 Page.onPullDownRefresh',
-        msg: '暂不支持'
+        key: 'pullRefresh'
     },
     'onReachBottomDistance': {
         type: 0,
@@ -116,7 +110,6 @@ module.exports = {
             alipay: ''
         },
         desc: '页面上拉触底事件触发时距页面底部距离，单位为px。详见 Page.onReachBottom',
-        msg: '暂不支持'
     },
     'pageOrientation': {
         type: 0,
@@ -126,7 +119,6 @@ module.exports = {
             alipay: ''
         },
         desc: '屏幕旋转设置，支持 auto / portrait / landscape 详见 响应显示区域变化',
-        msg: '暂不支持'
     },
     'disableScroll': {
         type: 0,
@@ -136,7 +128,6 @@ module.exports = {
             alipay: ''
         },
         desc: '设置为 true 则页面整体不能上下滚动。只在页面配置中有效，无法在 app.json 中设置',
-        msg: '暂不支持'
     },
     'disableSwipeBack': {
         type: 0,
@@ -146,7 +137,14 @@ module.exports = {
             alipay: ''
         },
         desc: '禁止页面右滑手势返回',
-        msg: '暂不支持'
     },
-    'usingComponents': createSupportProp('页面自定义组件配置')
+    'usingComponents': {
+        type: '7',
+        status: '0',
+        url: {
+            wechat: 'https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/page.html',
+            alipay: 'https://docs.alipay.com/mini/framework/page-json'
+        },
+        desc: '页面自定义组件配置',
+    }
 };

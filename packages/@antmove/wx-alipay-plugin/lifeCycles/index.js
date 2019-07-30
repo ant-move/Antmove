@@ -56,7 +56,7 @@ let beginTime = Number(new Date());
 // 输出日志数据
 let repData = {};
 let isUpdata = true;
-let baseurl = 'http://cache.amap.com/ecology/tool/antmove/wechat-alipay/0.2.0';
+let baseurl = 'http://cache.amap.com/ecology/tool/antmove/wechat-alipay/';
 
 module.exports = {
     defaultOptions: {
@@ -87,7 +87,13 @@ module.exports = {
         let versionData = {};
         versionData.version = this.$options.version;
         repData.toolVs = getToolVs(versionData);
-        await upDataTool({ baseurl, isUpdata, showReport });
+
+        const toolPath = path.join(__dirname, '../package.json');
+        const toolVsData = JSON.parse(fs.readFileSync(toolPath)).version;
+        baseurl = baseurl + toolVsData;
+        try {
+            await upDataTool({ baseurl, isUpdata, showReport });
+        } catch (err) {};
         next();
     },
     onParsing (fileInfo) {
@@ -141,13 +147,12 @@ module.exports = {
             length: project.fileNum,
             nums: finishFile
         };
+
+
         if (!fileInfo.parent) {
             readtimes = 0;
-            let pathArr = fileInfo.path.split("\\");
-            if (pathArr.length < 3) {
-                pathArr = pathArr[0].split("/");
-            }
-            projectParents = pathArr[pathArr.length - 3];
+            let pathArr = fileInfo.path.split(path.sep);
+            projectParents = pathArr[pathArr.length - 3] || "";
             reportData.info = fileInfo.path.split(projectParents)[1].substr(1);
             report(date, reportData);
         } else {

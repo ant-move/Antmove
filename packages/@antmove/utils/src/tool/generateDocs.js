@@ -10,9 +10,9 @@ const {
 const {isExternal} = require('./config')
 const path = require('path');
 const fs = require('fs-extra');
-const outputDist = path.join(__dirname, '../../../../../ant-move-docs/website/sidebars.json');
-const insidePath = path.join(__dirname,'../../../../../ant-move-docs/website/inside.json');
-const externalPath = path.join(__dirname,'../../../../../ant-move-docs/website/external.json');
+const outputDist = path.join(__dirname, '../../../../../../ant-move-docs/website/sidebars.json');
+const insidePath = path.join(__dirname,'../../../../../../ant-move-docs/website/inside.json');
+const externalPath = path.join(__dirname,'../../../../../../ant-move-docs/website/external.json');
 /**
  * generate docs sidebar.json
  */
@@ -95,14 +95,14 @@ module.exports = function ( config = {}, target) {
             if (target === "wechat-alipay") {
                 getPath = externalPath;
                 json = fs.readFileSync(getPath); 
-                fs.outputFileSync(p,headA)
+                // fs.outputFileSync(p,headA)
             } else {
                 return
             }         
         } else {
             getPath = insidePath
             json = fs.readFileSync(getPath);
-            fs.outputFileSync(p,headB)
+            // fs.outputFileSync(p,headB)
         }
         json = JSON.parse(json);  
         json[`${res}`][`${tansformBefor}转${tansformAfter}`] = wx2alipay;  

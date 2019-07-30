@@ -10,15 +10,14 @@ Component({
         'polygons': [],
         'circles': [],
         'controls': [],
-        'include-points': [],
-        'show-location': false,
+        'includeLoints': [],
+        'showLocation': false,
         'subkey': '',
-        'enable-3D': false,
-        'show-compass': false,
-        'enable-overlooking': false,
-        'enable-zoom': false,
-        'enable-scroll': false,
-        'enable-rotate': false,
+        'showCompass': false,
+        'enableOverlooking': false,
+        'enableZoom': false,
+        'enableScroll': false,
+        'enableRotate': false,
         style: '',
         onMarkerTap: () => { },
         onCalloutTap: () => { },
@@ -37,7 +36,8 @@ Component({
     },
     didUpdate () {
         this.setData({
-            mapStyle: this.props.style
+            mapStyle: this.props.style,
+            
         });
         this.processProps();
     },
@@ -57,7 +57,7 @@ Component({
                             type: 'component'
                         });
                 }
-                if (el['aria-label']) {
+                if (el['ariaLabel']) {
                     utils.warn(
                         'markers暂不支持aria-label',
                         {
@@ -165,12 +165,14 @@ Component({
             const setting = {
                 gestureEnable: 0,
             };
-            if (this.props["enable-scroll"]) {
+            if (this.props["enableScroll"]) {
                 setting.gestureEnable = 1;
+            } else {
+                setting.gestureEnable = 0;
             }
             this.setData({
                 alMakers: alMarkers,
-                
+                setting
             });
             // polyline 差异
             this.props.polyline.map(el => {
@@ -226,28 +228,28 @@ Component({
                     type: 'component'
                 });
             }
-            if (this.props['enable-3D']) {
+            if (this.props['enable3D']) {
                 utils.warn('暂不支持enable-3D',{
                     apiName: 'map',
                     errorType: 0,
                     type: 'component'
                 });
             }
-            if (this.props['show-compass']) {
+            if (this.props['showCompass']) {
                 utils.warn('暂不支持show-compass',{
                     apiName: 'map',
                     errorType: 0,
                     type: 'component'
                 });
             }
-            if (this.props['enable-overlooking']) {
+            if (this.props['enableOverlooking']) {
                 utils.warn('暂不支持enable-overlooking',{
                     apiName: 'map',
                     errorType: 0,
                     type: 'component'
                 });
             }
-            if (this.props['enable-zoom']) {
+            if (this.props['enableZoom']) {
                 utils.warn('暂不支持enable-zoom',{
                     apiName: 'map',
                     errorType: 0,
@@ -255,7 +257,7 @@ Component({
                 });
             }
             
-            if (this.props['enable-rotate']) {
+            if (this.props['enableRotate']) {
                 utils.warn('暂不支持enable-rotate',{
                     apiName: 'map',
                     errorType: 0,

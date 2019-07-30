@@ -209,37 +209,37 @@ const apiObj = {
     },
     hideToast: {
         fn(obj) {
-            my.hideToast();
-            if (typeof obj.success === "function") {
-                obj.success();
-            }
-            if (typeof obj.complete === "function") {
-                obj.complete();
+            try {
+                my.hideToast();
+                obj.success && obj.success({ errMsg: "hideToast: ok" });
+            } catch (err) {
+                obj.fail && obj.fail(err);
+            } finally {
+                obj.complete && obj.complete({ errMsg: "hideToast: ok" });
             }
         }
     },
     hideLoading: {
         fn(obj) {
-            my.hideLoading();
-
-            if (typeof obj.success === "function") {
-                obj.success();
-            }
-
-            if (typeof obj.complete === "function") {
-                obj.complete();
+            try {
+                my.hideLoading();
+                obj.success && obj.success({ errMsg: "hideLoading: ok" });
+            } catch (err) {
+                obj.fail && obj.fail(err);
+            } finally {
+                obj.complete && obj.complete({ errMsg: "hideLoading: ok" });
             }
         }
     },
     showNavigationBarLoading: {
-        fn(obj) {
+        fn(obj = {}) {
             try {
                 my.showNavigationBarLoading();
                 obj.success && obj.success({ errMsg: "showNavigationBarLoading: ok" });
             } catch (err) {
                 obj.fail && obj.fail(err);
             } finally {
-                obj.complete && obj.complete();
+                obj.complete && obj.complete({ errMsg: "showNavigationBarLoading: ok" });
             }
         }
     },
@@ -249,42 +249,57 @@ const apiObj = {
         }
     },
     hideNavigationBarLoading: {
-        fn(obj) {
+        fn(obj = {}) {
             try {
                 my.hideNavigationBarLoading();
                 obj.success && obj.success({ errMsg: "hideNavigationBarLoading: ok" });
             } catch (err) {
                 obj.fail && obj.fail(err);
             } finally {
-                obj.complete && obj.complete();
+                obj.complete && obj.complete({ errMsg: "hideNavigationBarLoading: ok" });
             }
         }
     },
     setTabBarStyle: {
-        fn(obj={}){
-            if(obj.color && obj.color.length === 4){
+        fn(obj = {}) {
+            if (obj.color && obj.color.length === 4) {
                 const color = obj.color.slice(1)
                 obj.color = `#${color}${color}`
             }
             my.setTabBarStyle(obj)
         }
     },
+    setTabBarItem: {
+        fn(obj = {}) {
+            if (!obj.iconPath || !obj.selectedIconPath) {
+                utils.warn(
+                    `setTabBarItem的iconPath和selectedIconPath是必传的!`,
+                    {
+                        apiName: 'setTabBarItem/iconPath和selectedIconPath',
+                        errorType: 0,
+                        type: 'api'
+                    }
+                );
+            }
+            my.setTabBarItem(obj)
+        }
+    },
     stopPullDownRefresh: {
-        fn(obj) {
-            my.stopPullDownRefresh();
-
-            if (typeof obj.success === "function") {
-                obj.success();
+        fn(obj = {}) {
+            try {
+                my.stopPullDownRefresh();
+                obj.success && obj.success({ errMsg: "stopPullDownRefresh: ok" });
+            } catch (err) {
+                obj.fail && obj.fail(err);
+            } finally {
+                obj.complete && obj.complete({ errMsg: "stopPullDownRefresh: ok" });
             }
 
-            if (typeof obj.complete === "function") {
-                obj.complete();
-            }
         }
     },
     pageScrollTo: {
         fn(obj = {}) {
-            let pageScrollToParams = descObj.pageScrollTo.body.params;
+            let pageScrollToParams = descObj.pageScrollTo.body.params.props;
             let params = utils.defineGetter(
                 obj,
                 pageScrollToParams,
@@ -300,12 +315,13 @@ const apiObj = {
                 }
             );
             my.pageScrollTo(params);
-            if (typeof obj.success === "function") {
-                obj.success();
-            }
-
-            if (typeof obj.complete === "function") {
-                obj.complete();
+            try {
+                my.pageScrollTo();
+                obj.success && obj.success({ errMsg: "pageScrollTo: ok" });
+            } catch (err) {
+                obj.fail && obj.fail(err);
+            } finally {
+                obj.complete && obj.complete({ errMsg: "pageScrollTo: ok" });
             }
         },
     },
@@ -323,7 +339,8 @@ const apiObj = {
 
             if (
                 obj.method &&
-                descObj.request.body.params.props[obj.method] !== undefined
+                (obj.method !== 'GET' ||
+                    obj.method !== 'POST')
             ) {
                 utils.warn(
                     `request暂不支持${obj.method}请求方式`,
@@ -394,6 +411,21 @@ const apiObj = {
                 }
             );
         },
+    },
+    createCameraContext: {
+        fn (obj) {
+            const res = my.createCameraContext({...obj});
+            res.takePhoto = () => {
+                console.warn("支付宝暂不支持 takePhoto");
+            };
+            res.startRecord = () => {
+                console.warn("支付宝暂不支持 startRecord");
+            };
+            res.stopRecord = () => {
+                console.warn("支付宝暂不支持 stopRecord");
+            };
+            return res;
+        }
     },
     previewImage: {
         fn(obj = {}) {
@@ -496,7 +528,7 @@ const apiObj = {
                         getLocationProps,
                         function (obj, prop) {
                             utils.warn(
-                                `getLocation'的返回值不支持 ${prop} 属性!`,
+                                `getLocation的返回值不支持 ${prop} 属性!`,
                                 {
                                     apiName: prop,
                                     errorType: getLocationProps[prop].type,
@@ -569,9 +601,6 @@ const apiObj = {
                 obj.complete();
             }
         }
-    },
-    requestPayment: {
-        fn() { },
     },
     getNetworkType: {
         fn(obj = {}) {
