@@ -280,14 +280,16 @@ module.exports = {
                 }
             },
             'bindtransition': {
-                type: 0,
-                status: 2,
+                type: 1,
+                status: 0,
                 desc: 'swiper-item 的位置发生改变时会触发 transition 事件，event.detail = {dx: dx, dy: dy}',
+                key: "onTransition"
             },
             'bindanimationfinish': {
-                type: 0,
-                status: 2,
+                type: 1,
+                status: 0,
                 desc: '动画结束时会触发 animationfinish 事件，event.detail 同上',
+                key: "onAnimationEnd"
             }
         },
     },

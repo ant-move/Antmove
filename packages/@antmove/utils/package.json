@@ -1,7 +1,7 @@
 {
   "name": "@antmove/utils",
   "version": "0.1.11",
-  "description": "",
+  "description": "antmove helper functions",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

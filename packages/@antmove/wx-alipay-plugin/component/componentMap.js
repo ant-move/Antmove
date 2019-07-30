@@ -111,14 +111,14 @@ module.exports = {
                 msg: 'Not support'
             },
             'bindtransition': {
-                type: 0,
-                desc: 'missing',
-                msg: 'Not support'
+                type: 1,
+                desc: 'diff',
+                key: "onTransition"
             },
             'bindanimationfinish': {
-                type: 0,
-                desc: 'missing',
-                msg: 'Not support'
+                type: 1,
+                desc: 'diff',
+                key: "onAnimationEnd"
             },
             'bindchange': {
                 type: 1,

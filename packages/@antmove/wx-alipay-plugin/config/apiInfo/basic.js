@@ -236,4 +236,30 @@ module.exports = {
         'https://developers.weixin.qq.com/miniprogram/dev/api/base/debug/wx.getLogManager.html',
         '无'
     ),
+    createCameraContext: createDescObj(
+        1,
+        '创建 camera 上下文 CameraContext 对象',
+        'https://developers.weixin.qq.com/miniprogram/dev/api/media/camera/wx.createCameraContext.html',
+        '',
+        {
+            msg: '返回值属性值缺失',
+            returnValue: {
+                props: {
+                
+                    takePhoto: {
+                        type: 0,
+                        desc: "拍照"
+                    },
+                    startRecord: {
+                        type: 0,
+                        desc: "开始录像"
+                    },
+                    stopRecord: {
+                        type: 0,
+                        desc: "停止录像"
+                    }
+                }
+            }
+        }
+    ),
 };
