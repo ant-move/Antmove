@@ -15,7 +15,24 @@ const utils = {
     },
     isTypeFile (extname, filepath) {
         return extname === path.extname(filepath);
-    }
+    },
+    transformStr
 };
+
+function transformStr (type = '') {
+    /**
+     * 组件名字母大写转小写
+     */
+    type;
+    type = type.replace(/^[A-Z]/, function ($) {
+        return $.toLowerCase();
+    });
+
+    type = type.replace(/[A-Z]/, function ($) {
+        return '-' + $.toLowerCase();
+    });
+
+    return type;
+}
 
 module.exports = utils;
