@@ -2,6 +2,7 @@ const fs = require('fs-extra');
 const _componentMap = require('../config/componentsInfo/index').descObject;
 const eventsMap = require('./eventsMap');
 const generic = require('./generic');
+const preProcessCustomComponent = require('./customComponent');
 
 module.exports = function (ast, fileInfo, renderAxml) {
     let { type, props } = ast;
@@ -161,6 +162,8 @@ function processCustomComponent (ast, fileInfo) {
     }
 
     if (fileInfo.customComponents[ast.type]) {
+        preProcessCustomComponent(ast);
+
         if (ast.props) {
             Object.keys(ast.props)
                 .forEach(function (prop) {

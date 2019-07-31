@@ -7,6 +7,7 @@ module.exports = function () {
     };
 
     app.use = function (plugin, options) {
+        preprocessOpts(options);
         processEnv(options.env, options);
         app.plugins.push({
             plugin,
@@ -36,4 +37,20 @@ function processEnv (env, options = {}) {
     } else {
         console.log(chalk('Invalid env value, use production instead.'));
     }
+}
+
+function preprocessOpts (opts = {}) {
+    /**
+     * process exclude files
+     */
+    opts.exclude = opts.exclude || [/^\.\w+/];
+    if (opts.exclude && Array.isArray(opts.exclude)) {
+        opts.exclude.push(/^\.\w+/);
+    } else {
+        opts.exclude = [opts.exclude];
+    }
+
+    opts.exclude.push(/__antmove/g);
+    opts.exclude.push(opts.dist);   // 排除输出目录
+
 }

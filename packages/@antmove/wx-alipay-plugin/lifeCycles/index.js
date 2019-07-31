@@ -61,13 +61,13 @@ let baseurl = 'http://cache.amap.com/ecology/tool/antmove/wechat-alipay/';
 module.exports = {
     defaultOptions: {
         exclude: [
-            /^\.\w+/,
             'project.config.json'
         ],
         env: 'production',
         remote: false
     },
     beforeParse: async function (next) {
+        fs.emptyDirSync(this.$options.dist);
         if (!isWechatApp(this.$options.entry)) {
             console.log(chalk.red('[Ops] ' + this.$options.entry + ' is not a wechat miniproramm directory.'));
             return false;
@@ -93,7 +93,7 @@ module.exports = {
         baseurl = baseurl + toolVsData;
         try {
             await upDataTool({ baseurl, isUpdata, showReport });
-        } catch (err) {};
+        } catch (err) {}
         next();
     },
     onParsing (fileInfo) {
@@ -122,7 +122,9 @@ module.exports = {
     onParsed () {
     },
     beforeCompile (ctx) {
-        fs.emptyDirSync(ctx.$options.dist);
+        /**
+         * 
+         */
     },
     onCompiling (fileInfo, ctx) {
         const {

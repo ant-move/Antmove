@@ -2,6 +2,7 @@ const Config = require('../config');
 const appJson = require('../config/jsonInfo/globalconfig');
 const pageJson = require('../config/jsonInfo/pageconfig');
 const windowConfigMap = {};
+const { transformStr } = require('@antmove/utils');
 
 mkJsonMap(appJson.window.props, windowConfigMap);
 mkJsonMap(pageJson, windowConfigMap);
@@ -40,6 +41,18 @@ module.exports = function (jsonStr, fileInfo) {
 
     // process wrap components
     let tagsInfo = fileInfo.tagsInfo;
+
+    // process custome components
+    if (json.usingComponents) {
+        Object.keys(json.usingComponents)
+            .forEach(function (key) {
+                let _key = transformStr(key);
+                let _val = json.usingComponents[key];
+
+                delete json.usingComponents[key];
+                json.usingComponents[_key] = _val;
+            })
+    }
 
     if (tagsInfo) {
         tagsInfo.forEach((tagInfo) => {
