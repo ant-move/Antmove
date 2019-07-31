@@ -19,6 +19,10 @@ module.exports = {
     processTransformationPage (_opts, options) {
         _opts = Object.assign(_opts, options);
         _opts.onLoad = function (res) {
+            if (typeof options.data === 'function') {
+                options.data = options.data();
+            }
+            
             getUrl();
             if (options.onResize) {
                 warnLife("There is no onResize life cycle", "onResize");
