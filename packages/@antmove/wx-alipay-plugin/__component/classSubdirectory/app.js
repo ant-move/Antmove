@@ -106,6 +106,11 @@ module.exports = {
                     }
                 };
                 res = pre(res);
+
+                if (typeof options.data === 'function') {
+                    options.data = options.data();
+                }
+                
                 options.onLaunch.call(this,res);
             }
 
