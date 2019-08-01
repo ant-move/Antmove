@@ -1,6 +1,6 @@
 {
   "name": "antmove",
-  "version": "0.1.10",
+  "version": "0.1.12",
   "description": "小程序跨平台开发统一解决方案.",
   "bin": {
     "antmove": "./bin/index"
