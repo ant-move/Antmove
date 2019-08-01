@@ -114,7 +114,7 @@ const App = transformFramework();   // 得到的 app 实例即可进行转换处
             * 默认开启
 * `start` | `Function` - 开始编译操作
 
-## 计划（即将推出）
+## 内测中（即将推出）
 
 * 支付宝转百度能力支持
 * 支付宝转微信能力支持
@@ -142,5 +142,5 @@ const App = transformFramework();   // 得到的 app 实例即可进行转换处
 
 如果您在使用的过程中碰到问题，可以通过下面几个途径寻求帮助。
 
-* 钉钉交流群： <img width='200px' src='https://ant-move.github.io/website/img/contact-dingding.jpg'/>
+* 钉钉微信交流群： <img width='200px' src='https://ant-move.github.io/website/img/contact-dingding.jpg'/> <img width='200px' src='https://img.alicdn.com/tfs/TB1V0HBb1L2gK0jSZFmXXc7iXXa-752-974.jpg'/>
 * 邮件：amap-appx@service.autonavi.com

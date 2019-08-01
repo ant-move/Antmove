@@ -23,6 +23,9 @@ module.exports = class Transform {
         const packagePath = path.join(__dirname, '../..', 'package.json');
         const packageJson = fs.readFileSync(packagePath);
         const versionData = { version: JSON.parse(packageJson).version};
+        if (lifeCycles.defaultOptions.exclude) {
+            this.$options.exclude = this.$options.exclude.concat(lifeCycles.defaultOptions.exclude);
+        }
         lifeCycles.$options = Object.assign(lifeCycles.defaultOptions, this.$options, versionData);
         /**
          * Setting compile env
