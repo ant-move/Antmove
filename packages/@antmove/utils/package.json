@@ -1,6 +1,6 @@
 {
   "name": "@antmove/utils",
-  "version": "0.1.17",
+  "version": "0.1.19",
   "description": "antmove helper functions",
   "main": "index.js",
   "scripts": {
