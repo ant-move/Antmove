@@ -1,9 +1,7 @@
 const utils = require('../../api/utils');
 const { warnLife } = utils;
-// const config = require('../../config');
-const config = {
-    env: 'development'
-};
+const config = require('../../api/config');
+config.env = 'development';
 
 const getUrl = function () {
     let pages = getCurrentPages();
@@ -25,46 +23,24 @@ const watchShakes = function () {
     let logUrl = "pages/ant-move-runtime-logs/index"; 
     let specificUrl = "pages/ant-move-runtime-logs/specific/index";
     if ( url ===logUrl || url===specificUrl ) {
-        return ;
+        watchShakes();
     }  
     my.watchShake({
         success: function () {
-            watchShakes(); 
-            let res = my.getStorageSync({
-                key: 'timer', 
+            watchShakes();
+            my.confirm({
+                title: '温馨提示',
+                content: '是否进入警告日志页面',
+                confirmButtonText: '马上进入',
+                cancelButtonText: '暂不需要',
+                success: function (res) {
+                    if (res.confirm) {
+                        my.navigateTo({
+                            url: '/pages/ant-move-runtime-logs/index'
+                        });
+                    }
+                }
             });
-            let timer = new Date().getTime(); 
-            if (res.data === null) {
-                my.setStorageSync({
-                    key: 'timer',
-                    data: {
-                        timer
-                    }
-                });
-            }
-            if (res.data&&res.data.timer+5000>timer) {
-                my.confirm({
-                    title: '温馨提示',
-                    content: '是否进入警告日志页面',
-                    confirmButtonText: '马上进入',
-                    cancelButtonText: '暂不需要',
-                    success: function (res) {
-                        if (res.confirm) {
-                            my.navigateTo({
-                                url: '../../pages/ant-move-runtime-logs/index'
-                            });
-                        }
-                    }
-                });
-            }
-            if (res.data) {
-                my.setStorageSync({
-                    key: 'timer',
-                    data: {
-                        timer
-                    }
-                });
-            }
         }
     }); 
 };
@@ -89,7 +65,7 @@ module.exports = {
             let body = {};
             function pre (params = {}) {
                 return utils.defineGetter(params, body.params, function (obj, prop) {
-                    warnLife(`onLaunch's return value is not support ${prop} attribute!`, "onLaunch");
+                    warnLife(`onLaunch's return value is not support ${prop} attribute!`, `onLaunch/${prop}`);
                 });
             }
             if (options.onLaunch) {
@@ -119,7 +95,7 @@ module.exports = {
             let body = {};
             function pre (params = {}) {
                 return utils.defineGetter(params, body.params, function (obj, prop) {
-                    warnLife(`onShow's return value is not support ${prop} attribute!`, "onShow");
+                    warnLife(`onShow's return value is not support ${prop} attribute!`, `onShow/${prop}`);
                 });
             }
             if (options.onShow) {
@@ -141,6 +117,7 @@ module.exports = {
         };
         if (options.onHide) {
             _opts.onHide = function () {
+                warnLife('','app/onHide')
                 options.onHide.call(this);
             };
         }

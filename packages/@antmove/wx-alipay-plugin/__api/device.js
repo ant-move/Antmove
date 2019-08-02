@@ -15,7 +15,7 @@ const apiObj = {
                 utils.warn(
                     `startBeaconDiscovery的参数不支持 ${prop} 属性!`,
                     {
-                        apiName: prop,
+                        apiName: `startBeaconDiscovery/${prop}`,
                         errorType: startBeaconDiscoveryParams[prop].type,
                         type: 'api'
                     }
@@ -130,7 +130,7 @@ const apiObj = {
                         utils.warn(
                             `onBluetoothDeviceFound的返回值不支持 ${prop} 属性!`,
                             {
-                                apiName: prop,
+                                apiName: `onBluetoothDeviceFound/${prop}`,
                                 errorType: onBluetoothDeviceFoundProps[prop].type,
                                 type: 'api'
                             }
@@ -154,7 +154,7 @@ const apiObj = {
                             utils.warn(
                                 `getBluetoothDevices的返回值不支持 ${prop} 属性!`,
                                 {
-                                    apiName: prop,
+                                    apiName: `getBluetoothDevices/${prop}`,
                                     errorType: getBluetoothDevicesProps[prop].type,
                                     type: 'api'
                                 }
@@ -260,7 +260,7 @@ const apiObj = {
                         utils.warn(
                             `scanCode的参数不支持 ${prop} 属性!`,
                             {
-                                apiName: prop,
+                                apiName: `scanCode/${prop}`,
                                 errorType: scanCodeSuccessRes[prop].type,
                                 type: 'api'
                             }
@@ -280,7 +280,7 @@ const apiObj = {
                 utils.warn(
                     `stopGyroscope的参数不支持 ${prop} 属性!`,
                     {
-                        apiName: prop,
+                        apiName: `stopGyroscope${prop}`,
                         errorType: stopGyroscopeParams[prop].type,
                         type: 'api'
                     }
@@ -297,7 +297,7 @@ const apiObj = {
                     utils.warn(
                         `onCompassChange的返回值不支持 ${prop} 属性!`,
                         {
-                            apiName: prop,
+                            apiName: `onCompassChange/${prop}`,
                             errorType: onCompassChangeReturnValue[prop].type,
                             type: 'api'
                         }    
@@ -315,7 +315,7 @@ const apiObj = {
                 utils.warn(
                     `stopCompass的参数不支持 ${prop} 属性!`,
                     {
-                        apiName: prop,
+                        apiName: `stopCompass/${prop}`,
                         errorType: stopCompassParams[prop].type,
                         type: 'api'
                     }
@@ -331,7 +331,7 @@ const apiObj = {
                 utils.warn(
                     `stopAccelerometer的参数不支持 ${prop} 属性!`,
                     {
-                        apiName: prop,
+                        apiName: `stopCompass/${prop}`,
                         errorType: stopAccelerometerParams[prop].type,
                         type: 'api'
                     }
@@ -351,7 +351,7 @@ const apiObj = {
                 utils.warn(
                     `makePhoneCall的参数不支持 ${prop} 属性!`,
                     {
-                        apiName: prop,
+                        apiName: `makePhoneCall/${prop}`,
                         errorType: makePhoneCallParams[prop].type,
                         type: 'api'
                     }

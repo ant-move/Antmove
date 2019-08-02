@@ -6,8 +6,6 @@ const {
     a
 } = require('../renderMD/index');
 
-//external or inside
-const {isExternal} = require('./config')
 const path = require('path');
 const fs = require('fs-extra');
 const outputDist = path.join(__dirname, '../../../../../../ant-move-docs/website/sidebars.json');
@@ -16,28 +14,6 @@ const externalPath = path.join(__dirname,'../../../../../../ant-move-docs/websit
 /**
  * generate docs sidebar.json
  */
-const wx2alipay = [
-    {
-        "type": "subcategory",
-        "label": "组件",
-        "ids": []
-    }, 
-    {
-        "type": "subcategory",
-        "label": "API",
-        "ids": []
-    },
-    {
-        "type": "subcategory",
-        "label": "配置小程序",
-        "ids": []
-    },
-    {
-        "type": "subcategory",
-        "label": "生命周期",
-        "ids": []
-    }
-];
 
 function returnType ( type ) {
     let typeDoc = "";
@@ -59,7 +35,30 @@ function returnType ( type ) {
     }
     return typeDoc;
 }
-module.exports = function ( config = {}, target) {
+module.exports = function ( config = {}, target ,edition) {
+    const wx2alipay = [
+        {
+            "type": "subcategory",
+            "label": "组件",
+            "ids": []
+        }, 
+        {
+            "type": "subcategory",
+            "label": "API",
+            "ids": []
+        },
+        {
+            "type": "subcategory",
+            "label": "配置小程序",
+            "ids": []
+        },
+        {
+            "type": "subcategory",
+            "label": "生命周期",
+            "ids": []
+        }
+    ];
+    let isExternal = edition;
     let befor = target.split("-")[0];
     let after = target.split("-")[1];
     function tansformTarget (target) {
@@ -84,11 +83,11 @@ module.exports = function ( config = {}, target) {
         ApiInfo,
         LifeInfo,
         JsonInfo
-    } = config
+    } = config;
     function generateSideBarJson (res) { 
-        let p = path.join(__dirname,'../../../../../ant-move-docs/website/config/heardLinks.js')
+        let p = path.join(__dirname,'../../../../../../ant-move-docs/website/config/heardLinks.js')
         let headA = "module.exports={heardArray:[{doc: 'readme', label: '指南'},{doc: 'wechat-alipay-components-basic', label: '微信转支付宝'},{blog: true, label: '博客'},{page: 'help', label: '帮助'}, { search: true }]}"
-        let headB = "module.exports = {heardArray : [ {doc: 'readme', label: '指南'}, {doc: 'wechat-alipay-components-basic', label: '微信转支付宝'}, {doc: 'alipay-wechat-api-basic', label: '支付宝转微信'}, {doc: 'alipay-baidu-api-currency', label: '支付宝转百度'},{doc: 'wechat-amap-components-view',label: '微信转高德'},{blog: true, label: '博客'},{page: 'help', label: '帮助'},{ search: true }]}"
+        let headB = "module.exports = {heardArray : [ {doc: 'readme', label: '指南'}, {doc: 'wechat-alipay-components-basic', label: '微信转支付宝'}, {doc: 'alipay-baidu-components-view', label: '支付宝转微信'}, {doc: 'alipay-baidu-api-currency', label: '支付宝转百度'},{doc: 'wechat-amap-components-view',label: '微信转高德'},{blog: true, label: '博客'},{page: 'help', label: '帮助'},{ search: true }]}"
         let json = {};      
         let getPath = "";
         if (isExternal === "external" ) {
@@ -238,18 +237,26 @@ module.exports = function ( config = {}, target) {
                     let arr = [] ;
                     let attrInfo =  ComponentsInfo[i].body[attrName] ;
                     _str += h2(attrName);
-                    let propsObj = {} ;
+                    let propsObj = {} ;               
                     if (attrInfo.props) {
                         propsObj = attrInfo.props;
                         Object.keys(propsObj)
                             .forEach(function (attr) {
                                 arr.push(attr) ;
-                                let attrDesc = attrInfo.props[attr].desc;
-                                if (attrDesc) {
+                                let _attr = attrInfo.props[attr];
+                                let attrDesc = _attr.desc;
+                                if (_attr.params) {
+                                    Object.keys(_attr.params).forEach(function  (prm) {
+                                        if ( _attr.params[prm].type === 1) {
+                                            attrDesc += ` * 返回值微信支持${prm},支付宝支持${_attr.params[prm].key}`
+                                        } else if (_attr.params[prm].type === 0) {
+                                            attrDesc += ` * 返回值微信支持${prm},支付宝暂不支持`
+                                        }
+                                    })
                                     arr.push(attrDesc) ; 
                                 } else {
-                                    arr.push(" ");
-                                }                               
+                                    arr.push(attrDesc) ; 
+                                }                           
                                 let attrSupport = attrInfo.props[attr].status ;
                                 if ( attrSupport === 0 || attrSupport ) {
                                     switch (attrSupport) {
@@ -273,9 +280,18 @@ module.exports = function ( config = {}, target) {
                                 } 
                             });                       
                         _str += table(header, arr);
-                    } else {
+                    } else if (attrInfo.status === 2) {
                         _str += `* 暂不支持\n`;
-                    }  
+                    }  else if (attrInfo.status === 0) {
+                        if (attrInfo.key) {
+                            _str += `* 支付宝使用${attrInfo.key}\n`;
+                        } else {
+                            _str += `* 完整支持\n`;                            
+                        }                      
+
+                    } else if (attrInfo.type === 5 && !attrInfo.props) {
+                        _str += `* 支付宝使用自定义组件替代`
+                    }
                 });       
             componentObj[fnName.type] = _str;
             componentDoc.push (componentObj);
