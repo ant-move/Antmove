@@ -28,7 +28,7 @@ const apiObj = {
                     utils.warn(
                         `getSystemInfoSync的返回值不支持 ${prop} 属性!`,
                         {
-                            apiName: prop,
+                            apiName: `getSystemInfoSync/${prop}`,
                             errorType: getSystemInfoSyncProps[prop].type,
                             type: 'api'
                         }
@@ -50,7 +50,7 @@ const apiObj = {
                             utils.warn(
                                 `getSystemInfo的返回值不支持 ${prop} 属性!`,
                                 {
-                                    apiName: prop,
+                                    apiName: `getSystemInfo/${prop}`,
                                     errorType: getSystemInfoProps[prop].type,
                                     type: 'api'
                                 }
@@ -100,7 +100,7 @@ const apiObj = {
                     utils.warn(
                         `showToast的参数不支持 ${prop} 属性!`,
                         {
-                            apiName: prop,
+                            apiName: `showToast/${prop}`,
                             errorType: showToastProps[prop].type,
                             type: 'api'
                         }
@@ -131,7 +131,7 @@ const apiObj = {
                     utils.warn(
                         `showModal的参数不支持 ${prop} 属性!`,
                         {
-                            apiName: prop,
+                            apiName: `howModal/${prop}` ,
                             errorType: showModalProps[prop].type,
                             type: 'api'
                         }
@@ -166,7 +166,7 @@ const apiObj = {
                     utils.warn(
                         `showLoading的参数不支持 ${prop} 属性!`,
                         {
-                            apiName: prop,
+                            apiName: `showLoading/${prop}`,
                             errorType: showLoadingProps[prop].type,
                             type: 'api'
                         }
@@ -190,7 +190,7 @@ const apiObj = {
                     utils.warn(
                         `showActionSheet的参数不支持 ${prop} 属性!`,
                         {
-                            apiName: prop,
+                            apiName: `showActionSheet/${prop}`,
                             errorType: showActionSheetProps[prop].type,
                             type: 'api'
                         }
@@ -307,7 +307,7 @@ const apiObj = {
                     utils.warn(
                         `pageScrollTo的参数不支持 ${prop} 属性!`,
                         {
-                            apiName: prop,
+                            apiName: `pageScrollTo/${prop}`,
                             errorType: pageScrollToParams[prop].type,
                             type: 'api'
                         }
@@ -403,7 +403,7 @@ const apiObj = {
                     utils.warn(
                         `createMapContext的返回值不支持 ${prop} 属性!`,
                         {
-                            apiName: prop,
+                            apiName: `createMapContext/${prop}` ,
                             errorType: createMapContextProps[prop].type,
                             type: 'api'
                         }
@@ -530,7 +530,7 @@ const apiObj = {
                             utils.warn(
                                 `getLocation的返回值不支持 ${prop} 属性!`,
                                 {
-                                    apiName: prop,
+                                    apiName: `getLocation/${prop}`,
                                     errorType: getLocationProps[prop].type,
                                     type: 'api'
                                 }
@@ -772,7 +772,7 @@ const apiObj = {
                     utils.warn(
                         `downloadFile的返回值不支持 ${prop} 属性!`,
                         {
-                            apiName: prop,
+                            apiName: `downloadFile/${prop}`,
                             errorType: downloadFileReturnValue[prop].type,
                             type: 'api'
                         }
@@ -804,7 +804,7 @@ const apiObj = {
                     utils.warn(
                         `uploadFile的返回值不支持 ${prop} 属性!`,
                         {
-                            apiName: prop,
+                            apiName: `uploadFile/${prop}`,
                             errorType: uploadFileValue[prop].type,
                             type: 'api'
                         }
@@ -823,7 +823,7 @@ const apiObj = {
                     utils.warn(
                         `connectSocket的参数不支持 ${prop} 属性!`,
                         {
-                            apiName: prop,
+                            apiName: `connectSocket/${prop}`,
                             errorType: connectSocketParams[prop].type,
                             type: 'api'
                         }
@@ -881,7 +881,7 @@ const apiObj = {
                     utils.warn(
                         `closeSocket的参数不支持 ${prop} 属性!`,
                         {
-                            apiName: prop,
+                            apiName: `closeSocket/${prop}`,
                             errorType: closeSocketParams[prop].type,
                             type: 'api'
                         }
@@ -907,7 +907,7 @@ const apiObj = {
                     utils.warn(
                         `getRecorderManager的返回值不支持 ${prop} 属性!`,
                         {
-                            apiName: prop,
+                            apiName: `getRecorderManager/${prop}`,
                             errorType: getRecorderManagerProps[prop].type,
                             type: 'api'
                         }
