@@ -1,14 +1,15 @@
 const myApi = require('./my');
+const utils = require('./utils.js');
 let hasProxy = typeof Proxy !== 'undefined';
 let _Proxy = function () { };
 if (hasProxy) _Proxy = Proxy;
 /**
  * runtime error catch
  */
-function warnApi(api) {
+function warnApi (api) {
     const iscanIuse = my.canIUse(api);
     if (!iscanIuse) {
-        warn(
+        utils.warn(
             `支付宝暂不支持${api}`,
             {
                 apiName: api,
@@ -25,7 +26,7 @@ module.exports = function (obj = {}) {
         Object.keys(myApi)
             .forEach(function (attr) {
                 Object.defineProperty(_obj, attr, {
-                    get() {
+                    get () {
                         let ret;
                         if (myApi[attr]) {
                             ret = function (o = {}, args = "") {
@@ -35,7 +36,7 @@ module.exports = function (obj = {}) {
                                 return myApi[attr].fn(o);
                             };
                         } else {
-                            warnApi(attr)
+                            warnApi(attr);
                             ret = obj[attr];
                         }
 
@@ -46,7 +47,7 @@ module.exports = function (obj = {}) {
         return _obj;
     }
     return new _Proxy(obj, {
-        get(target, attr) {
+        get (target, attr) {
             let ret;
             if (typeof attr === 'string' && myApi[attr]) {
                 ret = function (obj = {}, args = "") {
@@ -56,7 +57,7 @@ module.exports = function (obj = {}) {
                     return myApi[attr].fn(obj);
                 };
             } else {
-                warnApi(attr)
+                warnApi(attr);
                 ret = target[attr];
             }
 

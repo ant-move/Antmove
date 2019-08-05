@@ -49,9 +49,13 @@ module.exports = function (jsonStr, fileInfo) {
                 let _key = transformStr(key);
                 let _val = json.usingComponents[key];
 
+                if (_val[0] !== '.' || _val[0] !== '/') {
+                    _val = './' + _val;
+                }
+
                 delete json.usingComponents[key];
                 json.usingComponents[_key] = _val;
-            })
+            });
     }
 
     if (tagsInfo) {

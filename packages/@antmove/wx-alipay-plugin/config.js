@@ -3,6 +3,9 @@ module.exports = {
     isDev () {
         return this.env === 'development';
     },
+    options: {
+        scopeStyle: false
+    },
     library: {
         customComponentPrefix: '/__antmove',
         customComponentNamePrefix: 'antmove'

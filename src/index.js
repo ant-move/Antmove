@@ -1,5 +1,4 @@
 const Transform = require('./transform/index.js');
-const chalk = require('chalk');
 
 module.exports = function () {
     const app = {
@@ -34,8 +33,6 @@ function processEnv (env, options = {}) {
         options.env = process.env.NODE_ENV = 'development';
     } else if (env === 'prod' || env === 'production') {
         options.env = process.env.NODE_ENV = 'production';
-    } else {
-        console.log(chalk('Invalid env value, use production instead.'));
     }
 }
 
