@@ -1,9 +1,11 @@
-# 蚂蚁搬家工具
+# Antmove
 
 <p><a href="https://github.com/ant-move/antmove" target="_blank" rel="noopener noreferrer"><img width="200" src="https://img.alicdn.com/tfs/TB1ktoia.D1gK0jSZFGXXbd3FXa-765-765.png" alt="antmove logo"></a></p>
 
-蚂蚁搬家工具，让小程序跨平台开发变得简单。
+Antmove，编译型跨端解决方案，让小程序跨平台开发变得简单。
 > 一键实现微信小程序项目到支付宝小程序的迁徙，不再为重复开发而烦恼。
+
+![antmove structure](https://img.alicdn.com/tfs/TB13u6Cb4z1gK0jSZSgXXavwpXa-3852-936.png)
 
 ## 特性
 
