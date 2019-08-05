@@ -20,6 +20,27 @@ Antmove，编译型跨端解决方案，让小程序跨平台开发变得简单�
 
 ## 安装
 
+### vscode 转换插件
+
+在 vscode 扩展中搜索 `Antmove` 下载安装 Antmove vscode 转换插件实现一键转换。
+
+### VsCode 编译步骤
+
+* 安装扩展（Antmove - antmove-vscode-plugin）
+* 在 VsCode 中打开要转换的项目
+* 打开 VsCode 命令面板
+    * Mac: `command + shift + p`
+    * Windows: `ctrl + shift + p`
+* 输入 `Antmove`
+* 运行 `Antmove: Run antmove` 命令
+* 运行如上命令后会给出一个弹窗，选择转换后生成代码存储目录
+* 转换完成
+
+* [antmove-vscode-plugin](https://marketplace.visualstudio.com/items?itemName=antmove-app.antmove-vscode-plugin&ssr=false)
+
+> 本插件依赖于 vscode 代码编辑器，安装了 vscode 的用户才能使用。
+
+
 ### 使用 npm 或 yarn 安装
 
 > 我们推荐使用 npm 或 yarn 的方式进行开发，不仅可在开发环境轻松调试，也可放心地在生产环境打包部署使用，享受整个生态圈和工具链带来的诸多好处。
