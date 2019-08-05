@@ -5,7 +5,9 @@ module.exports = {
     processTransformationComponent (_opts, options) {
 
         _opts = Object.assign(_opts, options);
-        _opts.props = options.properties;
+        _opts.props = Object({}, options.properties);
+
+        handleProps(_opts);
         let _life = {};
         if (options && options.lifetimes) {
             _life = options.lifetimes;
@@ -166,7 +168,11 @@ module.exports = {
                 });
         }
         _opts.didMount = function () {
-            this.properties = this.props;
+            this.properties = this.properties || {};
+            handleData.call(this);
+            if (typeof this.props.__parentcomponent === 'function') {
+                this.props.__parentcomponent.call(this);
+            }
             if (typeof this.triggerEvent !== 'function') {
                 this.triggerEvent = function (event, data = {}) {
                     let e = this.$currentEvent;
@@ -181,6 +187,23 @@ module.exports = {
                             };
                         }
                         this.props[event](e, data);
+                    }
+
+                    // __wepy__ 
+                    if (event === 'on_init' && this.props.on_init === '_initComponent') {
+                        let e = {
+                            target: {
+                                dataset: {}
+                            },
+                            currentTarget: {
+                                dataset: {}
+                            }
+                        };
+                        this._initComponent({
+                            detail: data,
+                            ...e
+                        });
+                        return data;
                     }
                 };
             }
@@ -206,12 +229,17 @@ module.exports = {
                 warnLife(`There is no page life cycle where the component resides,including(show,hide,resize)`, "getRelationNodes");
             }
         };
-        
-        
     }
 };
 
-function processDataSet (e = {target: {}}, props = {}) {
+function processDataSet (e = {
+    target: {
+        dataset: {}
+    },
+    currentTarget: {
+        dataset: {}
+    }
+}, props = {}) {
     Object.keys(props)
         .forEach(function (prop) {
             if (prop.match(/^data-/)) {
@@ -229,4 +257,26 @@ function processDataSet (e = {target: {}}, props = {}) {
                 e.currentTarget.dataset[prop] = props[originProp];
             }
         });
+}
+
+
+function handleProps (opts = {}) {
+    opts.props = opts.props || {};
+
+    Object.keys(opts.props)
+        .forEach(function (prop) {
+            if (opts.props[prop].default !== undefined) {
+                opts.props[prop] = opts.props[prop].default;
+            } else {
+                opts.props[prop] = undefined;
+            }
+        });
+    
+    opts.props['__parentcomponent'] = function () {
+        return this;
+    };
+}
+
+function handleData () {
+  
 }

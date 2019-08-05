@@ -61,13 +61,18 @@ let baseurl = 'http://cache.amap.com/ecology/tool/antmove/wechat-alipay/';
 module.exports = {
     defaultOptions: {
         exclude: [
-            'project.config.json'
+            'project.config.json',
+            'node_modules'
         ],
         env: 'production',
         remote: false
     },
     beforeParse: async function (next) {
         fs.emptyDirSync(this.$options.dist);
+        if (this.$options.scope) {
+            Config.options.scopeStyle = true;
+        }
+
         if (!isWechatApp(this.$options.entry)) {
             console.log(chalk.red('[Ops] ' + this.$options.entry + ' is not a wechat miniproramm directory.'));
             return false;
@@ -402,7 +407,7 @@ module.exports = {
         
         reportEnd({
             info: '欢迎使用蚂蚁搬家工具，您可以通过如下地址寻求帮助或是给予反馈。',
-            path: 'antmove-docs: https://github.com/ant-move/antmove'
+            path: 'Antmove: https://ant-move.github.io/website/'
         });
 
     }

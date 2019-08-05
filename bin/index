@@ -20,6 +20,7 @@ program
     .option('-i, --input <type>', 'Input path of compiled code.')
     .option('-o, --output <type>', 'Output path of compiled code.')
     .option('-e, --env <type>', 'Compiling in development mode or production mode.')
+    .option('-s, --scope <type>', 'Compiling component in scope mode.')
     .option('-r, --remote <type>', 'Pull ployfill from remote sources.')
     .parse(process.argv);
 
@@ -28,7 +29,7 @@ options.defaultInput = inputDirPath;
 options.output = program.output;
 options.env = program.env || options.env;
 options.remote = program.remote || options.remote;
-
+options.scope = program.scope || true;
 /**
  * $ antmove wx-alipay ../alipay-app
  * */
@@ -39,6 +40,7 @@ program
     .action(function (...params) {
         specialtypeCmd = true;
         action({
+            ...options,
             input: inputDirPath,
             output: params[0],
             env: params[1] || 'prod'

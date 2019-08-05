@@ -1,4 +1,5 @@
 const fs = require('fs-extra');
+const path = require('path');
 const _componentMap = require('../config/componentsInfo/index').descObject;
 const eventsMap = require('./eventsMap');
 const generic = require('./generic');
@@ -10,6 +11,20 @@ module.exports = function (ast, fileInfo, renderAxml) {
         Object.keys(props).forEach( key => {
             if (key && !props[key].value[0]) {
                 props[key] =  { type: 'double', value: [ ' ' ] };
+            }
+
+            if (key === 'src') {
+                let rule = props[key].value[0];
+                if ((rule[0] !== '/' && rule[0] !== '.')) {
+                    let tempPath = path.join(fileInfo.dirname, rule.replace(/\.axml'*/g, '.wxml'));
+                    if (fs.pathExistsSync(tempPath)) {
+                        rule = './' + rule;
+                    } else {
+                        rule = '/' + rule;
+                    }
+                }
+
+                props[key].value[0] = rule;
             }
         });
     }   

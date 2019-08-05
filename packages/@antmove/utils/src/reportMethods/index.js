@@ -47,7 +47,7 @@ module.exports = {
     report (date, reportData = {}) {
         let finishiDate = Number(new Date());
         if (reportData.type === "title") {
-            console.log(figlet.textSync("ant-move"));
+            console.log(figlet.textSync("Antmove"));
             return date;
         }
         if (!reportData.showReport) {
