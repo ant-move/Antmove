@@ -15,7 +15,7 @@ module.exports = function (ast, fileInfo, renderAxml) {
                 props[key] =  { type: 'double', value: [ ' ' ] };
             }
 
-            if (key === 'src') {
+            if (key === 'src' && type === 'include') {
                 let rule = props[key].value[0];
                 if ((rule[0] !== '/' && rule[0] !== '.' && rule[0] !== '{')) {
                     let tempPath = path.join(fileInfo.dirname, rule.replace(/\.axml'*/g, '.wxml'));

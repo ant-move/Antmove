@@ -20,7 +20,7 @@
     "url": "git+https://github.com/ant-move/antmove/packages/@antmove/cli"
   },
   "dependencies": {
-    "@antmove/wx-alipay": "^0.1.22",
+    "@antmove/wx-alipay": "^0.1.21",
     "antmove": "^0.1.13"
   }
 }

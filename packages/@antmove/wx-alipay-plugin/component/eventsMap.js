@@ -12,5 +12,4 @@ module.exports = {
     'bindlongtap': 'onLongTap',
     'bindscrolltoupper': 'onScrollToUpper',
     'bindscrolltolower': 'onScrollToLower',
-    'bindtimeupdate': 'onTimeUpdate'
 };
