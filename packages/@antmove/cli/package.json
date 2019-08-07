@@ -1,6 +1,6 @@
 {
   "name": "@antmove/cli",
-  "version": "0.1.0",
+  "version": "0.1.22",
   "description": "cli of antmove",
   "bin": {
     "antmove-cli": "./bin/index"
@@ -20,7 +20,7 @@
     "url": "git+https://github.com/ant-move/antmove/packages/@antmove/cli"
   },
   "dependencies": {
-    "@antmove/wx-alipay": "^0.1.21",
+    "@antmove/wx-alipay": "^0.1.22",
     "antmove": "^0.1.13"
   }
 }
