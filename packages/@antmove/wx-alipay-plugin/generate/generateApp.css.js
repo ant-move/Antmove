@@ -15,10 +15,6 @@ function generateAppAcss (output) {
 
 const cssStyle = `
     @import '${customComponentPrefix}/static/app.acss';
-
-    page {
-        background: #fff;
-    }
 `;
 
 module.exports = function (str, output) {

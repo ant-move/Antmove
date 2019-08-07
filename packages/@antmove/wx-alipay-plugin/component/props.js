@@ -4,8 +4,10 @@ const _componentMap = require('../config/componentsInfo/index').descObject;
 const eventsMap = require('./eventsMap');
 const generic = require('./generic');
 const preProcessCustomComponent = require('./customComponent');
+const processButton = require('./processButton.js');
 
 module.exports = function (ast, fileInfo, renderAxml) {
+    processButton(ast, fileInfo);
     let { type, props } = ast;
     if (props) {
         Object.keys(props).forEach( key => {
@@ -15,7 +17,7 @@ module.exports = function (ast, fileInfo, renderAxml) {
 
             if (key === 'src') {
                 let rule = props[key].value[0];
-                if ((rule[0] !== '/' && rule[0] !== '.')) {
+                if ((rule[0] !== '/' && rule[0] !== '.' && rule[0] !== '{')) {
                     let tempPath = path.join(fileInfo.dirname, rule.replace(/\.axml'*/g, '.wxml'));
                     if (fs.pathExistsSync(tempPath)) {
                         rule = './' + rule;

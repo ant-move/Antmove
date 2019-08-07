@@ -1,0 +1,82 @@
+#!/usr/bin/env node
+
+var path = require('path');
+var program = require('commander');
+var buildScript = require('../src/index.js');
+const inputDirPath = process.cwd();
+/**
+ * read packageJson
+ */
+const packageJson = require('../package.json');
+let specialtypeCmd = false;
+const options = {
+    input: '',
+    output: '',
+    env: 'production',
+    remote: true
+};
+program
+    .version(packageJson.version)
+    .option('-i, --input <type>', 'Input path of compiled code.')
+    .option('-o, --output <type>', 'Output path of compiled code.')
+    .option('-e, --env <type>', 'Compiling in development mode or production mode.')
+    .option('-s, --scope <type>', 'Compiling component in scope mode.')
+    .option('-r, --remote <type>', 'Pull ployfill from remote sources.')
+    .parse(process.argv);
+
+options.input = program.input;
+options.defaultInput = inputDirPath;
+options.output = program.output;
+options.env = program.env || options.env;
+options.remote = program.remote || options.remote;
+options.scope = program.scope || true;
+/**
+ * $ antmove wx-alipay ../alipay-app
+ * */
+program
+    .version(packageJson.version)
+    .command('wx-alipay')
+    .option('-o, --output', 'Output path of compiled code.')
+    .action(function (...params) {
+        specialtypeCmd = true;
+        action({
+            ...options,
+            input: inputDirPath,
+            output: params[0],
+            env: params[1] || 'prod'
+        });
+    });
+ 
+program.parse(process.argv);
+
+if (!specialtypeCmd) {
+    action(options);
+}
+
+/**
+ * cmd options
+ * @param opts 
+ */
+function action (options) {
+    if (!options.output) {
+        program.help();
+        return false;
+    }
+
+    /**
+     * preprocess ouput path
+     */
+    options.input = toAbsolutePath(options.input);
+    options.output = toAbsolutePath(options.output);
+    buildScript(options);
+}
+
+
+function toAbsolutePath (target) {
+    let dist = target;
+    if (!path.isAbsolute(target)) {
+        dist = path.join(inputDirPath, target);
+    }
+
+    return dist;
+}

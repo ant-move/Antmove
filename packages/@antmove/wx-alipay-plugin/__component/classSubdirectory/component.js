@@ -168,13 +168,16 @@ module.exports = {
                 });
         }
         _opts.didMount = function () {
-            this.properties = this.properties || {};
+            this.properties = this.props || {};
             handleData.call(this);
             if (typeof this.props.__parentcomponent === 'function') {
                 this.props.__parentcomponent.call(this);
             }
             if (typeof this.triggerEvent !== 'function') {
-                this.triggerEvent = function (event, data = {}) {
+                this.triggerEvent = function (...params) {
+                    params = params || [];
+                    let event = params[0];
+                    let data = params[1];
                     let e = this.$currentEvent;
                     event = 'on' + event[0].toUpperCase() + event.substring(1);
 
@@ -186,7 +189,10 @@ module.exports = {
                                 ...data
                             };
                         }
-                        this.props[event](e, data);
+
+                        params[0] = e;
+                        params[1] = data;
+                        this.props[event].apply(this, params);
                     }
 
                     // __wepy__ 

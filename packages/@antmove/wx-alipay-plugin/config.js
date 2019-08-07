@@ -4,7 +4,8 @@ module.exports = {
         return this.env === 'development';
     },
     options: {
-        scopeStyle: false
+        scopeStyle: false,
+        pageContainerClassName: 'page-container-classname'
     },
     library: {
         customComponentPrefix: '/__antmove',

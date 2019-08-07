@@ -37,32 +37,6 @@ module.exports = function (fileInfo, ctx, inCompileWxml = false) {
         cssContent = generateAppCssStyle(cssContent, ctx.output);
     }
 
-    /**
-     * process css module path
-     */
-    // try {
-    //     /*
-    //     let cssObj = css.parse(cssContent);
-    //     cssObj.stylesheet.rules
-    //         .forEach(function (rule) {
-    //             if (fileInfo.dist == '/Users/yangxiaofu/work/gaode/sources/app/processing/examples/dist/alipay//pages/chat/chat.acss') {
-    //                 console.log(rule);
-    //             }
-    //             if (rule.type === 'import' && (rule.import[1] !== '/' || rule.import[1] !== '.')) {
-    //                 let tempPath = path.join(fileInfo.dirname, rule.import.substring(1)).replace(/\.acss'*/g, '.wxss');
-    //                 if (fs.pathExistsSync(tempPath)) {
-    //                     rule.import = rule.import[0] + './' + rule.import.substring(1).trim();
-    //                 } else {
-    //                     rule.import = rule.import[0] + '/' + rule.import.substring(1).trim();
-    //                 }
-    //             }
-    //         });
-    //     cssContent = css.stringify(cssObj);
-    //     */
-    // } catch (error) {
-    //     console.warn('Invalid css file. - ', fileInfo.path);        
-    // }
-
     cssContent = cssContent.replace(/@import\s+['|"](\S+)['|"]/g, function (...$) {
         let rule = $[1];
         if ((rule[0] !== '/' && rule[0] !== '.')) {
@@ -113,6 +87,48 @@ module.exports = function (fileInfo, ctx, inCompileWxml = false) {
             console.warn('Invalid css file. - ', fileInfo.path);        
         }
     }
+
+    /**
+     * page base component
+     */
+    cssContent = cssContent.replace(/\S*(page)(\s+|\{|\.|,)/, function (...$) {
+        let className = '.' + Config.options.pageContainerClassName + $[2];
+        return className;
+    });
+
+    /**
+     * page 标签高度百分比样式兼容
+     */
+    /*
+    try {
+        let cssObj = css.parse(cssContent);
+        cssObj.stylesheet.rules
+            .forEach(function (el) {
+                if (el.selectors) {
+                    let bool = false;
+                    el.selectors
+                        .forEach(function (selector) {
+                            if (selector === '.' + Config.options.pageContainerClassName) {
+                                bool = true;
+                            }
+                        });
+                    if (bool) {
+                        el.declarations = 
+                        el.declarations
+                            .map(function (dec) {
+                                if (dec.property === 'height' || dec.property === 'min-height') {
+                                    dec.value = dec.value.replace(/%/, 'vh');
+                                }
+
+                                return dec;
+                            });
+                    }
+                }
+            });
+        cssContent = css.stringify(cssObj);
+    } catch (e) {
+        console.error('[parseError]: ' + fileInfo.dist);
+    }*/
 
     cssContent = prettierCode(cssContent, 'scss');
     fs.outputFileSync(fileInfo.dist, cssContent);

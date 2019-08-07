@@ -10,6 +10,7 @@ const {
     ifProcessHandleFn,
     ConstructorHandle,
     prettierCode,
+    processFnBodyHandleFn
 } = require('@antmove/utils');
 
 module.exports = function (fileInfo, ctx, originCode, apis) {
@@ -40,10 +41,21 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
         originCode = ConstructorHandle(originCode);
     }
 
-    if (isMatchPlatformApi) {
+    if (isMatchPlatformApi || (fileInfo.parent && fileInfo.parent.tplInfo)) {
         insertCode += `const _my = require('${apiPath}')(my);
                 `;
     }
+
+    if (fileInfo.parent && fileInfo.parent.tplInfo) {
+        
+        fileInfo.parent.tplInfo.button &&
+        fileInfo.parent.tplInfo.button
+            .forEach(function (info) {
+                if (info.type === 'button' && info.scope)
+                    originCode = processFnBodyHandleFn(originCode, info);
+            });
+    }
+
     originCode = insertCode + originCode;
     originCode = prettierCode(originCode);
             

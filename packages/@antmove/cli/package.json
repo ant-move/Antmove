@@ -1,0 +1,26 @@
+{
+  "name": "@antmove/cli",
+  "version": "0.1.0",
+  "description": "cli of antmove",
+  "bin": {
+    "antmove-cli": "./bin/index"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "amap-appx@service.autonavi.com",
+  "license": "GPL-3.0",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ant-move/antmove/packages/@antmove/cli"
+  },
+  "dependencies": {
+    "@antmove/wx-alipay": "^0.1.21",
+    "antmove": "^0.1.13"
+  }
+}
