@@ -1,3 +1,11 @@
+.page-container-classname {
+    cursor: default;
+    -webkit-user-select: none;
+    user-select: none;
+    width: 100%;
+    overflow-x: hidden;
+}
+
 view {
     display: block;
 }
@@ -139,6 +147,14 @@ button[size=mini] {
     line-height: 2.3;
     font-size: 13px;
     padding: 0 1.34em;
+}
+
+button-small {
+    font-size: 13px;
+    height: auto;
+    color: #353535;
+    border: 1px solid #353535;
+    background-color: transparent;
 }
 
 checkbox {

@@ -2,7 +2,9 @@ const propsHandle = require('../props/index.js');
 const proccessComponentProps = require('../component/props');
 const os = require('os');
 const fs = require('fs-extra');
+const path = require('path');
 const indentWidthChar = '  ';
+const config = require('../config');
 const {
     cjsToes
 } = require('@antmove/utils');
@@ -12,6 +14,7 @@ const {
 function processImportJs (code) {
     return cjsToes(code);
 }
+
 /**
  * @special tags
  */
@@ -32,6 +35,7 @@ function processSpecialTags (ast = {}) {
 }
 
 module.exports = function axmlRender (ast = [], fileInfo) {
+    fileInfo.isPage = processPageTpl(fileInfo);
     if (typeof ast === 'string') return ast;
     let _code = '';
     let indentWidth = '';
@@ -39,6 +43,15 @@ module.exports = function axmlRender (ast = [], fileInfo) {
     ast.forEach(function (tagAst) {
         _code += renderFn(tagAst, fileInfo);
     });
+
+    if (fileInfo.isPage) {
+        /**
+         * page
+         */
+        _code = `<view class='${config.options.pageContainerClassName}'>
+                ${_code}
+            </view>`;
+    }
 
     return _code;
 
@@ -62,7 +75,7 @@ module.exports = function axmlRender (ast = [], fileInfo) {
                 filename =filename + moduleName;
                 fs.outputFileSync(filename, processImportJs(sjsCode));
                 _ast.children[0].value = '';
-                let relativePath = filename.split('/');
+                let relativePath = filename.split(path.sep);
                 let _relativePath = relativePath[relativePath.length - 1];
     
                 _ast.props.src = { type: 'double', value: [ './' + _relativePath ] };
@@ -183,3 +196,16 @@ module.exports = function axmlRender (ast = [], fileInfo) {
         }
     }
 };
+
+function processPageTpl (fileInfo = {}) {
+    let bool = false;
+    let jsonFile = fileInfo.dirname + '/' + fileInfo.basename + '.json';
+    if (fs.pathExistsSync(jsonFile)) {
+        let obj = JSON.parse(fs.readFileSync(jsonFile, 'utf8'));
+        if (obj.component === undefined) {
+            bool = true;
+        }
+    }
+
+    return bool;
+}

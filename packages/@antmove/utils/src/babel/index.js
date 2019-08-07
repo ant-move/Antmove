@@ -5,6 +5,7 @@ const commentBlock = require('./alipayCodeBlock.js');
 const requireModule = require('./requireModule');
 const behavourHandle = require("./behavourHandle");
 const minifyObjectHandle = require('./minifyObject');
+const processFnBodyHandle = require('./processFnBody');
 const replaceCalleeHandle = require('./replaceCallee');
 const cjsToes = require('./cjs-to-es5');
 const fs = require('fs-extra');
@@ -56,6 +57,28 @@ function minifyObjectHandleFn (code, opts={}) {
     }).code;
 }
 
+function shorthandProperties (code) {
+    return babel.transform(code, {
+        plugins: [
+            require('@babel/plugin-transform-shorthand-properties')
+        ]
+    }).code;
+}
+
+function processFnBodyHandleFn (code, opts={}) {
+    code = shorthandProperties(code);
+    return babel.transform(code, {
+        plugins: [
+            [
+                processFnBodyHandle,
+                {
+                    opts
+                }
+            ]
+        ]
+    }).code;
+}
+
 function requireModuleFn (code, ctx) {
     let depObj = {};
     try {
@@ -78,9 +101,7 @@ function requireModuleFn (code, ctx) {
 function transformEs6 (code) {
     return babel.transform(code, {
         "presets": [
-            [
-                "@babel/preset-env"
-            ]
+            require('@babel/preset-env')
         ]
     }).code;
 }
@@ -104,5 +125,6 @@ module.exports = {
     replaceCalleeHandleFn,
     minifyObjectHandleFn,
     transformEs6,
-    cjsToes: cjsToesFn
+    cjsToes: cjsToesFn,
+    processFnBodyHandleFn
 };

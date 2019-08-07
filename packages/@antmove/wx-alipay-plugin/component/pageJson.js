@@ -3,6 +3,8 @@ const appJson = require('../config/jsonInfo/globalconfig');
 const pageJson = require('../config/jsonInfo/pageconfig');
 const windowConfigMap = {};
 const { transformStr } = require('@antmove/utils');
+const path = require('path');
+const fs = require('fs-extra');
 
 mkJsonMap(appJson.window.props, windowConfigMap);
 mkJsonMap(pageJson, windowConfigMap);
@@ -48,10 +50,17 @@ module.exports = function (jsonStr, fileInfo) {
             .forEach(function (key) {
                 let _key = transformStr(key);
                 let _val = json.usingComponents[key];
-
-                if (_val[0] !== '.' || _val[0] !== '/') {
-                    _val = './' + _val;
+                let rule = _val;
+                if ((rule[0] !== '/' && rule[0] !== '.')) {
+                    let tempPath = path.join(fileInfo.dirname, rule + '.wxml');
+                    if (fs.pathExistsSync(tempPath)) {
+                        rule = './' + rule;
+                    } else {
+                        rule = '/' + rule;
+                    }
                 }
+                
+                _val = rule;
 
                 delete json.usingComponents[key];
                 json.usingComponents[_key] = _val;

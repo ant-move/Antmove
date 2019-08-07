@@ -8,7 +8,7 @@ const descObj = require("./desc.js");
 
 const apiObj = {
     canIUse: {
-        fn(params) {
+        fn (params) {
             let paramsList = params.split(".");
             if (paramsList[1] && paramsList[1] === "success") {
                 paramsList[1] = "return";
@@ -18,7 +18,7 @@ const apiObj = {
         }
     },
     getSystemInfoSync: {
-        fn() {
+        fn () {
             let ret = my.getSystemInfoSync();
             let getSystemInfoSyncProps = descObj.getSystemInfoSync.body.returnValue.props;
             return utils.defineGetter(
@@ -38,7 +38,7 @@ const apiObj = {
         },
     },
     getSystemInfo: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             let getSystemInfoProps = descObj.getSystemInfo.body.returnValue.props;
             my.getSystemInfo({
                 ...obj,
@@ -63,7 +63,7 @@ const apiObj = {
         },
     },
     showToast: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             let showToastProps = descObj.showToast.body.params.props;
             if (obj.title) {
                 obj.content = obj.title;
@@ -112,7 +112,7 @@ const apiObj = {
         },
     },
     showModal: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             let showModalProps = descObj.showModal.body.params.props;
             if (obj.cancelText !== undefined) {
                 obj.cancelButtonText = obj.cancelText;
@@ -131,7 +131,7 @@ const apiObj = {
                     utils.warn(
                         `showModal的参数不支持 ${prop} 属性!`,
                         {
-                            apiName: `howModal/${prop}` ,
+                            apiName: `howModal/${prop}`,
                             errorType: showModalProps[prop].type,
                             type: 'api'
                         }
@@ -141,7 +141,7 @@ const apiObj = {
 
             my.confirm({
                 ...params,
-                success(res) {
+                success (res) {
                     if (res.confirm) {
                         res.cancel = false;
                     } else {
@@ -153,7 +153,7 @@ const apiObj = {
         },
     },
     showLoading: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             let showLoadingProps = descObj.showLoading.body.params.props;
             if (obj.title) {
                 obj.content = obj.title;
@@ -177,7 +177,7 @@ const apiObj = {
         },
     },
     showActionSheet: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             let showActionSheetProps = descObj.showActionSheet.body.params.props;
             if (obj.itemList) {
                 obj.items = obj.itemList;
@@ -208,7 +208,7 @@ const apiObj = {
         },
     },
     hideToast: {
-        fn(obj) {
+        fn (obj) {
             try {
                 my.hideToast();
                 obj.success && obj.success({ errMsg: "hideToast: ok" });
@@ -220,7 +220,7 @@ const apiObj = {
         }
     },
     hideLoading: {
-        fn(obj) {
+        fn (obj) {
             try {
                 my.hideLoading();
                 obj.success && obj.success({ errMsg: "hideLoading: ok" });
@@ -232,7 +232,7 @@ const apiObj = {
         }
     },
     showNavigationBarLoading: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             try {
                 my.showNavigationBarLoading();
                 obj.success && obj.success({ errMsg: "showNavigationBarLoading: ok" });
@@ -244,12 +244,12 @@ const apiObj = {
         }
     },
     setNavigationBarTitle: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             return my.setNavigationBar(obj);
         }
     },
     hideNavigationBarLoading: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             try {
                 my.hideNavigationBarLoading();
                 obj.success && obj.success({ errMsg: "hideNavigationBarLoading: ok" });
@@ -261,16 +261,16 @@ const apiObj = {
         }
     },
     setTabBarStyle: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             if (obj.color && obj.color.length === 4) {
-                const color = obj.color.slice(1)
-                obj.color = `#${color}${color}`
+                const color = obj.color.slice(1);
+                obj.color = `#${color}${color}`;
             }
-            my.setTabBarStyle(obj)
+            my.setTabBarStyle(obj);
         }
     },
     setTabBarItem: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             if (!obj.iconPath || !obj.selectedIconPath) {
                 utils.warn(
                     `setTabBarItem的iconPath和selectedIconPath是必传的!`,
@@ -281,11 +281,11 @@ const apiObj = {
                     }
                 );
             }
-            my.setTabBarItem(obj)
+            my.setTabBarItem(obj);
         }
     },
     stopPullDownRefresh: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             try {
                 my.stopPullDownRefresh();
                 obj.success && obj.success({ errMsg: "stopPullDownRefresh: ok" });
@@ -298,7 +298,7 @@ const apiObj = {
         }
     },
     pageScrollTo: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             let pageScrollToParams = descObj.pageScrollTo.body.params.props;
             let params = utils.defineGetter(
                 obj,
@@ -326,16 +326,15 @@ const apiObj = {
         },
     },
     request: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             if (obj.header) {
                 obj.headers = obj.header;
                 delete obj.header;
             }
 
-            if (obj.responseType) {
-                obj.dataType = obj.responseType;
-                delete obj.responseType;
-            }
+            obj.method = obj.method || '';
+
+            obj.method = obj.method.toUpperCase();
 
             if (
                 obj.method &&
@@ -365,17 +364,17 @@ const apiObj = {
             }
             let task = my.request({
                 ...obj,
-                success(res) {
+                success (res) {
                     res.header = res.headers;
                     res.statusCode = res.status;
                     delete res.headers;
                     delete res.status;
                     obj.success && obj.success(res);
                 },
-                fail(err) {
+                fail (err) {
                     obj.fail && obj.fail(err);
                 },
-                complete(res) {
+                complete (res) {
                     obj.complete && obj.complete(res);
                 }
             });
@@ -383,12 +382,11 @@ const apiObj = {
             task.abort = function () { };
             task.onHeadersReceived = function () { };
             task.offHeadersReceived = function () { };
-            JSON.stringify
             return task;
         },
     },
     createMapContext: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             let createMapContextProps = descObj.createMapContext.body.returnValue.props;
             let data = my.createMapContext(obj);
             for (let key in createMapContextProps) {
@@ -403,7 +401,7 @@ const apiObj = {
                     utils.warn(
                         `createMapContext的返回值不支持 ${prop} 属性!`,
                         {
-                            apiName: `createMapContext/${prop}` ,
+                            apiName: `createMapContext/${prop}`,
                             errorType: createMapContextProps[prop].type,
                             type: 'api'
                         }
@@ -428,7 +426,7 @@ const apiObj = {
         }
     },
     previewImage: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             let imgList = obj.urls || [];
             let index = imgList.indexOf(obj.current);
             obj.current = index;
@@ -436,14 +434,14 @@ const apiObj = {
         },
     },
     compressImage: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             if (obj.src) {
                 obj.apFilePaths = [obj.src];
                 delete obj.src;
             }
             my.compressImage({
                 ...obj,
-                success(res) {
+                success (res) {
                     res.tempFilePath = res.apFilePaths[0];
                     delete res.apFilePath;
                     obj.success && obj.success(res);
@@ -452,13 +450,13 @@ const apiObj = {
         },
     },
     chooseImage: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             if (!obj.count) {
                 obj.count = 9;
             }
             my.chooseImage({
                 ...obj,
-                success(res) {
+                success (res) {
                     res.tempFilePaths = res.apFilePaths;
                     delete res.apFilePath;
                     utils.warn(
@@ -475,7 +473,7 @@ const apiObj = {
         },
     },
     saveImageToPhotosAlbum: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             if (obj.filePath) {
                 obj.url = obj.filePath;
             }
@@ -483,7 +481,7 @@ const apiObj = {
         }
     },
     openLocation: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             if (obj.scale) {
                 utils.warn(
                     "支付宝scale的取值为3-19，默认15",
@@ -504,7 +502,7 @@ const apiObj = {
         },
     },
     getLocation: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             let type = obj.type || "wgs84";
             let getLocationProps = descObj.getLocation.body.returnValue;
             my.getLocation({
@@ -543,10 +541,10 @@ const apiObj = {
         },
     },
     openCard: {
-        fn() { },
+        fn () { },
     },
     login: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             my.getAuthCode({
                 scopes: 'auth_user',
                 success: res => {
@@ -590,7 +588,7 @@ const apiObj = {
         },
     },
     hideKeyboard: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             my.hideKeyboard(obj);
 
             if (typeof obj.success === "function") {
@@ -603,10 +601,10 @@ const apiObj = {
         }
     },
     getNetworkType: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             my.getNetworkType({
                 ...obj,
-                success(res) {
+                success (res) {
                     res.networkType = res.networkType.toLowerCase();
                     let typeObjMap = {
                         unknown: "unknown",
@@ -628,11 +626,11 @@ const apiObj = {
         },
     },
     canvasToTempFilePath: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             const ctx = my.createCanvasContext(obj.canvasId);
             ctx.toTempFilePath({
                 ...obj,
-                success(res) {
+                success (res) {
                     res.tempFilePath = res.apFilePath;
                     delete res.apFilePath;
                     obj.success && obj.success(res);
@@ -641,36 +639,36 @@ const apiObj = {
         }
     },
     canvasPutImageData: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             const ctx = my.createCanvasContext(obj.canvasId);
             ctx.putImageData({
                 ...obj,
-                success(res) {
+                success (res) {
                     obj.success && obj.success(res);
                 }
             });
         }
     },
     canvasGetImageData: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             const ctx = my.createCanvasContext(obj.canvasId);
             ctx.getImageData({
                 ...obj,
-                success(res) {
+                success (res) {
                     obj.success && obj.success(res);
                 }
             });
         }
     },
     saveFile: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             if (obj.tempFilePath) {
                 obj.apFilePath = obj.tempFilePath;
                 delete obj.tempFilePath;
             }
             my.saveFile({
                 ...obj,
-                success(res) {
+                success (res) {
                     res.savedFilePath = res.apFilePath;
                     delete res.apFilePath;
                     obj.success && obj.success(res);
@@ -679,7 +677,7 @@ const apiObj = {
         }
     },
     removeSavedFile: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             if (obj.filePath) {
                 obj.apFilePath = obj.filePath;
                 delete obj.filePath;
@@ -688,9 +686,9 @@ const apiObj = {
         }
     },
     getSavedFileList: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             my.getSavedFileList({
-                success(res) {
+                success (res) {
                     if (res.fileList.length) {
                         let ret = res.fileList.map(item => {
                             item.filePath = item.apFilePath;
@@ -707,7 +705,7 @@ const apiObj = {
         }
     },
     getSavedFileInfo: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             if (obj.filePath) {
                 obj.apFilePath = obj.filePath;
                 delete obj.filePath;
@@ -716,7 +714,7 @@ const apiObj = {
         }
     },
     getFileInfo: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             if (obj.filePath) {
                 obj.apFilePath = obj.filePath;
                 delete obj.filePath;
@@ -725,7 +723,7 @@ const apiObj = {
         }
     },
     downloadFile: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             let downloadFileReturnValue = descObj.downloadFile.body.returnValue;
             if (obj.filePath !== undefined) {
                 utils.warn(
@@ -739,7 +737,7 @@ const apiObj = {
             }
             my.downloadFile({
                 ...obj,
-                success(res) {
+                success (res) {
                     res.tempFilePath = res.apFilePath;
                     if (res.apFilePath) {
                         res.statusCode = 200;
@@ -759,11 +757,11 @@ const apiObj = {
                 }
             });
             const task = {
-                abort() { },
-                offHeadersReceived() { },
-                offProgressUpdate() { },
-                onHeadersReceived() { },
-                onProgressUpdate() { },
+                abort () { },
+                offHeadersReceived () { },
+                offProgressUpdate () { },
+                onHeadersReceived () { },
+                onProgressUpdate () { },
             };
             return utils.defineGetter(
                 task,
@@ -782,7 +780,7 @@ const apiObj = {
         },
     },
     uploadFile: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             let uploadFileValue = descObj.uploadFile.body.returnValue;
             if (obj.name) {
                 obj.fileName = obj.name;
@@ -791,11 +789,11 @@ const apiObj = {
             obj.fileType = 'image';
             my.uploadFile(obj);
             const task = {
-                abort() { },
-                offHeadersReceived() { },
-                offProgressUpdate() { },
-                onHeadersReceived() { },
-                onProgressUpdate() { },
+                abort () { },
+                offHeadersReceived () { },
+                offProgressUpdate () { },
+                onHeadersReceived () { },
+                onProgressUpdate () { },
             };
             return utils.defineGetter(
                 task,
@@ -814,7 +812,7 @@ const apiObj = {
         },
     },
     connectSocket: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             let connectSocketParams = descObj.connectSocket.body.params;
             let params = utils.defineGetter(
                 obj,
@@ -832,24 +830,24 @@ const apiObj = {
             );
             my.connectSocket(params);
             const task = {
-                close(obj = {}) {
+                close (obj = {}) {
                     my.closeSocket(obj);
                 },
-                onClose(fn) {
+                onClose (fn) {
                     my.onSocketClose(fn);
                 },
-                onError(fn) {
+                onError (fn) {
                     my.offSocketOpen(fn);
                 },
-                onMessage(fn) {
+                onMessage (fn) {
                     my.onSocketMessage(fn);
                 },
-                onOpen(fn) {
+                onOpen (fn) {
                     my.onSocketOpen(function (res) {
                         fn(res);
                     });
                 },
-                send(obj = {}) {
+                send (obj = {}) {
                     my.sendSocketMessage(obj);
                 },
             };
@@ -857,7 +855,7 @@ const apiObj = {
         },
     },
     onSocketOpen: {
-        fn(obj) {
+        fn (obj) {
             my.onSocketOpen((res) => {
                 utils.warn(
                     'onSocketOpen 成功回调缺少header',
@@ -872,7 +870,7 @@ const apiObj = {
         },
     },
     closeSocket: {
-        fn(obj = {}) {
+        fn (obj = {}) {
             let closeSocketParams = descObj.closeSocket.body.params;
             let params = utils.defineGetter(
                 obj,
@@ -892,7 +890,7 @@ const apiObj = {
         },
     },
     getRecorderManager: {
-        fn() {
+        fn () {
             let getRecorderManagerProps = descObj.getRecorderManager.body.returnValue.props;
             const RecorderManager = my.getRecorderManager();
             for (let key in getRecorderManagerProps) {
@@ -917,7 +915,7 @@ const apiObj = {
         },
     },
     setStorageSync: {
-        fn(key = "", data = "") {
+        fn (key = "", data = "") {
             if (key && data) {
                 return my.setStorageSync({
                     "key": key,
@@ -927,7 +925,7 @@ const apiObj = {
         }
     },
     getStorageSync: {
-        fn(key = "") {
+        fn (key = "") {
             const storeData = my.getStorageSync({
                 key
             });
@@ -936,7 +934,7 @@ const apiObj = {
         }
     },
     removeStorageSync: {
-        fn(key = "") {
+        fn (key = "") {
             return my.removeStorageSync({ key });
         }
     },

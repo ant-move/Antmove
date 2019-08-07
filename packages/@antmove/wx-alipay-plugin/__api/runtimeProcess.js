@@ -17,6 +17,10 @@ function warnApi (api) {
                 type: 'api'
             }
         );
+
+        return function () {
+            console.error(`支付宝暂不支持${api}`);
+        };
     }
 }
 
@@ -57,12 +61,69 @@ module.exports = function (obj = {}) {
                     return myApi[attr].fn(obj);
                 };
             } else {
-                warnApi(attr);
-                ret = target[attr];
+                let helpFn = warnApi(attr);
+                ret = target[attr] || helpFn;
             }
 
             return ret;
         }
     });
 
+};
+
+/**
+ * for bindgetuserinfo open-type of button
+ */
+myApi.getUserInfoWrap = {
+    fn: function (e = {}, fn) {
+  
+        my.getAuthCode({
+            scopes: 'auth_user',
+            success: () => {
+                my.getAuthUserInfo({
+                    success: function (userInfo) {
+                        fn && fn({
+                            ...e,
+                            detail: {
+                                userInfo
+                            }
+                        });
+                    }
+                });
+            },
+            fail (res) {
+                fn && fn({
+                    ...e,
+                    detail: res
+                });
+            }
+        });
+    }
+};
+
+/**
+ * for bindgetphonenumber open-type of button
+ */
+myApi.getPhoneNumberWrap = {
+    fn: function (e = {}, fn) {
+        my.getPhoneNumber({
+            success: (res) => {
+                let encryptedData = res.response;
+                e = {
+                    ...e,
+                    detail: encryptedData,
+                    res: res
+                };
+                fn && fn(e);
+            },
+            fail: (res) => {
+                e = {
+                    ...e,
+                    detail: {},
+                    res: res
+                };
+                fn && fn(e);
+            },
+        });
+    }
 };
