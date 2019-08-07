@@ -23,9 +23,14 @@ function ConstructorHandleFn (code, targetName = '') {
     }).code;
 }
 
-function ifProcessHandleFn (code) {
+function ifProcessHandleFn (code, opts = {}) {
     return babel.transform(code, {
-        plugins: [ifProcessHandle]
+        plugins: [
+            [
+                ifProcessHandle,
+                opts
+            ]
+        ]
     }).code;
 }
 

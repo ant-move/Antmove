@@ -63,25 +63,6 @@ progress {
     align-items: center;
 }
 
-button {
-    position: relative;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 14px;
-    padding-right: 14px;
-    box-sizing: border-box;
-    font-size: 18px;
-    text-align: center;
-    text-decoration: none;
-    line-height: 2.55555556;
-    border-radius: 5px;
-    -webkit-tap-highlight-color: transparent;
-    overflow: hidden;
-    color: #000000;
-    background-color: #F8F8F8;
-}
-
 button[type=primary] {
     color: #FFFFFF;
     background-color: #1AAD19;
@@ -147,14 +128,6 @@ button[size=mini] {
     line-height: 2.3;
     font-size: 13px;
     padding: 0 1.34em;
-}
-
-button-small {
-    font-size: 13px;
-    height: auto;
-    color: #353535;
-    border: 1px solid #353535;
-    background-color: transparent;
 }
 
 checkbox {

@@ -1,7 +1,9 @@
-module.exports = function () {
+module.exports = function (...p) {
     return {
         visitor: {
             IfStatement (path) {
+                let t = p[0].types;
+                let opts = p[1];
                 let name, value;
                 let right = path.node.test.right;
                 let left = path.node.test.left;
@@ -19,11 +21,13 @@ module.exports = function () {
 
                 name = left.object.name + '.' + left.property.name;
                 value = right.value;
-                if (name === 'wx.__target__' || name === '_my.__target__') {
+                if (name === opts.code) {
                     if (value === 'alipay') {
                         path.replaceWithMultiple(path.node.consequent.body);
+                    } else if (value === 'wx') {
+                        path.replaceWithMultiple(t.Identifier(''));
                     } else {
-                        path.replaceWithMultiple(path.node.alternate.body);
+                        path.node.alternate && path.replaceWithMultiple(path.node.alternate.body);
                     }
                 } else {
                     return false;

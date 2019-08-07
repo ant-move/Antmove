@@ -18,12 +18,15 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
     originCode = precessRelativePathOfCode(originCode, fileInfo.path, ctx.entry);
     
     let isMatchPlatformApi = originCode.match(/\bwx\.(\w+)/g);
-            
+    originCode = ifProcessHandleFn(originCode, {
+        entry: 'wx',
+        dist: 'my',
+        code: 'wx.__target__'
+    });       
     originCode = replaceCalleeHandleFn(originCode, 'wx', '_my', apis);
     Config.compile.wrapApis = Object.assign(Config.compile.wrapApis, apis);
     originCode = commentBlock(originCode);
     originCode = requireModuleFn(originCode, ctx);
-    originCode = ifProcessHandleFn(originCode);
 
     /**
      *  判断是否为 App()/Page()/Component()
