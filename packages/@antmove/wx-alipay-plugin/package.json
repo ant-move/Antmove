@@ -13,7 +13,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@antmove/utils": "^0.1.23",
+    "@antmove/utils": "^0.2.0",
     "@babel/preset-env": "^7.5.5",
     "axios": "^0.19.0",
     "chalk": "^2.4.2",
