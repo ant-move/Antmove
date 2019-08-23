@@ -1,40 +1,59 @@
 const babel = require('@babel/core');
+const babelPreset = require('@babel/preset-env');
 const ConstructorHandle = require('./constructorHandle.js');
 const ifProcessHandle = require('./ifProcess.js');
 const commentBlock = require('./alipayCodeBlock.js');
 const requireModule = require('./requireModule');
 const behavourHandle = require("./behavourHandle");
 const minifyObjectHandle = require('./minifyObject');
-const processFnBodyHandle = require('./processFnBody');
 const replaceCalleeHandle = require('./replaceCallee');
+const processRequire = require('./processRequire');
 const cjsToes = require('./cjs-to-es5');
+const externalForWx = require('./externalForWx');
+const getCbNameFn = require('./getCallName');
+const replaceCallNames = require("./replaceCallName");
 const fs = require('fs-extra');
 
-function ConstructorHandleFn (code, targetName = '') {
+function ConstructorHandleFn (code,  opts = {}) {
     return babel.transform(code, {
         plugins: [
             [
                 ConstructorHandle,
-                {
-                    targetName
-                }
-            ]
-        ]
-    }).code;
-}
-
-function ifProcessHandleFn (code, opts = {}) {
-    return babel.transform(code, {
-        plugins: [
-            [
-                ifProcessHandle,
                 opts
             ]
         ]
     }).code;
 }
 
-function replaceCalleeHandleFn (code, entryName, outputName, opts = {}) {
+function getCbName (code, opts = {}) {
+    return babel.transform(code, {
+        plugins: [
+            [
+                getCbNameFn,
+                opts
+            ]
+        ]
+    }).code;
+}
+
+function replaceCallName (code, opts = {}) {
+    return babel.transform(code, {
+        plugins: [
+            [
+                replaceCallNames,
+                opts
+            ]
+        ]
+    }).code;
+}
+
+function ifProcessHandleFn (code) {
+    return babel.transform(code, {
+        plugins: [ifProcessHandle]
+    }).code;
+}
+
+function replaceCalleeHandleFn (code, entryName, outputName, opts = {}, cb) {
     return babel.transform(code, {
         plugins: [
             [
@@ -42,9 +61,30 @@ function replaceCalleeHandleFn (code, entryName, outputName, opts = {}) {
                 { 
                     entryName, 
                     outputName,
-                    opts
+                    opts, 
+                    cb
                 }
             ]
+        ],
+        
+    }).code;
+}
+
+function externalForWxFn (code, opts = {}) {
+    return babel.transform(code, {
+        plugins: [
+            [
+                externalForWx,
+                opts
+            ]
+        ]
+    });
+}
+
+function transformClass (code) {
+    return babel.transform(code, {
+        plugins: [
+            [require("@babel/plugin-proposal-class-properties"), { "loose": true }]
         ]
     }).code;
 }
@@ -54,28 +94,6 @@ function minifyObjectHandleFn (code, opts={}) {
         plugins: [
             [
                 minifyObjectHandle,
-                {
-                    opts
-                }
-            ]
-        ]
-    }).code;
-}
-
-function shorthandProperties (code) {
-    return babel.transform(code, {
-        plugins: [
-            require('@babel/plugin-transform-shorthand-properties')
-        ]
-    }).code;
-}
-
-function processFnBodyHandleFn (code, opts={}) {
-    code = shorthandProperties(code);
-    return babel.transform(code, {
-        plugins: [
-            [
-                processFnBodyHandle,
                 {
                     opts
                 }
@@ -103,10 +121,24 @@ function requireModuleFn (code, ctx) {
     }).code;
 }
 
+function processRequireForWx (code, opts = {}) {
+    return babel.transform(code, {
+        plugins: [
+            require('@babel/plugin-proposal-export-default-from'),
+            [
+                processRequire,
+                opts
+            ]
+        ]
+    }).code;
+}
+
 function transformEs6 (code) {
     return babel.transform(code, {
         "presets": [
-            require('@babel/preset-env')
+            [
+                babelPreset
+            ]
         ]
     }).code;
 }
@@ -131,5 +163,9 @@ module.exports = {
     minifyObjectHandleFn,
     transformEs6,
     cjsToes: cjsToesFn,
-    processFnBodyHandleFn
+    externalForWxFn,
+    transformClass,
+    processRequireForWx,
+    getCbName,
+    replaceCallName
 };

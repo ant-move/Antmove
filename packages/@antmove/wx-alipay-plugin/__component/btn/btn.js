@@ -141,7 +141,6 @@ Component({
             my.getAuthCode({
                 scopes: 'auth_user',
                 success: () => {
-
                     my.getOpenUserInfo({
                         success: (userInfo) => {
                             eve.detail = {

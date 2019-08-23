@@ -7,18 +7,31 @@
   },
   "main": "src/index.js",
   "scripts": {
-    "build-zhihu": "node ./scripts/wechat/zhihu.js",
+    "alipay-mini": "node ./scripts/alipay-baidu/alipay-mini.js",
+    "wx-alipay-baidu": "node ./scripts/alipay-baidu/wx-alipay-baidu.js",
+    "baidu-todo": "node ./scripts/alipay-baidu/build.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "alipay-wechat": "node ./scripts/alipay-wechat/build.js",
+    "build-zhihu": "node ./scripts/wechat/index.js",
+    "build-mini": "node ./scripts/wechat/wx-mini.js",
     "build-v2ex": "node ./scripts/wechat/v2ex.js",
     "build-mini-demo": "node ./scripts/wechat/mini-demo.js",
+    "build-wx-wx": "node ./scripts/wechat/mini-demo-wx-wx.js",
+    "build-wxmini": "node ./scripts/wechat/wx-mini.js",
     "lint": "eslint ./src",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "external-doc": "node ./build/buildDoc/external",
+    "build-weui": "node ./scripts/wechat/weui.js",
+    "build-view-weapp": "node ./scripts/wechat/view.js"
   },
   "author": "amap-appx@service.autonavi.com",
   "license": "GPL-3.0",
   "dependencies": {
     "@antmove/wx-alipay": "^0.1.8",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "commander": "^2.19.0",
-    "fs-extra": "^8.1.0"
+    "fs-extra": "^8.1.0",
+    "marked": "^0.7.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
@@ -33,6 +46,15 @@
     "husky": "^1.3.1",
     "lerna": "^3.13.3"
   },
+  "keywords": [
+    "miniprogram",
+    "wechat-mini-program",
+    "alipay-programm",
+    "miniprogram-frame",
+    "tool",
+    "components",
+    "baidu-miniprogram"
+  ],
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",

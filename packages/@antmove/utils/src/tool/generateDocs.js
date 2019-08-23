@@ -8,9 +8,14 @@ const {
 
 const path = require('path');
 const fs = require('fs-extra');
-const outputDist = path.join(__dirname, '../../../../../../ant-move-docs/website/sidebars.json');
-const insidePath = path.join(__dirname,'../../../../../../ant-move-docs/website/inside.json');
-const externalPath = path.join(__dirname,'../../../../../../ant-move-docs/website/external.json');
+const outputPath = path.join(__dirname, '../../../../../../antmove-website');
+const outputDist = path.join(__dirname, '../../../../../../antmove-website/website/sidebars.json');
+const insidePath = path.join(__dirname, '../../../../../../antmove-website/website/inside.json');
+const externalPath = path.join(__dirname, '../../../../../../antmove-website/website/external.json');
+const {
+    str1,
+    str2
+} = require('./config');
 /**
  * generate docs sidebar.json
  */
@@ -35,7 +40,7 @@ function returnType ( type ) {
     }
     return typeDoc;
 }
-module.exports = function ( config = {}, target ,edition) {
+module.exports = function ( config = {}, target, edition) {
     const wx2alipay = [
         {
             "type": "subcategory",
@@ -49,12 +54,12 @@ module.exports = function ( config = {}, target ,edition) {
         },
         {
             "type": "subcategory",
-            "label": "配置小程序",
+            "label": "小程序配置",
             "ids": []
         },
         {
             "type": "subcategory",
-            "label": "生命周期",
+            "label": "框架接口",
             "ids": []
         }
     ];
@@ -72,7 +77,7 @@ module.exports = function ( config = {}, target ,edition) {
             break;
         case "baidu" :str = "百度";
             break;  
-        case "amap" :str = "高德"         
+        case "amap" :str = "高德";         
         }
         return str;
     }
@@ -85,37 +90,33 @@ module.exports = function ( config = {}, target ,edition) {
         JsonInfo
     } = config;
     function generateSideBarJson (res) { 
-        let p = path.join(__dirname,'../../../../../../ant-move-docs/website/config/heardLinks.js')
-        let headA = "module.exports={heardArray:[{doc: 'readme', label: '指南'},{doc: 'wechat-alipay-components-basic', label: '微信转支付宝'},{blog: true, label: '博客'},{page: 'help', label: '帮助'}, { search: true }]}"
-        let headB = "module.exports = {heardArray : [ {doc: 'readme', label: '指南'}, {doc: 'wechat-alipay-components-basic', label: '微信转支付宝'}, {doc: 'alipay-baidu-components-view', label: '支付宝转微信'}, {doc: 'alipay-baidu-api-currency', label: '支付宝转百度'},{doc: 'wechat-amap-components-view',label: '微信转高德'},{blog: true, label: '博客'},{page: 'help', label: '帮助'},{ search: true }]}"
+        let p = path.join(__dirname, '../../../../../../antmove-website/website/config/heardLinks.js');
+        let headA = str1;
+        let headB = str2;
         let json = {};      
         let getPath = "";
         if (isExternal === "external" ) {
-            if (target === "wechat-alipay") {
-                getPath = externalPath;
-                json = fs.readFileSync(getPath); 
-                // fs.outputFileSync(p,headA)
-            } else {
-                return
-            }         
+            getPath = externalPath;
+            json = fs.readFileSync(getPath); 
+            fs.outputFileSync(p, headA);        
         } else {
-            getPath = insidePath
+            getPath = insidePath;
             json = fs.readFileSync(getPath);
-            // fs.outputFileSync(p,headB)
+            fs.outputFileSync(p, headB);
         }
         json = JSON.parse(json);  
         json[`${res}`][`${tansformBefor}转${tansformAfter}`] = wx2alipay;  
-        if (isExternal === "inside") {
-            json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-components`);
-            json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-apis`);
-            json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-json`);
-            json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-lifeCircle`);
-        }        
-        fs.outputFileSync(outputDist, JSON.stringify(json,null,4));
-        fs.outputFileSync(getPath, JSON.stringify(json,null,4));
+        // if (isExternal === "inside") {
+        json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-components`);
+        json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-apis`);
+        json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-json`);
+        json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-lifeCircle`);
+        // }        
+        fs.outputFileSync(outputDist, JSON.stringify(json, null, 4));
+        fs.outputFileSync(getPath, JSON.stringify(json, null, 4));
     }
      
-    function renderApiDoc (_apiAll,type) {  
+    function renderApiDoc (_apiAll, type) {  
         let apiDoc = [];
         let _str = '' ;
         let header = ['函数名', '说明', `${tansformBefor}小程序`, `${tansformAfter}小程序`, '是否支持'];
@@ -139,36 +140,25 @@ module.exports = function ( config = {}, target ,edition) {
                 wx2alipay[3].ids.push(`${befor}-${after}-lifeCircle-${apiName.type}`);
             }       
             _str += `title: ${apiName.name}\n`;
-            _str += `---\n\n`;    
-            _str += h2(apiName.name);
+            _str += `---\n\n`;   
             Object.keys(apiName.body)
                 .forEach(function (fnName) {         
-                    let arr = [] ;
-                    let retValArr = [] ;
-                    let paramsArr = [];
+                    let arr = [], retValArr = [], paramsArr = [], valType = '';
                     arr.push(fnName);
                     let _apiInfo = apiName.body[fnName] ;
-                    let valType = '' ;
                     if (_apiInfo.desc) {
                         arr.push(_apiInfo.desc);
                     } else {
                         arr.push(" ");
-                    }    
-                    if (_apiInfo.url.original) {
-                        arr.push(a('查看文档', _apiInfo.url.original));
-                        if (_apiInfo.url.target) {
-                            arr.push(a('查看文档', _apiInfo.url.target));
+                    } 
+                    Object.keys(_apiInfo.url).forEach(function (v, i ) {
+                        if (_apiInfo.url[v]) {
+                            arr.push(a("查看文档", _apiInfo.url[v])); 
                         } else {
                             arr.push("无");
-                        } 
-                    } else {
-                        arr.push(a('查看文档', _apiInfo.url[`${befor}`]));
-                        if (_apiInfo.url[`${after}`]) {
-                            arr.push(a('查看文档', _apiInfo.url[`${after}`]));
-                        } else {
-                            arr.push("无");
-                        }  
-                    }
+                        }
+                        
+                    });
                     switch (_apiInfo.status) {
                     case 0 :arr.push("完全支持");
                         break ;
@@ -176,8 +166,8 @@ module.exports = function ( config = {}, target ,edition) {
                         break ;
                     case 2 :arr.push("不支持");
                         break ;                      
-                    }
-                    _str += h2(fnName);          
+                    } 
+                    _str += h2(fnName);       
                     _str += table(header, arr);
                     if ( _apiInfo.body.msg ) {
                         _str += h4("\n* "+_apiInfo.body.msg + '\n'); 
@@ -205,16 +195,16 @@ module.exports = function ( config = {}, target ,edition) {
                     }
                 });
             apiObj[apiName.type] = _str ;
+            fs.outputFile(`${outputPath}/transformDocs/${befor}-${after}/${type}/${befor}-${after}-${type}-${apiName.type}.md`, _str);
             apiDoc.push(apiObj);
         });
         return apiDoc;
         
     }
     function renderComponentDoc (obj, type) {
-        let componentDoc = [];
-        let _str = '' ;
-        let header = ['差异属性','说明','是否支持','备注'];
-        let ComponentsInfo = [];
+        let componentDoc = [], _str = '', ComponentsInfo = [];
+        let header = ['差异属性', '说明', '是否支持', '备注'];
+        let _header = ['属性名', '描述', `${tansformBefor}小程序`, `${tansformAfter}小程序`, '是否支持'];
         if ( type === "components" ) {
             ComponentsInfo = obj.ComponentsInfo ;
         } else {
@@ -234,11 +224,34 @@ module.exports = function ( config = {}, target ,edition) {
             }        
             Object.keys(ComponentsInfo[i].body)
                 .forEach(function (attrName) {              
-                    let arr = [] ;
+                    let arr = [], _arr = [];
                     let attrInfo =  ComponentsInfo[i].body[attrName] ;
                     _str += h2(attrName);
+                    if (type === "components") {
+                        _str += `${attrInfo.desc} \n `;
+                    } else {
+                        _arr.push(attrName);
+                        _arr.push(attrInfo.desc);
+                        Object.keys(attrInfo.url).forEach(function (v, i ) {
+                            if (attrInfo.url[v]) {
+                                _arr.push(a("查看文档", attrInfo.url[v])); 
+                            } else {
+                                _arr.push("无");
+                            }                           
+                        });
+                        switch (attrInfo.status) {
+                        case 0 :_arr.push("完全支持");
+                            break ;
+                        case 1 :_arr.push("支持");
+                            break ;
+                        case 2 :_arr.push("不支持");
+                            break ;                      
+                        }
+                        _str += table(_header, _arr); 
+                    }
                     let propsObj = {} ;               
                     if (attrInfo.props) {
+                        _str += h4("支持差异");
                         propsObj = attrInfo.props;
                         Object.keys(propsObj)
                             .forEach(function (attr) {
@@ -248,11 +261,11 @@ module.exports = function ( config = {}, target ,edition) {
                                 if (_attr.params) {
                                     Object.keys(_attr.params).forEach(function  (prm) {
                                         if ( _attr.params[prm].type === 1) {
-                                            attrDesc += ` * 返回值微信支持${prm},支付宝支持${_attr.params[prm].key}`
+                                            attrDesc += ` * 返回值微信支持${prm},支付宝支持${_attr.params[prm].key}`;
                                         } else if (_attr.params[prm].type === 0) {
-                                            attrDesc += ` * 返回值微信支持${prm},支付宝暂不支持`
+                                            attrDesc += ` * 返回值微信支持${prm},支付宝暂不支持`;
                                         }
-                                    })
+                                    });
                                     arr.push(attrDesc) ; 
                                 } else {
                                     arr.push(attrDesc) ; 
@@ -280,19 +293,12 @@ module.exports = function ( config = {}, target ,edition) {
                                 } 
                             });                       
                         _str += table(header, arr);
-                    } else if (attrInfo.status === 2) {
-                        _str += `* 暂不支持\n`;
-                    }  else if (attrInfo.status === 0) {
-                        if (attrInfo.key) {
-                            _str += `* 支付宝使用${attrInfo.key}\n`;
-                        } else {
-                            _str += `* 完整支持\n`;                            
-                        }                      
-
-                    } else if (attrInfo.type === 5 && !attrInfo.props) {
-                        _str += `* 支付宝使用自定义组件替代`
                     }
-                });       
+                    else if (attrInfo.type === 5 && !attrInfo.props) {
+                        _str += `* 支付宝使用自定义组件替代`;
+                    }
+                });  
+            fs.outputFile(`${outputPath}/transformDocs/${befor}-${after}/${type}/${befor}-${after}-${type}-${fnName.type}.md`, _str);             
             componentObj[fnName.type] = _str;
             componentDoc.push (componentObj);
         });
@@ -354,17 +360,14 @@ module.exports = function ( config = {}, target ,edition) {
                 }
             });
         str = `---\nid: ${id}\ntitle: 不支持 生命周期 列表\n---\n${list(arr)}
-        `;
-        
+        `;       
         return str;
-    }
-    
-    let apiRes = renderApiDoc(ApiInfo,"api");
-    let componentRes =  renderComponentDoc(ComponentInfo,"components");
-    let lifeRes = renderApiDoc(LifeInfo,"life") ; 
-    let jsonRes = renderComponentDoc(JsonInfo,"json");
+    }    
+    let apiRes = renderApiDoc(ApiInfo, "api");
+    let componentRes =  renderComponentDoc(ComponentInfo, "components");
+    let lifeRes = renderApiDoc(LifeInfo, "life") ; 
+    let jsonRes = renderComponentDoc(JsonInfo, "json");
     generateSideBarJson(target);  
-
     return {
         lifeRes,
         apiRes,

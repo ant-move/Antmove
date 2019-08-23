@@ -3,6 +3,8 @@
 var path = require('path');
 var program = require('commander');
 var buildScript = require('../src/index.js');
+const alipayWxCli = require('./alipay-wx');
+const alipayBaiduCli = require('./alipay-baidu');
 const inputDirPath = process.cwd();
 /**
  * read packageJson
@@ -21,8 +23,7 @@ program
     .option('-o, --output <type>', 'Output path of compiled code.')
     .option('-e, --env <type>', 'Compiling in development mode or production mode.')
     .option('-s, --scope <type>', 'Compiling component in scope mode.')
-    .option('-r, --remote <type>', 'Pull ployfill from remote sources.')
-    .parse(process.argv);
+    .option('-r, --remote <type>', 'Pull ployfill from remote sources.');
 
 options.input = program.input;
 options.defaultInput = inputDirPath;
@@ -46,6 +47,38 @@ program
             env: params[1] || 'prod'
         });
     });
+
+/**
+ * antmove-cli alipay-wx ../wx-app
+ */
+alipayWxCli(program, function (params, plugin) {
+    specialtypeCmd = true;
+
+    action({
+        ...options,
+        input: inputDirPath,
+        output: params[0],
+        env: params[1] || 'prod'
+    },
+    plugin
+    );
+});
+
+/**
+ * antmove-cli alipay-baidu ../baidu-app
+ */
+alipayBaiduCli(program, function (params, plugin) {
+    specialtypeCmd = true;
+
+    action({
+        ...options,
+        input: inputDirPath,
+        output: params[0],
+        env: params[1] || 'prod'
+    },
+    plugin
+    );
+});
  
 program.parse(process.argv);
 
@@ -57,7 +90,7 @@ if (!specialtypeCmd) {
  * cmd options
  * @param opts 
  */
-function action (options) {
+function action (options, script = buildScript) {
     if (!options.output) {
         program.help();
         return false;
@@ -68,7 +101,7 @@ function action (options) {
      */
     options.input = toAbsolutePath(options.input);
     options.output = toAbsolutePath(options.output);
-    buildScript(options);
+    script(options);
 }
 
 

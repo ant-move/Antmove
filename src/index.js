@@ -47,7 +47,7 @@ function preprocessOpts (opts = {}) {
         opts.exclude = [opts.exclude];
     }
 
-    opts.exclude.push(/__antmove/g);
+    // opts.exclude.push(/__antmove/g);
     opts.exclude.push(opts.dist);   // 排除输出目录
 
 }

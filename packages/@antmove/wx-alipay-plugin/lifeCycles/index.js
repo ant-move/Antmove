@@ -173,7 +173,7 @@ module.exports = {
         readtimes++;
         if (isTypeFile('.wxml', fileInfo.path)) {
             compileWxss(fileInfo, ctx, true);
-            const reptempData = getTemplateData(fileInfo);
+            const reptempData = getTemplateData(fileInfo, project.name);
             checkCoverView(fileInfo.ast, reptempData);
             compileWxml(fileInfo, ctx);
             const reportData = {
@@ -233,6 +233,8 @@ module.exports = {
             };
             date = report(date, reportData);
             content = cjsToes(content);
+
+            content = content.replace(/\.wxs/g, '.sjs');
             fs.outputFileSync(fileInfo.dist.replace(/\.wxs$/, '.sjs'), content);
         } else {
             let content;

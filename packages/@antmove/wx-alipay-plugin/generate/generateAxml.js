@@ -35,7 +35,7 @@ function processSpecialTags (ast = {}) {
 }
 
 module.exports = function axmlRender (ast = [], fileInfo) {
-    fileInfo.isPage = processPageTpl(fileInfo);
+    processPageTpl(fileInfo);
     if (typeof ast === 'string') return ast;
     let _code = '';
     let indentWidth = '';
@@ -143,7 +143,11 @@ module.exports = function axmlRender (ast = [], fileInfo) {
                     }
 
                     if (propInfo.value && propInfo.value.type === 'double') {
-                        attrCode += ` ${propInfo.key}="${value}"`;
+                        if (propInfo.key === 'wx:else' || propInfo.key === 'a:else') {
+                            attrCode += ` ${propInfo.key} `
+                        } else {
+                            attrCode += ` ${propInfo.key}="${value}"`;
+                        }                      
                     } else {
                         attrCode += ` ${propInfo.key}='${value}'`;
                     }
@@ -198,12 +202,15 @@ module.exports = function axmlRender (ast = [], fileInfo) {
 };
 
 function processPageTpl (fileInfo = {}) {
-    let bool = false;
+    let bool = undefined;
     let jsonFile = fileInfo.dirname + '/' + fileInfo.basename + '.json';
     if (fs.pathExistsSync(jsonFile)) {
         let obj = JSON.parse(fs.readFileSync(jsonFile, 'utf8'));
         if (obj.component === undefined) {
-            bool = true;
+            fileInfo.isPage = true;
+            fileInfo.isComponent = false;
+        } else {
+            fileInfo.isComponent = true;
         }
     }
 

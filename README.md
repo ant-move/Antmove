@@ -1,8 +1,8 @@
-# Antmove
+# Antmove（蚂蚁搬家）
 
 <p><a href="https://github.com/ant-move/antmove" target="_blank" rel="noopener noreferrer"><img width="200" src="https://img.alicdn.com/tfs/TB1ktoia.D1gK0jSZFGXXbd3FXa-765-765.png" alt="antmove logo"></a></p>
 
-Antmove，编译型跨端解决方案，让小程序跨平台开发变得简单。
+Antmove - 小程序转换器，基于支付宝/微信小程序转换为多端小程序，让小程序跨平台开发变得简单。
 > 一键实现微信小程序项目到支付宝小程序的迁徙，不再为重复开发而烦恼。
 
 ![antmove structure](https://img.alicdn.com/tfs/TB13u6Cb4z1gK0jSZSgXXavwpXa-3852-936.png)
@@ -64,22 +64,33 @@ $ npm install antmove --save
 
 ### 命令行使用
 
+```bash
+npm i -g antmove-cli
+```
+
 > 通过 npm 或 yarn 全局安装才能使用如下命令行
 
-提供两种可用的命令行调用方式
+提供两种可用的命令行调用方式（如下几个命令的参数是类似的）
 
-* `antmove wx-alipay`（使用前请将终端切换到需转换编译的微信小程序项目路径）
+* 微信小程序转支付宝小程序命令 - `wx-alipay`
+* 支付宝小程序转微信小程序 - `alipay-wx`
+* 支付宝小程序转百度智能小程序 - `alipay-baidu`
+
+> 你可以通过微信转支付宝转百度的链路实现百度小程序的支持哦，Antmove 已经做二次转换的特别处理。
+
+* `antmove-cli wx-alipay`（使用前请将终端切换到需转换编译的微信小程序项目路径）
 
 ```bash
 antmove wx-alipay ./dist/alipay-app
 ```
 
-* `antmove` - 该命令更加灵活，可配置输出输出目录/编译模式等
+* `antmove-cli` - 该命令更加灵活，可配置输出输出目录/编译模式等
 
 ```bash
-antmove -i ./wechat-mini/project -o ./dist/alipay-mini/project --env development
+antmove-cli -t wx-alipay -i ./wechat-mini/project -o ./dist/alipay-mini/project --env development
 ```
 > 如上的命令表示将 `./wechat-mini/project` 微信小程序项目转换为支付宝小程序项目，转换到 `./dist/alipay-mini/project` 目录
+> 如果你不想输入参数，可以体验交互式的命令方式，执行 `antmove-cli` 即可。
 
 ### 命令行参数说明
 
@@ -133,14 +144,10 @@ const App = transformFramework();   // 得到的 app 实例即可进行转换处
         * `dist` | `String` - 转换后代码输出目录
         * `env` | `String` - 编译环境设置（env/prod）
             * 默认值为生产环境
-        * `remote` | `Boolean` - 是否拉去远程拉取 polyfill 代码
-            * 默认开启
 * `start` | `Function` - 开始编译操作
 
 ## 内测中（即将推出）
 
-* 支付宝转百度能力支持
-* 支付宝转微信能力支持
 * 支付宝转头条能力支持
 * 页面/组件维度转换能力支持
 
@@ -151,11 +158,11 @@ const App = transformFramework();   // 得到的 app 实例即可进行转换处
 * [趣满满](http://www.piaofer.cn/)
 * [天气通](http://tianqitong.sina.cn/)
 
-> 如果你的公司和产品使用了 [Ant move](https://ant-move.github.io/website/docs/readme.html)，欢迎到[这里](https://github.com/ant-move/antmove/issues/1)留言。
+> 如果你的公司和产品使用了 [Antmove](https://ant-move.github.io/website/docs/readme.html)，欢迎到[这里](https://github.com/ant-move/antmove/issues/1)留言。
 
 ## 贡献
 
-欢迎参与蚂蚁搬家项目的开发建设和讨论。
+欢迎参与 Antmove 项目的开发建设和讨论。
 > 提交 pull request 之前请先提 [Issue 讨论](https://github.com/ant-move/antmove/issues).
 
 ## 协议
@@ -165,5 +172,5 @@ const App = transformFramework();   // 得到的 app 实例即可进行转换处
 
 如果您在使用的过程中碰到问题，可以通过下面几个途径寻求帮助。
 
-* 钉钉微信交流群： <img width='200px' src='https://ant-move.github.io/website/img/contact-dingding.jpg'/> <img width='200px' src='https://img.alicdn.com/tfs/TB1r8Sadi_1gK0jSZFqXXcpaXXa-752-974.jpg'/>
+* 钉钉微信交流群： <img width='200px' src='https://ant-move.github.io/website/img/contact-dingding.jpg'/> <img width='200px' src='https://cache.amap.com/ecology/tool/antmove/web/assets/02.JPG'/>
 * 邮件：amap-appx@service.autonavi.com

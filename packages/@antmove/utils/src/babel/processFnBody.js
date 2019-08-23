@@ -11,7 +11,9 @@ module.exports = function (...p) {
                  */
                 props.forEach(el => {
                     if (el.value && el.value.type === 'FunctionExpression' && el.value.params[0]) {
+                        console.log(el);
                         if (opts.bindFnName === el.key.name) {
+                            console.log(opts, el.value.params[0]);
                             let expr = t.expressionStatement(
                                 t.callExpression(
                                     t.memberExpression(

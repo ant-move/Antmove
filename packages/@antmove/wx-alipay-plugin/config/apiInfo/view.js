@@ -151,7 +151,7 @@ module.exports = {
         2,
         '设置页面导航条颜色',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.setNavigationBarColor.html',
-        '无'
+        ''
     ),
     hideNavigationBarLoading: createDescObj(
         0,
@@ -264,30 +264,30 @@ module.exports = {
         2,
         '动态设置置顶栏文字内容',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/sticky/wx.setTopBarText.html',
-        '无'
+        ''
     ),
     nextTick: createDescObj(
         2,
         '延迟一部分操作到下一个时间片再执行',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/custom-component/wx.nextTick.html',
-        '无'
+        ''
     ),
     getMenuButtonBoundingClientRect: createDescObj(
         2,
         '获取菜单按钮（右上角胶囊按钮）的布局位置信息',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/menu/wx.getMenuButtonBoundingClientRect.html',
-        '无'
+        ''
     ),
     onWindowResize: createDescObj(
         2,
         '监听窗口尺寸变化事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/window/wx.onWindowResize.html',
-        '无'
+        ''
     ),
     offWindowResize: createDescObj(
         2,
         '取消监听窗口尺寸变化事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/window/wx.offWindowResize.html',
-        '无'
+        ''
     )
 };

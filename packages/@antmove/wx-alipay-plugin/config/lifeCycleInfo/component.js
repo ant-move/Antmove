@@ -57,4 +57,22 @@ module.exports = {
         "https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/lifetimes.html",
         ""
     ),
+    properties: createDescObj(
+        0,
+        "组件的对外属性，是属性名到属性设置的映射表",
+        "https://developers.weixin.qq.com/miniprogram/dev/reference/api/Component.html",
+        "https://docs.alipay.com/mini/framework/component_object"
+    ),
+    observers: createDescObj(
+        0,
+        "组件数据字段监听器，用于监听 properties 和 data 的变化",
+        "https://developers.weixin.qq.com/miniprogram/dev/reference/api/Component.html",
+        ""
+    ),
+    behaviors: createDescObj(
+        0,
+        "类似于mixins和traits的组件间代码复用机制",
+        "https://developers.weixin.qq.com/miniprogram/dev/reference/api/Component.html",
+        "https://docs.alipay.com/mini/framework/component_object"
+    ),
 };

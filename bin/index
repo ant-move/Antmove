@@ -29,7 +29,7 @@ options.defaultInput = inputDirPath;
 options.output = program.output;
 options.env = program.env || options.env;
 options.remote = program.remote || options.remote;
-options.scope = program.scope || true;
+options.scope = program.scope || false;
 /**
  * $ antmove wx-alipay ../alipay-app
  * */

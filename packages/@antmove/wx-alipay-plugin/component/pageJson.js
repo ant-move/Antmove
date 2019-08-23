@@ -36,6 +36,17 @@ function replaceTheKey (obj, configMap) {
     return obj;
 }
 
+function toAbsolutePath (str = '') {
+    if (!str) return false;
+
+    str = str.replace(/^\.\//, '/');
+    str = str.replace(/^\w/, function (...$) {
+        return '/' + $[0];
+    });
+
+    return str;
+}
+
 module.exports = function (jsonStr, fileInfo) {
     if (!jsonStr) return '';
     let json = JSON.parse(jsonStr);
@@ -45,27 +56,44 @@ module.exports = function (jsonStr, fileInfo) {
     let tagsInfo = fileInfo.tagsInfo;
 
     // process custome components
-    if (json.usingComponents) {
-        Object.keys(json.usingComponents)
-            .forEach(function (key) {
-                let _key = transformStr(key);
-                let _val = json.usingComponents[key];
-                let rule = _val;
-                if ((rule[0] !== '/' && rule[0] !== '.')) {
-                    let tempPath = path.join(fileInfo.dirname, rule + '.wxml');
-                    if (fs.pathExistsSync(tempPath)) {
-                        rule = './' + rule;
-                    } else {
-                        rule = '/' + rule;
-                    }
-                }
-                
-                _val = rule;
-
-                delete json.usingComponents[key];
-                json.usingComponents[_key] = _val;
+    json.usingComponents = json.usingComponents || {};
+    if (fileInfo.appUsingComponents) {
+        Object.keys(fileInfo.appUsingComponents)
+            .forEach(function (c) {
+                if (!fileInfo.customAppUsingComponents) return false;
+                let cPath = fileInfo.customAppUsingComponents[c];
+                // let relativePath = path.relative(fileInfo.path, cPath);
+                // console.log(fileInfo.path, relativePath);
+                /**
+                 * not support npm packages components
+                 */
+                if (!cPath) return false;
+                cPath = toAbsolutePath(cPath);
+                json.usingComponents[c] = cPath;
             });
     }
+    if (fileInfo.path.match(/dashboard/g)) {
+        // console.log('000000', json);
+    }
+    Object.keys(json.usingComponents)
+        .forEach(function (key) {
+            let _key = transformStr(key);
+            let _val = json.usingComponents[key];
+            let rule = _val;
+            if ((rule[0] !== '/' && rule[0] !== '.')) {
+                let tempPath = path.join(fileInfo.dirname, rule + '.wxml');
+                if (fs.pathExistsSync(tempPath)) {
+                    rule = './' + rule;
+                } else {
+                    rule = '/' + rule;
+                }
+            }
+                
+            _val = rule;
+
+            delete json.usingComponents[key];
+            json.usingComponents[_key] = _val;
+        });
 
     if (tagsInfo) {
         tagsInfo.forEach((tagInfo) => {

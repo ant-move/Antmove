@@ -214,7 +214,22 @@ function openingMade () {
 
     let unsupportedNum = 0;
     let spanColor = 'warn';
-    keyArr.forEach(key => {
+    // 排序
+    const zhengqueArr = keyArr.filter(key => {
+        return openingData[key].status === 1;
+    });
+
+    const warningArr = keyArr.filter(key => {
+        return openingData[key].status === 2;
+    });
+
+    const cuowuArr = keyArr.filter(key => {
+        return openingData[key].status === 3;
+    });
+
+    const newKeyArr = cuowuArr.concat(warningArr, zhengqueArr);
+
+    newKeyArr.forEach(key => {
         let icon = "";
         if (openingData[key].status === 1) {
             icon = '<i class="iconfont icon-zhengque"></i>';
@@ -223,12 +238,13 @@ function openingMade () {
         } else if (openingData[key].status === 3) {
             icon = '<i class="iconfont icon-cuowu"></i>';
         }
+        
         tbodyData = tbodyData + `<tr>
                         <td>${key}</td>
                         <td>${openingData[key].pathArr.join("、")}</td>
                         <td>
                             <div class="show-instruct" data-path="${openingData[key].docpath}">
-                                查看支付宝相关能力
+                                查看相关能力
                             </div>
                         </td>
                         
@@ -378,6 +394,7 @@ function fileInfo () {
                                         ${its}
                                     </div>`;
                     });
+                    
                     if (item.doc) {
                         if (item.doc!=='无') {
                             newtrStr += `<td class="name">
@@ -397,7 +414,7 @@ function fileInfo () {
                                     ${opations}
                                 </td>
                                 <td class="unsupported" path="">
-                                    支付宝暂不支持，请尝试其他实现方式
+                                    暂不支持，请尝试其他实现方式
                                 </td>`;
                         }
                         
@@ -409,7 +426,7 @@ function fileInfo () {
                                     ${opations}
                                 </td>
                                 <td class="unsupported">
-                                   支付宝暂不支持，请尝试其他实现方式
+                                   暂不支持，请尝试其他实现方式
                                 </td>`;
                     }
                     newtr.innerHTML = newtrStr;
@@ -484,5 +501,5 @@ function projectResult () {
 }
 
 function footerMade () {
-    document.querySelector(".foot-cont").innerText = `Power by antmove v${pageData.toolVs}`;
+    document.querySelector(".foot-cont").innerText = `Power by Antmove v${pageData.toolVs}`;
 }

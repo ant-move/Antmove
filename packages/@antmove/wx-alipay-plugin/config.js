@@ -3,6 +3,7 @@ module.exports = {
     isDev () {
         return this.env === 'development';
     },
+    target: '_',
     options: {
         scopeStyle: false,
         pageContainerClassName: 'page-container-classname'
@@ -22,6 +23,8 @@ module.exports = {
             'classSubdirectory/app.js': true,
             'classSubdirectory/page.js': true,
             'classSubdirectory/component.js': true,
+            'classSubdirectory/relation.js': true,
+            'classSubdirectory/promise.js': true,
             'componentClass.js': true,
             'lifeCyclesMap.js': true
         },

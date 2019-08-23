@@ -1,7 +1,5 @@
 const utils = require('../../api/utils');
 const { warnLife } = utils;
-const config = require('../../api/config');
-config.env = 'development';
 
 const getUrl = function () {
     let pages = getCurrentPages();
@@ -17,40 +15,9 @@ const getUrl = function () {
     });
 };
 
-const watchShakes = function () {
-    let pages = getCurrentPages();
-    let url = pages[pages.length - 1].route;
-    let logUrl = "pages/ant-move-runtime-logs/index"; 
-    let specificUrl = "pages/ant-move-runtime-logs/specific/index";
-    if ( url ===logUrl || url===specificUrl ) {
-        watchShakes();
-    }  
-    my.watchShake({
-        success: function () {
-            watchShakes();
-            my.confirm({
-                title: '温馨提示',
-                content: '是否进入警告日志页面',
-                confirmButtonText: '马上进入',
-                cancelButtonText: '暂不需要',
-                success: function (res) {
-                    if (res.confirm) {
-                        my.navigateTo({
-                            url: '/pages/ant-move-runtime-logs/index'
-                        });
-                    }
-                }
-            });
-        }
-    }); 
-};
 module.exports = {
     processTransformationApp (_opts, options) {
         _opts = Object.assign(_opts, options);
-        if (options.onPageNotFound) {
-            warnLife(`There is no onPageNotFound life cycle`,"onPageNotFound");
-
-        }
         _opts.onLaunch = function (res) {
             my.clearStorageSync({
                 key: "logInfo"
@@ -58,10 +25,7 @@ module.exports = {
             my.clearStorageSync({
                 key: "_pageMsg"
             });
-            getUrl ();   
-            if (config.env === "development") {
-                watchShakes();
-            }             
+            getUrl ();             
             let body = {};
             function pre (params = {}) {
                 return utils.defineGetter(params, body.params, function (obj, prop) {
@@ -87,9 +51,16 @@ module.exports = {
                     options.data = options.data();
                 }
                 
-                options.onLaunch.call(this,res);
+                options.onLaunch.call(this, res);
             }
-
+            if (options.onPageNotFound) {
+                warnLife(`There is no onPageNotFound life cycle`, "onPageNotFound");
+    
+            }
+            if (options.onPageNotFound) {
+                warnLife(`There is no onPageNotFound life cycle`,"onPageNotFound");
+    
+            }
         };
         _opts.onShow = function (res) {
             let body = {};
@@ -112,12 +83,12 @@ module.exports = {
                     }
                 };
                 res = pre(res);
-                options.onShow.call(this,res);
+                options.onShow.call(this, res);
             }
         };
         if (options.onHide) {
             _opts.onHide = function () {
-                warnLife('','app/onHide')
+                warnLife('', 'app/onHide');
                 options.onHide.call(this);
             };
         }

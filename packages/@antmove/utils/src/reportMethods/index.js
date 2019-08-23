@@ -31,12 +31,9 @@ const method = {
            
             log.clear();
             log(thisPercentBar.update(speedProgress));
-            
             if (speedProgress===1) {
-                console.log('\n');
+                console.log("\n");
             }
-            
-            
         } else {
             return false;
         }
@@ -47,7 +44,7 @@ module.exports = {
     report (date, reportData = {}) {
         let finishiDate = Number(new Date());
         if (reportData.type === "title") {
-            console.log(figlet.textSync("Antmove"));
+            console.log(chalk.green(figlet.textSync("Antmove")));
             return date;
         }
         if (!reportData.showReport) {

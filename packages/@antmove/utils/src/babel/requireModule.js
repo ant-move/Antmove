@@ -1,3 +1,6 @@
+/**
+ * 微信路径转支付宝路径格式
+ */
 module.exports = function (...p) {
 
     function replacePath (pathname = '', cb = ()=>{}) {

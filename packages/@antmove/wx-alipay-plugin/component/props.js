@@ -5,15 +5,22 @@ const eventsMap = require('./eventsMap');
 const generic = require('./generic');
 const preProcessCustomComponent = require('./customComponent');
 const processButton = require('./processButton.js');
+const processDataSet = require('./processDataSet');
+const {
+    externalForWxFn
+} = require('@antmove/utils');
 
 module.exports = function (ast, fileInfo, renderAxml) {
     processButton(ast, fileInfo);
     let { type, props } = ast;
+    processExternalClasses(ast, fileInfo);
     if (props) {
         Object.keys(props).forEach( key => {
             if (key && !props[key].value[0]) {
                 props[key] =  { type: 'double', value: [ ' ' ] };
             }
+
+            processDataSet(key, props[key], props);
 
             if (key === 'src' && type === 'include') {
                 let rule = props[key].value[0];
@@ -118,7 +125,6 @@ function processEvents (obj = {}) {
             delete obj[key];
         } else if (/^bind:(.+)/.test(key)) {
             let newKey = `on${RegExp.$1}`;
-
             obj[newKey] = obj[key];
             delete obj[key];
         } else if (generic[key]) {
@@ -153,15 +159,31 @@ function processComponentMethodProp (astProps={}, propsInfo={}) {
 
 
 function checkoutCustomComponent (fileInfo, tagName) {
-    let bool = false, json;
+    let bool = false, json, appJson;
     if (fileInfo.extname === '.wxml') {
         json = fileInfo.path.replace('.wxml', '.json');
         if (!fs.pathExistsSync(json)) return false;
-        json = JSON.parse(fs.readFileSync(json, 'utf8'));
+
+        if (!fileInfo.jsonUsingComponents) {
+            json = JSON.parse(fs.readFileSync(json, 'utf8')) || {};
+            appJson = JSON.parse(fs.readFileSync(path.join(fileInfo.entry, 'app.json'), 'utf8')) || {};
+        } else {
+            json = fileInfo.jsonUsingComponents;
+            appJson = fileInfo.appUsingComponents;
+        }
         if (json.usingComponents && json.usingComponents[tagName]) {
             bool = true;
-        } else if (!tagName) {
-            return json.usingComponents;
+        } else if (appJson.usingComponents && appJson.usingComponents[tagName]) {
+            bool = true;
+        } 
+        
+        if (!tagName) {
+            fileInfo.jsonUsingComponents = fileInfo.jsonUsingComponents || json.usingComponents;
+            fileInfo.appUsingComponents = fileInfo.appUsingComponents || appJson.usingComponents;
+            return {
+                component: json.usingComponents,
+                app: appJson.usingComponents
+            };
         }
     }
 
@@ -173,13 +195,20 @@ function processCustomComponent (ast, fileInfo) {
     /**
      * 自定义组件事件处理
      */
-    if (!fileInfo.customComponents) {
+    
+    if (!fileInfo.jsonUsingComponents) {
         let customComponents = checkoutCustomComponent(fileInfo) || {};
-        fileInfo.customComponents = customComponents;
+        fileInfo.jsonUsingComponents = customComponents.component || {};
     }
-
-    if (fileInfo.customComponents[ast.type]) {
+    fileInfo.appUsingComponents = fileInfo.appUsingComponents || {};
+    if (fileInfo.jsonUsingComponents[ast.type] || fileInfo.appUsingComponents[ast.type]) {
+        let _type = ast.type;
         preProcessCustomComponent(ast);
+            
+        if (fileInfo.appUsingComponents[ast.type]) {
+            fileInfo.customAppUsingComponents = fileInfo.customAppUsingComponents || {};
+            fileInfo.customAppUsingComponents[ast.type] = fileInfo.customAppUsingComponents[ast.type] || fileInfo.appUsingComponents[_type]; 
+        }
 
         if (ast.props) {
             Object.keys(ast.props)
@@ -193,9 +222,70 @@ function processCustomComponent (ast, fileInfo) {
 
                         ast.props[newProp] = ast.props[prop];
                         delete ast.props[prop];
+                    }
 
+                    // a:key
+                    if (prop.match(/:key$/)) {
+                        ast.props[prop].value[0] = '*this';
                     }
                 });
         }
+    }
+}
+
+function processExternalClasses (ast, fileInfo) {
+    /**
+     * external class 只支持字符常量，不支持表达式
+     */
+    if (!fileInfo.isComponent) return false;
+    let opts =  {
+        externalClasses: []
+    };
+
+    fileInfo.jsFileCode = fileInfo.jsFileCode || '';
+
+    if (!fileInfo.jsFileCode) {
+        let jsFile = fileInfo.path.replace('.wxml', '.js');
+        
+        let code = fs.readFileSync(jsFile, 'utf8');
+        fileInfo.jsFileCode = code;
+    }
+    externalForWxFn(fileInfo.jsFileCode, opts);
+    fileInfo.externalClasses = opts;
+    
+    if (ast.props) {
+        if (ast.props.class) {
+            /**
+             * 提取扩展类 -class 结尾
+             * */
+            let _classes = ast.props.class.value[0].split(/\s+/);
+            _classes = _classes.filter(function (className) {
+                return className.match(/-class$/);
+            });
+
+            let temp = ast.props.class.value[0].split(/\s+/);
+            let newClass = [];
+            temp.forEach(function (str) {
+                if (opts.externalClasses.includes(str) || _classes.includes(str)) {
+                    newClass.push('{{' + _transform(str) + '}}');
+                } else {
+                    newClass.push(str);
+                }
+            });
+            
+            ast.props.class.value[0] = newClass.join(' ');
+
+            // _classes.forEach(function (className) {
+            //     ast.props.class.value[0] += ` {{ ${_transform(className)} }}`;
+            // });
+        }
+    }
+
+    function _transform (str = '') {
+        str = str.replace(/-(\w)/g, function (...$) {
+            return $[1].toUpperCase();
+        });
+
+        return str;
     }
 }
