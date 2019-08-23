@@ -1,6 +1,6 @@
 {
   "name": "@antmove/alipay-baidu",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "transform alipay miniprogram to baidu miniprogram tool.",
   "main": "index.js",
   "scripts": {
@@ -9,8 +9,8 @@
   "author": "",
   "license": "GPL",
   "dependencies": {
-    "problem": "0.0.0",
-    "@antmove/utils": "0.2.0"
+    "@antmove/utils": "0.2.0",
+    "problem": "0.0.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.5.5",
