@@ -28,5 +28,6 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.5.5"
-  }
+  },
+  "gitHead": "3fa92562a02cc94eaef08f74018250a34ade521b"
 }
