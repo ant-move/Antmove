@@ -7,8 +7,17 @@ module.exports = function (...p) {
 
                     p[1].opts[path.node.property.name] = true;
 
-                    if (typeof p[2].cb === 'function') {
-                        p[2].cb(path.node.property.name);
+                    if (typeof p[1].cb === 'function') {
+                        p[1].cb(path.node.property.name);
+                    }
+                }
+            },
+            Identifier (path) {
+                if (path.node.type === 'Identifier' && path.node.name === p[1].entryName) {
+                    path.node.name = p[1].outputName;
+
+                    if (typeof p[1].cb === 'function') {
+                        p[1].cb(path.node.name);
                     }
                 }
             }

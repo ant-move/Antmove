@@ -20,6 +20,7 @@
   height:60rpx;
 }
 .sp-input-style{
+  background:#ffffff;
   width:calc(100vw - 2.5rem);
 }
 .bg{

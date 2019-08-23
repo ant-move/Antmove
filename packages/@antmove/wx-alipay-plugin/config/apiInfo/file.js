@@ -26,7 +26,7 @@ module.exports = {
         2,
         '新开页面打开文档',
         'https://developers.weixin.qq.com/miniprogram/dev/api/file/wx.openDocument.html',
-        '无'
+        ''
     ),
     getSavedFileList: createDescObj(
         0,
@@ -50,7 +50,7 @@ module.exports = {
         2,
         '获取全局唯一的文件管理器',
         'https://developers.weixin.qq.com/miniprogram/dev/api/file/wx.getFileSystemManager.html',
-        '无'
+        ''
     ),
     getFileInfo: createDescObj(
         0,

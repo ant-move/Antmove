@@ -1,5 +1,8 @@
 const parseTpl = require('../../parse/parse');
 const fs = require('fs-extra');
+const path = require('path');
+
+const customComponent = {};
 
 module.exports = function (fileInfo) {
     return scopeStyle(fileInfo);
@@ -10,6 +13,35 @@ module.exports = function (fileInfo) {
  * @param {*} fileInfo - 对应的 wxml 文件信息
  */
 function scopeStyle (fileInfo) {
+    let dirname = fileInfo.dirname.split(path.sep).pop();
+    let basename = fileInfo.basename;
+    let classPrefix = '';
+    let componentName = dirname + '-' + basename;
+
+    function setClassName (componentName) {
+        let bool = customComponent[componentName];
+        if (!bool) {
+            classPrefix = componentName;
+        } else {
+            let str = String(Number(new Date()));
+            str = '-' + str.substr(0, 2);
+            componentName += setClassName(componentName + str);
+        }
+
+        return componentName;
+    }
+
+    classPrefix = setClassName(componentName);
+    
+    const _ast = parseTpl.parseString(`
+    <view class='${classPrefix}'></view>
+    `);
+    // const prop = {
+    //     class: {
+    //         type: 'unknown',
+    //         value: ['']
+    //     }
+    // };
     /**
      * isComponent
      */
@@ -17,52 +49,41 @@ function scopeStyle (fileInfo) {
         let tplPath = fileInfo.dirname + '/' + fileInfo.basename + '.wxml';
 
         let ast = parseTpl.parseFile(tplPath);
-        let classNames = [];
-        let classNameObj = {};
+        _ast[0].children = [ast];
+        // let originClass = prop.class;
 
-        ast.forEach(function (node) {
-            classNames = classNames.concat(getClass(node, classNameObj));
-        });
+        // ast.forEach(function (node) {
+        //     /**
+        //      * 忽略非容器标签
+        //      */
+        //     let tagObj = {
+        //         wxs: true,
+        //         include: true
+        //     };
 
-        fileInfo.ast = ast;
-        return classNameObj;
+        //     if (tagObj[ast.type]) return false;
+        //     node.props = node.props || {};
+        //     node.props.class = node.props.class || prop.class;
+        //     originClass = JSON.parse(JSON.stringify(node.props.class));
+
+        //     node.props.class.value[0] = node.props.class.value[0].split(/\s+/)
+        //         .map((classname) =>{
+        //             return classname + '-' + classPrefix;
+        //         });
+        //     node.props.class.value[0] = node.props.class.value[0].join(' ');
+
+        //     node.props.class.value[0] = node.props.class.value[0] + ' ' + classPrefix;
+        // });
+
+        fileInfo.ast = _ast;
+        // originClass.classPrefix = classPrefix;
+        return {
+            classPrefix
+        };
     }
-    return {};
+    return false;
 }
 
-function getClass (ast = {}, classNameObj) {
-    if (ast.type === 'textContent') {
-        return [];
-    }
-    let classNames = [];
-    if (ast.props && ast.props.class) {
-        let prop = ast.props.class;
-        let ret = prop.value[0].match(/\{/g);
-        if (!ret) {
-            let _classNames = [];
-            classNames = classNames.concat(prop.value[0].split(/\s+/));
-            classNames.forEach(function (className) {
-                if (!classNameObj[className]) {
-                    classNameObj[className] = {
-                        value: 'className-' + Number(new Date()) + '-' + className
-                    };
-                    _classNames.push(classNameObj[className].value);
-                }
-            });
-            prop.value[0] = _classNames.join(' ');
-        }
-    }
-
-    if (ast.children && ast.children.length) {
-        ast.children.forEach(function (child) {
-            classNames = classNames.concat(
-                getClass(child, classNameObj)
-            );
-        });
-    }
-
-    return classNames;
-}
 
 function isComponent (fileInfo) {
     let jsonPath = fileInfo.dirname + '/' + fileInfo.basename + '.json';

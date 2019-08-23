@@ -56,49 +56,49 @@ module.exports = {
         2,
         '关闭 Wi-Fi 模块',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/wifi/wx.stopWifi.html',
-        '无'
+        ''
     ),
     startWifi: createDescObj(
         2,
         '初始化 Wi-Fi 模块',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/wifi/wx.startWifi.html',
-        '无'
+        ''
     ),
     setWifiList: createDescObj(
         2,
         '设置 wifiList 中 AP 的相关信息。在 onGetWifiList 回调后调用，iOS特有接口',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/wifi/wx.setWifiList.html',
-        '无'
+        ''
     ),
     onWifiConnected: createDescObj(
         2,
         '监听连接上 Wi-Fi 的事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/wifi/wx.onWifiConnected.html',
-        '无'
+        ''
     ),
     onGetWifiList: createDescObj(
         2,
         '监听获取到 Wi-Fi 列表数据事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/wifi/wx.onGetWifiList.html',
-        '无'
+        ''
     ),
     getWifiList: createDescObj(
         2,
         '监听连接上 Wi-Fi 的事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/wifi/wx.getWifiList.html',
-        '无'
+        ''
     ),
     getConnectedWifi: createDescObj(
         2,
         '监听连接上 Wi-Fi 的事件。',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/wifi/wx.getConnectedWifi.html',
-        '无'
+        ''
     ),
     connectWifi: createDescObj(
         2,
         '连接 Wi-Fi。若已知 Wi-Fi 信息，可以直接利用该接口连接。仅 Android 与 iOS 11 以上版本支持。',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/wifi/wx.connectWifi.html',
-        '无'
+        ''
     ),
     // 低功耗蓝牙
     writeBLECharacteristicValue: createDescObj(
@@ -165,13 +165,13 @@ module.exports = {
         2,
         '连接低功耗蓝牙设备。',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/bluetooth-ble/wx.createBLEConnection.html',
-        '无'
+        ''
     ),
     closeBLEConnection: createDescObj(
         2,
         '断开与低功耗蓝牙设备的连接。',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/bluetooth-ble/wx.closeBLEConnection.html',
-        '无'
+        ''
     ),
     // 联系人
     addPhoneContact: createDescObj(
@@ -302,44 +302,44 @@ module.exports = {
         2,
         'wx.getBatteryInfo 的同步版本',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/battery/wx.getBatteryInfoSync.html',
-        '无'
+        ''
     ),
     getBatteryInfo: createDescObj(
         2,
         '获取设备电量。同步 API wx.getBatteryInfoSync 在 iOS 上不可用。',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/battery/wx.getBatteryInfo.html',
-        '无'
+        ''
     ),
     // NFC
     stopHCE: createDescObj(
         2,
         '关闭 NFC 模块。仅在安卓系统下有效。',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/nfc/wx.stopHCE.html',
-        '无'
+        ''
     ),
     startHCE: createDescObj(
         2,
         '初始化 NFC 模块。',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/nfc/wx.startHCE.html',
-        '无'
+        ''
     ),
     sendHCEMessage: createDescObj(
         2,
         '发送 NFC 消息。仅在安卓系统下有效。',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/nfc/wx.sendHCEMessage.html',
-        '无'
+        ''
     ),
     onHCEMessage: createDescObj(
         2,
         '监听接收 NFC 设备消息事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/nfc/wx.onHCEMessage.html',
-        '无'
+        ''
     ),
     getHCEState: createDescObj(
         2,
         '判断当前设备是否支持 HCE 能力。',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/nfc/wx.getHCEState.html',
-        '无'
+        ''
     ),
     // 网络
     onNetworkStatusChange: createDescObj(
@@ -436,7 +436,7 @@ module.exports = {
         2,
         '开始监听罗盘数据',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/accelerometer/wx.startAccelerometer.html',
-        '无'
+        ''
     ),
     stopAccelerometer: createDescObj(
         1,
@@ -485,7 +485,7 @@ module.exports = {
         2,
         '开始监听罗盘数据',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/compass/wx.startCompass.html',
-        '无'
+        ''
     ),
     stopCompass: createDescObj(
         1,
@@ -517,19 +517,19 @@ module.exports = {
         2,
         '监听设备方向变化事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/motion/wx.onDeviceMotionChange.html',
-        '无'
+        ''
     ),
     startDeviceMotionListening: createDescObj(
         2,
         '开始监听设备方向的变化',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/motion/wx.startDeviceMotionListening.html',
-        '无'
+        ''
     ),
     stopDeviceMotionListening: createDescObj(
         2,
         '停止监听设备方向的变化',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/motion/wx.stopDeviceMotionListening.html',
-        '无'
+        ''
     ),
     // 陀螺仪
     onGyroscopeChange: createDescObj(
@@ -542,7 +542,7 @@ module.exports = {
         2,
         '开始监听陀螺仪数据',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/gyroscope/wx.startGyroscope.html',
-        '无'
+        ''
     ),
     stopGyroscope: createDescObj(
         1,
@@ -574,7 +574,7 @@ module.exports = {
         2,
         '监听内存不足告警事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/performance/wx.onMemoryWarning.html',
-        '无'
+        ''
     ),
     // 扫码
     scanCode: createDescObj(

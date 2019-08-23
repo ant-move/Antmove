@@ -249,60 +249,60 @@ module.exports = {
         2,
         '停止搜索 mDNS 服务',
         'https://developers.weixin.qq.com/miniprogram/dev/api/network/mdns/wx.stopLocalServiceDiscovery.html',
-        '无'
+        ''
     ),
     startLocalServiceDiscovery: createDescObj(
         2,
         '开始搜索局域网下的 mDNS 服务',
         'https://developers.weixin.qq.com/miniprogram/dev/api/network/mdns/wx.startLocalServiceDiscovery.html',
-        '无'
+        ''
     ),
     onLocalServiceResolveFail: createDescObj(
         2,
         '监听 mDNS 服务解析失败的事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/network/mdns/wx.onLocalServiceResolveFail.html',
-        '无'
+        ''
     ),
     onLocalServiceLost: createDescObj(
         2,
         '监听 mDNS 服务离开的事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/network/mdns/wx.onLocalServiceLost.html',
-        '无'
+        ''
     ),
     onLocalServiceFound: createDescObj(
         2,
         '监听 mDNS 服务发现的事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/network/mdns/wx.onLocalServiceFound.html',
-        '无'
+        ''
     ),
     onLocalServiceDiscoveryStop: createDescObj(
         2,
         '监听 mDNS 服务停止搜索的事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/network/mdns/wx.onLocalServiceDiscoveryStop.html',
-        '无'
+        ''
     ),
     offLocalServiceResolveFail: createDescObj(
         2,
         '取消监听 mDNS 服务解析失败的事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/network/mdns/wx.offLocalServiceResolveFail.html',
-        '无'
+        ''
     ),
     offLocalServiceLost: createDescObj(
         2,
         '取消监听 mDNS 服务离开的事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/network/mdns/wx.offLocalServiceLost.html',
-        '无'
+        ''
     ),
     offLocalServiceFound: createDescObj(
         2,
         '取消监听 mDNS 服务发现的事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/network/mdns/wx.offLocalServiceFound.html',
-        '无'
+        ''
     ),
     offLocalServiceDiscoveryStop: createDescObj(
         2,
         '取消监听 mDNS 服务停止搜索的事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/network/mdns/wx.offLocalServiceDiscoveryStop.html',
-        '无'
+        ''
     )
 };

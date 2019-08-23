@@ -7,17 +7,24 @@ const appTransformation = require('./classSubdirectory/app');
 const pageTransformation = require('./classSubdirectory/page');
 const componentTransformation = require('./classSubdirectory/component');
 
-module.exports = function processComponent (options = {}, type = 'Component') {
-    let _opts = {};
-    if (type === "App" && options) {
-        appTransformation.processTransformationApp(_opts,options);
+module.exports = function processComponent ( type = 'Component') {
+    const core = {
+        App: function (options = {}) {
+            let _opts = {};
+            appTransformation.processTransformationApp(_opts, options);
+            App(_opts);
+        },
+        Page: function (options = {}) {
+            let _opts = {};
+            pageTransformation.processTransformationPage(_opts, options);
+            Page(_opts);
+        },
+        Component: function (options = {}) {
+            let _opts = {};
+            componentTransformation.processTransformationComponent(_opts, options);
+            Component(_opts);
+        }
+    };
 
-    } else if (type === 'Page' && options) {
-        pageTransformation.processTransformationPage(_opts,options);
-
-    } else if (type === 'Component' && options) {
-        componentTransformation.processTransformationComponent(_opts,options);
-
-    }  
-    return _opts;
+    return core[type];
 };

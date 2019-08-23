@@ -16,7 +16,7 @@ module.exports = {
         2,
         '检查登录态是否过期',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/login/wx.checkSession.html',
-        '无'
+        ''
     ),
     navigateToMiniProgram: createDescObj(
         0,
@@ -34,7 +34,7 @@ module.exports = {
         2,
         '获取当前帐号信息',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/account-info/wx.getAccountInfoSync.html',
-        '无'
+        ''
     ),
     getUserInfo: createDescObj(
         1,
@@ -93,13 +93,13 @@ module.exports = {
         2,
         '用户信息',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/user-info/UserInfo.html',
-        '无'
+        ''
     ),
     reportMonitor: createDescObj(
         2,
         '自定义业务数据监控上报接口',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/report/wx.reportMonitor.html',
-        '无'
+        ''
     ),
     reportAnalytics: createDescObj(
         0,
@@ -114,7 +114,7 @@ module.exports = {
         2,
         '发起支付',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/payment/wx.requestPayment.html',
-        '无',
+        '',
         {
             msg: '支付宝与微信支付功能差异较大，请参考支付宝支付文档做兼容处理',
         }
@@ -152,13 +152,16 @@ module.exports = {
         2,
         '用户授权设置信息',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/setting/AuthSetting.html',
-        '无'
+        ''
     ),
     chooseAddress: createDescObj(
-        2,
-        '获取用户收货地址',
+        1,
+        '打开地图选择位置',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/address/wx.chooseAddress.html',
-        '无'
+        'https://yuque.antfin-inc.com/mpaas-tiny-site/api/choose-address',
+        {
+            msg: '支付宝端需要在项目作出相应配置，并需要服务端的支持'
+        }
     ),
     openCard: createDescObj(
         1,
@@ -218,13 +221,13 @@ module.exports = {
         2,
         '选择用户的发票抬头',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/invoice/wx.chooseInvoiceTitle.html',
-        '无'
+        ''
     ),
     chooseInvoice: createDescObj(
         2,
         '选择用户已有的发票',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/invoice/wx.chooseInvoice.html',
-        '无'
+        ''
     ),
     startSoterAuthentication: createDescObj(
         1,
@@ -259,18 +262,18 @@ module.exports = {
         2,
         '获取本机支持的 SOTER 生物认证方式',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/soter/wx.checkIsSupportSoterAuthentication.html',
-        '无'
+        ''
     ),
     checkIsSoterEnrolledInDevice: createDescObj(
         2,
         '获取设备内是否录入如指纹等生物信息的接口',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/soter/wx.checkIsSoterEnrolledInDevice.html',
-        '无'
+        ''
     ),
     getWeRunData: createDescObj(
         2,
         '获取用户过去三十天微信运动步数',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/werun/wx.getWeRunData.html',
-        '无'
+        ''
     )
 };

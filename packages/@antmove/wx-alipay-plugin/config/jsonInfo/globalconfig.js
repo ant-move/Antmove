@@ -23,7 +23,7 @@ module.exports = {
             wechat: 'https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/app.html#pages',
             alipay: 'https://docs.alipay.com/mini/framework/app-json'
         },
-        desc: 'app.json 用于对小程序进行全局配置，设置页面文件的路径、窗口表现、网络超时时间、多 tab 等。',
+        desc: '用于指定小程序由哪些页面组成，每一项都对应一个页面的 路径（含文件名） 信息。',
         status: 0,
         type: 7
     },

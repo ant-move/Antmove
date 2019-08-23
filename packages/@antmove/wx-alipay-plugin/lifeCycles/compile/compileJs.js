@@ -10,38 +10,49 @@ const {
     ifProcessHandleFn,
     ConstructorHandle,
     prettierCode,
-    processFnBodyHandleFn
+    processFnBodyHandleFn,
+    getCbName
 } = require('@antmove/utils');
 
 module.exports = function (fileInfo, ctx, originCode, apis) {
     originCode = behavourHandle(originCode);
     originCode = precessRelativePathOfCode(originCode, fileInfo.path, ctx.entry);
     
-    let isMatchPlatformApi = originCode.match(/\bwx\.(\w+)/g);
     originCode = ifProcessHandleFn(originCode, {
         entry: 'wx',
         dist: 'my',
         code: 'wx.__target__'
-    });       
-    originCode = replaceCalleeHandleFn(originCode, 'wx', '_my', apis);
+    });    
+    
+    let isMatchPlatformApi = ''; // originCode.match(/\bwx\.(\w+)/g);
+    
+    originCode = replaceCalleeHandleFn(originCode, 'wx', '_my', apis, function () {
+        isMatchPlatformApi = true;
+    });
     Config.compile.wrapApis = Object.assign(Config.compile.wrapApis, apis);
     originCode = commentBlock(originCode);
     originCode = requireModuleFn(originCode, ctx);
-
+    
     /**
      *  判断是否为 App()/Page()/Component()
      * */
 
     let componentWrapFnPath = customComponentPrefix + '/component/componentClass.js';
-    let matchRet = (originCode.match(/\n*App\(/g) || originCode.match(/\n*Page\(/g) || originCode.match(/\n*Component\(/g));
-
+    let matchRet = '';
+    let cbNameInfo = {
+        name: ''
+    };
+    getCbName(originCode, cbNameInfo);
+    matchRet = cbNameInfo.name;
     let apiPath = customComponentPrefix + '/api/index.js';
     let _compoentPath = componentWrapFnPath;
     let insertCode = '';
 
     if (matchRet) {
-        insertCode += `const _conponentConstructorHandle = require('${_compoentPath}');\n`;
-        originCode = ConstructorHandle(originCode);
+        insertCode += `const ${Config.target + matchRet} = require('${_compoentPath}')('${matchRet}');\n`;
+        originCode = ConstructorHandle(originCode, {
+            targetName: Config.target
+        });
     }
 
     if (isMatchPlatformApi || (fileInfo.parent && fileInfo.parent.tplInfo)) {
@@ -49,15 +60,17 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
                 `;
     }
 
-    if (fileInfo.parent && fileInfo.parent.tplInfo) {
+    // Todo:
+    // if (fileInfo.parent && fileInfo.parent.tplInfo) {
         
-        fileInfo.parent.tplInfo.button &&
-        fileInfo.parent.tplInfo.button
-            .forEach(function (info) {
-                if (info.type === 'button' && info.scope)
-                    originCode = processFnBodyHandleFn(originCode, info);
-            });
-    }
+    //     fileInfo.parent.tplInfo.button &&
+    //     fileInfo.parent.tplInfo.button
+    //         .forEach(function (info) {
+    //             // todos
+    //             // if (info.type === 'button' && info.scope)
+    //             // originCode = processFnBodyHandleFn(originCode, info);
+    //         });
+    // }
 
     originCode = insertCode + originCode;
     originCode = prettierCode(originCode);

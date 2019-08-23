@@ -38,13 +38,13 @@ function generate (output) {
     let myJS = 'const utils = require("./utils");\nconst descObj = require("./desc.js");\nconst apiObj = ' + apiContent + '\nmodule.exports = apiObj;';
     let descJs = 'const utils = require("./utils");\nconst infoObj = ' + apiInfo + '\nmodule.exports = infoObj;';
 
-    if (!Config.isDev()) {
-        myJS = minifyJs(
-            transformEs6(myJS)
-        );
-        descJs = minifyJs(
-            transformEs6(descJs));
-    }
+    // if (!Config.isDev()) {
+    //     myJS = minifyJs(
+    //         transformEs6(myJS)
+    //     );
+    //     descJs = minifyJs(
+    //         transformEs6(descJs));
+    // }
 
     fs.outputFileSync(path.join(outputPath, 'my.js'), myJS);
     fs.outputFileSync(path.join(outputPath, 'desc.js'), descJs);
@@ -52,7 +52,7 @@ function generate (output) {
     function copyFile (filename) {
         let inputPath = path.join(entry, filename);
         let distPath = path.join(outputPath, filename);
-        if (!Config.isDev()) {
+        if (false && !Config.isDev()) {
             let content = fs.readFileSync(inputPath, 'utf8');
             fs.outputFileSync(distPath, minifyJs(
                 transformEs6(content)

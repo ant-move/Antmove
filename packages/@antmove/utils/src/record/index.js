@@ -5,7 +5,7 @@ module.exports = function (config={}) {
     config.isShow = process.env.NODE_ENV === 'development';
     return {
         // 运行环境
-        getSurrounding (obj = {}) {
+        getSurrounding () {
             if (!config.isShow) {
                 return {};
             }
@@ -13,9 +13,7 @@ module.exports = function (config={}) {
                 pcSystem: {
                     name: "系统",
                     val: process.platform
-                }, 
-                
-    
+                },
                 nodeVersion: {
                     name: "nodejs",
                     val: process.version
@@ -25,7 +23,7 @@ module.exports = function (config={}) {
             return result;
         },
     
-        getTemplateData (fileInfo) {
+        getTemplateData (fileInfo, progectname="") {
             if (!config.isShow) {
                 return {};
             }
@@ -34,19 +32,18 @@ module.exports = function (config={}) {
             result.components = [];
             let projectPath = "";
             let pagePath = "";
-            if (fileInfo.path.indexOf('pages')!==-1) {
+            if (progectname) {
+                pagePath =  fileInfo.path.split(progectname)[1] && fileInfo.path.split(progectname)[1].replace(/\\/g, "/").substr(1);
+            } else if (fileInfo.path.indexOf('pages')!==-1) {
                 projectPath =  fileInfo.path.split('pages')[0];
                 pagePath =  fileInfo.path.split(projectPath)[1].replace(/\\/g, "/");
             } else {
                 projectPath =  fileInfo.path.split('components')[0];
                 pagePath =  fileInfo.path.split(projectPath)[1].replace(/\\/g, "/");
             }
-             
             result.status = 1;
             fileInfo.ast.forEach(item => {
-                
                 let eleName = item.type;
-              
                 // 查找规则
                 const componentObj = {
                     name: "",
@@ -56,7 +53,7 @@ module.exports = function (config={}) {
                 if (config.components.descObject[eleName]) {
                     componentObj.name = eleName;
                     try {
-                        componentObj.doc = config.components.descObject[eleName].url.alipay;
+                        componentObj.doc = config.components.descObject[eleName].url.alipay ||  config.components.descObject[eleName].url.target;
                     } catch (err) {
                         componentObj.doc = "";
                     }
@@ -146,7 +143,7 @@ module.exports = function (config={}) {
             return result;
         },
     
-        getScriptData (pathInfo, apiObj, wxoriginCode) {
+        getScriptData (pathInfo, apiObj, wxoriginCode, projectType="wx") {
             if (!config.isShow) {
                 return {};
             }
@@ -171,28 +168,18 @@ module.exports = function (config={}) {
                 makeLifeData(pageLifeArr, 1, result, config);
             }
     
-            // component
-    
             if (wxoriginCode.indexOf('Component')!==-1) {
                 let compLifeArr = getLife(wxoriginCode, 2, config);
                 makeLifeData(compLifeArr, 2, result, config);
             }
-    
-           
-            if (pagePath.indexOf('pages')!==-1||wxoriginCode.indexOf('Component')!==-1) {
-                result.type = "jsModular";
-                
-            } else {
-                result.type = "otherModular";
-            }
-    
+            result.type = "jsModular";
             Object.keys(apiObj).forEach(item => {
                 if (testOpenAbility(item, config)) {
                     let opreult = {};
-                    opreult[`wx.${item}`] = {
+                    opreult[`${projectType}.${item}`] = {
                         path: pagePath,
-                        idear: "查看支付宝文档",
-                        docpath: config.openAbility[item].alipay,
+                        idear: "查看相关文档",
+                        docpath: config.openAbility[item].alipay || config.openAbility[item].url.target || config.openAbility[item].url.original,
                         status: config.openAbility[item].status+1
                     };
     
@@ -204,13 +191,13 @@ module.exports = function (config={}) {
                 let apiresilt = {}; 
                 apiresilt.attrs = []; 
                 try {
-                    apiresilt.doc =config.apis.descObject[item].url.alipay;
+                    apiresilt.doc =config.apis.descObject[item].url.alipay || config.apis.descObject[item].url.target;
                 } catch (err) {
                     apiresilt.doc = "";
                 }
                 
                 if (config.apis.descObject[item] && config.apis.descObject[item].status === 1) {
-                    apiresilt.name = `wx.${item}`;
+                    apiresilt.name = `${projectType}.${item}`;
                     let params = config.apis.descObject[item].body.params||{};
                     let propskey = params.props || {};
                     let defectArr = [];
@@ -260,7 +247,7 @@ module.exports = function (config={}) {
                         result.status = 2;
                     }
                 } else if ( config.apis.descObject[item] && config.apis.descObject[item].status === 2) {
-                    apiresilt.name = `wx.${item}`;           
+                    apiresilt.name = `${projectType}.${item}`;           
                     apiresilt.attrs = ["不支持"];
                     result.status = 3;
                     result.components.push(apiresilt);
@@ -294,7 +281,7 @@ module.exports = function (config={}) {
                         let jsonData = {
                             name: key,
                             attrs: [],
-                            doc: config.pageconfig[key].url.wechat
+                            doc: config.pageconfig[key].url.wechat || config.pageconfig[key].url.original
                         };
                         if (config.pageconfig[key].status ===2 ) {
                             jsonData.attrs=['属性不支持'];
@@ -310,7 +297,7 @@ module.exports = function (config={}) {
                         let jsonData = {
                             name: key,
                             attrs: [],
-                            doc: config.globalconfig[key].url.wechat
+                            doc: config.globalconfig[key].url.wechat || config.pageconfig[key].url.original
                         };
                         if (config.pageconfig[key].status ===2 ) {
                             jsonData.attrs = ['属性不支持'];
@@ -394,7 +381,7 @@ module.exports = function (config={}) {
             openBower(local, config);
         },
     
-        findOpenAbility (repData) {
+        findOpenAbility (repData, dataType="wx") {
             if (!config.isShow) {
                 return {};
             }
@@ -408,15 +395,15 @@ module.exports = function (config={}) {
             Object.keys(config.openAbility).forEach(item => {
                 let pathArr = [];
                 openArr.forEach(its => {
-                    if (its[`wx.${item}`]) {
-                        pathArr.push(its[`wx.${item}`].path);
+                    if (its[`${dataType}.${item}`]) {
+                        pathArr.push(its[`${dataType}.${item}`].path);
                     }
                 });
                 if (pathArr.length>0) {
-                    result[`wx.${item}`] = {
+                    result[`${dataType}.${item}`] = {
                         pathArr: pathArr,
-                        idear: '查看支付宝文档',
-                        docpath: config.openAbility[item].url.alipay,
+                        idear: '查看相关文档',
+                        docpath: config.openAbility[item].url.alipay || config.openAbility[item].url.target || config.openAbility[item].url.original,
                         status: config.openAbility[item].status+1
                     };
                 }
@@ -520,7 +507,6 @@ async  function openBower (distpath, config) {
 function getLife (wxoriginCode, num, config) {
     let resultArr = [];
     let lifeArr = Object.keys(config.lifeCycleInfo.lifeInfo[num].body);
-    
     lifeArr.forEach(its => {
         let reg = eval( "/\\w*" + its + "\\w*/g;"); 
         let larr = wxoriginCode.match(reg)||[];
@@ -544,7 +530,7 @@ function makeLifeData (lifeArr, num, result, config) {
 
         if (body&&body.status===1) {
             try {
-                lifeResilt.doc = body.url.alipay || body.url.wechat;
+                lifeResilt.doc = body.url.alipay || body.url.wechat || body.url.target;
             } catch (err) {
                 lifeResilt.doc = "";
             }
@@ -586,7 +572,7 @@ function makeLifeData (lifeArr, num, result, config) {
             result.components.push(lifeResilt);
         } else if (body&&body.status===2) {
             try {
-                lifeResilt.doc = body.url.alipay||body.url.wechat;
+                lifeResilt.doc = body.url.alipay||body.url.wechat || body.url.target;
             } catch (err) {
                 lifeResilt.doc = "";
             }

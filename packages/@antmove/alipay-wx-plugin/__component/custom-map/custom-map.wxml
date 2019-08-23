@@ -1,0 +1,30 @@
+<view class="map-wrap {{className}}">
+    <map
+        id='{{id}}'
+        class='{{class}}'
+        longitude="{{longitude}}"
+        latitude="{{latitude}}"
+        scale="{{scale}}"
+        polyline="{{polyline}}"
+        polygon="{{polygons}}"
+        circles="{{circles}}"
+        controls="{{controls}}"
+        markers="{{alMakers}}"
+        style="{{mapStyle}}"
+        enable-scroll="{{enableScroll}}"
+        show-compass="{{showCompass}}"
+        show-scale="{{showScale}}"
+        enable-traffic="{{enableTraffic}}"
+        include-points="{{includePoints}}"
+        show-location="{{showLocation}}"
+        onMarkerTap="onMarkerTapFn"
+        onCalloutTap="onCalloutTapFn"
+        onControlTap="onControlTapFn"
+        onRegionChange="onRegionChangeFn"
+        onTap="onTapFn"
+        
+    />
+    <cover-view class="coverview-wrap">
+        <slot></slot>
+    </cover-view>
+</view>

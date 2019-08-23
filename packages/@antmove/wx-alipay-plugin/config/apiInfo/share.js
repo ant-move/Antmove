@@ -7,13 +7,13 @@ module.exports = {
         2,
         '更新转发属性',
         'https://developers.weixin.qq.com/miniprogram/dev/api/share/wx.updateShareMenu.html',
-        '无'
+        ''
     ),
     showShareMenu: createDescObj(
         2,
         '显示当前页面的转发按钮',
         'https://developers.weixin.qq.com/miniprogram/dev/api/share/wx.showShareMenu.html',
-        '无'
+        ''
     ),
     hideShareMenu: createDescObj(
         0,
@@ -25,6 +25,6 @@ module.exports = {
         2,
         '获取转发详细信息',
         'https://developers.weixin.qq.com/miniprogram/dev/api/share/wx.getShareInfo.html',
-        '无'
+        ''
     )
 };

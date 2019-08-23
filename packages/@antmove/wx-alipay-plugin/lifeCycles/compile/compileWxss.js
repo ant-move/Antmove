@@ -10,7 +10,7 @@ module.exports = function (fileInfo, ctx, inCompileWxml = false) {
     if (fileInfo.hasCompiledStyle) return false;
 
     let originFileInfo = null;
-    let classNamesObj = {};
+    let classNamesWrap = false;
     if (inCompileWxml) {
         originFileInfo = fileInfo;
 
@@ -25,12 +25,14 @@ module.exports = function (fileInfo, ctx, inCompileWxml = false) {
 
         fileInfo.hasCompiledStyle = true;
 
-        classNamesObj = processClassNames(originFileInfo);
+        classNamesWrap = processClassNames(originFileInfo);
     }
 
 
     fileInfo.dist = fileInfo.dist.replace(/\.wxss/, '.acss');
     let cssContent = fs.readFileSync(fileInfo.path, 'utf8') || '';
+    cssContent = prettierCode(cssContent, 'scss');
+
     cssContent = cssContent.replace(/\.wxss"/g, '.acss";').replace(/\.wxss'/g, '.acss\';');
 
     if (fileInfo.deep === 0 || fileInfo.filename === 'app.wxss') {
@@ -50,35 +52,32 @@ module.exports = function (fileInfo, ctx, inCompileWxml = false) {
 
         return `@import '${rule}';\n`;
     });
+    if (Config.options.scopeStyle && classNamesWrap) {
+        const classPrefix = classNamesWrap.classPrefix;
+        // let rootClassNames = classNamesWrap.value[0].split(/\s+/);
 
-    if (Config.options.scopeStyle && Object.keys(classNamesObj).length) {
         try {
             let cssObj = css.parse(cssContent);
             cssObj.stylesheet.rules
                 .forEach(function (el) {
                     if (el.selectors) {
-                        el.selectors = el.selectors.map(function (selector) {
-                            let _arr = selector.split(' ');
-                            let _ret = [];
+                        el.selectors = el.selectors.map((selector,) => {
+                            /**
+                             * 兼容双分号选择器情况
+                             */
 
-                            _arr.forEach(function (className) {
-                                let _className = '';
-                
-                                if (className[0] === '.') {
-                                    _className = className.substring(1);
-                                } else {
-                                    _className = className;
-                                }
-
-                                if (classNamesObj[_className]) {
-                                    _ret.push('.' + classNamesObj[_className].value);
-                                } else {
-                                    _ret.push(className);
-                                }
-                            });
-
-                            selector = _ret.join(' ');
-                            return selector;
+                            selector = selector.replace(/^;+/, '');   
+                            if (selector.match(/@/)) return selector;
+                            
+                            let ret = '';
+                            // rootClassNames.forEach(function (className) {
+                            //     let temp = selector.split(' ');
+                            //     if (temp[0] === ('.' + className)) {
+                            //         ret = selector + '-' + classPrefix;
+                            //     }
+                            // }); 
+                            ret = '.' + classPrefix + ' ' + selector;
+                            return ret;
                         });
                     }
                 });

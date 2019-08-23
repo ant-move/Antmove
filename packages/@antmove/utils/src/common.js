@@ -28,7 +28,7 @@ function transformStr (type = '') {
         return $.toLowerCase();
     });
 
-    type = type.replace(/[A-Z]/g, function ($) {
+    type = type.replace(/[A-Z]/, function ($) {
         return '-' + $.toLowerCase();
     });
 

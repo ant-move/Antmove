@@ -1,17 +1,18 @@
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 
 const fileUtils = {};
+let entry = '';
 
 fileUtils.parserDirInfo = function (opts = {}, cb = () => {}, deep = 0, parent = null) {
     let dirpath = opts.dirpath;
     let temp = fs.readdirSync(dirpath);
     let files = [];
-
+    entry = entry || dirpath;
     temp.forEach(function (filename) {
         let _file = path.join(dirpath, filename);
         _file = fileUtils.parserFileInfo(_file, deep, parent);
-
+        _file.entry = entry;
         let _bool;
         opts.exclude.forEach(function (reg) {
             if (_file.filename.match(reg)) {
@@ -96,6 +97,15 @@ fileUtils.parserFileInfo = function (filepath, deep, parent) {
         parent,
         deep
     };
+};
+
+fileUtils.emptyFiles = function (dirname, arr = []) {
+    fs.readdirSync(dirname)
+        .forEach(function (file) {
+            if (!arr.includes(file)) {
+                fs.removeSync(path.join(dirname, file));
+            }
+        });
 };
 
 module.exports = fileUtils;

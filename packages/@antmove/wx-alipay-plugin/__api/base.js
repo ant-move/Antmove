@@ -131,7 +131,7 @@ const apiObj = {
                     utils.warn(
                         `showModal的参数不支持 ${prop} 属性!`,
                         {
-                            apiName: `howModal/${prop}`,
+                            apiName: `showModal/${prop}`,
                             errorType: showModalProps[prop].type,
                             type: 'api'
                         }
@@ -337,9 +337,8 @@ const apiObj = {
             obj.method = obj.method.toUpperCase();
 
             if (
-                obj.method &&
-                (obj.method !== 'GET' ||
-                    obj.method !== 'POST')
+                obj.method !== 'GET' &&
+                    obj.method !== 'POST'
             ) {
                 utils.warn(
                     `request暂不支持${obj.method}请求方式`,
@@ -413,14 +412,35 @@ const apiObj = {
     createCameraContext: {
         fn (obj) {
             const res = my.createCameraContext({...obj});
-            res.takePhoto = () => {
-                console.warn("支付宝暂不支持 takePhoto");
+            res.takePhoto = () => {  
+                utils.warn(            
+                    "支付宝暂不支持takePhoto",
+                    {
+                        apiName: `createCameraContext/takePhoto`,
+                        errorType: 0,
+                        type: 'api'
+                    }
+                ); 
             };
             res.startRecord = () => {
-                console.warn("支付宝暂不支持 startRecord");
+                utils.warn(            
+                    "支付宝暂不支持startRecord",
+                    {
+                        apiName: `createCameraContext/startRecord`,
+                        errorType: 0,
+                        type: 'api'
+                    }
+                );
             };
             res.stopRecord = () => {
-                console.warn("支付宝暂不支持 stopRecord");
+                utils.warn(            
+                    "支付宝暂不支持stopRecord",
+                    {
+                        apiName: `createCameraContext/stopRecord`,
+                        errorType: 0,
+                        type: 'api'
+                    }
+                );
             };
             return res;
         }
@@ -938,6 +958,67 @@ const apiObj = {
             return my.removeStorageSync({ key });
         }
     },
+    createSelectorQuery: {
+        fn () {
+            let SQ = my.createSelectorQuery();
+            function Query () {
+                this.query = SQ;
+                this._selectType = 0; // 0: array, 1: object
+
+                this.select = function (p) {
+                    this.query.select(p);
+                    this._selectType = 1;
+                    return this;
+                };
+
+                this.selectAll = function (p) {
+                    this.query.selectAll(p);
+                    return this;
+                };
+
+                this.selectViewport = function (p) {
+                    this.query.selectViewport(p);
+                    return this;
+                };
+
+                this.boundingClientRect = function (p) {
+                    let self = this;
+                    this.query.boundingClientRect().exec(function (ret) {
+                        if (self._selectType) {
+                            self._selectType = 0;
+                            if (Array.isArray(ret) && ret.length === 1) {
+                                ret = ret[0];
+                            }
+                        }
+
+                        p && p(ret);
+                    });
+                    return this;
+                };
+
+                this.scrollOffset = function (p) {
+                    let self = this;
+                    this.query.scrollOffset().exec(function (ret) {
+                        if (self._selectType) {
+                            self._selectType = 0;
+                            if (Array.isArray(ret) && ret.length === 1) {
+                                ret = ret[0];
+                            }
+                        }
+
+                        p && p(ret);
+                    });
+                    return this;
+                };
+            }
+
+            Query.prototype = SQ;
+
+            let res = new Query();
+
+            return res;
+        }
+    }
 };
 
 module.exports = apiObj;

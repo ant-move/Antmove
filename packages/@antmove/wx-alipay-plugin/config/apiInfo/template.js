@@ -24,19 +24,19 @@ module.exports = {
         2,
         '创建并返回一个 IntersectionObserver 对象实例',
         'https://developers.weixin.qq.com/miniprogram/dev/api/wxml/wx.createIntersectionObserver.html',
-        '无'
+        ''
     ),
     IntersectionObserver: createDescObj(
         2,
         'IntersectionObserver 对象，用于推断某些节点是否可以被用户看见、有多大比例可以被用户看见',
         'https://developers.weixin.qq.com/miniprogram/dev/api/wxml/IntersectionObserver.html',
-        '无'
+        ''
     ),
     NodesRef: createDescObj(
         2,
         '用于获取 WXML 节点信息的对象',
         'https://developers.weixin.qq.com/miniprogram/dev/api/wxml/NodesRef.html',
-        '无'
+        ''
     ),
     SelectorQuery: createDescObj(
         0,

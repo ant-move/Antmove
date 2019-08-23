@@ -144,97 +144,97 @@ module.exports = {
         2,
         '获取全局唯一的版本更新管理器',
         'https://developers.weixin.qq.com/miniprogram/dev/api/base/update/wx.getUpdateManager.html',
-        '无'
+        ''
     ),
     getLaunchOptionsSync: createDescObj(
         2,
         '获取小程序启动时的参数',
         'https://developers.weixin.qq.com/miniprogram/dev/api/base/app/life-cycle/wx.getLaunchOptionsSync.html',
-        '无'
+        ''
     ),
     onPageNotFound: createDescObj(
         2,
         '监听小程序要打开的页面不存在事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/base/app/app-event/wx.onPageNotFound.html',
-        '无'
+        ''
     ),
     onError: createDescObj(
         2,
         '监听小程序错误事件。如脚本错误或 API 调用报错等。',
         'https://developers.weixin.qq.com/miniprogram/dev/api/base/app/app-event/wx.onError.html',
-        '无'
+        ''
     ),
     onAudioInterruptionBegin: createDescObj(
         2,
         '监听音频因为受到系统占用而被中断开始事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/base/app/app-event/wx.onAudioInterruptionBegin.html',
-        '无'
+        ''
     ),
     onAudioInterruptionEnd: createDescObj(
         2,
         '监听音频中断结束事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/base/app/app-event/wx.onAudioInterruptionEnd.html',
-        '无'
+        ''
     ),
     onAppShow: createDescObj(
         2,
         '监听小程序切前台事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/base/app/app-event/wx.onAppShow.html',
-        '无'
+        ''
     ),
     onAppHide: createDescObj(
         2,
         '监听小程序切后台事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/base/app/app-event/wx.onAppHide.html',
-        '无'
+        ''
     ),
     offPageNotFound: createDescObj(
         2,
         '取消监听小程序要打开的页面不存在事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/base/app/app-event/wx.offPageNotFound.html',
-        '无'
+        ''
     ),
     offError: createDescObj(
         2,
         '监听小程序切前台事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/base/app/app-event/wx.offError.html',
-        '无'
+        ''
     ),
     offAudioInterruptionBegin: createDescObj(
         2,
         '取消监听音频因为受到系统占用而被中断开始事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/base/app/app-event/wx.offAudioInterruptionBegin.html',
-        '无'
+        ''
     ),
     offAudioInterruptionEnd: createDescObj(
         2,
         '取消监听音频中断结束事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/base/app/app-event/wx.offAudioInterruptionEnd.html',
-        '无'
+        ''
     ),
     offAppShow: createDescObj(
         2,
         '取消监听小程序切前台事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/base/app/app-event/wx.offAppShow.html',
-        '无'
+        ''
     ),
     offAppHide: createDescObj(
         2,
         '取消监听小程序切后台事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/base/app/app-event/wx.offAppHide.html',
-        '无'
+        ''
     ),
     setEnableDebug: createDescObj(
         2,
         '设置是否打开调试开关。此开关对正式版也能生效',
         'https://developers.weixin.qq.com/miniprogram/dev/api/base/debug/wx.setEnableDebug.html',
-        '无'
+        ''
     ),
     getLogManager: createDescObj(
         2,
         '获取日志管理器对象。',
         'https://developers.weixin.qq.com/miniprogram/dev/api/base/debug/wx.getLogManager.html',
-        '无'
+        ''
     ),
     createCameraContext: createDescObj(
         1,

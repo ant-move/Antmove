@@ -40,8 +40,8 @@ module.exports = function (obj = {}) {
                                 return myApi[attr].fn(o);
                             };
                         } else {
-                            warnApi(attr);
-                            ret = obj[attr];
+                            let helpFn = warnApi(attr);
+                            ret = obj[attr] || helpFn;
                         }
 
                         return ret;

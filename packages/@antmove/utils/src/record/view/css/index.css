@@ -13,6 +13,12 @@ html {
     z-index: 2;
 }
 
+.nav-item {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+}
+
 .logo {
     display: inline-block;
     vertical-align: middle;
@@ -22,7 +28,7 @@ html {
 
 .loco-name {
     vertical-align: middle;
-    font-size: 20px;
+    font-size: 24px;
 }
 
 .navconntent {
@@ -35,7 +41,7 @@ html {
     line-height: 80px;
     font-size: 20px;
     color: #fff;
-}   
+}
 
 .right-box {
     width: 400px;
@@ -158,7 +164,7 @@ html {
 .table_left,
 .table_right{
     border-bottom: 1px solid #E6E6E6;
-    border-right: 1px solid #E6E6E6; 
+    border-right: 1px solid #E6E6E6;
     text-align: center;
     width: 50%;
     height: 50px;
@@ -174,7 +180,7 @@ html {
 .rep-list {
     border: 1px solid #E6E6E6;
     margin-top: 20px;
-    padding-bottom: 20px; 
+    padding-bottom: 20px;
 }
 .rep-list .list-title{
     height: 66px;
@@ -187,12 +193,12 @@ html {
     background-color: #fff;
     border: 1px solid #e6e6ee;
     padding: 0 20px;
-    padding-bottom: 20px; 
+    padding-bottom: 20px;
 }
 
 .tabs {
     height: 50px;
-    border-bottom: 1px solid #e6e6e6; 
+    border-bottom: 1px solid #e6e6e6;
     user-select: none;
 }
 
@@ -211,7 +217,7 @@ html {
 
 .tab-item.actived {
     color: #333;
-    border-bottom: 2px solid #4088F6; 
+    border-bottom: 2px solid #4088F6;
 }
 
 .tab-item .num {
@@ -241,7 +247,7 @@ html {
     margin-top: 30px;
     display: none;
     overflow: auto;
-    height: 550px; 
+    height: 550px;
     background-color: #fff;
 }
 
@@ -272,7 +278,7 @@ html {
 .table .table-head th,
 .table .table-head td {
     font-weight: 400;
-} 
+}
 
 
 .table-head tr.pages th:nth-child(1),
@@ -291,9 +297,9 @@ html {
 }
 
 .text-right {
-    
+
     padding-right: 35px;
-    text-align: right; 
+    text-align: right;
 }
 
 
@@ -379,7 +385,7 @@ html {
     font-size: 18px;
 }
 .mask .close i:active{
-    color: #ccc;    
+    color: #ccc;
 }
 .table-box table {
     width: 100%;

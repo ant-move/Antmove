@@ -1,6 +1,6 @@
 let lifeInfo = [
     {
-        name: '全局',
+        name: '小程序App',
         type: 'app',
         body: require('./app.js')
     },
@@ -10,7 +10,7 @@ let lifeInfo = [
         body: require('./page.js')
     },
     {
-        name: '组件',
+        name: '自定义组件',
         type: 'component',
         body: require('./component.js')
     },
