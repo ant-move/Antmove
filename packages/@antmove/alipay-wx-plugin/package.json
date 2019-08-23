@@ -16,5 +16,9 @@
     "parsimmon": "^1.13.0",
     "problem": "0.0.0"
   },
-  "gitHead": "433e21601d2ec98ae4ee8bd7eb203f1add9fd90c"
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "gitHead": "7e6d2eca3d0dba04e4ff2bbd34b9cc476d85a333"
 }
