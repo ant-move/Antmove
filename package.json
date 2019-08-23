@@ -4,22 +4,8 @@
   "description": "小程序转换器，基于支付宝/微信小程序转换为多端小程序，让小程序跨平台开发变得简单。",
   "main": "src/index.js",
   "scripts": {
-    "alipay-mini": "node ./scripts/alipay-baidu/alipay-mini.js",
-    "wx-alipay-baidu": "node ./scripts/alipay-baidu/wx-alipay-baidu.js",
-    "baidu-todo": "node ./scripts/alipay-baidu/build.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "alipay-wechat": "node ./scripts/alipay-wechat/build.js",
-    "build-zhihu": "node ./scripts/wechat/index.js",
-    "build-mini": "node ./scripts/wechat/wx-mini.js",
-    "build-v2ex": "node ./scripts/wechat/v2ex.js",
-    "build-mini-demo": "node ./scripts/wechat/mini-demo.js",
-    "build-wx-wx": "node ./scripts/wechat/mini-demo-wx-wx.js",
-    "build-wxmini": "node ./scripts/wechat/wx-mini.js",
     "lint": "eslint ./src",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "external-doc": "node ./build/buildDoc/external",
-    "build-weui": "node ./scripts/wechat/weui.js",
-    "build-view-weapp": "node ./scripts/wechat/view.js"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "author": "amap-appx@service.autonavi.com",
   "license": "GPL-3.0",

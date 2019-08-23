@@ -15,5 +15,6 @@
     "js-base64": "^2.5.1",
     "parsimmon": "^1.13.0",
     "problem": "0.0.0"
-  }
+  },
+  "gitHead": "3fa92562a02cc94eaef08f74018250a34ade521b"
 }
