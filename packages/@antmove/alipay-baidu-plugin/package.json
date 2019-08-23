@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "GPL",
+  "license": "GPL-3.0",
   "dependencies": {
     "@antmove/utils": "0.2.0",
     "problem": "0.0.0"
@@ -16,5 +16,5 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "parsimmon": "^1.13.0"
   },
-  "gitHead": "3fa92562a02cc94eaef08f74018250a34ade521b"
+  "gitHead": "433e21601d2ec98ae4ee8bd7eb203f1add9fd90c"
 }
