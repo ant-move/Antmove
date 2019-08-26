@@ -68,15 +68,16 @@ module.exports = {
         remote: false
     },
     beforeParse: async function (next) {
+        if (!isWechatApp(this.$options.entry)) {
+            console.log(chalk.red('[Ops] ' + this.$options.entry + ' is not a wechat miniproramm directory.'));
+            return false;
+        }
+
         fs.emptyDirSync(this.$options.dist);
         if (this.$options.scope) {
             Config.options.scopeStyle = true;
         }
 
-        if (!isWechatApp(this.$options.entry)) {
-            console.log(chalk.red('[Ops] ' + this.$options.entry + ' is not a wechat miniproramm directory.'));
-            return false;
-        }
         Config.env = process.env.NODE_ENV ===  "development" ? 'development' : 'production';
         showReport = Config.env === 'development';
         isUpdata = this.$options.remote;    // 是否从远程拉取 polyfill 代码
@@ -406,12 +407,6 @@ module.exports = {
         repData.concept = statisticsData;
         let targetPath =  path.join(ctx.output, `${Config.library.customComponentPrefix}/.config.json`);
         writeReportPage(repData, targetPath);
-        
-        reportEnd({
-            info: '欢迎使用蚂蚁搬家工具，您可以通过如下地址寻求帮助或是给予反馈。',
-            path: 'Antmove: https://ant-move.github.io/website/'
-        });
-
     }
 };
 

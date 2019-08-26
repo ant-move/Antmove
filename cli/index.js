@@ -1,4 +1,4 @@
-const transformFramework = require('antmove');
+const transformFramework = require('../src/index');
 const WechatPlugin = require('@antmove/wx-alipay');
 
 const App = transformFramework();
