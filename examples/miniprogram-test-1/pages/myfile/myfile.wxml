@@ -1,6 +1,0 @@
-<view>
-    <button type="default" bindtap="saveFile">saveFile</button>
-    <button type="default" bindtap="removeSavedFile">removeSavedFile</button>
-    <button type="default" bindtap="getSavedFileInfo">getSavedFileInfo</button>
-    <button type="default" bindtap="getFileInfo">getFileInfo</button>
-</view>

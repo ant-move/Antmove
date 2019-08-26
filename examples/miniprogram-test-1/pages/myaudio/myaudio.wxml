@@ -1,8 +1,0 @@
-<view>
- 
-<button  type="default" bindtap="newBgm">生成背景音乐</button>
-<button  type="default" bindtap="seekBG">控制背景音乐进度</button>
-<button  type="default" bindtap="playBG">播放背景音乐进度</button>
-<button  type="default" bindtap="pauseBG">暂停背景音乐进度</button>
-<button  type="default" bindtap="stopBackground">关闭背景音乐</button>
-</view>

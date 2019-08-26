@@ -1,5 +1,0 @@
-/* components/comtest/comtest.wxss */
-.comtest {
-    background-color: red;
-    width: 100%;
-}

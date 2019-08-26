@@ -1,4 +1,0 @@
-<!--components/custom-li/custom-li.wxml-->
-<view>
-  <slot></slot>
-</view>

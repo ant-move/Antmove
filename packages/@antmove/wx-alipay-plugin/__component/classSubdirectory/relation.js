@@ -6,7 +6,8 @@ let RelationAst = {
     current: null,
     createArray: [],
     destoryArray: [],
-    mountedHandles: []
+    mountedHandles: [],
+    componentNodes: {}
 };
 
 function createNode (ctx) {
@@ -39,6 +40,30 @@ createNode.prototype = {
             .filter(function (el) {
                 return el.$id !== child.$id;
             });
+    },
+    _addComponentNode (className, ctx) {
+        className = '.' + className;
+        let componentNodes = this.getRootNode().componentNodes;
+        if (componentNodes[className]) {
+            componentNodes[className].push(ctx);
+        } else {
+            componentNodes[className] = [ctx];
+        }
+    },
+    addComponentNode (className = '', ctx) {
+        let classNameArray = className.split(/\s+/g);
+        classNameArray.forEach((classNameStr) => {
+            this._addComponentNode(classNameStr, ctx);
+        });
+    },
+    selectComponent (className) {
+        let componentNodes = this.getRootNode().componentNodes;
+        return componentNodes[className] && componentNodes[className][0];
+    },
+    selectComponents (className) {
+        let componentNodes = this.getRootNode().componentNodes;
+
+        return componentNodes[className];
     }
 };
 module.exports = function (node, cb = () => {}) {
@@ -58,7 +83,8 @@ module.exports = function (node, cb = () => {}) {
             current: null,
             createArray: [],
             destoryArray: [],
-            mountedHandles: []
+            mountedHandles: [],
+            componentNodes: {}
         };
         RelationAst.$page = wrapNode;
     }

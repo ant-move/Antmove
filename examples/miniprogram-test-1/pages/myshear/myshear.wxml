@@ -1,6 +1,0 @@
-<view>
-  <button type="default" bindtap="defaultTap">隐藏分享</button>
-  <button type="default" bindtap="updateShareMenu">updateShareMenu</button>
-  <button type="default" bindtap="showShareMenu">showShareMenu</button>
-  <button type="default" bindtap="getShareInfo">getShareInfo</button>
-</view>

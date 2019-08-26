@@ -1,6 +1,6 @@
 {
   "name": "@antmove/wx-alipay",
-  "version": "0.2.4",
+  "version": "0.2.8",
   "description": "transform wechat miniprogram to alipay miniprogram tool.",
   "main": "index.js",
   "scripts": {

@@ -65,7 +65,7 @@ $ npm install antmove --save
 ### 命令行使用
 
 ```bash
-npm i -g antmove-cli
+npm i -g antmove
 ```
 
 > 通过 npm 或 yarn 全局安装才能使用如下命令行
@@ -78,19 +78,19 @@ npm i -g antmove-cli
 
 > 你可以通过微信转支付宝转百度的链路实现百度小程序的支持哦，Antmove 已经做二次转换的特别处理。
 
-* `antmove-cli wx-alipay`（使用前请将终端切换到需转换编译的微信小程序项目路径）
+* `antmove wx-alipay`（使用前请将终端切换到需转换编译的微信小程序项目路径）
 
 ```bash
 antmove wx-alipay ./dist/alipay-app
 ```
 
-* `antmove-cli` - 该命令更加灵活，可配置输出输出目录/编译模式等
+* `antmove` - 该命令更加灵活，可配置输出输出目录/编译模式等
 
 ```bash
-antmove-cli -t wx-alipay -i ./wechat-mini/project -o ./dist/alipay-mini/project --env development
+antmove -t wx-alipay -i ./wechat-mini/project -o ./dist/alipay-mini/project --env development
 ```
 > 如上的命令表示将 `./wechat-mini/project` 微信小程序项目转换为支付宝小程序项目，转换到 `./dist/alipay-mini/project` 目录
-> 如果你不想输入参数，可以体验交互式的命令方式，执行 `antmove-cli` 即可。
+> 如果你不想输入参数，可以体验交互式的命令方式，执行 `antmove` 即可。
 
 ### 命令行参数说明
 

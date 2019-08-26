@@ -1,8 +1,0 @@
-/* pages/loadaction/loadaction.wxss */
-.bg{
-  color: red;
-}
-.cancel{
-  height: 200px;
-  color: red
-}
