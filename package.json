@@ -1,6 +1,6 @@
 {
   "name": "antmove",
-  "version": "0.2.9",
+  "version": "0.2.14",
   "description": "小程序转换器，基于支付宝/微信小程序转换为多端小程序，让小程序跨平台开发变得简单。",
   "main": "src/index.js",
   "bin": {
@@ -14,8 +14,11 @@
   "license": "GPL-3.0",
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "chalk": "^2.4.2",
     "commander": "^2.19.0",
+    "figlet": "^1.2.3",
     "fs-extra": "^8.1.0",
+    "inquirer": "^7.0.0",
     "marked": "^0.7.0"
   },
   "devDependencies": {
