@@ -1,5 +1,4 @@
 const chalk = require('chalk');
-const figlet = require('figlet');
 const CLI = require('clui');
 const clc = require('cli-color');
 const log = require('single-line-log').stdout;
@@ -44,7 +43,7 @@ module.exports = {
     report (date, reportData = {}) {
         let finishiDate = Number(new Date());
         if (reportData.type === "title") {
-            console.log(chalk.green(figlet.textSync("Antmove")));
+
             return date;
         }
         if (!reportData.showReport) {

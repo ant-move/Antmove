@@ -1,4 +1,4 @@
-const transformFramework = require('antmove');
+const transformFramework = require('../../src/index');
 const AlipayWxPlugin = require('@antmove/alipay-baidu');
 
 const App = transformFramework();
