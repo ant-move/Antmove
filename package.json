@@ -1,6 +1,6 @@
 {
   "name": "antmove",
-  "version": "0.2.14",
+  "version": "0.2.15",
   "description": "小程序转换器，基于支付宝/微信小程序转换为多端小程序，让小程序跨平台开发变得简单。",
   "main": "src/index.js",
   "bin": {
@@ -19,7 +19,9 @@
     "figlet": "^1.2.3",
     "fs-extra": "^8.1.0",
     "inquirer": "^7.0.0",
-    "marked": "^0.7.0"
+    "@antmove/alipay-baidu": "^0.2.1",
+    "@antmove/alipay-wx": "^0.2.1",
+    "@antmove/wx-alipay": "^0.2.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
