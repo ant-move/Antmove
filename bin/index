@@ -2,10 +2,14 @@
 
 var path = require('path');
 var program = require('commander');
-var buildScript = require('../cli/index.js');
+const chalk = require('chalk');
+const buildScript = require('../cli/index.js');
 const alipayWxCli = require('./alipay-wx');
 const alipayBaiduCli = require('./alipay-baidu');
+const alipayToBaidu = require('../cli/alipay-baidu/index');
+const alipayToWx = require('../cli/alipay-wechat/index');
 const inputDirPath = process.cwd();
+const entryProcess = require('./entry');
 /**
  * read packageJson
  */
@@ -15,29 +19,26 @@ const options = {
     input: '',
     output: '',
     env: 'production',
-    remote: true
+    remote: false
 };
+
+
+
 program
     .version(packageJson.version)
+    .option('-t, --type <type>', 'Which plugin to be used.')
     .option('-i, --input <type>', 'Input path of compiled code.')
     .option('-o, --output <type>', 'Output path of compiled code.')
     .option('-e, --env <type>', 'Compiling in development mode or production mode.')
     .option('-s, --scope <type>', 'Compiling component in scope mode.')
     .option('-r, --remote <type>', 'Pull ployfill from remote sources.');
 
-options.input = program.input;
-options.defaultInput = inputDirPath;
-options.output = program.output;
-options.env = program.env || options.env;
-options.remote = program.remote || options.remote;
-options.scope = program.scope || true;
 /**
  * $ antmove wx-alipay ../alipay-app
  * */
 program
     .version(packageJson.version)
     .command('wx-alipay')
-    .option('-o, --output', 'Output path of compiled code.')
     .action(function (...params) {
         specialtypeCmd = true;
         action({
@@ -82,6 +83,14 @@ alipayBaiduCli(program, function (params, plugin) {
  
 program.parse(process.argv);
 
+options.input = program.input;
+options.defaultInput = inputDirPath;
+options.output = program.output;
+options.env = program.env || options.env;
+options.remote = program.remote || options.remote;
+options.scope = program.scope || false;
+options.type = program.type;
+
 if (!specialtypeCmd) {
     action(options);
 }
@@ -91,17 +100,33 @@ if (!specialtypeCmd) {
  * @param opts 
  */
 function action (options, script = buildScript) {
-    if (!options.output) {
-        program.help();
-        return false;
-    }
-
     /**
      * preprocess ouput path
      */
-    options.input = toAbsolutePath(options.input);
-    options.output = toAbsolutePath(options.output);
-    script(options);
+    let buildInfo = {
+        'wx-alipay': buildScript,
+        'alipay-wx': alipayToWx,
+        'alipay-baidu': alipayToBaidu
+    };
+    entryProcess(options, function (opts = {}) {
+        opts.input = toAbsolutePath(opts.input);
+        opts.output = toAbsolutePath(opts.output);
+    
+        if (!opts.output) {
+            program.help();
+            return false;
+        }
+
+        if (opts.input === opts.output) {
+            console.log(chalk.red('输入输出目录不能为同一个地址。'));
+        }
+
+        if (buildInfo[opts.type]) {
+            buildInfo[opts.type](opts);
+        } else {
+            console.log(chalk.red('编译类型错误，请选择可用的转换类型。'));
+        }
+    });
 }
 
 
