@@ -44,7 +44,7 @@ function processMethods (_opts = {}) {
         .forEach(function (method) {
             let fn = _opts.methods[method];
             methods[method] = function (...p) {  
-                if (typeof p[0] === 'object' && p[0].timeStamp && p[0].target) {
+                if (p[0] && typeof p[0] === 'object' && p[0].timeStamp && p[0].target) {
                     this._currentEvent = p[0];
                 }              
                 return fn.apply(this, p);
@@ -398,7 +398,6 @@ module.exports = {
         //     options.mixins = makeBehaviors(_opts, _opts, mixins);
         // }    
         _opts.onInit = function () {  
-            getterData.call(this, this);
             processInit.call(this, _opts, options, _life, fnApp);
             updateData.call(this);
         };
@@ -416,9 +415,9 @@ module.exports = {
             if (typeof this.triggerEvent !== 'function') {
                 processTriggerEvent.call(this);
             }
-            if (typeof this.getRelationNodes !== 'function') {              
-                processgetRelationNodes.call(this);
-            }
+            // if (typeof this.getRelationNodes !== 'function') {              
+            //     processgetRelationNodes.call(this);
+            // }
 
             // process relations
             let relationAst = this.$node.getRootNode().mountedHandles;
@@ -432,6 +431,15 @@ module.exports = {
             createNode(this, (ast) => {
                 ast.createArray.push(this.$id);
             });
+            if (this.props.className) {
+                this.$node.addComponentNode(this.props.className, this);
+            }
+            this.selectComponent = function (...p) {
+                return this.$node.selectComponent(...p);
+            }; 
+            this.selectAllComponents = function (...p) {
+                return this.$node.selectComponents(...p);
+            };
         });
 
         fnApp.add('didMount', function () {
@@ -555,7 +563,7 @@ function handleExternalClasses (opts = {}) {
             return $[1].toUpperCase();
         });
 
-        return str;
+        return str || '';
     }
     return opts;
 }
@@ -564,7 +572,7 @@ function handleAfterInit () {
     let classStr = '';
     this.data.__classNames
         .forEach((key) => {
-            classStr += this.props[key];
+            classStr += (this.props[key] || '');
         });
     this.setData({
         _classes: classStr

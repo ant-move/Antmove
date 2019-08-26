@@ -1,20 +1,19 @@
 {
   "name": "@antmove/alipay-wx",
-  "version": "0.2.4",
+  "version": "0.2.9",
   "description": "transform alipay miniprogram to wx miniprogram tool.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "amap-appx",
   "license": "GPL-3.0",
   "dependencies": {
-    "@antmove/utils": "0.2.0",
+    "@antmove/utils": "^0.2.1",
     "css": "^2.2.4",
     "fs-extra": "^8.1.0",
     "js-base64": "^2.5.1",
-    "parsimmon": "^1.13.0",
-    "problem": "0.0.0"
+    "htmlparser2": "^3.10.1"
   },
   "publishConfig": {
     "access": "public",
