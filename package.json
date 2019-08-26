@@ -1,8 +1,11 @@
 {
   "name": "antmove",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "小程序转换器，基于支付宝/微信小程序转换为多端小程序，让小程序跨平台开发变得简单。",
   "main": "src/index.js",
+  "bin": {
+    "antmove": "./bin/index"
+  },
   "scripts": {
     "lint": "eslint ./src",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
