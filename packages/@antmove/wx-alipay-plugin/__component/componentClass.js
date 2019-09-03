@@ -22,6 +22,7 @@ module.exports = function processComponent ( type = 'Component') {
         Component: function (options = {}) {
             let _opts = {};
             componentTransformation.processTransformationComponent(_opts, options);
+            
             Component(_opts);
         }
     };

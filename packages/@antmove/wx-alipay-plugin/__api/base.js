@@ -1018,6 +1018,17 @@ const apiObj = {
 
             return res;
         }
+    },
+    createAnimation: {
+        fn (obj = {}) {
+            let animation = my.createAnimation(obj);
+            animation.config.delay = animation.config.delay || 0;
+            animation.option = {
+                transition: animation.config,
+                transformOrigin: animation.config.transformOrigin,
+            };
+            return animation;
+        }
     }
 };
 

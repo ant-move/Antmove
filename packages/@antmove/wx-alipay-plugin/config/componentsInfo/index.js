@@ -51,8 +51,16 @@ ComponentsInfo.forEach(function (component) {
     descObject = Object.assign(descObject, component.body);
 });
 
-module.exports = {
+let info = {
     ComponentsInfo,
     descObject,
     wxVersion: '2.2.4'
 };
+
+const { isAmap } = require('../../utils/index');
+
+if (isAmap()) {
+    info = require('@antmove/wx-amap').components;
+}
+
+module.exports = info;

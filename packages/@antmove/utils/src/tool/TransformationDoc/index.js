@@ -3,7 +3,7 @@ const path = require('path');
 const fn = require('../generateDocs');
 module.exports = function (configObj, type, edition) {
     const { apiRes, componentRes, lifeRes, jsonRes, unsupportApis, unsupportComponents, unsupportJson, unsupportLifeCircle} = fn(configObj, type, edition);
-    const outputDist = path.join(__dirname, '../../../../../../../ant-move-docs/docs');
+    const outputDist = path.join(__dirname, '../../../../../../../antmove-website/docs');
     apiRes.forEach(function (apiName) {
         let _ = Object.keys(apiName)[0] ;
         fs.outputFile(`${outputDist}/${type}-api-${_}.md`, apiName[_]);

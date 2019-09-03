@@ -3,7 +3,6 @@ const upDataTool = require("../utils/updataTool");
 const chalk = require('chalk');
 const appJsonProcess = require('../component/appJson');
 const pageJsonProcess = require('../component/pageJson');
-const generateConfig = require('../generate/generateConfig');
 const fs = require('fs-extra');
 const path = require("path");
 const checkCoverView = require("../utils/checkCoverView"); // cover-view 检测
@@ -103,7 +102,7 @@ module.exports = {
         next();
     },
     onParsing (fileInfo) {
-        
+        fileInfo.output = this.$options.dist;
         if (fileInfo.type === 'file') {
             project.fileNum++;
             if (fileInfo.filename === 'app.json') {
@@ -379,7 +378,7 @@ module.exports = {
         } = record(recordConfig);
         generateBundleComponent(ctx.output, Config);
         await runGenerateBundleApi(ctx.output);
-
+        generateNodeTrees(ctx.output, Config);
 
         const tableInfo = {
             "项目名称": project.name,
@@ -393,7 +392,6 @@ module.exports = {
 
         repData.tableInfo = tableInfo;
 
-        generateConfig(ctx.output, Config);
         
 
         let nowTime = report(beginTime, {
@@ -427,4 +425,9 @@ function runGenerateBundleApi (output) {
             reject(error);
         }
     });
+}
+
+function generateNodeTrees (output, config) {
+    let str = global.appNodesTreeStr + '}';
+    fs.outputFileSync(path.join(output, config.library.customComponentPrefix, 'api/relations.js'), str);
 }

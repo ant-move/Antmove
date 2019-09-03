@@ -1,8 +1,5 @@
 module.exports = function (originCode) {
-    if (/ Behavior/.test(originCode)||/=Behavior/.test(originCode)) {
-
-        originCode = originCode.replace (/\.properties/g,".props");
-
+    if (/\s*Behavior/.test(originCode)||/=Behavior/.test(originCode)) {
 
         originCode = `function Behavior (behavior) {
             return behavior;

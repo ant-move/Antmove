@@ -7,10 +7,9 @@ const apiObj = {
             swan.chooseImage({
                 ...obj,
                 success (res) {
-                    res.apFilePaths = res.tempFilePaths;
-                    delete res.tempFilePaths;
-                    delete res.tempFiles;
-
+                    res.apFilePaths = res.tempFilePaths.map(item => {
+                        return item.path;
+                    });
                     successFn(res);
                 }
             });

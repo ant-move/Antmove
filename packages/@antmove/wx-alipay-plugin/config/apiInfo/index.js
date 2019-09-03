@@ -76,8 +76,16 @@ apiInfo.forEach(function (apiItem) {
     descObject = Object.assign(descObject, apiItem.body);
 });
 
-module.exports = {
+let info = {
     apiInfo,
     descObject,
     wxVersion: '2.2.4'
 };
+
+const { isAmap } = require('../../utils/index');
+
+if (isAmap()) {
+    info = require('@antmove/wx-amap').api;
+}
+
+module.exports = info;

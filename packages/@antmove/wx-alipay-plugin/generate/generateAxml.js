@@ -1,5 +1,6 @@
 const propsHandle = require('../props/index.js');
 const proccessComponentProps = require('../component/props');
+const createComponentNode = require('../component/processRelations');
 const os = require('os');
 const fs = require('fs-extra');
 const path = require('path');
@@ -34,14 +35,22 @@ function processSpecialTags (ast = {}) {
     }
 }
 
+global.appNodesTreeStr = `module.exports = {\n`;
+
 module.exports = function axmlRender (ast = [], fileInfo) {
+    /**
+     * container node render
+     */
+    fileInfo.nodeId = 0;
+    let refRender = createComponentNode(ast[0], fileInfo);
+
     processPageTpl(fileInfo);
     if (typeof ast === 'string') return ast;
     let _code = '';
     let indentWidth = '';
 
     ast.forEach(function (tagAst) {
-        _code += renderFn(tagAst, fileInfo);
+        _code += renderFn(tagAst, fileInfo, refRender);
     });
 
     if (fileInfo.isPage) {
@@ -52,6 +61,8 @@ module.exports = function axmlRender (ast = [], fileInfo) {
                 ${_code}
             </view>`;
     }
+
+    generateRenderFn(fileInfo, refRender.toJsFile());
 
     return _code;
 
@@ -64,7 +75,8 @@ module.exports = function axmlRender (ast = [], fileInfo) {
     }
 
 
-    function renderFn (_ast, _fileInfo) {
+    function renderFn (_ast, _fileInfo, parentRenderNode) {
+        let _parentRenderNode = parentRenderNode;
         _ast.children = _ast.children || [];
         if (_ast.type === 'wxs' && _ast.children.length) {
             try {
@@ -89,7 +101,12 @@ module.exports = function axmlRender (ast = [], fileInfo) {
         }
         let {props} = _ast;
 
-        proccessComponentProps(_ast, _fileInfo, axmlRender);
+        let isComponentRender = proccessComponentProps(_ast, _fileInfo, axmlRender);
+
+        if (isComponentRender) {
+            _parentRenderNode = createComponentNode(_ast, _fileInfo);
+            parentRenderNode.appendChild(_parentRenderNode);
+        }
         processSpecialTags(_ast);
         if (_ast.type === 'textContent') {
             // todo: fix comment parse bug
@@ -144,7 +161,7 @@ module.exports = function axmlRender (ast = [], fileInfo) {
 
                     if (propInfo.value && propInfo.value.type === 'double') {
                         if (propInfo.key === 'wx:else' || propInfo.key === 'a:else') {
-                            attrCode += ` ${propInfo.key} `
+                            attrCode += ` ${propInfo.key} `;
                         } else {
                             attrCode += ` ${propInfo.key}="${value}"`;
                         }                      
@@ -169,10 +186,10 @@ module.exports = function axmlRender (ast = [], fileInfo) {
                 children.forEach(function (child) {
                     if (Array.isArray(child)) {
                         child.forEach(function (subChild) {
-                            appendCode(renderFn(subChild, _fileInfo));
+                            appendCode(renderFn(subChild, _fileInfo, _parentRenderNode));
                         });
                     } else {
-                        appendCode(renderFn(child, _fileInfo));
+                        appendCode(renderFn(child, _fileInfo, _parentRenderNode));
                     }
                 });
             } else {
@@ -215,4 +232,15 @@ function processPageTpl (fileInfo = {}) {
     }
 
     return bool;
+}
+
+/**
+ * 组件层级关系
+ */
+function generateRenderFn (fileInfo, renderStr = '') {
+    let route = fileInfo.dist.replace(fileInfo.output, '');
+    route = route.replace(/\.axml/, '');
+    route = route.replace(/\\+/g, '/');
+
+    appNodesTreeStr += `'${route}': ${renderStr},`;
 }

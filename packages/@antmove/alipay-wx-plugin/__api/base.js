@@ -328,17 +328,37 @@ const apiObj = {
                 obj.filePath = obj.url;
                 delete obj.url;
             }
-            wx.saveImageToPhotosAlbum({
-                ...obj,
-                success: () => {
-                    obj.success && obj.success();
-                },
-                fail: ()=> {
-                    obj.fail && obj.fail();
-                },
-                complete: () => {
-                    obj.complete && obj.complete();
-                } 
+            wx.getSetting({
+                success (res) {
+                    let writePhotos = res.authSetting['scope.writePhotosAlbum'];
+                    if (!writePhotos) {
+                        wx.authorize({
+                            scope: 'scope.writePhotosAlbum',
+                            success () {}
+                        });
+                    }
+                    if (obj.filePath.includes('https') || obj.filePath.includes('http')) {
+                        utils.warn(
+                            "微信小程序保存照片API不支持网络图片路径", {
+                                apiName: 'saveImageToPhotosAlbum',
+                                errorType: 0,
+                                type: 'api'
+                            }
+                        );
+                    }
+                    wx.saveImageToPhotosAlbum({
+                        ...obj,
+                        success: () => {
+                            obj.success && obj.success();
+                        },
+                        fail: () => {
+                            obj.fail && obj.fail();
+                        },
+                        complete: () => {
+                            obj.complete && obj.complete();
+                        }
+                    });
+                }
             });
         }
     },

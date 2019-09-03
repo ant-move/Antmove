@@ -6,6 +6,7 @@ module.exports = {
     },
     "extends": "eslint:recommended",
     "globals": {
+        appNodesTreeStr: true,
         Behavior: true,
         wx: true,
         my: true,

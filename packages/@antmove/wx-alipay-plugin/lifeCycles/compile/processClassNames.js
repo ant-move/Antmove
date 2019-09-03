@@ -33,8 +33,8 @@ function scopeStyle (fileInfo) {
 
     classPrefix = setClassName(componentName);
     
-    const _ast = parseTpl.parseString(`
-    <view class='${classPrefix}'></view>
+    let _ast = parseTpl.parseString(`
+    <view class='${classPrefix} {{className}}'></view>
     `);
     // const prop = {
     //     class: {
@@ -49,9 +49,25 @@ function scopeStyle (fileInfo) {
         let tplPath = fileInfo.dirname + '/' + fileInfo.basename + '.wxml';
 
         let ast = parseTpl.parseFile(tplPath);
+
+        let bool = true;
+        ast.forEach(function (node) {
+            if (node && node.props && node.props['unscope-style']) {
+                bool = false;
+                delete node.props['unscope-style'];
+            }
+
+            if (node && node.props && node.props['is-inline'] !== undefined) {
+                _ast = parseTpl.parseString(`
+        <view class='${classPrefix} {{className}}' style="display: inline-block;"></view>
+        `);
+            }
+        });
+
+        if (!bool) return false;
+        // _ast[0].props.class.value.push("{{className}}");
         _ast[0].children = [ast];
         // let originClass = prop.class;
-
         // ast.forEach(function (node) {
         //     /**
         //      * 忽略非容器标签

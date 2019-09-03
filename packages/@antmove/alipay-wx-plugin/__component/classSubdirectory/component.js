@@ -157,6 +157,7 @@ function makeProperties (opts) {
     opts.properties = opts.properties || {};
     opts.props = transformProps(opts.props);
     opts.properties = Object.assign(opts.properties, opts.props);
+    opts.options = {multipleSlots: true}
 }
 
 module.exports = {

@@ -8,7 +8,7 @@ const alipayWxCli = require('./alipay-wx');
 const alipayBaiduCli = require('./alipay-baidu');
 const alipayToBaidu = require('../cli/alipay-baidu/index');
 const alipayToWx = require('../cli/alipay-wechat/index');
-const inputDirPath = process.cwd();
+const inputDirPath = process.cwd() + '/';
 const entryProcess = require('./entry');
 /**
  * read packageJson
@@ -33,54 +33,6 @@ program
     .option('-s, --scope <type>', 'Compiling component in scope mode.')
     .option('-r, --remote <type>', 'Pull ployfill from remote sources.');
 
-/**
- * $ antmove wx-alipay ../alipay-app
- * */
-program
-    .version(packageJson.version)
-    .command('wx-alipay')
-    .action(function (...params) {
-        specialtypeCmd = true;
-        action({
-            ...options,
-            input: inputDirPath,
-            output: params[0],
-            env: params[1] || 'prod'
-        });
-    });
-
-/**
- * antmove-cli alipay-wx ../wx-app
- */
-alipayWxCli(program, function (params, plugin) {
-    specialtypeCmd = true;
-
-    action({
-        ...options,
-        input: inputDirPath,
-        output: params[0],
-        env: params[1] || 'prod'
-    },
-    plugin
-    );
-});
-
-/**
- * antmove-cli alipay-baidu ../baidu-app
- */
-alipayBaiduCli(program, function (params, plugin) {
-    specialtypeCmd = true;
-
-    action({
-        ...options,
-        input: inputDirPath,
-        output: params[0],
-        env: params[1] || 'prod'
-    },
-    plugin
-    );
-});
- 
 program.parse(process.argv);
 
 options.input = program.input;
@@ -91,6 +43,59 @@ options.remote = program.remote || options.remote;
 options.scope = program.scope || false;
 options.type = program.type;
 
+/**
+ * $ antmove wx-alipay ../alipay-app
+ * */
+program
+    .version(packageJson.version)
+    .command('wx-alipay')
+    .action(function () {
+        specialtypeCmd = true;
+        action({
+            ...options,
+            type: 'wx-alipay'
+        });
+    });
+
+program
+    .version(packageJson.version)
+    .command('wx-amap')
+    .action(function () {
+        specialtypeCmd = true;
+        action({
+            ...options,
+            type: 'wx-amap'
+        });
+    });
+
+/**
+ * antmove-cli alipay-wx ../wx-app
+ */
+alipayWxCli(program, function () {
+    specialtypeCmd = true;
+
+    action({
+        ...options,
+        type: 'alipay-wx'
+    }
+    );
+});
+
+/**
+ * antmove-cli alipay-baidu ../baidu-app
+ */
+alipayBaiduCli(program, function () {
+    specialtypeCmd = true;
+
+    action({
+        ...options,
+        type: 'alipay-baidu'
+    }
+    );
+});
+ 
+program.parse(process.argv);
+
 if (!specialtypeCmd) {
     action(options);
 }
@@ -99,15 +104,17 @@ if (!specialtypeCmd) {
  * cmd options
  * @param opts 
  */
-function action (options, script = buildScript) {
+function action (options) {
     /**
      * preprocess ouput path
      */
     let buildInfo = {
         'wx-alipay': buildScript,
+        'wx-amap': buildScript,
         'alipay-wx': alipayToWx,
         'alipay-baidu': alipayToBaidu
     };
+
     entryProcess(options, function (opts = {}) {
         opts.input = toAbsolutePath(opts.input);
         opts.output = toAbsolutePath(opts.output);
@@ -121,7 +128,15 @@ function action (options, script = buildScript) {
             console.log(chalk.red('输入输出目录不能为同一个地址。'));
         }
 
+        if (opts.output[opts.output.length - 1] !== '/') {
+            opts.output += '/';
+        }
+
         if (buildInfo[opts.type]) {
+            if (opts.type === 'wx-amap') {
+                opts.aliType = 'amap';
+                process.env.aliType = 'amap';
+            }
             buildInfo[opts.type](opts);
         } else {
             console.log(chalk.red('编译类型错误，请选择可用的转换类型。'));

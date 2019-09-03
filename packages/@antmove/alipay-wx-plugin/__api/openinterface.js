@@ -137,8 +137,9 @@ const apiObj = {
                         type: 'api'
                     }
                 );
+            } else {
+                wx.openCard(obj);
             }
-            wx.openCard(obj);
         }
     },
     addCardAuth: {

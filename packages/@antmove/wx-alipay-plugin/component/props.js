@@ -1,6 +1,6 @@
 const fs = require('fs-extra');
 const path = require('path');
-const _componentMap = require('../config/componentsInfo/index').descObject;
+let _componentMap = require('../config/componentsInfo/index').descObject;
 const eventsMap = require('./eventsMap');
 const generic = require('./generic');
 const preProcessCustomComponent = require('./customComponent');
@@ -11,6 +11,7 @@ const {
 } = require('@antmove/utils');
 
 module.exports = function (ast, fileInfo, renderAxml) {
+    let isComponentTag = false;
     processButton(ast, fileInfo);
     let { type, props } = ast;
     processExternalClasses(ast, fileInfo);
@@ -35,6 +36,20 @@ module.exports = function (ast, fileInfo, renderAxml) {
 
                 props[key].value[0] = rule;
             }
+
+            if (key === 'wx:for') {
+                // relation ref collect
+                if (!isNaN(Number(props[key].value[0]))) {
+                    props[key].value[0] = '{{[' + props[key].value[0].split('') + ']}}';
+                }
+                props['ref-numbers'] = props[key];
+            }
+
+            // 数字文本兼容
+            let val = props[key].value[0].trim();
+            if (val && !isNaN(Number(val))) {
+                props[key].value[0] = `{{${val}}}`;
+            }
         });
     }   
    
@@ -43,7 +58,7 @@ module.exports = function (ast, fileInfo, renderAxml) {
     /**
      * 自定义组件预处理 - 事件
      */
-    processCustomComponent(ast, fileInfo);
+    isComponentTag = processCustomComponent(ast, fileInfo);
     /**
      * 检测是否已存在同名的组件
      */
@@ -116,6 +131,8 @@ module.exports = function (ast, fileInfo, renderAxml) {
         }
     }
     processEvents(props);
+
+    return isComponentTag;
 };
 
 function processEvents (obj = {}) {
@@ -123,22 +140,15 @@ function processEvents (obj = {}) {
         if (eventsMap[key]) {
             obj[eventsMap[key]] = obj[key];
             delete obj[key];
-        } else if (/^bind:(.+)/.test(key)) {
-            let newKey = `on${RegExp.$1}`;
-            obj[newKey] = obj[key];
+        } else if (/^bind:(.+)/.test(key) || /^bind(.+)/.test(key)) {
+            let newEvent = RegExp.$1;
+            let uper = newEvent[0].toUpperCase();
+            let eventKey = `on${uper}${newEvent.substring(1)}`;
+            obj[eventKey] = obj[key];
             delete obj[key];
         } else if (generic[key]) {
             obj[generic[key]] = obj[key];
             delete obj[key];
-        } else if (/^bind(.+)/.test(key)) {
-            let newEvent = RegExp.$1;
-            let uper = newEvent[0].toUpperCase();
-            let eventKey = `on${uper}${newEvent.substring(1)}`;
-            
-            obj[eventKey] = obj[key];
-
-            delete obj[key];
-
         }
     }
 
@@ -192,6 +202,7 @@ function checkoutCustomComponent (fileInfo, tagName) {
 
 
 function processCustomComponent (ast, fileInfo) {
+    let isComponentTag = false;
     /**
      * 自定义组件事件处理
      */
@@ -202,6 +213,7 @@ function processCustomComponent (ast, fileInfo) {
     }
     fileInfo.appUsingComponents = fileInfo.appUsingComponents || {};
     if (fileInfo.jsonUsingComponents[ast.type] || fileInfo.appUsingComponents[ast.type]) {
+        isComponentTag = true;
         let _type = ast.type;
         preProcessCustomComponent(ast);
             
@@ -228,9 +240,19 @@ function processCustomComponent (ast, fileInfo) {
                     if (prop.match(/:key$/)) {
                         ast.props[prop].value[0] = '*this';
                     }
+
+                    // collect nodes relation
+                    // let _prop = {
+                    //     type: 'unknown',
+                    //     value: ['__selfRef']
+                    // };
+                    // ast.props.__getParentRef = _prop;
+                    
                 });
         }
     }
+
+    return isComponentTag;
 }
 
 function processExternalClasses (ast, fileInfo) {
@@ -256,11 +278,11 @@ function processExternalClasses (ast, fileInfo) {
     if (ast.props) {
         if (ast.props.class) {
             /**
-             * 提取扩展类 -class 结尾
+             * 提取扩展类 -class 结尾 或者带 -class- 的命名
              * */
             let _classes = ast.props.class.value[0].split(/\s+/);
             _classes = _classes.filter(function (className) {
-                return className.match(/-class$/);
+                return className.match(/-class$/) || className.match(/-class-/g);
             });
 
             let temp = ast.props.class.value[0].split(/\s+/);

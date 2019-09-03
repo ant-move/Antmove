@@ -1,7 +1,41 @@
 const utils = require('../../api/utils');
 const { warnLife, fnAppClass, browserPath } = utils;
 const createNode = require('./relation');
+const processRelationHandle = require('./processRelation');
 let posix = browserPath();
+const Relations = require('../../api/relations');
+
+
+function processRelations (ctx, relationInfo = {}) {
+    let route = ctx.is;
+    let info = relationInfo[route] || relationInfo[route.substring(1)];
+    if (info) {
+        processRelationHandle(info, function (node) {
+            if (node.$id === 'saveChildRef0') {
+                ctx[node.$id] = function () {};
+                node.$index = 0;
+                node.$route = route;
+                createNode(ctx, null, node);
+                return false;
+            }
+            ctx[node.$id] = function (ref) {
+                ctx.$antmove = ctx.$antmove || {};
+                if (ctx.$antmove[node.$id] === undefined) {
+                    ctx.$antmove[node.$id] = 0;
+                } else {
+                    ctx.$antmove[node.$id] += 1;
+                }
+
+                node.$index = ctx.$antmove[node.$id];
+                node.$route = route;
+                createNode(ref, null, node);
+            };
+        });
+    } else {
+        console.warn('Missing nodes relation of ', route);
+    }
+}
+
 function getUrl () {
     let pages = getCurrentPages();
     let url = pages[pages.length - 1].route;
@@ -17,20 +51,19 @@ function getUrl () {
     return url;
 }
 
-/**
- * 兼容微信 properties 的取值
- */
-function updateData () {
+function updateData (param) {
     let ctx = this;
     if (typeof ctx.properties === 'object') {
+        ctx.properties.name = ctx.properties.name || '';
+        ctx.properties.value = ctx.properties.value || null;
         Object.keys(ctx.properties)
             .forEach((item) => {
-                if (typeof ctx.props[item] !== 'function' && item[0] !== '$' && this.data[item] !== ctx.props[item]) {
-                    // this.data[item] = ctx.props[item];
-                    Object.defineProperty(ctx.data, item, {
-                        get () {
-                            return ctx.props[item];
-                        }
+                // didupdate
+                if (param && param[0][item] === this.props[item]) return false;
+                if (ctx.props[item] !== undefined && typeof ctx.props[item] !== 'function' && item[0] !== '$' && ctx.data[item] !== ctx.props[item]) {
+                    
+                    ctx.setData({
+                        [item]: ctx.props[item]
                     });
                 }
             });
@@ -51,6 +84,7 @@ function processMethods (_opts = {}) {
             };
         });
     _opts.methods = methods;
+    
     return _opts;
 }
 
@@ -64,69 +98,124 @@ function processRelationPath (self, relation) {
 }
 function handleRelations () {
     if (this.props.theRelations) {
-        
-        this.getRelationNodes = function (_p) {
-            return this._storeRelationNodes[_p];
-        };
-  
         Object.keys(this.props.theRelations)
             .forEach((relation)=> {
                 let _p = processRelationPath(this, relation);
-                  
                 let relationInfo = this.props.theRelations[relation];
-                let nodes = findRelationNode(this.$node, _p, relationInfo.type, true);// this.$node.getRootNode().$nodes[_p];
-                if (!nodes) return false;
-                  
-                nodes.forEach( (n) => {
-                    _relationNode.call(this, n);
+                let nodes = null;
+
+                if (relationInfo.type === 'child' || relationInfo.type === 'descendant') {
+                    return false;
+                }
+                nodes = findRelationNode(this.$node, _p, relationInfo.type, true);
+                if (!nodes || nodes[0] === undefined) {
+                    return false;
+                }
+
+                nodes.forEach((n) => {
+                    if (!n) {
+                        // console.error('wrong relation reference of ', relationInfo);
+                        // console.error('from: ', this.$node.$self.is, 'to: ', _p);
+                        return false;
+                    }
+                    _relationNode.call(this, n, {
+                        relationInfo,
+                        _p,
+                        relation
+                    });
                 });
   
-                function _relationNode (node) {
-                    node = node.$self;
-  
-                    this._storeRelationNodes = this._storeRelationNodes || {};
-                    if (this._storeRelationNodes[_p]) {
-                        this._storeRelationNodes[_p].push(node);
-                    } else {
-                        this._storeRelationNodes[_p] = [node];
-                    }
-                    let ctx = this || {};
-  
-                    // if (relationInfo.type === 'descendant' || relationInfo.type === 'child') {
-                    //     ctx = node;
-                    // }
-  
-                    if (typeof relationInfo.linked === 'function') {
-                        relationInfo.linked.call(ctx, node);
-                    }
-  
-                    if (typeof relationInfo.linkChanged === 'function') {
-                        let self = this;
-                        ctx._lifes = ctx._lifes || {};
-                        ctx._lifes.didUpdate = ctx._lifes.didUpdate || [];
-                        ctx._lifes.didUpdate.push(() => {
-                            relationInfo.linkChanged.call(self, node);
-                        });
-                    }
-  
-                    if (typeof relationInfo.unlinked === 'function') {
-                        let self = this;
-                        ctx._lifes = ctx._lifes || {};
-                        ctx._lifes.didUnmount = ctx._lifes.didUnmount || [];
-                        ctx._lifes.didUnmount.push(() => {
-                            relationInfo.unlinked.call(self, node);
-                        });
-                    }
-                }
+                
             });
     }
 }
+
+// process node relation callback
+function _relationNode (node, info) {
+    const { relationInfo, relation, _p} = info;
+
+    // 触发父级组件的 relations
+    let type = relationInfo.type;
+    let parentType = '';
+    if (type === 'parent') {
+        parentType = 'child';
+    } else if (type === 'ancestor') {
+        parentType = 'descendant';
+    }
+
+    let parentCtx = node.$self;
+    let childCtx = this;
+    if (typeof parentCtx.props.theRelations === 'object') {
+        Object.keys(parentCtx.props.theRelations)
+            .forEach((relation)=> {
+                let relationInfo = parentCtx.props.theRelations[relation];
+                if (relationInfo.type === parentType) {
+                    _relationNode.call(parentCtx, childCtx.$node, {   
+                        relationInfo,
+                        relation,
+                        _p: processRelationPath(parentCtx, relation)
+                    });
+
+                    return true;
+                }
+        
+            });
+    }
+  
+
+    node = node.$self;
+  
+    this._storeRelationNodes = this._storeRelationNodes || {};
+    if (this._storeRelationNodes[_p]) {
+        this._storeRelationNodes[_p].push(node);
+    } else {
+        this._storeRelationNodes[_p] = [node];
+    }
+                    
+    if (this._storeRelationNodes[relation]) {
+        this._storeRelationNodes[relation].push(node);
+    } else {
+        this._storeRelationNodes[relation] = [node];
+    }
+    let ctx = this || {};
+    this.getRelationNodes = function (_p) {
+        this._storeRelationNodes = this._storeRelationNodes || {};
+        return this._storeRelationNodes[_p]||[];
+    };
+
+  
+    if (typeof relationInfo.linked === 'function') {
+
+        relationInfo.linked.call(ctx, node);
+    }
+  
+    if (typeof relationInfo.linkChanged === 'function') {
+        let self = this;
+        ctx._lifes = ctx._lifes || {};
+        ctx._lifes.didUpdate = ctx._lifes.didUpdate || [];
+        ctx._lifes.didUpdate.push(() => {
+            relationInfo.linkChanged.call(self, node);
+        });
+    }
+    if (typeof relationInfo.unlinked === 'function') {
+        let self = this;
+        ctx._lifes = ctx._lifes || {};
+        ctx._lifes.didUnmount = ctx._lifes.didUnmount || [];
+        ctx._lifes.didUnmount.push(() => {
+            relationInfo.unlinked.call(self, node);
+        });
+    }
+}
+
+
+
   
 function findRelationNode (node, p, type, isArray = false) {
     // parent child ancestor descendant
     let nodes = [];
     let _prcess = {
         parent: function (node) {
+            if (!node || !node.$parent) return ;
             let _p = node.$parent.$self.is || node.$parent.$self.route;
             if (_p === p) {
                 return node.$parent;
@@ -137,6 +226,7 @@ function findRelationNode (node, p, type, isArray = false) {
             node.$children
                 .forEach(function (child) {
                     let _p = child.$self.is;
+
                     if (_p === p) {
                         _child = child;
   
@@ -149,11 +239,12 @@ function findRelationNode (node, p, type, isArray = false) {
             return _child;
         },
         ancestor: function (node) {
+            if (!node) return ;
             let _node = null;
   
             _node = _prcess.parent(node);
             if (!_node) {
-                return _prcess.parent(node.$parent);
+                _node = _prcess.ancestor(node.$parent);
             }
             return _node;
         },
@@ -213,8 +304,6 @@ function collectObserver (observerObj, option, ctx) {
         if (option[prop].observer) {
             if (typeof option[prop].observer === 'string') {
                 observerObj[prop] = ctx.methods[option[prop].observer];
-                if (option[prop].observer === 'updateExpanded') {
-                }
             } else {
                 observerObj[prop] = option[prop].observer;
             }
@@ -223,60 +312,60 @@ function collectObserver (observerObj, option, ctx) {
     return observerObj;   
 }
 
-function collectObservers (observersObj, objFun) {
-    observersObj = Object.assign(observersObj, objFun);
-    return observersObj;
+function collectObservers (observersObj, options, param) {
+    let self  = this;
+    for (let key in options.observers) {
+        let keyArr = key.split(","); 
+        let arr = []; 
+        keyArr.forEach( its => {  
+            its = its.trim();               
+            arr.push(self.data[its]);  
+                                   
+        });
+        keyArr.forEach (its => {
+            its = its.trim(); 
+            observersObj[its] = Object.create(null);
+            observersObj[its].fn = options.observers[key]; 
+            observersObj[its].arr = arr;
+        });   
+    }
+    observersHandle(observersObj, param, self);
 }
 
-function processObservers (observersObj, options, that) { 
-    let obs = {};
-    let arr = [];      
-    if (options.observers) {         
-        for (let key in options.observers) {
-            let keyArr = key.split(","); 
-            keyArr.forEach( its => {  
-                its = its.trim();
-                arr.push(that.data[its]);  
-                let obj = Object.create(null);
-                obj[its] = options.observers[key];      
-                observersObj = collectObservers(observersObj, obj);
-            });
-        }
+function processObservers (observersObj, options, param) { 
+    if (options.observers) {  
+        collectObservers.call(this, observersObj, options, param);
     } 
-    return obs = {
-        arr,
-        observersObj
-    };
 }
 
 function processInit () {
     getUrl();
-    this.properties = this.props;
     this._currentEvent = {};
-
-    let fn = this.setData;
-    let self = this;
-    this.setData = function (data, cb = () => {}) {
-        updateData.call(self);
-        fn.call(this, data, cb);
-    };
 }
 
 function processTriggerEvent () {
     this.triggerEvent = function (event, data = {}, opts = {}) {
         let e = this._currentEvent;
+        let eventType = (event[0].toLowerCase() + event.substring(1));
         event = 'on' + event[0].toUpperCase() + event.substring(1);
-        processDataSet(e, this.props);
+        e.type = eventType;
+        e = processDataSet(e, this.props);
+        event = event.replace(/-\w+/, function (name) {
+            name = name[1].toUpperCase() + name.substring(2);
+            return name;
+        });
         if (typeof this.props[event] === 'function') {
             if (e) {
                 e.detail = e.detail || {};
                 if (Array.isArray(data)) {
                     e.detail = data;
-                } else {
+                } else if (typeof data === 'object') {
                     e.detail = {
                         ...e.detail,
                         ...data
                     };
+                } else {
+                    e.detail = data;
                 }
             }
             this.props[event](e, data, opts);
@@ -284,92 +373,47 @@ function processTriggerEvent () {
     };
 }
 
-function processgetRelationNodes () {
-    this.getRelationNodes = function () {
-        warnLife(`getRelationNodes is Unsupported`, "getRelationNodes");
-        return [];
-    }();
-}
 
 function observerHandle (observerObj, args, that ) {
     Object.keys(observerObj).forEach(function (obs) {
-        if (args[0][obs] !== that.props[obs]) {  
+        
+        if (args[0][obs] !== that.props[obs] && typeof observerObj[obs] === 'function') { 
             observerObj[obs].call(that, that.props[obs], args[0][obs]);
         }
     });
 }
 
-function observersHandle (observersObj, args, that, param) {
+function observersHandle (observersObj, args, that) {
     Object.keys(observersObj).forEach(function (obs) {
-        if (typeof observersObj[obs] === 'function' && args[1][obs] !== that.data[obs]) {
-            observersObj[obs].call(that, ...param);
+        if (typeof observersObj[obs].fn === 'function' && args[1][obs] !== that.data[obs] ) {
+            observersObj[obs].fn.call(that, ...observersObj[obs].arr);
         }
     });
 }
 
+function processIntersectionObserver (context) {
+    context.createIntersectionObserver = function (...p) {
+        return my.createIntersectionObserver(...p);
+    };
+}
+
+function processRef (opts = {}) {
+    opts.ref = function () {
+        return {
+            self: this,
+            refNumbers: this.props.refNumbers || 1
+        };
+    };
+}
 /**
  * 
  * @param {*} behavior 
  * @param {*} _opts 
  * @param {*} mixins 
  */
-function makeBehaviors (behavior, _opts, mixins) {
-    mixins = behavior.behaviors.map(item =>{
-        if (item.properties) {
-            Object.keys(item.properties).forEach(function (prop) {
-                // if (item.properties[prop].value) {
-                _opts.props[prop] = item.properties[prop] && item.properties[prop].value;
-                // } 
-            });
-        }
-        if (item.data) {
-            _opts.data = Object.assign(behaviorsAssign(behavior, item, "data"), _opts.data);
-        }
-        if (item.methods) {
-            _opts.methods = Object.assign(behaviorsAssign(behavior, item, "methods"), _opts.methods);
-        }
-        if (item.behaviors) {
-            makeBehaviors(item, _opts);
-        }
-        let _lifeCircle = {};
-        if (item.lifetimes) {
-            _lifeCircle = item.lifetimes;
-        } else {
-            _lifeCircle = item;
-        }
-        if (_lifeCircle.created) {
-            if (my.canIUse('component2')) {   
-                item.onInit = _lifeCircle.created ;              
-            } else {
-                warnLife(`created is Unsupported`, "behaviors/created");
-            }
-        }
-        if (_lifeCircle.attached) {
-            item.didMount = _lifeCircle.attached;
-        }
-        if (_lifeCircle.ready) {
-            item.didMount = _lifeCircle.ready;
-        }
-        if (_lifeCircle.detached) {
-            item.didUnmount = _lifeCircle.detached;
-        }
-        _lifeCircle.moved && warnLife(`moved is Unsupported`, "behaviors/moved");
-        _lifeCircle.error && warnLife(`error is Unsupported`, "behaviors/error");
-        _lifeCircle.pageLifetimes && warnLife(`pageLifetimes is Unsupported`, "pageLifetimes");
-        return item;
-    });
-    if (typeof behavior.mixins === "undefined") {
-        behavior.mixins = mixins ;              
-    } else {
-        behavior.mixins = mixins.concat(behavior.mixins);
-    }  
-    return behavior;          
-}
 
 module.exports = {
     processTransformationComponent (_opts, options) {
-        let observerObj = Object.create(null);  
-        let observersObj = Object.create(null); 
         let fnApp = fnAppClass();
         options.properties = options.properties || {};
         
@@ -378,36 +422,33 @@ module.exports = {
         delete options.behaviors;
         delete options.mixins;
         let retMixins = {};
+        
         processBehavior(retMixins, behaviors);
         processBehavior(retMixins, mixins); 
-        _opts = Object.assign(_opts, options);
-        _opts.behaviors = [];
-        mergeOptions(retMixins, _opts);
-
-        _opts.props = Object({}, options.properties);
-        _opts.data = options.data || {};
+        mergeOptions(retMixins, options);
+        
+        Object.keys(options)
+            .forEach(function (key) {
+                _opts[key] = options[key];
+            });
+        _opts.observerObj = {};  
+        _opts.observersObj = {}; 
 
         handleProps(_opts);
         handleExternalClasses(_opts);
+
+
         let _life = compatibleLifetime(options); 
         if (options.properties) {
-            collectObserver(observerObj, options.properties, options);
-        }       
-        // if (options.behaviors) {
-        //     let mixins = [] ;
-        //     options.mixins = makeBehaviors(_opts, _opts, mixins);
-        // }    
-        _opts.onInit = function () {  
-            processInit.call(this, _opts, options, _life, fnApp);
-            updateData.call(this);
-        };
+            collectObserver(_opts.observerObj, options.properties, options);
+        }
 
-        if (options.methods) {
+        if (_opts.methods) {
             processMethods(_opts);
         }
-        
+        // processRef(_opts);
+
         let didMount = function () {
-            this.properties = options.properties;
             _life.error && warnLife(`There is no error life cycle`, "error");
             _life.move && warnLife(`There is no moved life cycle`, "moved");
             _life.pageLifetimes && warnLife(`There is no page life cycle where the component resides,including(show,hide,resize)`, "pageLifetimes");
@@ -415,72 +456,96 @@ module.exports = {
             if (typeof this.triggerEvent !== 'function') {
                 processTriggerEvent.call(this);
             }
-            // if (typeof this.getRelationNodes !== 'function') {              
-            //     processgetRelationNodes.call(this);
-            // }
 
-            // process relations
-            let relationAst = this.$node.getRootNode().mountedHandles;
+            // process relations, get relation ast
+            let relationAst = createNode(null, null, null, null, true).mountedHandles;
             relationAst.push(()=>{
                 handleRelations.call(this);
             });
-
         };      
-        
         fnApp.add('onInit', function () {
-            createNode(this, (ast) => {
-                ast.createArray.push(this.$id);
-            });
+            this.getRelationNodes = function (...p) {
+                return [];
+            };
+            
+            
+            if (this.props.id) {
+                this.$node.addComponentNodeId(this.props.id, this);
+            }
+            processIntersectionObserver(this);
             if (this.props.className) {
                 this.$node.addComponentNode(this.props.className, this);
             }
+
             this.selectComponent = function (...p) {
                 return this.$node.selectComponent(...p);
             }; 
             this.selectAllComponents = function (...p) {
                 return this.$node.selectComponents(...p);
             };
+
+            this.onPageReady = function (p) {
+                _opts.onPageReady && _opts.onPageReady.call(this, p);
+            };
         });
 
-        fnApp.add('didMount', function () {
-            createNode(this, (ast) => {
-                ast.destoryArray.push(this.$id);
-            });
+        fnApp.add('deriveDataFromProps', function () {
         });
         
         fnApp.add('didMount', didMount);
         fnApp.add('onInit', options.created);
-        fnApp.add('onInit', options.onInit);
+        fnApp.insert('onInit', function () {
+            this.properties = {
+                ..._opts.properties
+            };
+            processInit.call(this, _opts, options, _life, fnApp);
+            updateData.call(this);
+            processRelations(this, Relations);
+
+        });
         fnApp.bind('onInit', _opts);
-        fnApp.add('didMount', options.attached);
-        fnApp.add('didMount', options.ready);
+        fnApp.add('didMount', _opts.attached);
+        fnApp.add('didMount', _opts.ready);
         
-        let didUpdate = function (...param) {       
-            let obs = processObservers(observersObj, options, this);
-            observersObj = obs.observersObj;
-            observersHandle(observersObj, param, this, obs.arr);
-            observerHandle(observerObj, param, this);
+
+        let didUpdate = function (...param) { 
+            updateData.call(this, param);
+
+            processObservers.call(this, _opts.observersObj, options, param);
+            observerHandle(_opts.observerObj, param, this);
         };
         fnApp.add('didUpdate', didUpdate);
         fnApp.add('didUpdate', function () {
             handleAfterInit.call(this);        
         });
-        fnApp.add('didUpdate', options.didUpdate);
+
+        fnApp.bind('deriveDataFromProps', _opts);
         fnApp.bind('didUpdate', _opts); 
         fnApp.bind('didMount', _opts);
         fnApp.add('didUnmount', options.detached);
+        fnApp.add('didUnmount', function () {
+            if (this.$node) {
+                this.$node.parent.removeChild(this.$node);
+                let refId = this.$node.$relationNode.$id;
+                this.$antmove[refId]--;
+            }
+        });
         fnApp.bind("didUnmount", options.didUnmount);
     }
 };
 
-function processDataSet (e = {
-    target: {
-        dataset: {}
-    },
-    currentTarget: {
-        dataset: {}
+function processDataSet (e, props = {}) {
+    if (e.timeStamp === undefined) {
+        e = {
+            ...e,
+            target: {
+                dataset: {}
+            },
+            currentTarget: {
+                dataset: {}
+            }
+        };
     }
-}, props = {}) {
     Object.keys(props)
         .forEach(function (prop) {
             if (prop.match(/^data-/)) {
@@ -493,11 +558,11 @@ function processDataSet (e = {
                 prop = prop.split('-');
                 prop.shift();
                 prop = prop.join('');
-
                 e.target.dataset[prop] = props[originProp];
                 e.currentTarget.dataset[prop] = props[originProp];
             }
         });
+    return e;
 }
 
 
@@ -507,7 +572,7 @@ function handleProps (opts = {}) {
     if (opts.relations) {
         opts.props.theRelations = opts.relations;
     }
-
+    if (!opts.properties) return false;
     Object.keys(opts.properties)
         .forEach(function (prop) {
             let val = opts.properties[prop];
@@ -579,26 +644,6 @@ function handleAfterInit () {
     });
 }
 
-/**
- * data => props
- * @param {*} ctx 
- */
-/*
-function getterData (ctx = {}) {
-    ctx.props = ctx.props || {};
-    Object.keys(ctx.properties)
-        .forEach(function (key) {
-            // props name 不能以 $ 开头命名
-            if (typeof ctx.props[key] === 'function' || key[0] === '$') return false;
-            ctx.data[key] = ctx.data[key] || ctx.props[key];
-            Object.defineProperty(ctx.data, key, {
-                get () {
-                    return ctx.props[key];
-                
-                }
-            });
-        });
-}*/
 
 /**
  * behavior
@@ -638,7 +683,7 @@ function mergeOptions (parent, child) {
   
             if (Array.isArray(_val)) return false;
             if (child[key] === undefined) child[key] = parent[key];
-  
+
             if (typeof val === 'object' && typeof _val === 'object') {
                 child[key] = Object.assign({}, _val, val);
             } else if (typeof val === 'function' && typeof _val === 'function') {
@@ -646,6 +691,6 @@ function mergeOptions (parent, child) {
                     val.apply(this, p);
                     _val.apply(this, p);
                 };
-            }
+            } 
         });
 }

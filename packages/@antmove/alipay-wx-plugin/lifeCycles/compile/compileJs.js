@@ -60,7 +60,6 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
     originCode = transformClass(originCode);
     originCode = replaceCalleeHandleFn(originCode, 'my', '_wx', apis);
     originCode = replaceCallName(originCode, {name: 'httpRequest', newName: 'request'});
-    originCode = originCode.replace(/e\.target\./g, 'e.currentTarget.');
     // if (/\bmy\./g.test(originCode)) {
     //     originCode = originCode.replace(/\bmy\./g, '_wx.');
     // }
@@ -94,7 +93,6 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
     }
     originCode = insertCode + originCode;
     originCode = completionPath(originCode, fileInfo.dirname);
-    originCode = precessWxAbsolutePathOfCode(originCode, fileInfo, ctx.entry);
     originCode = processRequireForWx(originCode, {
         dirname: ctx.entry,
         filename: fileInfo.path,

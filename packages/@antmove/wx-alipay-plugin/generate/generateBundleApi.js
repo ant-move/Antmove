@@ -4,14 +4,10 @@
  */
 const path = require('path');
 const fs = require('fs-extra');
-const {
-    minifyJs,
-    transformEs6
-} = require('@antmove/utils');
 let Config = require('../config.js');
 let customComponentPrefix = Config.library.customComponentPrefix;
 const wrapApis = require('../__api/my.js');
-const wrapApisInfo = require('../config/apiInfo/index').descObject;
+let wrapApisInfo = require('../config/apiInfo/index').descObject;
 let entry = path.join(__dirname, '../__api');
 
 /**
@@ -52,15 +48,8 @@ function generate (output) {
     function copyFile (filename) {
         let inputPath = path.join(entry, filename);
         let distPath = path.join(outputPath, filename);
-        if (false && !Config.isDev()) {
-            let content = fs.readFileSync(inputPath, 'utf8');
-            fs.outputFileSync(distPath, minifyJs(
-                transformEs6(content)
-            ));
-        } else {
 
-            fs.copySync(inputPath, distPath);
-        }
+        fs.copySync(inputPath, distPath);
     }
 }
 
@@ -101,6 +90,7 @@ function objToString (obj = {}) {
 }
 
 function minifyObject (obj = {}, props = {}) {
+    if (!Config.min) return obj;
     let _obj = {};
 
     Object.keys(props)

@@ -1,6 +1,6 @@
 const utils = require('../../api/utils');
 const { warnLife } = utils;
-
+const { setIfWatch } = require('./utils');
 const getUrl = function () {
     let pages = getCurrentPages();
     let url = pages[pages.length - 1].route;
@@ -25,7 +25,7 @@ module.exports = {
             my.clearStorageSync({
                 key: "_pageMsg"
             });
-            getUrl ();             
+            getUrl ();            
             let body = {};
             function pre (params = {}) {
                 return utils.defineGetter(params, body.params, function (obj, prop) {
@@ -50,7 +50,7 @@ module.exports = {
                 if (typeof options.data === 'function') {
                     options.data = options.data();
                 }
-                
+
                 options.onLaunch.call(this, res);
             }
             if (options.onPageNotFound) {
@@ -63,6 +63,7 @@ module.exports = {
             }
         };
         _opts.onShow = function (res) {
+            setIfWatch(true);
             let body = {};
             function pre (params = {}) {
                 return utils.defineGetter(params, body.params, function (obj, prop) {
@@ -86,11 +87,12 @@ module.exports = {
                 options.onShow.call(this, res);
             }
         };
-        if (options.onHide) {
-            _opts.onHide = function () {
+        _opts.onHide = function () {
+            setIfWatch(false);
+            if (options.onHide) {
                 warnLife('', 'app/onHide');
                 options.onHide.call(this);
-            };
+            }
         }
         if (options.onError) {
             _opts.onError =function () {

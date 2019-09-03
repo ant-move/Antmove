@@ -113,7 +113,7 @@ function processEvents (obj = {}, type) {
             obj['class'] = obj[key];
         }
     }
-    if (oldEvent.length> 0 && componentMap[type]) {
+    if (oldEvent.length> 0 && !componentMap[type]) {
         obj['antmoveEvent'] = { type: 'unknown', value: [ JSON.stringify(oldEvent) ] };
     }
     return obj;
