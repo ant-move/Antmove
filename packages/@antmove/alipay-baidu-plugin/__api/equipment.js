@@ -109,7 +109,7 @@ const apiObj = {
         fn (obj) {  
             utils.testparams(descObj.addPhoneContact,obj);
             delete obj.alipayAccount;
-            return swan.vibrateShort({
+            return swan.addPhoneContact({
                 ...obj
             });
         }

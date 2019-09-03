@@ -24,13 +24,13 @@ module.exports = function (opts = {}, cb = () => {}) {
                     name: 'wx-alipay'
                 },
                 {
+                    name: 'wx-amap'
+                },
+                {
                     name: 'alipay-baidu'
                 },
                 {
                     name: 'alipay-wx'
-                },
-                {
-                    name: 'wx-wx'
                 }
             ]
         },
@@ -53,8 +53,8 @@ module.exports = function (opts = {}, cb = () => {}) {
     inquirer
         .prompt(ret)
         .then(answers => {
-            answers.input = answers.input || defaultInput;
-            answers.output = answers.output || defaultOutput;
+            answers.input = opts.input || answers.input || defaultInput;
+            answers.output = opts.output || answers.output || defaultOutput;
             opts = Object.assign({}, opts, answers);
             cb && cb(opts);
         });

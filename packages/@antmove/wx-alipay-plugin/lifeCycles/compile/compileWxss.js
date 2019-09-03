@@ -90,7 +90,7 @@ module.exports = function (fileInfo, ctx, inCompileWxml = false) {
     /**
      * page base component
      */
-    cssContent = cssContent.replace(/\S*(page)(\s+|\{|\.|,)/, function (...$) {
+    cssContent = cssContent.replace(/^(page)(\s+|\{|\.|,)/, function (...$) {
         let className = '.' + Config.options.pageContainerClassName + $[2];
         return className;
     });

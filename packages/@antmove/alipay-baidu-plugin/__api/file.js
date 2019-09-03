@@ -75,6 +75,28 @@ const apiObj = {
 
             });
         }
+    },
+
+    downloadFile: {
+        fn (obj) {
+            swan.downloadFile({
+                ...obj,
+                success (res) {
+                    res.apFilePath = res.tempFilePath;
+                    obj.success&&obj.success(res);
+                }
+            });
+        }
+    },
+
+    uploadFile: {
+        fn (obj) {
+            obj.name = obj.fileName;
+            delete obj.fileName;
+            return  swan.uploadFile ({
+                ...obj
+            })
+        }
     }
 };
 module.exports = apiObj;

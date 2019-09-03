@@ -61,6 +61,11 @@ module.exports = function ( config = {}, target, edition) {
             "type": "subcategory",
             "label": "框架接口",
             "ids": []
+        },
+        {
+            "type": "subcategory",
+            "label": "暂不支持能力",
+            "ids": []
         }
     ];
     let isExternal = edition;
@@ -106,11 +111,15 @@ module.exports = function ( config = {}, target, edition) {
         }
         json = JSON.parse(json);  
         json[`${res}`][`${tansformBefor}转${tansformAfter}`] = wx2alipay;  
+        wx2alipay[4].ids.push(`${befor}-${after}-unsupport-apis`)
+        wx2alipay[4].ids.push(`${befor}-${after}-unsupport-components`)
+        wx2alipay[4].ids.push(`${befor}-${after}-unsupport-json`)
+        wx2alipay[4].ids.push(`${befor}-${after}-unsupport-lifeCircle`)
         // if (isExternal === "inside") {
-        json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-components`);
-        json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-apis`);
-        json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-json`);
-        json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-lifeCircle`);
+        // json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-components`);
+        // json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-apis`);
+        // json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-json`);
+        // json[`${res}`][`${tansformBefor}转${tansformAfter}`].push(`${befor}-${after}-unsupport-lifeCircle`);
         // }        
         fs.outputFileSync(outputDist, JSON.stringify(json, null, 4));
         fs.outputFileSync(getPath, JSON.stringify(json, null, 4));
@@ -314,9 +323,8 @@ module.exports = function ( config = {}, target, edition) {
                     arr.push(a(key + ' - ' + value.desc, value.url.wechat));
                 }
             });
-        str = `---\nid: ${id}\ntitle: 不支持 API 列表\n---\n${list(arr)}
+        str = `---\nid: ${id}\ntitle: API\n---\n${list(arr)}
         `;
-        
         return str;
     }
     
@@ -329,7 +337,7 @@ module.exports = function ( config = {}, target, edition) {
                     arr.push(a(key + ' - ' + value.desc, value.url.wechat));
                 }
             });
-        str = `---\nid: ${id}\ntitle: 不支持 组件 列表\n---\n${list(arr)}
+        str = `---\nid: ${id}\ntitle: 组件\n---\n${list(arr)}
         `;
         
         return str;
@@ -344,7 +352,7 @@ module.exports = function ( config = {}, target, edition) {
                     arr.push(a(key + ' - ' + value.desc, value.url.wechat));
                 }
             });
-        str = `---\nid: ${id}\ntitle: 不支持 配置小程序 列表\n---\n${list(arr)}
+        str = `---\nid: ${id}\ntitle: 小程序配置\n---\n${list(arr)}
         `;
         
         return str;
@@ -359,7 +367,7 @@ module.exports = function ( config = {}, target, edition) {
                     arr.push(a(key + ' - ' + value.desc, value.url.wechat));
                 }
             });
-        str = `---\nid: ${id}\ntitle: 不支持 生命周期 列表\n---\n${list(arr)}
+        str = `---\nid: ${id}\ntitle: 页面组件注册\n---\n${list(arr)}
         `;       
         return str;
     }    

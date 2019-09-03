@@ -31,18 +31,20 @@ module.exports = function (obj = {}) {
                 Object.defineProperty(_obj, attr, {
                     get () {
                         let ret;
-                        if (myApi[attr]) {
-                            ret = function (...o) {
-                                if (o.length === 1) {
-                                    return myApi[attr].fn(o[0]);
-                                } 
+                        if (myApi[attr] && attr !== 'SDKVersion') {
+                            ret = function (o = {}, args = "") {
+                                if (args) {
+                                    return myApi[attr].fn(o, args);
+                                }
                                 return myApi[attr].fn(o);
                             };
+                        } else if (attr !== 'SDKVersion' ) {
+                          
+                            let helpFn = warnApi(attr);
+                            ret = obj[attr] || helpFn;
                         } else {
-                            warnApi(attr);
-                            ret = obj[attr];
+                            ret = myApi[attr].fn();
                         }
-
                         return ret;
                     }
                 });
@@ -52,24 +54,19 @@ module.exports = function (obj = {}) {
     return new _Proxy(obj, {
         get (target, attr) {
             let ret;
-            if (typeof attr === 'string' && myApi[attr]) {
+            if (typeof attr === 'string' && myApi[attr] && attr!=='SDKVersion') {
                 ret = function (obj = {}, args = "") {
-                    if (args) {
+                    if (args ) {
                         return myApi[attr].fn(obj, args);
-                    }
+                    } 
                     return myApi[attr].fn(obj);
                 };
+            } else if (attr !== 'SDKVersion') {
+                let helpFn = warnApi(attr);
+                ret = target[attr] || helpFn;
             } else {
-                warnApi(attr);
-                if (target[attr] === undefined) {
-                    ret = function () {
-                        return false;
-                    };
-                } else {
-                    ret = target[attr];
-                }
+                ret = myApi[attr].fn();
             }
-
             return ret;
         }
     });

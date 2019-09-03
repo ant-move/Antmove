@@ -16,7 +16,7 @@
  * desc - 组件或属性作用描述
  */
 
-module.exports = {
+let info = {
     'pages': {
         name: '设置页面路径',
         url: {
@@ -300,3 +300,11 @@ module.exports = {
         desc: '指明 sitemap.json 的位置',
     }
 };
+
+const { isAmap } = require('../../utils/index');
+
+if (isAmap()) {
+    info = require('@antmove/wx-amap/config/jsonInfo/globalconfig');
+}
+
+module.exports = info;

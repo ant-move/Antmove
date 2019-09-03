@@ -115,9 +115,6 @@ module.exports = {
             getJsonData,
             getOthersFile
         } = record(recordConfig);
-        // if (/node_modules/.test(fileInfo.path)) {
-        //     fileInfo.dist = fileInfo.dist.replace(/node_modules/, 'ant_modules');
-        // }
         if (fileInfo.type !== 'file') {
             fs.ensureDirSync(fileInfo.dist);
             return false;

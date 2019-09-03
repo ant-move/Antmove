@@ -27,16 +27,18 @@ module.exports = function (obj = {}) {
                 Object.defineProperty(_obj, attr, {
                     get () {
                         let ret;
-                        if (myApi[attr]) {
+                        if (myApi[attr]&&attr!=='SDKVersion') {
                             ret = function (o = {}, args = "") {
                                 if (args) {
                                     return myApi[attr].fn(o, args);
                                 }
                                 return myApi[attr].fn(o);
                             };
-                        } else {
+                        } else if (attr!=='SDKVersion' ) {
                             let helpFn = warnApi(attr);
                             ret = obj[attr] || helpFn;
+                        } else {
+                            ret = myApi[attr].fn();
                         }
 
                         return ret;
@@ -48,20 +50,20 @@ module.exports = function (obj = {}) {
     return new _Proxy(obj, {
         get (target, attr) {
             let ret;
-            if (typeof attr === 'string' && myApi[attr]) {
+            if (typeof attr === 'string' && myApi[attr] && attr!=='SDKVersion') {
                 ret = function (obj = {}, args = "") {
-                    if (args) {
+                    if (args ) {
                         return myApi[attr].fn(obj, args);
-                    }
+                    } 
                     return myApi[attr].fn(obj);
                 };
-            } else {
+            } else if (attr!=='SDKVersion') {
                 let helpFn = warnApi(attr);
                 ret = target[attr] || helpFn;
+            } else {
+                ret = myApi[attr].fn();
             }
-
             return ret;
         }
     });
-
 };

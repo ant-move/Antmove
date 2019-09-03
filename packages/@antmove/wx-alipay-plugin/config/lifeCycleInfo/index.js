@@ -21,9 +21,16 @@ lifeInfo.forEach(function (lifeItem) {
     descObject = Object.assign(descObject, lifeItem.body);
 });
 
-module.exports = {
+let info = {
     lifeInfo,
     descObject,
     wxVersion: '2.2.4'
 };
 
+const { isAmap } = require('../../utils/index');
+
+if (isAmap()) {
+    info = require('@antmove/wx-amap').lifeCycle;
+}
+
+module.exports = info;

@@ -10,9 +10,9 @@ module.exports = {
         }
         
         // 封装 百度端生命周期的处理
-        makeLifes(_opts, options);
         _opts = Object.assign(_opts, options);
-        
+        _opts.properties =  Object.assign( {},  _opts.props);
+        makeLifes(_opts, options);
         makeEventObj (_opts, options);
         makeMixin (_opts, options);
         
@@ -45,31 +45,24 @@ function makeLifes (_opts, options) {
         _opts[obj.target] = function () {
             if (obj.target==="created") {
                 this.props = this.props || {};
-                const Obj = {};
                 // 处理用户的自定义
-                Object.keys(this.props).map(key => {
-                    if (this.properties[key]===undefined||this.properties[key]===null) {
-                        Obj[key] = this.props[key];
-                    }      
-                });
-                this.setData(Obj);
                 this.props = this.properties;
                 this.$page = {};
                 this.$id = this.id;
                 this.is = "";
-                if (this.props.oldEvent) {
+                if (this.props.antmoveEvent) {
                     const that = this;
-                    const oldEvent = JSON.parse(this.props.oldEvent);
-                    oldEvent.map(key => {
+                    const antmoveEvent = JSON.parse(this.props.antmoveEvent);
+                    antmoveEvent.map(key => {
                         that.props[key] = function (...res) {
                             let newkey = key.substr(2, key.length).toLowerCase();
                             if (res[0]&&res[0].detail) {
                                 that.triggerEvent(newkey, res[0].detail);
                             } else {
-                                that.triggerEvent(newkey, res);
+                                that.triggerEvent(newkey, ...res);
                             }
-                        }
-                    })
+                        };
+                    });
                 }
                 
             }

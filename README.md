@@ -1,9 +1,9 @@
 # Antmove（蚂蚁搬家）
 
-<p><a href="https://github.com/ant-move/antmove" target="_blank" rel="noopener noreferrer"><img width="200" src="https://img.alicdn.com/tfs/TB1ktoia.D1gK0jSZFGXXbd3FXa-765-765.png" alt="antmove logo"></a></p>
+<p><a href="https://github.com/ant-move/antmove" target="_blank" rel="noopener noreferrer"><img width="200" src="https://img.alicdn.com/tfs/TB1IYo_b1L2gK0jSZPhXXahvXXa-3468-1197.png" alt="antmove logo"></a></p>
 
 Antmove - 小程序转换器，基于支付宝/微信小程序转换为多端小程序，让小程序跨平台开发变得简单。
-> 一键实现微信小程序项目到支付宝小程序的迁徙，不再为重复开发而烦恼。
+> 一键实现小程序转换迁徙，不再为重复开发而烦恼。
 
 ![antmove structure](https://img.alicdn.com/tfs/TB13u6Cb4z1gK0jSZSgXXavwpXa-3852-936.png)
 
@@ -14,6 +14,12 @@ Antmove - 小程序转换器，基于支付宝/微信小程序转换为多端小
 * 配套详细的编译时日志/运行时日志工具
 * 编译生成代码可读性强，可二次编程
 * 二次编译支持
+
+## 平台支持
+
+* 微信小程序转支付宝小程序
+* 支付宝小程序转微信小程序
+* 支付宝小程序转百度小程序
 
 ## 文档
 * [官方文档](https://ant-move.github.io/website/docs/readme.html)
@@ -81,13 +87,18 @@ npm i -g antmove
 * `antmove wx-alipay`（使用前请将终端切换到需转换编译的微信小程序项目路径）
 
 ```bash
-antmove wx-alipay ./dist/alipay-app
+antmove wx-alipay -i ./ -o ./dist/alipay-app
+```
+
+或者
+```bash
+antmove wx-alipay
 ```
 
 * `antmove` - 该命令更加灵活，可配置输出输出目录/编译模式等
 
 ```bash
-antmove -t wx-alipay -i ./wechat-mini/project -o ./dist/alipay-mini/project --env development
+antmove wx-alipay -i ./wechat-mini/project -o ./dist/alipay-mini/project --env development
 ```
 > 如上的命令表示将 `./wechat-mini/project` 微信小程序项目转换为支付宝小程序项目，转换到 `./dist/alipay-mini/project` 目录
 > 如果你不想输入参数，可以体验交互式的命令方式，执行 `antmove` 即可。

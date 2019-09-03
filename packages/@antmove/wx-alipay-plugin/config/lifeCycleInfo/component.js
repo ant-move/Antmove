@@ -75,4 +75,10 @@ module.exports = {
         "https://developers.weixin.qq.com/miniprogram/dev/reference/api/Component.html",
         "https://docs.alipay.com/mini/framework/component_object"
     ),
+    relations: createDescObj(
+        2,
+        "定义和使用组件间关系",
+        "https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/relations.html",
+        ""
+    )
 };

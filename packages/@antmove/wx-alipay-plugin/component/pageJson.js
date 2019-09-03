@@ -1,10 +1,12 @@
 const Config = require('../config');
-const appJson = require('../config/jsonInfo/globalconfig');
-const pageJson = require('../config/jsonInfo/pageconfig');
+let appJson = require('../config/jsonInfo/globalconfig');
+let pageJson = require('../config/jsonInfo/pageconfig');
 const windowConfigMap = {};
 const { transformStr } = require('@antmove/utils');
 const path = require('path');
 const fs = require('fs-extra');
+
+
 
 mkJsonMap(appJson.window.props, windowConfigMap);
 mkJsonMap(pageJson, windowConfigMap);

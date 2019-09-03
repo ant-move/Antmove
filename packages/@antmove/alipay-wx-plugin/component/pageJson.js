@@ -42,10 +42,8 @@ module.exports = function (jsonStr, fileInfo) {
     let tagsInfo = fileInfo.tagsInfo;
     if (json.usingComponents) {
         Object.keys(json.usingComponents).map(key => {
-            if (/\w/g.test(json.usingComponents[key][0])) {
-                json.usingComponents[`antmove-${key}`] = '/ant_modules/' + json.usingComponents[key];
-                delete json.usingComponents[key];
-            }
+            json.usingComponents[`antmove-${key}`] = json.usingComponents[key];
+            delete json.usingComponents[key];
         });
     }
     if (tagsInfo) {

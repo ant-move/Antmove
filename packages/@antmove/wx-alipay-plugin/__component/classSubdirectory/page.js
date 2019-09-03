@@ -1,8 +1,10 @@
 const utils = require('../../api/utils');
 const { warnLife } = utils;
 const config = require('../../api/config');
-config.env = 'development';
 const createNode = require('./relation');
+const Relations = require('../../api/relations');
+const processRelationHandle = require('./processRelation');
+const { connectNodes } = require('./utils');
 
 const getUrl = function () {
     let pages = getCurrentPages();
@@ -18,21 +20,36 @@ const getUrl = function () {
     });
     return url;
 };
+const getLogInfo = function () {
+    let num = 0;
+    let info = my.getStorageSync({
+      key: '__antmove_loginfo'
+    }).data.pages;
+    info.forEach(function (v,i) {
+      num += v.logs.length
+    })
+    return num
+};
+
 const watchShakes = function () {
     let pages = getCurrentPages();
     let url = pages[pages.length - 1].route;
     let logUrl = "pages/ant-move-runtime-logs/index"; 
     let specificUrl = "pages/ant-move-runtime-logs/specific/index";
-    if ( url ===logUrl || url===specificUrl ) {
-        watchShakes();
-    }  
     my.watchShake({
-        success: function () {
-            watchShakes();
+        success: function () { 
+            let num = getLogInfo();  
+            let ifWatch = my.getStorageSync({
+                key:'ifWatch'
+            }).data;
+            if (!ifWatch || url === logUrl || url === specificUrl || !num) {
+                watchShakes();
+                return false
+            }
             my.confirm({
                 title: '温馨提示',
-                content: '是否进入警告日志页面',
-                confirmButtonText: '马上进入',
+                content: `已收集了${num}条问题日志，是否查看?  (该弹窗和问题收集页面的代码由Antmove嵌入，上线时请记得去掉)`,
+                confirmButtonText: '赶紧看看',
                 cancelButtonText: '暂不需要',
                 success: function (res) {
                     if (res.confirm) {
@@ -40,6 +57,9 @@ const watchShakes = function () {
                             url: '/pages/ant-move-runtime-logs/index'
                         });
                     }
+                },
+                complete: function () {
+                    watchShakes();
                 }
             });
         }
@@ -48,12 +68,15 @@ const watchShakes = function () {
 module.exports = {
     processTransformationPage (_opts, options) {
         _opts = Object.assign(_opts, options);
+
         _opts.onLoad = function (res) {
-            createNode(this);
+            // 初始化节点树
+            createNode(null, null, null, true);
+            processRelations(this, Relations);
             if (typeof options.data === 'function') {
                 options.data = options.data();
             }
-            
+
             getUrl();
             if (config.env === "development") {
                 watchShakes();
@@ -68,12 +91,18 @@ module.exports = {
 
         _opts.onReady = function (param) {
             let ast = this.$node.getRootNode();
-            setTimeout(() => {
-                processRelationNodes(ast);
-            }, 0);
+            processRelationNodes(ast);
+
+            this.selectComponent = function (...p) {
+                return this.$node.selectComponent(...p);
+            }; 
+            this.selectAllComponents = function (...p) {
+                return this.$node.selectComponents(...p);
+            };
             if (options.onReady) {
                 options.onReady.call(this, param);
             }
+            ast.isPageReady = true;
         };
     }
 };
@@ -83,27 +112,55 @@ function processRelationNodes (ast = {}) {
     let $nodes = ast.$nodes;
     let destoryArray = ast.destoryArray;
   
-    for (let i = 0; i < destoryArray.length - 1; i++) {
-        if (destoryArray[i] > destoryArray[i+1]) {
-            $nodes[destoryArray[i+1]].appendChild($nodes[destoryArray[i]]);
-        } else {
-            for (let j = i + 2; j <= destoryArray.length - 1; j++) {
-                if (destoryArray[i] > destoryArray[j]) {
-                    $nodes[destoryArray[j]].appendChild($nodes[destoryArray[i]]);
-                    break;
-                } else if (j === destoryArray.length - 1) {
-                    ast.$page.appendChild($nodes[destoryArray[i]]);
-                }
+    /**
+     * componentNodes onPageReady
+     */
+    Object.keys($nodes)
+        .forEach(function (item) {
+            let node = $nodes[item];
+            connectNodes(node, ast);
+        
+            if (node.$self && typeof node.$self.onPageReady === 'function') {
+                node.$self.onPageReady();
             }
-        }
-    }
-  
-    if (destoryArray[destoryArray.length - 1] < destoryArray[destoryArray.length - 2]) {
-        ast.$page.appendChild($nodes[destoryArray[destoryArray.length - 1]]);
-    }
+        });
 
     ast.mountedHandles
-        .forEach(function (fn) {
+        .forEach(function (fn, i) {
             fn();
         });
+    ast.mountedHandles = [];
+}
+
+
+function processRelations (ctx, relationInfo = {}) {
+    let route = ctx.route;
+    if (route[0] !== '/') route = '/' + route;
+    let info = relationInfo[route] || relationInfo[route.substring(1)];
+    if (info) {
+        processRelationHandle(info, function (node) {
+            let id = node.$id;
+            if (id === 'saveChildRef0') {
+                ctx[id] = function () {};
+                node.$index = 0;
+                node.$route = route;
+                createNode(ctx, null, node);
+                return false;
+            }
+            ctx[id] = function (ref) {
+                ctx.$antmove = ctx.$antmove || {};
+                if (ctx.$antmove[id] === undefined) {
+                    ctx.$antmove[id] = 0;
+                } else {
+                    ctx.$antmove[id] += 1;
+                }
+
+                node.$index = ctx.$antmove[id];
+                node.$route = route;
+                createNode(ref, null, node);
+            };
+        });
+    } else {
+        console.warn('Missing nodes relation of ', route);
+    }
 }

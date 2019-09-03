@@ -16,7 +16,7 @@
  * desc - 组件或属性作用描述
  */
 
-module.exports = {
+let info = {
     'navigationBarBackgroundColor': {
         type: 1,
         status: 0,
@@ -147,3 +147,10 @@ module.exports = {
         desc: '页面自定义组件配置',
     }
 };
+
+const { isAmap } = require('../../utils/index');
+
+if (isAmap()) {
+    info = require('@antmove/wx-amap/config/jsonInfo/pageconfig');
+}
+module.exports = info;

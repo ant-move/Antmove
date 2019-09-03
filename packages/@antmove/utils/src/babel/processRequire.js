@@ -13,12 +13,14 @@ module.exports = function (...p) {
         } else {
             filepath = filepath.substring(3);
         }
+        filepath = filepath.replace(/\\/g, '/');
         return filepath;
     }
     return {
         visitor: {
             ImportDeclaration (path) {
                 let pathValue = path.node.source.value || '';
+
                 if (pathValue[0] === '/') {
                     pathValue = _transform(pathValue);
                 }
