@@ -161,11 +161,11 @@ const App = transformFramework();   // 得到的 app 实例即可进行转换处
 
 ### 微信小程序
 
-<img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/e.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/wei.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/weather.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/qu.jpg'>
+<img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/e-alipay.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/wei.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/weather.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/qu-alipay.jpg'>
 
 ### 支付宝小程序
 
-<img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/e-alipay.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/wei-alipay.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/qu-alipay.jpg'>
+<img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/e.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/wei-alipay.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/qu.jpg'>
 
 ### 高德小程序
 
