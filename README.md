@@ -157,17 +157,25 @@ const App = transformFramework();   // 得到的 app 实例即可进行转换处
             * 默认值为生产环境
 * `start` | `Function` - 开始编译操作
 
-## 内测中（即将推出）
-
-* 支付宝转头条能力支持
-* 页面/组件维度转换能力支持
-
 ## 谁在使用
 
-* [e代驾](http://www.edaijia.cn/)
-* [微代驾](http://www.weidaijia.cn/)
-* [趣满满](http://www.piaofer.cn/)
-* [天气通](http://tianqitong.sina.cn/)
+### 微信小程序
+
+<img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/e.jpg'>
+<img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/wei.jpg'>
+<img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/weather.jpg'>
+<img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/qu.jpg'>
+
+### 支付宝小程序
+
+<img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/e-alipay.jpg'>
+<img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/wei-alipay.jpg'>
+<img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/qu-alipay.jpg'>
+
+### 高德小程序
+
+<img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/weather-amap.jpg'>
+
 
 > 如果你的公司和产品使用了 [Antmove](https://ant-move.github.io/website/docs/readme.html)，欢迎到[这里](https://github.com/ant-move/antmove/issues/1)留言。
 

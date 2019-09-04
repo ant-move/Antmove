@@ -1,7 +1,8 @@
 let id = 0;
 const { connectNodes } = require('./utils');
-
-let RelationAst = {
+const astCache = {}
+function createAstData () {
+  let RelationAst = {
     $refNodes: {},
     $nodes: {},
     $page: null,
@@ -10,9 +11,10 @@ let RelationAst = {
     destoryArray: [],
     mountedHandles: [],
     componentNodes: {},
-    $refNodes: {}
 };
 
+return RelationAst;
+}
 function createNode (ctx) {
     this.$self = ctx;
     ctx.$node = this;
@@ -22,7 +24,10 @@ function createNode (ctx) {
 
 createNode.prototype = {
     getRootNode () {
-        return RelationAst;
+      let ctx = this.$self;
+  let cacheId = ctx.$page ? ctx.$page.$id : ctx.$id;
+
+        return astCache[cacheId];
     },
     setParent (parent) {
         this.$parent = parent;
@@ -47,68 +52,22 @@ createNode.prototype = {
             .filter(function (el) {
                 return el.$id !== child.$id;
             });
-    },
-    _addComponentNode (className, ctx) {
-        className = '.' + className;
-        let componentNodes = this.getRootNode().componentNodes;
-        if (componentNodes[className]) {
-            componentNodes[className].push(ctx);
-        } else {
-            componentNodes[className] = [ctx];
-        }
-    },
-    addComponentNodeId (id, ctx) {
-        id = '#' + id;
-        let componentNodes = this.getRootNode().componentNodes;
-        if (componentNodes[id]) {
-            componentNodes[id].push(ctx);
-        } else {
-            componentNodes[id] = [ctx];
-        }
-    },
-    addComponentNode (className = '', ctx) {
-        let classNameArray = className.split(/\s+/g);
-        classNameArray.forEach((classNameStr) => {
-            this._addComponentNode(classNameStr, ctx);
-        });
-    },
-    selectComponent (className) {
-        let componentNodes = this.getRootNode().componentNodes;
-        return componentNodes[className] && componentNodes[className][0];
-    },
-    selectComponents (className) {
-        let componentNodes = this.getRootNode().componentNodes;
-        return componentNodes[className];
     }
 };
 
-function initRootNode () {
-    /**
-   * 页面节点信息初始化
-   */
-    RelationAst = {
-        $nodes: {},
-        $page: null,
-        current: null,
-        createArray: [],
-        destoryArray: [],
-        mountedHandles: [],
-        componentNodes: {},
-        $refNodes: {}
-    };
-    return RelationAst;
-}
 
-function getRootNode () {
-    return RelationAst;
-}
 module.exports = function (node, cb = () => {}, relationNode, bool =false, _bool = false) {
+  let RelationAst = {}
+  let cacheId = this.$page ? this.$page.$id : this.$id;
     if (_bool) {
-        return getRootNode();
+        return astCache[cacheId];
     }
     if (bool) {
-        return initRootNode();
+      astCache[cacheId] = createAstData();
+        return astCache[cacheId]
     }
+
+    RelationAst = astCache[cacheId];
     let wrapNode = new createNode(node);
     let route = relationNode.$route;
 

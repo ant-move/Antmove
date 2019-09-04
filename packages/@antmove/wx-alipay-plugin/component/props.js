@@ -277,15 +277,28 @@ function processExternalClasses (ast, fileInfo) {
     
     if (ast.props) {
         if (ast.props.class) {
+            let classInfo = ast.props.class
+            classInfo = _externalClass(classInfo);
             /**
              * 提取扩展类 -class 结尾 或者带 -class- 的命名
              * */
-            let _classes = ast.props.class.value[0].split(/\s+/);
+        }
+
+        Object.keys(ast.props)
+            .forEach(function (propName) {
+                if (propName.match(/-class$/) || propName.match(/-class-/g)) {
+                    ast.props[propName] = _externalClass(ast.props[propName])
+                }
+            })
+    }
+
+    function _externalClass (classInfo = {}) {
+        let _classes = classInfo.value[0].split(/\s+/);
             _classes = _classes.filter(function (className) {
                 return className.match(/-class$/) || className.match(/-class-/g);
             });
 
-            let temp = ast.props.class.value[0].split(/\s+/);
+            let temp = classInfo.value[0].split(/\s+/);
             let newClass = [];
             temp.forEach(function (str) {
                 if (opts.externalClasses.includes(str) || _classes.includes(str)) {
@@ -295,12 +308,8 @@ function processExternalClasses (ast, fileInfo) {
                 }
             });
             
-            ast.props.class.value[0] = newClass.join(' ');
-
-            // _classes.forEach(function (className) {
-            //     ast.props.class.value[0] += ` {{ ${_transform(className)} }}`;
-            // });
-        }
+            classInfo.value[0] = newClass.join(' ');
+            return classInfo
     }
 
     function _transform (str = '') {
