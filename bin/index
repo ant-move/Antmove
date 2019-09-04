@@ -128,10 +128,6 @@ function action (options) {
             console.log(chalk.red('输入输出目录不能为同一个地址。'));
         }
 
-        if (opts.output[opts.output.length - 1] !== '/') {
-            opts.output += '/';
-        }
-
         if (buildInfo[opts.type]) {
             if (opts.type === 'wx-amap') {
                 opts.aliType = 'amap';

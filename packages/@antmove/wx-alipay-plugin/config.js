@@ -27,6 +27,7 @@ module.exports = {
             'classSubdirectory/relation.js': true,
             'classSubdirectory/processRelation.js': true,
             'classSubdirectory/promise.js': true,
+            'classSubdirectory/selectComponent.js': true,
             'classSubdirectory/utils.js': true,
             'componentClass.js': true,
             'lifeCyclesMap.js': true

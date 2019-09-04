@@ -241,6 +241,6 @@ function generateRenderFn (fileInfo, renderStr = '') {
     let route = fileInfo.dist.replace(fileInfo.output, '');
     route = route.replace(/\.axml/, '');
     route = route.replace(/\\+/g, '/');
-
+    
     appNodesTreeStr += `'${route}': ${renderStr},`;
 }

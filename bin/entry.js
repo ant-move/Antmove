@@ -55,6 +55,9 @@ module.exports = function (opts = {}, cb = () => {}) {
         .then(answers => {
             answers.input = opts.input || answers.input || defaultInput;
             answers.output = opts.output || answers.output || defaultOutput;
+            if (answers.output.charAt(answers.output.length-1)==='/') {
+                answers.output = answers.output.substr(0, answers.output.length-1);
+            }
             opts = Object.assign({}, opts, answers);
             cb && cb(opts);
         });

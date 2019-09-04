@@ -1,6 +1,6 @@
 {
   "name": "@antmove/alipay-wx",
-  "version": "0.2.21",
+  "version": "0.2.22",
   "description": "transform alipay miniprogram to wx miniprogram tool.",
   "main": "index.js",
   "scripts": {
