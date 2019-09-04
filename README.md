@@ -1,6 +1,6 @@
 # Antmove（蚂蚁搬家）
 
-<p><a href="https://github.com/ant-move/antmove" target="_blank" rel="noopener noreferrer"><img width="200" src="https://img.alicdn.com/tfs/TB1IYo_b1L2gK0jSZPhXXahvXXa-3468-1197.png" alt="antmove logo"></a></p>
+<p><a href="https://github.com/ant-move/antmove" target="_blank" rel="noopener noreferrer"><img width="200" src="https://img.alicdn.com/tfs/TB1ktoia.D1gK0jSZFGXXbd3FXa-765-765.png" alt="antmove logo"></a></p>
 
 Antmove - 小程序转换器，基于支付宝/微信小程序转换为多端小程序，让小程序跨平台开发变得简单。
 > 一键实现小程序转换迁徙，不再为重复开发而烦恼。
