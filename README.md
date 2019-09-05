@@ -159,17 +159,10 @@ const App = transformFramework();   // 得到的 app 实例即可进行转换处
 
 ## 谁在使用
 
-### 微信小程序
-
-<img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/e-alipay.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/wei.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/weather.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/qu-alipay.jpg'>
-
-### 支付宝小程序
-
-<img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/e.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/wei-alipay.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/qu.jpg'>
-
-### 高德小程序
-
-<img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/weather-amap.jpg'>
+* [e代驾](http://www.edaijia.cn/)
+* [微代驾](http://www.weidaijia.cn/)
+* [趣满满](http://www.piaofer.cn/)
+* [天气通](http://tianqitong.sina.cn/)
 
 
 > 如果你的公司和产品使用了 [Antmove](https://ant-move.github.io/website/docs/readme.html)，欢迎到[这里](https://github.com/ant-move/antmove/issues/1)留言。
