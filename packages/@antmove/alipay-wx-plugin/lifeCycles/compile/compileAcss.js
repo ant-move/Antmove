@@ -9,10 +9,7 @@ module.exports = function (fileInfo, ctx) {
     fileInfo.dist = fileInfo.dist.replace(/\.acss/, '.wxss');
     let cssContent = fs.readFileSync(fileInfo.path, 'utf8') || '';
     cssContent = cssContent.replace(/\.acss"/g, '.wxss"');
-    cssContent = cssContent.replace(/\..+\s+\*/, function (a) {
-        a = a.trim().slice(0, a.length - 1);
-        return a;
-    });
+    
     if (fileInfo.deep === 0 || fileInfo.filename === 'app.acss') {
         cssContent = generateAppCssStyle(cssContent, ctx.output);
     }

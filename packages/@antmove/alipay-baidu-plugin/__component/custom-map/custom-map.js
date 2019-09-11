@@ -1,5 +1,10 @@
 Component({
-
+    properties: {
+        polygon: {
+            type: Array,
+            value: [],
+        }
+    },
     data: {
         mapShow: false,
         scale: 17,
@@ -15,7 +20,6 @@ Component({
         enableZoom: true,
         enableScroll: true,
         enableRotate: false,
-        drawPolygon: false,
         enableSatellite: false,
         enableTraffic: false,
         markers: [],
@@ -24,8 +28,7 @@ Component({
 
     created: function () {
         const initData = {
-            mapShow: true,
-            scale: this.properties.scale+1
+            mapShow: true
         }
         if (this.properties.latitude||this.properties.longitude) {
             let {longitude, latitude} = this.bdEncrypt( this.properties.longitude, this.properties.latitude);

@@ -124,7 +124,7 @@ function appendWxs (val) {
 
 function transformStyle (value) {
     value = value.trim();
-    let reg = /{\s?[a-zA-Z]+:.+}/;
+    const reg = /{\s?[a-zA-Z]+:.+}/;
     if (reg.test(value)) {
         let val = value.slice(1, value.length - 1);
         val = val.replace(/ +/g, '');
@@ -140,6 +140,28 @@ function transformStyle (value) {
         funName += `\n\t\ttransformStyle: function(value) {\n\t\t\tvalue = JSON.stringify(value);\n\t\t\tvalue = value.slice(1, value.length - 1);\n\t\t\tlet val ='';\n\t\t\tfor(var i = 0; i < value.length; i++){\n\t\t\t\tif (value[i] !== '"') {\n\t\t\t\t\tif (value.indexOf('transform') === -1) {\n\t\t\t\t\t\tif(value[i] === ','){\n\t\t\t\t\t\t\tval += ';';\n\t\t\t\t\t\t\tcontinue;\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t} else {\n\t\t\t\t\tval += '';\n\t\t\t\t\tcontinue;\n\t\t\t\t}\n\t\t\t\tif(value.charCodeAt(i) >= 65 && value.charCodeAt(i) <= 90) {\n\t\t\t\t\tval += '-' + value[i].toLowerCase();\n\t\t\t\t\tcontinue;\n\t\t\t\t}\n\t\t\t\tval += value[i];\n\t\t\t}\n\t\t\treturn val;\n\t\t},`
     );
     return value;
+}
+
+function transformStringTemplate (prop) {
+    let value = prop.value.value[0].replace(/ /g, '');
+    const reg = /^{{`(.+)`}}$/;
+    if (reg.test(value)) {
+        let arr = RegExp.$1.split('$');
+        let str = arr[1].trim().match(/\s*{.+}/)[0];
+        str = str.slice(1, str.length - 1);
+        arr[1] = `{{ ${str} }}`;
+        value = arr.join('');
+        prop.value.value[0] = value;
+    }
+}
+
+function transformSjs (ast) {
+    ast.type = 'wxs';
+    ast.props['module'] = ast.props.name;
+    ast.props['src'] = ast.props.from;
+    delete ast.props.name;
+    delete ast.props.from;
+    return ast;
 }
 
 module.exports = function axmlRender (ast = [], fileInfo) {
@@ -184,6 +206,9 @@ module.exports = function axmlRender (ast = [], fileInfo) {
                 obj['value'][0] = appendWxs(obj['value'][0]);
             });
         }
+        if (_ast.type === 'import-sjs') {
+            transformSjs(_ast);
+        }
         if (_ast.type === 'textContent') {
             // todo: fix comment parse bug
 
@@ -203,6 +228,7 @@ module.exports = function axmlRender (ast = [], fileInfo) {
         Object.keys(props)
             .forEach(function (prop) {
                 let propInfo = propsHandle(prop, props[prop], ast);
+                transformStringTemplate(propInfo);
                 // a:for process
                 if (propInfo.key === 'wx:for-items' || propInfo.key === 'a:for-items') {
                     propInfo.key = 'a:for';
@@ -214,7 +240,7 @@ module.exports = function axmlRender (ast = [], fileInfo) {
                 } else {
                     let value = propInfo.value.value[0] || '';
                     value = value.replace(/\.axml/g, '.wx')
-                        .replace(/\.wxs/g, '.sjs');
+                        .replace(/\.sjs/g, '.wxs');
 
                     /**
                  * support unknown type string

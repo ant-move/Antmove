@@ -15,8 +15,8 @@ let entry = path.join(__dirname, '../__api');
 
 module.exports = function (output) {
     let outputPath = path.join(output, `${customComponentPrefix}/api`);
-    let apiContent = minifyObject(wrapApis, Config.compile.wrapApis);
-    let apiInfo = minifyObject(wrapApisInfo, Config.compile.wrapApis);
+    let apiContent = minifyObject(wrapApis, wrapApis);
+    let apiInfo = minifyObject(wrapApisInfo, wrapApis);
 
     apiContent = objToString(apiContent);
     apiContent = apiContent.replace(/\\n/g, '');

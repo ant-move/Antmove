@@ -62,7 +62,8 @@ module.exports = function (node, cb = () => {}, relationNode, bool =false, _bool
     if (_bool) {
         return astCache[cacheId];
     }
-    if (bool) {
+    
+    if (bool || !astCache[cacheId]) {
       astCache[cacheId] = createAstData();
         return astCache[cacheId]
     }

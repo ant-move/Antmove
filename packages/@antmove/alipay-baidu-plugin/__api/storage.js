@@ -7,9 +7,9 @@ const apiObj = {
     },
     getStorageSync: {
         fn (obj) {
-            return swan.setStorageSync(obj.key);
+            return { data: swan.getStorageSync(obj.key)};
         }
-    },
+    }
     
 };
 module.exports = apiObj;

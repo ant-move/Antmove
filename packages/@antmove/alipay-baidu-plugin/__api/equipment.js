@@ -100,9 +100,19 @@ const apiObj = {
     vibrateShort: {
         fn (obj) {  
             console.warn("震动15ms，仅在iPhone7/7 Plus以上及Android机型生效");
-            return swan.vibrateShort({
-                ...obj
-            });
+        
+            if (obj instanceof Function) {
+                swan.vibrateShort({
+                    success () {
+                        obj();
+                    }
+                });
+            } else {
+                swan.vibrateShort({
+                    ...obj
+                });
+            }
+            
         }
     },
     addPhoneContact: {
@@ -112,6 +122,21 @@ const apiObj = {
             return swan.addPhoneContact({
                 ...obj
             });
+        }
+    },
+    vibrateLong: {
+        fn (obj) {
+            if (obj instanceof Function) {
+                swan.vibrateLong({
+                    success () {
+                        obj();
+                    }
+                });
+            } else {
+                swan.vibrateLong({
+                    ...obj
+                });
+            }
         }
     },
     scan: {

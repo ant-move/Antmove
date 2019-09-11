@@ -25,7 +25,7 @@ module.exports = function (fileInfo, ctx, inCompileWxml = false) {
 
         fileInfo.hasCompiledStyle = true;
 
-        classNamesWrap = processClassNames(originFileInfo);
+        classNamesWrap = Config.options.scopeStyle && processClassNames(originFileInfo);
     }
 
 

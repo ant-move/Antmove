@@ -24,6 +24,7 @@ const method = {
     },
     reportSpeed (speed) {
         if (!speed.showReport) {
+            
             const speedProgress = Math.floor(speed.nums/speed.length*100)/100;
             const Progress = CLI.Progress;
             const thisPercentBar = new Progress(40);
@@ -165,13 +166,15 @@ module.exports = {
     },
 
     reportSpeed (speed) {
-        
+
         method.reportSpeed(speed);
     },
+    reportDist (version, distPath) {
+        console.log('');
+        console.log(chalk.green(`Version：${version}`));
+        console.log(chalk.green(`转化输出地址：${distPath}`));
+        console.log('');
+    }   
 
-    reportEnd (showData) {
-        console.log(chalk.green(showData.info));
-        console.log(chalk.green(showData.path));
-    }
 
 }; 

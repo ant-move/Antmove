@@ -174,38 +174,6 @@ const apiObj = {
             });
         }
     },
-    'ap.faceVerify': {
-        fn (obj) {
-            let apFaceVerifyParams = descObj['ap.faceVerify'].body.params.props;
-            let apFaceVerifyReturnValue = descObj['ap.faceVerify'].body.returnValue.props;
-            let params = utils.defineGetter(obj, apFaceVerifyParams, function (obj, prop) {
-                utils.warn(
-                    `ap-faceVerify的参数不支持 ${prop} 属性!`,
-                    {
-                        apiName: prop,
-                        errorType: apFaceVerifyParams[prop].type,
-                        type: 'api'
-                    }
-                );
-            });
-            wx.startSoterAuthentication({
-                ...params,
-                success: res => {
-                    res = utils.defineGetter(obj, apFaceVerifyReturnValue, function (obj, prop) {
-                        utils.warn(
-                            `ap-faceVerify的返回值不支持 ${prop} 属性!`,
-                            {
-                                apiName: prop,
-                                errorType: apFaceVerifyReturnValue[prop].type,
-                                type: 'api'
-                            }
-                        );
-                    });
-                    obj.success && obj.success(res);
-                }
-            });
-        }
-    },
     getRunData: {
         fn (obj = {}) {
             let getRunDataParams = descObj.getRunData.body.params.props;

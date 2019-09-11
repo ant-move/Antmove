@@ -244,64 +244,18 @@ module.exports = {
         ''
     ),
     'ap.faceVerify': createDescObj(
-        1,
+        2,
         '接口通过活体检测和人脸比对技术，认证当前用户是否为登录支付宝用户的本人和真人',
         'https://docs.alipay.com/mini/api/alipay-face-verify',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/soter/wx.startSoterAuthentication.html',
         {
-            msg: '命名不同alipay: ap.faceVerify, wx: startSoterAuthentication, 参数缺失/返回值缺失',
-            params: {
-                props: {
-                    bizId: {
-                        type: 0,
-                        desc: '业务流水号，需要保证唯一性，不超过 64 位'
-                    },
-                    bizType: {
-                        type: 0,
-                        desc: '填写 2，代表刷脸认证场景'
-                    },
-                    useBackCamera: {
-                        type: 0,
-                        desc: '是否使用后置摄像头，true为使用后置摄像头；不设置时，默认使用前置摄像头'
-                    }
-                }
-            },
-            returnValue: {
-                props: {
-                    zimId: {
-                        type: 0,
-                        desc: '刷脸认证标识'
-                    },
-                    faceRetCode: {
-                        type: 0,
-                        desc: '刷脸认证结果码'
-                    },
-                    retCode: {
-                        type: 0,
-                        desc: '认证可用性结果码'
-                    },
-                    retCodeSub: {
-                        type: 0,
-                        desc: '认证可用性结果码明细'
-                    },
-                    retMessageSub: {
-                        type: 0,
-                        desc: '认证可用性结果描述'
-                    },
-                }
-            }
+            msg: ''
         }
     ),
-    'zoloz.identification.customer.certifyzhub.query': createDescObj(
+    'zoloz': createDescObj(
         2,
         '服务端接口，商户在认证完成后,调用该接口查询认证的状态和结果',
         'https://docs.alipay.com/mini/api/fs9ukn',
-        ''
-    ),
-    'zoloz.identification.user.web.query': createDescObj(
-        2,
-        '人脸采集完成后,可以查询采集结果',
-        'https://docs.alipay.com/mini/api/kvzu9p',
         ''
     ),
     'ap.preventCheat': createDescObj(

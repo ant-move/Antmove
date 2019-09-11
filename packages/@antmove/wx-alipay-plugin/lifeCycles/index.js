@@ -6,6 +6,7 @@ const pageJsonProcess = require('../component/pageJson');
 const fs = require('fs-extra');
 const path = require("path");
 const checkCoverView = require("../utils/checkCoverView"); // cover-view 检测
+const getPackageJson = require('../utils/getpackageData'); 
 const compileWxml = require('./compile/compileWxml');
 const compileWxss = require('./compile/compileWxss');
 const compileJs = require('./compile/compileJs');
@@ -36,7 +37,7 @@ const {
     report,
     reportTable,
     reportSpeed,
-    reportEnd
+    reportDist
 } = reportMethods;
 // 制作日志
 const recordConfig = require("../utils/record/config");
@@ -61,7 +62,8 @@ module.exports = {
     defaultOptions: {
         exclude: [
             'project.config.json',
-            'node_modules'
+            'node_modules',
+            'antmove.config.js'
         ],
         env: 'production',
         remote: false
@@ -73,7 +75,7 @@ module.exports = {
         }
 
         fs.emptyDirSync(this.$options.dist);
-        if (this.$options.scope) {
+        if (this.$options.scope && this.$options.scope !== 'false') {
             Config.options.scopeStyle = true;
         }
 
@@ -125,6 +127,8 @@ module.exports = {
 
     },
     onParsed () {
+        const packageData = getPackageJson();
+        reportDist(`${packageData.version}`, this.$options.dist);
     },
     beforeCompile (ctx) {
         /**

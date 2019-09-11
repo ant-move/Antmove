@@ -1,14 +1,12 @@
-const fs = require('fs-extra');
-const path = require('path');
-let _componentMap = require('../config/componentsInfo/index').descObject;
-const eventsMap = require('./eventsMap');
-const generic = require('./generic');
-const preProcessCustomComponent = require('./customComponent');
-const processButton = require('./processButton.js');
-const processDataSet = require('./processDataSet');
-const {
-    externalForWxFn
-} = require('@antmove/utils');
+const fs = require("fs-extra");
+const path = require("path");
+let _componentMap = require("../config/componentsInfo/index").descObject;
+const eventsMap = require("./eventsMap");
+const generic = require("./generic");
+const preProcessCustomComponent = require("./customComponent");
+const processButton = require("./processButton.js");
+const processDataSet = require("./processDataSet");
+const { externalForWxFn } = require("@antmove/utils");
 
 module.exports = function (ast, fileInfo, renderAxml) {
     let isComponentTag = false;
@@ -16,33 +14,37 @@ module.exports = function (ast, fileInfo, renderAxml) {
     let { type, props } = ast;
     processExternalClasses(ast, fileInfo);
     if (props) {
-        Object.keys(props).forEach( key => {
+        Object.keys(props).forEach(key => {
             if (key && !props[key].value[0]) {
-                props[key] =  { type: 'double', value: [ ' ' ] };
+                props[key] = { type: "double", value: [" "] };
             }
 
             processDataSet(key, props[key], props);
 
-            if (key === 'src' && type === 'include') {
+            if (key === "src" && type === "include") {
                 let rule = props[key].value[0];
-                if ((rule[0] !== '/' && rule[0] !== '.' && rule[0] !== '{')) {
-                    let tempPath = path.join(fileInfo.dirname, rule.replace(/\.axml'*/g, '.wxml'));
+                if (rule[0] !== "/" && rule[0] !== "." && rule[0] !== "{") {
+                    let tempPath = path.join(
+                        fileInfo.dirname,
+                        rule.replace(/\.axml'*/g, ".wxml")
+                    );
                     if (fs.pathExistsSync(tempPath)) {
-                        rule = './' + rule;
+                        rule = "./" + rule;
                     } else {
-                        rule = '/' + rule;
+                        rule = "/" + rule;
                     }
                 }
 
                 props[key].value[0] = rule;
             }
 
-            if (key === 'wx:for') {
+            if (key === "wx:for") {
                 // relation ref collect
                 if (!isNaN(Number(props[key].value[0]))) {
-                    props[key].value[0] = '{{[' + props[key].value[0].split('') + ']}}';
+                    props[key].value[0] =
+                        "{{[" + props[key].value[0].split("") + "]}}";
                 }
-                props['ref-numbers'] = props[key];
+                props["ref-numbers"] = props[key];
             }
 
             // 数字文本兼容
@@ -51,8 +53,8 @@ module.exports = function (ast, fileInfo, renderAxml) {
                 props[key].value[0] = `{{${val}}}`;
             }
         });
-    }   
-   
+    }
+
     let originType = type;
     let tagInfo = _componentMap[type];
     /**
@@ -62,7 +64,11 @@ module.exports = function (ast, fileInfo, renderAxml) {
     /**
      * 检测是否已存在同名的组件
      */
-    if (tagInfo && tagInfo.type === 5 && !checkoutCustomComponent(fileInfo, originType)) {
+    if (
+        tagInfo &&
+        tagInfo.type === 5 &&
+        !checkoutCustomComponent(fileInfo, originType)
+    ) {
         processComponentMethodProp(ast.props, tagInfo.props);
         type = ast.type = tagInfo.tagName || ast.type;
         /**
@@ -70,28 +76,27 @@ module.exports = function (ast, fileInfo, renderAxml) {
          */
         fileInfo.tagsInfo = fileInfo.tagsInfo || [];
 
-
         fileInfo.tagsInfo.push(tagInfo);
         if (tagInfo.hasChildren) {
             if (ast.children) {
                 let _axml = renderAxml(ast.children[0], {});
                 _axml = _axml.trim();
-                if (_axml[_axml.length] === '\n') {
+                if (_axml[_axml.length] === "\n") {
                     _axml = _axml.substring(0, _axml.length - 1);
                 }
 
                 ast.props = ast.props || {};
                 ast.props.textContent = {
                     value: [_axml],
-                    type: 'unknown'
+                    type: "unknown"
                 };
 
                 ast.children = [];
             } else {
                 ast.props = ast.props || {};
                 ast.props.textContent = {
-                    value: [''],
-                    type: 'single'
+                    value: [""],
+                    type: "single"
                 };
 
                 ast.children = [];
@@ -104,8 +109,6 @@ module.exports = function (ast, fileInfo, renderAxml) {
     } else if (tagInfo && tagInfo.type === 6) {
         type = ast.type = tagInfo.tagName || ast.type;
     }
-
-   
 
     if (tagInfo) {
         if (tagInfo.type !== undefined) {
@@ -127,7 +130,6 @@ module.exports = function (ast, fileInfo, renderAxml) {
                     props[propInfo.key] = _value;
                 }
             }
-            
         }
     }
     processEvents(props);
@@ -135,7 +137,7 @@ module.exports = function (ast, fileInfo, renderAxml) {
     return isComponentTag;
 };
 
-function processEvents (obj = {}) {
+function processEvents(obj = {}) {
     for (let key in obj) {
         if (eventsMap[key]) {
             obj[eventsMap[key]] = obj[key];
@@ -155,41 +157,52 @@ function processEvents (obj = {}) {
     return obj;
 }
 
-function processComponentMethodProp (astProps={}, propsInfo={}) {
-    Object.keys(astProps)
-        .forEach(function (prop) {
-            if (propsInfo[prop] && propsInfo[prop].type === 1) {
-                astProps[propsInfo[prop].key] = astProps[prop];
-                delete astProps[prop];
-            }
-        });
+function processComponentMethodProp(astProps = {}, propsInfo = {}) {
+    Object.keys(astProps).forEach(function (prop) {
+        if (propsInfo[prop] && propsInfo[prop].type === 1) {
+            astProps[propsInfo[prop].key] = astProps[prop];
+            delete astProps[prop];
+        }
+    });
 
     return astProps;
 }
 
-
-function checkoutCustomComponent (fileInfo, tagName) {
-    let bool = false, json, appJson;
-    if (fileInfo.extname === '.wxml') {
-        json = fileInfo.path.replace('.wxml', '.json');
+function checkoutCustomComponent(fileInfo, tagName) {
+    let bool = false,
+        json,
+        appJson;
+    if (fileInfo.extname === ".wxml") {
+        json = fileInfo.path.replace(".wxml", ".json");
         if (!fs.pathExistsSync(json)) return false;
 
         if (!fileInfo.jsonUsingComponents) {
-            json = JSON.parse(fs.readFileSync(json, 'utf8')) || {};
-            appJson = JSON.parse(fs.readFileSync(path.join(fileInfo.entry, 'app.json'), 'utf8')) || {};
+            json = JSON.parse(fs.readFileSync(json, "utf8")) || {};
+            appJson =
+                JSON.parse(
+                    fs.readFileSync(
+                        path.join(fileInfo.entry, "app.json"),
+                        "utf8"
+                    )
+                ) || {};
         } else {
             json = fileInfo.jsonUsingComponents;
             appJson = fileInfo.appUsingComponents;
         }
         if (json.usingComponents && json.usingComponents[tagName]) {
             bool = true;
-        } else if (appJson.usingComponents && appJson.usingComponents[tagName]) {
+        } else if (
+            appJson.usingComponents &&
+            appJson.usingComponents[tagName]
+        ) {
             bool = true;
-        } 
-        
+        }
+
         if (!tagName) {
-            fileInfo.jsonUsingComponents = fileInfo.jsonUsingComponents || json.usingComponents;
-            fileInfo.appUsingComponents = fileInfo.appUsingComponents || appJson.usingComponents;
+            fileInfo.jsonUsingComponents =
+                fileInfo.jsonUsingComponents || json.usingComponents;
+            fileInfo.appUsingComponents =
+                fileInfo.appUsingComponents || appJson.usingComponents;
             return {
                 component: json.usingComponents,
                 app: appJson.usingComponents
@@ -200,55 +213,63 @@ function checkoutCustomComponent (fileInfo, tagName) {
     return bool;
 }
 
-
-function processCustomComponent (ast, fileInfo) {
+function processCustomComponent(ast, fileInfo) {
     let isComponentTag = false;
     /**
      * 自定义组件事件处理
      */
-    
+
     if (!fileInfo.jsonUsingComponents) {
         let customComponents = checkoutCustomComponent(fileInfo) || {};
         fileInfo.jsonUsingComponents = customComponents.component || {};
     }
     fileInfo.appUsingComponents = fileInfo.appUsingComponents || {};
-    if (fileInfo.jsonUsingComponents[ast.type] || fileInfo.appUsingComponents[ast.type]) {
+    if (
+        fileInfo.jsonUsingComponents[ast.type] ||
+        fileInfo.appUsingComponents[ast.type]
+    ) {
         isComponentTag = true;
         let _type = ast.type;
         preProcessCustomComponent(ast);
-            
+
         if (fileInfo.appUsingComponents[ast.type]) {
-            fileInfo.customAppUsingComponents = fileInfo.customAppUsingComponents || {};
-            fileInfo.customAppUsingComponents[ast.type] = fileInfo.customAppUsingComponents[ast.type] || fileInfo.appUsingComponents[_type]; 
+            fileInfo.customAppUsingComponents =
+                fileInfo.customAppUsingComponents || {};
+            fileInfo.customAppUsingComponents[ast.type] =
+                fileInfo.customAppUsingComponents[ast.type] ||
+                fileInfo.appUsingComponents[_type];
         }
 
         if (ast.props) {
-            Object.keys(ast.props)
-                .forEach(function (prop) {
-                    let value = ast.props[prop].value[0];
-                    if (prop.match(/^(bind:*)(\w+)/) && !value.match(/\{/)) {
-                        let newProp = prop.replace(/^(bind:*)\w+/, function ($, $1, $2, $3) {
-                            let prop = $.substring($1.length);
-                            return 'on' + prop[0].toUpperCase() + prop.substring(1);
-                        });
+            Object.keys(ast.props).forEach(function (prop) {
+                let value = ast.props[prop].value[0];
+                if (prop.match(/^(bind:*)(\w+)/) && !value.match(/\{/)) {
+                    let newProp = prop.replace(/^(bind:*)\w+/, function (
+                        $,
+                        $1,
+                        $2,
+                        $3
+                    ) {
+                        let prop = $.substring($1.length);
+                        return "on" + prop[0].toUpperCase() + prop.substring(1);
+                    });
 
-                        ast.props[newProp] = ast.props[prop];
-                        delete ast.props[prop];
-                    }
+                    ast.props[newProp] = ast.props[prop];
+                    delete ast.props[prop];
+                }
 
-                    // a:key
-                    if (prop.match(/:key$/)) {
-                        ast.props[prop].value[0] = '*this';
-                    }
+                // a:key
+                if (prop.match(/:key$/)) {
+                    ast.props[prop].value[0] = "*this";
+                }
 
-                    // collect nodes relation
-                    // let _prop = {
-                    //     type: 'unknown',
-                    //     value: ['__selfRef']
-                    // };
-                    // ast.props.__getParentRef = _prop;
-                    
-                });
+                // collect nodes relation
+                // let _prop = {
+                //     type: 'unknown',
+                //     value: ['__selfRef']
+                // };
+                // ast.props.__getParentRef = _prop;
+            });
         }
     }
 
@@ -260,63 +281,63 @@ function processExternalClasses (ast, fileInfo) {
      * external class 只支持字符常量，不支持表达式
      */
     if (!fileInfo.isComponent) return false;
-    let opts =  {
+    let opts = {
         externalClasses: []
     };
 
-    fileInfo.jsFileCode = fileInfo.jsFileCode || '';
+    fileInfo.jsFileCode = fileInfo.jsFileCode || "";
 
     if (!fileInfo.jsFileCode) {
-        let jsFile = fileInfo.path.replace('.wxml', '.js');
-        
-        let code = fs.readFileSync(jsFile, 'utf8');
+        let jsFile = fileInfo.path.replace(".wxml", ".js");
+
+        let code = fs.readFileSync(jsFile, "utf8");
         fileInfo.jsFileCode = code;
     }
     externalForWxFn(fileInfo.jsFileCode, opts);
     fileInfo.externalClasses = opts;
-    
+
     if (ast.props) {
         if (ast.props.class) {
-            let classInfo = ast.props.class
+            let classInfo = ast.props.class;
             classInfo = _externalClass(classInfo);
             /**
              * 提取扩展类 -class 结尾 或者带 -class- 的命名
              * */
         }
 
-        Object.keys(ast.props)
-            .forEach(function (propName) {
-                if (propName.match(/-class$/) || propName.match(/-class-/g)) {
-                    ast.props[propName] = _externalClass(ast.props[propName])
-                }
-            })
+        Object.keys(ast.props).forEach(function (propName) {
+            if (propName.match(/-class$/) || propName.match(/-class-/g)) {
+                ast.props[propName] = _externalClass(ast.props[propName]);
+            }
+        });
     }
 
-    function _externalClass (classInfo = {}) {
+    function _externalClass(classInfo = {}) {
         let _classes = classInfo.value[0].split(/\s+/);
-            _classes = _classes.filter(function (className) {
-                return className.match(/-class$/) || className.match(/-class-/g);
-            });
-
-            let temp = classInfo.value[0].split(/\s+/);
-            let newClass = [];
-            temp.forEach(function (str) {
-                if (opts.externalClasses.includes(str) || _classes.includes(str)) {
-                    newClass.push('{{' + _transform(str) + '}}');
-                } else {
-                    newClass.push(str);
-                }
-            });
-            
-            classInfo.value[0] = newClass.join(' ');
-            return classInfo
+        _classes = _classes.filter(function (className) {
+            return className.match(/-class$/) || className.match(/-class-/g);
+        });
+    
+        let temp = classInfo.value[0].split(/\s+/);
+        let newClass = [];
+        temp.forEach(function (str) {
+            if (opts.externalClasses.includes(str) || _classes.includes(str)) {
+                newClass.push("{{" + _transform(str) + "}}");
+            } else {
+                newClass.push(str);
+            }
+        });
+    
+        classInfo.value[0] = newClass.join(" ");
+        return classInfo;
     }
-
-    function _transform (str = '') {
+    
+    function _transform(str = "") {
         str = str.replace(/-(\w)/g, function (...$) {
             return $[1].toUpperCase();
         });
-
+    
         return str;
     }
 }
+

@@ -5,6 +5,7 @@ const generateBundleComponent = require('../generate/generateWrapComponents');
 const appJsonProcess = require('../component/appJson');
 const pageJsonProcess = require('../component/pageJson');
 const generateConfig = require('../generate/generateConfig');
+const getPackageJson = require('../utils/getpackageData');
 const fs = require('fs-extra');
 const compileAxml = require('./compile/compileAxml');
 const compileAcss = require('./compile/compileAcss');
@@ -32,7 +33,8 @@ const { processAppJson } = require('../generate/generateRuntimeLogPage');
 const {
     report,
     reportTable,
-    reportSpeed
+    reportSpeed,
+    // reportDist
 } = reportMethods;
 // 制作日志
 const recordConfig = require("../utils/record/config");
@@ -101,7 +103,8 @@ module.exports = {
 
     },
     onParsed () {
-        console.log('onParsed. ');
+        const packageData = getPackageJson();
+        // reportDist(`${packageData.version}`, this.$options.dist);
     },
     beforeCompile (ctx) {
         fs.emptyDirSync(ctx.$options.dist);
@@ -190,7 +193,8 @@ module.exports = {
             date = report(date, reportData);
             const reptempData = getScriptData(pathinfo, apis, wxoriginCode, "my");
             repData.transforms = Object.assign(repData.transforms, reptempData);
-        } else if (isTypeFile('.wxs', fileInfo.path)) {
+        } else if (isTypeFile('.sjs', fileInfo.path)) {
+            const { transformEs6 } = require('@antmove/utils');
             let pathinfo = fileInfo.path.split(projectParents)[1].substr(1);
             const reptempData = getCustomScript(pathinfo);
             repData.transforms = Object.assign(repData.transforms, reptempData);
@@ -204,7 +208,8 @@ module.exports = {
                 nums: finishFile
             };
             date = report(date, reportData);
-            fs.outputFileSync(fileInfo.dist.replace(/\.wxs$/, '.sjs'), content);
+            content = transformEs6(content);
+            fs.outputFileSync(fileInfo.dist.replace(/\.sjs$/, '.wxs'), content);
         } else {
             let content;
             if (fileInfo.deep === 0 && fileInfo.filename === 'app.json') {
@@ -349,7 +354,6 @@ module.exports = {
         generateBundleApi(ctx.output);
         generateBundleComponent(ctx.output);
 
-
         const tableInfo = {
             "项目名称": project.name,
             "项目路径": project.path,
@@ -381,7 +385,5 @@ module.exports = {
 
             writeReportPage(repData, targetPath);
         });
-
-
     }
 };

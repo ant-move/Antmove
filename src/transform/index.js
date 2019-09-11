@@ -53,7 +53,7 @@ module.exports = class Transform {
             dirpath: inputDir
         });
         this.$data.inputProjectInfo = parserDirInfo(_opts, function (info) {
-            info.dist = info.path.replace(inputDir, outputDir);
+            info.dist = info.path.replace(inputDir, outputDir).replace('//', '/');
             callIfIsFunc(lifeCycles.onParsing.bind(self.$plugin), info);
         });
 

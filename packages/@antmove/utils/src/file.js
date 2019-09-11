@@ -3,12 +3,17 @@ const path = require('path');
 
 const fileUtils = {};
 let entry = '';
+let packageInfo = null;
 
 fileUtils.parserDirInfo = function (opts = {}, cb = () => {}, deep = 0, parent = null) {
     let dirpath = opts.dirpath;
     let temp = fs.readdirSync(dirpath);
     let files = [];
     entry = entry || dirpath;
+
+    if (!packageInfo && fs.pathExistsSync(path.join(entry, 'package.json'))) {
+        packageInfo = JSON.parse(fs.readFileSync(path.join(entry, 'package.json'), 'utf8'));
+    }
     temp.forEach(function (filename) {
         let _file = path.join(dirpath, filename);
         _file = fileUtils.parserFileInfo(_file, deep, parent);
@@ -31,6 +36,8 @@ fileUtils.parserDirInfo = function (opts = {}, cb = () => {}, deep = 0, parent =
                 dirpath: _file.path
             });
             _file.children = fileUtils.parserDirInfo(_opts, cb, deep + 1, _file);
+        } else {
+            _file.packageInfo = packageInfo;
         }
 
         files.push(_file);

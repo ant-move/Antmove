@@ -99,7 +99,12 @@ function processEvents (obj = {}) {
 
             obj[eventKey] = obj[key];
             delete obj[key];
-
+        }
+        if (key==='a:if' || key==='wx:if') {
+            if (obj[key].value[0].indexOf("$slot")!==-1) {
+                obj[key].value[0] = '{{true}}';
+            }
+            
         }
     }
 

@@ -2,7 +2,10 @@ const config = require('../config');
 
 module.exports = function (ast, fileInfo) {
     let dev = config.isDev();
+    if (ast.type === 'icon') processTypeAttrStyle(ast, 'icon');
     if (ast.type !== 'button') return false;
+
+    processTypeAttrStyle(ast)
     /**
      * open-type UserInfo
      */
@@ -45,8 +48,11 @@ module.exports = function (ast, fileInfo) {
                         ...fileInfo.parent.tplInfo,
                         ...fileInfo.tplInfo
                     };
-
-                    props['open-type'].value[0] = 'getAuthorize';
+                    
+                    if (!props['open-type'].value[0].match(/{{/g)) {
+                        props['open-type'].value[0] = 'getAuthorize';
+                    }
+                   
                     props.onGetAuthorize = JSON.parse(JSON.stringify(propObj));
                     props.scope = JSON.parse(JSON.stringify(propObj));
                     props.scope.value[0] = scopeType;
@@ -58,3 +64,31 @@ module.exports = function (ast, fileInfo) {
         }
     }
 };
+
+function processTypeAttrStyle (ast, prefix ='') {
+    /**
+     * type style
+     */
+
+    if (ast.props.type) {
+        if (!ast.props.class) {
+            ast.props.class = {
+                type: 'unknown',
+                value: ['']
+            }
+        }
+
+        ast.props.class.value[0] += (' ' + prefix + ast.props.type.value[0] + '-style');
+    }
+
+    if (ast.props.size) {
+        if (!ast.props.class) {
+            ast.props.class = {
+                type: 'unknown',
+                value: ['']
+            }
+        }
+
+        ast.props.class.value[0] += (' ' + ast.props.size.value[0] + '-style');
+    }
+}
