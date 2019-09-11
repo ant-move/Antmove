@@ -186,5 +186,5 @@ const App = transformFramework();   // 得到的 app 实例即可进行转换处
 如果您在使用的过程中碰到问题，可以通过下面几个途径寻求帮助。
 
 * 钉钉微信交流群： 
-    <img width='200px' src='https://ant-move.github.io/website/img/contact-dingding.jpg'/> <img width='200px' src='https://cache.amap.com/ecology/tool/antmove/web/assets/03.JPG'/>
+    <img width='200px' src='https://ant-move.github.io/website/img/contact-dingding.jpg'/> <img width='200px' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/03.JPG'/>
 * 邮件：amap-appx@service.autonavi.com
