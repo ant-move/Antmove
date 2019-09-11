@@ -6,7 +6,7 @@
         style="width: 100%; height: 300px;"
         longitude="{{longitude}}"
         latitude="{{latitude}}"
-        scale="{{scale}}"
+        scale="{{scale+1}}"
         markers="{{markers}}"
         show-location 
         polyline="{{polyline}}"

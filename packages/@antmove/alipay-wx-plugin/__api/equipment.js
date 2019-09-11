@@ -83,6 +83,7 @@ const apiObj = {
                             );
                         }
                     );
+                    res.networkAvailable = true;
                     obj.success && obj.success(res);
                 }
             });
@@ -90,7 +91,7 @@ const apiObj = {
     },
     onNetworkStatusChange: {
         fn (obj = {}) {
-            wx.getNetworkType({
+            wx.onNetworkStatusChange({
                 ...obj,
                 success (res) {
                     if (res.networkType === 'none') {

@@ -49,6 +49,14 @@ function toAbsolutePath (str = '') {
     return str;
 }
 
+function isNpm (packageObj, filename) {
+    if (filename[0] !== '.' || filename[0] !== '/') return false;
+    let packageName = filename.spilt('/')[0];
+    if (packageObj.dependencies && packageObj[packageName]) {
+        return true;
+    }
+}
+
 module.exports = function (jsonStr, fileInfo) {
     if (!jsonStr) return '';
     let json = JSON.parse(jsonStr);
@@ -64,19 +72,21 @@ module.exports = function (jsonStr, fileInfo) {
             .forEach(function (c) {
                 if (!fileInfo.customAppUsingComponents) return false;
                 let cPath = fileInfo.customAppUsingComponents[c];
-                // let relativePath = path.relative(fileInfo.path, cPath);
-                // console.log(fileInfo.path, relativePath);
+                if (!cPath) return false;
+                if (!isNpm(fileInfo.packageInfo, cPath)) {
+                    cPath = path.join(fileInfo.output, cPath);
+                    cPath = path.relative(path.join(fileInfo.dist, '../'), cPath);
+                    
+                }
                 /**
                  * not support npm packages components
                  */
-                if (!cPath) return false;
-                cPath = toAbsolutePath(cPath);
+                
+                // cPath = toAbsolutePath(cPath);
                 json.usingComponents[c] = cPath;
             });
     }
-    if (fileInfo.path.match(/dashboard/g)) {
-        // console.log('000000', json);
-    }
+    
     Object.keys(json.usingComponents)
         .forEach(function (key) {
             let _key = transformStr(key);

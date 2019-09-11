@@ -5,6 +5,7 @@ const generateBundleComponent = require('../generate/generateWrapComponents');
 const appJsonProcess = require('../component/appJson');
 const pageJsonProcess = require('../component/pageJson');
 const generateConfig = require('../generate/generateConfig');
+const getPackageJson = require('../utils/getpackageData');
 const fs = require('fs-extra');
 const path = require("path");
 const chalk = require('chalk');
@@ -35,7 +36,7 @@ const {
     report,
     reportTable,
     reportSpeed,
-    reportEnd
+    reportDist
 } = reportMethods;
 // 制作日志
 const recordConfig = require("../utils/record/config");
@@ -107,7 +108,8 @@ module.exports = {
         
     },
     onParsed () {
-        console.log('onParsed. ');
+        const packageData = getPackageJson();
+        reportDist(`${packageData.version}`, this.$options.dist);
     },
     beforeCompile (ctx) {
         fs.emptyDirSync(ctx.$options.dist);
@@ -388,10 +390,7 @@ module.exports = {
             let statisticsData = statistics(repData.transforms);
             repData.concept = statisticsData; 
             writeReportPage (repData, targetPath);
-            reportEnd({
-                info: '欢迎使用蚂蚁搬家工具，您可以通过如下地址寻求帮助或是给予反馈。',
-                path: 'antmove-docs: https://github.com/ant-move/antmove'
-            });
+            
         }); 
 
  

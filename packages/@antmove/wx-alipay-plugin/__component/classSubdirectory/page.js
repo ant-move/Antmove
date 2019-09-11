@@ -131,7 +131,10 @@ function processRelationNodes (ast = {}) {
 
 function processRelations (ctx, relationInfo = {}) {
     let route = ctx.route;
+    route = route.replace(/\/node_modules\/[a-z-]+\/[a-z-]+/, '')
+
     if (route[0] !== '/') route = '/' + route;
+    
     let info = relationInfo[route] || relationInfo[route.substring(1)];
     if (info) {
         processRelationHandle(info, function (node) {

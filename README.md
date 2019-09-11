@@ -1,6 +1,6 @@
 # Antmove（蚂蚁搬家）
 
-<p><a href="https://github.com/ant-move/antmove" target="_blank" rel="noopener noreferrer"><img width="200" src="https://img.alicdn.com/tfs/TB1ktoia.D1gK0jSZFGXXbd3FXa-765-765.png" alt="antmove logo"></a></p>
+<p><a href="https://github.com/ant-move/antmove" target="_blank" rel="noopener noreferrer"><img width="200" src="https://img.alicdn.com/tfs/TB1IYo_b1L2gK0jSZPhXXahvXXa-3468-1197.png" alt="antmove logo"></a></p>
 
 Antmove - 小程序转换器，基于支付宝/微信小程序转换为多端小程序，让小程序跨平台开发变得简单。
 > 一键实现小程序转换迁徙，不再为重复开发而烦恼。
@@ -159,11 +159,17 @@ const App = transformFramework();   // 得到的 app 实例即可进行转换处
 
 ## 谁在使用
 
-* [e代驾](http://www.edaijia.cn/)
-* [微代驾](http://www.weidaijia.cn/)
-* [趣满满](http://www.piaofer.cn/)
-* [天气通](http://tianqitong.sina.cn/)
+### 微信小程序
 
+<img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/e-wx.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/qu-wx.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/wei-wx.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/werther-wx.jpg'>
+
+### 支付宝小程序
+
+<img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/e-alipay.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/wei-alipay.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/qu-alipay.jpg'>
+
+### 高德小程序
+
+<img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/e-amap.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/wei-amap.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/bus-amap.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/weather-amap.jpg'>
 
 > 如果你的公司和产品使用了 [Antmove](https://ant-move.github.io/website/docs/readme.html)，欢迎到[这里](https://github.com/ant-move/antmove/issues/1)留言。
 
@@ -180,5 +186,5 @@ const App = transformFramework();   // 得到的 app 实例即可进行转换处
 如果您在使用的过程中碰到问题，可以通过下面几个途径寻求帮助。
 
 * 钉钉微信交流群： 
-    <img width='200px' src='https://ant-move.github.io/website/img/contact-dingding.jpg'/><img width='200px' src='http://cache.amap.com/ecology/tool/antmove/web/assets/qr/03.JPG'/>
+    <img width='200px' src='https://ant-move.github.io/website/img/contact-dingding.jpg'/> <img width='200px' src='https://cache.amap.com/ecology/tool/antmove/web/assets/03.JPG'/>
 * 邮件：amap-appx@service.autonavi.com

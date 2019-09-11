@@ -10,6 +10,9 @@ const alipayToBaidu = require('../cli/alipay-baidu/index');
 const alipayToWx = require('../cli/alipay-wechat/index');
 const inputDirPath = process.cwd() + '/';
 const entryProcess = require('./entry');
+const {
+    recordOptions
+} = require('../cli/utils');
 /**
  * read packageJson
  */
@@ -116,9 +119,10 @@ function action (options) {
     };
 
     entryProcess(options, function (opts = {}) {
+        let _input = opts.input,
+            _output = opts.output ; 
         opts.input = toAbsolutePath(opts.input);
         opts.output = toAbsolutePath(opts.output);
-    
         if (!opts.output) {
             program.help();
             return false;
@@ -133,6 +137,7 @@ function action (options) {
                 opts.aliType = 'amap';
                 process.env.aliType = 'amap';
             }
+            recordOptions(opts, _input, _output);
             buildInfo[opts.type](opts);
         } else {
             console.log(chalk.red('编译类型错误，请选择可用的转换类型。'));

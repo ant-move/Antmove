@@ -1,7 +1,8 @@
 
 let prefix = 'saveChildRef';
 module.exports = function (ast, fileInfo) {
-    let type = ast.type;
+    ast = ast ? ast : {}
+    let type = ast.type || "";
     let nodeId = fileInfo.nodeId++;
     let renderFnId = prefix + nodeId;
 

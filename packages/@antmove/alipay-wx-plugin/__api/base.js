@@ -155,6 +155,7 @@ const apiObj = {
     showToast: {
         fn (obj = {}) {
             let showToastProps = descObj.showToast.body.params.props;
+            obj.type = obj.type ? obj.type : 'none';
             if (obj.content) {
                 obj.title = obj.content;
                 delete obj.content;
@@ -196,8 +197,6 @@ const apiObj = {
                     break;
                 }
                 delete obj.type;
-            } else {
-                obj.icon = "success";
             }
             let params = utils.defineGetter(
                 obj,
@@ -451,11 +450,10 @@ const apiObj = {
     },
     getLocation: {
         fn (obj = {}) {
-            if (obj.cacheTimeout) {
+            if (obj.cacheTimeout !== undefined) {
                 utils.warn(
-                    "微信暂不支持 cacheTimeout",
-                    {
-                        apiName: 'uploadFile/cacheTimeout',
+                    "微信暂不支持 cacheTimeout", {
+                        apiName: 'getLocation/cacheTimeout',
                         errorType: 0,
                         type: 'api'
                     }
@@ -476,7 +474,6 @@ const apiObj = {
                     if (userLocation === false) {
                         wx.authorize({scope: 'scope.userLocation'});
                     }
-                    let getLocationReturnValue = descObj.getLocation.body.returnValue.props;
                     wx.getLocation({
                         ...obj,
                         type: 'wgs84',
@@ -486,27 +483,10 @@ const apiObj = {
                                 res.longitude,
                                 res.latitude
                             );
-
                             data = Object.assign(res, {
-                                longitude: lnglat.lon,
-                                latitude: lnglat.lat
+                                longitude: lnglat[0],
+                                latitude: lnglat[1]
                             });
-                            if (obj.type === 0) {
-                                data = utils.defineGetter(
-                                    getLocationReturnValue,
-                                    getLocationReturnValue,
-                                    function (obj, prop) {
-                                        utils.warn(
-                                            `getLocation'的返回值不支持 ${prop} 属性!`,
-                                            {
-                                                apiName: prop,
-                                                errorType: getLocationReturnValue[prop].type,
-                                                type: 'api'
-                                            }
-                                        );
-                                    }
-                                );
-                            }
                             obj.success && obj.success(data);
                         },
                         fail: function () {
@@ -615,9 +595,7 @@ const apiObj = {
                     }
                 );
             }
-            obj.header = obj.header || {};
-            obj.header['content-type'] = obj.header['content-type'] || 'application/x-www-form-urlencoded';
-            let task = wx.request({
+            wx.request({
                 ...obj,
                 success (res) {
                     res.headers = res.header;
@@ -633,7 +611,6 @@ const apiObj = {
                     obj.complete && obj.complete(res);
                 }
             });
-            return task;
         }
     },
     sendSocketMessage: {

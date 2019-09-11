@@ -8,7 +8,7 @@ const apiObj = {
                 ...obj,
                 success (res) {
                     res.apFilePaths = res.tempFilePaths.map(item => {
-                        return item.path;
+                        return item;
                     });
                     successFn(res);
                 }

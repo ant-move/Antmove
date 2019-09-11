@@ -1,5 +1,6 @@
 const fs = require('fs-extra');
 const Config = require('../../config');
+const path = require('path');
 const customComponentPrefix = Config.library.customComponentPrefix;
 const {
     behavourHandle,
@@ -48,6 +49,18 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
     matchRet = cbNameInfo.name;
     let apiPath = customComponentPrefix + '/api/index.js';
     let _compoentPath = componentWrapFnPath;
+    /**
+     * absolute to relative
+     */
+    _compoentPath = path.relative(path.join(fileInfo.dist, '../'), path.join(fileInfo.output, _compoentPath))
+    apiPath = path.relative(path.join(fileInfo.dist, '../'), path.join(fileInfo.output, apiPath))
+    if (_compoentPath[0] !== '.') {
+        _compoentPath = './' + _compoentPath;
+    }
+
+    if (apiPath[0] !== '.') {
+        apiPath = './' + apiPath;
+    }
     let insertCode = '';
 
     if (matchRet) {
