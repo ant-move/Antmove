@@ -1,27 +1,34 @@
 # Antmove（蚂蚁搬家）
 
-<p><a href="https://github.com/ant-move/antmove" target="_blank" rel="noopener noreferrer"><img width="200" src="https://img.alicdn.com/tfs/TB1IYo_b1L2gK0jSZPhXXahvXXa-3468-1197.png" alt="antmove logo"></a></p>
+<p><a href="https://github.com/ant-move/antmove" target="_blank" rel="noopener noreferrer"><img width="200" src="https://ant-move.github.io/website/img/favicon.ico" alt="antmove logo"></a></p>
 
 Antmove - 小程序转换器，基于支付宝/微信小程序转换为多端小程序，让小程序跨平台开发变得简单。
 > 一键实现小程序转换迁徙，不再为重复开发而烦恼。
 
 ![antmove structure](https://img.alicdn.com/tfs/TB13u6Cb4z1gK0jSZSgXXavwpXa-3852-936.png)
 
+## 目录
+
+<ul class="toc-headings"><li><a href="#特性" class="active">特性</a></li><li><a href="#跨平台支持" class="">跨平台支持</a></li><li><a href="#文档">文档</a></li><li><a href="#安装">安装</a><ul class="toc-headings"><li><a href="#vscode-转换插件">vscode 转换插件</a></li><li><a href="#vscode-编译步骤">VsCode 编译步骤</a></li><li><a href="#使用-npm-或-yarn-安装">使用 npm 或 yarn 安装</a></li></ul></li><li><a href="#快速开始">快速开始</a><ul class="toc-headings"><li><a href="#命令行使用">命令行使用</a></li><li><a href="#命令行参数说明">命令行参数说明</a></li><li><a href="#nodejs-使用方式">Node.js 使用方式</a></li></ul></li><li><a href="#api">API</a><ul class="toc-headings"><li><a href="#transformframework"><code>transformFramework</code></a></li><li><a href="#app"><code>App</code></a></li></ul></li><li><a href="#谁在使用">谁在使用</a><ul class="toc-headings"><li><a href="#微信小程序">微信小程序</a></li><li><a href="#支付宝小程序">支付宝小程序</a></li><li><a href="#高德小程序">高德小程序</a></li></ul></li><li><a href="#贡献">贡献</a></li><li><a href="#协议">协议</a></li><li><a href="#联系">联系</a></li></ul>
+
 ## 特性
 
-* 简单易使用，无学习成本，直接上手
+* 简单易使用，无学习成本，一键转换
 * 转换覆盖率全面，及时跟进各小程序平台更新情况
 * 配套详细的编译时日志/运行时日志工具
 * 编译生成代码可读性强，可二次编程
 * 二次编译支持
 
-## 平台支持
+## 跨平台支持
 
 * 微信小程序转支付宝小程序
 * 支付宝小程序转微信小程序
 * 支付宝小程序转百度小程序
+* 微信小程序一键转百度小程序内测中，即将发布
+* 微信小程序一键转钉钉小程序内测中，即将发布
 
 ## 文档
+
 * [官方文档](https://ant-move.github.io/website/docs/readme.html)
 
 ## 安装
@@ -38,7 +45,9 @@ Antmove - 小程序转换器，基于支付宝/微信小程序转换为多端小
     * Mac: `command + shift + p`
     * Windows: `ctrl + shift + p`
 * 输入 `Antmove`
-* 运行 `Antmove: Run antmove` 命令
+* 微信小程序转支付宝小程序，运行 `Antmove: Run antmove` 或者 `Antmove: Run antmove wx-alipay` 命令
+* 支付宝小程序转微信小程序，运行 `Antmove: Run antmove alipay-wx` 命令
+* 支付宝小程序转百度小程序，运行 `Antmove: Run antmove alipay-baidu` 命令
 * 运行如上命令后会给出一个弹窗，选择转换后生成代码存储目录
 * 转换完成
 
@@ -161,6 +170,8 @@ const App = transformFramework();   // 得到的 app 实例即可进行转换处
 
 ### 微信小程序
 
+> 这里展示的微信小程序为原小程序应用，下面的其它平台小程序为基于这些微信小程序转换得到。
+
 <img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/e-wx.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/qu-wx.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/wei-wx.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/werther-wx.jpg'>
 
 ### 支付宝小程序
@@ -186,5 +197,5 @@ const App = transformFramework();   // 得到的 app 实例即可进行转换处
 如果您在使用的过程中碰到问题，可以通过下面几个途径寻求帮助。
 
 * 钉钉微信交流群： 
-    <img width='200px' src='https://ant-move.github.io/website/img/contact-dingding.jpg'/> <img width='200px' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/03.JPG'/>
+    <img width='200px' src='https://ant-move.github.io/website/img/contact-dingding.jpg'/> <img width='200px' src='https://cache.amap.com/ecology/tool/antmove/web/assets/wx-qrcode.JPG'/>
 * 邮件：amap-appx@service.autonavi.com
