@@ -65,6 +65,10 @@ Antmove - 小程序转换器，基于支付宝/微信小程序转换为多端小
 ```bash
 $ npm install antmove -g
 ```
+或
+```bash
+$ yarn global add antmove
+```
 
 * 本地安装
 
