@@ -81,7 +81,7 @@ $ yarn add antmove
 ```
 
 
-> 如果你的网络环境不佳，推荐使用 [cnpm](https://github.com/cnpm/cnpm)。
+> 如果你的中国大陆网络环境不佳，推荐使用 [cnpm](https://github.com/cnpm/cnpm)。
 
 
 ## 快速开始
