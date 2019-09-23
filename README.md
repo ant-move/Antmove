@@ -65,25 +65,32 @@ Antmove - 小程序转换器，基于支付宝/微信小程序转换为多端小
 ```bash
 $ npm install antmove -g
 ```
+或
+```bash
+$ yarn global add antmove
+```
 
 * 本地安装
 
 ```bash
 $ npm install antmove --save
 ```
+或
+```bash
+$ yarn add antmove
+```
 
-> 如果你的网络环境不佳，推荐使用 [cnpm](https://github.com/cnpm/cnpm)。
+
+> 如果你的中国大陆网络环境不佳，推荐使用 [cnpm](https://github.com/cnpm/cnpm)。
 
 
 ## 快速开始
 
 ### 命令行使用
 
-```bash
-npm i -g antmove
-```
+[使用 npm 或 yarn 安装](#使用-npm-或-yarn-安装)才能使用如下命令行。
 
-> 通过 npm 或 yarn 全局安装才能使用如下命令行
+如果不是全局安装，命令前要加`npx`，同时必须在安装的目录下使用如下命令行。
 
 提供两种可用的命令行调用方式（如下几个命令的参数是类似的）
 
@@ -129,8 +136,8 @@ const path = require('path');
 const transformFramework = require('antmove');
 const WechatPlugin = require('@antmove/wx-alipay');
 
-let outputPath = path.join(__dirname, '../../dist');
-let inputDirPath = path.join(__dirname, '../../examples/miniprogram-demo/miniprogram');
+const outputPath = path.join(__dirname, '../../dist');
+const inputDirPath = path.join(__dirname, '../../examples/miniprogram-demo/miniprogram');
 
 const App = transformFramework();
 
