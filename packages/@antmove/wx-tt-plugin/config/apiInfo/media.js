@@ -3,40 +3,17 @@ const { createDescObj } = require('./utils');
  * 媒体
  */
 module.exports = {
-    //
     createMapContext: createDescObj(
-        1,
+        2,
         '创建 map 上下文 MapContext 对象',
         'https://developers.weixin.qq.com/miniprogram/dev/api/media/map/wx.createMapContext.html',
-        'https://docs.alipay.com/mini/api/ui-map',
-        {
-            msg: '返回值对象方法缺失',
-            returnValue: {
-                props: {
-                    getRegion: {
-                        type: 0,
-                        desc: '获取当前地图的视野范围'
-                    },
-                    getScale: {
-                        type: 0,
-                        desc: '获取当前地图的缩放级别'
-                    },
-                    includePoints: {
-                        type: 0,
-                        desc: '缩放视野展示所有经纬度'
-                    }
-                }
-            }
-        }
+        ''
     ),
     saveImageToPhotosAlbum: createDescObj(
         0,
         '保存图片到系统相册不支持网络图片路径',
         'https://developers.weixin.qq.com/miniprogram/dev/api/media/image/wx.saveImageToPhotosAlbum.html',
-        'https://docs.alipay.com/mini/api/izfoiz',
-        {
-            msg: '完全支持',
-        }
+        'https://developer.toutiao.com/dev/miniapp/uITNz4iM1MjLyUzM'
     ),
 
 
@@ -44,22 +21,34 @@ module.exports = {
         0,
         '在新页面中全屏预览图片',
         'https://developers.weixin.qq.com/miniprogram/dev/api/media/image/wx.previewImage.html',
-        'https://docs.alipay.com/mini/api/eei0av'
+        'https://developer.toutiao.com/dev/miniapp/uIjMz4iMyMjLyIzM'
     ),
     getImageInfo: createDescObj(
-        0,
+        1,
         '获取图片信息',
         'https://developers.weixin.qq.com/miniprogram/dev/api/media/image/wx.getImageInfo.html',
-        'https://docs.alipay.com/mini/api/yv9n6t'
+        'https://developer.toutiao.com/dev/miniapp/uQTOy4CN5IjL0kjM',
+        {
+            msg: '返回值属性缺失',
+            returnValue: {
+                props: {
+                    orientation: {
+                        type: 0,
+                        desc: '拍照时设备方向'
+                    },
+                    path: {
+                        type: 0,
+                        desc: '图片的本地路径'
+                    }
+                }
+            }
+        }
     ),
     compressImage: createDescObj(
-        0,
+        2,
         '压缩图片接口，可选压缩质量',
         'https://developers.weixin.qq.com/miniprogram/dev/api/media/image/wx.compressImage.html',
-        'https://docs.alipay.com/mini/api/ehndze',
-        {
-            msg: '封装后可完全支持',
-        }
+        ''
     ),
     chooseMessageFile: createDescObj(
         2,
@@ -71,14 +60,14 @@ module.exports = {
         1,
         '从本地相册选择图片或使用相机拍照',
         'https://developers.weixin.qq.com/miniprogram/dev/api/media/image/wx.chooseImage.html',
-        'https://docs.alipay.com/mini/api/media-image#a-nameeh9ddfamychooseimage',
+        'https://developer.toutiao.com/dev/miniapp/uEDNy4SM0IjLxQjM',
         {
-            msg: '返回值属性缺失',
-            returnValue: {
+            msg: '参数缺失，返回值属性缺失',
+            parmas: {
                 props: {
-                    tempFiles: {
+                    sizeType: {
                         type: 0,
-                        desc: '图片的本地临时文件列表'
+                        desc: '所选的图片的尺寸'
                     }
                 }
             }
@@ -88,13 +77,13 @@ module.exports = {
         0,
         '保存视频到系统相册',
         'https://developers.weixin.qq.com/miniprogram/dev/api/media/video/wx.saveVideoToPhotosAlbum.html',
-        ''
+        'https://developer.toutiao.com/dev/miniapp/uIDNz4iM0MjLyQzM'
     ),
     createVideoContext: createDescObj(
         1,
         '创建 video 上下文 VideoContext 对象',
         'https://developers.weixin.qq.com/miniprogram/dev/api/media/video/wx.createVideoContext.html',
-        '',
+        'https://developer.toutiao.com/dev/miniapp/ucDNy4yN0IjL3QjM',
         {
             msg: '返回值方法缺失',
             returnValue: {
@@ -108,13 +97,24 @@ module.exports = {
         }
     ),
     chooseVideo: createDescObj(
-        0,
+        1,
         '拍摄视频或从手机相册中选视频',
         'https://developers.weixin.qq.com/miniprogram/dev/api/media/video/wx.chooseVideo.html',
-        ''
+        'https://developer.toutiao.com/dev/miniapp/ugDNy4CO0IjL4QjM',
+        {
+            msg: '参数缺失',
+            parmas: {
+                props: {
+                    camera: {
+                        type: 0,
+                        desc: '默认拉起的是前置或者后置摄像头。'
+                    }
+                }
+            }
+        }
     ),
     stopVoice: createDescObj(
-        0,
+        2,
         '结束播放语音',
         'https://developers.weixin.qq.com/miniprogram/dev/api/media/audio/wx.stopVoice.html',
         ''
@@ -132,7 +132,7 @@ module.exports = {
         ''
     ),
     pauseVoice: createDescObj(
-        0,
+        2,
         '暂停正在播放的语音',
         'https://developers.weixin.qq.com/miniprogram/dev/api/media/audio/wx.pauseVoice.html',
         ''
@@ -149,7 +149,7 @@ module.exports = {
         ''
     ),
     createAudioContext: createDescObj(
-        0,
+        2,
         '创建 audio 上下文 AudioContext 对象',
         'https://developers.weixin.qq.com/miniprogram/dev/api/media/audio/wx.createAudioContext.html',
         ''
@@ -221,60 +221,25 @@ module.exports = {
         ''
     ),
     stopRecord: createDescObj(
-        0,
+        2,
         '停止录音',
         'https://developers.weixin.qq.com/miniprogram/dev/api/media/recorder/wx.stopRecord.html',
         ''
     ),
     startRecord: createDescObj(
-        0,
+        2,
         '开始录音',
         'https://developers.weixin.qq.com/miniprogram/dev/api/media/recorder/wx.startRecord.html',
         ''
     ),
     getRecorderManager: createDescObj(
-        1,
+        0,
         '获取全局唯一的录音管理器 RecorderManager',
         'https://developers.weixin.qq.com/miniprogram/dev/api/media/recorder/wx.getRecorderManager.html',
-        '',
-        {
-            msg: '返回值方法缺失',
-            returnValue: {
-                props: {
-                    pause: {
-                        type: 0,
-                        desc: '暂停录音'
-                    },
-                    resume: {
-                        type: 0,
-                        desc: '继续录音'
-                    },
-                    onpause: {
-                        type: 0,
-                        desc: '监听录音暂停事件'
-                    },
-                    onresume: {
-                        type: 0,
-                        desc: '监听录音继续事件'
-                    },
-                    onFrameRecorded: {
-                        type: 0,
-                        desc: '监听已录制完指定帧大小的文件事件。如果设置了 frameSize，则会回调此事件'
-                    },
-                    onInterruptionEnd: {
-                        type: 0,
-                        desc: '监听录音中断结束事件。在收到 interruptionBegin 事件之后，小程序内所有录音会暂停，收到此事件之后才可再次录音成功'
-                    },
-                    onInterruptionBegin: {
-                        type: 0,
-                        desc: '监听录音因为受到系统占用而被中断开始事件。以下场景会触发此事件：微信语音聊天、微信视频聊天。此事件触发后，录音会被暂停。pause 事件在此事件后触发'
-                    }
-                }
-            }
-        }
+        'https://developer.toutiao.com/dev/miniapp/ukTOy4SO5IjL5kjM'
     ),
     createCameraContext: createDescObj(
-        0,
+        2,
         '创建 camera 上下文 CameraContext 对象',
         'https://developers.weixin.qq.com/miniprogram/dev/api/media/camera/wx.createCameraContext.html',
         ''
