@@ -65,9 +65,34 @@ function scopeStyle (fileInfo) {
         });
 
         if (!bool) return false;
+        // _ast[0].props.class.value.push("{{className}}");
         _ast[0].children = [ast];
+        // let originClass = prop.class;
+        // ast.forEach(function (node) {
+        //     /**
+        //      * 忽略非容器标签
+        //      */
+        //     let tagObj = {
+        //         wxs: true,
+        //         include: true
+        //     };
+
+        //     if (tagObj[ast.type]) return false;
+        //     node.props = node.props || {};
+        //     node.props.class = node.props.class || prop.class;
+        //     originClass = JSON.parse(JSON.stringify(node.props.class));
+
+        //     node.props.class.value[0] = node.props.class.value[0].split(/\s+/)
+        //         .map((classname) =>{
+        //             return classname + '-' + classPrefix;
+        //         });
+        //     node.props.class.value[0] = node.props.class.value[0].join(' ');
+
+        //     node.props.class.value[0] = node.props.class.value[0] + ' ' + classPrefix;
+        // });
 
         fileInfo.ast = _ast;
+        // originClass.classPrefix = classPrefix;
         return {
             classPrefix
         };

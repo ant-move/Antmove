@@ -10,7 +10,12 @@ const getPackageJson = require('../utils/getpackageData');
 const compileWxml = require('./compile/compileWxml');
 const compileWxss = require('./compile/compileWxss');
 const compileJs = require('./compile/compileJs');
+const saveComponentJs = require('../utils/saveComponentJs');
 const generateBundleComponent = require('../generate/generateWrapComponents');
+// const generateWxsDeps = require('../generate/generateWxsDep')
+// const antmoveCache = require('../utils/antmoveCache');
+
+
 
 const project = {
     name: "",
@@ -30,7 +35,8 @@ const {
     record,
     reportMethods,
     runJs,
-    cjsToes
+    cjsToes,
+    emptyFiles
 } = require('@antmove/utils');
 const { processAppJson } = require('../generate/generateRuntimeLogPage');
 const {
@@ -74,13 +80,18 @@ module.exports = {
             return false;
         }
 
-        fs.emptyDirSync(this.$options.dist);
+        fs.existsSync(this.$options.dist) && emptyFiles(this.$options.dist, ['miniprogram_npm', 'node_modules']);        
         if (this.$options.scope && this.$options.scope !== 'false') {
             Config.options.scopeStyle = true;
         }
 
         Config.env = process.env.NODE_ENV ===  "development" ? 'development' : 'production';
         showReport = Config.env === 'development';
+        Config.component2 = this.$options.component2;
+        Config.aliAppType = this.$options.platform || 'alipay';
+        if (this.$options.component === "component") {
+            Config.min = true;
+        }
         isUpdata = this.$options.remote;    // 是否从远程拉取 polyfill 代码
         let date = "";
         report(date, { type: "title", showReport });
@@ -127,8 +138,18 @@ module.exports = {
 
     },
     onParsed () {
-        const packageData = getPackageJson();
-        reportDist(`${packageData.version}`, this.$options.dist);
+        const {packageData, antmovePackageData} = getPackageJson();
+
+
+        if (!this.$options.isWx2Baidu) {
+            try {
+                reportDist(`${antmovePackageData.version}`, this.$options.dist, {tool: '@antmove/wx-alipay', version: packageData.version});
+            } catch (err) {
+                return false;
+            }
+        } else {
+            console.log('\n ');
+        }
     },
     beforeCompile (ctx) {
         /**
@@ -179,7 +200,11 @@ module.exports = {
             compileWxss(fileInfo, ctx, true);
             const reptempData = getTemplateData(fileInfo, project.name);
             checkCoverView(fileInfo.ast, reptempData);
-            compileWxml(fileInfo, ctx);
+            let isComponent = false;
+            if (this.$options.component === "component") {
+                isComponent = true;
+            }
+            compileWxml(fileInfo, ctx, isComponent);
             const reportData = {
                 info: fileInfo.path.split(projectParents)[1].substr(1),
                 type: "compile",
@@ -209,6 +234,9 @@ module.exports = {
             let originCode = fs.readFileSync(fileInfo.path, 'utf8');
             let wxoriginCode = originCode;
             let apis = {};
+            if (this.$options.isWx2Baidu) {
+                saveComponentJs(fileInfo, originCode, this.$options);
+            } 
             compileJs(fileInfo, ctx, originCode, apis);
 
             const reportData = {
@@ -236,10 +264,27 @@ module.exports = {
                 nums: finishFile
             };
             date = report(date, reportData);
-            content = cjsToes(content);
+            /**
+             * 不支持 sjs 兼容处理
+             */
+            if (!Config.hasWxs) {
+                content = content.replace(/\.wxs/g, '.wxs.js');
+                if (content.match(/\s*getRegExp/g)) {
+                    let preCode = `
+                    function getRegExp (p1, p2) {
+                        return new RegExp(p1, p2);
+                    }
+                    \n
+                    `;
+                    content = preCode + content;
+                }
+                fs.outputFileSync(fileInfo.dist.replace(/\.wxs$/, '.wxs.js'), content);
+            } else {
+                content = cjsToes(content);
 
-            content = content.replace(/\.wxs/g, '.sjs');
-            fs.outputFileSync(fileInfo.dist.replace(/\.wxs$/, '.sjs'), content);
+                content = content.replace(/\.wxs/g, '.sjs');
+                fs.outputFileSync(fileInfo.dist.replace(/\.wxs$/, '.sjs'), content);
+            }
         } else {
             let content;
             if (fileInfo.deep === 0 && fileInfo.filename === 'app.json') {
@@ -265,10 +310,7 @@ module.exports = {
                 } catch (err) {
                     project.name = dirnameArr[dirnameArr.length - 1];
                 }
-
-
                 content = appJsonProcess(content);
-
                 content = prettierCode(content, 'json', {
                     useTabs: true,
                     tabWidth: 4
@@ -283,11 +325,9 @@ module.exports = {
                     nums: finishFile
                 };
                 date = report(date, reportData);
-
             } else if (fileInfo.extname === '.json') {
+                const { transformPackage } =require('@antmove/utils');
                 let pathInfo = fileInfo.path.split(projectParents)[1].substr(1);
-
-
                 let parent = fileInfo.parent;
                 let bool = false;
                 let wxmlFileInfo = null;
@@ -303,6 +343,9 @@ module.exports = {
                     content = pageJsonProcess.call(ctx, content, wxmlFileInfo);
                 } else {
                     content = fs.readFileSync(fileInfo.path, 'utf8');
+                }
+                if (fileInfo.path.includes('package.json')) {
+                    // content = transformPackage(fileInfo);
                 }
                 const jsonData = getJsonData(pathInfo, content);
                 repData.transforms = Object.assign(repData.transforms, jsonData);
@@ -374,7 +417,7 @@ module.exports = {
         
         return fileInfo;
     },
-    compiled: async function (ctx) {
+    compiled: async function (ctx, cb = () => {}) {
         const {
             findOpenAbility,
             statistics,
@@ -383,7 +426,6 @@ module.exports = {
         generateBundleComponent(ctx.output, Config);
         await runGenerateBundleApi(ctx.output);
         generateNodeTrees(ctx.output, Config);
-
         const tableInfo = {
             "项目名称": project.name,
             "项目路径": project.path,
@@ -393,11 +435,7 @@ module.exports = {
             "组件数": String(project.componentNum),
 
         };
-
         repData.tableInfo = tableInfo;
-
-        
-
         let nowTime = report(beginTime, {
             showReport,
             type: "computedTime"
@@ -409,6 +447,8 @@ module.exports = {
         repData.concept = statisticsData;
         let targetPath =  path.join(ctx.output, `${Config.library.customComponentPrefix}/.config.json`);
         writeReportPage(repData, targetPath);
+
+        cb ();
     }
 };
 

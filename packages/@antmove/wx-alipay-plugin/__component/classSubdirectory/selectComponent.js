@@ -45,10 +45,23 @@ selectComponent.prototype = {
         let ctx = this.$ctx;
         let self = this;
         ctx.selectComponent = function (...p) {
-            return self.selectComponent(...p);
+            if (self.selectComponent(...p)._this !== undefined) {
+                return self.selectComponent(...p)._this
+            } else {
+                return self.selectComponent(...p);
+            }          
         }; 
         ctx.selectAllComponents = function (...p) {
-            return self.selectComponents(...p);
+            let componentsArr = self.selectComponents(...p);
+            let newArr = [];
+            componentsArr.forEach (function (item) {
+                if (item._this !== undefined) {
+                    newArr.push(item._this);
+                } else {
+                    newArr.push(item);
+                }
+            })
+            return newArr;
         };
     }
 };

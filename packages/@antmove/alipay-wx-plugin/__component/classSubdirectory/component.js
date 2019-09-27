@@ -62,10 +62,6 @@ function makeLifes (_opts, options) {
     const transformLife = [
         {
             original: 'onInit',
-            target: 'created'
-        },
-        {
-            original: 'deriveDataFromProps',
             target: 'attached'
         },
         {
@@ -80,7 +76,7 @@ function makeLifes (_opts, options) {
     transformLife.forEach(obj => {
         const oname = options[obj.original];
         const tname = options[obj.target];
-        if (obj.target === "created") {
+        if (obj.target === "attached") {
             _opts[obj.target] = function () {
                 if (options.didUpdate) {
                     const setData = this.setData;
@@ -99,14 +95,17 @@ function makeLifes (_opts, options) {
                 }
                 this.props = this.data;
                 processCustomEvent.call(this, options);
+                _opts.props = Object.assign({}, this.props);
                 this.$page = {};
-                this.$id = this.id;
-                this.is = "";
+                oname && oname.call(this);
+                tname && tname.call(this);
             };
-            oname && oname.call(this);
-            tname && tname.call(this);
         } else {
             _opts[obj.target] = function () {
+                if (obj.target === 'ready') {
+                    this.$id = this.__wxExparserNodeId__;
+                    this.is = "";
+                }
                 oname && oname.call(this);
                 tname && tname.call(this);
             };
@@ -158,10 +157,13 @@ function makeEventObj (_opts, options) {
         const methods = options.methods;
         const newMethods = {};
         Object.keys(methods).forEach(key => {
-            newMethods[key] = function (event) {
-                (event && event.target) && (event.target.dataset = { ...event.currentTarget.dataset } || {});
-                methods[key].call(this, event);
-            };
+            newMethods[key] =  function (...res) {
+                if (res[0]&&res[0].target) {
+                    res[0].target.dataset ={ ...res[0].currentTarget.dataset}||{};
+                    return methods[key].call(this, res[0]);
+                } 
+                return methods[key].apply(this, res);     
+            };    
         });
         _opts.methods = newMethods;
     }

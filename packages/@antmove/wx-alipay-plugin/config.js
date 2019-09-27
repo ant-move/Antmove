@@ -3,6 +3,10 @@ module.exports = {
     isDev () {
         return this.env === 'development';
     },
+    hasWxs: true,      // 是否支持 wxs
+    wxsPolyfillPath: 'api/sjs/',
+    aliAppType: 'my',
+    component2: true,
     target: '_',
     min: false, // minify polyfill api
     options: {

@@ -3,14 +3,13 @@
     <map
         s-if="{{mapShow}}"
         id= "{{mapId}}"
-        style="width: 100%; height: 300px;"
         longitude="{{longitude}}"
         latitude="{{latitude}}"
-        scale="{{scale+1}}"
+        scale="{{ascale}}"
         markers="{{markers}}"
         show-location 
         polyline="{{polyline}}"
-        polygons="{{drawPolygon ? polygons : []}}"
+        polygons="{{ polygon }}"
         circles="{{circles}}"
         controls="{{controls}}"
         include-points="{{include-points}}"

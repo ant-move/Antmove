@@ -1,0 +1,6 @@
+<view class="sheet_item {{className}}"  catchtap="tapItem">
+    <view tt:if="textContent">
+        {{textContent}}
+    </view>
+    <slot></slot>
+</view>

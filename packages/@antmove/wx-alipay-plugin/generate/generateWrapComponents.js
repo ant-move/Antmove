@@ -12,9 +12,14 @@ function copyDirectory (output, directoryPath) {
     let entryPath = entry + '/' + directoryPath;
     let outputPath = path.join(output, `${customComponentPrefix}/component/${directoryPath}`);
     
-    fs.copy(entryPath, outputPath, function (err) {
-        if (err) console.error(err);
-    });
+    // if not support component2
+    if (!Config.component2) {
+        entryPath = entryPath.replace('classSubdirectory', 'runtime2');
+    }
+    
+    const err = fs.copySync(entryPath, outputPath);
+    if (err) console.error(err);
+    
 }
 
 

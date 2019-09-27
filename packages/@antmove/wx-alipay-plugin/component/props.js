@@ -7,8 +7,16 @@ const preProcessCustomComponent = require("./customComponent");
 const processButton = require("./processButton.js");
 const processDataSet = require("./processDataSet");
 const { externalForWxFn } = require("@antmove/utils");
+const Config = require('../config');
 
 module.exports = function (ast, fileInfo, renderAxml) {
+    
+    if (ast.type==='swiper-item') {
+        const oldChildren = ast.children;
+        ast.children = [
+            { props: {}, type: 'view', children: oldChildren }
+        ];
+    }
     let isComponentTag = false;
     processButton(ast, fileInfo);
     let { type, props } = ast;
@@ -18,16 +26,11 @@ module.exports = function (ast, fileInfo, renderAxml) {
             if (key && !props[key].value[0]) {
                 props[key] = { type: "double", value: [" "] };
             }
-
-            processDataSet(key, props[key], props);
-
-            if (key === "src" && type === "include") {
-                let rule = props[key].value[0];
-                if (rule[0] !== "/" && rule[0] !== "." && rule[0] !== "{") {
-                    let tempPath = path.join(
-                        fileInfo.dirname,
-                        rule.replace(/\.axml'*/g, ".wxml")
-                    );
+            key = processDataSet(key, props[key], props);
+            if (key === 'src' && type === 'include') {
+                let rule = props[ key].value[0];
+                if ((rule[0] !== '/' && rule[0] !== '.' && rule[0] !== '{')) {
+                    let tempPath = path.join(fileInfo.dirname, rule.replace(/\.axml'*/g, '.wxml'));
                     if (fs.pathExistsSync(tempPath)) {
                         rule = "./" + rule;
                     } else {
@@ -137,7 +140,7 @@ module.exports = function (ast, fileInfo, renderAxml) {
     return isComponentTag;
 };
 
-function processEvents(obj = {}) {
+function processEvents (obj = {}) {
     for (let key in obj) {
         if (eventsMap[key]) {
             obj[eventsMap[key]] = obj[key];
@@ -157,7 +160,7 @@ function processEvents(obj = {}) {
     return obj;
 }
 
-function processComponentMethodProp(astProps = {}, propsInfo = {}) {
+function processComponentMethodProp (astProps = {}, propsInfo = {}) {
     Object.keys(astProps).forEach(function (prop) {
         if (propsInfo[prop] && propsInfo[prop].type === 1) {
             astProps[propsInfo[prop].key] = astProps[prop];
@@ -168,7 +171,7 @@ function processComponentMethodProp(astProps = {}, propsInfo = {}) {
     return astProps;
 }
 
-function checkoutCustomComponent(fileInfo, tagName) {
+function checkoutCustomComponent (fileInfo, tagName) {
     let bool = false,
         json,
         appJson;
@@ -213,7 +216,7 @@ function checkoutCustomComponent(fileInfo, tagName) {
     return bool;
 }
 
-function processCustomComponent(ast, fileInfo) {
+function processCustomComponent (ast, fileInfo) {
     let isComponentTag = false;
     /**
      * 自定义组件事件处理
@@ -263,12 +266,9 @@ function processCustomComponent(ast, fileInfo) {
                     ast.props[prop].value[0] = "*this";
                 }
 
-                // collect nodes relation
-                // let _prop = {
-                //     type: 'unknown',
-                //     value: ['__selfRef']
-                // };
-                // ast.props.__getParentRef = _prop;
+                if (!Config.component2) {
+                    ast.props['_parent_ref'] = { type: "double", value: ["{{isMounted}}"] };
+                }
             });
         }
     }
@@ -305,34 +305,34 @@ function processExternalClasses (ast, fileInfo) {
              * */
         }
 
-        Object.keys(ast.props).forEach(function (propName) {
-            if (propName.match(/-class$/) || propName.match(/-class-/g)) {
-                ast.props[propName] = _externalClass(ast.props[propName]);
-            }
-        });
+        Object.keys(ast.props)
+            .forEach(function (propName) {
+                if (propName.match(/-class$/) || propName.match(/-class-/g)) {
+                    ast.props[propName] = _externalClass(ast.props[propName]);
+                }
+            });
     }
 
-    function _externalClass(classInfo = {}) {
+    function _externalClass (classInfo = {}) {
         let _classes = classInfo.value[0].split(/\s+/);
         _classes = _classes.filter(function (className) {
             return className.match(/-class$/) || className.match(/-class-/g);
         });
-    
         let temp = classInfo.value[0].split(/\s+/);
         let newClass = [];
         temp.forEach(function (str) {
             if (opts.externalClasses.includes(str) || _classes.includes(str)) {
-                newClass.push("{{" + _transform(str) + "}}");
+                newClass.push('{{' + _transform(str) + '}}');
             } else {
                 newClass.push(str);
             }
         });
-    
-        classInfo.value[0] = newClass.join(" ");
+            
+        classInfo.value[0] = newClass.join(' ');
         return classInfo;
     }
     
-    function _transform(str = "") {
+    function _transform (str = "") {
         str = str.replace(/-(\w)/g, function (...$) {
             return $[1].toUpperCase();
         });

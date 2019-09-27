@@ -83,7 +83,10 @@ module.exports = function (jsonStr, fileInfo) {
                  */
                 
                 // cPath = toAbsolutePath(cPath);
+                cPath = cPath.replace(/\\/g, '/');
+                
                 json.usingComponents[c] = cPath;
+                
             });
     }
     
@@ -102,7 +105,6 @@ module.exports = function (jsonStr, fileInfo) {
             }
                 
             _val = rule;
-
             delete json.usingComponents[key];
             json.usingComponents[_key] = _val;
         });

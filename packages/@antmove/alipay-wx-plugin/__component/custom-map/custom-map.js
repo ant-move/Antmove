@@ -1,7 +1,7 @@
 const utils = require('../../api/utils');
 Component({
     properties: {
-        id: {
+        _id: {
             type: String,
             value: 'mapId'
         },
@@ -90,26 +90,7 @@ Component({
         showScale: false,
         enableTraffic: false
     },
-    ready () {
-        this.processProps();
-    },
     methods: {
-        processProps () {
-            const {
-                setting,
-                markers,
-                polyline,
-                polygon
-            } = this.properties;
-            // maekers 差异
-            this.listeningMarkers(markers);
-            // polyline 差异
-            this.listeningPolyline(polyline);
-            // polygons 差异
-            this.listeningPolygons(polygon);
-            // setting 差异
-            this.listeningSetting(setting);
-        },
         listeningMarkers (markers) {
             let alMarkers = markers.map(el => {
                 if (el.anchorX && el.anchorY) {
@@ -350,27 +331,6 @@ Component({
         },
 
         onRegionChangeFn (e) {
-            // e.timeStamp = Number(Date.now());
-            // let defValue = {
-            //     causedBy: "update",
-            //     currentTarget: {
-            //         dataset: {},
-            //         id: "map",
-            //         offsetLeft: 0,
-            //         offsetTop: 0,
-            //         detail: {
-            //             type: "end"
-            //         }
-            //     },
-            //     target: {
-            //         dataset: {},
-            //         id: "map",
-            //         offsetTop: 0,
-            //         offsetLeft: 0
-            //     },
-            //     timeStamp: Number(Date.now()),
-            //     type: "end"
-            // };
             this.triggerEvent('regionchange', e);
         },
         onTapFn (e) {

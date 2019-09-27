@@ -1,13 +1,18 @@
-
+const config = require('../config');
 let prefix = 'saveChildRef';
 module.exports = function (ast, fileInfo) {
-    ast = ast ? ast : {}
+    ast = ast ? ast : {};
     let type = ast.type || "";
     let nodeId = fileInfo.nodeId++;
     let renderFnId = prefix + nodeId;
 
     ast.props = ast.props || {};
-    ast.props.ref = createProp(renderFnId);
+
+    if (config.component2) {
+        ast.props.ref = createProp(renderFnId);
+    } else {
+        ast.props.onChildRef = createProp(renderFnId);
+    }
 
     return new Node({
         type,

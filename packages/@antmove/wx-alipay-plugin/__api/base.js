@@ -21,7 +21,7 @@ const apiObj = {
         fn () {
             let ret = my.getSystemInfoSync();
             let getSystemInfoSyncProps = descObj.getSystemInfoSync.body.returnValue.props;
-            return utils.defineGetter(
+            ret = utils.defineGetter(
                 ret,
                 getSystemInfoSyncProps,
                 function (obj, prop) {
@@ -35,6 +35,14 @@ const apiObj = {
                     );
                 }
             );
+            /**
+             * 处理Androi屏幕宽度返回值
+             */
+            if (ret.platform === "Android") {  
+                ret.screenWidth = ret.screenWidth/ret.pixelRatio;
+                ret.screenHeight = ret.screenHeight/ret.pixelRatio
+            }
+            return ret
         },
     },
     getSystemInfo: {
@@ -57,6 +65,13 @@ const apiObj = {
                             );
                         }
                     );
+                    /**
+                    * 处理Androi屏幕宽度返回值
+                    */
+                    if (res.platform === "Android") {
+                        res.screenWidth = res.screenWidth/res.pixelRatio;
+                        res.screenHeight = res.screenHeight/res.pixelRatio
+                    } 
                     obj.success && obj.success(res);
                 }
             });
@@ -806,7 +821,20 @@ const apiObj = {
                 obj.fileName = obj.name;
                 delete obj.name;
             }
+            const pathArr =  obj.filePath.split('.');
             obj.fileType = 'image';
+            const fileType = {
+                'video': ['ogg', 'avi', 'wma', 'rmvb', 'rm', 'flash', 'mp4', '3gp'],
+                'audio': ['wav', 'mp3'],
+            };
+            let typeName = pathArr[pathArr.length-1];
+            Object.keys(fileType).forEach(key => {
+                fileType[key].forEach (item => {
+                    if (typeName.toLowerCase() === item) {
+                        obj.fileType = key;
+                    }
+                });
+            });
             my.uploadFile(obj);
             const task = {
                 abort () { },
@@ -964,7 +992,14 @@ const apiObj = {
             function Query () {
                 this.query = SQ;
                 this._selectType = 0; // 0: array, 1: object
-
+                this.in = function (p) {
+                    if (typeof this.query.in === 'function') {
+                        this.query.in(p)
+                        return this;
+                    } else {
+                        return this;
+                    }
+                }
                 this.select = function (p) {
                     this.query.select(p);
                     this._selectType = 1;

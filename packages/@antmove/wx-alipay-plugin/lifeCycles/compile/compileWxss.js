@@ -25,7 +25,7 @@ module.exports = function (fileInfo, ctx, inCompileWxml = false) {
 
         fileInfo.hasCompiledStyle = true;
 
-        classNamesWrap = Config.options.scopeStyle && processClassNames(originFileInfo);
+        classNamesWrap = processClassNames(originFileInfo);
     }
 
 
@@ -130,5 +130,6 @@ module.exports = function (fileInfo, ctx, inCompileWxml = false) {
     }*/
 
     cssContent = prettierCode(cssContent, 'scss');
-    fs.outputFileSync(fileInfo.dist, cssContent);
+    if (fileInfo.deep === 0 && /\S*\.wxml/.test(fileInfo.filename) ) return;
+    fs.outputFileSync(fileInfo.dist, cssContent);  
 };

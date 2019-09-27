@@ -1,6 +1,6 @@
 {
   "name": "@antmove/utils",
-  "version": "0.2.23",
+  "version": "1.0.0",
   "description": "antmove helper functions",
   "main": "index.js",
   "scripts": {
@@ -15,6 +15,7 @@
     "@babel/plugin-transform-async-to-generator": "^7.5.0",
     "chalk": "^2.4.2",
     "clean-css": "^4.2.1",
+    "cli-table3": "^0.5.1",
     "clui": "^0.3.6",
     "figlet": "^1.2.3",
     "fs-extra": "^8.1.0",

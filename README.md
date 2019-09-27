@@ -13,22 +13,24 @@ Antmove - 小程序转换器，基于支付宝/微信小程序转换为多端小
 
 ## 特性
 
-* 简单易使用，无学习成本，一键转换
+* 简单易使用，无学习成本，直接上手
 * 转换覆盖率全面，及时跟进各小程序平台更新情况
 * 配套详细的编译时日志/运行时日志工具
 * 编译生成代码可读性强，可二次编程
 * 二次编译支持
+* 组件转换支持
 
-## 跨平台支持
+## 平台支持
 
-* 微信小程序转支付宝小程序
-* 支付宝小程序转微信小程序
-* 支付宝小程序转百度小程序
-* 微信小程序一键转百度小程序内测中，即将发布
-* 微信小程序一键转钉钉小程序内测中，即将发布
+* wx-alipay
+* wx-baidu
+* wx-tt
+* alipay-wx
+* alipay-baidu
+* wx-compiler
+* alipay-compiler
 
 ## 文档
-
 * [官方文档](https://ant-move.github.io/website/docs/readme.html)
 
 ## 安装
@@ -45,9 +47,7 @@ Antmove - 小程序转换器，基于支付宝/微信小程序转换为多端小
     * Mac: `command + shift + p`
     * Windows: `ctrl + shift + p`
 * 输入 `Antmove`
-* 微信小程序转支付宝小程序，运行 `Antmove: Run antmove` 或者 `Antmove: Run antmove wx-alipay` 命令
-* 支付宝小程序转微信小程序，运行 `Antmove: Run antmove alipay-wx` 命令
-* 支付宝小程序转百度小程序，运行 `Antmove: Run antmove alipay-baidu` 命令
+* 运行 `Antmove: Run antmove` 命令
 * 运行如上命令后会给出一个弹窗，选择转换后生成代码存储目录
 * 转换完成
 
@@ -81,16 +81,17 @@ $ yarn add antmove
 ```
 
 
-> 如果你的中国大陆网络环境不佳，推荐使用 [cnpm](https://github.com/cnpm/cnpm)。
-
+> 如果你的网络环境不佳，推荐使用 [cnpm](https://github.com/cnpm/cnpm)。
 
 ## 快速开始
 
 ### 命令行使用
 
-[使用 npm 或 yarn 安装](#使用-npm-或-yarn-安装)才能使用如下命令行。
+```bash
+npm i -g antmove
+```
 
-如果不是全局安装，命令前要加`npx`，同时必须在安装的目录下使用如下命令行。
+> 通过 npm 或 yarn 全局安装才能使用如下命令行
 
 提供两种可用的命令行调用方式（如下几个命令的参数是类似的）
 
@@ -136,8 +137,8 @@ const path = require('path');
 const transformFramework = require('antmove');
 const WechatPlugin = require('@antmove/wx-alipay');
 
-const outputPath = path.join(__dirname, '../../dist');
-const inputDirPath = path.join(__dirname, '../../examples/miniprogram-demo/miniprogram');
+let outputPath = path.join(__dirname, '../../dist');
+let inputDirPath = path.join(__dirname, '../../examples/miniprogram-demo/miniprogram');
 
 const App = transformFramework();
 

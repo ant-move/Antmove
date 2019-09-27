@@ -1,19 +1,19 @@
 let id = 0;
 const { connectNodes } = require('./utils');
-const astCache = {}
+let astCache = {};
 function createAstData () {
-  let RelationAst = {
-    $refNodes: {},
-    $nodes: {},
-    $page: null,
-    current: null,
-    createArray: [],
-    destoryArray: [],
-    mountedHandles: [],
-    componentNodes: {},
-};
+    let RelationAst = {
+        $refNodes: {},
+        $nodes: {},
+        $page: null,
+        current: null,
+        createArray: [],
+        destoryArray: [],
+        mountedHandles: [],
+        componentNodes: {},
+    };
 
-return RelationAst;
+    return RelationAst;
 }
 function createNode (ctx) {
     this.$self = ctx;
@@ -24,8 +24,8 @@ function createNode (ctx) {
 
 createNode.prototype = {
     getRootNode () {
-      let ctx = this.$self;
-  let cacheId = ctx.$page ? ctx.$page.$id : ctx.$id;
+        let ctx = this.$self;
+        let cacheId = ctx.$page ? ctx.$page.$id : ctx.$id;
 
         return astCache[cacheId];
     },
@@ -57,15 +57,37 @@ createNode.prototype = {
 
 
 module.exports = function (node, cb = () => {}, relationNode, bool =false, _bool = false) {
-  let RelationAst = {}
-  let cacheId = this.$page ? this.$page.$id : this.$id;
+    let RelationAst = {};
+    let cacheId = this.$page ? this.$page.$id : this.$id;
     if (_bool) {
         return astCache[cacheId];
     }
     
     if (bool || !astCache[cacheId]) {
-      astCache[cacheId] = createAstData();
-        return astCache[cacheId]
+        astCache[cacheId] = createAstData();
+        return astCache[cacheId];
+    }
+    let _relationData = {};
+    function initData (isComponent = false) {
+        let _ctx = this;
+        _relationData = createAstData();
+        if (isComponent) {
+            _ctx = this.$page;
+        }
+        _ctx.$antmove = _ctx.$antmove || {};
+        _ctx.$antmove.relationData = _relationData;
+        _ctx.$antmove.astCache = astCache;
+    }
+    if (!this.$page) {
+        initData.call(this);
+    } else {
+        if (!this.$page.$antmove
+            || !this.$page.$antmove.relationData) {
+            initData.call(this, true);
+        }
+        _relationData = this.$page.$antmove.relationData;
+        astCache =  this.$page.$antmove.astCache;
+
     }
 
     RelationAst = astCache[cacheId];

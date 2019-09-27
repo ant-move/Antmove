@@ -213,7 +213,7 @@ module.exports = {
                 type: 1,
                 status: 0,
                 desc: '滚动时触发，event.detail = {scrollLeft, scrollTop, scrollHeight, scrollWidth, deltaX, deltaY}',
-                key: 'onScrollToUpper',
+                key: 'onScroll',
                 params: {
                     deltaX: {
                         type: 0,

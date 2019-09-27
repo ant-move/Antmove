@@ -183,6 +183,11 @@ module.exports = function axmlRender (ast = [], fileInfo) {
         _code += wxsLabel;
     }
     funName = '';
+    _code = _code.replace(/<text[^>]*\s*.*>\s*.+\s*<\/text>/g, function (val) {
+        val = val.replace(/\r|\n/g, '');
+        val = val.replace(/ +/g, ' ');
+        return val;
+    });
     return _code;
 
     function incIndent () {
@@ -197,7 +202,7 @@ module.exports = function axmlRender (ast = [], fileInfo) {
         let { props } = _ast;
         proccessComponentProps(_ast, _fileInfo, axmlRender);
         processSpecialTags(_ast);
-        _ast.value = appendWxs(_ast.value, isAddWxs);
+        _ast.value = appendWxs(_ast.value);
         if (props && props['style']) {
             props['style'].value[0] = transformStyle(props['style'].value[0]);
         }
@@ -211,7 +216,6 @@ module.exports = function axmlRender (ast = [], fileInfo) {
         }
         if (_ast.type === 'textContent') {
             // todo: fix comment parse bug
-
             if (_ast.value.match(/-->/)) {
                 return '';
             }
@@ -261,7 +265,11 @@ module.exports = function axmlRender (ast = [], fileInfo) {
                     if (propInfo.value && propInfo.value.type === 'double') {
                         attrCode += ` ${propInfo.key}="${value}"`;
                     } else {
-                        if (propInfo.key === "wx:else" || propInfo.key === "scroll-y") {
+                        const attributeNames = ['wx:else', 'scroll-y', 'showNumber'];
+                        let hasAttr = attributeNames.some(item => {
+                            return item === propInfo.key;
+                        });
+                        if (hasAttr) {
                             attrCode += ` ${propInfo.key}`;
                         } else {
                             attrCode += ` ${propInfo.key}='${value}'`;

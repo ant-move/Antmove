@@ -1,10 +1,10 @@
 const path = require('path');
-const fs = require('fs-extra');
 const prettier = require('prettier');
 
 module.exports = {
-    precessRelativePathOfCode: function (code, filepath, dir) {    
-        return code.replace(/\.+((\/|\\)\.+)+(\/|\\)*\w+/g, function (...r) {
+    precessRelativePathOfCode: function (code, filepath, dir, isComponent) {  
+        if (isComponent) return code;
+        return code.replace(/\.+((\/|\\)\.+)+(\/|\\)*\w+/g, function (...r) {          
             let _path = path.join(filepath, '../', r[0]); 
             _path = _path.substring(dir.length).replace(/\\/g, '/'); // replace 的作用是将windows下的路径的\改回/,使路径格式符合js语法
             return _path;

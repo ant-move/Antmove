@@ -16,9 +16,9 @@ module.exports = function () {
         return app;
     };
 
-    app.start = function () {
+    app.start = function (cb = () => {}) {
         app.plugins.forEach(function (plugin) {
-            new Transform(plugin.plugin, plugin.options).beforeRun();
+            new Transform(plugin.plugin, plugin.options).beforeRun(cb);
         });
         
         return app;

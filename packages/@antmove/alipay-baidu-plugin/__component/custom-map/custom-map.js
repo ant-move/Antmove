@@ -3,12 +3,27 @@ Component({
         polygon: {
             type: Array,
             value: [],
+            
+        },
+        scale: {
+            type: Number,
+            value: 17,
+            observer (newData, oldData) {
+                console.log(newData, oldData);
+                if (newData!==oldData) {
+                    let ascale = newData+1;
+                    this.setData({
+                        ascale
+                    });
+                }
+                
+            }
         }
     },
     data: {
         mapShow: false,
-        scale: 17,
         mapId: "",
+        ascale: 17,
         latitude: '40.048828',
         longitude: '116.280412',
         polyline: [],

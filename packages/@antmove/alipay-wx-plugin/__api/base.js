@@ -46,6 +46,10 @@ const apiObj = {
                 obj.confirmText = obj.buttonText;
                 delete obj.confirmText;
             }
+            obj.content = obj.content.toString();
+            if (typeof obj.content === 'object') {
+                obj.content = JSON.stringify(obj.content);
+            }
             wx.showModal({
                 ...obj,
                 showCancel: false
@@ -61,6 +65,9 @@ const apiObj = {
             if (obj.cancelButtonText) {
                 obj.cancelText = obj.cancelButtonText;
                 delete obj.cancelButtonText;
+            }
+            if (obj.content instanceof Array) {
+                obj.content = JSON.stringify(obj.content);
             }
             wx.showModal(obj);
         }
@@ -155,7 +162,6 @@ const apiObj = {
     showToast: {
         fn (obj = {}) {
             let showToastProps = descObj.showToast.body.params.props;
-            obj.type = obj.type ? obj.type : 'none';
             if (obj.content) {
                 obj.title = obj.content;
                 delete obj.content;
@@ -198,6 +204,7 @@ const apiObj = {
                 }
                 delete obj.type;
             }
+            obj.icon = obj.icon ? obj.icon : 'none'; 
             let params = utils.defineGetter(
                 obj,
                 showToastProps,
@@ -233,6 +240,13 @@ const apiObj = {
             return canvasContext;
         }
     },
+    createAnimation: {
+        fn (obj) {
+            obj.timingFunction = obj.timeFunction;
+            delete obj.timeFunction;
+            return wx.createAnimation({...obj});
+        }
+    },
     createMapContext: {
         fn (params) {
             const mapContext = wx.createMapContext(params);
@@ -254,26 +268,6 @@ const apiObj = {
                 delete obj.selectAll;
             }
             wx.createIntersectionObserver(obj);
-        }
-    },
-    createSelectorQuery: {
-        fn (obj = {}) {
-            let createSelectorQueryProps = descObj.createSelectorQuery.body.params.props;
-            let params = utils.defineGetter(
-                obj,
-                createSelectorQueryProps,
-                function (obj, prop) {
-                    utils.warn(
-                        `createSelectorQuery的参数不支持 ${prop} 属性!`,
-                        {
-                            apiName: prop,
-                            errorType: createSelectorQueryProps[prop].type,
-                            type: 'api'
-                        }
-                    );
-                }
-            );
-            return wx.createSelectorQuery(params);
         }
     },
     chooseImage: {

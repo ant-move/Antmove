@@ -1,4 +1,4 @@
-module.exports = {
+module.exports ={
     "descObject": {
         "movable-view": {
             "name": "可移动的视图容器",
@@ -21,7 +21,7 @@ module.exports = {
                 "out-of-bounds": {
                     "type": 0,
                     "status": 2,
-                    "desc": "超过可移动区域后，movable-view是否还可以移动"
+                    "desc": "movable-view是否带有惯性"
                 },
                 "x": {
                     "type": 7,
@@ -43,7 +43,11 @@ module.exports = {
                     "status": 2,
                     "desc": "阻尼系数，用于控制x或y改变时的动画和过界回弹的动画，值越大移动越快"
                 },
-                "disabled": { "type": 7, "status": 0, "desc": "是否禁用" },
+                "disabled": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "是否禁用"
+                },
                 "scale": {
                     "type": 0,
                     "status": 2,
@@ -64,7 +68,11 @@ module.exports = {
                     "status": 2,
                     "desc": "定义缩放倍数，取值范围为 0.5 - 10"
                 },
-                "animation": { "type": 0, "status": 2, "desc": "是否使用动画" },
+                "animation": {
+                    "type": 0,
+                    "status": 2,
+                    "desc": "是否使用动画"
+                },
                 "bindchange": {
                     "type": 1,
                     "status": 0,
@@ -116,8 +124,16 @@ module.exports = {
             },
             "desc": "使用竖向滚动时，需要给scroll-view一个固定高度，通过 WXSS 设置 height。组件属性的长度单位默认为px，2.4.0起支持传入单位(rpx/px)。",
             "props": {
-                "scroll-x": { "type": 7, "status": 0, "desc": "允许横向滚动" },
-                "scroll-y": { "type": 7, "status": 0, "desc": "允许纵向滚动" },
+                "scroll-x": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "允许横向滚动"
+                },
+                "scroll-y": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "允许纵向滚动"
+                },
                 "scroll-top": {
                     "type": 3,
                     "status": 1,
@@ -162,7 +178,7 @@ module.exports = {
                     "type": 1,
                     "status": 0,
                     "desc": "滚动到底部/右边时触发",
-                    "key": "onScrollToLower",
+                    "key": "onScrollToUpper",
                     "params": {
                         "scrolltolower": {
                             "type": 1,
@@ -175,10 +191,16 @@ module.exports = {
                     "type": 1,
                     "status": 0,
                     "desc": "滚动时触发，event.detail = {scrollLeft, scrollTop, scrollHeight, scrollWidth, deltaX, deltaY}",
-                    "key": "onScrollToUpper",
+                    "key": "onScroll",
                     "params": {
-                        "deltaX": { "type": 0, "status": 2 },
-                        "deltaY": { "type": 0, "status": 2 }
+                        "deltaX": {
+                            "type": 0,
+                            "status": 2
+                        },
+                        "deltaY": {
+                            "type": 0,
+                            "status": 2
+                        }
                     }
                 }
             }
@@ -211,7 +233,11 @@ module.exports = {
                     "status": 0,
                     "desc": "当前选中的指示点颜色"
                 },
-                "autoplay": { "type": 7, "status": 0, "desc": "是否自动切换" },
+                "autoplay": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "是否自动切换"
+                },
                 "current": {
                     "type": 7,
                     "status": 0,
@@ -222,7 +248,11 @@ module.exports = {
                     "status": 0,
                     "desc": "自动切换时间间隔"
                 },
-                "duration": { "type": 7, "status": 0, "desc": "滑动动画时长" },
+                "duration": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "滑动动画时长"
+                },
                 "circular": {
                     "type": 7,
                     "status": 0,
@@ -272,14 +302,16 @@ module.exports = {
                     }
                 },
                 "bindtransition": {
-                    "type": 0,
-                    "status": 2,
-                    "desc": "swiper-item 的位置发生改变时会触发 transition 事件，event.detail = {dx: dx, dy: dy}"
+                    "type": 1,
+                    "status": 0,
+                    "desc": "swiper-item 的位置发生改变时会触发 transition 事件，event.detail = {dx: dx, dy: dy}",
+                    "key": "onTransition"
                 },
                 "bindanimationfinish": {
-                    "type": 0,
-                    "status": 2,
-                    "desc": "动画结束时会触发 animationfinish 事件，event.detail 同上"
+                    "type": 1,
+                    "status": 0,
+                    "desc": "动画结束时会触发 animationfinish 事件，event.detail 同上",
+                    "key": "onAnimationEnd"
                 }
             }
         },
@@ -358,13 +390,21 @@ module.exports = {
             },
             "desc": "组件属性的长度单位默认为px，2.4.0起支持传入单位(rpx/px)。",
             "props": {
-                "percent": { "type": 7, "status": 0, "desc": "百分比0~100" },
+                "percent": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "百分比0~100"
+                },
                 "show-info": {
                     "type": 7,
                     "status": 0,
                     "desc": "在进度条右侧显示百分比"
                 },
-                "border-radius": { "type": 0, "status": 2, "desc": "圆角大小" },
+                "border-radius": {
+                    "type": 0,
+                    "status": 2,
+                    "desc": "圆角大小"
+                },
                 "font-size": {
                     "type": 0,
                     "status": 2,
@@ -427,7 +467,11 @@ module.exports = {
                     "desc": "节点列表/HTML String",
                     "msg": "支付宝小程序只支持Array类型"
                 },
-                "space": { "type": 0, "status": 2, "desc": "显示连续空格" }
+                "space": {
+                    "type": 0,
+                    "status": 2,
+                    "desc": "显示连续空格"
+                }
             }
         },
         "text": {
@@ -443,24 +487,20 @@ module.exports = {
                     "status": 0,
                     "desc": "文本是否可选"
                 },
-                "space": { "type": 7, "status": 0, "desc": "显示连续空格" },
-                "decode": { "type": 7, "status": 0, "desc": "是否解码" },
-                "hidden": { "type": 0, "status": 2, "desc": "隐藏该组件" }
-            }
-        },
-        "checkbox-group": {
-            "name": "多项选择器",
-            "url": {
-                "wechat": "https://developers.weixin.qq.com/miniprogram/dev/component/checkbox-group.html",
-                "alipay": "https://docs.alipay.com/mini/component/checkbox-group"
-            },
-            "desc": "多项选择器，内部由多个checkbox组成。",
-            "props": {
-                "bindchange": {
-                    "type": 1,
+                "space": {
+                    "type": 7,
                     "status": 0,
-                    "desc": "checkbox-group中选中项发生改变时触发 change 事件，detail = {value:[选中的checkbox的value的数组]}",
-                    "key": "onChange"
+                    "desc": "显示连续空格"
+                },
+                "decode": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "是否解码"
+                },
+                "hidden": {
+                    "type": 0,
+                    "status": 2,
+                    "desc": "隐藏该组件"
                 }
             }
         },
@@ -504,8 +544,16 @@ module.exports = {
             },
             "desc": "该组件是原生组件，使用时请注意相关限制",
             "props": {
-                "value": { "type": 7, "status": 0, "desc": "输入框的初始内容" },
-                "type": { "type": 7, "status": 0, "desc": "input 的类型" },
+                "value": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "输入框的初始内容"
+                },
+                "type": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "input 的类型"
+                },
                 "password": {
                     "type": 7,
                     "status": 0,
@@ -526,7 +574,11 @@ module.exports = {
                     "status": 0,
                     "desc": "指定 placeholder 的样式类"
                 },
-                "disabled": { "type": 7, "status": 0, "desc": "是否禁用" },
+                "disabled": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "是否禁用"
+                },
                 "maxlength": {
                     "type": 7,
                     "status": 0,
@@ -543,7 +595,11 @@ module.exports = {
                     "desc": "(即将废弃，请直接使用 focus )自动聚焦，拉起键盘",
                     "key": "focus"
                 },
-                "focus": { "type": 7, "status": 0, "desc": "获取焦点" },
+                "focus": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "获取焦点"
+                },
                 "confirm-type": {
                     "type": 7,
                     "status": 0,
@@ -618,7 +674,11 @@ module.exports = {
             },
             "desc": "从底部弹起的滚动选择器。",
             "props": {
-                "mode": { "type": 7, "status": 0, "desc": "选择器类型" },
+                "mode": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "选择器类型"
+                },
                 "bindchange": {
                     "type": 1,
                     "status": 0,
@@ -701,8 +761,16 @@ module.exports = {
                     "status": 0,
                     "desc": "radio 标识。当该radio 选中时，radio-group 的 change 事件会携带radio的value"
                 },
-                "checked": { "type": 7, "status": 0, "desc": "当前是否选中" },
-                "disabled": { "type": 7, "status": 0, "desc": "是否禁用" },
+                "checked": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "当前是否选中"
+                },
+                "disabled": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "是否禁用"
+                },
                 "color": {
                     "type": 7,
                     "status": 0,
@@ -723,15 +791,31 @@ module.exports = {
             },
             "desc": "滑动选择器。",
             "props": {
-                "min": { "type": 7, "status": 0, "desc": "最小值" },
-                "max": { "type": 7, "status": 0, "desc": "最大值" },
+                "min": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "最小值"
+                },
+                "max": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "最大值"
+                },
                 "step": {
                     "type": 7,
                     "status": 0,
                     "desc": "步长，值必须大于 0，并可被(max - min)整除"
                 },
-                "disabled": { "type": 7, "status": 0, "desc": "是否禁用" },
-                "value": { "type": 7, "status": 0, "desc": "当前取值" },
+                "disabled": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "是否禁用"
+                },
+                "value": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "当前取值"
+                },
                 "color": {
                     "type": 3,
                     "status": 0,
@@ -800,8 +884,16 @@ module.exports = {
             },
             "desc": "开关选择器。",
             "props": {
-                "checked": { "type": 7, "status": 0, "desc": "是否选中" },
-                "disabled": { "type": 7, "status": 0, "desc": "是否禁用" },
+                "checked": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "是否选中"
+                },
+                "disabled": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "是否禁用"
+                },
                 "bindchange": {
                     "type": 1,
                     "status": 0,
@@ -833,8 +925,16 @@ module.exports = {
             },
             "desc": "该组件是原生组件，使用时请注意相关限制。",
             "props": {
-                "value": { "type": 7, "status": 0, "desc": "输入框的内容" },
-                "placeholder": { "type": 7, "status": 0, "desc": "占位符" },
+                "value": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "输入框的内容"
+                },
+                "placeholder": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "占位符"
+                },
                 "placeholder-style": {
                     "type": 7,
                     "status": 0,
@@ -845,14 +945,26 @@ module.exports = {
                     "status": 0,
                     "desc": "指定 placeholder 的样式类"
                 },
-                "disabled": { "type": 7, "status": 0, "desc": "是否禁用" },
+                "disabled": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "是否禁用"
+                },
                 "maxlength": {
                     "type": 7,
                     "status": 0,
                     "desc": "最大长度，当设置为-1时不限制最大长度"
                 },
-                "auto-focus": { "type": 1, "status": 0, "desc": "focus" },
-                "focus": { "type": 7, "status": 0, "desc": "获取焦点" },
+                "auto-focus": {
+                    "type": 1,
+                    "status": 0,
+                    "desc": "focus"
+                },
+                "focus": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "获取焦点"
+                },
                 "auto-height": {
                     "type": 7,
                     "status": 0,
@@ -945,14 +1057,26 @@ module.exports = {
             "tagName": "btn",
             "path": "/__antmove/__component/btn/btn",
             "props": {
-                "size": { "type": 7, "status": 0, "desc": "按钮的大小" },
-                "type": { "type": 7, "status": 0, "desc": "按钮的样式类型" },
+                "size": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "按钮的大小"
+                },
+                "type": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "按钮的样式类型"
+                },
                 "plain": {
                     "type": 7,
                     "status": 0,
                     "desc": "按钮是否镂空，背景色透明"
                 },
-                "disabled": { "type": 7, "status": 0, "desc": "是否禁用" },
+                "disabled": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "是否禁用"
+                },
                 "loading": {
                     "type": 7,
                     "status": 0,
@@ -1101,42 +1225,6 @@ module.exports = {
                 }
             }
         },
-        "label": {
-            "name": "表单组件标签",
-            "url": {
-                "wechat": "http://www.ionic.wang/weixin/component/label.html",
-                "alipay": "https://docs.alipay.com/mini/component/label"
-            },
-            "desc": "用来改进表单组件的可用性。使用for属性找到对应的id，或者将控件放在该标签下，当点击时，就会触发对应的控件。 for优先级高于内部控件，内部有多个控件的时候默认触发第一个控件。",
-            "props": {
-                "for": { "type": 7, "status": 0, "desc": "绑定控件的 id" }
-            },
-            "type": 7,
-            "status": 0
-        },
-        "checkbox": {
-            "name": "多选项目",
-            "url": {
-                "wechat": "http://www.ionic.wang/weixin/component/checkbox.html",
-                "alipay": "https://docs.alipay.com/mini/component/checkbox"
-            },
-            "desc": "多选项目",
-            "props": {
-                "value": {
-                    "type": 7,
-                    "status": 0,
-                    "desc": "<checkbox/>标识，选中时触发<checkbox-group/>的 change 事件，并携带 <checkbox/> 的 value"
-                },
-                "disabled": { "type": 7, "status": 0, "desc": "是否禁用" },
-                "checked": {
-                    "type": 7,
-                    "status": 0,
-                    "desc": "当前是否选中，可用来设置默认选中"
-                }
-            },
-            "type": 7,
-            "status": 0
-        },
         "navigator": {
             "name": "页面链接",
             "url": {
@@ -1254,7 +1342,11 @@ module.exports = {
                     "status": 0,
                     "desc": "要播放音频的资源地址"
                 },
-                "loop": { "type": 7, "status": 0, "desc": "是否循环播放" },
+                "loop": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "是否循环播放"
+                },
                 "controls": {
                     "type": 7,
                     "status": 0,
@@ -1315,7 +1407,11 @@ module.exports = {
             },
             "desc": "支持JPG、PNG、SVG格式，2.3.0 起支持云文件ID。",
             "props": {
-                "src": { "type": 7, "status": 0, "desc": "图片资源地址" },
+                "src": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "图片资源地址"
+                },
                 "mode": {
                     "type": 7,
                     "status": 0,
@@ -1361,9 +1457,21 @@ module.exports = {
             "path": "/__antmove/__component/custom-map/custom-map",
             "desc": "use custom map component instead default map component.",
             "props": {
-                "longitude": { "type": 7, "status": 0, "desc": "中心经度" },
-                "latitude": { "type": 7, "status": 0, "desc": "中心纬度" },
-                "scale": { "type": 7, "status": 0, "desc": "缩放级别" },
+                "longitude": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "中心经度"
+                },
+                "latitude": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "中心纬度"
+                },
+                "scale": {
+                    "type": 7,
+                    "status": 0,
+                    "desc": "缩放级别"
+                },
                 "markers": {
                     "name": "标记点",
                     "type": 5,
@@ -1395,7 +1503,11 @@ module.exports = {
                             "status": 2,
                             "desc": "显示层级"
                         },
-                        "iconPath": { "type": 7, "status": 0, "desc": null },
+                        "iconPath": {
+                            "type": 7,
+                            "status": 0,
+                            "desc": null
+                        },
                         "rotate": {
                             "type": 7,
                             "status": 0,
@@ -1576,8 +1688,16 @@ module.exports = {
                             "status": 0,
                             "desc": "经纬度数组"
                         },
-                        "color": { "type": 7, "status": 0, "desc": "线的颜色" },
-                        "width": { "type": 7, "status": 0, "desc": "线的宽度" },
+                        "color": {
+                            "type": 7,
+                            "status": 0,
+                            "desc": "线的颜色"
+                        },
+                        "width": {
+                            "type": 7,
+                            "status": 0,
+                            "desc": "线的宽度"
+                        },
                         "dottedLine": {
                             "type": 7,
                             "status": 0,
@@ -1610,8 +1730,16 @@ module.exports = {
                     "desc": "在地图上显示圆",
                     "status": 0,
                     "props": {
-                        "latitude": { "type": 7, "status": 0, "desc": "纬度" },
-                        "longitude": { "type": 7, "status": 0, "desc": "经度" },
+                        "latitude": {
+                            "type": 7,
+                            "status": 0,
+                            "desc": "纬度"
+                        },
+                        "longitude": {
+                            "type": 7,
+                            "status": 0,
+                            "desc": "经度"
+                        },
                         "color": {
                             "type": 7,
                             "status": 0,
@@ -1622,7 +1750,11 @@ module.exports = {
                             "status": 0,
                             "desc": "填充颜色"
                         },
-                        "radius": { "type": 7, "status": 0, "desc": "半径" },
+                        "radius": {
+                            "type": 7,
+                            "status": 0,
+                            "desc": "半径"
+                        },
                         "strokeWidth": {
                             "type": 7,
                             "status": 0,
@@ -1646,7 +1778,11 @@ module.exports = {
                             "status": 0,
                             "desc": "控件相对地图位置"
                         },
-                        "iconPath": { "type": 7, "status": 0, "desc": null },
+                        "iconPath": {
+                            "type": 7,
+                            "status": 0,
+                            "desc": null
+                        },
                         "clickable": {
                             "type": 7,
                             "status": 0,
@@ -1737,11 +1873,6 @@ module.exports = {
                     "status": 2,
                     "desc": "是否支持缩放"
                 },
-                "enable-scroll": {
-                    "type": 0,
-                    "status": 2,
-                    "desc": "是否支持拖动"
-                },
                 "enable-rotate": {
                     "type": 0,
                     "status": 2,
@@ -1793,7 +1924,11 @@ module.exports = {
                     "desc": "视野发生变化时触发",
                     "key": "onRegionChange",
                     "params": {
-                        "type": { "type": 7, "status": 0, "desc": "" },
+                        "type": {
+                            "type": 7,
+                            "status": 0,
+                            "desc": ""
+                        },
                         "causedBy": {
                             "type": 0,
                             "status": 2,
@@ -1928,7 +2063,7 @@ module.exports = {
                         "out-of-bounds": {
                             "type": 0,
                             "status": 2,
-                            "desc": "超过可移动区域后，movable-view是否还可以移动"
+                            "desc": "movable-view是否带有惯性"
                         },
                         "x": {
                             "type": 7,
@@ -2085,7 +2220,7 @@ module.exports = {
                             "type": 1,
                             "status": 0,
                             "desc": "滚动到底部/右边时触发",
-                            "key": "onScrollToLower",
+                            "key": "onScrollToUpper",
                             "params": {
                                 "scrolltolower": {
                                     "type": 1,
@@ -2098,10 +2233,16 @@ module.exports = {
                             "type": 1,
                             "status": 0,
                             "desc": "滚动时触发，event.detail = {scrollLeft, scrollTop, scrollHeight, scrollWidth, deltaX, deltaY}",
-                            "key": "onScrollToUpper",
+                            "key": "onScroll",
                             "params": {
-                                "deltaX": { "type": 0, "status": 2 },
-                                "deltaY": { "type": 0, "status": 2 }
+                                "deltaX": {
+                                    "type": 0,
+                                    "status": 2
+                                },
+                                "deltaY": {
+                                    "type": 0,
+                                    "status": 2
+                                }
                             }
                         }
                     }
@@ -2203,14 +2344,16 @@ module.exports = {
                             }
                         },
                         "bindtransition": {
-                            "type": 0,
-                            "status": 2,
-                            "desc": "swiper-item 的位置发生改变时会触发 transition 事件，event.detail = {dx: dx, dy: dy}"
+                            "type": 1,
+                            "status": 0,
+                            "desc": "swiper-item 的位置发生改变时会触发 transition 事件，event.detail = {dx: dx, dy: dy}",
+                            "key": "onTransition"
                         },
                         "bindanimationfinish": {
-                            "type": 0,
-                            "status": 2,
-                            "desc": "动画结束时会触发 animationfinish 事件，event.detail 同上"
+                            "type": 1,
+                            "status": 0,
+                            "desc": "动画结束时会触发 animationfinish 事件，event.detail 同上",
+                            "key": "onAnimationEnd"
                         }
                     }
                 },
@@ -2415,22 +2558,6 @@ module.exports = {
             "name": "表单",
             "type": "form",
             "body": {
-                "checkbox-group": {
-                    "name": "多项选择器",
-                    "url": {
-                        "wechat": "https://developers.weixin.qq.com/miniprogram/dev/component/checkbox-group.html",
-                        "alipay": "https://docs.alipay.com/mini/component/checkbox-group"
-                    },
-                    "desc": "多项选择器，内部由多个checkbox组成。",
-                    "props": {
-                        "bindchange": {
-                            "type": 1,
-                            "status": 0,
-                            "desc": "checkbox-group中选中项发生改变时触发 change 事件，detail = {value:[选中的checkbox的value的数组]}",
-                            "key": "onChange"
-                        }
-                    }
-                },
                 "form": {
                     "name": "表单",
                     "url": {
@@ -2522,7 +2649,11 @@ module.exports = {
                             "desc": "(即将废弃，请直接使用 focus )自动聚焦，拉起键盘",
                             "key": "focus"
                         },
-                        "focus": { "type": 7, "status": 0, "desc": "获取焦点" },
+                        "focus": {
+                            "type": 7,
+                            "status": 0,
+                            "desc": "获取焦点"
+                        },
                         "confirm-type": {
                             "type": 7,
                             "status": 0,
@@ -2714,8 +2845,16 @@ module.exports = {
                     },
                     "desc": "滑动选择器。",
                     "props": {
-                        "min": { "type": 7, "status": 0, "desc": "最小值" },
-                        "max": { "type": 7, "status": 0, "desc": "最大值" },
+                        "min": {
+                            "type": 7,
+                            "status": 0,
+                            "desc": "最小值"
+                        },
+                        "max": {
+                            "type": 7,
+                            "status": 0,
+                            "desc": "最大值"
+                        },
                         "step": {
                             "type": 7,
                             "status": 0,
@@ -2726,7 +2865,11 @@ module.exports = {
                             "status": 0,
                             "desc": "是否禁用"
                         },
-                        "value": { "type": 7, "status": 0, "desc": "当前取值" },
+                        "value": {
+                            "type": 7,
+                            "status": 0,
+                            "desc": "当前取值"
+                        },
                         "color": {
                             "type": 3,
                             "status": 0,
@@ -2871,7 +3014,11 @@ module.exports = {
                             "status": 0,
                             "desc": "focus"
                         },
-                        "focus": { "type": 7, "status": 0, "desc": "获取焦点" },
+                        "focus": {
+                            "type": 7,
+                            "status": 0,
+                            "desc": "获取焦点"
+                        },
                         "auto-height": {
                             "type": 7,
                             "status": 0,
@@ -3131,50 +3278,6 @@ module.exports = {
                             "key": "catchTap"
                         }
                     }
-                },
-                "label": {
-                    "name": "表单组件标签",
-                    "url": {
-                        "wechat": "http://www.ionic.wang/weixin/component/label.html",
-                        "alipay": "https://docs.alipay.com/mini/component/label"
-                    },
-                    "desc": "用来改进表单组件的可用性。使用for属性找到对应的id，或者将控件放在该标签下，当点击时，就会触发对应的控件。 for优先级高于内部控件，内部有多个控件的时候默认触发第一个控件。",
-                    "props": {
-                        "for": {
-                            "type": 7,
-                            "status": 0,
-                            "desc": "绑定控件的 id"
-                        }
-                    },
-                    "type": 7,
-                    "status": 0
-                },
-                "checkbox": {
-                    "name": "多选项目",
-                    "url": {
-                        "wechat": "http://www.ionic.wang/weixin/component/checkbox.html",
-                        "alipay": "https://docs.alipay.com/mini/component/checkbox"
-                    },
-                    "desc": "多选项目",
-                    "props": {
-                        "value": {
-                            "type": 7,
-                            "status": 0,
-                            "desc": "<checkbox/>标识，选中时触发<checkbox-group/>的 change 事件，并携带 <checkbox/> 的 value"
-                        },
-                        "disabled": {
-                            "type": 7,
-                            "status": 0,
-                            "desc": "是否禁用"
-                        },
-                        "checked": {
-                            "type": 7,
-                            "status": 0,
-                            "desc": "当前是否选中，可用来设置默认选中"
-                        }
-                    },
-                    "type": 7,
-                    "status": 0
                 }
             }
         },
@@ -3436,7 +3539,11 @@ module.exports = {
                             "status": 0,
                             "desc": "中心纬度"
                         },
-                        "scale": { "type": 7, "status": 0, "desc": "缩放级别" },
+                        "scale": {
+                            "type": 7,
+                            "status": 0,
+                            "desc": "缩放级别"
+                        },
                         "markers": {
                             "name": "标记点",
                             "type": 5,
@@ -3838,11 +3945,6 @@ module.exports = {
                             "status": 2,
                             "desc": "是否支持缩放"
                         },
-                        "enable-scroll": {
-                            "type": 0,
-                            "status": 2,
-                            "desc": "是否支持拖动"
-                        },
                         "enable-rotate": {
                             "type": 0,
                             "status": 2,
@@ -3894,7 +3996,11 @@ module.exports = {
                             "desc": "视野发生变化时触发",
                             "key": "onRegionChange",
                             "params": {
-                                "type": { "type": 7, "status": 0, "desc": "" },
+                                "type": {
+                                    "type": 7,
+                                    "status": 0,
+                                    "desc": ""
+                                },
                                 "causedBy": {
                                     "type": 0,
                                     "status": 2,
@@ -4017,4 +4123,4 @@ module.exports = {
             }
         }
     ]
-};
+}

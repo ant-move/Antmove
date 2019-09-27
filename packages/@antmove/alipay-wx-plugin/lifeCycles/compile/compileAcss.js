@@ -14,7 +14,11 @@ module.exports = function (fileInfo, ctx) {
         cssContent = generateAppCssStyle(cssContent, ctx.output);
     }
 
-    cssContent = processUrl(cssContent, ctx, fileInfo);
+    try {
+        cssContent = processUrl(cssContent, ctx, fileInfo);
+    } catch (error) {
+        console.error('Invalid Acss file: ' +  fileInfo.dist);
+    }
 
     cssContent = prettierCode(cssContent, 'scss');
     fs.outputFileSync(fileInfo.dist, cssContent);

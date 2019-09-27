@@ -15,15 +15,21 @@ const {
 
 module.exports = function (fileInfo, ctx, originCode, apis) {
     let isMatchPlatformApi = originCode.match(/\bmy\.(\w+)/g);
-    originCode = transformClass(originCode);
-    originCode = replaceCalleeHandleFn(originCode, 'my', '_wx', apis);
-    originCode = replaceCallName(originCode, {name: 'httpRequest', newName: 'request'});
+    try {
+        originCode = transformClass(originCode);
+        originCode = replaceCalleeHandleFn(originCode, 'my', '_wx', apis);
+        originCode = replaceCallName(originCode, {name: 'httpRequest', newName: 'request'});
+        Config.compile.wrapApis = Object.assign(Config.compile.wrapApis, apis);
+        originCode = commentBlock(originCode);
+        originCode = ifProcessHandleFn(originCode);
+    } catch (error) {
+        console.error('Invalid js file: ' +  fileInfo.dist);
+    }
+    
     // if (/\bmy\./g.test(originCode)) {
     //     originCode = originCode.replace(/\bmy\./g, '_wx.');
     // }
-    Config.compile.wrapApis = Object.assign(Config.compile.wrapApis, apis);
-    originCode = commentBlock(originCode);
-    originCode = ifProcessHandleFn(originCode);
+   
     /**
      *  判断是否为 App()/Page()/Component()
      * */
@@ -33,7 +39,12 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
     let cbNameInfo = {
         name: ''
     };
-    getCbName(originCode, cbNameInfo);
+    try {
+        getCbName(originCode, cbNameInfo);
+    } catch (error) {
+        console.error('Invalid js file: ' +  fileInfo.dist);
+    }
+    
     matchRet = cbNameInfo.name;
 
     let apiPath = customComponentPrefix + '/api/index.js';  
@@ -50,12 +61,17 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
                 `;
     }
     originCode = insertCode + originCode;
-    originCode = processRequireForWx(originCode, {
-        dirname: ctx.entry,
-        filename: fileInfo.path,
-        filepath: fileInfo.dirname
-    });
-    originCode = prettierCode(originCode);
-
+    originCode = originCode.replace(/_wx\.createSelectorQuery\(\)/g, 'this.createSelectorQuery()');
+    
+    try {
+        originCode = processRequireForWx(originCode, {
+            dirname: ctx.entry,
+            filename: fileInfo.path,
+            filepath: fileInfo.dirname
+        });
+        originCode = prettierCode(originCode);
+    } catch (error) {
+        console.error('Invalid js file: ' +  fileInfo.dist);
+    }
     fs.outputFileSync(fileInfo.dist, originCode);
 };

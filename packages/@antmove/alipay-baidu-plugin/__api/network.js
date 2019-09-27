@@ -10,6 +10,8 @@ const apiObj = {
     httpRequest: {
         fn (obj) {
             const successFn = obj.success;
+            obj.header = obj.headers;
+            delete obj.headers;
             delete obj.success;
             return swan.request({
                 ...obj,
@@ -20,6 +22,21 @@ const apiObj = {
             });
         }
         
+    },
+    request: {
+        fn (obj) {
+            const successFn = obj.success;
+            obj.header = obj.headers;
+            delete obj.headers;
+            delete obj.success;
+            return swan.request({
+                ...obj,
+                success (res) {
+                    res.status = res.statusCode;
+                    successFn && successFn(res);
+                }
+            });
+        }
     }
 
 };

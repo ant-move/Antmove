@@ -346,7 +346,7 @@ module.exports = {
             msg: '返回值对象方法缺失',
             returnValue: {
                 props: {
-                    cleaerRoute: {
+                    clearRoute: {
                         type: 0,
                         desc: '清除地图上的步行导航路线'
                     },

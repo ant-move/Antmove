@@ -2,6 +2,9 @@ const chalk = require('chalk');
 const CLI = require('clui');
 const clc = require('cli-color');
 const log = require('single-line-log').stdout;
+const fs = require('fs');
+const path = require('path');
+const Table = require('cli-table3');
 const method = {
     report (consoleData) {
         const { time, status, reportData, after = "...", cycle = "" } = consoleData;
@@ -169,12 +172,48 @@ module.exports = {
 
         method.reportSpeed(speed);
     },
-    reportDist (version, distPath) {
+    reportDist: async (version, distPath, toolData = {}) => {
+        let utilsPath = path.join(__dirname, '../../../../../node_modules/@antmove/utils', 'package.json');
+        if (!fs.existsSync(utilsPath)) {
+            utilsPath = path.join(__dirname, '../..', 'package.json');
+        }
+        const utilsData = JSON.parse(fs.readFileSync (utilsPath, 'utf-8'));
+      
         console.log('');
-        console.log(chalk.green(`Version：${version}`));
-        console.log(chalk.green(`转化输出地址：${distPath}`));
+
+        var table = new Table();
+        table.push(
+            {'antmove': version}
+        );
+        const toolObj = {};
+        toolObj[`${toolData.tool}`] = toolData.version;
+        toolData.tool && table.push(
+            toolObj
+        );
+        const utilsObj = {};
+        const outsObj = {};
+        utilsObj[`@antmove/utils`] = utilsData.version;
+        let distPathArr = distPath.split('');
+        let newPath = '';
+        distPathArr.forEach( (its, index) => {
+            newPath+=its;
+            if (index>1&&index%40===1) {
+                newPath+='\n';
+            }
+        });
+        outsObj[`转换输出地址`] = newPath;
+        table.push(
+            utilsObj,
+            outsObj
+        );
+        console.log(chalk.green(table.toString()));
         console.log('');
+    
+ 
+        
+
     }   
 
 
 }; 
+

@@ -10,6 +10,7 @@ const fs = require('fs-extra');
 const compileAxml = require('./compile/compileAxml');
 const compileAcss = require('./compile/compileAcss');
 const compileJs = require('./compile/compileJs');
+
 const project = {
     name: "",
     path: "",
@@ -34,7 +35,7 @@ const {
     report,
     reportTable,
     reportSpeed,
-    // reportDist
+    reportDist
 } = reportMethods;
 // 制作日志
 const recordConfig = require("../utils/record/config");
@@ -58,7 +59,9 @@ let repData = resDataInit();
 module.exports = {
     defaultOptions: {
         exclude: [
-            'project.config.json'
+            'project.config.json',
+            'node_modules',
+            'antmove.config.js'
         ],
         env: 'production',
         remote: false
@@ -67,9 +70,12 @@ module.exports = {
         const {
             getSurrounding,
         } = record(recordConfig);
-        fs.emptyDirSync(this.$options.dist);
-        emptyFiles(this.$options.dist, ['miniprogram_npm', 'node_modules']);
-        if (!isAlipayApp (this.$options.entry)) {
+        fs.existsSync(this.$options.dist) && emptyFiles(this.$options.dist, ['miniprogram_npm', 'node_modules']);
+        let ifComponent = false;
+        if (this.$options.component === "component") {
+            ifComponent = true;
+        }
+        if (!isAlipayApp (this.$options.entry, ifComponent)) {
             console.log(chalk.red('[Ops] ' + this.$options.entry + ' is not a alipay miniproramm directory.'));
             return false;
         }
@@ -103,13 +109,16 @@ module.exports = {
 
     },
     onParsed () {
-        const packageData = getPackageJson();
-        // reportDist(`${packageData.version}`, this.$options.dist);
+        const {packageData, antmovePackageData} = getPackageJson();
+        reportDist(`${antmovePackageData.version}`, this.$options.dist, {tool: '@antmove/alipay-wx', version: packageData.version});
     },
     beforeCompile (ctx) {
         fs.emptyDirSync(ctx.$options.dist);
     },
     onCompiling (fileInfo, ctx) {
+        // if (/node_modules/.test(fileInfo.path)) {
+        //     fileInfo.dist = fileInfo.dist.replace(/node_modules/, 'ant_modules');
+        // }
         const {
             getTemplateData,
             getStyleData,
@@ -194,7 +203,7 @@ module.exports = {
             const reptempData = getScriptData(pathinfo, apis, wxoriginCode, "my");
             repData.transforms = Object.assign(repData.transforms, reptempData);
         } else if (isTypeFile('.sjs', fileInfo.path)) {
-            const { transformEs6 } = require('@antmove/utils');
+            const { transformSjsToWxs } = require('@antmove/utils');
             let pathinfo = fileInfo.path.split(projectParents)[1].substr(1);
             const reptempData = getCustomScript(pathinfo);
             repData.transforms = Object.assign(repData.transforms, reptempData);
@@ -208,7 +217,8 @@ module.exports = {
                 nums: finishFile
             };
             date = report(date, reportData);
-            content = transformEs6(content);
+            content = transformSjsToWxs(content);
+            content = content.replace(/exports\["default"\]/g, 'module.exports');
             fs.outputFileSync(fileInfo.dist.replace(/\.sjs$/, '.wxs'), content);
         } else {
             let content;
@@ -251,9 +261,8 @@ module.exports = {
                 date = report(date, reportData);
 
             } else if (fileInfo.extname === '.json') {
+                const { transformPackage } =require('@antmove/utils');
                 let pathInfo = fileInfo.path.split(projectParents)[1].substr(1);
-
-
                 let parent = fileInfo.parent;
                 let bool = false;
                 let AxmlFileInfo = null;
@@ -266,11 +275,6 @@ module.exports = {
                 content = fs.readFileSync(fileInfo.path, 'utf8');
                 let pageJson = JSON.parse(content);
                 if (pageJson.usingComponents) {
-                    const componentObj = pageJson.usingComponents; 
-                    Object.keys(componentObj).map(key => {
-                        componentObj[`antmove-${key}`] = componentObj[key];
-                        delete componentObj[key];
-                    });
                     if (pageJson.component) {
                         project.componentNum++;
                     }
@@ -282,7 +286,9 @@ module.exports = {
                 } else {
                     content = fs.readFileSync(fileInfo.path, 'utf8');
                 }
-
+                if (fileInfo.path.includes('package.json')) {
+                    content = transformPackage(fileInfo);
+                }
                 const jsonData = getJsonData(pathInfo, content);
                 repData.transforms = Object.assign(repData.transforms, jsonData);
 
@@ -318,9 +324,7 @@ module.exports = {
                 repData.transforms = Object.assign(repData.transforms, otherData);
 
             }
-
             fs.outputFileSync(fileInfo.dist, content);
-
         }
         // 记录当前处理完成的文件数目
         finishFile++;

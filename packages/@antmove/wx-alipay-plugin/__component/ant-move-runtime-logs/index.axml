@@ -10,7 +10,7 @@
               <text>{{item.logNum}}</text>
             </view>
             <view class="log-img-wrp">
-              <image mode="scaleToFill" src="image/you3x.png" class="log-img"/>
+              <image mode="scaleToFill" src="./image/you3x.png" class="log-img"/>
             </view>
           </view>
         </view>
@@ -19,8 +19,19 @@
       <view>
       </view>
       <view class="footer-num">
-        总共{{pathNum}}页面
+        总共{{pathNum}}个页面
       </view>
+    </view>
+    <view class="box" ></view>
+  </view>
+  <view class = "antmove_logo">
+    <view class = "antmove_logo_box"> 
+        <view class = "antmove_logo_wrap">
+            <image class="antmove_logo_img" mode="scaleToFill" src="./image/antmove_logo.png"/>
+        </view>   
+        <view>
+           <text class="antmove_text"> Antmove</text>
+        </view>       
     </view>
   </view>
 </view>

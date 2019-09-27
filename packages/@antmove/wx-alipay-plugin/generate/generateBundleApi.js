@@ -34,13 +34,10 @@ function generate (output) {
     let myJS = 'const utils = require("./utils");\nconst descObj = require("./desc.js");\nconst apiObj = ' + apiContent + '\nmodule.exports = apiObj;';
     let descJs = 'const utils = require("./utils");\nconst infoObj = ' + apiInfo + '\nmodule.exports = infoObj;';
 
-    // if (!Config.isDev()) {
-    //     myJS = minifyJs(
-    //         transformEs6(myJS)
-    //     );
-    //     descJs = minifyJs(
-    //         transformEs6(descJs));
-    // }
+    if (Config.aliAppType === 'dd') {
+        myJS = `const my = dd;\nmy.request = my.httpRequest;\n` + myJS;
+        descJs = `const my = dd;\n` + descJs;
+    }
 
     fs.outputFileSync(path.join(outputPath, 'my.js'), myJS);
     fs.outputFileSync(path.join(outputPath, 'desc.js'), descJs);
@@ -53,10 +50,15 @@ function generate (output) {
     }
 }
 
-function generateRuntimeConfig (output, isDev = false) {
+function generateRuntimeConfig (output, isDev = false, type) {
+    
     let code = `
+    ${
+    type === 'dd' ? "dd.clearStorageSync = dd.removeStorageSync;\ndd.clearStorage = dd.removeStorage;\n" : ''
+}
     module.exports = {
-        env: ${isDev ? '"development"': '"production"'}
+        env: ${isDev ? '"development"': '"production"'},
+        global: ${type === 'alipay' ? 'my' : type }
     }
     `;
     let outputPath = path.join(output, `${customComponentPrefix}/api/config.js`);
@@ -104,13 +106,15 @@ function minifyObject (obj = {}, props = {}) {
 /**
  * 监听父进程 message 事件
  */
+
 process.on('message', function (opts) {
     Config = opts.Config;
     Config.isDev = function () {
         return Config.env === 'development';
     },
     customComponentPrefix = Config.library.customComponentPrefix;
-    generateRuntimeConfig(opts.output, Config.isDev());
+    
+    generateRuntimeConfig(opts.output, Config.isDev(), Config.aliAppType);
     generate(opts.output);
     process.exit(0);
 });

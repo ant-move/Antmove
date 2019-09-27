@@ -78,20 +78,47 @@ module.exports = {
                     type: createSupportProp('默认值为 node'),
                     name: createSupportProp('支持部分受信任的 HTML 节点'),
                     attrs: createSupportProp('支持部分受信任的属性，遵循 Pascal 命名法'),
-                    children: createSupportProp('结构和 nodes 相同')
+                    children: createSupportProp('结构和 nodes 相同'),
+                    'className': createSupportProp('已选择的进度条颜色',1,"class"),
                 }
             }
         }
     },
+    'custom-rich-text': {
+        name: '富文本',
+        url: {
+            target: "https://smartprogram.baidu.com/docs/develop/component/base/#rich-text/",
+            original: "https://docs.alipay.com/mini/component/rich-text"
+        },
+        desc: '富文本',
+        type: 5,
+        tagName: "custom-rich-text",
+        path: "/component/custom-rich-text/custom-rich-text",
+        nodes: {
+            type: 7,
+            status: 0,
+            desc: '节点列表',
+            props: {
+                type: createSupportProp('默认值为 node'),
+                name: createSupportProp('支持部分受信任的 HTML 节点'),
+                attrs: createSupportProp('支持部分受信任的属性，遵循 Pascal 命名法'),
+                children: createSupportProp('结构和 nodes 相同'),
+                
+            }
+        },
+        space: createSupportProp('暂不支持显示连续空格', 0),
+        'className': createSupportProp('已选择的进度条颜色',1,"class"),
+    },
     'import-sjs': {
-        name: "引用 .sjs 文件",
+        name: "引用自定义脚本文件",
+        tagName: "filter",
         url: {
             target: "",
             original: "https://docs.alipay.com/mini/framework/sjs"
         },
-        desc: "引用 .sjs 文件的的组件",
-        status: 2,
-        type: 0
+        desc: "引用自定义脚本文件",
+        status: 0,
+        type: 1
     },
     'favorite': {
         name: "收藏组件",
@@ -103,5 +130,4 @@ module.exports = {
         status: 2,
         type: 0
     }
-
 };

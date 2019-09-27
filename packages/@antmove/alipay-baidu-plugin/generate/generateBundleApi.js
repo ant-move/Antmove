@@ -11,15 +11,17 @@ const Config = require('../config.js');
 
 
 const wrapApis = require('../__api/my.js');
+
 const wrapApisInfo = require('../config/apiInfo/index').descObject;
 let entry = path.join(__dirname, '../__api');
 
 module.exports = function (output) {
     const customComponentPrefix = Config.library.customComponentPrefix;
     let outputPath = path.join(output, `${customComponentPrefix}/api`);
-    let apiContent = minifyObject(wrapApis, Config.compile.wrapApis);
+    // let apiContent = minifyObject(wrapApis, Config.compile.wrapApis);
+    let apiContent = wrapApis;
     let apiInfo = minifyObject(wrapApisInfo, Config.compile.wrapApis);
-
+    // let apiInfo = wrapApisInfo;
     apiContent = objToString(apiContent);
     apiContent = apiContent.replace(/\\n/g, '');
     apiContent = apiContent.replace(/\\"/g, '"');

@@ -5,10 +5,15 @@ const path = require('path');
 const os = require('os');
 const {
     returnOptions
-} = require('../cli/utils')
-
+} = require('../cli/utils');
+const {
+    getVersion
+} = require('@antmove/utils');
+// getVersion();
 console.log(chalk.green(figlet.textSync("Antmove")));
 console.log(chalk.green('欢迎使用蚂蚁搬家工具，您可以通过如下地址寻求帮助或是给予反馈。'));
+console.log(chalk.green('Antmove: https://ant-move.github.io/website/'));
+console.log(chalk.green('Github: https://github.com/ant-move/antmove'));
 console.log(' ');
 
 const pwd = process.cwd();
@@ -30,10 +35,22 @@ module.exports = function (opts = {}, cb = () => {}) {
                     name: 'wx-amap'
                 },
                 {
+                    name: 'wx-tt'
+                },
+                {
                     name: 'alipay-baidu'
                 },
                 {
                     name: 'alipay-wx'
+                },
+                {
+                    name: 'wx-compiler'                   
+                },
+                {
+                    name: 'alipay-compiler'
+                },
+                {
+                    name: 'wx-baidu'
                 }
             ]
         },
@@ -65,7 +82,7 @@ module.exports = function (opts = {}, cb = () => {}) {
             answers.output = opts.output || answers.output || defaultOutput;
             let isMac = os.platform();
             if (isMac === 'darwin' && answers.output.charAt(answers.output.length-1)!=='/') {
-                answers.output = `${answers.output}/`
+                answers.output = `${answers.output}/`;
             } 
             if (answers.output.charAt(answers.output.length-1)==='/' && isMac!=='darwin') {
                 answers.output = answers.output.substr(0, answers.output.length-1);

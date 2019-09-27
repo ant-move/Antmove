@@ -1,0 +1,9 @@
+.sheet_cancel {
+    border-top: 8px solid #eee;
+    line-height: 42px;
+    text-align: center;
+    overflow: hidden;
+}
+.sheet_cancel view {
+    overflow: hidden;
+}
