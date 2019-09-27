@@ -1,6 +1,6 @@
 {
   "name": "@antmove/alipay-polyfill",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "alipay miniprograrmm ployfill for antmove",
   "main": "index.js",
   "scripts": {
@@ -9,10 +9,11 @@
   "author": "amap-appx@service.autonavi.com",
   "license": "GPL-3.0",
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@antmove/utils": "^1.0.1",
+    "@antmove/utils": "^1.0.0",
     "chalk": "^2.4.2",
     "fs-extra": "^8.1.0"
   }
