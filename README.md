@@ -20,17 +20,17 @@ Antmove - 小程序转换器，基于支付宝/微信小程序转换为多端小
 * 二次编译支持
 * 组件转换支持
 
-## 平台支持
+## 跨平台支持
 
 | # | 编译命令 | 描述 | 文档 | GitHub | Npm |
 |--|--|--|--|--|--|
-| 1 | wx-alipay | 微信小程序转支付宝小程序，支持阿里系其它平台小程序编译（如 钉钉小程序） | | |
-| 2 | wx-baidu | 微信小程序转百度智能小程序 | | |
-| 3 | wx-tt | 微信小程序转字节跳动小程序 | | |
-| 4 | alipay-wx | 支付宝小程序转微信小程序 | | |
-| 5 | alipay-baidu | 支付宝小程序转百度智能小程序 | | |
-| 6 | wx-compiler | 对于有跨平台代码编写的，可以用该命令得到纯净的微信小程序代码 | | |
-| 7 | alipay-compiler | 原生支付宝小程序引用 Antmove 转换而来的组件库时，使用该命令对引用项目编译，以支持 relations 和 selectComponent 能力 | | |
+| 1 | wx-alipay | 微信小程序转支付宝小程序，支持阿里系其它平台小程序编译（如 钉钉小程序） | [README.md](https://github.com/ant-move/Antmove/blob/master/packages/%40antmove/wx-alipay-plugin/README.md)| [Github](https://github.com/ant-move/Antmove/tree/master/packages/%40antmove/wx-alipay-plugin) | [@antmove/wx-alipay - npm](https://www.npmjs.com/package/@antmove/wx-alipay) |
+| 2 | wx-baidu | 微信小程序转百度智能小程序 | [README.md](https://github.com/ant-move/Antmove/blob/master/packages/%40antmove/wx-baidu-plugin/README.md) | [Github](https://github.com/ant-move/Antmove/tree/master/packages/%40antmove/wx-baidu-plugin) | [@antmove/wx-baidu - npm](https://www.npmjs.com/package/@antmove/wx-baidu) |
+| 3 | wx-tt （非正式版）| 微信小程序转字节跳动小程序 | [README.md](https://github.com/ant-move/Antmove/blob/master/packages/%40antmove/wx-tt-plugin/README.md) | [Github](https://github.com/ant-move/Antmove/tree/master/packages/%40antmove/wx-tt-plugin) | [@antmove/wx-tt - npm](https://www.npmjs.com/package/@antmove/wx-tt)|
+| 4 | alipay-wx | 支付宝小程序转微信小程序 | [README.md](https://github.com/ant-move/Antmove/blob/master/packages/%40antmove/alipay-wx-plugin/README.md) | [Github](https://github.com/ant-move/Antmove/tree/master/packages/%40antmove/alipay-wx-plugin) | [@antmove/alipay-wx - npm](https://www.npmjs.com/package/@antmove/alipay-wx)|
+| 5 | alipay-baidu | 支付宝小程序转百度智能小程序 |  [README.md](https://github.com/ant-move/Antmove/blob/master/packages/%40antmove/alipay-baidu-plugin/README.md) | [Github](https://github.com/ant-move/Antmove/tree/master/packages/%40antmove/alipay-baidu-plugin) | [@antmove/alipay-baidu - npm](https://www.npmjs.com/package/@antmove/alipay-baidu)|
+| 6 | wx-compiler | 对于有跨平台代码编写的，可以用该命令得到纯净的微信小程序代码 | [README.md](https://github.com/ant-move/Antmove/blob/master/packages/%40antmove/wx-wx-plugin/README.md) | [Github](https://github.com/ant-move/Antmove/tree/master/packages/%40antmove/wx-wx-plugin)  | [@antmove/wx-wx - npm](https://www.npmjs.com/package/@antmove/wx-wx) |
+| 7 | alipay-compiler | 原生支付宝小程序引用 Antmove 转换而来的组件库时，使用该命令对引用项目编译，以支持 relations 和 selectComponent 能力 | [README.md](https://github.com/ant-move/Antmove/blob/master/packages/%40antmove/alipay-polyfill-plugin/README.md) | [Github](https://github.com/ant-move/Antmove/tree/master/packages/%40antmove/alipay-polyfill-plugin)  | [@antmove/alipay-polyfill - npm](https://www.npmjs.com/package/@antmove/alipay-polyfill)|
 
 ## 文档
 * [官方文档](https://ant-move.github.io/website/docs/readme.html)
