@@ -1,5 +1,5 @@
 {
-  "name": "@antmove/wx-tt",
+  "name": "@antmove/template-plugins",
   "version": "0.2.29",
   "description": "transform wechat miniprogram to tt miniprogram tool.",
   "main": "index.js",
