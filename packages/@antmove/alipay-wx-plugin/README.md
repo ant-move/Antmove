@@ -46,7 +46,7 @@
     * Mac: `command + shift + p`
     * Windows: `ctrl + shift + p`
 * 输入 `Antmove`
-* 运行 `Antmove: Run antmove alipay-wx` 命令，实现支付宝小程序转换微信小程序的转换
+* 运行 `Antmove: Run antmove alipay-wx` 命令，实现支付宝小程序到微信小程序的转换
 * 运行如上命令后会给出一个弹窗，选择转换后生成代码存储目录
 * 转换完成
 

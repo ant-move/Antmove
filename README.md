@@ -22,13 +22,15 @@ Antmove - 小程序转换器，基于支付宝/微信小程序转换为多端小
 
 ## 平台支持
 
-* wx-alipay
-* wx-baidu
-* wx-tt
-* alipay-wx
-* alipay-baidu
-* wx-compiler
-* alipay-compiler
+| # | 编译命令 | 描述 | 文档 | GitHub | Npm |
+|--|--|--|--|--|--|
+| 1 | wx-alipay | 微信小程序转支付宝小程序，支持阿里系其它平台小程序编译（如 钉钉小程序） | | |
+| 2 | wx-baidu | 微信小程序转百度智能小程序 | | |
+| 3 | wx-tt | 微信小程序转字节跳动小程序 | | |
+| 4 | alipay-wx | 支付宝小程序转微信小程序 | | |
+| 5 | alipay-baidu | 支付宝小程序转百度智能小程序 | | |
+| 6 | wx-compiler | 对于有跨平台代码编写的，可以用该命令得到纯净的微信小程序代码 | | |
+| 7 | alipay-compiler | 原生支付宝小程序引用 Antmove 转换而来的组件库时，使用该命令对引用项目编译，以支持 relations 和 selectComponent 能力 | | |
 
 ## 文档
 * [官方文档](https://ant-move.github.io/website/docs/readme.html)
@@ -120,7 +122,7 @@ antmove wx-alipay -i ./wechat-mini/project -o ./dist/alipay-mini/project --env d
 > 如上的命令表示将 `./wechat-mini/project` 微信小程序项目转换为支付宝小程序项目，转换到 `./dist/alipay-mini/project` 目录
 > 如果你不想输入参数，可以体验交互式的命令方式，执行 `antmove` 即可。
 
-### 命令行参数说明
+### 命令行参数说明 - [配置文件文档详情](./docs/antmove-config-js.md)
 
 * `--input,-i`
     * 可选，编译源码目录，如果不传则是当前目录
@@ -128,6 +130,7 @@ antmove wx-alipay -i ./wechat-mini/project -o ./dist/alipay-mini/project --env d
     * 必传，编译输出目录
 * `--env,-e`
     * 可选（development/production），编译模式，生产模式代码会压缩，无编译日志及运行时日志
+> 更多配置项可参考[配置文件文档详情](./docs/antmove-config-js.md)。
 
 ### Node.js 使用方式
 

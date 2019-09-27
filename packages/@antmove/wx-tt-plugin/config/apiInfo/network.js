@@ -7,34 +7,14 @@ module.exports = {
         1,
         '发起 HTTPS 网络请求',
         'https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html',
-        'https://docs.alipay.com/mini/api/owycmh',
+        'https://developer.toutiao.com/dev/miniapp/uQTMz4CNxMjL0EzM',
         {
-            msg: '入参参数名称差异/参数缺失/返回值名称差异',
+            msg: '入参参数名称差异',
             params: {
                 props: {
-                    header: {
-                        type: 1,
-                        desc: '设置请求的 header，header 中不能设置 Referer。content-type 默认为 application/json, wx: header, alipay: headers'
-                    },
-                    responseType: {
-                        type: 0,
-                        desc: '响应的数据类型, alipay缺失: responseType'
-                    },
                     'method合法值': {
                         type: 0,
                         desc: 'OPTIONS,HEAD,PUT,DELETE,TRACE,CONNECT'
-                    }
-                }
-            },
-            returnValue: {
-                props: {
-                    statusCode: {
-                        type: 1,
-                        desc: 'wx: statusCode, alipay: status'
-                    },
-                    header: {
-                        type: 1,
-                        desc: 'wx: header, alipay: headers'
                     }
                 }
             }
@@ -44,7 +24,7 @@ module.exports = {
         1,
         '下载文件资源到本地',
         'https://developers.weixin.qq.com/miniprogram/dev/api/network/download/wx.downloadFile.html',
-        'https://docs.alipay.com/mini/api/xr054r',
+        'https://developer.toutiao.com/dev/miniapp/uQjM04CNyQjL0IDN',
         {
             msg: '参数缺失, 返回值属性值/方法缺失, 返回值名称差异',
             params: {
@@ -57,21 +37,9 @@ module.exports = {
             },
             returnValue: {
                 props: {
-                    tempFilePath: {
-                        type: 1,
-                        desc: '临时文件路径, wx: tempFilePath, alipay: apFilePath'
-                    },
                     filePath: {
                         type: 0,
                         desc: '用户文件路径。传入 filePath 时会返回，跟传入的 filePath 一致'
-                    },
-                    statusCode: {
-                        type: 0,
-                        desc: '开发者服务器返回的 HTTP 状态码'
-                    },
-                    abort: {
-                        type: 0,
-                        desc: "中断下载任务"
                     },
                     offHeadersReceived: {
                         type: 0,
@@ -84,10 +52,6 @@ module.exports = {
                     onHeadersReceived: {
                         type: 0,
                         desc: "监听 HTTP Response Header 事件。会比请求完成事件更早"
-                    },
-                    onProgressUpdate: {
-                        type: 0,
-                        desc: "取消监听 HTTP Response Header 事件"
                     }
                 }
             }
@@ -97,23 +61,11 @@ module.exports = {
         1,
         '上传本地资源到开发者服务器',
         'https://developers.weixin.qq.com/miniprogram/dev/api/network/upload/wx.uploadFile.html',
-        'https://docs.alipay.com/mini/api/kmq4hc',
+        'https://developer.toutiao.com/dev/miniapp/uAzMz4CMzMjLwMzM',
         {
-            msg: '参数名称差异, 返回值方法缺失',
-            params: {
-                props: {
-                    name: {
-                        type: 1,
-                        desc: '文件对应的 key，开发者在服务端可以通过这个 key 获取文件的二进制内容, wx: name, alipay: fileName'
-                    }
-                }
-            },
+            msg: '返回值方法缺失',
             returnValue: {
                 props: {
-                    abort: {
-                        type: 0,
-                        desc: "missing"
-                    },
                     offHeadersReceived: {
                         type: 0,
                         desc: "missing"
@@ -125,10 +77,6 @@ module.exports = {
                     onHeadersReceived: {
                         type: 0,
                         desc: "missing"
-                    },
-                    onProgressUpdate: {
-                        type: 0,
-                        desc: "missing"
                     }
                 }
             }
@@ -138,112 +86,54 @@ module.exports = {
         1,
         '创建一个 WebSocket 的连接',
         'https://developers.weixin.qq.com/miniprogram/dev/api/network/websocket/wx.connectSocket.html',
-        'https://docs.alipay.com/mini/api/vx19c3',
+        'https://developer.toutiao.com/dev/miniapp/uMDNy4yM0IjLzQjM',
         {
             msg: '参数缺失, 返回值缺失',
             params: {
                 props: {
-                    protocols: {
-                        type: 0,
-                        desc: '子协议数组'
-                    },
                     tcpNoDelay: {
                         type: 0,
                         desc: '建立 TCP 连接的时候的 TCP_NODELAY 设置'
-                    }
-                }
-            },
-            returnValue: {
-                props: {
-                    close: {
-                        type: 0,
-                        desc: "missing"
-                    },
-                    cloonClosese: {
-                        type: 0,
-                        desc: "missing"
-                    },
-                    onError: {
-                        type: 0,
-                        desc: "missing"
-                    },
-                    onMessage: {
-                        type: 0,
-                        desc: "missing"
-                    },
-                    onOpen: {
-                        type: 0,
-                        desc: "missing"
-                    },
-                    send: {
-                        type: 0,
-                        desc: "missing"
                     }
                 }
             }
         }
     ),
     onSocketOpen: createDescObj(
-        1,
+        2,
         '监听WebSocket连接打开事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/network/websocket/wx.onSocketOpen.html',
-        'https://docs.alipay.com/mini/api/itm5og',
-        {
-            msg: '返回值属性值缺失',
-            returnValue: {
-                props: {
-                    header: {
-                        type: 0,
-                        desc: '连接成功的 HTTP 响应 Header'
-                    }
-                }
-            }
-        }
+        ''
     ),
     sendSocketMessage: createDescObj(
-        0,
+        2,
         '通过 WebSocket 连接发送数据',
         'https://developers.weixin.qq.com/miniprogram/dev/api/network/websocket/wx.sendSocketMessage.html',
-        'https://docs.alipay.com/mini/api/mr91d1'
+        ''
     ),
     onSocketMessage: createDescObj(
-        0,
+        2,
         '监听WebSocket接受到服务器的消息事件',
         'https://developers.weixin.qq.com/miniprogram/dev/api/network/websocket/wx.onSocketMessage.html',
-        'https://docs.alipay.com/mini/api/gecnap'
+        ''
     ),
     onSocketError: createDescObj(
-        0,
+        2,
         '监听WebSocket错误',
         'https://developers.weixin.qq.com/miniprogram/dev/api/network/websocket/wx.onSocketError.html',
-        'https://docs.alipay.com/mini/api/giu3c2'
+        ''
     ),
     onSocketClose: createDescObj(
-        0,
+        2,
         '监听WebSocket关闭',
         'https://developers.weixin.qq.com/miniprogram/dev/api/network/websocket/wx.onSocketClose.html',
-        'https://docs.alipay.com/mini/api/foqk6g'
+        ''
     ),
     closeSocket: createDescObj(
-        1,
+        2,
         '关闭 WebSocket 连接',
         'https://developers.weixin.qq.com/miniprogram/dev/api/network/websocket/wx.closeSocket.html',
-        'https://docs.alipay.com/mini/api/network',
-        {
-            msg: '参数缺失',
-            params: {
-                props: {
-                    code: {
-                        type: 0,
-                        desc: '一个数字值表示关闭连接的状态号，表示连接被关闭的原因。'
-                    },
-                    reason: {
-                        type: 0,
-                        desc: '一个可读的字符串，表示连接被关闭的原因。这个字符串必须是不长于 123 字节的 UTF-8 文本（不是字符）'
-                    }
-                }
-            }
-        }
+        ''
     ),
     stopLocalServiceDiscovery: createDescObj(
         2,

@@ -4,31 +4,39 @@ const { createDescObj } = require('./utils');
  */
 module.exports = {
     login: createDescObj(
-        0,
+        1,
         '调用接口获取登录凭证（code）',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/login/wx.login.html',
-        'https://docs.alipay.com/mini/api/openapi-authorize',
+        'https://developer.toutiao.com/dev/miniapp/uAzMy4CMzIjLwMjM',
         {
-            msg: '封装后完全支持'
+            msg: '参数缺失',
+            params: {
+                props: {
+                    timeout: {
+                        type: 0,
+                        desc: '超时时间，单位ms'
+                    }
+                }
+            }
         }
     ),
     checkSession: createDescObj(
-        2,
+        0,
         '检查登录态是否过期',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/login/wx.checkSession.html',
-        ''
+        'https://developer.toutiao.com/dev/miniapp/uUjMy4SNyIjL1IjM'
     ),
     navigateToMiniProgram: createDescObj(
         0,
         '打开另一个小程序',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/miniprogram-navigate/wx.navigateToMiniProgram.html',
-        'https://docs.alipay.com/mini/api/open-miniprogram'
+        'https://developer.toutiao.com/dev/miniapp/uYjMy4iNyIjL2IjM'
     ),
     navigateBackMiniProgram: createDescObj(
         0,
         '返回到上一个小程序',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/miniprogram-navigate/wx.navigateBackMiniProgram.html',
-        'https://docs.alipay.com/mini/api/open-miniprogram'
+        'https://developer.toutiao.com/dev/miniapp/uMjMy4yMyIjLzIjM'
     ),
     getAccountInfoSync: createDescObj(
         2,
@@ -40,19 +48,11 @@ module.exports = {
         1,
         '获取用户信息',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/user-info/wx.getUserInfo.html',
-        'https://docs.alipay.com/mini/api/userinfo',
+        'https://developer.toutiao.com/dev/miniapp/uAjMy4CMyIjLwIjM',
         {
             msg: '命名不同, 参数缺失, 返回值属性缺失',
             params: {
                 props: {
-                    getUserInfo: {
-                        type: 1,
-                        desc: 'wx: getUserInfo, alipay: getAuthUserInfo'
-                    },
-                    withCredentials: {
-                        type: 0,
-                        desc: '是否带上登录态信息'
-                    },
                     lang: {
                         type: 0,
                         desc: '显示用户信息的语言'
@@ -61,26 +61,6 @@ module.exports = {
             },
             returnValue: {
                 props: {
-                    userInfo: {
-                        type: 0,
-                        desc: '用户信息对象，不包含 openid 等敏感信息'
-                    },
-                    rawData: {
-                        type: 0,
-                        desc: '不包括敏感信息的原始数据字符串，用于计算签名'
-                    },
-                    signature: {
-                        type: 0,
-                        desc: '使用 sha1( rawData + sessionkey ) 得到字符串，用于校验用户信息'
-                    },
-                    encryptedData: {
-                        type: 0,
-                        desc: '包括敏感数据在内的完整用户信息的加密数据'
-                    },
-                    iv: {
-                        type: 0,
-                        desc: '加密算法的初始向量'
-                    },
                     cloudID: {
                         type: 0,
                         desc: '敏感数据对应的云 ID，开通云开发的小程序才会返回，可通过云调用直接获取开放数据'
@@ -88,12 +68,6 @@ module.exports = {
                 }
             }
         }
-    ),
-    UserInfo: createDescObj(
-        2,
-        '用户信息',
-        'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/user-info/UserInfo.html',
-        ''
     ),
     reportMonitor: createDescObj(
         2,
@@ -105,10 +79,7 @@ module.exports = {
         0,
         '自定义分析数据上报接口',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/data-analysis/wx.reportAnalytics.html',
-        'https://docs.alipay.com/mini/api/report',
-        {
-            msg: '封装后完全支持'
-        }
+        'https://developer.toutiao.com/dev/miniapp/ugzMy4COzIjL4MjM'
     ),
     requestPayment: createDescObj(
         2,
