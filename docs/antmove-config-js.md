@@ -44,7 +44,11 @@
 	* wx-alipay 编译输出其它平台的支付宝小程序（如: 钉钉）
 	* 是否必须 - 否
 	* 默认值 - `alipay`
-
+* npm
+	* 类型 - Object
+	* 指定编译后替换 npm 包
+	> 如下所示，编译后微信小程序端使用的 vant-weapp 包将替换为 vant-aliapp 包。
+	
 ## 示例
 
 ```js
