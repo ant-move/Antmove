@@ -1,6 +1,6 @@
 {
   "name": "@antmove/template-plugin",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "transform wechat miniprogram to tt miniprogram tool.",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,7 @@
   "author": "amap-appx@service.autonavi.com",
   "license": "GPL-3.0",
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
