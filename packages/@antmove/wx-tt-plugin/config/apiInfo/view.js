@@ -7,19 +7,11 @@ module.exports = {
         1,
         '显示消息提示框',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/interaction/wx.showToast.html',
-        'https://docs.alipay.com/mini/api/fhur8f',
+        'https://developer.toutiao.com/dev/miniapp/ucDMz4yNwMjL3AzM',
         {
             msg: '入参参数差异/缺失',
             params: {
                 props: {
-                    title: {
-                        type: 1,
-                        desc: '提示的内容, wx: title, alipay: content'
-                    },
-                    icon: {
-                        type: 1,
-                        desc: '图标, wx: icon, alipay: type'
-                    },
                     image: {
                         type: 0,
                         desc: '自定义图标的本地路径，image 的优先级高于 icon'
@@ -27,10 +19,6 @@ module.exports = {
                     mask: {
                         type: 0,
                         desc: '是否显示透明蒙层，防止触摸穿透'
-                    },
-                    'icon的合法值': {
-                        type: 0,
-                        desc: '显示加载图标，此时 title 文本最多显示 7 个汉字长度'
                     }
                 }
             }
@@ -40,23 +28,11 @@ module.exports = {
         1,
         '显示模态对话框',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/interaction/wx.showModal.html',
-        'https://docs.alipay.com/mini/api/lt3uqc',
+        'https://developer.toutiao.com/dev/miniapp/uUjMz4SNyMjL1IzM',
         {
-            msg: '入参参数名称差异/参数缺失/返回值名称差异',
+            msg: '入参参数缺失',
             params: {
                 props: {
-                    confirmText: {
-                        type: 1,
-                        desc: '确认按钮的文字，最多 4 个字符, wx: confirmText, alipay: confirmButtonText'
-                    },
-                    cancelText: {
-                        type: 1,
-                        desc: '取消按钮的文字，最多 4 个字符, wx: cancelText, alipay: cancelButtonText'
-                    },
-                    showCancel: {
-                        type: 0,
-                        desc: '是否显示取消按钮'
-                    },
                     cancelColor: {
                         type: 0,
                         desc: '取消按钮的文字颜色，必须是 16 进制格式的颜色字符串'
@@ -66,18 +42,6 @@ module.exports = {
                         desc: '确认按钮的文字颜色，必须是 16 进制格式的颜色字符串'
                     }
                 }
-            },
-            returnValue: {
-                props: {
-                    confirm: {
-                        type: 1,
-                        desc: 'wx: 为true时，表示用户点击了确定按钮, alipay: 点击confirm返回true，点击cancel返回false'
-                    },
-                    cancel: {
-                        type: 1,
-                        desc: 'wx: 为 true 时，表示用户点击了取消（用于 Android 系统区分点击蒙层关闭还是点击取消按钮关闭）'
-                    }
-                }
             }
         }
     ),
@@ -85,15 +49,11 @@ module.exports = {
         1,
         '显示 loading 提示框',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/interaction/wx.showLoading.html',
-        'https://docs.alipay.com/mini/api/bm69kb',
+        'https://developer.toutiao.com/dev/miniapp/uIDMz4iMwMjLyAzM',
         {
-            msg: '入参参数名称差异/参数缺失',
+            msg: '入参参数缺失',
             params: {
                 props: {
-                    title: {
-                        type: 1,
-                        desc: '提示的内容, wx: title, alipay: content'
-                    },
                     mask: {
                         type: 0,
                         desc: '是否显示透明蒙层，防止触摸穿透'
@@ -106,15 +66,11 @@ module.exports = {
         1,
         '显示操作菜单',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/interaction/wx.showActionSheet.html',
-        'https://docs.alipay.com/mini/api/hr092g',
+        'https://developer.toutiao.com/dev/miniapp/ukDMz4SOwMjL5AzM',
         {
-            msg: '入参参数名称差异/参数缺失',
+            msg: '入参参数缺失',
             params: {
                 props: {
-                    itemList: {
-                        type: 1,
-                        desc: '按钮的文字数组, wx: itemList(数组长度最大为6), alipay: items'
-                    },
                     itemColor: {
                         type: 0,
                         desc: '按钮的文字颜色'
@@ -127,25 +83,25 @@ module.exports = {
         0,
         '隐藏消息提示框',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/interaction/wx.hideToast.html',
-        'https://docs.alipay.com/mini/api/iygd4e'
+        'https://developer.toutiao.com/dev/miniapp/ugTMz4COxMjL4EzM'
     ),
     hideLoading: createDescObj(
         0,
         '隐藏 loading 提示框',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/interaction/wx.hideLoading.html',
-        'https://docs.alipay.com/mini/api/nzf540'
+        'https://developer.toutiao.com/dev/miniapp/uYDOy4iN4IjL2gjM'
     ),
     showNavigationBarLoading: createDescObj(
-        0,
+        2,
         '在当前页面显示导航条加载动画',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.showNavigationBarLoading.html',
-        'https://docs.alipay.com/mini/api/lydg2a'
+        ''
     ),
     setNavigationBarTitle: createDescObj(
         0,
         '动态设置当前页面的标题',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.setNavigationBarTitle.html',
-        'https://docs.alipay.com/mini/api/xwq8e6'
+        'https://developer.toutiao.com/dev/miniapp/ugDMz4COwMjL4AzM'
     ),
     setNavigationBarColor: createDescObj(
         2,
@@ -154,101 +110,101 @@ module.exports = {
         ''
     ),
     hideNavigationBarLoading: createDescObj(
-        0,
+        2,
         '在当前页面隐藏导航条加载动画',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.hideNavigationBarLoading.html',
-        'https://docs.alipay.com/mini/api/ncgsga'
+        ''
     ),
     setBackgroundTextStyle: createDescObj(
-        0,
+        2,
         '动态设置下拉背景字体、loading 图的样式',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/background/wx.setBackgroundTextStyle.html',
-        'https://docs.alipay.com/mini/api/aamqae'
+        ''
     ),
     setBackgroundColor: createDescObj(
-        0,
+        2,
         '动态设置窗口的背景色',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/background/wx.setBackgroundColor.html',
-        'https://docs.alipay.com/mini/api/set-background#mysetBackgroundColor'
+        ''
     ),
     showTabBarRedDot: createDescObj(
-        0,
+        2,
         '显示tabBar某一项的右上角的红点',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/tab-bar/wx.showTabBarRedDot.html',
-        'https://docs.alipay.com/mini/api/dquxiq'
+        ''
     ),
     showTabBar: createDescObj(
-        0,
+        2,
         '显示 tabBar',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/tab-bar/wx.showTabBar.html',
-        'https://docs.alipay.com/mini/api/dpq5dh'
+        ''
     ),
     setTabBarStyle: createDescObj(
-        0,
+        2,
         '动态设置 tabBar 的整体样式',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/tab-bar/wx.setTabBarStyle.html',
-        'https://docs.alipay.com/mini/api/wcf0sv'
+        ''
     ),
     setTabBarItem: createDescObj(
-        0,
+        2,
         '动态设置 tabBar 某一项的内容',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/tab-bar/wx.setTabBarItem.html',
-        'https://docs.alipay.com/mini/api/zu37bk'
+        ''
     ),
     setTabBarBadge: createDescObj(
-        0,
+        2,
         '为 tabBar 某一项的右上角添加文本',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/tab-bar/wx.setTabBarBadge.html',
-        'https://docs.alipay.com/mini/api/qm7t3v'
+        ''
     ),
     removeTabBarBadge: createDescObj(
-        0,
+        2,
         '移除 tabBar 某一项右上角的文本',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/tab-bar/wx.removeTabBarBadge.html',
-        'https://docs.alipay.com/mini/api/lpbp5g'
+        ''
     ),
     hideTabBarRedDot: createDescObj(
-        0,
+        2,
         '隐藏 tabBar 某一项的右上角的红点',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/tab-bar/wx.hideTabBarRedDot.html',
-        'https://docs.alipay.com/mini/api/mg428a'
+        ''
     ),
     hideTabBar: createDescObj(
-        0,
+        2,
         '隐藏 tabBar',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/tab-bar/wx.hideTabBar.html',
-        'https://docs.alipay.com/mini/api/at18z8'
+        ''
     ),
     loadFontFace: createDescObj(
-        0,
+        2,
         '动态加载网络字体',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/font/wx.loadFontFace.html',
-        'https://docs.alipay.com/mini/api/ggawf0'
+        ''
     ),
     stopPullDownRefresh: createDescObj(
         0,
         '停止当前页面下拉刷新',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/pull-down-refresh/wx.stopPullDownRefresh.html',
-        'https://docs.alipay.com/mini/api/pmhkbb'
+        'https://developer.toutiao.com/dev/miniapp/ucjMz4yNyMjL3IzM'
     ),
     startPullDownRefresh: createDescObj(
         0,
         '开始下拉刷新。调用后触发下拉刷新动画，效果与用户手动下拉刷新一致',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/pull-down-refresh/wx.startPullDownRefresh.html',
-        'https://docs.alipay.com/mini/api/ui-pulldown'
+        'https://developer.toutiao.com/dev/miniapp/ukjMz4SOyMjL5IzM'
     ),
     pageScrollTo: createDescObj(
         1,
         '将页面滚动到目标位置',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/scroll/wx.pageScrollTo.html',
-        'https://docs.alipay.com/mini/api/scroll#mypagescrollto',
+        'https://developer.toutiao.com/dev/miniapp/uETNz4SM1MjLxUzM',
         {
             msg: '参数缺失',
             params: {
                 props: {
-                    duration: {
+                    selector: {
                         type: 0,
-                        desc: '滚动动画的时长，单位 ms'
+                        desc: '选择器'
                     }
                 }
             }
@@ -258,7 +214,7 @@ module.exports = {
         0,
         '创建一个动画实例 animation',
         'https://developers.weixin.qq.com/miniprogram/dev/api/ui/animation/wx.createAnimation.html',
-        'https://docs.alipay.com/mini/api/ui-animation#a-namen93ndhamycreateanimation'
+        'https://developer.toutiao.com/dev/miniapp/uATNy4CM1IjLwUjM'
     ),
     setTopBarText: createDescObj(
         2,

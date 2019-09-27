@@ -169,7 +169,6 @@ module.exports = {
             }
         }
         readtimes++;
-
         if (isTypeFile('.axml', fileInfo.path)) {
             const reptempData = getTemplateData(fileInfo, project.name);
             compileAxml(fileInfo, ctx);
@@ -235,7 +234,7 @@ module.exports = {
                 nums: finishFile
             };
             date = report(date,reportData);
-            fs.outputFileSync(fileInfo.dist.replace(/\.sjs$/, '.js'), content);
+            fs.outputFileSync(fileInfo.dist.replace(/\.sjs$/, 'sjs.js'), content);
         } else {
             let content;
             if (fileInfo.deep === 0 && fileInfo.filename === 'app.json') {

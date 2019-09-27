@@ -82,48 +82,60 @@ module.exports = {
         'https://developer.toutiao.com/dev/miniapp/ugzMy4COzIjL4MjM'
     ),
     requestPayment: createDescObj(
-        2,
+        0,
         '发起支付',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/payment/wx.requestPayment.html',
-        '',
+        'https://developer.toutiao.com/dev/miniapp/ukjMy4SOyIjL5IjM',
         {
-            msg: '支付宝与微信支付功能差异较大，请参考支付宝支付文档做兼容处理',
+            msg: '微信与头条支付功能差异较大，请参考头条支付文档做兼容处理',
         }
     ),
     authorize: createDescObj(
-        1,
+        0,
         '提前向用户发起授权请求',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/authorize/wx.authorize.html',
-        'https://docs.alipay.com/mini/api/openapi-authorize',
-        {
-            msg: '命名不同wx: authorize, alipay: getAuthCode, 参数差异',
-            params: {
-                props: {
-                    scope: {
-                        type: 1,
-                        desc: '授权类型, wx: scope, alipay: scopes, 且取值不同'
-                    }
-                }
-            }
-        }
+        'https://developer.toutiao.com/dev/miniapp/uUzMy4SNzIjL1MjM'
     ),
     openSetting: createDescObj(
         0,
         '调起客户端小程序设置界面',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/setting/wx.openSetting.html',
-        'https://docs.alipay.com/mini/api/qflu8f'
+        'https://developer.toutiao.com/dev/miniapp/uQzMy4CNzIjL0MjM'
     ),
     getSetting: createDescObj(
         0,
         '获取用户的当前设置',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/setting/wx.getSetting.html',
-        'https://docs.alipay.com/mini/api/xmk3ml'
+        'https://developer.toutiao.com/dev/miniapp/uEjMy4SMyIjLxIjM'
     ),
     AuthSetting: createDescObj(
-        2,
+        1,
         '用户授权设置信息',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/setting/AuthSetting.html',
-        ''
+        'https://developer.toutiao.com/dev/miniapp/uQjMy4CNyIjL0IjM',
+        {
+            msg: '属性差异',
+            params: {
+                props: {
+                    writePhotosAlbum: {
+                        type: 1,
+                        desc: '是否授权保存到相册, tt: album'
+                    },
+                    werun: {
+                        type: 0,
+                        desc: '是否授权微信运动步数'
+                    },
+                    invoice: {
+                        type: 0,
+                        desc: '是否授权获取发票'
+                    },
+                    invoiceTitle: {
+                        type: 0,
+                        desc: '是否授权发票抬头'
+                    }
+                }
+            }
+        }
     ),
     chooseAddress: createDescObj(
         1,
@@ -131,62 +143,32 @@ module.exports = {
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/address/wx.chooseAddress.html',
         'https://yuque.antfin-inc.com/mpaas-tiny-site/api/choose-address',
         {
-            msg: '支付宝端需要在项目作出相应配置，并需要服务端的支持'
+            msg: '返回值参数缺失',
+            returnValue: {
+                props: {
+                    postalCode: {
+                        type: 0,
+                        desc: '邮编'
+                    },
+                    nationalCode: {
+                        type: 0,
+                        desc: '收货地址国家码'
+                    }
+                }
+            }
         }
     ),
     openCard: createDescObj(
-        1,
+        2,
         '查看微信卡包中的卡券',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/card/wx.openCard.html',
-        'https://docs.alipay.com/mini/api/qxxpsh',
-        {
-            msg: '命名不同wx: openCard, alipay: openCardList, 参数缺失',
-            params: {
-                props: {
-                    cardList: {
-                        type: 0,
-                        desc: '需要打开的卡券列表'
-                    },
-                    success: {
-                        type: 0,
-                        desc: '接口调用成功的回调函数'
-                    },
-                    fail: {
-                        type: 0,
-                        desc: '接口调用失败的回调函数'
-                    },
-                    complete: {
-                        type: 0,
-                        desc: '接口调用结束的回调函数（调用成功、失败都会执行)'
-                    }
-                }
-            }
-        }
+        ''
     ),
     addCard: createDescObj(
-        1,
+        2,
         '添加卡券',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/card/wx.addCard.html',
-        'https://docs.alipay.com/mini/api/add-card-auth',
-        {
-            msg: '命名不同wx: addCard, alipay: addCardAuth, 参数缺失, 返回值差异',
-            params: {
-                props: {
-                    cardList: {
-                        type: 0,
-                        desc: '需要添加的卡券列表'
-                    }
-                },
-                returnValue: {
-                    props: {
-                        cardList: {
-                            type: 1,
-                            desc: 'wx: cardList Array.<Object>, alipay: result Object'
-                        }
-                    }
-                }
-            }
-        }
+        ''
     ),
     chooseInvoiceTitle: createDescObj(
         2,
@@ -201,33 +183,10 @@ module.exports = {
         ''
     ),
     startSoterAuthentication: createDescObj(
-        1,
+        2,
         '开始 SOTER 生物认证',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/soter/wx.startSoterAuthentication.html',
-        'https://docs.alipay.com/mini/api/alipay-face-verify',
-        {
-            msg: '命名不同wx: startSoterAuthentication, alipay: ap.faceVerify, 参数缺失',
-            params: {
-                props: {
-                    requestAuthModes: {
-                        type: 0,
-                        desc: '请求使用的可接受的生物认证方式'
-                    },
-                    challenge: {
-                        type: 0,
-                        desc: '挑战因子'
-                    },
-                    authContent: {
-                        type: 0,
-                        desc: '验证描述，即识别过程中显示在界面上的对话框提示内容'
-                    },
-                    complete: {
-                        type: 0,
-                        desc: '接口调用结束的回调函数（调用成功、失败都会执行）'
-                    }
-                }
-            }
-        }
+        ''
     ),
     checkIsSupportSoterAuthentication: createDescObj(
         2,

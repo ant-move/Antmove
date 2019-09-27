@@ -1,10 +1,11 @@
-# alipay-wx-plugin
+
+# wx-baid-plugin
 
 <p><a class='readme-antmove-logo' href="https://github.com/ant-move/antmove" target="_blank" rel="noopener noreferrer"><img style='margin-left:0px;' width="200" src="https://img.alicdn.com/tfs/TB1ktoia.D1gK0jSZFGXXbd3FXa-765-765.png" alt="antmove logo"></a></p>
 
-## 介绍
-* 支付宝转微信小程序插件
-> 一键实现支付宝小程序项目到微信小程序的迁徙，不再为重复开发而烦恼。
+wx-baid-plugin，Antmove工具下实现微信转换到百度小程序的方案。
+> 一键实现微信小程序项目到百度小程序的迁徙，不再为重复开发而烦恼。
+> 百度智能小程序官方介绍，详情参考 [https://smartprogram.baidu.com/developer/index.html](https://smartprogram.baidu.com/developer/index.html)
 
 ## 目录
 * <a href='#安装'>安装</a>
@@ -28,9 +29,9 @@
 
 <span id='VsCode1'></span>
 
-### vscode 转换插件
+### VsCode 转换插件
 
-在 vscode 扩展中搜索 `Antmove` 下载安装 Antmove vscode 转换插件实现一键转换。
+在 VsCode 扩展中搜索 `Antmove` 下载安装 Antmove vscode 转换插件实现一键转换。
 
 <p>
     <img style='max-width: 800px;margin-left: 0;' src='https://img.alicdn.com/tfs/TB1KqazdhD1gK0jSZFyXXciOVXa-1154-516.png'>
@@ -46,7 +47,7 @@
     * Mac: `command + shift + p`
     * Windows: `ctrl + shift + p`
 * 输入 `Antmove`
-* 运行 `Antmove: Run antmove alipay-wx` 命令，实现支付宝小程序到微信小程序的转换
+* 运行 `Antmove: Run antmove wx-baidu` 命令，实现支付宝小程序转换百度小程序的转换
 * 运行如上命令后会给出一个弹窗，选择转换后生成代码存储目录
 * 转换完成
 
@@ -57,6 +58,7 @@
 <span id='使用npm或yarn安装'></span>
 
 ### 使用 npm 或 yarn 安装
+
 
 > 我们推荐使用 npm 或 yarn 的方式进行开发，不仅可在开发环境轻松调试，也可放心地在生产环境打包部署使用，享受整个生态圈和工具链带来的诸多好处。
 
@@ -82,38 +84,42 @@ $ npm install antmove --save
 
 ### 命令行使用
 
-```bash
-npm i -g antmove
-```
-
 > 通过 npm 或 yarn 全局安装才能使用如下命令行
 
-* `antmove alipay-wx`（使用前请将终端切换到需转换编译的支付宝小程序项目路径）
+提供两种可用的命令行调用方式
+
+* `antmove wx-baidu`（使用前请将终端切换到需转换编译的微信小程序项目路径）
 
 ```bash
-antmove alipay-wx
+antmove wx-baidu ./dist/alipay-app
 ```
 
 * `antmove` - 该命令更加灵活，可配置输出输出目录/编译模式等
 
 ```bash
-antmove alipay-wx -i ./alipay-mini/project -o ./dist/wechat-mini/project --env development
+antmove -t alipay-baidu -i ./wechat-mini/project -o ./dist/alipay-mini/project --env development
 ```
-> 如上的命令表示将 `./alipay-mini/project` 支付宝小程序项目转换为微信小程序项目，转换到 `./dist/wechat-mini/project` 目录
-> 如果你不想输入参数，可以体验交互式的命令方式，执行 `antmove` 即可。
+> 如上的命令表示将 `./wechat-mini/project` 支付宝小程序项目转换为百度小程序项目，转换到 `./dist/alipay-mini/project` 目录
+
+```bash
+antmove -t alipay-baidu -i ./wechat-mini/project -o ./dist/alipay-mini/project --env development -c
+```
+> 如上的命令表示将 `./wechat-mini/project` 支付宝小程序组件或插件换为百度小程序组件或插件，转换到 `./dist/alipay-mini/project` 目录
+
+<span id='命令行参数说明'></span>
 
 ### 命令行参数说明
 
-* `--type,-t`
-    * 可选，（alipay-wx），选择编译工具，此参数代表选择的支付宝转微信的工具
 * `--input,-i`
     * 可选，编译源码目录，如果不传则是当前目录
 * `--output,-o`
     * 可传，编译输出目录
-* `--component,-c`
-    * 可传，组件纬度转换，可单独组件或插件
 * `--env,-e`
     * 可选（development/production），编译模式，生产模式代码会压缩，无编译日志及运行时日志
+* `--type,-t`
+    * 可选，（alipay-baidu），选择编译工具，此参数代表选择的支付宝转百度的工具
+* `--component,-c`
+    * 可选，组件维度转换，常用来单独处理小程序的插件或组件
 
 <span id='Node.js'></span>
 
@@ -122,26 +128,20 @@ antmove alipay-wx -i ./alipay-mini/project -o ./dist/wechat-mini/project --env d
 #### 示例
 ```js
 const path = require('path');
-const transformFramework = require('antmove');
-const AlipayPlugin = require('@antmove/alipay-wx');
-
-let outputPath = path.join(__dirname, '../../dist', '/wechatmini-demo');
+const wxToBaidu = require('@antmove/wx-baidu');
+let outputPath = path.join(__dirname, '../../dist', '/alipaymini-demo');
 let inputDirPath = path.join(__dirname, '../../examples/miniprogram-demo/miniprogram');
-
-const App = transformFramework();
-
-App.use(
-    AlipayPlugin, 
-    {
-        entry: inputDirPath,
-        dist: outputPath,
-        env: 'development'
-    })
-    .start();
+wxToBaidu({
+	input: inputDirPath,
+    output: outputPath,
+    env: 'development'
+})
 ```
+
 <span id="API"></span>
 
 ## API
+<span id="transformFramework"></span>
 
 ### `transformFramework`
 
@@ -151,11 +151,12 @@ App.use(
 const transformFramework = require('antmove');
 const App = transformFramework();   // 得到的 app 实例即可进行转换处理操作
 ```
+<span id="App"></span>
 
 ### `App`
 
 * `use` | `Function` - `App.use(plugin, pluginOptions)` - 挂载插件到实例上，可挂载多个，按挂载顺序执行
-    *  `plugin`: 转换插件
+    * `plugin`: 转换插件
     * `pluginOptions`: 转换插件配置项
         * `entry` | `String` - 转换源码目录
         * `dist` | `String` - 转换后代码输出目录
@@ -173,6 +174,7 @@ const App = transformFramework();   // 得到的 app 实例即可进行转换处
 <span id="协议"></span>
 
 ## 协议
+
 [GPL](https://choosealicense.com/licenses/gpl-3.0/)
 
 <span id="联系"></span>
