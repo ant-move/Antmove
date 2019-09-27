@@ -20,7 +20,7 @@
     "@antmove/alipay-baidu": "^1.0.0",
     "@antmove/alipay-wx": "^1.0.0",
     "@antmove/wx-alipay": "^1.0.0",
-    "@antmove/wx-tt": "^0.1.0",
+    "@antmove/wx-tt": "^1.0.0",
     "@antmove/wx-baidu": "^1.0.0",
     "@antmove/wx-wx": "^1.0.0",
     "@antmove/alipay-polyfill": "^1.0.0",
