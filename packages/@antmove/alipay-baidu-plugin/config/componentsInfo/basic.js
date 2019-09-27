@@ -113,12 +113,17 @@ module.exports = {
         name: "引用自定义脚本文件",
         tagName: "filter",
         url: {
-            target: "",
+            target: "https://smartprogram.baidu.com/docs/develop/framework/view_filter/",
             original: "https://docs.alipay.com/mini/framework/sjs"
         },
-        desc: "引用自定义脚本文件",
+        desc: "引用自定义脚本文件 (百度端比较严格，函数形参不可以是'val'，moddle必须是对象形式)",
         status: 0,
-        type: 1
+        type: 1,
+        props: {
+            name: createSupportProp(' 标签的模块名', 1, "module"),
+            from: createSupportProp(' 标签的模块名', 1, "src")
+        }
+
     },
     'favorite': {
         name: "收藏组件",

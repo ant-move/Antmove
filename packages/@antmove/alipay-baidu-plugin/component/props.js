@@ -63,6 +63,10 @@ module.exports = function (ast, fileInfo, renderAxml) {
         if (tagInfo.type !== undefined) {
             if (tagInfo.type === 1) {
                 type = ast.type = tagInfo.tagName || ast.type;
+                if (tagInfo.tagName === 'filter') {
+                    let value = props.from.value[0].replace(/\.sjs$/, 'sjs.js');
+                    props.from.value[0] = value;
+                }
             }
         } 
 

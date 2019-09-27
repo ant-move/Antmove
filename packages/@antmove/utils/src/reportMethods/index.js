@@ -174,6 +174,7 @@ module.exports = {
     },
     reportDist: async (version, distPath, toolData = {}) => {
         let utilsPath = path.join(__dirname, '../../../../../node_modules/@antmove/utils', 'package.json');
+        
         if (!fs.existsSync(utilsPath)) {
             utilsPath = path.join(__dirname, '../..', 'package.json');
         }

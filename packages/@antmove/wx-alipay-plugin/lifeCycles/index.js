@@ -13,7 +13,6 @@ const compileJs = require('./compile/compileJs');
 const saveComponentJs = require('../utils/saveComponentJs');
 const generateBundleComponent = require('../generate/generateWrapComponents');
 // const generateWxsDeps = require('../generate/generateWxsDep')
-// const antmoveCache = require('../utils/antmoveCache');
 
 
 

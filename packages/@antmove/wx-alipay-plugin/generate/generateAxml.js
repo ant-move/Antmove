@@ -44,7 +44,7 @@ module.exports = function axmlRender (ast = [], fileInfo) {
      */
     fileInfo.nodeId = 0;
     let refRender = createComponentNode(ast[0], fileInfo);
-    processComponentIs(fileInfo)
+    processComponentIs(fileInfo);
     processPageTpl(fileInfo);
     if (typeof ast === 'string') return ast;
     let _code = '';
@@ -269,7 +269,7 @@ function processSjs (_ast, _fileInfo) {
                 let moduleName = _ast.props.module.value[0];
                 filename = filename.replace('.axml', '.');
                 let wxsPath = filename;
-            wxsPath = wxsPath.replace(_fileInfo.output, '');
+                wxsPath = wxsPath.replace(_fileInfo.output, '');
 
                 wxsPath = wxsPath + moduleName + 'sjs.js';
 
@@ -279,7 +279,7 @@ function processSjs (_ast, _fileInfo) {
                         return new RegExp(p1, p2);
                     }
                     \n
-                    `
+                    `;
                     sjsCode = preCode + sjsCode;
                 }
 
@@ -287,10 +287,10 @@ function processSjs (_ast, _fileInfo) {
                 _ast.children[0].value = '';
 
                 
-                wxsApp.createDep(route, wxsPath, moduleName, _fileInfo.output)
+                wxsApp.createDep(route, wxsPath, moduleName, _fileInfo.output);
                 
                 // _ast.props.src = { type: 'double', value: [ './' + _relativePath ] };
-                bool = true
+                bool = true;
             } catch (e) {
                 if (e) {
                     console.error(e);
@@ -298,7 +298,7 @@ function processSjs (_ast, _fileInfo) {
             }
         } else {
             let filename = _fileInfo.dist;
-            let moduleName = _ast.props.module.value[0]
+            let moduleName = _ast.props.module.value[0];
             let wxsPath = _ast.props.src.value[0] + '.js';
             wxsPath = path.join(filename, '../', wxsPath);
             wxsPath = wxsPath.replace(_fileInfo.output, '');
@@ -315,11 +315,12 @@ function processSjs (_ast, _fileInfo) {
 }
 
 function processComponentIs (fileInfo) {
-    let dist = fileInfo.dist.replace(/\.axml$/, '.is.js');
+    // let dist = fileInfo.dist.replace(/\.axml$/, '.is.js');
     let isPath = fileInfo.dist.replace(fileInfo.output, '')
-        .replace(/\.axml$/, '');
+        .replace(/\.axml$/, '').replace(/\\/g, "/");
     
-        if (fileInfo.parent) {
-            fileInfo.parent.is = isPath;
-        }
+    if (fileInfo.parent) {
+        fileInfo.parent.is = isPath;
+    }
+
 }
