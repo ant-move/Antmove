@@ -78,51 +78,10 @@ button[type=primary] {
     background-color: #1AAD19;
 }
 
-button[loading][type=primary] {
-    color: rgba(255, 255, 255, 0.6);
-    background-color: #179B16;
-}
-
-button[disabled][type=primary] {
-    background-color: #9ED99D;
-}
-
-button[disabled] {
-    color: rgba(255, 255, 255, 0.6);
-}
-
-button[type=default] {
-    color: #000000;
-    background-color: #F8F8F8;
-}
-
-button[disabled][type=default] {
-    color: rgba(0, 0, 0, 0.3);
-    background-color: #F7F7F7;
-}
 
 button[type=warn] {
     color: #FFFFFF;
     background-color: #E64340;
-}
-
-button[disabled][type=warn] {
-    background-color: #EC8B89;
-}
-
-button[plain] {
-    color: #353535;
-    border: 1px solid #353535;
-}
-
-button[type=primary][plain] {
-    border: 1px solid #1aad19;
-}
-
-button[type=default][plain] {
-    color: #353535;
-    border: 1px solid #353535;
-    background-color: transparent;
 }
 
 button[size=mini] {

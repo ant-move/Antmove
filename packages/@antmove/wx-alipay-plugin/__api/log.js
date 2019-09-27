@@ -88,7 +88,7 @@ module.exports = {
             page.logs.push(log);
             logInfo.pages.push(page);
         }
-        my.setStorage({
+        my.setStorageSync({
             key: "__antmove_loginfo",
             data: logInfo
         });

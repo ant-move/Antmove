@@ -17,9 +17,7 @@ function warnApi (api) {
                 type: 'api'
             }
         );
-        return function () {
-            console.error('微信暂不支持' + api);
-        };
+        return function () { return false; };
     }
 }
 

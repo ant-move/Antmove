@@ -9,6 +9,7 @@ const config = require('../config');
 const {
     cjsToes
 } = require('@antmove/utils');
+const wxsApp = require('./generateWxsDep');
 /**
 * process wxs
 */
@@ -29,7 +30,7 @@ function createElement (tagName, children = []) {
     };
 }
 function processSpecialTags (ast = {}) {
-    if (ast.type === 'picker' && ast.children[0].length > 1) {
+    if (ast.type === 'picker' && ast.children[0] && ast.children[0].length > 1) {
         ast.children[0] = [createElement('view', ast.children[0])];
         return ast;
     }
@@ -43,7 +44,7 @@ module.exports = function axmlRender (ast = [], fileInfo) {
      */
     fileInfo.nodeId = 0;
     let refRender = createComponentNode(ast[0], fileInfo);
-
+    processComponentIs(fileInfo)
     processPageTpl(fileInfo);
     if (typeof ast === 'string') return ast;
     let _code = '';
@@ -63,7 +64,6 @@ module.exports = function axmlRender (ast = [], fileInfo) {
     }
 
     generateRenderFn(fileInfo, refRender.toJsFile());
-
     return _code;
 
     function incIndent () {
@@ -78,6 +78,11 @@ module.exports = function axmlRender (ast = [], fileInfo) {
     function renderFn (_ast, _fileInfo, parentRenderNode) {
         let _parentRenderNode = parentRenderNode;
         _ast.children = _ast.children || [];
+        if (!config.hasWxs) {
+            let bool = processSjs(_ast, _fileInfo);
+
+            if (bool) return '';
+        }
         if (_ast.type === 'wxs' && _ast.children.length) {
             try {
                 let filename = _fileInfo.dist;
@@ -243,4 +248,78 @@ function generateRenderFn (fileInfo, renderStr = '') {
     route = route.replace(/\\+/g, '/');
     
     appNodesTreeStr += `'${route}': ${renderStr},`;
+}
+
+/**
+ * sjs exports to props object
+ */
+function processSjs (_ast, _fileInfo) {
+    let route = _fileInfo.dist.replace(_fileInfo.output, '');
+    route = route.replace(/\.axml/, '');
+    route = route.replace(/\\+/g, '/');
+    let bool = false;
+    if (_ast.type === 'wxs') {
+        if (_ast.children.length) {
+            /**
+             * 内联 wxs 处理
+             */
+            try {
+                let filename = _fileInfo.dist;
+                let sjsCode = _ast.children[0].value;
+                let moduleName = _ast.props.module.value[0];
+                filename = filename.replace('.axml', '.');
+                let wxsPath = filename;
+            wxsPath = wxsPath.replace(_fileInfo.output, '');
+
+                wxsPath = wxsPath + moduleName + 'sjs.js';
+
+                if (sjsCode.match(/\s*getRegExp/g)) {
+                    let preCode = `
+                    function getRegExp (p1, p2) {
+                        return new RegExp(p1, p2);
+                    }
+                    \n
+                    `
+                    sjsCode = preCode + sjsCode;
+                }
+
+                fs.outputFileSync(filename + moduleName + 'sjs.js', sjsCode);
+                _ast.children[0].value = '';
+
+                
+                wxsApp.createDep(route, wxsPath, moduleName, _fileInfo.output)
+                
+                // _ast.props.src = { type: 'double', value: [ './' + _relativePath ] };
+                bool = true
+            } catch (e) {
+                if (e) {
+                    console.error(e);
+                }
+            }
+        } else {
+            let filename = _fileInfo.dist;
+            let moduleName = _ast.props.module.value[0]
+            let wxsPath = _ast.props.src.value[0] + '.js';
+            wxsPath = path.join(filename, '../', wxsPath);
+            wxsPath = wxsPath.replace(_fileInfo.output, '');
+
+            if (wxsPath[0] !== '/') {
+                wxsPath = '/' + wxsPath;
+            }
+            wxsApp.createDep(route, wxsPath, moduleName, _fileInfo.output);
+            bool = true;
+        }
+    }
+
+    return bool;
+}
+
+function processComponentIs (fileInfo) {
+    let dist = fileInfo.dist.replace(/\.axml$/, '.is.js');
+    let isPath = fileInfo.dist.replace(fileInfo.output, '')
+        .replace(/\.axml$/, '');
+    
+        if (fileInfo.parent) {
+            fileInfo.parent.is = isPath;
+        }
 }

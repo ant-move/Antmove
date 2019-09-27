@@ -1,12 +1,12 @@
 <view class="map-wrap {{className}}">
     <map
-        id='{{id}}'
+        id='{{_id}}'
         class='{{class}}'
         longitude="{{longitude}}"
         latitude="{{latitude}}"
         scale="{{scale}}"
         polyline="{{polyline}}"
-        polygon="{{polygons}}"
+        polygons="{{polygon}}"
         circles="{{circles}}"
         controls="{{controls}}"
         markers="{{alMakers}}"
@@ -17,11 +17,11 @@
         enable-traffic="{{enableTraffic}}"
         include-points="{{includePoints}}"
         show-location="{{showLocation}}"
-        onMarkerTap="onMarkerTapFn"
-        onCalloutTap="onCalloutTapFn"
-        onControlTap="onControlTapFn"
-        onRegionChange="onRegionChangeFn"
-        onTap="onTapFn"
+        bindmarkertap="onMarkerTapFn"
+        bindcallouttap="onCalloutTapFn"
+        bindcontroltap="onControlTapFn"
+        bindregionchange="onRegionChangeFn"
+        bindtap="onTapFn"
         
     />
     <cover-view class="coverview-wrap">

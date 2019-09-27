@@ -17,5 +17,10 @@ module.exports = {
         let _opts = {};
         componentTransformation.processTransformationComponent(_opts, options);
         return Component(_opts);
+    },
+    baiduComponentWx (options={}) {
+        let _opts = {};
+        componentTransformation.processTransformationComponentWx(_opts, options);
+        return Component(_opts);
     }
 };

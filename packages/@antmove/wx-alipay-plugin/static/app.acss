@@ -80,7 +80,6 @@ border-radius: 5px;
 overflow: hidden;
 color: #000;
 background-color: #f8f8f8;
-
 }
 button[type=primary] {
     color: #FFFFFF;

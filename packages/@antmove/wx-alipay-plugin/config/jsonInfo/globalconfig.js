@@ -201,11 +201,32 @@ let info = {
     },
     'subpackages': {
         name: '分包结构配置',
-        type: 0,
-        status: 2,
+        status: 1,
         url: {
             wechat: 'https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/app.html#subpackages',
-            alipay: ''
+            alipay: 'https://docs.alipay.com/mini/framework/subpackages'
+        },
+        props: {
+            'root': {
+                type: 7,
+                status: 0,
+                desc: '分包根目录'
+            },
+            'name': {
+                type: 0,
+                status: 2,
+                desc: '分包别名，分包预下载时可以使用'
+            },
+            'pages': {
+                type: 7,
+                status: 0,
+                desc: '分包页面路径，相对与分包根目录',
+            },
+            'independent': {
+                type: 0,
+                status: 2,
+                desc: '分包是否是独立分包',
+            },
         },
         desc: '启用分包加载时，声明项目分包结构。',
     },
@@ -242,12 +263,24 @@ let info = {
     'preloadRule': {
         name: '分包预下载规则',
         type: 0,
-        status: 2,
+        status: 1,
         url: {
             wechat: 'https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/app.html#preloadRule',
-            alipay: ''
+            alipay: 'https://docs.alipay.com/mini/framework/subpackages'
         },
         desc: '声明分包预下载的规则',
+        props: {
+            'packages': {
+                type: 6,
+                status: 1,
+                desc: '进入页面后预下载分包的 root 或 name。__APP__ 表示主包。(支付宝暂不支持name和__APP__ )'
+            },
+            'network': {
+                type: 7,
+                status: 0,
+                desc: '在指定网络下进行预下载，all :不限网络；wifi:仅 wifi 下预下载'
+            },
+        }
     },
     'resizable': {
         name: 'iPad 小程序是否支持屏幕旋转，默认关闭',

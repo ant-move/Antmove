@@ -13,6 +13,7 @@ const compileAxml = require('./compile/compileAxml');
 const compileAcss = require('./compile/compileAcss');
 const compileJs = require('./compile/compileJs');
 const isAlipayApp = require('../utils/isAlipayApp');
+const getCache = require('../utils/getCache');
 const project = {
     name: "",
     path: "",
@@ -60,7 +61,9 @@ let repData = resDataInit();
 module.exports = {
     defaultOptions: {
         exclude: [
-            'project.config.json'
+            'project.config.json',
+            'node_modules',
+            'antmove.config.js'
         ],
         env: 'production',
         remote: false
@@ -70,7 +73,11 @@ module.exports = {
             getSurrounding
         } = record(recordConfig);
         fs.emptyDirSync(this.$options.dist);
-        if (!isAlipayApp(this.$options.entry)) {
+        let ifComponent = false;
+        if (this.$options.component === "component") {
+            ifComponent = true;
+        }
+        if (!isAlipayApp(this.$options.entry, ifComponent) && !this.$options.isWx2Baidu) {
             console.log(chalk.red('[Ops] ' + this.$options.entry + ' is not a alipay miniproramm directory.'));
             return false;
         }
@@ -108,11 +115,19 @@ module.exports = {
         
     },
     onParsed () {
-        const packageData = getPackageJson();
-        reportDist(`${packageData.version}`, this.$options.dist);
+        const {packageData, antmovePackageData} = getPackageJson();
+        const toolData = {tool: '@antmove/alipay-baidu', version: packageData.version};
+
+        try {
+            reportDist(`${antmovePackageData.version}`, this.$options.dist, toolData);
+        } catch (err) {
+            return false;
+        }
+        
     },
     beforeCompile (ctx) {
         fs.emptyDirSync(ctx.$options.dist);
+        this.$options.antmoveCache  = getCache(this.$options.entry);
     },
     onCompiling (fileInfo, ctx) {
         const { 
@@ -192,7 +207,8 @@ module.exports = {
             let originCode = fs.readFileSync(fileInfo.path, 'utf8');
             let wxoriginCode = originCode;
             let apis = {};
-            compileJs(fileInfo, ctx, originCode, apis);
+            fileInfo.antmoveCache = this.$options.antmoveCache;
+            compileJs(fileInfo, ctx, originCode, apis, this.$options.entry);
 
             const reportData = {
                 info: pathinfo,
@@ -205,7 +221,7 @@ module.exports = {
             date = report(date,reportData);
             const reptempData = getScriptData(pathinfo, apis, wxoriginCode, "my");
             repData.transforms = Object.assign(repData.transforms,reptempData);
-        } else if (isTypeFile('.wxs', fileInfo.path)) {
+        } else if (isTypeFile('.sjs', fileInfo.path)) {
             let pathinfo = fileInfo.path.split(projectParents)[1].substr(1);
             const reptempData = getCustomScript (pathinfo);
             repData.transforms = Object.assign(repData.transforms,reptempData);
@@ -219,7 +235,7 @@ module.exports = {
                 nums: finishFile
             };
             date = report(date,reportData);
-            fs.outputFileSync(fileInfo.dist.replace(/\.wxs$/, '.sjs'), content);
+            fs.outputFileSync(fileInfo.dist.replace(/\.sjs$/, '.js'), content);
         } else {
             let content;
             if (fileInfo.deep === 0 && fileInfo.filename === 'app.json') {
@@ -261,8 +277,8 @@ module.exports = {
                 date = report(date,reportData);
 
             } else if (fileInfo.extname === '.json') {
+                const { transformPackage } =require('@antmove/utils');
                 let pathInfo = fileInfo.path.split(projectParents)[1].substr(1);
-            
                 let parent = fileInfo.parent;
                 let bool = false;
                 let AxmlFileInfo = null;
@@ -277,8 +293,10 @@ module.exports = {
                 if (pageJson.usingComponents) {
                     const componentObj = pageJson.usingComponents; 
                     Object.keys(componentObj).map(key => {
-                        componentObj[`antmove-${key}`] = componentObj[key];
-                        delete componentObj[key];
+                        if (key !== 'custom-rich-text') {
+                            componentObj[`antmove-${key}`] = componentObj[key];
+                            delete componentObj[key];
+                        }
                     });
                     if (pageJson.component) {
                         project.componentNum++;
@@ -288,7 +306,9 @@ module.exports = {
                 if (bool) {
                     content = pageJsonProcess.call(ctx, content, AxmlFileInfo, project.distPath);
                 } 
-                
+                if (fileInfo.path.includes('package.json')) {
+                    content = transformPackage(fileInfo);
+                }
                 const jsonData = getJsonData(pathInfo,content);
                 repData.transforms = Object.assign(repData.transforms, jsonData);
 
@@ -355,7 +375,7 @@ module.exports = {
         });
         return fileInfo;
     },
-    compiled (ctx) {
+    compiled (ctx, cb = () => {}) {
 
         generateBundleApi(ctx.output);
         
@@ -390,7 +410,8 @@ module.exports = {
             let statisticsData = statistics(repData.transforms);
             repData.concept = statisticsData; 
             writeReportPage (repData, targetPath);
-            
+
+            cb ();
         }); 
 
  

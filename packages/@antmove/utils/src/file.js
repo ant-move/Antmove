@@ -58,12 +58,12 @@ fileUtils.parserDirInfo = function (opts = {}, cb = () => {}, deep = 0, parent =
             wxmlFileIndex = i;
         }
 
-        if (ext === '.json' || ext === '.wxml' || ext === '.wxss') {
+        if (ext === '.json' || ext === '.wxml') {
             isComponent++;
         }
     });
 
-    isComponent = isComponent === 3 ? true : false;
+    isComponent = isComponent === 2 ? true : false;
     if (isComponent) {
         let _el = files.splice(wxmlFileIndex, 1);
         files.unshift(_el[0]);

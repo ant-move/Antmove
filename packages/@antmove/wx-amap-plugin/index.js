@@ -3,4 +3,4 @@ module.exports = {
     components: require('./config/componentsInfo/componentInfo'),
     json: require('./config/jsonInfo/index'),
     lifeCycle: require('./config/lifeCycleInfo/index')
-}
+};

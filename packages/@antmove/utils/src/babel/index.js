@@ -89,6 +89,26 @@ function transformClass (code) {
     }).code;
 }
 
+function transformSjsToWxs (code) {
+    return babel.transform(code, {
+        "presets": [
+            [
+                babelPreset
+            ]
+        ],
+        plugins: [
+            [
+                require('@babel/plugin-transform-modules-commonjs'),
+                {
+                    allowTopLevelThis: true,
+                    loose: true,
+                    strict: true
+                }
+            ]
+        ]
+    }).code;
+}
+
 function minifyObjectHandleFn (code, opts={}) {
     return babel.transform(code, {
         plugins: [
@@ -165,6 +185,7 @@ module.exports = {
     cjsToes: cjsToesFn,
     externalForWxFn,
     transformClass,
+    transformSjsToWxs,
     processRequireForWx,
     getCbName,
     replaceCallName

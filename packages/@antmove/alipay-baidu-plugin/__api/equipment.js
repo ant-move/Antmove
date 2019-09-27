@@ -74,6 +74,39 @@ const apiObj = {
             return returnData;
         }
     },
+    
+    getLocation: {
+        fn (obj) {
+            obj.type ='gcj02';
+            swan.getLocation({...obj});
+           
+        }
+    },
+    getSetting: {
+        fn (obj) {
+            swan.getSetting ({
+                ...obj,
+                success (res) {
+                    
+                    res.authSetting.location =  res.authSetting["scope.userLocation"];
+                    delete res.authSetting["scope.userLocation"];
+                    res.authSetting.audioRecord = res.authSetting["scope.record"];
+                    delete res.authSetting["scope.record"];
+                    
+                    res.authSetting.userInfo = res.authSetting["scope.userInfo"];
+                    delete res.authSetting["scope.userInfo"];
+                     
+                    res.authSetting.album = res.authSetting["scope.writePhotosAlbum"];
+                    delete  res.authSetting["scope.writePhotosAlbum"];
+                     
+                    res.authSetting.camera = res.authSetting["scope.camera"];
+                    delete res.authSetting["scope.camera"];
+                    obj.success && obj.success(res);
+                }
+            });
+           
+        }
+    },
     getNetworkType: {
         fn (obj) {  
             utils.testreturnValue(descObj.getNetworkType);

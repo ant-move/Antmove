@@ -15,6 +15,35 @@ module.exports = {
         makeLifes(_opts, options);
         addObserver(_opts);
         makeEventObj (_opts, options);
+    },
+    processTransformationComponentWx (_opts, options) {
+        const unsupported = ['relations', 'moved', 'error', 'observers'];
+        unsupported.forEach (key => {
+            if (options[key]) {
+                console.warn(`智能小程序 ${key} 不支持`);
+            }
+            delete options[key];
+        });
+
+        if (options.lifetimes) {
+            const lifetimes = ['moved', 'error'];
+            Object.keys(options.lifetimes).forEach(life => {
+                if (lifetimes.indexOf(life)!==-1) {
+                    console.warn(`自定义组件生命周期 ${life} 不支持`);
+                    delete options.lifetimes[life];
+                }
+            });
+        }
+        if (options.pageLifetimes) {
+            if (options.pageLifetimes.resize) {
+                console.warn(`组件所在页面的生命周期 resize 不支持`);
+                delete options.lifetimes.resize;
+            }
+            
+        }
+        
+        _opts = Object.assign(_opts, options);
+
     }
 };
 

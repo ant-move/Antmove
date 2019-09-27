@@ -8,8 +8,12 @@ const transformDoc = require('./tool/TransformationDoc/index');
 const record = require("./record");
 const reportMethods = require("./reportMethods");
 const childProcess = require('./childProcess');
+const transformPackage = require('./transformPackage');
+const comStores = require('./comStores');
+const getVersion = require('./getVersion')
 
 module.exports = {
+    ...getVersion,
     ...babelPlugins,
     ...preprecessCode,
     log,
@@ -19,6 +23,8 @@ module.exports = {
     transformDoc,
     record,
     reportMethods,
+    comStores,
+    transformPackage,
     ...childProcess,
     /**
      * defineGetter

@@ -1,0 +1,31 @@
+<view class="am-modal-{{hidden ? 'hide':'show'}} {{className}} " disable-scroll="{{disableScroll}}">
+	<view class="am-modal-mask" />
+	<view class="am-modal-document {{advice === true ? 'am-modal-document-advice' : '' }}">
+		<view class="am-modal {{className}}">
+			<view tt:if="{{topImage}}" class="am-modal-image am-modal-image-{{topImageSize}}">
+				<image src="{{topImage}}" />
+			</view>
+			<view class="am-modal-header" tt:if="{{title}}">
+                {{title}}
+			</view>
+            <view class="am-modal-header" tt:if="{{$slots.header}}">
+				<slot name="header"/>
+			</view>
+			<view class="am-modal-body">
+				<slot />
+			</view>
+            <view class="am-modal-footer" hover-class="am-modal-footer-active" tt:if="{{$slots.footer}}" bindtap="modalClick">
+                <slot name="footer" />
+            </view>
+			<view class="am-modal-footer" hover-class="am-modal-footer-active" tt:if="{{!$slots.footer}}">
+                <view class="cancel am-modal-footer-btn" tt:if="{{!noCancel}}" bindtap="modalClick">
+                    {{cancelText}}
+                </view>
+                <view class="confirm am-modal-footer-btn" ontap="mdalClose">
+                    {{confirmText}}
+                </view>
+			</view>
+			<view class="am-modal-close {{closeType === '1' ? 'am-modal-close-white' : ''}}" tt:if="{{$slots.footer}}"  hover-class="am-modal-close-active"  bindtap="mdalClose" />
+		</view>
+	</view>
+</view>

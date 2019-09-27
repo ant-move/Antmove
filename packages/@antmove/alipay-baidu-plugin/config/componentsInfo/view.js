@@ -29,7 +29,7 @@ module.exports = {
             'hover-class': createSupportProp('点击时添加的样式类'), 
             'hover-start-time': createSupportProp("按住多久后出现点击状态，单位毫秒"),
             "hover-stay-time": createSupportProp("松开后点击状态保留时间，单位毫秒"),
-            'hidden': createSupportProp("是否隐藏",0),
+            'hidden': createSupportProp("是否隐藏"),
             class: createSupportProp("自定义样式名"),
             style: createSupportProp("内联样式"),
             animation: createSupportProp("用于动画"),

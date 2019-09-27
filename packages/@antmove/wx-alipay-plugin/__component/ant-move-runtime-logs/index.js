@@ -29,7 +29,7 @@ Page(
             _dataset.logs = JSON.stringify(event.target.dataset.logs); 
                   
             my.navigateTo({
-                url: `specific/index?path=${_dataset.path}&logs=${_dataset.logs}&logNum=${_dataset.logNum}`
+                url: `./specific/index?path=${_dataset.path}&logs=${_dataset.logs}&logNum=${_dataset.logNum}`
             });              
         },
 

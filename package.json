@@ -1,28 +1,36 @@
 {
   "name": "antmove",
-  "version": "0.2.25",
+  "version": "1.0.0",
   "description": "小程序转换器，基于支付宝/微信小程序转换为多端小程序，让小程序跨平台开发变得简单。",
   "main": "src/index.js",
   "bin": {
     "antmove": "./bin/index"
   },
   "scripts": {
-    "link": "bash ./bin/link.local.sh",
+    "link": "bash ./build/link.local.sh",
     "lint": "eslint ./src",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "amap-doc": "node ./build/utils/outputFils.js",
+    "build-external": "node ./build/buildDoc/external",
+    "build-alife": "node ./build/buildAlipay/index.js"
   },
   "author": "amap-appx@service.autonavi.com",
   "license": "GPL-3.0",
   "dependencies": {
-    "@antmove/alipay-baidu": "^0.2.1",
-    "@antmove/alipay-wx": "^0.2.1",
-    "@antmove/wx-alipay": "^0.2.1",
+    "@antmove/alipay-baidu": "^1.0.0",
+    "@antmove/alipay-wx": "^1.0.0",
+    "@antmove/wx-alipay": "^1.0.0",
+    "@antmove/wx-tt": "^0.1.0",
+    "@antmove/wx-baidu": "^1.0.0",
+    "@antmove/wx-wx": "^1.0.0",
+    "@antmove/alipay-polyfill": "^1.0.0",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "chalk": "^2.4.2",
     "commander": "^2.19.0",
     "figlet": "^1.2.3",
     "fs-extra": "^8.1.0",
     "inquirer": "^7.0.0",
+    "marked": "^0.7.0",
     "os": "^0.1.1"
   },
   "devDependencies": {

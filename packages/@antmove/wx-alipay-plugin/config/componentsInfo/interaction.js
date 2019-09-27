@@ -152,7 +152,7 @@ module.exports = {
             wechat: 'http://www.ionic.wang/weixin/component/action-sheet.html',
             alipay: ''
         },
-        desc: '底部菜单表的取消按钮，和<action-sheet-item/>的区别是，点击它会触发<action-sheet/>的change事件，并且外观上会同它上面的内容间隔开来。',
+        desc: '底部菜单表的取消按钮，和action-sheet-item的区别是，点击它会触发action-sheet的change事件，并且外观上会同它上面的内容间隔开来。',
         tagName: 'action-sheet-cancel',
         path: customComponentPrefix + '/__component/action-sheet-cancel/action-sheet-cancel'
     }

@@ -14,7 +14,7 @@ module.exports = class Transform {
         this.$plugin = plugin;
     }
 
-    beforeRun () {
+    beforeRun (cb = () => {}) {
         let inputDir = this.$options.entry;
         let outputDir = this.$options.dist;
 
@@ -32,11 +32,12 @@ module.exports = class Transform {
          */
         process.env.NODE_ENV = lifeCycles.$options.env;
         lifeCycles.beforeParse(function () {
-            self.run(inputDir, outputDir);
+            self.run(inputDir, outputDir, cb);
+
         });
     }
 
-    run (inputDir, outputDir) {
+    run (inputDir, outputDir, cb = () => {}) {
         let self = this;
         this.entry = inputDir;
         this.output = outputDir;
@@ -66,16 +67,81 @@ module.exports = class Transform {
             callIfIsFunc(lifeCycles.onCompiling.bind(self.$plugin), fileInfo, self);
         });
 
-        callIfIsFunc(lifeCycles.compiled.bind(this), this);
+        callIfIsFunc(lifeCycles.compiled.bind(this), this, cb);
+        let configPath = this.$options.output+'antmove.config.js';
+        if (fs.existsSync(configPath)) {
+            fs.unlinkSync(configPath);
+        }
+        let pro = getProgramName (this.$options.type.split ("-") [1]);
+        if ( this.$options.component === "component" ) {
+            fs.unlinkSync(this.$options.output+'app.js');
+            fs.unlinkSync(this.$options.output+'app.json');
+            fs.unlinkSync(this.$options.output+"app."+pro.css);
+            deleteFolder(this.$options.input);
+            var _path = this.$options.input;
+            _path = _path.match(/(\S*)\/\.antmove/)[1];
+            fs.rmdirSync (_path);
+        }
     }
+
 };
 
 function walk (arr = [], cb) {
-    arr.forEach(function (el) {
+    arr.forEach( function (el) {
         if (Array.isArray(el.children)) {
             walk(el.children, cb);
         } else {
             cb && cb(el);
         }
     });
+}
+
+function deleteFolder (path) {
+    var files = [], curPath = '';
+    if (fs.existsSync(path)) {
+        if (fs.statSync(path).isDirectory()) {
+            files = fs.readdirSync(path);
+            files.forEach (function (file) {
+                if (path.charAt(path.length-1)==="/") {
+                    curPath = path + file;
+                } else {
+                    curPath = path + "/" + file ;
+                }                    
+                if (fs.statSync(curPath).isDirectory()) {
+                    curPath = curPath + "/";
+                    deleteFolder(curPath);
+                } else {
+                    fs.unlinkSync(curPath);                  
+                }
+            });
+            try {
+                fs.rmdirSync(path);
+            } catch (err) {
+                console.log();
+            }
+        } else {
+            fs.unlinkSync(curPath);
+        }
+    }
+}
+
+function getProgramName (type = "wx") {
+    let pro = {};
+    switch (type) {
+    case "wx" : 
+        pro.name = "微信";
+        pro.css = "wxss";
+        break;
+    case "alipay": 
+        pro.name = "支付宝";
+        pro.css = "acss";
+        break;
+    case "baidu": 
+        pro.name = "百度";
+        pro.css = "css";
+        break;
+    default : 
+        pro.css = "wxss";
+    }
+    return pro;
 }

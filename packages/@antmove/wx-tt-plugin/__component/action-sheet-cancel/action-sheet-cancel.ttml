@@ -1,0 +1,6 @@
+<view class="sheet_cancel {{className}}" slot="footer">
+    <view tt:if="textContent">
+        {{textContent}}
+    </view>
+    <slot></slot>
+</view>

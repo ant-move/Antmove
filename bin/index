@@ -1,13 +1,20 @@
 #!/usr/bin/env node
 
+var fs = require('fs-extra');
 var path = require('path');
 var program = require('commander');
 const chalk = require('chalk');
 const buildScript = require('../cli/index.js');
 const alipayWxCli = require('./alipay-wx');
 const alipayBaiduCli = require('./alipay-baidu');
+const wxWxCli = require('./wx-wx');
 const alipayToBaidu = require('../cli/alipay-baidu/index');
 const alipayToWx = require('../cli/alipay-wechat/index');
+const wxToWx = require('../cli/wechat-wechat/index');
+const wxToBaidu = require('../cli/wechat-baidu/index');
+const wxToBaiduCli = require('./wx-baidu');
+const wxToTouTiao = require('../cli/wechat-tt/index');
+const alipayPolyfill = require('../cli/alipay-polyfill/index');
 const inputDirPath = process.cwd() + '/';
 const entryProcess = require('./entry');
 const {
@@ -16,25 +23,34 @@ const {
 /**
  * read packageJson
  */
-const packageJson = require('../package.json');
+const packageJson = require("../package.json");
 let specialtypeCmd = false;
 const options = {
-    input: '',
-    output: '',
-    env: 'production',
-    remote: false
+    input: "",
+    output: "",
+    env: "production",
+    remote: false,
+    component2: false,
+    platform: "alipay"
 };
-
-
 
 program
     .version(packageJson.version)
-    .option('-t, --type <type>', 'Which plugin to be used.')
-    .option('-i, --input <type>', 'Input path of compiled code.')
-    .option('-o, --output <type>', 'Output path of compiled code.')
-    .option('-e, --env <type>', 'Compiling in development mode or production mode.')
-    .option('-s, --scope <type>', 'Compiling component in scope mode.')
-    .option('-r, --remote <type>', 'Pull ployfill from remote sources.');
+    .option("-t, --type <type>", "Which plugin to be used.")
+    .option("-i, --input <type>", "Input path of compiled code.")
+    .option("-o, --output <type>", "Output path of compiled code.")
+    .option("-c, --component <type>", "Which plugin to be used.")
+    .option(
+        "-e, --env <type>",
+        "Compiling in development mode or production mode."
+    )
+    .option("-s, --scope <type>", "Compiling component in scope mode.")
+    .option("-r, --remote <type>", "Pull ployfill from remote sources.")
+    .option(
+        "--component2 <type>",
+        "Is support component2 for alipay miniprogram."
+    )
+    .option("--platform <type>", "The platform of alipay miniprogram.");
 
 program.parse(process.argv);
 
@@ -45,29 +61,60 @@ options.env = program.env || options.env;
 options.remote = program.remote || options.remote;
 options.scope = program.scope || false;
 options.type = program.type;
+options.component = program.component || false;
+options.component2 = program.component2 || options.component2;
+options.platform = program.platform || options.platform;
+
+if (options.component2 !== "true" || options.component2 !== 1) {
+    options.component2 = false;
+} else {
+    options.component2 = true;
+}
 
 /**
  * $ antmove wx-alipay ../alipay-app
  * */
 program
     .version(packageJson.version)
-    .command('wx-alipay')
+    .command("wx-alipay")
     .action(function () {
         specialtypeCmd = true;
         action({
             ...options,
-            type: 'wx-alipay'
+            type: "wx-alipay"
         });
     });
 
 program
     .version(packageJson.version)
-    .command('wx-amap')
+    .command("wx-amap")
     .action(function () {
         specialtypeCmd = true;
         action({
             ...options,
-            type: 'wx-amap'
+            type: "wx-amap"
+        });
+    });
+
+program
+    .version(packageJson.version)
+    .command('wx-tt')
+    .action(function () {
+        specialtypeCmd = true;
+        action({
+            ...options,
+            type: 'wx-tt'
+        });
+    });
+
+program
+    .version(packageJson.version)
+    .command('alipay-compiler')
+    .action(function () {
+        specialtypeCmd = true;
+        action({
+            ...options,
+            type: 'alipay-compiler'
         });
     });
 
@@ -79,9 +126,8 @@ alipayWxCli(program, function () {
 
     action({
         ...options,
-        type: 'alipay-wx'
-    }
-    );
+        type: "alipay-wx"
+    });
 });
 
 /**
@@ -92,11 +138,33 @@ alipayBaiduCli(program, function () {
 
     action({
         ...options,
-        type: 'alipay-baidu'
+        type: "alipay-baidu"
+    });
+});
+
+/**
+ * antmove-cli wx-compiler ../wx-app
+ */
+wxWxCli(program, function () {
+    specialtypeCmd = true;
+
+    action({
+        ...options,
+        type: 'wx-compiler'
     }
     );
 });
- 
+
+wxToBaiduCli (program, function () {
+    specialtypeCmd = true;
+
+    action({
+        ...options,
+        type: 'wx-baidu'
+    }
+    );
+});
+
 program.parse(process.argv);
 
 if (!specialtypeCmd) {
@@ -105,7 +173,7 @@ if (!specialtypeCmd) {
 
 /**
  * cmd options
- * @param opts 
+ * @param opts
  */
 function action (options) {
     /**
@@ -114,13 +182,17 @@ function action (options) {
     let buildInfo = {
         'wx-alipay': buildScript,
         'wx-amap': buildScript,
+        'wx-tt': wxToTouTiao,
         'alipay-wx': alipayToWx,
-        'alipay-baidu': alipayToBaidu
+        'alipay-baidu': alipayToBaidu,
+        'wx-compiler': wxToWx,
+        'alipay-compiler': alipayPolyfill,
+        'wx-baidu': wxToBaidu
     };
 
     entryProcess(options, function (opts = {}) {
         let _input = opts.input,
-            _output = opts.output ; 
+            _output = opts.output;
         opts.input = toAbsolutePath(opts.input);
         opts.output = toAbsolutePath(opts.output);
         if (!opts.output) {
@@ -129,22 +201,38 @@ function action (options) {
         }
 
         if (opts.input === opts.output) {
-            console.log(chalk.red('输入输出目录不能为同一个地址。'));
+            console.log(chalk.red("输入输出目录不能为同一个地址。"));
         }
 
         if (buildInfo[opts.type]) {
-            if (opts.type === 'wx-amap') {
-                opts.aliType = 'amap';
-                process.env.aliType = 'amap';
+            if (opts.component === 'component') {
+                let cachePath = path.join(__dirname, '../cache/.antmove/');
+                let originalProgram = opts.type.split("-")[0];
+                let isOriginalComponents = ifOriginalComponent(opts.input, originalProgram);
+                let program = getProgramName(originalProgram);
+                if  (!isOriginalComponents) {
+                    console.log(chalk.red(`如需使用一键转换${program.name}组件功能，请选择${program.name}小程序的组件`));
+                    return false;
+                }
+                fs.outputFileSync(`${cachePath}app.${program.css}`, " ");
+                fs.outputFileSync(`${cachePath}app.js`, " ");
+                fs.outputFileSync(`${cachePath}app.json`, "{}");
+                copyFolder(opts.input, cachePath);
+                opts.input = cachePath;
             }
+            if (opts.type === "wx-amap") {
+                opts.aliType = "amap";
+                process.env.aliType = "amap";
+            }
+            _input = './';
+            _output = processPath(opts);
             recordOptions(opts, _input, _output);
             buildInfo[opts.type](opts);
         } else {
-            console.log(chalk.red('编译类型错误，请选择可用的转换类型。'));
+            console.log(chalk.red("编译类型错误，请选择可用的转换类型。"));
         }
     });
 }
-
 
 function toAbsolutePath (target) {
     let dist = target;
@@ -153,4 +241,77 @@ function toAbsolutePath (target) {
     }
 
     return dist;
+}
+
+function copyFolder (from, to) {
+    let files = [];
+    if (fs.existsSync(to)) {
+        files = fs.readdirSync(from);
+        files.forEach(function (file) {
+            var targetPath = from + "/" + file;
+            var toPath = to + "/" + file;
+            if (fs.statSync(targetPath).isDirectory()) {
+                copyFolder(targetPath, toPath);
+            } else {
+                fs.copyFileSync(targetPath, toPath);
+            }
+        });
+    } else {
+        fs.mkdirSync(to);
+        copyFolder(from, to);
+    }
+}
+
+function ifOriginalComponent (from, type) {
+    let _tem = "";
+    switch (type) {
+    case "wx" : _tem = "wxml";
+        break;
+    case "alipay": _tem = "axml";
+        break;
+    case "baidu": _tem = "swan";
+    }
+    let isWx = false ;
+    testIsWxComponents(from);
+    function testIsWxComponents (from) {
+        let files = fs.readdirSync(from);
+        files.forEach(function (file) {
+            var targetPath = from + "/" + file;
+            var reg = new RegExp("\\S*\\." + _tem);
+            if (fs.statSync(targetPath).isDirectory()) {
+                testIsWxComponents(targetPath);
+            } else {
+                var ifWxml = reg.test(targetPath.split('/')[targetPath.split('/').length-1]);
+                if (ifWxml) {
+                    isWx = true;
+                    return;
+                }
+            }
+        });
+    }
+    return isWx;
+}
+
+function getProgramName (type = "wx") {
+    let pro = {};
+    switch (type) {
+    case "wx" : 
+        pro.name = "微信";
+        pro.css = "wxss";
+        break;
+    case "alipay": 
+        pro.name = "支付宝";
+        pro.css = "acss";
+        break;
+    case "baidu": 
+        pro.name = "百度";
+        pro.css = "css";
+    }
+    return pro;
+}
+
+function processPath ( opts ) {
+    let _path = "";
+    _path = path.relative(opts.input, opts.output);
+    return _path;
 }

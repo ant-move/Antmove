@@ -1,7 +1,7 @@
 const fs = require('fs-extra');
 const componentMap = require('../config/componentsInfo/index')['descObject'];
 const eventsMap = require('./eventsMap');
-
+const customCompents = require('./customCompents');
 module.exports = function (ast, fileInfo, renderAxml) {
     let { type, props } = ast;
     type = changeComponentName ( ast, type, fileInfo);
@@ -137,7 +137,7 @@ function checkoutCustomComponent (fileInfo, tagName) {
     if (fileInfo.extname === '.axml') {
         json = fileInfo.path.replace('.axml', '.json');
         json = JSON.parse(fs.readFileSync(json, 'utf8'));
-        if (json.usingComponents && json.usingComponents[tagName]) {
+        if (json.usingComponents && json.usingComponents[tagName] && customCompents.indexOf(tagName)===-1) {
             bool = true;
         }
     }
@@ -152,11 +152,28 @@ function changeComponentName ( ast, type, fileInfo) {
         const jsonData = fs.readFileSync(jsonPath);
         const jsonObj  = JSON.parse(jsonData);
         if (jsonObj.usingComponents&&jsonObj.usingComponents[type]) {
-            type = ast.type = 'antmove-' + type;
+            if ( type!=='custom-rich-text') {
+                type = ast.type = 'antmove-' + type;
+            }
+
         }
     }
 
     return type;
 
 }
+
+// function removeoldcoCompents (tagInfo={} ,arr=[], fileInfo={}) {
+//     if (tagInfo.tagName&&arr.indexOf(tagInfo.tagName)!==-1) {
+//         if (fileInfo.extname === '.axml') {
+//             let jsonPath = fileInfo.path.replace('.axml', '.json');
+//             let json = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+//             if (json.usingComponents && json.usingComponents[tagInfo.tagName]) {
+//                 delete json.usingComponents[tagInfo.tagName];
+//                 fs.writeFileSync(JSON.stringify(json), 'utf8');
+//             }
+            
+//         }
+//     }
+// }
 

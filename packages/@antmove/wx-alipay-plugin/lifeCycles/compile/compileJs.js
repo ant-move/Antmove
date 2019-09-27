@@ -1,7 +1,7 @@
 const fs = require('fs-extra');
 const Config = require('../../config');
-const path = require('path');
 const customComponentPrefix = Config.library.customComponentPrefix;
+const path = require('path');
 const {
     behavourHandle,
     // precessRelativePathOfCode,
@@ -19,6 +19,10 @@ const {
 module.exports = function (fileInfo, ctx, originCode, apis) {
     originCode = behavourHandle(originCode);
     // originCode = precessRelativePathOfCode(originCode, fileInfo.path, ctx.entry);
+    if (!Config.component2 && fileInfo.parent && fileInfo.parent.is) {
+        originCode = processComponentIs(originCode, fileInfo.parent.is)
+
+    }
     originCode = ifProcessHandleFn(originCode, {
         entry: 'wx',
         dist: 'my',
@@ -52,8 +56,8 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
     /**
      * absolute to relative
      */
-    _compoentPath = path.relative(path.join(fileInfo.dist, '../'), path.join(fileInfo.output, _compoentPath))
-    apiPath = path.relative(path.join(fileInfo.dist, '../'), path.join(fileInfo.output, apiPath))
+    _compoentPath = path.relative(path.join(fileInfo.dist, '../'), path.join(fileInfo.output, _compoentPath)).replace(/\\/g, '/');
+    apiPath = path.relative(path.join(fileInfo.dist, '../'), path.join(fileInfo.output, apiPath)).replace(/\\/g, '/');
     if (_compoentPath[0] !== '.') {
         _compoentPath = './' + _compoentPath;
     }
@@ -74,7 +78,11 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
     }
 
     if (isMatchPlatformApi || (fileInfo.parent && fileInfo.parent.tplInfo)) {
-        insertCode += `const _my = require('${apiPath}')(my);
+        let type = 'my'
+        if (Config.aliAppType === 'dingding') {
+            type = 'dd';
+        }
+        insertCode += `const _my = require('${apiPath}')(${type});
                 `;
     }
 
@@ -89,9 +97,23 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
     //             // originCode = processFnBodyHandleFn(originCode, info);
     //         });
     // }
-
     originCode = insertCode + originCode;
     originCode = prettierCode(originCode);
 
     fs.outputFileSync(fileInfo.dist, originCode);
 };
+
+function processComponentIs (code, isPath = '') {
+    if (isPath) {
+        code = `
+        my.setStorageSync({
+            key: 'activeComponent',
+            data: {
+                is: '${isPath}'
+            }
+        })\n
+        `+ code;
+    }
+
+    return code;
+}

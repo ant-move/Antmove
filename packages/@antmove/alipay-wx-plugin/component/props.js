@@ -5,7 +5,7 @@ const generic = require('./generic');
 
 module.exports = function (ast, fileInfo, renderAxml) {
     let { type, props } = ast;
-    type = changeComponentName ( ast, type, fileInfo);
+    // type = changeComponentName ( ast, type, fileInfo);
     let originType = type;
     let _componentMap = componentMap;
     let tagInfo = _componentMap[type];
@@ -153,17 +153,4 @@ function checkoutCustomComponent (fileInfo, tagName) {
     }
 
     return bool;
-}
-
-function changeComponentName (ast, type, fileInfo) {
-    let jsonPath = fileInfo.path;
-    jsonPath = jsonPath.replace(".axml", '.json');
-    if (fs.existsSync(jsonPath)) {
-        const jsonData = fs.readFileSync(jsonPath);
-        const jsonObj  = JSON.parse(jsonData);
-        if (jsonObj.usingComponents&&jsonObj.usingComponents[type]) {
-            type = ast.type = 'antmove-' + type;
-        }
-    }
-    return type;
 }

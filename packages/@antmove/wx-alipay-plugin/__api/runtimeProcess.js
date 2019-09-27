@@ -1,5 +1,6 @@
 const myApi = require('./my');
 const utils = require('./utils.js');
+const globalVar = require('./config').global;
 let hasProxy = typeof Proxy !== 'undefined';
 let _Proxy = function () { };
 if (hasProxy) _Proxy = Proxy;
@@ -7,7 +8,7 @@ if (hasProxy) _Proxy = Proxy;
  * runtime error catch
  */
 function warnApi (api) {
-    const iscanIuse = my.canIUse(api);
+    const iscanIuse = globalVar.canIUse(api);
     if (!iscanIuse) {
         utils.warn(
             `支付宝暂不支持${api}`,
@@ -77,10 +78,10 @@ module.exports = function (obj = {}) {
 myApi.getUserInfoWrap = {
     fn: function (e = {}, fn) {
   
-        my.getAuthCode({
+        globalVar.getAuthCode({
             scopes: 'auth_user',
             success: () => {
-                my.getAuthUserInfo({
+                globalVar.getAuthUserInfo({
                     success: function (userInfo) {
                         fn && fn({
                             ...e,
@@ -106,7 +107,7 @@ myApi.getUserInfoWrap = {
  */
 myApi.getPhoneNumberWrap = {
     fn: function (e = {}, fn) {
-        my.getPhoneNumber({
+        globalVar.getPhoneNumber({
             success: (res) => {
                 let encryptedData = res.response;
                 e = {

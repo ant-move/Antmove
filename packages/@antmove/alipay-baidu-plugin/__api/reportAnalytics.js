@@ -10,8 +10,20 @@ module.exports = {
     getAuthCode: {
         fn (obj) {
             utils.testparams(descObj.connectSocket, obj);
-            obj.success&& obj.success({authCode: "获取失败"});
-            obj.complete&& obj.complete();
+            swan.login({
+                success (res) {
+                    obj.success&&  obj.success({
+                        authCode: res.code
+                    });
+                }, 
+                fail (err) {
+                    obj.fail&&  obj.fail(err);
+                },
+                complete (...res) {
+                    obj.complete&&obj.complete(...res);
+                }
+
+            });
 
         }
     }

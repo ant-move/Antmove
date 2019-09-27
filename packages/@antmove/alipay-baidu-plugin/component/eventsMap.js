@@ -5,5 +5,9 @@ module.exports = {
     onTouchMove: 'bindtouchmove',
     onTouchEnd: 'bindtouchend',
     onTouchCancel: 'bindouchcancel',
-    onLongTap: 'bidlongtap'
+    onLongTap: 'bidlongtap',
+    catchTouchStart: 'catchtouchstart',
+    catchTouchMove: 'catchtouchmove',
+    catchTouchEnd: 'catchtouchend',
+    catchTouchCancel: 'catchtouchcancel',
 };
