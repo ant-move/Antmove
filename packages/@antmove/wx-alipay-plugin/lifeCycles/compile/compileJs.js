@@ -11,6 +11,7 @@ const {
     ifProcessHandleFn,
     ConstructorHandle,
     prettierCode,
+    transformClass,
     // processFnBodyHandleFn,
     getCbName
 } = require('@antmove/utils');
@@ -20,9 +21,10 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
     originCode = behavourHandle(originCode);
     // originCode = precessRelativePathOfCode(originCode, fileInfo.path, ctx.entry);
     if (!Config.component2 && fileInfo.parent && fileInfo.parent.is) {
-        originCode = processComponentIs(originCode, fileInfo.parent.is)
+        originCode = processComponentIs(originCode, fileInfo.parent.is);
 
     }
+    originCode = transformClass(originCode);
     originCode = ifProcessHandleFn(originCode, {
         entry: 'wx',
         dist: 'my',
@@ -30,7 +32,7 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
     });    
     
     let isMatchPlatformApi = ''; // originCode.match(/\bwx\.(\w+)/g);
-    
+
     originCode = replaceCalleeHandleFn(originCode, 'wx', '_my', apis, function () {
         isMatchPlatformApi = true;
     });
@@ -78,7 +80,7 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
     }
 
     if (isMatchPlatformApi || (fileInfo.parent && fileInfo.parent.tplInfo)) {
-        let type = 'my'
+        let type = 'my';
         if (Config.aliAppType === 'dingding') {
             type = 'dd';
         }

@@ -4,21 +4,10 @@ const { createDescObj } = require('./utils');
  */
 module.exports = {
     request: createDescObj(
-        1,
+        0,
         '发起 HTTPS 网络请求',
         'https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html',
-        'https://developer.toutiao.com/dev/miniapp/uQTMz4CNxMjL0EzM',
-        {
-            msg: '入参参数名称差异',
-            params: {
-                props: {
-                    'method合法值': {
-                        type: 0,
-                        desc: 'OPTIONS,HEAD,PUT,DELETE,TRACE,CONNECT'
-                    }
-                }
-            }
-        }
+        'https://developer.toutiao.com/dev/miniapp/uQTMz4CNxMjL0EzM'
     ),
     downloadFile: createDescObj(
         1,

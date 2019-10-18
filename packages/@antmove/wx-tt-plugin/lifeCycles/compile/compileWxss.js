@@ -10,8 +10,11 @@ module.exports = function (fileInfo, ctx) {
     let classNamesWrap = false;
     fileInfo.dist = fileInfo.dist.replace(/\.wxss/, '.ttss');
     let cssContent = fs.readFileSync(fileInfo.path, 'utf8') || '';
-    cssContent = prettierCode(cssContent, 'scss');
-
+    try {
+        cssContent = prettierCode(cssContent, 'scss');
+    } catch (error) {
+        console.error('Invalid js file: ' +  fileInfo.dist);
+    }
     cssContent = cssContent.replace(/\.wxss"/g, '.ttss";').replace(/\.wxss'/g, '.ttss\';');
 
     if (fileInfo.deep === 0 || fileInfo.filename === 'app.wxss') {
@@ -106,7 +109,11 @@ module.exports = function (fileInfo, ctx) {
         console.error('[parseError]: ' + fileInfo.dist);
     }*/
 
-    cssContent = prettierCode(cssContent, 'scss');
-    if (fileInfo.deep === 2 && /\S*\.wxml/.test(fileInfo.filename) ) return;
+    try {
+        cssContent = prettierCode(cssContent, 'scss');
+    } catch (error) {
+        console.error('Invalid js file: ' +  fileInfo.dist);
+    }
+    if (fileInfo.deep !== undefined && /\S*\.wxml/.test(fileInfo.filename) ) return;
     fs.outputFileSync(fileInfo.dist, cssContent);  
 };

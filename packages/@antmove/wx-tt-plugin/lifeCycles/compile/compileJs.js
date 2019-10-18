@@ -17,23 +17,31 @@ const {
 
 
 module.exports = function (fileInfo, ctx, originCode, apis) {
-    originCode = behavourHandle(originCode);
-    // originCode = precessRelativePathOfCode(originCode, fileInfo.path, ctx.entry);
-    originCode = ifProcessHandleFn(originCode, {
-        entry: 'wx',
-        dist: 'tt',
-        code: 'wx.__target__'
-    });    
-    
+    try {
+        originCode = behavourHandle(originCode);
+        // originCode = precessRelativePathOfCode(originCode, fileInfo.path, ctx.entry);
+        originCode = ifProcessHandleFn(originCode, {
+            entry: 'wx',
+            dist: 'tt',
+            code: 'wx.__target__'
+        }); 
+    } catch (error) {
+        console.error('Invalid js file: ' +  fileInfo.dist);
+    }
     let isMatchPlatformApi = ''; // originCode.match(/\bwx\.(\w+)/g);
     
-    originCode = replaceCalleeHandleFn(originCode, 'wx', '_tt', apis, function () {
-        isMatchPlatformApi = true;
-    });
-    Config.compile.wrapApis = Object.assign(Config.compile.wrapApis, apis);
-    originCode = commentBlock(originCode);
     
-    originCode = requireModuleFn(originCode, ctx);
+    try {
+        originCode = replaceCalleeHandleFn(originCode, 'wx', '_tt', apis, function () {
+            isMatchPlatformApi = true;
+        });
+        Config.compile.wrapApis = Object.assign(Config.compile.wrapApis, apis);
+        originCode = commentBlock(originCode);
+        originCode = requireModuleFn(originCode, ctx);
+    } catch (error) {
+        console.error('Invalid js file: ' +  fileInfo.dist);
+    }
+    
     /**
      *  判断是否为 App()/Page()/Component()
      * */
@@ -44,7 +52,11 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
         name: '',
         constructName: {}
     };
-    getCbName(originCode, cbNameInfo);
+    try {
+        getCbName(originCode, cbNameInfo);
+    } catch (error) {
+        console.error('Invalid js file: ' +  fileInfo.dist);
+    }
     
     matchRet = cbNameInfo.name;
     let apiPath = customComponentPrefix + '/api/index.js';
@@ -68,9 +80,13 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
             .forEach(function (name) {
                 insertCode += `const ${Config.target + name} = require('${_compoentPath}')('${name}');\n`;
             });
-        originCode = ConstructorHandle(originCode, {
-            targetName: Config.target
-        });
+        try {
+            originCode = ConstructorHandle(originCode, {
+                targetName: Config.target
+            });
+        } catch (error) {
+            console.error('Invalid js file: ' +  fileInfo.dist);
+        }
     }
 
     if (isMatchPlatformApi || (fileInfo.parent && fileInfo.parent.tplInfo)) {
@@ -91,6 +107,10 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
     // }
 
     originCode = insertCode + originCode;
-    originCode = prettierCode(originCode);
+    try {
+        originCode = prettierCode(originCode);
+    } catch (error) {
+        console.error('Invalid js file: ' +  fileInfo.dist);
+    }
     fs.outputFileSync(fileInfo.dist, originCode);
 };

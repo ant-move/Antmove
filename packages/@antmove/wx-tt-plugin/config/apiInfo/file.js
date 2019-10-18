@@ -53,6 +53,14 @@ module.exports = {
                         desc: '计算文件摘要的算法'
                     }
                 }
+            },
+            returnValue: {
+                props: {
+                    digestAlgorithm: {
+                        type: 0,
+                        desc: '计算文件摘要的算法'
+                    }
+                }
             }
         }
     ),

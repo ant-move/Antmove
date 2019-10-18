@@ -123,6 +123,8 @@ picker-view-column {
     z-index: 0;
     height: 100%;
     overflow: hidden;
+    text-align: center;
+    line-height: 34px;
 }
 
 radio {

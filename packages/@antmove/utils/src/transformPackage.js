@@ -5,11 +5,14 @@ const convertedNpmName = Object.keys(convertedComponents);
 
 module.exports = function transformPackage (fileInfo) {
     let packageJson = JSON.parse(fs.readFileSync(fileInfo.path).toString());
-    let antmoveJson = fs.readFileSync(path.join(fileInfo.entry, `./antmove.config.js`)).toString();
-    antmoveJson = antmoveJson.replace(/module.exports = /, '').replace(/;/, '');
-    antmoveJson = eval("("+antmoveJson+")");
-    packageJson = replaceNpmName(packageJson, antmoveJson);
-    return packageJson;
+    if (fs.existsSync(path.join(fileInfo.entry, `./antmove.config.js`))) {
+        let antmoveJson = fs.readFileSync(path.join(fileInfo.entry, `./antmove.config.js`)).toString();
+        antmoveJson = antmoveJson.replace(/module.exports = /, '').replace(/;/, '');
+        antmoveJson = eval("(" + antmoveJson + ")");
+        if (!antmoveJson.npm) return JSON.stringify(packageJson, null, 4);
+        packageJson = replaceNpmName(packageJson, antmoveJson);
+    }
+    return JSON.stringify(packageJson, null, 4);
 };
 
 function replaceNpmName (packageJson, antmoveJson) {
@@ -20,12 +23,12 @@ function replaceNpmName (packageJson, antmoveJson) {
             delete packageJson.dependencies[key];
         }
     });
-    packageJson.devDependencies &&Object.keys(packageJson.devDependencies).forEach(key => {
+    packageJson.devDependencies && Object.keys(packageJson.devDependencies).forEach(key => {
         if (convertedNpmName.includes(key)) {
             const newKey = antmoveJson.npm[key].name;
             packageJson.devDependencies[newKey] = antmoveJson.npm[key].version;
             delete packageJson.devDependencies[key];
         }
     });
-    return JSON.stringify(packageJson, null, 4);
+    return packageJson;
 }

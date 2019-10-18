@@ -9,7 +9,7 @@ const descObj = require("./desc.js");
 
 const apiObj = {
     getAuthCode: {
-        fn (obj = {}) {
+        fn () {
             utils.warn(
                 `微信小程序发起授权请求获取用户信息时需要使用button按钮配合`,
                 {
@@ -92,38 +92,6 @@ const apiObj = {
                     });
                 }
             }
-        }
-    },
-    tradePay: {
-        fn (obj = {}) {
-            let tradePayParams = descObj.tradePay.body.params.props;
-            let tradePayReturnValue = descObj.tradePay.body.returnValue.props;
-            let params = utils.defineGetter(obj, tradePayParams, function (obj, prop) {
-                utils.warn(
-                    `tradePay的参数不支持 ${prop} 属性!`,
-                    {
-                        apiName: prop,
-                        errorType: tradePayParams[prop].type,
-                        type: 'api'
-                    }
-                );
-            });
-            wx.requestPayment({
-                ...params,
-                success: res => {
-                    let _res = utils.defineGetter(res, tradePayReturnValue, function (obj, prop) {
-                        utils.warn(
-                            `tradePay的参数不支持 ${prop} 属性!`,
-                            {
-                                apiName: prop,
-                                errorType: tradePayReturnValue[prop].type,
-                                type: 'api'
-                            }
-                        );
-                    });
-                    obj.success && obj.success(_res);
-                }
-            });
         }
     },
     openCardList: {

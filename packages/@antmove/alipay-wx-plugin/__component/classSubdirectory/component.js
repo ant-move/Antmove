@@ -1,3 +1,5 @@
+let data = require("./data.js");
+
 function judgeType (data) {
     if (data === undefined) return null;
     if (typeof data === 'number') {
@@ -96,7 +98,6 @@ function makeLifes (_opts, options) {
                 this.props = this.data;
                 processCustomEvent.call(this, options);
                 _opts.props = Object.assign({}, this.props);
-                this.$page = {};
                 oname && oname.call(this);
                 tname && tname.call(this);
             };
@@ -105,6 +106,7 @@ function makeLifes (_opts, options) {
                 if (obj.target === 'ready') {
                     this.$id = this.__wxExparserNodeId__;
                     this.is = "";
+                    this.$page = data.$page;
                 }
                 oname && oname.call(this);
                 tname && tname.call(this);

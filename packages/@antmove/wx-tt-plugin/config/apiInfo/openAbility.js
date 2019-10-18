@@ -103,19 +103,13 @@ module.exports = {
         'https://developer.toutiao.com/dev/miniapp/uQzMy4CNzIjL0MjM'
     ),
     getSetting: createDescObj(
-        0,
+        1,
         '获取用户的当前设置',
         'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/setting/wx.getSetting.html',
-        'https://developer.toutiao.com/dev/miniapp/uEjMy4SMyIjLxIjM'
-    ),
-    AuthSetting: createDescObj(
-        1,
-        '用户授权设置信息',
-        'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/setting/AuthSetting.html',
-        'https://developer.toutiao.com/dev/miniapp/uQjMy4CNyIjL0IjM',
+        'https://developer.toutiao.com/dev/miniapp/uEjMy4SMyIjLxIjM',
         {
-            msg: '属性差异',
-            params: {
+            msg: '返回值属性差异',
+            returnValue: {
                 props: {
                     writePhotosAlbum: {
                         type: 1,

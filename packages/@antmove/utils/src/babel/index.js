@@ -1,7 +1,7 @@
 const babel = require('@babel/core');
 const babelPreset = require('@babel/preset-env');
 const ConstructorHandle = require('./constructorHandle.js');
-const ifProcessHandle = require('./ifProcess.js');
+const crossCodeHandle = require('./crossCode.js');
 const commentBlock = require('./alipayCodeBlock.js');
 const requireModule = require('./requireModule');
 const behavourHandle = require("./behavourHandle");
@@ -47,9 +47,9 @@ function replaceCallName (code, opts = {}) {
     }).code;
 }
 
-function ifProcessHandleFn (code) {
+function crossCodeHandleFn (code) {
     return babel.transform(code, {
-        plugins: [ifProcessHandle]
+        plugins: [crossCodeHandle]
     }).code;
 }
 
@@ -174,8 +174,9 @@ function cjsToesFn (code) {
 }
 
 module.exports = {
+    // processClasssProperties,
     ConstructorHandle: ConstructorHandleFn,
-    ifProcessHandleFn,
+    crossCodeHandleFn,
     commentBlock,
     requireModuleFn,
     behavourHandle,

@@ -34,28 +34,12 @@ module.exports = {
         ''
     ),
     tradePay: createDescObj(
-        1,
+        2,
         '发起支付',
         'https://docs.alipay.com/mini/api/openapi-pay',
-        'https://developers.weixin.qq.com/miniprogram/dev/api/open-api/payment/wx.requestPayment.html',
+        '',
         {
-            msg: '命名不同 alipay: tradePay, wx: requestPayment, 参数缺失/返回值差异',
-            params: {
-                props: {
-                    tradeNO: {
-                        type: 0,
-                        desc: '接入小程序支付时传入此参数。此参数为支付宝交易号，注意参数有大小写区分'
-                    }
-                }
-            },
-            returnValue: {
-                props: {
-                    resultCode: {
-                        type: 0,
-                        desc: '支付结果码'
-                    }
-                }
-            }
+            msg: '微信与支付宝支付功能差异较大，请参考微信支付文档做兼容处理',
         }
     ),
     'alipay.open.app.qrcode.create': createDescObj(

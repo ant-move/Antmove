@@ -1,6 +1,6 @@
 {
   "name": "@antmove/alipay-baidu",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "transform alipay miniprogram to baidu miniprogram tool.",
   "main": "index.js",
   "scripts": {

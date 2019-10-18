@@ -1,5 +1,6 @@
 const utils = require('../../api/utils');
 const { warnLife } = utils;
+const data = require("./data.js");
 
 const getUrl = function () {
     let pages = getCurrentPages();
@@ -34,6 +35,7 @@ const makeEventObj = function (_opts, options) {
 const makeLife = function (_opts, options) {
     _opts.onLoad = function (res) {
         getUrl();
+        data.$page = this;
         if (options.events) {
             warnLife("There is no events life cycle", "events");
         }
