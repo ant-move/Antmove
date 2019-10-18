@@ -46,11 +46,9 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
     }
     
     matchRet = cbNameInfo.name;
-
     let apiPath = customComponentPrefix + '/api/index.js';  
     let _compoentPath = componentWrapFnPath;
     let insertCode = '';
-
     if (matchRet) {
         insertCode += `const ${Config.target + matchRet} = require('${_compoentPath}')('` + matchRet + `');\n`;
         originCode = ConstructorHandle(originCode, {targetName: Config.target});
@@ -60,9 +58,45 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
         insertCode += `const _wx = require('${apiPath}')(wx);
                 `;
     }
+    if (Config.ref.filename === fileInfo.path) {
+        if (matchRet === 'Page') { 
+            originCode = originCode.replace(/Page\s*\(\{([^]*)\}\)/, function () {
+                let value = RegExp.$1;
+                let val = '';
+                let newFn = '';
+                if (/onLoad\s*\(\)/.test(value)) {
+                    value = value.replace(/onLoad\s*\(\)\s*\{([^]*?)\},*/, '');
+                    value.match(/onLoad\s*\(\)\s*\{([^]*?)\}/);
+                    newFn = `\n\tonLoad() {\n\t\tlet ref = this.selectComponent('#${Config.ref.id}');\n\t\tthis.${Config.ref.id}(ref);\n${RegExp.$1}\n\t},`;
+                } else {
+                    newFn = `\n\tonLoad() {\n\t\tlet ref = this.selectComponent('#${Config.ref.id}');\n\t\tthis.${Config.ref.id}(ref);\n\t},`;
+                }
+                val += newFn;
+                val += value;
+                return 'Page({\n' + val + '\n})';
+            });
+        } else {
+            originCode = originCode.replace(/Component\s*\(\{([^]*?)\}\)/, function () {
+                let value = RegExp.$1;
+                let val = '';
+                let newFn = '';
+                if (/created\s*\(\)/.test(value)) {
+                    value = value.replace(/created\s*\(\)\s*\{([^]*?)\},*/, '');
+                    value.match(/created\s*\(\)\s*\{([^]*)\}/);
+                    newFn = `\n\tcreated() {\n\t\tlet ref = this.selectComponent('#${Config.ref.id}');\n\t\tthis.${Config.ref.id}(ref);\n${RegExp.$1}\n\t},`;
+                } else {
+                    newFn = `\n\tcreated() {\n\t\tlet ref = this.selectComponent('#${Config.ref.id}');\n\t\tthis.${Config.ref.id}(ref);\n\t},`;
+                }
+                val += newFn;
+                val += value;
+                return 'Component({\n' + val + '\n})';
+            });
+        }
+    }
     originCode = insertCode + originCode;
-    originCode = originCode.replace(/_wx\.createSelectorQuery\(\)/g, 'this.createSelectorQuery()');
-    
+    if (matchRet === 'Component') {
+        originCode = originCode.replace(/_wx\.createSelectorQuery\(\)/g, 'this.createSelectorQuery()');
+    }
     try {
         originCode = processRequireForWx(originCode, {
             dirname: ctx.entry,

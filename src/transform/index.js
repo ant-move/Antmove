@@ -76,12 +76,18 @@ module.exports = class Transform {
         }
         let pro = getProgramName (this.$options.type.split ("-") [1]);
         if ( this.$options.component === "component" ) {
-            fs.unlinkSync(this.$options.output+'app.js');
-            fs.unlinkSync(this.$options.output+'app.json');
-            fs.unlinkSync(this.$options.output+"app."+pro.css);
+
+            let outputpath = path.join(this.$options.output, 'app.js');
+            fs.unlinkSync(outputpath);
+            outputpath = outputpath.replace(/\.js/, '.json');
+
+            fs.unlinkSync(outputpath);
+
+            fs.unlinkSync(outputpath.replace(/app\.json/, "app."+pro.css));
             deleteFolder(this.$options.input);
             var _path = this.$options.input;
-            _path = _path.match(/(\S*)\/\.antmove/)[1];
+            let pathArr = _path.match(/(\S*)\/\.antmove/) || _path.match(/(\S*)\\\.antmove/);
+            _path = pathArr[1];
             fs.rmdirSync (_path);
         }
     }
@@ -141,6 +147,10 @@ function getProgramName (type = "wx") {
     case "baidu": 
         pro.name = "百度";
         pro.css = "css";
+        break;
+    case "qq":
+        pro.name = "qq";
+        pro.css = "qss";
         break;
     default : 
         pro.css = "wxss";

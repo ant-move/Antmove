@@ -338,7 +338,7 @@ module.exports = {
         'https://developer.toutiao.com/dev/miniapp/uQzMz4CNzMjL0MzM'
     ),
     stopCompass: createDescObj(
-        1,
+        0,
         '停止监听罗盘数据',
         'https://developers.weixin.qq.com/miniprogram/dev/api/device/compass/wx.stopCompass.html',
         'https://developer.toutiao.com/dev/miniapp/uMDNz4yM0MjLzQzM'

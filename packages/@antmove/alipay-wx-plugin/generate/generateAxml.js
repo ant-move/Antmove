@@ -1,5 +1,6 @@
 const propsHandle = require('../props/index.js');
 const proccessComponentProps = require('../component/props');
+let { ref } = require('../config');
 const {
     transformEs6
 } = require('@antmove/utils');
@@ -78,8 +79,23 @@ function transformFun (type, val) {
     return val;
 }
 
+function transformToString (val) {
+    val = val.replace(/{{(.*\.toString\(\)).*}}/, function (value) {
+        const text = RegExp.$1.toString().split('.')[0];
+        const str = `custom._toString(${text})`;
+        if (!funName.includes('_toString')) {
+            funName += `\n\t\t_toString: function(val) {\n\t\t\treturn val.toString();\n\t\t},`;
+        }
+        const reg = new RegExp(text);
+        value = value.replace(/\.toString\(\)/, '');
+        value = value.replace(reg, str);
+        return value;
+    });
+    return val;
+}
+
 function appendWxs (val) {
-    let arr = ['typeof', 'some', 'every', 'forEach', 'reduce', 'filter'];
+    let arr = ['typeof', 'some', 'every', 'forEach', 'reduce', 'filter', 'toString'];
     let type = '';
     let value = '';
     if (val) {
@@ -96,6 +112,9 @@ function appendWxs (val) {
         switch (type) {
         case 'typeof':
             val = transformTypeof(val);
+            break;
+        case 'toString':
+            val = transformToString(val);
             break;
         case 'some':
             val = transformFun(type, val);
@@ -164,6 +183,14 @@ function transformSjs (ast) {
     return ast;
 }
 
+function transformRef (prop, filePath) {
+    prop.id = { type: 'unknown', value: prop.ref.value};
+    const filename = filePath.replace(/\.axml/, '.js');
+    let obj = { id: prop.ref.value[0], filename };
+    ref = Object.assign(ref, obj);
+    delete prop.ref;
+}
+
 module.exports = function axmlRender (ast = [], fileInfo) {
     if (typeof ast === 'string') return ast;
     let wxsLabel = `<wxs module="custom">\n`;
@@ -213,6 +240,9 @@ module.exports = function axmlRender (ast = [], fileInfo) {
         }
         if (_ast.type === 'import-sjs') {
             transformSjs(_ast);
+        }
+        if (props && props['ref']) {
+            transformRef(props, fileInfo.path);
         }
         if (_ast.type === 'textContent') {
             // todo: fix comment parse bug

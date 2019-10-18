@@ -22,74 +22,93 @@ module.exports = {
         type: 5,
         name: '模态弹窗',
         url: {
-            wechat: 'http://www.ionic.wang/weixin/component/modal.html',
-            alipay: ''
+            original: 'http://www.ionic.wang/weixin/component/modal.html',
+            target: ''
         },
         desc: '模态弹窗。',
         tagName: 'custom-modal',
         path: customComponentPrefix + '/__component/custom-modal/custom-modal',
         props: {
+            'title': {
+                type: 0,
+                status: 2,
+                desc: '标题',
+            },
+            'no-cancel': {
+                type: 0,
+                status: 2,
+                desc: '是否隐藏 cancel 按钮',
+            },
+            'confirm-text': {
+                type: 0,
+                status: 2,
+                desc: 'confirm 按钮文字',
+            },
+            'cancel-text': {
+                type: 0,
+                status: 2,
+                desc: 'cancel 按钮文字',
+            },
         }
     },
     'toast': {
         type: 5,
         name: '消息提示框',
         url: {
-            wechat: 'http://www.ionic.wang/weixin/component/toast.html',
-            alipay: ''
+            original: 'http://www.ionic.wang/weixin/component/toast.html',
+            target: ''
         },
         desc: '消息提示框。',
         tagName: 'custom-toast',
         path: customComponentPrefix + '/__component/custom-toast/custom-toast',
         props: {
+            'duration': {
+                type: 0,
+                status: 2,
+                desc: 'hidden 设置 false 后，触发 bindchange 的延时，单位毫秒',
+            },
         }
     },
     'loading': {
         type: 5,
         name: '加载提示',
         url: {
-            wechat: 'http://www.ionic.wang/weixin/component/loading.html',
-            alipay: ''
+            original: 'http://www.ionic.wang/weixin/component/loading.html',
+            target: ''
         },
         desc: '加载提示。',
         tagName: 'custom-loading',
-        path: customComponentPrefix + '/__component/custom-loading/custom-loading',
-        props: {
-        }
+        path: customComponentPrefix + '/__component/custom-loading/custom-loading'
     },
     'action-sheet': {
         type: 5,
         name: '从屏幕底部出现的菜单表',
         url: {
-            wechat: 'http://www.ionic.wang/weixin/component/action-sheet.html',
-            alipay: ''
+            original: 'http://www.ionic.wang/weixin/component/action-sheet.html',
+            target: ''
         },
         desc: '从屏幕底部出现的菜单表。',
         tagName: 'custom-action-sheet',
-        path: customComponentPrefix + '/__component/custom-action-sheet/custom-action-sheet',
-        props: {
-        }
+        path: customComponentPrefix + '/__component/custom-action-sheet/custom-action-sheet'
        
     },
     'action-sheet-item': {
         type: 5,
         name: '底部菜单表的子选项',
         url: {
-            wechat: 'http://www.ionic.wang/weixin/component/action-sheet.html',
-            alipay: ''
+            original: 'http://www.ionic.wang/weixin/component/action-sheet.html',
+            target: ''
         },
         desc: '底部菜单表的子选项。',
         tagName: 'action-sheet-item',
-        path: customComponentPrefix + '/__component/action-sheet-item/action-sheet-item',
-        props: {
-        }
+        path: customComponentPrefix + '/__component/action-sheet-item/action-sheet-item'
     },
     'action-sheet-cancel': {
         type: 5,
         name: '底部菜单表的取消按钮',
         url: {
-            wechat: 'http://www.ionic.wang/weixin/component/action-sheet.html',
-            alipay: ''
+            original: 'http://www.ionic.wang/weixin/component/action-sheet.html',
+            target: ''
         },
         desc: '底部菜单表的取消按钮，和action-sheet-item的区别是，点击它会触发action-sheet的change事件，并且外观上会同它上面的内容间隔开来。',
         tagName: 'action-sheet-cancel',

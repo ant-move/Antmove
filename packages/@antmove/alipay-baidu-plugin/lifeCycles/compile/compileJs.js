@@ -44,7 +44,7 @@ module.exports = function (fileInfo, ctx, originCode, apis, entry) {
     if (/\bwx\./g.test(originCode)) {
         originCode = originCode.replace(/\bwx\./g, "_swan.");
     }
-    Config.compile.wrapApis = Object.assign(Config.compile.wrapApis,apis);
+    Config.compile.wrapApis = Object.assign(Config.compile.wrapApis, apis);
     originCode = commentBlock(originCode);
     originCode = requireModuleFn(originCode, ctx);
     originCode = ifProcessHandleFn(originCode);
@@ -55,10 +55,12 @@ module.exports = function (fileInfo, ctx, originCode, apis, entry) {
     let cbNameInfo = {
         name: ''
     };
-    getCbName(originCode, cbNameInfo);
+    let insertCode = '';
     let componentWrapFnPath = customComponentPrefix + '/component/componentClass.js';
+    getCbName(originCode, cbNameInfo);
     let apiPath = customComponentPrefix + '/api/index.js';
-    
+    let _compoentPath = componentWrapFnPath;    
+        
     const fnArr = [];
     if (originCode.match(/\bApp\(/g)) {
         fnArr.push("baiduApp");
@@ -76,8 +78,6 @@ module.exports = function (fileInfo, ctx, originCode, apis, entry) {
         }   
 
     } 
-    let insertCode = "";
-    let _compoentPath = componentWrapFnPath;
     if (fnArr.length > 0) {
         let fnStr = `{${fnArr.join(",")}}`;
         insertCode += `const ${fnStr} = require('${_compoentPath}');\n`;
@@ -87,7 +87,6 @@ module.exports = function (fileInfo, ctx, originCode, apis, entry) {
     }
     
     originCode = ConstructorHandle(originCode, { targetName: Config.target} );
-    
 
    
     insertCode += `const _swan = require('${apiPath}')(swan);`;

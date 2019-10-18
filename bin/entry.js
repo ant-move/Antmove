@@ -51,6 +51,9 @@ module.exports = function (opts = {}, cb = () => {}) {
                 },
                 {
                     name: 'wx-baidu'
+                },
+                {
+                    name: 'wx-qq'
                 }
             ]
         },
@@ -69,12 +72,6 @@ module.exports = function (opts = {}, cb = () => {}) {
     let ret = arr.filter(function (info) {      
         return opts[info.name] === undefined;
     });
-    if (ret.length === 3) {
-        if (returnOptions(pwd)) {
-            opts = returnOptions(pwd);
-            ret.length = 0;
-        }
-    }
     inquirer    
         .prompt(ret)
         .then(answers => {

@@ -1,6 +1,7 @@
 module.exports = {
     "env": "development",
     "target": "WX",
+    "ref": {},
     isDev () {
         return this.env === 'development';
     },
@@ -20,6 +21,7 @@ module.exports = {
             'classSubdirectory/app.js': true,
             'classSubdirectory/page.js': true,
             'classSubdirectory/component.js': true,
+            'classSubdirectory/data.js': true,
             'componentClass.js': true
         },
         wrapApis: {}

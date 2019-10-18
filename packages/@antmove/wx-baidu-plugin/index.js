@@ -47,18 +47,18 @@ module.exports = function (options = {}) {
 
 };
 
-function deleteall (path) {
+function deleteall (newoutPath) {
     var files = [];
-    if (fs.existsSync(path)) {
-        files = fs.readdirSync(path);
+    if (fs.existsSync(newoutPath)) {
+        files = fs.readdirSync(newoutPath);
         files.forEach(function (file) {
-            var curPath = path + "/" + file;
+            var curPath = newoutPath + path.sep + file;
             if (fs.statSync(curPath).isDirectory()) { 
                 deleteall(curPath);
             } else {
                 fs.unlinkSync(curPath);
             }
         });
-        fs.rmdirSync(path);
+        fs.rmdirSync(newoutPath);
     }
 }  

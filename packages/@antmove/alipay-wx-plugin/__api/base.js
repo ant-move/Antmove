@@ -46,7 +46,8 @@ const apiObj = {
                 obj.confirmText = obj.buttonText;
                 delete obj.confirmText;
             }
-            obj.content = obj.content.toString();
+            obj.title = obj.title ? JSON.stringify(obj.title) : '';
+            obj.content =  obj.content ? JSON.stringify(obj.content) : '';
             if (typeof obj.content === 'object') {
                 obj.content = JSON.stringify(obj.content);
             }
@@ -66,9 +67,8 @@ const apiObj = {
                 obj.cancelText = obj.cancelButtonText;
                 delete obj.cancelButtonText;
             }
-            if (obj.content instanceof Array) {
-                obj.content = JSON.stringify(obj.content);
-            }
+            obj.title = obj.title ? JSON.stringify(obj.title) : '';
+            obj.content =  obj.content ? JSON.stringify(obj.content) : '';
             wx.showModal(obj);
         }
     },

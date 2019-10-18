@@ -6,9 +6,12 @@ function recordOptions (options, _input, _output) {
     if (!options.input || !options.output || !options.type) return;
     let configPath = path.join(options.input, `./antmove.config.js`);
     options = JSON.parse(JSON.stringify(options));
+    let ifNpm = getLastVersion(options);
+    if (ifNpm) {
+        options.npm =  getLastVersion(options);
+    }
     options.input =_input;
     options.output = _output;
-    options.npm =  getLastVersion();
     delete options.remote;
     delete options.defaultInput;
     options = JSON.stringify(options, null, 4);
@@ -16,8 +19,32 @@ function recordOptions (options, _input, _output) {
     fs.outputFileSync(configPath,  _options);
 }
 
-function getLastVersion () {
+function getLastVersion (options) {
     let obj = {};
+    let packJsonPath = path.join(options.input, `./package.json`);
+    let isExist = fs.existsSync(packJsonPath);
+    let code = '';
+    let ifVant = false;
+    let _obj = {};
+    if (isExist) {
+        code = fs.readFileSync(packJsonPath);
+        code = code.toString();
+        code = JSON.parse(code);
+        Object.keys(code).forEach(function (name) {
+
+           if (name === "dependencies" || name === "devDependencies") {
+            _obj = {..._obj,...code[name]}
+            }
+        })
+        Object.keys(_obj).forEach(function (name) {
+            if (name === "vant-weapp") {
+                ifVant = true;
+            }
+        })
+        if (!ifVant) {
+            return false          
+        }
+    }
     Object.keys(comStores).forEach(key => {
         const version = exec(`npm view ${comStores[key]} version`).toString().replace(/\n|\r|\t/, '');
         obj[key] = {
@@ -33,6 +60,7 @@ function returnOptions (res) {
     let isExist = fs.existsSync(_path);
     if (isExist) {
         let _options = require(_path);
+        console.log(_options)
         return _options;
     } else {
         return false;

@@ -58,7 +58,7 @@ module.exports = function (ast, fileInfo, renderAxml) {
         type = ast.type = tagInfo.tagName || ast.type;
     }
 
-    // 
+    transformProps(props);
     if (tagInfo) {
         if (tagInfo.type !== undefined) {
             if (tagInfo.type === 1) {
@@ -167,6 +167,23 @@ function changeComponentName ( ast, type, fileInfo) {
 
 }
 
+function transformProps (obj = {}) {
+    if (Object.prototype.toString.call(obj) === '[object Object]') {
+        Object.values(obj).forEach(item => {
+            let str = '';
+            if (item) {
+                const itemArr = item.value[0].split(' ');
+                itemArr.forEach(i => {
+                    i = i.trim();
+                    str += i + ' ';
+                });
+                str = str.replace(/\s+/g, ' ').trim();
+                item.value[0] = str;
+            }
+        });
+    }
+    return obj;
+}
 // function removeoldcoCompents (tagInfo={} ,arr=[], fileInfo={}) {
 //     if (tagInfo.tagName&&arr.indexOf(tagInfo.tagName)!==-1) {
 //         if (fileInfo.extname === '.axml') {

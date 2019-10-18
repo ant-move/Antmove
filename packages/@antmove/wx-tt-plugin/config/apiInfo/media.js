@@ -91,6 +91,18 @@ module.exports = {
                     sendDanmu: {
                         type: 0,
                         desc: '发送弹幕'
+                    },
+                    playbackRate: {
+                        type: 0,
+                        desc: '设置倍速播放'
+                    },
+                    showStatusBar: {
+                        type: 0,
+                        desc: '显示状态栏，仅在iOS全屏下有效'
+                    },
+                    hideStatusBar: {
+                        type: 0,
+                        desc: '隐藏状态栏，仅在iOS全屏下有效'
                     }
                 }
             }

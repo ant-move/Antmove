@@ -112,16 +112,7 @@ antmove -i ./wechat-mini/project -o ./dist/alipay-mini/project --env development
 * `--component2`
     * 编译输出 component2 版本的支付宝小程序
 * `--platform`  
-    * 编译输出其它平台的支付宝小程序（比如钉钉）`wx-alipay --platform dd`
-
-    > 非 component2 模式下，selectComponent API 不一定在 didMounted 时可用，需使用 onRelationsUpdate API 监听，在 methods 中添加如下监听函数。
-
-    > ```js
-        onRelationsUpdate() {
-            // for dd
-            this.setChildren(this.data.columns);
-        },
-        ```
+    * 编译输出其它平台的支付宝小程序（比如钉钉）
 
 <span id='Node.js'></span>
 ### Node.js 使用方式

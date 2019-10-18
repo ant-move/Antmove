@@ -14,11 +14,13 @@ const wxToWx = require('../cli/wechat-wechat/index');
 const wxToBaidu = require('../cli/wechat-baidu/index');
 const wxToBaiduCli = require('./wx-baidu');
 const wxToTouTiao = require('../cli/wechat-tt/index');
+const wxToQq = require('../cli/wx-qq/index');
 const alipayPolyfill = require('../cli/alipay-polyfill/index');
 const inputDirPath = process.cwd() + '/';
 const entryProcess = require('./entry');
 const {
-    recordOptions
+    recordOptions,
+    returnOptions
 } = require('../cli/utils');
 /**
  * read packageJson
@@ -30,8 +32,9 @@ const options = {
     output: "",
     env: "production",
     remote: false,
-    component2: false,
-    platform: "alipay"
+    component2: true,
+    platform: "alipay",
+    scope:true
 };
 
 program
@@ -59,16 +62,22 @@ options.defaultInput = inputDirPath;
 options.output = program.output;
 options.env = program.env || options.env;
 options.remote = program.remote || options.remote;
-options.scope = program.scope || false;
+options.scope = program.scope || options.scope;
 options.type = program.type;
 options.component = program.component || false;
 options.component2 = program.component2 || options.component2;
 options.platform = program.platform || options.platform;
 
-if (options.component2 !== "true" || options.component2 !== 1) {
-    options.component2 = false;
-} else {
+if (options.component2 === "true" || options.component2 === 1 ||options.component2 === true) {
     options.component2 = true;
+} else {
+    options.component2 = false;
+}
+
+if (options.scope === "true" || options.scope === 1 ||options.scope === true) {
+    options.scope = true;
+} else {
+    options.scope = false;
 }
 
 /**
@@ -107,6 +116,16 @@ program
         });
     });
 
+program
+    .version(packageJson.version)
+    .command('wx-qq')
+    .action(function () {
+        specialtypeCmd = true;
+        action({
+            ...options,
+            type: 'wx-qq'
+        });
+    });
 program
     .version(packageJson.version)
     .command('alipay-compiler')
@@ -183,13 +202,23 @@ function action (options) {
         'wx-alipay': buildScript,
         'wx-amap': buildScript,
         'wx-tt': wxToTouTiao,
+        'wx-qq': wxToQq,
         'alipay-wx': alipayToWx,
         'alipay-baidu': alipayToBaidu,
         'wx-compiler': wxToWx,
         'alipay-compiler': alipayPolyfill,
         'wx-baidu': wxToBaidu
     };
-
+    let antmoveOptions = returnOptions(process.cwd());;
+    if (antmoveOptions) {
+        Object.keys(options).forEach(function (optName) {
+            if (!options[optName] && typeof options[optName] !== Boolean) {
+                console.log(optName,"aaaa")
+                options[optName] = antmoveOptions[optName];
+            }
+            
+        })
+    }
     entryProcess(options, function (opts = {}) {
         let _input = opts.input,
             _output = opts.output;
@@ -265,11 +294,20 @@ function copyFolder (from, to) {
 function ifOriginalComponent (from, type) {
     let _tem = "";
     switch (type) {
-    case "wx" : _tem = "wxml";
+    case "wx" : 
+        _tem = "wxml";
         break;
-    case "alipay": _tem = "axml";
+    case "alipay": 
+        _tem = "axml";
         break;
-    case "baidu": _tem = "swan";
+    case "baidu": 
+        _tem = "swan";
+        break;
+    case "qq":
+        _tem = "qml";
+        break;
+    default:
+        _tem = "axml";
     }
     let isWx = false ;
     testIsWxComponents(from);
@@ -306,6 +344,14 @@ function getProgramName (type = "wx") {
     case "baidu": 
         pro.name = "百度";
         pro.css = "css";
+        break;
+    case "qq":
+        pro.name = "qq";
+        pro.css = "qss";
+        break;
+    default : 
+        pro.name = "微信";
+        pro.css = "wxss";
     }
     return pro;
 }

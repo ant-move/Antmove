@@ -1,5 +1,4 @@
-// const baseApi = require('./base');
-// const device = require('./device');
-// const openinterface= require('./openinterface');
+const device = require('./base');
 module.exports = {
+    ...device,
 };
