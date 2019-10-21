@@ -60,7 +60,6 @@ function returnOptions (res) {
     let isExist = fs.existsSync(_path);
     if (isExist) {
         let _options = require(_path);
-        console.log(_options)
         return _options;
     } else {
         return false;

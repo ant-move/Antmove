@@ -100,6 +100,8 @@ function makeLifes (_opts, options) {
                             let newkey = key.substr(2, key.length).toLowerCase();
                             if (res[0]&&res[0].detail) {
                                 this.triggerEvent(newkey, res[0].detail);
+                            } else if (res[0]) {
+                                this.triggerEvent(newkey, res[0]);
                             } else {
                                 this.triggerEvent(newkey);
                             }
