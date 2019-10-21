@@ -14,7 +14,7 @@ const wxToWx = require('../cli/wechat-wechat/index');
 const wxToBaidu = require('../cli/wechat-baidu/index');
 const wxToBaiduCli = require('./wx-baidu');
 const wxToTouTiao = require('../cli/wechat-tt/index');
-const wxToQq = require('../cli/wx-qq/index');
+//const wxToQq = require('../cli/wx-qq/index');
 const alipayPolyfill = require('../cli/alipay-polyfill/index');
 const inputDirPath = process.cwd() + '/';
 const entryProcess = require('./entry');
@@ -202,7 +202,7 @@ function action (options) {
         'wx-alipay': buildScript,
         'wx-amap': buildScript,
         'wx-tt': wxToTouTiao,
-        'wx-qq': wxToQq,
+        //'wx-qq': wxToQq,
         'alipay-wx': alipayToWx,
         'alipay-baidu': alipayToBaidu,
         'wx-compiler': wxToWx,
@@ -213,7 +213,6 @@ function action (options) {
     if (antmoveOptions) {
         Object.keys(options).forEach(function (optName) {
             if (!options[optName] && typeof options[optName] !== Boolean) {
-                console.log(optName,"aaaa")
                 options[optName] = antmoveOptions[optName];
             }
             

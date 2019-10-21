@@ -177,6 +177,7 @@ module.exports = {
     // processClasssProperties,
     ConstructorHandle: ConstructorHandleFn,
     crossCodeHandleFn,
+    ifProcessHandleFn: crossCodeHandleFn,
     commentBlock,
     requireModuleFn,
     behavourHandle,

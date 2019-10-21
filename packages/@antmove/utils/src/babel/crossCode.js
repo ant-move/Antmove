@@ -55,7 +55,7 @@ module.exports = function () {
 
                     name = left.object.name + '.' + left.property.name;
                     value = right.value;
-                    console.log(name, value);
+                    // console.log(name, value);
                     const typeOutput = ['wx', 'alipay', 'tt', 'qq', 'baidu', 'amap'];
                     if (name === 'wx.__target__' || name === '_my.__target__') {
                         const index = typeOutput.findIndex(item => item === 'wx');
