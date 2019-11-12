@@ -35,7 +35,10 @@ const {
     reportMethods,
     runJs,
     cjsToes,
-    emptyFiles
+    emptyFiles,
+    setAppName,
+    setCompileType,
+    reportError
 } = require('@antmove/utils');
 const { processAppJson } = require('../generate/generateRuntimeLogPage');
 const {
@@ -74,7 +77,12 @@ module.exports = {
         remote: false
     },
     beforeParse: async function (next) {
-        if (!isWechatApp(this.$options.entry)) {
+        setCompileType('wx-alipay');
+        let ifComponent = false;
+        if (this.$options.component === "component") {
+            ifComponent = true;
+        }
+        if (!isWechatApp(this.$options.entry, ifComponent)) {
             console.log(chalk.red('[Ops] ' + this.$options.entry + ' is not a wechat miniproramm directory.'));
             return false;
         }
@@ -121,7 +129,7 @@ module.exports = {
                 project.path = fileInfo.dirname;
                 let distPath = fileInfo.dist.split('app.json')[0];
                 project.distPath = path.join(distPath.substr(0, distPath.length - 1));
-
+                
                 report("", {
                     type: "project",
                     path: project.path,
@@ -289,6 +297,10 @@ module.exports = {
             if (fileInfo.deep === 0 && fileInfo.filename === 'app.json') {
                 content = fs.readFileSync(fileInfo.path, 'utf8');
                 const appData = JSON.parse(content);
+                let json = appData;
+                if (json.window && json.window.navigationBarTitleText) {
+                    setAppName(json.window.navigationBarTitleText);
+                }
                 try {
                     project.pageNum = appData.pages.length;
                 } catch (err) {
@@ -417,6 +429,7 @@ module.exports = {
         return fileInfo;
     },
     compiled: async function (ctx, cb = () => {}) {
+        reportError();
         const {
             findOpenAbility,
             statistics,
@@ -424,6 +437,7 @@ module.exports = {
         } = record(recordConfig);
         generateBundleComponent(ctx.output, Config);
         await runGenerateBundleApi(ctx.output);
+
         generateNodeTrees(ctx.output, Config);
         const tableInfo = {
             "项目名称": project.name,

@@ -20,30 +20,31 @@ function recordOptions (options, _input, _output) {
 }
 
 function getLastVersion (options) {
-    let obj = {};
     let packJsonPath = path.join(options.input, `./package.json`);
     let isExist = fs.existsSync(packJsonPath);
+    if (!isExist) {
+        return false
+    }
+    let obj = {};
     let code = '';
     let ifVant = false;
     let _obj = {};
-    if (isExist) {
-        code = fs.readFileSync(packJsonPath);
-        code = code.toString();
-        code = JSON.parse(code);
-        Object.keys(code).forEach(function (name) {
+    code = fs.readFileSync(packJsonPath);
+    code = code.toString();
+    code = JSON.parse(code);
+    Object.keys(code).forEach(function (name) {
 
-           if (name === "dependencies" || name === "devDependencies") {
-            _obj = {..._obj,...code[name]}
-            }
-        })
-        Object.keys(_obj).forEach(function (name) {
-            if (name === "vant-weapp") {
-                ifVant = true;
-            }
-        })
-        if (!ifVant) {
-            return false          
+        if (name === "dependencies" || name === "devDependencies") {
+        _obj = {..._obj,...code[name]}
         }
+    })
+    Object.keys(_obj).forEach(function (name) {
+        if (name === "vant-weapp") {
+            ifVant = true;
+        }
+    })
+    if (!ifVant) {
+        return false          
     }
     Object.keys(comStores).forEach(key => {
         const version = exec(`npm view ${comStores[key]} version`).toString().replace(/\n|\r|\t/, '');

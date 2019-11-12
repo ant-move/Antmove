@@ -4,4 +4,3 @@ dist/
 *.log
 bus/
 .vscode
-examples/

@@ -2,7 +2,8 @@ const propsHandle = require('../props/index.js');
 const proccessComponentProps = require('../component/props');
 let { ref } = require('../config');
 const {
-    transformEs6
+    transformEs6,
+    processMixTemplate
 } = require('@antmove/utils');
 const os = require('os');
 
@@ -191,6 +192,13 @@ function transformRef (prop, filePath) {
     delete prop.ref;
 }
 
+function transformInput (ast) {
+    if (ast.props[undefined]) {
+        ast.props['type'] =  { type: 'unknown', value: ast.props[undefined].value };
+        delete ast.props[undefined];
+    }
+}
+
 module.exports = function axmlRender (ast = [], fileInfo) {
     if (typeof ast === 'string') return ast;
     let wxsLabel = `<wxs module="custom">\n`;
@@ -240,6 +248,9 @@ module.exports = function axmlRender (ast = [], fileInfo) {
         }
         if (_ast.type === 'import-sjs') {
             transformSjs(_ast);
+        }
+        if (_ast.type === 'input') {
+            transformInput(_ast);
         }
         if (props && props['ref']) {
             transformRef(props, fileInfo.path);
@@ -295,15 +306,11 @@ module.exports = function axmlRender (ast = [], fileInfo) {
                     if (propInfo.value && propInfo.value.type === 'double') {
                         attrCode += ` ${propInfo.key}="${value}"`;
                     } else {
-                        const attributeNames = ['wx:else', 'scroll-y', 'showNumber'];
-                        let hasAttr = attributeNames.some(item => {
-                            return item === propInfo.key;
-                        });
-                        if (hasAttr) {
+                        if (value === '' || value === undefined || !value) {
                             attrCode += ` ${propInfo.key}`;
                         } else {
                             attrCode += ` ${propInfo.key}='${value}'`;
-                        }    
+                        }     
                     }
                 }
             });
@@ -339,6 +346,8 @@ module.exports = function axmlRender (ast = [], fileInfo) {
         return code.replace(os.EOL + os.EOL, os.EOL);
 
         function appendCode (appendChars) {
+            let isType = processMixTemplate('wx', _ast);
+            if (!isType) return;
             if (appendChars.trim().length === 0) {
                 return;
             }

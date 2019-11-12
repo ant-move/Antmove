@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 var fs = require('fs-extra');
 var path = require('path');
 var program = require('commander');
@@ -14,14 +13,17 @@ const wxToWx = require('../cli/wechat-wechat/index');
 const wxToBaidu = require('../cli/wechat-baidu/index');
 const wxToBaiduCli = require('./wx-baidu');
 const wxToTouTiao = require('../cli/wechat-tt/index');
-//const wxToQq = require('../cli/wx-qq/index');
+const wxToQq = require('../cli/wx-qq/index');
 const alipayPolyfill = require('../cli/alipay-polyfill/index');
 const inputDirPath = process.cwd() + '/';
 const entryProcess = require('./entry');
+
 const {
     recordOptions,
     returnOptions
 } = require('../cli/utils');
+
+
 /**
  * read packageJson
  */
@@ -34,7 +36,7 @@ const options = {
     remote: false,
     component2: true,
     platform: "alipay",
-    scope:true
+    scope: true,
 };
 
 program
@@ -57,6 +59,13 @@ program
 
 program.parse(process.argv);
 
+let antmoveOptions = returnOptions(process.cwd());
+
+if (antmoveOptions) {
+    Object.keys(options).forEach(function (optName) {
+        options[optName] = antmoveOptions[optName];       
+    });
+}
 options.input = program.input;
 options.defaultInput = inputDirPath;
 options.output = program.output;
@@ -78,6 +87,13 @@ if (options.scope === "true" || options.scope === 1 ||options.scope === true) {
     options.scope = true;
 } else {
     options.scope = false;
+}
+if (antmoveOptions) {
+    Object.keys(options).forEach(function (optName) {
+        if (options[optName] === undefined) {
+            options[optName] = antmoveOptions[optName];
+        }
+    });
 }
 
 /**
@@ -202,22 +218,14 @@ function action (options) {
         'wx-alipay': buildScript,
         'wx-amap': buildScript,
         'wx-tt': wxToTouTiao,
-        //'wx-qq': wxToQq,
+        'wx-qq': wxToQq,
         'alipay-wx': alipayToWx,
         'alipay-baidu': alipayToBaidu,
         'wx-compiler': wxToWx,
         'alipay-compiler': alipayPolyfill,
         'wx-baidu': wxToBaidu
     };
-    let antmoveOptions = returnOptions(process.cwd());;
-    if (antmoveOptions) {
-        Object.keys(options).forEach(function (optName) {
-            if (!options[optName] && typeof options[optName] !== Boolean) {
-                options[optName] = antmoveOptions[optName];
-            }
-            
-        })
-    }
+    
     entryProcess(options, function (opts = {}) {
         let _input = opts.input,
             _output = opts.output;
@@ -251,6 +259,13 @@ function action (options) {
             if (opts.type === "wx-amap") {
                 opts.aliType = "amap";
                 process.env.aliType = "amap";
+            }
+            if (opts.type === 'alipay-wx') {
+                if (program.scope === "true" || program.scope === 1 ||program.scope === true) {
+                    opts.scope = true;
+                } else {
+                    opts.scope = false;
+                }
             }
             _input = './';
             _output = processPath(opts);

@@ -19,7 +19,12 @@ function processEvent (info = {}) {
     let temp = {};
     Object.keys(info)
         .forEach(function (key) {
-            let eventName = key.substring(4);
+            let eventName = '';
+            if (key.charAt(0) === 'b') {
+                eventName = key.substring(4);
+            } else {
+                eventName = key.substring(5);
+            }
             temp[key] = info[key];
             temp['bind:' + eventName] = info[key];
             temp['catch:' + eventName] = info[key].replace(/^on/, 'catch');

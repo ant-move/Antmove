@@ -15,6 +15,7 @@ module.exports = class Transform {
     }
 
     beforeRun (cb = () => {}) {
+        process.env.compilerType = this.$options.type;
         let inputDir = this.$options.entry;
         let outputDir = this.$options.dist;
 

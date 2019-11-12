@@ -1,6 +1,7 @@
 const fs = require("fs");
 const open = require('open');
 const path = require("path");
+
 module.exports = function (config={}) {
     config.isShow = process.env.NODE_ENV === 'development';
     return {

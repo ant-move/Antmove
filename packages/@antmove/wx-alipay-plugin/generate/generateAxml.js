@@ -7,7 +7,8 @@ const path = require('path');
 const indentWidthChar = '  ';
 const config = require('../config');
 const {
-    cjsToes
+    cjsToes,
+    processMixTemplate
 } = require('@antmove/utils');
 const wxsApp = require('./generateWxsDep');
 /**
@@ -208,6 +209,8 @@ module.exports = function axmlRender (ast = [], fileInfo) {
         return code.replace(os.EOL + os.EOL, os.EOL);
 
         function appendCode (appendChars) {
+            let isType = processMixTemplate('alipay', _ast);
+            if (!isType) return
             if (appendChars.trim().length === 0) {
                 return;
             }

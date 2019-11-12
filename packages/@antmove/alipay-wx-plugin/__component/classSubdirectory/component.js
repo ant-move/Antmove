@@ -80,21 +80,6 @@ function makeLifes (_opts, options) {
         const tname = options[obj.target];
         if (obj.target === "attached") {
             _opts[obj.target] = function () {
-                if (options.didUpdate) {
-                    const setData = this.setData;
-                    this.setData = (obj, cb = () => {} ) => {
-                        const proData = JSON.stringify(this.data);
-                        return setData.call(this, obj, ()=> {
-                            if (_opts.behaviorUpdate) {
-                                Object.values(_opts.behaviorUpdate).forEach(item => {
-                                    item.call(this, this.properties, JSON.parse(proData));
-                                });
-                            }
-                            options.didUpdate.call(this, this.properties, JSON.parse(proData));
-                            cb();
-                        });
-                    };
-                }
                 this.props = this.data;
                 processCustomEvent.call(this, options);
                 _opts.props = Object.assign({}, this.props);
@@ -110,6 +95,14 @@ function makeLifes (_opts, options) {
                 }
                 oname && oname.call(this);
                 tname && tname.call(this);
+                if (_opts.didUpdate) {
+                    if (_opts.behaviorUpdate) {
+                        Object.values(_opts.behaviorUpdate).forEach(item => {
+                            item.call(this, _opts.props, _opts.data);
+                        });
+                    }
+                    _opts.didUpdate.call(this, _opts.props, _opts.data);
+                }  
             };
         }
         delete options[obj.original];
@@ -175,7 +168,6 @@ function makeProperties (opts) {
     opts.properties = opts.properties || {};
     const props = transformProps(opts.props);
     opts.properties = Object.assign(opts.properties, props);
-    opts.options = { multipleSlots: true };
 }
 
 function addObserver (obj) {
@@ -183,23 +175,18 @@ function addObserver (obj) {
         return false;
     }
     obj.properties && Object.keys(obj.properties).map(key => {
-        const observer = function (newVal, oldVal) {
-            const props = { ...obj.props};
-            this.props = Object.assign({}, obj.props);
-            this.props[key] = newVal;
-            if (props[key] !== oldVal) {
-                if (obj.behaviorUpdate) {
-                    Object.values(obj.behaviorUpdate).forEach(item => {
-                        item.call(this, props, this.data);
-                    });
-                } 
-                obj.didUpdate.call(this, props, this.data);
+        const observer = function () {
+            const props = JSON.parse(JSON.stringify(obj.props));
+            if (obj.behaviorUpdate) {
+                Object.values(obj.behaviorUpdate).forEach(item => {
+                    item.call(this, props, this.data);
+                });
             }
+            obj.didUpdate.call(this, props, this.data);
         };
         if (obj.properties[key]) {
             obj.properties[key].observer = observer;
-        }
-        
+        } 
     });
     
 }

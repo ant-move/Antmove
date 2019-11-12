@@ -40,13 +40,6 @@ module.exports = function (jsonStr, fileInfo) {
 
     // process wrap components
     let tagsInfo = fileInfo.tagsInfo;
-    // if (json.usingComponents) {
-    //     Object.keys(json.usingComponents).map(key => {
-    //         if (/\w/g.test(json.usingComponents[key][0])) {
-    //             json.usingComponents[key] = '/ant_modules/' + json.usingComponents[key];
-    //         }
-    //     });
-    // }
     if (tagsInfo) {
         tagsInfo.forEach((tagInfo) => {
             if (tagInfo.type === 5) {

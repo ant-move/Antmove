@@ -47,7 +47,7 @@ createNode.prototype = {
         this.$children.push(child);
         child.$parent = this;
     },
-    removeChld (child) {
+    removeChild (child) {
         this.$children = this.$children
             .filter(function (el) {
                 return el.$id !== child.$id;

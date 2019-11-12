@@ -235,8 +235,8 @@ module.exports = {
             updateData.call(this);
             processRelations(this, Relations);
             this.selectComponentApp.connect();
-
-            observerHandle(_opts.observerObj, [_opts.props, this.data], this,true);
+            addAntmoveData.call(this);
+            observerHandle(_opts.observerObj, this.$antmove._data, this,true);
         });
         fnApp.bind('onInit', _opts);
         fnApp.add('didMount', _opts.attached);
@@ -244,10 +244,10 @@ module.exports = {
         
 
         let didUpdate = function (...param) { 
-            updateData.call(this, param);
-
-            processObservers.call(this, _opts.observersObj, options, param);
-            observerHandle(_opts.observerObj, param, this);
+           updateData.call(this, param);
+           processObservers.call(this, _opts.observersObj, options, this.$antmove._data);
+           observerHandle(_opts.observerObj, this.$antmove._data, this);
+           addAntmoveData.call(this);
         };
         fnApp.add('didUpdate', didUpdate);
         fnApp.add('didUpdate', function () {
@@ -260,12 +260,12 @@ module.exports = {
         fnApp.add('didUnmount', options.detached);
         fnApp.add('didUnmount', function () {
             if (this.$node) {
-                this.$node.parent.removeChild(this.$node);
+                this.$node.$parent.removeChild(this.$node);
                 let refId = this.$node.$relationNode.$id;
                 this.$antmove[refId]--;
             }
         });
-        fnApp.bind("didUnmount", options.didUnmount);
+        fnApp.bind("didUnmount", _opts);
     }
 };
 
@@ -274,7 +274,30 @@ module.exports = {
 function handleData (otps = {}) {
   
 }
+function addAntmoveData() {
+    let _data = [{},{}], ctx = this,_props = {};
+    for (var i in ctx.properties) {
+        _props[i] = ctx.data[i]
+    }
+    _data[0] = copy(_props);
+    _data[1] = copy(ctx.data) ;
+    this.$antmove = this.$antmove || {};
+    this.$antmove._data = _data;
+}
 
+function copy(obj) {
+  var objClone = Array.isArray(obj) ? [] : {};
+    for (var key in obj) {
+     if (obj.hasOwnProperty(key)) {
+        if (obj[key] && typeof obj[key] === "object") {
+          objClone[key] = copy(obj[key]);
+        } else {
+          objClone[key] = obj[key];
+        }
+      }
+    }
+  return objClone;
+}
 
 
 

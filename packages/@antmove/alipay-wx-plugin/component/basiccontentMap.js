@@ -100,6 +100,25 @@ module.exports = {
     },
     'input': {
         props: {
+            'type': {
+                props: {
+                    'numberpad': {
+                        type: 0,
+                        desc: 'missing',
+                        key: 'Not support'
+                    },
+                    'digitpad': {
+                        type: 0,
+                        desc: 'missing',
+                        key: 'Not support'
+                    },
+                    'idcardpad': {
+                        type: 0,
+                        desc: 'missing',
+                        key: 'Not support'
+                    },
+                }
+            },
             'reandomNumber': {
                 type: 0,
                 desc: 'missing',
