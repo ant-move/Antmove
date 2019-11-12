@@ -1,6 +1,5 @@
 const fs = require('fs-extra');
 const path = require('path');
-
 const fileUtils = {};
 let entry = '';
 let packageInfo = null;

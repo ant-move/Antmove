@@ -96,6 +96,16 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
     originCode = insertCode + originCode;
     if (matchRet === 'Component') {
         originCode = originCode.replace(/_wx\.createSelectorQuery\(\)/g, 'this.createSelectorQuery()');
+        originCode = originCode.replace(/Component\s*\(\{([^]*?)\}\)/, function () {
+            let value = RegExp.$1;
+            let val = '\toptions: {\n\t\tmultipleSlots: true,\n';
+            if (Config.options.scopeStyle) {
+                val += `\t\tstyleIsolation: 'shared',`;
+            }
+            val += '\n},';
+            val += value;
+            return 'Component({\n' + val + '\n})';
+        });
     }
     try {
         originCode = processRequireForWx(originCode, {

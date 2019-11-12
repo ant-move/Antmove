@@ -130,6 +130,6 @@ module.exports = function (fileInfo, ctx, inCompileWxml = false) {
     }*/
 
     cssContent = prettierCode(cssContent, 'scss');
-    if (fileInfo.deep === 0 && /\S*\.wxml/.test(fileInfo.filename) ) return;
+    if (/\S*\.wxml/.test(fileInfo.filename) ) return;
     fs.outputFileSync(fileInfo.dist, cssContent);  
 };

@@ -9,8 +9,9 @@ const compileJs = require('./compile/compileJs');
 //const Config = require('../config.js');
 
 const {
-    isTypeFile
-    
+    isTypeFile,
+    setCompileType,
+    reportError
 } = require('@antmove/utils');
 
 
@@ -26,6 +27,7 @@ module.exports = {
         remote: false
     },
     beforeParse: async function (next) {
+        setCompileType('wx-wx');
         fs.emptyDirSync(this.$options.dist);
         if (!isWechatApp(this.$options.entry)) {
             console.log(chalk.red('[Ops] ' + this.$options.entry + ' is not a wechat miniproramm directory.'));
@@ -58,6 +60,6 @@ module.exports = {
         return fileInfo;
     },
     compiled: async function () {
-
+        reportError();
     }
 };

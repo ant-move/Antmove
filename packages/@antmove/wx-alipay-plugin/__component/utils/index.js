@@ -10,8 +10,7 @@ const collectObserver = require('./collectObserver');
 const collectObservers = require('./collectObservers');
 const processTriggerEvent = require('./processTriggerEvent');
 const {
-    observerHandle,
-    observersHandle
+    observerHandle
 } = require('./observerHandle');
 const processDataSet = require('./processDataSet');
 const handleProps = require('./handleProps');
@@ -33,7 +32,6 @@ module.exports = {
     collectObservers,
     processTriggerEvent,
     observerHandle,
-    observersHandle,
     processDataSet,
     handleProps,
     handleExternalClasses,

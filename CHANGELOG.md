@@ -1,3 +1,18 @@
+## 1.0.4(2019-09-26)
+### Features
+
+* alipay-wx:
+	* 修复alipay-wx转换后didUpdate不执行的问题
+	* 添加alipay-wx开启组件样式隔离的功能
+	* 修复input的type属性转换后为undefined的问题
+	* 添加alipay-wx对模版编译功能的支持
+* wx-alipay:
+	* 新增wx-alipay对模版编译功能的支持:(标签添加 is-alipay 属性即可)
+
+### fix
+
+	* 当转换的小程序某文件夹中只存在wxml一种文件格式时，输出后wxml还存在的问题
+
 ## 1.0.0(2019-09-26)
 ### Features
 

@@ -237,6 +237,14 @@ const apiObj = {
     createCanvasContext: {
         fn (params) {
             const canvasContext = wx.createCanvasContext(params);
+            utils.warn(
+                `createCanvasContext下的API的参数和支付宝小程序不一致，大致为一半，请自行修改!`,
+                {
+                    apiName: 'createCanvasContext',
+                    errorType: 0,
+                    type: 'api'
+                }
+            );
             return canvasContext;
         }
     },

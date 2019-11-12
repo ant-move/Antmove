@@ -34,7 +34,10 @@ const {
     reportMethods,
     runJs,
     emptyFiles,
-    cjsToes
+    cjsToes,
+    setAppName,
+    setCompileType,
+    reportError
 } = require('@antmove/utils');
 const { processAppJson } = require('../generate/generateRuntimeLogPage');
 const {
@@ -73,6 +76,7 @@ module.exports = {
         remote: false
     },
     beforeParse: async function (next) {
+        setCompileType('wx-tt');
         fs.existsSync(this.$options.dist) && emptyFiles(this.$options.dist, ['miniprogram_npm', 'node_modules']);
         if (!isWechatApp(this.$options.entry)) {
             console.log(chalk.red('[Ops] ' + this.$options.entry + ' is not a wechat miniproramm directory.'));
@@ -252,6 +256,10 @@ module.exports = {
             if (fileInfo.deep === 0 && fileInfo.filename === 'app.json') {
                 content = fs.readFileSync(fileInfo.path, 'utf8');
                 const appData = JSON.parse(content);
+                let json = appData;
+                if (json.window && json.window.navigationBarTitleText) {
+                    setAppName(json.window.navigationBarTitleText);
+                }
                 try {
                     project.pageNum = appData.pages.length;
                 } catch (err) {
@@ -383,6 +391,7 @@ module.exports = {
         return fileInfo;
     },
     compiled: async function (ctx, cb = () => {}) {
+        reportError();
         const {
             findOpenAbility,
             statistics,

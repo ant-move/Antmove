@@ -28,7 +28,10 @@ const {
     isTypeFile,
     record,
     reportMethods,
-    emptyFiles
+    emptyFiles,
+    setAppName,
+    setCompileType,
+    reportError,
 } = require('@antmove/utils');
 const { processAppJson } = require('../generate/generateRuntimeLogPage');
 const {
@@ -67,6 +70,7 @@ module.exports = {
         remote: false
     },
     beforeParse (next) {
+        setCompileType('alipay-wx');
         const {
             getSurrounding,
         } = record(recordConfig);
@@ -78,6 +82,9 @@ module.exports = {
         if (!isAlipayApp (this.$options.entry, ifComponent)) {
             console.log(chalk.red('[Ops] ' + this.$options.entry + ' is not a alipay miniproramm directory.'));
             return false;
+        }
+        if (this.$options.scope && this.$options.scope !== 'false') {
+            Config.options.scopeStyle = true;
         }
         Config.env = process.env.NODE_ENV ===  "development" ? 'development' : 'production';
         showReport = Config.env === 'development';
@@ -116,9 +123,6 @@ module.exports = {
         fs.emptyDirSync(ctx.$options.dist);
     },
     onCompiling (fileInfo, ctx) {
-        // if (/node_modules/.test(fileInfo.path)) {
-        //     fileInfo.dist = fileInfo.dist.replace(/node_modules/, 'ant_modules');
-        // }
         const {
             getTemplateData,
             getStyleData,
@@ -229,6 +233,9 @@ module.exports = {
                 repData.transforms = Object.assign(repData.transforms, jsonData);
                 content = processAppJson(content);
                 const app = JSON.parse(content);
+                if (app.window && app.window.navigationBarTitleText) {
+                    setAppName(app.window.navigationBarTitleText);
+                }
                 let dirnameArr = fileInfo.dirname.split("/");
                 if (dirnameArr.length <= 1) {
                     dirnameArr = dirnameArr[0].split("\\");
@@ -354,7 +361,7 @@ module.exports = {
         return fileInfo;
     },
     compiled (ctx) {
-
+        reportError();
         generateBundleApi(ctx.output);
         generateBundleComponent(ctx.output);
 

@@ -15,6 +15,7 @@ const replaceCallNames = require("./replaceCallName");
 const fs = require('fs-extra');
 
 function ConstructorHandleFn (code,  opts = {}) {
+
     return babel.transform(code, {
         plugins: [
             [
@@ -78,7 +79,7 @@ function externalForWxFn (code, opts = {}) {
                 opts
             ]
         ]
-    });
+    }).code;
 }
 
 function transformClass (code) {

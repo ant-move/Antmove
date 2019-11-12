@@ -30,7 +30,10 @@ const {
     prettierCode,
     isTypeFile,
     record,
-    reportMethods
+    reportMethods,
+    setAppName,
+    setCompileType,
+    reportError
 } = require('@antmove/utils');
 const { processAppJson } = require('../generate/generateRuntimeLogPage');
 const {
@@ -69,6 +72,7 @@ module.exports = {
         remote: false
     },
     beforeParse (next) {
+        setCompileType('alipay-baidu');
         const { 
             getSurrounding
         } = record(recordConfig);
@@ -326,6 +330,11 @@ module.exports = {
                 date = report(date, reportData);
             } else {
                 content = fs.readFileSync(fileInfo.path);
+                const appData = JSON.parse(content);
+                let json = appData;
+                if (json.window && json.window.navigationBarTitleText) {
+                    setAppName(json.window.navigationBarTitleText);
+                }
                 if (content) {
                     project.componentNum++;
                 }
@@ -375,7 +384,7 @@ module.exports = {
         return fileInfo;
     },
     compiled (ctx, cb = () => {}) {
-
+        reportError();
         generateBundleApi(ctx.output);
         
         generateBundleComponent(ctx.output);
