@@ -1,6 +1,6 @@
 {
     "name": "antmove",
-    "version": "1.0.2",
+    "version": "1.0.15",
     "description": "小程序转换器，基于支付宝/微信小程序转换为多端小程序，让小程序跨平台开发变得简单。",
     "main": "src/index.js",
     "bin": {
