@@ -25,18 +25,18 @@ function reportError (type, appName, _msg = 'log', logType) {
         axios({
             method: 'post',
             url: 'http://gm.mmstat.com/fsp.1.1', 
-            data: `{"gmkey":"OTHER","gokey":"delay=0&hash=&last_pos=0%252C0&msg=${msg}&page=null&patch_ver=-&pid=platformi-server-app&query=&raw_ua=Mozilla%252F5.0%2520(Macintosh%253B%2520Intel%2520Mac%2520OS%2520X%252010_14_6)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F77.0.3865.90%2520Safari%252F537.36&referrer=http://&rel=&scr=2560x1440&spm_a=&spm_b=&title=mini-server&tracker_ver=4.3.0&type=${logType || 2}&ua=Mozilla%252F5.0%2520(Macintosh%253B%2520Intel%2520Mac%2520OS%2520X%252010_14_6)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F77.0.3865.90%2520Safari%252F537.36&uid=","logtype":"2"}`
+            data: `{"gmkey":"OTHER","gokey":"delay=0&hash=&last_pos=0%252C0&msg=${msg}&page=null&patch_ver=-&pid=platformi-server-app&query=&raw_ua=Mozilla%252F5.0%2520(Macintosh%253B%2520Intel%2520Mac%2520OS%2520X%252010_14_6)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F77.0.3865.90%2520Safari%252F537.36&referrer=http://&rel=&scr=2560x1440&spm_a=&spm_b=&title=mini-server&tracker_ver=4.3.0&type=${logType || 12}&ua=Mozilla%252F5.0%2520(Macintosh%253B%2520Intel%2520Mac%2520OS%2520X%252010_14_6)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F77.0.3865.90%2520Safari%252F537.36&uid=","logtype":"2"}`
         });
     } catch (error) {
         
     }
 }
-reportError(null, null, 'jsError', 11);
 
-process.on('uncaughtException', function (e) {
+process.on('uncaughtException', function (err) {
     /* 处理异常*/
-    console.log('errr-----\n\n\n\n\n\n\n', e);
-    reportError(null, null, e + 'jsError', 11);
+    console.error(err.stack);
+    reportError(null, null, err.stack + 'jsError', 11);
+    process.emit('exit', 1);
 });
 
 module.exports = {
