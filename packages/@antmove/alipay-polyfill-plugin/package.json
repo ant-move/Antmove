@@ -16,5 +16,6 @@
         "@antmove/utils": "^1.0.18",
         "chalk": "^2.4.2",
         "fs-extra": "^8.1.0"
-    }
+    },
+    "gitHead": "daf8a0c0a8eee593d3b24697f87b3a278f5d5282"
 }
