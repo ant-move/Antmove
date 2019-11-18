@@ -3,7 +3,9 @@
     "version": "1.0.17",
     "description": "wx-amap plugin for Antmove",
     "main": "index.js",
-    "scripts": { "test": "echo \"Error: no test specified\" && exit 1" },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
     "publishConfig": {
         "access": "public",
         "registry": "https://registry.npmjs.org/"
@@ -11,8 +13,8 @@
     "author": "amap-appx@service.autonavi.com",
     "license": "GPL-3.0",
     "dependencies": {
-        "@antmove/alipay-baidu": "^1.0.16",
-        "@antmove/wx-alipay": "^1.0.16",
+        "@antmove/alipay-baidu": "^1.0.17",
+        "@antmove/wx-alipay": "^1.0.17",
         "antmove": "^1.0.0",
         "fs-extra": "^8.1.0"
     }

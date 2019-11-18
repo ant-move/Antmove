@@ -3,7 +3,9 @@
     "version": "1.0.17",
     "description": "antmove helper functions",
     "main": "index.js",
-    "scripts": { "test": "echo \"Error: no test specified\" && exit 1" },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
     "author": "amap-appx@service.autonavi.com",
     "license": "GPL-3.0",
     "dependencies": {
@@ -27,6 +29,9 @@
         "access": "public",
         "registry": "https://registry.npmjs.org/"
     },
-    "devDependencies": { "@babel/preset-env": "^7.5.5", "axios": "^0.19.0" },
+    "devDependencies": {
+        "@babel/preset-env": "^7.5.5",
+        "axios": "^0.19.0"
+    },
     "gitHead": "7e6d2eca3d0dba04e4ff2bbd34b9cc476d85a333"
 }
