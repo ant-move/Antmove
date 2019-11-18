@@ -3,7 +3,9 @@
     "version": "1.0.18",
     "description": "wx-amap plugin for Antmove",
     "main": "index.js",
-    "scripts": { "test": "echo \"Error: no test specified\" && exit 1" },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
     "publishConfig": {
         "access": "public",
         "registry": "https://registry.npmjs.org/"

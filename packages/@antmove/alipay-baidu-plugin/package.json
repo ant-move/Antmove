@@ -3,11 +3,18 @@
     "version": "1.0.18",
     "description": "transform alipay miniprogram to baidu miniprogram tool.",
     "main": "index.js",
-    "scripts": { "test": "echo \"Error: no test specified\" && exit 1" },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
     "author": "",
     "license": "GPL-3.0",
-    "dependencies": { "@antmove/utils": "^1.0.16", "htmlparser2": "^3.10.1" },
-    "devDependencies": { "@babel/plugin-proposal-class-properties": "^7.5.5" },
+    "dependencies": {
+        "@antmove/utils": "^1.0.18",
+        "htmlparser2": "^3.10.1"
+    },
+    "devDependencies": {
+        "@babel/plugin-proposal-class-properties": "^7.5.5"
+    },
     "publishConfig": {
         "access": "public",
         "registry": "https://registry.npmjs.org/"
