@@ -62,7 +62,7 @@ module.exports = {
             let originCode = fs.readFileSync(fileInfo.path, 'utf8');
              
             compileJs(fileInfo, ctx, originCode);
-        } else if (fileInfo.extname === '.json') {
+        } else if (fileInfo.deep > 0&&fileInfo.extname === '.json') {
             let content = fs.readFileSync(fileInfo.path, 'utf8');
             const { transformPackage, prettierCode } =require('@antmove/utils');
             if (fileInfo.path.includes('package.json')) {

@@ -21,7 +21,11 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
         originCode = replaceCallName(originCode, {name: 'httpRequest', newName: 'request'});
         Config.compile.wrapApis = Object.assign(Config.compile.wrapApis, apis);
         originCode = commentBlock(originCode);
-        originCode = ifProcessHandleFn(originCode);
+        originCode = ifProcessHandleFn(originCode, {
+            entry: 'alipay',
+            dist: 'wx',
+            code: 'my.__target__'
+        });
     } catch (error) {
         console.error('Invalid js file: ' +  fileInfo.dist);
     }

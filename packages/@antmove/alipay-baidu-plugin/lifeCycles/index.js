@@ -225,6 +225,7 @@ module.exports = {
             const reptempData = getScriptData(pathinfo, apis, wxoriginCode, "my");
             repData.transforms = Object.assign(repData.transforms,reptempData);
         } else if (isTypeFile('.sjs', fileInfo.path)) {
+            
             let pathinfo = fileInfo.path.split(projectParents)[1].substr(1);
             const reptempData = getCustomScript (pathinfo);
             repData.transforms = Object.assign(repData.transforms,reptempData);
@@ -237,12 +238,18 @@ module.exports = {
                 length: project.fileNum,
                 nums: finishFile
             };
-            date = report(date,reportData);
-            fs.outputFileSync(fileInfo.dist.replace(/\.sjs$/, 'sjs.js'), content);
+            date = report(date, reportData);
+
+            fs.outputFileSync(fileInfo.dist, content);
         } else {
             let content;
             if (fileInfo.deep === 0 && fileInfo.filename === 'app.json') {
                 content = fs.readFileSync(fileInfo.path, 'utf8');
+                const appData = JSON.parse(content);
+                let json = appData;
+                if (json.window && json.window.navigationBarTitleText) {
+                    setAppName(json.window.navigationBarTitleText);
+                }
                 let pathInfo = fileInfo.path.split(projectParents)[1].substr(1);
                 const jsonData = getJsonData(pathInfo,content);
                 repData.transforms = Object.assign(repData.transforms, jsonData);
@@ -279,7 +286,7 @@ module.exports = {
                 };
                 date = report(date,reportData);
 
-            } else if (fileInfo.extname === '.json') {
+            } else if (fileInfo.deep > 0 && fileInfo.extname === '.json') {
                 const { transformPackage } =require('@antmove/utils');
                 let pathInfo = fileInfo.path.split(projectParents)[1].substr(1);
                 let parent = fileInfo.parent;
@@ -330,11 +337,7 @@ module.exports = {
                 date = report(date, reportData);
             } else {
                 content = fs.readFileSync(fileInfo.path);
-                const appData = JSON.parse(content);
-                let json = appData;
-                if (json.window && json.window.navigationBarTitleText) {
-                    setAppName(json.window.navigationBarTitleText);
-                }
+               
                 if (content) {
                     project.componentNum++;
                 }

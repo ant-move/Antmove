@@ -48,9 +48,14 @@ function replaceCallName (code, opts = {}) {
     }).code;
 }
 
-function crossCodeHandleFn (code) {
+function crossCodeHandleFn (code, opts = {}) {
     return babel.transform(code, {
-        plugins: [crossCodeHandle]
+        plugins: [
+            [
+                crossCodeHandle,
+                opts
+            ] 
+        ]
     }).code;
 }
 
