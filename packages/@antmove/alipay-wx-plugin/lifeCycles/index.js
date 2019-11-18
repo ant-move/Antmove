@@ -267,7 +267,7 @@ module.exports = {
                 };
                 date = report(date, reportData);
 
-            } else if (fileInfo.extname === '.json') {
+            } else if (fileInfo.deep > 0&&fileInfo.extname === '.json') {
                 const { transformPackage } =require('@antmove/utils');
                 let pathInfo = fileInfo.path.split(projectParents)[1].substr(1);
                 let parent = fileInfo.parent;

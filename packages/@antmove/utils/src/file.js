@@ -41,7 +41,7 @@ fileUtils.parserDirInfo = function (opts = {}, cb = () => {}, deep = 0, parent =
 
         files.push(_file);
         
-        return _file;
+        return files;
     });
 
     /* 

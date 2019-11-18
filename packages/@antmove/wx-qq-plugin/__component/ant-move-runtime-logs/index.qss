@@ -1,0 +1,96 @@
+.log-show-log {
+    color: red;
+}
+.log-show-log-p {
+    padding-bottom: 20rpx;
+}
+.log-show-warn {
+    height: auto;
+    border-bottom: 2rpx solid #ccc;
+}
+page{
+  background-color:#F8F8F8;
+}
+.log-box{
+  background-color: #ffffff;
+  height:100rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom:3rpx solid #F8F8F8;
+  padding-left:18rpx;
+}
+.log-img-wrp{
+  padding-right:20rpx;
+  padding-top:6rpx;
+  padding-left:10rpx;
+}
+.log-img{
+  width:20rpx;
+  height:30rpx;
+}
+.index-bg{
+  padding-top:20rpx;
+}
+.indexWrp{
+  width:94.93%;
+  margin:0 auto
+}
+.log-path{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20rpx;
+  color: #999;
+}
+.log-font{
+  color:#333;
+}
+.footer{
+  background-color: #F8F8F8;
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  font-size: 24rpx;
+  color:#999;
+}
+.footer-num{
+  margin-top:15rpx;
+  background-color: #F8F8F8;
+}
+.bg{
+  background-color: #F8F8F8;
+}
+.box{
+  width: 100%;
+  height:115rpx;
+}
+.antmove_logo{
+  background: #F8F8F8;
+  width:100%;
+  position: fixed;
+  bottom:0;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 15rpx;
+}
+.antmove_logo_box{
+  margin-top:15rpx;
+  display: flex;
+  font-family: PingFangSC-Regular;
+}
+
+.antmove_logo_wrap{
+    margin-right:10rpx;
+}
+
+.antmove_logo_img{
+
+  width: 60rpx;
+  height:60rpx
+}
+.antmove_text{
+  font-size:36rpx;
+  height:60rpx;
+  line-height: 65rpx;
+}

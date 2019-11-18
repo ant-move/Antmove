@@ -1,4 +1,4 @@
-module.exports = function () {
+module.exports = function (...p) {
     return {
         visitor: {
             IfStatement (path) {
@@ -6,6 +6,7 @@ module.exports = function () {
                 let right = path.node.test.right;
                 let left = path.node.test.left;
                 let temp;
+                let dist = p[1].dist;
                 if (left && left.type === 'StringLiteral') {
                     temp = right;
                     right = left;
@@ -19,13 +20,13 @@ module.exports = function () {
                 value = right.value;
                 const typeOutput = ['wx', 'alipay', 'tt', 'qq', 'baidu', 'amap'];
                 if (name === 'wx.__target__' || name === '_my.__target__') {
-                    if (typeOutput.includes(value)) {
+                    if (typeOutput.includes(value) && dist === value) {
                         path.replaceWithMultiple(path.node.consequent.body);
                     } else {
                         path.replaceWithMultiple(path.node.alternate.body);
                     }
                 } else if (name === 'my.__target__' || name === '_wx.__target__' || name === '_swan.__target__') {
-                    if (typeOutput.includes(value)) {
+                    if (typeOutput.includes(value) && dist === value) {
                         path.replaceWithMultiple(path.node.consequent.body);
                     } else {
                         path.replaceWithMultiple(path.node.alternate.body);

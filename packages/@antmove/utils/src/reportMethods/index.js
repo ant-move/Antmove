@@ -152,14 +152,14 @@ module.exports = {
 
         new Line(outputBuffer)
             .column('Statistical items', 20, [clc.cyan])
-            .column('Contents', 200, [clc.cyan])
+            .column('Contents', 180, [clc.cyan])
             .fill()
             .store();
 
         for (let key in table.tableInfo) {
             new Line(outputBuffer)
                 .column(key, 16)
-                .column( table.tableInfo[key], 200)
+                .column( table.tableInfo[key], 180)
                 .fill()
                 .store();
         }

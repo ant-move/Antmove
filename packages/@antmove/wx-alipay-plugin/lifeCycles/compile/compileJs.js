@@ -27,7 +27,7 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
     originCode = transformClass(originCode);
     originCode = ifProcessHandleFn(originCode, {
         entry: 'wx',
-        dist: 'my',
+        dist: 'alipay',
         code: 'wx.__target__'
     });    
     

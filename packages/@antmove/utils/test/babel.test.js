@@ -9,7 +9,7 @@ function testCode (testName, code01, code02) {
 testCode(
     'crossCodeFn testing: ',
     babelPlugins.ifProcessHandleFn(`const name = wx.__target__ === 'alipay' ? 'alipay' : 'wx'`),
-    `const name = 'alipay';`
+    `const name = 'wx';`
 );
 
 testCode(
