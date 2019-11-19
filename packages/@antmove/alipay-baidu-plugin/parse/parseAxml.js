@@ -19,7 +19,7 @@ function parseString (code) {
     let currentNode = null;
     let preTagIsText = false;     // fixbug: textContent value 被拆分的情况
     let preTextNode = null;
-    const singleEl = ['input', 'image'];
+    const singleEl = ['input', 'image', 'import-sjs'];
     var parser = new htmlparser.Parser({
         onopentag: function (name, attrs) {
             

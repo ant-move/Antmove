@@ -1,6 +1,6 @@
 {
     "name": "@antmove/wx-baidu",
-    "version": "1.0.20",
+    "version": "1.0.21",
     "description": "wx-amap plugin for Antmove",
     "main": "index.js",
     "scripts": {
