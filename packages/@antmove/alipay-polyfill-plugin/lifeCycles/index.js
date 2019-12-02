@@ -81,7 +81,7 @@ module.exports = {
     },
     compiled: function (ctx, cb = () => {}) {
         cb ();
-        generateComponent(ctx.output);
+        generateComponent(ctx.output, this.$options);
         generateAPi(ctx.output);
         generateNodeTrees(ctx.output, Config);
     }
