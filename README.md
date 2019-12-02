@@ -35,6 +35,7 @@ Antmove - 小程序转换器，基于支付宝/微信小程序转换为多端小
 
 ## 文档
 * [官方文档](https://ant-move.github.io/website/docs/readme.html)
+* [钉钉小程序使用 Antmove 组件库指南](https://github.com/ant-move/Antmove/blob/master/docs/dd-guide.md)
 
 ## 安装
 

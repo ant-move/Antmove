@@ -1,6 +1,6 @@
 {
     "name": "@antmove/alipay-polyfill",
-    "version": "1.0.20",
+    "version": "1.0.21",
     "description": "alipay miniprograrmm ployfill for antmove",
     "main": "index.js",
     "scripts": {

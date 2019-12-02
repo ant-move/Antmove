@@ -220,6 +220,9 @@ module.exports = {
         
         fnApp.add('didMount', didMount);
         fnApp.add('onInit', options.created);
+        fnApp.add('onInit', function(){
+            processObservers.call(this, _opts.observersObj, options, this.$antmove._data);
+        })
         fnApp.insert('onInit', function () {
             this.getRelationNodes = function () {
                 return [];

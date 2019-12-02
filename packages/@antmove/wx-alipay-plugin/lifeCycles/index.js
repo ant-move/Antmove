@@ -87,7 +87,7 @@ module.exports = {
             return false;
         }
 
-        fs.existsSync(this.$options.dist) && emptyFiles(this.$options.dist, ['miniprogram_npm', 'node_modules']);        
+        fs.existsSync(this.$options.dist) && emptyFiles(this.$options.dist, ['miniprogram_npm', 'node_modules', '.tea', 'mini.project.json']);        
         if (this.$options.scope && this.$options.scope !== 'false') {
             Config.options.scopeStyle = true;
         }
