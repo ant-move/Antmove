@@ -38,7 +38,9 @@ const {
     emptyFiles,
     setAppName,
     setCompileType,
-    reportError
+    reportError,
+    getAppName,
+    recordOptions
 } = require('@antmove/utils');
 const { processAppJson } = require('../generate/generateRuntimeLogPage');
 const {
@@ -86,7 +88,7 @@ module.exports = {
             console.log(chalk.red('[Ops] ' + this.$options.entry + ' is not a wechat miniproramm directory.'));
             return false;
         }
-
+        recordOptions(this.$options)
         fs.existsSync(this.$options.dist) && emptyFiles(this.$options.dist, ['miniprogram_npm', 'node_modules', '.tea', 'mini.project.json']);        
         if (this.$options.scope && this.$options.scope !== 'false') {
             Config.options.scopeStyle = true;
@@ -300,6 +302,9 @@ module.exports = {
                 let json = appData;
                 if (json.window && json.window.navigationBarTitleText) {
                     setAppName(json.window.navigationBarTitleText);
+                } else {
+                    const appName = getAppName(json.pages, fileInfo.entry, 'navigationBarTitleText');
+                    setAppName(appName);
                 }
                 try {
                     project.pageNum = appData.pages.length;

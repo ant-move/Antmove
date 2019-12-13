@@ -55,12 +55,16 @@ module.exports = function (obj = {}) {
         get (target, attr) {
             let ret;
             if (typeof attr === 'string' && myApi[attr]) {
-                ret = function (obj = {}, args = "") {
-                    if (args) {
-                        return myApi[attr].fn(obj, args);
-                    }
-                    return myApi[attr].fn(obj);
-                };
+                if (typeof myApi[attr].fn === 'function') {
+                    ret = function (obj = {}, args = "") {
+                        if (args) {
+                            return myApi[attr].fn(obj, args);
+                        }
+                        return myApi[attr].fn(obj);
+                  };
+                } else {
+                    ret = myApi[attr];
+                }
             } else {
                 let helpFn = warnApi(attr);
                 ret = target[attr] || helpFn;

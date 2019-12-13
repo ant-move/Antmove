@@ -1,6 +1,6 @@
 {
     "name": "antmove",
-    "version": "1.0.19",
+    "version": "1.0.20",
     "description": "小程序转换器，基于支付宝/微信小程序转换为多端小程序，让小程序跨平台开发变得简单。",
     "main": "src/index.js",
     "bin": {
@@ -68,7 +68,8 @@
     "husky": {
         "hooks": {
             "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-            "pre-commit": "npm run lint"
+            "pre-commit": "npm run lint",
+            "pre-push": "npm run test-suites && npm run test"
         }
     },
     "publishConfig": {

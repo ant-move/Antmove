@@ -10,6 +10,7 @@ const Config = require('../config.js');
 
 const {
     isTypeFile,
+    recordOptions
 } = require('@antmove/utils');
 
 function isAliApp () {
@@ -28,7 +29,7 @@ module.exports = {
             console.log(chalk.red('[Ops] ' + this.$options.entry + ' is not an ailapp miniproramm directory.'));
             return false;
         }
-
+        recordOptions(this.$options);
         fs.emptyDirSync(this.$options.dist);
         Config.component2 = this.$options.component2;
         Config.env = process.env.NODE_ENV ===  "development" ? 'development' : 'production';

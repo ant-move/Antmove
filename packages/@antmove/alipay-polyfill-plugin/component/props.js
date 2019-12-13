@@ -1,5 +1,6 @@
 const fs = require('fs-extra');
 const path = require('path');
+const Config = require('../config.js')
 
 module.exports = function (ast, fileInfo, renderAxml) {
     let isComponentTag = false;
@@ -61,6 +62,10 @@ function processCustomComponent (ast, fileInfo) {
     }
     if (fileInfo.jsonUsingComponents[ast.type]) {
         isComponentTag = true;
+        if (ast.props && !Config.component2) {
+            ast.props['_parent_ref'] = { type: "double", value: ["{{isMounted}}"] }
+          
+        }
     }
 
     return isComponentTag;

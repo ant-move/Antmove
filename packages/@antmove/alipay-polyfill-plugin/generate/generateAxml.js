@@ -12,6 +12,7 @@ module.exports = function axmlRender (ast = [], fileInfo) {
      */
     fileInfo.nodeId = 0;
     let refRender = createComponentNode(ast[0], fileInfo);
+    processComponentIs(fileInfo);
 
     if (typeof ast === 'string') return ast;
     let _code = '';
@@ -156,4 +157,15 @@ function generateRenderFn (fileInfo, renderStr = '') {
     route = route.replace(/\\+/g, '/');
     
     appNodesTreeStr += `'${route}': ${renderStr},`;
+}
+
+function processComponentIs (fileInfo) {
+    // let dist = fileInfo.dist.replace(/\.axml$/, '.is.js');
+    let isPath = fileInfo.dist.replace(fileInfo.output, '')
+        .replace(/\.axml$/, '').replace(/\\/g, "/");
+    
+    if (fileInfo.parent) {
+        fileInfo.parent.is = isPath;
+    }
+
 }

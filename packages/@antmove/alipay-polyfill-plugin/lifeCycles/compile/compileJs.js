@@ -14,7 +14,10 @@ module.exports = function (fileInfo, ctx, originCode) {
     /**
      *  判断是否为 App()/Page()/Component()
      * */
+    if (!Config.component2 && fileInfo.parent && fileInfo.parent.is) {
+        originCode = processComponentIs(originCode, fileInfo.parent.is);
 
+    }
     let componentWrapFnPath = customComponentPrefix + '/component/componentClass.js';
     let matchRet = '';
     let cbNameInfo = {
@@ -50,3 +53,18 @@ module.exports = function (fileInfo, ctx, originCode) {
 
     fs.outputFileSync(fileInfo.dist, originCode);
 };
+
+function processComponentIs (code, isPath = '') {
+    if (isPath) {
+        code = `
+        my.setStorageSync({
+            key: 'activeComponent',
+            data: {
+                is: '${isPath}'
+            }
+        })\n
+        `+ code;
+    }
+
+    return code;
+}

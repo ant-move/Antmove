@@ -7,7 +7,12 @@ const App = transformFramework();
 const BaiduApp = transformFramework();
 module.exports = function (options = {}) {
     const inputDirPath = options.input;
-    const outputDirPath = options.output || options.defaultOutput;
+    let outputDirPath = options.output || options.defaultOutput;
+
+    if (outputDirPath.charAt(outputDirPath.length-1)===path.sep) {
+        outputDirPath = outputDirPath.substr(0, outputDirPath.length-1);
+    }
+    
     const dirArr = outputDirPath.split(path.sep);
     dirArr.pop();
     dirArr.push('.antmove');

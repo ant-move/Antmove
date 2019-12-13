@@ -83,7 +83,7 @@ module.exports = function (fileInfo, ctx, inCompileWxml = false) {
                 });
             cssContent = css.stringify(cssObj);
         } catch (e) {
-            console.warn('Invalid css file. - ', fileInfo.path);        
+            console.warn('Invalid wxss file. - ', fileInfo.path);        
         }
     }
 
