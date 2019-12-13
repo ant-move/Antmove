@@ -181,19 +181,12 @@ const App = transformFramework();   // 得到的 app 实例即可进行转换处
 
 ## 谁在使用
 
-### 微信小程序
-
-> 这里展示的微信小程序为原小程序应用，下面的其它平台小程序为基于这些微信小程序转换得到。
-
-<img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/e-wx.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/qu-wx.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/wei-wx.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/werther-wx.jpg'>
-
-### 支付宝小程序
-
-<img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/e-alipay.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/wei-alipay.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/qu-alipay.jpg'>
-
-### 高德小程序
-
-<img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/e-amap.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/wei-amap.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/bus-amap.jpg'><img width='150' src='https://cache.amap.com/ecology/tool/antmove/web/assets/qr/custom/weather-amap.jpg'>
+* e 代驾
+* 微代驾
+* 趣满满
+* 天气通
+* 实时公交
+* 更多
 
 > 如果你的公司和产品使用了 [Antmove](https://ant-move.github.io/website/docs/readme.html)，欢迎到[这里](https://github.com/ant-move/antmove/issues/1)留言。
 
