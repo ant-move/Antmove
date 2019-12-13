@@ -33,7 +33,9 @@ const {
     reportMethods,
     setAppName,
     setCompileType,
-    reportError
+    reportError,
+    getAppName,
+    recordOptions
 } = require('@antmove/utils');
 const { processAppJson } = require('../generate/generateRuntimeLogPage');
 const {
@@ -85,6 +87,7 @@ module.exports = {
             console.log(chalk.red('[Ops] ' + this.$options.entry + ' is not a alipay miniproramm directory.'));
             return false;
         }
+        recordOptions(this.$options);
         antmoveHandle(this.$options.entry);
         Config.env = process.env.NODE_ENV ===  "development" ? 'development' : 'production';
         showReport = Config.env === 'development';
@@ -337,6 +340,14 @@ module.exports = {
                 date = report(date, reportData);
             } else {
                 content = fs.readFileSync(fileInfo.path);
+                const appData = JSON.parse(content);
+                let json = appData;
+                if (json.window && json.window.defaultTitle) {
+                    setAppName(json.window.defaultTitle);
+                } else {
+                    const appName = getAppName(json.pages, fileInfo.entry, 'defaultTitle');
+                    setAppName(appName);
+                }
                
                 if (content) {
                     project.componentNum++;

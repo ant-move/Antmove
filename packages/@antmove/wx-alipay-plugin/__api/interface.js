@@ -17,6 +17,18 @@ const apiObj = {
                 });
            return my.hideBackHome(param);
         }
+    },
+    cloud: {
+        init () {
+            utils.warn(
+                `支付宝暂不支持init`,
+                {
+                    apiName: "cloud/init",
+                    errorType: 0,
+                    type: 'api'
+                }
+            )
+        }
     }
 }
 

@@ -32,6 +32,8 @@ const {
     setAppName,
     setCompileType,
     reportError,
+    getAppName,
+    recordOptions
 } = require('@antmove/utils');
 const { processAppJson } = require('../generate/generateRuntimeLogPage');
 const {
@@ -83,6 +85,7 @@ module.exports = {
             console.log(chalk.red('[Ops] ' + this.$options.entry + ' is not a alipay miniproramm directory.'));
             return false;
         }
+        recordOptions(this.$options);
         if (this.$options.scope && this.$options.scope !== 'false') {
             Config.options.scopeStyle = true;
         }
@@ -233,15 +236,19 @@ module.exports = {
                 repData.transforms = Object.assign(repData.transforms, jsonData);
                 content = processAppJson(content);
                 const app = JSON.parse(content);
-                if (app.window && app.window.navigationBarTitleText) {
-                    setAppName(app.window.navigationBarTitleText);
+                if (app.window && app.window.defaultTitle) {
+                    setAppName(app.window.defaultTitle);
+                } else {
+                    const appName = getAppName(app.pages, fileInfo.entry, 'defaultTitle');
+                    setAppName(appName);
                 }
+                
                 let dirnameArr = fileInfo.dirname.split("/");
                 if (dirnameArr.length <= 1) {
                     dirnameArr = dirnameArr[0].split("\\");
                 }
                 try {
-                    project.name = app.window.navigationBarTitleText || dirnameArr[dirnameArr.length - 1];
+                    project.name = app.window.defaultTitle || dirnameArr[dirnameArr.length - 1];
                 } catch (err) {
                     project.name = dirnameArr[dirnameArr.length - 1];
                 }

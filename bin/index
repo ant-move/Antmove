@@ -19,7 +19,7 @@ const inputDirPath = process.cwd() + '/';
 const entryProcess = require('./entry');
 
 const {
-    recordOptions,
+    // recordOptions,
     returnOptions
 } = require('../cli/utils');
 
@@ -242,7 +242,7 @@ function action (options) {
 
         if (buildInfo[opts.type]) {
             if (opts.component === 'component') {
-                let cachePath = path.join(__dirname, '../cache/.antmove/');
+                let cachePath = getCachePath(opts.input);
                 let originalProgram = opts.type.split("-")[0];
                 let isOriginalComponents = ifOriginalComponent(opts.input, originalProgram);
                 let program = getProgramName(originalProgram);
@@ -267,9 +267,9 @@ function action (options) {
                     opts.scope = false;
                 }
             }
-            _input = './';
-            _output = processPath(opts);
-            recordOptions(opts, _input, _output);
+            // _input = './';
+            // _output = processPath(opts);
+            // recordOptions(opts, _input, _output);
             buildInfo[opts.type](opts);
         } else {
             console.log(chalk.red("编译类型错误，请选择可用的转换类型。"));
@@ -370,8 +370,22 @@ function getProgramName (type = "wx") {
     return pro;
 }
 
-function processPath ( opts ) {
-    let _path = "";
-    _path = path.relative(opts.input, opts.output);
+// function processPath ( opts ) {
+//     let _path = "";
+//     _path = path.relative(opts.input, opts.output);
+//     return _path;
+// }
+
+function getCachePath (from) {
+    let _path = from;
+    let tail = _path.charAt(_path.length-1);
+    let sep = path.sep;
+    let arr = _path.split(sep);
+    if (tail === '/' || '\\') {
+        arr.splice(-2, 2, 'cache', '.antmove');
+    } else {
+        arr.splice(-1, 1, 'cache', '.antmove');
+    }
+    _path = arr.join(sep) + sep;
     return _path;
 }

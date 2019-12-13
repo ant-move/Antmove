@@ -37,7 +37,8 @@ const {
     cjsToes,
     setAppName,
     setCompileType,
-    reportError
+    reportError,
+    getAppName,
 } = require('@antmove/utils');
 const { processAppJson } = require('../generate/generateRuntimeLogPage');
 const {
@@ -259,6 +260,9 @@ module.exports = {
                 let json = appData;
                 if (json.window && json.window.navigationBarTitleText) {
                     setAppName(json.window.navigationBarTitleText);
+                } else {
+                    const appName = getAppName(json.pages, fileInfo.entry, 'navigationBarTitleText');
+                    setAppName(appName);
                 }
                 try {
                     project.pageNum = appData.pages.length;

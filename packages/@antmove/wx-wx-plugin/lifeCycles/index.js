@@ -11,7 +11,8 @@ const compileJs = require('./compile/compileJs');
 const {
     isTypeFile,
     setCompileType,
-    reportError
+    reportError,
+    recordOptions
 } = require('@antmove/utils');
 
 
@@ -32,7 +33,8 @@ module.exports = {
         if (!isWechatApp(this.$options.entry)) {
             console.log(chalk.red('[Ops] ' + this.$options.entry + ' is not a wechat miniproramm directory.'));
             return false;
-        }      
+        }  
+        recordOptions(this.$options);    
         next();
     },
     onParsing () {

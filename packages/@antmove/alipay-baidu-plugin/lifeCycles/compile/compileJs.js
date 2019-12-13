@@ -16,14 +16,25 @@ const {
 module.exports = function (fileInfo, ctx, originCode, apis, entry) {
     const jsonPath = fileInfo.path+'on';
     const antmoveCache = fileInfo.antmoveCache;
+    Object.keys(antmoveCache).forEach(key => {
+        if (key[0] === '/') {
+            let key2 = key.substr(1);
+            antmoveCache[key2] = antmoveCache[key];
+            delete antmoveCache[key];
+        }
+    });
     let jsonData = {};
     if (fs.existsSync(jsonPath)) {
         jsonData = JSON.parse(fs.readFileSync(jsonPath));
         /**
          *  二次转码获取组件js的wx格式的缓存代码
          * */
+
         if (jsonData.component && antmoveCache) {
-            const componentPath =  fileInfo.path.split(entry)[1].replace(/\\/g, '/');
+            let componentPath =  fileInfo.path.split(entry)[1].replace(/\\/g, '/');
+            if (componentPath[0]==='/') {
+                componentPath = componentPath.substr(1);
+            }
             if (!componentPath.includes('__antmove')) {
                 let cachepath = path.join(entry, '__antmove/.antmove_cache', antmoveCache[componentPath]);
                 originCode = fs.readFileSync(cachepath);
