@@ -13,10 +13,7 @@
         "test": "jest",
         "link": "bash ./build/link.local.sh",
         "lint": "eslint ./src",
-        "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-        "amap-doc": "node ./build/utils/outputFils.js",
-        "build-external": "node ./build/buildDoc/external",
-        "build-alife": "node ./build/buildAlipay/index.js"
+        "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
     },
     "author": "amap-appx@service.autonavi.com",
     "license": "GPL-3.0",
@@ -68,8 +65,7 @@
     "husky": {
         "hooks": {
             "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-            "pre-commit": "npm run lint",
-            "pre-push": "npm run test-suites && npm run test"
+            "pre-commit": "npm run lint"
         }
     },
     "publishConfig": {
