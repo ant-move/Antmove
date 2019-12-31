@@ -13,6 +13,7 @@ const {
     prettierCode,
     transformClass,
     // processFnBodyHandleFn,
+    transSharePath,
     getCbName
 } = require('@antmove/utils');
 
@@ -24,6 +25,7 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
         originCode = processComponentIs(originCode, fileInfo.parent.is);
 
     }
+    originCode = transSharePath(originCode);
     originCode = transformClass(originCode);
     originCode = ifProcessHandleFn(originCode, {
         entry: 'wx',

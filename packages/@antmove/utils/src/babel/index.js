@@ -12,6 +12,7 @@ const cjsToes = require('./cjs-to-es5');
 const externalForWx = require('./externalForWx');
 const getCbNameFn = require('./getCallName');
 const replaceCallNames = require("./replaceCallName");
+const sharePath = require('./sharePath');
 const fs = require('fs-extra');
 
 function ConstructorHandleFn (code,  opts = {}) {
@@ -179,6 +180,15 @@ function cjsToesFn (code) {
     }).code;
 }
 
+function transSharePath (code, opts = {}) {
+    return babel.transform(code, {
+        plugins: [
+            sharePath,
+            opts
+        ]
+    }).code
+}
+
 module.exports = {
     // processClasssProperties,
     ConstructorHandle: ConstructorHandleFn,
@@ -196,5 +206,6 @@ module.exports = {
     transformSjsToWxs,
     processRequireForWx,
     getCbName,
-    replaceCallName
+    replaceCallName,
+    transSharePath
 };
