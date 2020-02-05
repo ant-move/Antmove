@@ -7,6 +7,7 @@ let eventObj = {
     'bindtouchend': 'onTouchEnd',
     'bindtouchcancel': 'onTouchCancel',
     'bindlongtap': 'onLongTap',
+    'bindlongpress':  'onLongTap',
     'bindscrolltoupper': 'onScrollToUpper',
     'bindscrolltolower': 'onScrollToLower',
     "catchtouchmove": "catchTouchMove",

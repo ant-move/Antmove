@@ -51,7 +51,9 @@ module.exports = function (str) {
             
         });
     }
-
+    if (json.plugins) {
+        delete json.plugins
+    }
     replaceTheKey(json.window, windowConfigMap);
 
     return JSON.stringify(json);

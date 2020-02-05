@@ -234,7 +234,7 @@ function processCustomComponent (ast, fileInfo) {
         isComponentTag = true;
         let _type = ast.type;
         preProcessCustomComponent(ast);
-
+        componentInTemplate(ast)
         if (fileInfo.appUsingComponents[ast.type]) {
             fileInfo.customAppUsingComponents =
                 fileInfo.customAppUsingComponents || {};
@@ -272,8 +272,20 @@ function processCustomComponent (ast, fileInfo) {
             });
         }
     }
-
     return isComponentTag;
+}
+
+function  componentInTemplate(ast){
+    function deep(node){
+        if (node.parent) {
+            if (node.parent.type === 'template') {
+                console.warn('template模版中尽量不要插入自定义组件，会有渲染异常的风险');
+            } else {
+                deep(node.parent);
+            }
+        }
+    }
+    deep(ast)
 }
 
 function processExternalClasses (ast, fileInfo) {

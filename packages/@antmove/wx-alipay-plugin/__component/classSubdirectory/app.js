@@ -20,10 +20,10 @@ module.exports = {
         _opts = Object.assign(_opts, options);
         _opts.onLaunch = function (res) {
             if (!my.canIUse('component2')) console.warn("当前未开启component2,请在详情内勾选启用component2编译.");
-            my.clearStorageSync({
+            my.removeStorageSync({
                 key: "logInfo"
             });
-            my.clearStorageSync({
+            my.removeStorageSync({
                 key: "_pageMsg"
             });
             getUrl ();            

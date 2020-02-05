@@ -260,6 +260,9 @@ module.exports = {
                 let json = appData;
                 if (json.window && json.window.navigationBarTitleText) {
                     setAppName(json.window.navigationBarTitleText);
+                } else {
+                    const appName = getAppName(json.pages, fileInfo.entry, 'navigationBarTitleText');
+                    setAppName(appName);
                 }
                 try {
                     project.pageNum = appData.pages.length;
@@ -345,14 +348,6 @@ module.exports = {
                 date = report(date, reportData);
             } else {
                 content = fs.readFileSync(fileInfo.path);
-                const appData = JSON.parse(content);
-                let json = appData;
-                if (json.window && json.window.navigationBarTitleText) {
-                    setAppName(json.window.navigationBarTitleText);
-                } else {
-                    const appName = getAppName(json.pages, fileInfo.entry, 'navigationBarTitleText');
-                    setAppName(appName);
-                }
                 
                 const reportData = {
                     info: fileInfo.path.split(projectParents)[1].substr(1),

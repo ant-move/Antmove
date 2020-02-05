@@ -25,13 +25,13 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
         originCode = processComponentIs(originCode, fileInfo.parent.is);
 
     }
-    originCode = transSharePath(originCode);
     originCode = transformClass(originCode);
     originCode = ifProcessHandleFn(originCode, {
         entry: 'wx',
         dist: 'alipay',
         code: 'wx.__target__'
-    });    
+    });   
+    originCode = transSharePath(originCode);
     
     let isMatchPlatformApi = ''; // originCode.match(/\bwx\.(\w+)/g);
 

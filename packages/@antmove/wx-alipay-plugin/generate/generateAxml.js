@@ -122,7 +122,10 @@ module.exports = function axmlRender (ast = [], fileInfo) {
 
             return `${_ast.value}`;
         }
-
+        
+        if (_ast.type === 'open-data') {
+            console.warn('支付宝暂不支持open-data组件,请检查业务逻辑')
+        }
         let code = '';
         let tagName = _ast.type;
         let children = _ast.children;
@@ -172,7 +175,11 @@ module.exports = function axmlRender (ast = [], fileInfo) {
                             attrCode += ` ${propInfo.key}="${value}"`;
                         }                      
                     } else {
-                        attrCode += ` ${propInfo.key}='${value}'`;
+                        if ((propInfo.key === "a:key" || propInfo.key === "wx:key") && !/{{/.test(value)) {
+                            attrCode +=  ` ${propInfo.key}='{{${value}}}'`
+                        } else {
+                            attrCode += ` ${propInfo.key}='${value}'`;
+                        }
                     }
                 }
             });
@@ -215,10 +222,21 @@ module.exports = function axmlRender (ast = [], fileInfo) {
                 return;
             }
 
+            // if (appendChars.startsWith('<')) {
+            //     code += (appendChars.startsWith('</') ? os.EOL : '') +  String(indentWidth) + appendChars;
+            // } else if (appendChars.endsWith('>')) {
+            //     code += appendChars + os.EOL;
+            // } else {
+            //     code += indentWidth + appendChars;
+            // }
             if (appendChars.startsWith('<')) {
-                code += (appendChars.startsWith('</') ? os.EOL : '') +  String(indentWidth) + appendChars;
+                code += (appendChars.startsWith('</') && !/<\/text>/.test(appendChars) ? os.EOL : '') +  String(indentWidth) + appendChars;
             } else if (appendChars.endsWith('>')) {
-                code += appendChars + os.EOL;
+                if (/<\/text>/.test(appendChars)) {
+                    code += appendChars 
+                } else {
+                    code += appendChars + os.EOL;
+                }
             } else {
                 code += indentWidth + appendChars;
             }
