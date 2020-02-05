@@ -300,6 +300,9 @@ module.exports = {
                 content = fs.readFileSync(fileInfo.path, 'utf8');
                 const appData = JSON.parse(content);
                 let json = appData;
+                if (this.$options.hooks && typeof this.$options.hooks.plugin === 'function') {
+                    content = this.$options.hooks.plugin(content);
+                }
                 if (json.window && json.window.navigationBarTitleText) {
                     setAppName(json.window.navigationBarTitleText);
                 } else {
@@ -331,7 +334,6 @@ module.exports = {
                     useTabs: true,
                     tabWidth: 4
                 });
-
                 const reportData = {
                     info: pathInfo,
                     type: "compile",

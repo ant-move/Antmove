@@ -250,8 +250,11 @@ module.exports = {
                 content = fs.readFileSync(fileInfo.path, 'utf8');
                 const appData = JSON.parse(content);
                 let json = appData;
-                if (json.window && json.window.navigationBarTitleText) {
-                    setAppName(json.window.navigationBarTitleText);
+                if (json.window && json.window.defaultTitle) {
+                    setAppName(json.window.defaultTitle);
+                } else {
+                    const appName = getAppName(json.pages, fileInfo.entry, 'defaultTitle');
+                    setAppName(appName);
                 }
                 let pathInfo = fileInfo.path.split(projectParents)[1].substr(1);
                 const jsonData = getJsonData(pathInfo,content);
@@ -340,14 +343,6 @@ module.exports = {
                 date = report(date, reportData);
             } else {
                 content = fs.readFileSync(fileInfo.path);
-                const appData = JSON.parse(content);
-                let json = appData;
-                if (json.window && json.window.defaultTitle) {
-                    setAppName(json.window.defaultTitle);
-                } else {
-                    const appName = getAppName(json.pages, fileInfo.entry, 'defaultTitle');
-                    setAppName(appName);
-                }
                
                 if (content) {
                     project.componentNum++;

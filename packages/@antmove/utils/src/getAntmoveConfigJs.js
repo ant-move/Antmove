@@ -7,7 +7,6 @@ function recordOptions (options) {
     let _input = './',
         _output = processPath(options);
     let configPath = path.join(options.input, `./antmove.config.js`);
-    options = JSON.parse(JSON.stringify(options));
     let _options = {};
     _options.input =_input;
     _options.output = _output;
@@ -23,6 +22,15 @@ function recordOptions (options) {
     }
     _options = JSON.stringify(_options, null, 4);
     antmoveConfigDist = `module.exports = ${_options}`;
+    antmoveConfigDist = antmoveConfigDist.replace((/}$/),() => {
+        let fn = typeof options.hooks.plugin === 'function' ? options.hooks.plugin : function plugin (appJson) {return appJson};
+        let str =  `,
+    "hooks": {
+        "plugin": ${fn}
+    }
+}`
+    return str
+    })
     fs.outputFileSync(configPath,  antmoveConfigDist);
 }
 
