@@ -134,7 +134,9 @@ let inputDirPath = path.join(__dirname, '../../examples/miniprogram-demo/minipro
 wxToBaidu({
 	input: inputDirPath,
     output: outputPath,
-    env: 'development'
+    type: 'wx-baidu',
+    hooks: {},
+    isWx2Baidu: true
 })
 ```
 

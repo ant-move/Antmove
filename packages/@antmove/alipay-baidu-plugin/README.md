@@ -129,7 +129,7 @@ antmove -t alipay-baidu -i ./wechat-mini/project -o ./dist/alipay-mini/project -
 ```js
 const path = require('path');
 const transformFramework = require('antmove');
-const alipayToBaidu = require('@antmove/alipay-baidu');
+const AlipayPlugin = require('@antmove/alipay-baidu');
 
 let outputPath = path.join(__dirname, '../../dist', '/alipaymini-demo');
 let inputDirPath = path.join(__dirname, '../../examples/miniprogram-demo/miniprogram');
@@ -137,11 +137,11 @@ let inputDirPath = path.join(__dirname, '../../examples/miniprogram-demo/minipro
 const App = transformFramework();
 
 App.use(
-    alipayToBaidu, 
+    AlipayPlugin, 
     {
         entry: inputDirPath,
         dist: outputPath,
-        env: 'development'
+        type: 'alipay-baidu'
     })
     .start();
 ```

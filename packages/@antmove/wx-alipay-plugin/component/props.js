@@ -27,7 +27,7 @@ module.exports = function (ast, fileInfo, renderAxml) {
                 props[key] = { type: "double", value: [" "] };
             }
             key = processDataSet(key, props[key], props);
-            if (key === 'src' && type === 'include') {
+            if (key === 'src' && (type === 'include' || type === 'import')) {
                 let rule = props[ key].value[0];
                 if ((rule[0] !== '/' && rule[0] !== '.' && rule[0] !== '{')) {
                     let tempPath = path.join(fileInfo.dirname, rule.replace(/\.axml'*/g, '.wxml'));
@@ -184,7 +184,7 @@ function checkoutCustomComponent (fileInfo, tagName) {
             appJson =
                 JSON.parse(
                     fs.readFileSync(
-                        path.join(fileInfo.entry, "app.json"),
+                        path.join(fileInfo.output, "app.json"),
                         "utf8"
                     )
                 ) || {};

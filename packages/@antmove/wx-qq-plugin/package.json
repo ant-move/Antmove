@@ -1,6 +1,6 @@
 {
     "name": "@antmove/wx-qq",
-    "version": "1.0.31",
+    "version": "1.0.18",
     "description": "transform wechat miniprogram to qq miniprogram tool.",
     "main": "index.js",
     "scripts": {
@@ -22,6 +22,5 @@
         "css": "^2.2.4",
         "fs-extra": "^8.1.0",
         "htmlparser2": "^3.10.1"
-    },
-    "gitHead": "d44d3ff6076b0114f4ff8ed0f720d7881de43aa4"
+    }
 }

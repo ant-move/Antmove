@@ -127,7 +127,7 @@ antmove -i ./wechat-mini/project -o ./dist/wechat-mini/project --env development
 ```js
 const path = require('path');
 const transformFramework = require('antmove');
-const WechatPlugin = require('@antmove/wx-compiler');
+const WechatPlugin = require('@antmove/wx-wx');
 
 let outputPath = path.join(__dirname, '../../dist');
 let inputDirPath = path.join(__dirname, '../../examples/miniprogram-demo/miniprogram');
@@ -139,7 +139,8 @@ App.use(
     {
         entry: inputDirPath,
         dist: outputPath + '/alipaymini-demo',
-        env: 'development'
+        env: 'development',
+        type: 'wx-wx'
     })
     .start();
 ```

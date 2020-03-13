@@ -1,8 +1,8 @@
 const exec = require('child_process').exec;
-const chalk = require('chalk');
-let version = require('../../../../package.json').version;  
+const chalk = require('chalk'); 
 let isLow = false;
-function getVersion () {
+function getVersion (version) {
+    console.log(version)
     let p1 = new Promise(function(res,rej){
         exec(`npm view antmove version`,{timeout:5000},function (error, stdout, stderr) { 
             if (error) {
