@@ -3,6 +3,7 @@ const figlet = require('figlet');
 const chalk = require('chalk');
 const path = require('path');
 const os = require('os');
+const fs = require('fs-extra');
 
 const {
     returnOptions
@@ -10,8 +11,9 @@ const {
 const {
     getVersion
 } = require('@antmove/utils');
-
-getVersion();
+const packagePath = path.join(__dirname, '../package.json');
+const antmoveVersion = JSON.parse(fs.readFileSync(packagePath)).version;
+getVersion(antmoveVersion);
 
 console.log(chalk.green(figlet.textSync("Antmove")));
 console.log(chalk.green('欢迎使用蚂蚁搬家工具，您可以通过如下地址寻求帮助或是给予反馈。'));

@@ -136,6 +136,7 @@ App.use(
         entry: inputDirPath,
         dist: outputPath,
         env: 'development'
+        type: 'alipay-wx'
     })
     .start();
 ```

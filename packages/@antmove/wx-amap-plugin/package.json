@@ -1,16 +1,13 @@
 {
     "name": "@antmove/wx-amap",
-    "version": "1.0.31",
+    "version": "1.0.18",
     "description": "wx-amap plugin for Antmove",
     "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
+    "scripts": { "test": "echo \"Error: no test specified\" && exit 1" },
     "publishConfig": {
         "access": "public",
         "registry": "https://registry.npmjs.org/"
     },
     "author": "amap-appx@service.autonavi.com",
-    "license": "GPL-3.0",
-    "gitHead": "d44d3ff6076b0114f4ff8ed0f720d7881de43aa4"
+    "license": "GPL-3.0"
 }

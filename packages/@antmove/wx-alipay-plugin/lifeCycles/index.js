@@ -1,5 +1,5 @@
 const wxmlParser = require('../parse/parse.js');
-const upDataTool = require("../utils/updataTool");
+//const upDataTool = require("../utils/updataTool");
 const chalk = require('chalk');
 const appJsonProcess = require('../component/appJson');
 const pageJsonProcess = require('../component/pageJson');
@@ -65,8 +65,8 @@ let projectParents = "";
 let beginTime = Number(new Date());
 // 输出日志数据
 let repData = {};
-let isUpdata = true;
-let baseurl = 'http://cache.amap.com/ecology/tool/antmove/wechat-alipay/';
+//let isUpdata = true;
+//let baseurl = 'http://cache.amap.com/ecology/tool/antmove/wechat-alipay/';
 
 module.exports = {
     defaultOptions: {
@@ -101,7 +101,7 @@ module.exports = {
         if (this.$options.component === "component") {
             Config.min = true;
         }
-        isUpdata = this.$options.remote;    // 是否从远程拉取 polyfill 代码
+        //isUpdata = this.$options.remote;    // 是否从远程拉取 polyfill 代码
         let date = "";
         report(date, { type: "title", showReport });
         const {
@@ -115,12 +115,12 @@ module.exports = {
         versionData.version = this.$options.version;
         repData.toolVs = getToolVs(versionData);
 
-        const toolPath = path.join(__dirname, '../package.json');
-        const toolVsData = JSON.parse(fs.readFileSync(toolPath)).version;
-        baseurl = baseurl + toolVsData;
-        try {
-            await upDataTool({ baseurl, isUpdata, showReport });
-        } catch (err) {}
+       // const toolPath = path.join(__dirname, '../package.json');
+       // const toolVsData = JSON.parse(fs.readFileSync(toolPath)).version;
+        // baseurl = baseurl + toolVsData;
+        // try {
+        //     await upDataTool({ baseurl, isUpdata, showReport });
+        // } catch (err) {}
         next();
     },
     onParsing (fileInfo) {
@@ -298,11 +298,11 @@ module.exports = {
             let content;
             if (fileInfo.deep === 0 && fileInfo.filename === 'app.json') {
                 content = fs.readFileSync(fileInfo.path, 'utf8');
-                const appData = JSON.parse(content);
-                let json = appData;
                 if (this.$options.hooks && typeof this.$options.hooks.plugin === 'function') {
                     content = this.$options.hooks.plugin(content);
                 }
+                const appData = JSON.parse(content);
+                let json = appData;
                 if (json.window && json.window.navigationBarTitleText) {
                     setAppName(json.window.navigationBarTitleText);
                 } else {

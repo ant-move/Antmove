@@ -78,18 +78,21 @@ module.exports = class Transform {
         let pro = getProgramName (this.$options.type.split ("-") [1]);
         if ( this.$options.component === "component" ) {
 
-            let outputpath = path.join(this.$options.output, 'app.js');
-            fs.unlinkSync(outputpath);
-            outputpath = outputpath.replace(/\.js/, '.json');
+            let outputpath = path.join(this.$options.dist, 'app.js');
+            if ( fs.pathExistsSync(outputpath)) {
+                fs.unlinkSync(outputpath);
+                outputpath = outputpath.replace(/\.js/, '.json');
 
-            fs.unlinkSync(outputpath);
+                fs.unlinkSync(outputpath);
 
-            fs.unlinkSync(outputpath.replace(/app\.json/, "app."+pro.css));
-            deleteFolder(this.$options.input);
-            var _path = this.$options.input;
-            let pathArr = _path.match(/(\S*)\/\.antmove/) || _path.match(/(\S*)\\\.antmove/);
-            _path = pathArr[1];
-            fs.rmdirSync (_path);
+                fs.unlinkSync(outputpath.replace(/app\.json/, "app."+pro.css));
+                deleteFolder(this.$options.entry);
+                var _path = this.$options.entry;
+                let pathArr = _path.match(/(\S*)\/\.antmove/) || _path.match(/(\S*)\\\.antmove/);
+                _path = pathArr[1];
+                fs.rmdirSync (_path);
+            }
+
         }
     }
 

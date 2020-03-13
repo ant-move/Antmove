@@ -123,7 +123,7 @@ const path = require('path');
 const transformFramework = require('antmove');
 const WechatPlugin = require('@antmove/wx-alipay');
 
-let outputPath = path.join(__dirname, '../../dist');
+let outputPath = path.join(__dirname, '../../dist', 'alipaymini-demo');
 let inputDirPath = path.join(__dirname, '../../examples/miniprogram-demo/miniprogram');
 
 const App = transformFramework();
@@ -132,8 +132,9 @@ App.use(
     WechatPlugin, 
     {
         entry: inputDirPath,
-        dist: outputPath + '/alipaymini-demo',
-        env: 'development'
+        dist: outputPath,
+        env: 'development',
+        type: 'wx-alipay',
     })
     .start();
 ```

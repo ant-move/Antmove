@@ -135,7 +135,8 @@ App.use(
     {
         entry: inputDirPath,
         dist: outputPath,
-        env: 'development'
+        env: 'development',
+        type: 'wx-tt'
     })
     .start();
 ```
