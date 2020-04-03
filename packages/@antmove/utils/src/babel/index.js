@@ -207,5 +207,13 @@ module.exports = {
     processRequireForWx,
     getCbName,
     replaceCallName,
-    transSharePath
+    transSharePath,
+    customBabelHandle (code, ctx) {
+        let babels = ctx.$options.babel.plugins|| [];
+        return babel.transform(code, {
+            plugins :[
+                ...babels
+            ]
+        }).code
+    }
 };

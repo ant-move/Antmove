@@ -17,7 +17,7 @@ getVersion(antmoveVersion);
 
 console.log(chalk.green(figlet.textSync("Antmove")));
 console.log(chalk.green('欢迎使用蚂蚁搬家工具，您可以通过如下地址寻求帮助或是给予反馈。'));
-console.log(chalk.green('Antmove: https://ant-move.github.io/website/'));
+console.log(chalk.green('Antmove: https://ant-move.github.io/'));
 console.log(chalk.green('Github: https://github.com/ant-move/antmove'));
 console.log(' ');
 

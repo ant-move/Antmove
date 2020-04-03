@@ -37,7 +37,8 @@ const options = {
     component2: true,
     platform: "alipay",
     scope: true,
-    hooks: {}
+    hooks: {},
+    babel: {}
 };
 
 program

@@ -15,14 +15,14 @@ Antmove - 小程序转换器，基于支付宝/微信小程序转换为多端小
 
 ## 文档
 
-* [多端代码编写指南](./children/cross-platform.md)
-* [微信转钉钉快速指南](./contribute/wxToDd.md)
-* [微信转支付宝快速指南](./contribute/wxToAlipay.md)
-* [支付宝转微信快速指南](./contribute/alipayToWx.md)
-* [支付宝转百度快速指南](./contribute/alipayToBaidu.md)
-* [支付宝小程序使用 Antmove 组件库指南](./contribute/alipayUseAntmove.md)
-* [钉钉小程序使用 Antmove 组件库指南](./contribute/ddUseAntmove.md)
-* [Antmove 实现原理介绍](./contribute/howToContribute.md)
+* [多端代码编写指南](https://ant-move.github.io/guide/children/cross-platform.html)
+* [微信转钉钉快速指南](https://ant-move.github.io/guide/contribute/wxToDd.html)
+* [微信转支付宝快速指南](https://ant-move.github.io/guide/contribute/wxToAlipay.html)
+* [支付宝转微信快速指南](https://ant-move.github.io/guide/contribute/alipayToWx.html)
+* [支付宝转百度快速指南](https://ant-move.github.io/guide/contribute/alipayToBaidu.html)
+* [支付宝小程序使用 Antmove 组件库指南](https://ant-move.github.io/guide/contribute/alipayUseAntmove.html)
+* [钉钉小程序使用 Antmove 组件库指南](https://ant-move.github.io/guide/contribute/ddUseAntmove.html)
+* [Antmove 实现原理介绍](https://ant-move.github.io/guide/contribute/howToContribute.html)
 
 ## 安装
 
