@@ -82,7 +82,7 @@ module.exports = function (jsonStr, fileInfo) {
                  * not support npm packages components
                  */
                 
-                // cPath = toAbsolutePath(cPath);
+                cPath = toAbsolutePath(cPath);
                 cPath = cPath.replace(/\\/g, '/');
                 
                 json.usingComponents[c] = cPath;

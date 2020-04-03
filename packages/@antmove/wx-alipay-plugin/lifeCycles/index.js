@@ -298,8 +298,8 @@ module.exports = {
             let content;
             if (fileInfo.deep === 0 && fileInfo.filename === 'app.json') {
                 content = fs.readFileSync(fileInfo.path, 'utf8');
-                if (this.$options.hooks && typeof this.$options.hooks.plugin === 'function') {
-                    content = this.$options.hooks.plugin(content);
+                if (this.$options.hooks && typeof this.$options.hooks.appJson === 'function') {
+                    content = this.$options.hooks.appJson(content);
                 }
                 const appData = JSON.parse(content);
                 let json = appData;

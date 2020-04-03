@@ -3,6 +3,7 @@ const Config = require('../../config');
 const customComponentPrefix = Config.library.customComponentPrefix;
 const path = require('path');
 const {
+    customBabelHandle,
     behavourHandle,
     // precessRelativePathOfCode,
     replaceCalleeHandleFn,
@@ -19,6 +20,7 @@ const {
 
 
 module.exports = function (fileInfo, ctx, originCode, apis) {
+    originCode = customBabelHandle(originCode, ctx)
     originCode = behavourHandle(originCode);
     // originCode = precessRelativePathOfCode(originCode, fileInfo.path, ctx.entry);
     if (!Config.component2 && fileInfo.parent && fileInfo.parent.is) {

@@ -18,15 +18,20 @@ function recordOptions (options) {
     _options.component = options.component;
     let ifNpm = getLastVersion(options);
     if (ifNpm) {
-        _options.npm =  getLastVersion(options);
+        _options.npm =  ifNpm;
     }
     _options = JSON.stringify(_options, null, 4);
     antmoveConfigDist = `module.exports = ${_options}`;
     antmoveConfigDist = antmoveConfigDist.replace((/}$/),() => {
         let fn = typeof options.hooks.plugin === 'function' ? options.hooks.plugin : function plugin (appJson) {return appJson};
+        let customBabel = typeof options.babel.plugins === 'object'?  `[${options.babel.plugins}]` : '[]';
         let str =  `,
     "hooks": {
-        "plugin": ${fn}
+        "appJson": ${fn}
+
+    },
+    "babel": {
+        "plugins": ${customBabel}
     }
 }`
     return str
