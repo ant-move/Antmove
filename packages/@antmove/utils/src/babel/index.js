@@ -209,6 +209,9 @@ module.exports = {
     replaceCallName,
     transSharePath,
     customBabelHandle (code, ctx) {
+        if (!ctx.$options.babel) {
+            return code
+        }
         let babels = ctx.$options.babel.plugins|| [];
         return babel.transform(code, {
             plugins :[

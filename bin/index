@@ -17,7 +17,6 @@ const wxToQq = require('../cli/wx-qq/index');
 const alipayPolyfill = require('../cli/alipay-polyfill/index');
 const inputDirPath = process.cwd() + '/';
 const entryProcess = require('./entry');
-
 const {
     // recordOptions,
     returnOptions
