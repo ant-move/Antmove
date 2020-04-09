@@ -23,8 +23,8 @@ function recordOptions (options) {
     _options = JSON.stringify(_options, null, 4);
     antmoveConfigDist = `module.exports = ${_options}`;
     antmoveConfigDist = antmoveConfigDist.replace((/}$/),() => {
-        let fn = typeof options.hooks.plugin === 'function' ? options.hooks.plugin : function plugin (appJson) {return appJson};
-        let customBabel = typeof options.babel.plugins === 'object'?  `[${options.babel.plugins}]` : '[]';
+        let fn = options.hooks && typeof options.hooks.appJson === 'function' ? options.hooks.apJson : function plugin (appJson) {return appJson};
+        let customBabel = options.babel && typeof options.babel.plugins === 'object' ?  `[${options.babel.plugins}]` : '[]';
         let str =  `,
     "hooks": {
         "appJson": ${fn}
