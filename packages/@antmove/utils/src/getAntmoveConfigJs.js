@@ -8,14 +8,12 @@ function recordOptions (options) {
         _output = processPath(options);
     let configPath = path.join(options.input, `./antmove.config.js`);
     let _options = {};
+    let newArr = ['env','platform','component2','scope','type','component','error','empty'];
+    newArr.forEach ((key) => {
+        _options[key] = options[key];
+    })
     _options.input =_input;
     _options.output = _output;
-    _options.env = options.env;
-    _options.platform = options.platform;
-    _options.component2 =options.component2;
-    _options.scope = options.scope;
-    _options.type = options.type;
-    _options.component = options.component;
     let ifNpm = getLastVersion(options);
     if (ifNpm) {
         _options.npm =  ifNpm;
