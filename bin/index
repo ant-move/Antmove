@@ -36,6 +36,8 @@ const options = {
     component2: true,
     platform: "alipay",
     scope: true,
+    error: false,
+    empty: false,
     hooks: {},
     babel: {}
 };
@@ -55,6 +57,14 @@ program
     .option(
         "--component2 <type>",
         "Is support component2 for alipay miniprogram."
+    )
+    .option(
+        "--error <type>",
+        "Whether to throw error."
+    )
+    .option(
+        "--empty <type>",
+        "Empty directory or not."
     )
     .option("--platform <type>", "The platform of alipay miniprogram.");
 
@@ -77,6 +87,20 @@ options.type = program.type;
 options.component = program.component || false;
 options.component2 = program.component2 || options.component2;
 options.platform = program.platform || options.platform;
+options.error = program.error || options.error;
+options.empty = program.empty || options.empty;
+
+if (options.error === "true" || options.error === true ) {
+    options.error = true;
+}  else {
+    options.error = false;
+}
+
+if (options.empty === "true" || options.empty === true ) {
+    options.empty = true;
+}  else {
+    options.empty = false;
+}
 
 if (options.component2 === "true" || options.component2 === 1 ||options.component2 === true) {
     options.component2 = true;

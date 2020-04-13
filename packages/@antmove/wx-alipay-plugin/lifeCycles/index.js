@@ -84,12 +84,24 @@ module.exports = {
         if (this.$options.component === "component") {
             ifComponent = true;
         }
-        if (!isWechatApp(this.$options.entry, ifComponent)) {
-            console.log(chalk.red('[Ops] ' + this.$options.entry + ' is not a wechat miniproramm directory.'));
-            return false;
+
+        try {
+            if (!isWechatApp(this.$options.entry, ifComponent)) {
+                let errStr = '[Ops] ' + this.$options.entry + ' is not a wechat miniproramm directory.';
+                if (this.$options.error) {
+                    throw new Error(errStr)
+                } else {
+                    console.log(chalk.red(errStr));
+                    return false;
+                }
+            }
+        } catch (err) {
+            console.log(err);
+            return false
         }
+
         recordOptions(this.$options);
-        fs.existsSync(this.$options.dist) && emptyFiles(this.$options.dist, ['miniprogram_npm', 'node_modules', '.tea', 'mini.project.json']);        
+        this.$options.empty && fs.existsSync(this.$options.dist) && emptyFiles(this.$options.dist, ['miniprogram_npm', 'node_modules', '.tea', 'mini.project.json']);        
         if (this.$options.scope && this.$options.scope !== 'false') {
             Config.options.scopeStyle = true;
         }
