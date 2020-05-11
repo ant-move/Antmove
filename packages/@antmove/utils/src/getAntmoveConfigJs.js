@@ -3,7 +3,10 @@ const fs = require('fs-extra');
 const exec = require('child_process').execSync;
 const { comStores } = require('@antmove/utils');
 function recordOptions (options) {
+    options.input = options.input || options.entry;
+    options.output = options.output || options.dist;
     if (!options.input || !options.output || !options.type) return;
+
     let _input = './',
         _output = processPath(options);
     let configPath = path.join(options.input, `./antmove.config.js`);
@@ -19,7 +22,7 @@ function recordOptions (options) {
         _options.npm =  ifNpm;
     }
     _options = JSON.stringify(_options, null, 4);
-    antmoveConfigDist = `module.exports = ${_options}`;
+    let antmoveConfigDist = `module.exports = ${_options}`;
     antmoveConfigDist = antmoveConfigDist.replace((/}$/),() => {
         let fn = options.hooks && typeof options.hooks.appJson === 'function' ? options.hooks.appJson : function plugin (appJson) {return appJson};
         let customBabel = options.babel && typeof options.babel.plugins === 'object' ?  `[${options.babel.plugins}]` : '[]';

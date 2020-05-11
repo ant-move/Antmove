@@ -38,6 +38,7 @@ const options = {
     scope: true,
     error: false,
     empty: false,
+    fromId: 0,
     hooks: {},
     babel: {}
 };
@@ -66,6 +67,7 @@ program
         "--empty <type>",
         "Empty directory or not."
     )
+    .option("-f --fromId <type>", "Scene value.")
     .option("--platform <type>", "The platform of alipay miniprogram.");
 
 program.parse(process.argv);
@@ -89,6 +91,7 @@ options.component2 = program.component2 || options.component2;
 options.platform = program.platform || options.platform;
 options.error = program.error || options.error;
 options.empty = program.empty || options.empty;
+options.fromId = program.fromId || options.fromId;
 
 if (options.error === "true" || options.error === true ) {
     options.error = true;

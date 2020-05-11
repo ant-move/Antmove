@@ -84,16 +84,16 @@ module.exports = {
         if (this.$options.component === "component") {
             ifComponent = true;
         }
-
         try {
             if (!isWechatApp(this.$options.entry, ifComponent)) {
                 let errStr = '[Ops] ' + this.$options.entry + ' is not a wechat miniproramm directory.';
                 if (this.$options.error) {
-                    throw new Error(errStr)
+                    next(errStr)
+                    throw new Error(errStr);
                 } else {
                     console.log(chalk.red(errStr));
-                    return false;
                 }
+                return false
             }
         } catch (err) {
             console.log(err);
