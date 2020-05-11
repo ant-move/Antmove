@@ -1,13 +1,32 @@
+let times = 0;
+let lastTime = 0;
+
 const getLogInfo = function () {
     let num = 0;
     let info = my.getStorageSync({
         key: '__antmove_loginfo'
-    }).data.pages;
+    }).data
+    if (info === null) return false
+    info = info.pages;
     info.forEach(function (v, i) {
         num += v.logs.length;
     });
     return num;
 };
+
+function getNewData () {
+    if (!lastTime) {
+        lastTime = new Date().getTime();
+        times = 1;
+    } else {
+        let thisTime = new Date().getTime();
+        times +=1;
+        if ( thisTime - lastTime > 1000 || times >3 ) {
+            times = 1;
+        }
+        lastTime = thisTime;
+    }
+}
 
 
 const watchShakes = function () {
@@ -21,7 +40,8 @@ const watchShakes = function () {
             let ifWatch = my.getStorageSync({
                 key: 'ifWatch'
             }).data;
-            if (!ifWatch || url === logUrl || url === specificUrl || !num) {
+            getNewData();
+            if (times!==3 || !ifWatch || url === logUrl || url === specificUrl || !num) {
                 watchShakes();
                 return false;
             }

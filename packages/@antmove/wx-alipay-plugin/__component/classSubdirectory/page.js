@@ -26,9 +26,6 @@ module.exports = {
             }
 
             getUrl();
-            if (config.env === "development") {
-                watchShakes();
-            } 
             if (options.onResize) {
                 warnLife("There is no onResize life cycle", "onResize");
             }
@@ -46,6 +43,14 @@ module.exports = {
             }
             ast.isPageReady = true;
         };
+        _opts.onShow = function (param) {
+            if (config.env === "development") {
+                watchShakes();
+            } 
+            if (options.onShow) {
+                options.onShow.call(this, param);
+            }
+        }
     }
 };
 
