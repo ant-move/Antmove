@@ -1,0 +1,71 @@
+.btn_box{
+    position: relative
+}
+.mini {
+    display: inline-block
+}
+button{
+    color: "#000";
+    line-height: 2.5556;
+    border: 1px solid #ccc;
+    padding-right: 14px;
+    padding-left: 14px;
+    box-sizing: border-box;
+    font-size: 18px;
+    border-radius: 5px;
+}
+button:active{
+    background-color: #dedede;
+    color: rgba(0,0,0,0.6);
+}
+.size_mini{
+    display: inline-block;
+    border:1px solid #ccc;
+    line-height: 2.3;
+    padding: 0 1.34em;
+    font-size: 13px;
+    height: auto;
+}
+.type_primary{
+    background-color: #179b16;
+    color:#fff;
+    border-color: #179b16;
+}
+.type_warn{
+    background-color: #e64340;
+    color:#fff;
+    border-color: #e64340;
+}
+
+
+.plain.type_warn{
+    color: #e64340;
+    background-color: #fff;
+}
+
+.plain.type_primary{
+    color: #179b16;
+    background-color: #fff;
+}
+
+.plain:active {
+    background-color: #dedede;
+    color: rgba(0,0,0,0.6);
+}
+.disabled{
+    opacity: 0.6
+}
+
+.btn_mark,.btn_catch{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%
+}
+.btn_catch:active {
+  background-color: rgba(255,255,255,.3)
+}
+.hovers{
+    background-color: blue;
+}
