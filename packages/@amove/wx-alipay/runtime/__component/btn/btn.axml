@@ -1,0 +1,10 @@
+<view  class="btn_box {{size}} {{disabled?'disabled':''}}" onTap="btnOnTap" >
+    <button class="{{className}} base_btn size_{{size}} type_{{type}}  {{plain?'plain':''}}"  loading="{{loading}}" formType="{{formType}}" open-type="{{opentype}}"  app-parameter="{{appParameter}}" scope='{{scope}}' onGetAuthorize="{{getAuthorize}}"> <slot></slot> </button>
+    <view class="btn_mark" a:if="{{onCatchTap}}" catchTap="btnOnTap"></view>
+
+    <view class="btn_mark" a:if="{{disabled}}" catchTap="stopEvent"></view>
+</view>
+
+
+
+
