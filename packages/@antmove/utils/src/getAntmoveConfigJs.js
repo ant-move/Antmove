@@ -26,6 +26,7 @@ function recordOptions (options) {
     antmoveConfigDist = antmoveConfigDist.replace((/}$/),() => {
         let fn = options.hooks && typeof options.hooks.appJson === 'function' ? options.hooks.appJson : function plugin (appJson) {return appJson};
         let customBabel = options.babel && typeof options.babel.plugins === 'object' ?  `[${options.babel.plugins}]` : '[]';
+        let customPlugins = options.plugins && Array.isArray(options.plugins) ? `[${options.plugins}]`: '[]';
         let str =  `,
     "hooks": {
         "appJson": ${fn}
@@ -33,7 +34,8 @@ function recordOptions (options) {
     },
     "babel": {
         "plugins": ${customBabel}
-    }
+    },
+        "plugins": ${customPlugins}
 }`
     return str
     })

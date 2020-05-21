@@ -11,7 +11,10 @@ module.exports = {
     "output": "../out"
 ,
     "hooks": {
-        "appJson": function plugin (appJson) {return appJson;}
+        "appJson": function plugin (appJson) {
+            console.log(appJson);
+            return appJson;
+        }
 
     },
     "babel": {
