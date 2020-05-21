@@ -15,6 +15,7 @@ const wxToBaiduCli = require('./wx-baidu');
 const wxToTouTiao = require('../cli/wechat-tt/index');
 const wxToQq = require('../cli/wx-qq/index');
 const alipayPolyfill = require('../cli/alipay-polyfill/index');
+const wx2my = require('../cli/wx2my/index');
 const inputDirPath = process.cwd() + '/';
 const entryProcess = require('./entry');
 const {
@@ -40,7 +41,8 @@ const options = {
     empty: false,
     fromId: 0,
     hooks: {},
-    babel: {}
+    babel: {},
+    plugins:[]
 };
 
 program
@@ -135,6 +137,16 @@ program
         action({
             ...options,
             type: "wx-alipay"
+        });
+    });
+program
+    .version(packageJson.version)
+    .command("wx2my")
+    .action(function () {
+        specialtypeCmd = true;
+        action({
+            ...options,
+            type: "wx2my"
         });
     });
 
@@ -251,12 +263,13 @@ function action (options) {
         'alipay-baidu': alipayToBaidu,
         'wx-compiler': wxToWx,
         'alipay-compiler': alipayPolyfill,
-        'wx-baidu': wxToBaidu
+        'wx-baidu': wxToBaidu,
+        'wx-my': wx2my
     };
     
     entryProcess(options, function (opts = {}) {
-        let _input = opts.input,
-            _output = opts.output;
+        // let _input = opts.input,
+        //     _output = opts.output;
         opts.input = toAbsolutePath(opts.input);
         opts.output = toAbsolutePath(opts.output);
         if (!opts.output) {
@@ -267,7 +280,9 @@ function action (options) {
         if (opts.input === opts.output) {
             console.log(chalk.red("输入输出目录不能为同一个地址。"));
         }
-
+        if (opts.type === 'wx2my') {
+            opts.type = 'wx-my';
+        }
         if (buildInfo[opts.type]) {
             if (opts.component === 'component') {
                 let cachePath = getCachePath(opts.input);

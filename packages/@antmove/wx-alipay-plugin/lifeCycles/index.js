@@ -38,6 +38,7 @@ const {
     emptyFiles,
     setAppName,
     setCompileType,
+    setAppFromId,
     reportError,
     getAppName,
     recordOptions
@@ -80,6 +81,7 @@ module.exports = {
     },
     beforeParse: async function (next) {
         setCompileType('wx-alipay');
+        setAppFromId(this/$options/fromId);
         let ifComponent = false;
         if (this.$options.component === "component") {
             ifComponent = true;
