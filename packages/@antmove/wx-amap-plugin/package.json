@@ -1,6 +1,6 @@
 {
     "name": "@antmove/wx-amap",
-    "version": "1.0.42",
+    "version": "1.0.51",
     "description": "wx-amap plugin for Antmove",
     "main": "index.js",
     "scripts": {

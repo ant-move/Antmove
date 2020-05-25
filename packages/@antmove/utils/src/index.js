@@ -22,7 +22,8 @@ const axios = require('axios').default;
 function reportError (type, appName, _msg = 'log', logType) {
     type = type || process.env.compilerType || '';
     appName = appName || process.env.appName || '';
-    let msg = `${type}-${appName}-${_msg}`;
+    let fromId = process.env.fromId || '0';
+    let msg = `${type}-${appName}-${_msg}-${fromId}`;
     try {
         axios({
             method: 'post',
@@ -76,6 +77,9 @@ module.exports = {
     },
     setCompileType (type) {
         process.env.compilerType = type;
+    },
+    setAppFromId (fromId) {
+        process.env.fromId = fromId;
     },
     reportError,
     getAppName (pagesPath, baseDirName, attrName) {

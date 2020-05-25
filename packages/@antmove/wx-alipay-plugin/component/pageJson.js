@@ -50,7 +50,7 @@ function toAbsolutePath (str = '') {
 }
 
 function isNpm (packageObj, filename) {
-    if (filename[0] === '.' || filename[0] === '/') return false;
+    if (filename[0] === '.' || filename[0] === '/' || !packageObj) return false;
     let packageName = filename.split('/')[0];
     if (packageObj.dependencies && packageObj.dependencies[packageName]) {
         return true;
@@ -96,7 +96,7 @@ module.exports = function (jsonStr, fileInfo) {
             let _val = json.usingComponents[key];
             let rule = _val;
             let _name =rule.split('/')[0];
-            if ((rule[0] !== '/' && rule[0] !== '.' && fileInfo.packageInfo && !isNpm(fileInfo.packageInfo, _name))) {
+            if ((rule[0] !== '/' && rule[0] !== '.' && !isNpm(fileInfo.packageInfo, _name))) {
                 let tempPath = path.join(fileInfo.dirname, rule + '.wxml');
                 if (fs.pathExistsSync(tempPath)) {
                     rule = './' + rule;

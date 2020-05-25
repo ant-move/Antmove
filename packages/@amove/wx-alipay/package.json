@@ -1,0 +1,29 @@
+{
+    "name": "@amove/wx-alipay",
+    "version": "0.0.1",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "amap-appx@autonavi.com",
+    "license": "GPL-3.0",
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+    },
+    "dependencies": {
+        "colornames": "^1.1.1",
+        "css": "^2.2.4",
+        "fs-extra": "^9.0.0",
+        "htmlparser2": "^4.1.0",
+        "humps": "^2.0.1",
+        "parsimmon": "^1.13.0",
+        "prettier": "^2.0.5",
+        "@amove/next": "^0.0.3",
+        "@amove/wx-utils": "^0.0.1",
+        "@amove/wx": "^0.0.1",
+        "@amove/babel": "^0.0.1",
+        "@amove/directory-to-ast": "^0.0.1"
+    }
+}

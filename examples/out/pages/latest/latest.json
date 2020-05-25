@@ -1,0 +1,5 @@
+{
+	"usingComponents": {
+		"custom-loading": "/__antmove/component/custom-loading/custom-loading"
+	}
+}

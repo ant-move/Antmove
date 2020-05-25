@@ -3,28 +3,30 @@ const fs = require('fs-extra');
 const exec = require('child_process').execSync;
 const { comStores } = require('@antmove/utils');
 function recordOptions (options) {
+    options.input = options.input || options.entry;
+    options.output = options.output || options.dist;
     if (!options.input || !options.output || !options.type) return;
+
     let _input = './',
         _output = processPath(options);
     let configPath = path.join(options.input, `./antmove.config.js`);
     let _options = {};
+    let newArr = ['env','platform','component2','scope','type','component','error','empty'];
+    newArr.forEach ((key) => {
+        _options[key] = options[key];
+    })
     _options.input =_input;
     _options.output = _output;
-    _options.env = options.env;
-    _options.platform = options.platform;
-    _options.component2 =options.component2;
-    _options.scope = options.scope;
-    _options.type = options.type;
-    _options.component = options.component;
     let ifNpm = getLastVersion(options);
     if (ifNpm) {
         _options.npm =  ifNpm;
     }
     _options = JSON.stringify(_options, null, 4);
-    antmoveConfigDist = `module.exports = ${_options}`;
+    let antmoveConfigDist = `module.exports = ${_options}`;
     antmoveConfigDist = antmoveConfigDist.replace((/}$/),() => {
-        let fn = typeof options.hooks.plugin === 'function' ? options.hooks.plugin : function plugin (appJson) {return appJson};
-        let customBabel = typeof options.babel.plugins === 'object'?  `[${options.babel.plugins}]` : '[]';
+        let fn = options.hooks && typeof options.hooks.appJson === 'function' ? options.hooks.appJson : function plugin (appJson) {return appJson};
+        let customBabel = options.babel && typeof options.babel.plugins === 'object' ?  `[${options.babel.plugins}]` : '[]';
+        let customPlugins = options.plugins && Array.isArray(options.plugins) ? `[${options.plugins}]`: '[]';
         let str =  `,
     "hooks": {
         "appJson": ${fn}
@@ -32,7 +34,8 @@ function recordOptions (options) {
     },
     "babel": {
         "plugins": ${customBabel}
-    }
+    },
+        "plugins": ${customPlugins}
 }`
     return str
     })

@@ -1,0 +1,16 @@
+<view class='page-container-classname'>
+                <view class='container' ref='saveChildRef0'>
+  <view class='node-list'>
+    <block a:for='{{nodes}}' ref-numbers='{{nodes}}'>
+      <view class='node-item'>
+        <navigator url='../topicList/topicList?id={{item.id}}' hover-class='navigator-hover'>
+          <text class='node-title'>
+            {{item.title}}          </text>
+        </navigator>
+      </view>
+    </block>
+  </view>  <custom-loading hidden='{{hidden}}'>
+    加载中...
+  </custom-loading>
+</view>
+            </view>

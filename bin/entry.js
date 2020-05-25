@@ -37,6 +37,9 @@ module.exports = function (opts = {}, cb = () => {}) {
                     name: 'wx-alipay'
                 },
                 {
+                    name: 'wx2my'
+                },
+                {
                     name: 'wx-amap'
                 },
                 {

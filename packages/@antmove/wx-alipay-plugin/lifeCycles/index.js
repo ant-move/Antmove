@@ -1,5 +1,5 @@
 const wxmlParser = require('../parse/parse.js');
-//const upDataTool = require("../utils/updataTool");
+// const upDataTool = require("../utils/updataTool");
 const chalk = require('chalk');
 const appJsonProcess = require('../component/appJson');
 const pageJsonProcess = require('../component/pageJson');
@@ -38,6 +38,7 @@ const {
     emptyFiles,
     setAppName,
     setCompileType,
+    setAppFromId,
     reportError,
     getAppName,
     recordOptions
@@ -65,8 +66,8 @@ let projectParents = "";
 let beginTime = Number(new Date());
 // 输出日志数据
 let repData = {};
-//let isUpdata = true;
-//let baseurl = 'http://cache.amap.com/ecology/tool/antmove/wechat-alipay/';
+// let isUpdata = true;
+// let baseurl = 'http://cache.amap.com/ecology/tool/antmove/wechat-alipay/';
 
 module.exports = {
     defaultOptions: {
@@ -80,16 +81,29 @@ module.exports = {
     },
     beforeParse: async function (next) {
         setCompileType('wx-alipay');
+        setAppFromId(this/$options/fromId);
         let ifComponent = false;
         if (this.$options.component === "component") {
             ifComponent = true;
         }
-        if (!isWechatApp(this.$options.entry, ifComponent)) {
-            console.log(chalk.red('[Ops] ' + this.$options.entry + ' is not a wechat miniproramm directory.'));
-            return false;
+        try {
+            if (!isWechatApp(this.$options.entry, ifComponent)) {
+                let errStr = '[Ops] ' + this.$options.entry + ' is not a wechat miniproramm directory.';
+                if (this.$options.error) {
+                    next(errStr)
+                    throw new Error(errStr);
+                } else {
+                    console.log(chalk.red(errStr));
+                }
+                return false
+            }
+        } catch (err) {
+            console.log(err);
+            return false
         }
-        recordOptions(this.$options)
-        fs.existsSync(this.$options.dist) && emptyFiles(this.$options.dist, ['miniprogram_npm', 'node_modules', '.tea', 'mini.project.json']);        
+
+        recordOptions(this.$options);
+        this.$options.empty && fs.existsSync(this.$options.dist) && emptyFiles(this.$options.dist, ['miniprogram_npm', 'node_modules', '.tea', 'mini.project.json']);        
         if (this.$options.scope && this.$options.scope !== 'false') {
             Config.options.scopeStyle = true;
         }
@@ -101,7 +115,7 @@ module.exports = {
         if (this.$options.component === "component") {
             Config.min = true;
         }
-        //isUpdata = this.$options.remote;    // 是否从远程拉取 polyfill 代码
+        // isUpdata = this.$options.remote;    // 是否从远程拉取 polyfill 代码
         let date = "";
         report(date, { type: "title", showReport });
         const {
@@ -115,8 +129,8 @@ module.exports = {
         versionData.version = this.$options.version;
         repData.toolVs = getToolVs(versionData);
 
-       // const toolPath = path.join(__dirname, '../package.json');
-       // const toolVsData = JSON.parse(fs.readFileSync(toolPath)).version;
+        // const toolPath = path.join(__dirname, '../package.json');
+        // const toolVsData = JSON.parse(fs.readFileSync(toolPath)).version;
         // baseurl = baseurl + toolVsData;
         // try {
         //     await upDataTool({ baseurl, isUpdata, showReport });

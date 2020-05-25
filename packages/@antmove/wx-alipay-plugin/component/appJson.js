@@ -51,6 +51,31 @@ module.exports = function (str) {
             
         });
     }
+    if (json.subpackages) {
+        json.subPackages =json.subpackages;
+        delete json.subpackages;
+
+        if (json.preloadRule) {
+            let subPackages = json.subPackages;
+            let preloadRule = json.preloadRule;
+            let nameToRoot = {};
+            subPackages.forEach((sub) => {
+                
+                if (sub.name) {
+                    nameToRoot[sub.name] = sub.root;
+                }           
+            })
+            Object.keys(preloadRule)
+                .forEach((rule) => {
+                    preloadRule[rule].packages
+                        .forEach((path, index) => {
+                            if (nameToRoot[path]) {
+                                preloadRule[rule].packages.splice(index, 1, nameToRoot[path]);
+                            }                          
+                    })
+                })
+        }
+    }
     if (json.plugins) {
         delete json.plugins
     }
