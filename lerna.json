@@ -1,8 +1,8 @@
 {
   "packages": [
     "./",
-    "packages/@antmove/*",
-    "packages/@amove/*"
+    "packages/@amove/*",
+    "packages/@antmove/*"
   ],
-  "version": "1.0.55"
+  "version": "1.0.56"
 }
