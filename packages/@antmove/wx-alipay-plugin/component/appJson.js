@@ -1,3 +1,5 @@
+const path = require('path');
+const fs = require('fs-extra');
 const appJson = require('../config/jsonInfo/globalconfig');
 var toHex = require('colornames');
 /**
@@ -32,10 +34,66 @@ function mkJsonMap (props, targetJson) {
         });
 }
 
-module.exports = function (str) {
+function mkNewPage (newPath, newName) {
+    let jsPath = newPath + '.js';
+    let xmlPath = newPath + '.axml';
+    let jsonPath = newPath + '.json';
+    let cssPath = newPath + '.acss';
+    let jsContent = `
+        Page({})
+    `;
+    let xmlContent = `
+        <view class="${newName}">
+            <${newName}></${newName}>
+        <view>
+    `;
+    let jsonContent = `
+        {
+            "usingComponents" : {
+                "${newName}" : "./${newName}"
+            }
+        }
+    `;
+    let cssContent = `
+        .${newName}{
+            width: 100%
+        }
+    `;
+    fs.outputFileSync(jsPath, jsContent);
+    fs.outputFileSync(xmlPath, xmlContent);
+    fs.outputFileSync(jsonPath, jsonContent);
+    fs.outputFileSync(cssPath, cssContent);
+}
+
+module.exports = function (str, options) {
     let tabBar;
+    let pages;
     let json = JSON.parse(str);
+    let entry = options.entry
     tabBar = json.tabBar;
+    pages = json.pages;
+    if (pages) {
+        pages.forEach ((p, i) => {
+            let pagePath = path.join(entry, p + '.json');
+            if (fs.existsSync(pagePath)) {
+                let nodeJson = JSON.parse(fs.readFileSync(pagePath, 'utf8'));
+                if (nodeJson.component) {
+                    let newPage  = path.join(p, '../')
+                    let newName = path.relative(newPage, p);
+                    let _newName = newName  + '-component';
+                    let newComponentPath = path.join(newPage, _newName)
+                    let pagefillPath = path.join(options.dist, p);
+                    options.componentPages = options.componentPages || {};
+                    options.componentPages[p] = {
+                        dir : newPage,
+                        path: newComponentPath,
+                        componentName : _newName,
+                    }
+                    mkNewPage(pagefillPath, _newName)
+                }
+            }
+        })
+    }
     if (tabBar) {
         let list = tabBar.list || [];
         delete tabBar.list;

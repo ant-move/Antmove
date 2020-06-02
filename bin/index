@@ -29,7 +29,7 @@ const {
  */
 const packageJson = require("../package.json");
 let specialtypeCmd = false;
-const options = {
+let options = {
     input: "",
     output: "",
     env: "production",
@@ -39,10 +39,11 @@ const options = {
     scope: true,
     error: false,
     empty: false,
+    isReport: true,
     fromId: 0,
     hooks: {},
     babel: {},
-    plugins:[]
+    plugins: []
 };
 
 program
@@ -70,7 +71,8 @@ program
         "Empty directory or not."
     )
     .option("-f --fromId <type>", "Scene value.")
-    .option("--platform <type>", "The platform of alipay miniprogram.");
+    .option("--platform <type>", "The platform of alipay miniprogram.")
+    .option("-p --isReport <type>", "Report or not.");
 
 program.parse(process.argv);
 
@@ -94,6 +96,7 @@ options.platform = program.platform || options.platform;
 options.error = program.error || options.error;
 options.empty = program.empty || options.empty;
 options.fromId = program.fromId || options.fromId;
+options.isReport = program.isReport || options.isReport;
 
 if (options.error === "true" || options.error === true ) {
     options.error = true;
@@ -105,6 +108,12 @@ if (options.empty === "true" || options.empty === true ) {
     options.empty = true;
 }  else {
     options.empty = false;
+}
+
+if (options.isReport === "true" || options.isReport === true ) {
+    options.isReport = true;
+}  else {
+    options.isReport = false;
 }
 
 if (options.component2 === "true" || options.component2 === 1 ||options.component2 === true) {
@@ -313,6 +322,7 @@ function action (options) {
             // _input = './';
             // _output = processPath(opts);
             // recordOptions(opts, _input, _output);
+
             buildInfo[opts.type](opts);
         } else {
             console.log(chalk.red("编译类型错误，请选择可用的转换类型。"));

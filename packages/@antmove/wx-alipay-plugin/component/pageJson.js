@@ -64,7 +64,8 @@ module.exports = function (jsonStr, fileInfo) {
 
     // process wrap components
     let tagsInfo = fileInfo.tagsInfo;
-
+    let ctx = this;
+    let componentPages = this.$options.componentPages || {};
     // process custome components
     json.usingComponents = json.usingComponents || {};
     if (fileInfo.appUsingComponents) {
@@ -89,7 +90,6 @@ module.exports = function (jsonStr, fileInfo) {
                 
             });
     }
-    
     Object.keys(json.usingComponents)
         .forEach(function (key) {
             let _key = transformStr(key);
@@ -107,6 +107,19 @@ module.exports = function (jsonStr, fileInfo) {
                 
             _val = rule;
             delete json.usingComponents[key];
+            Object.keys(componentPages)
+                .forEach (p => {
+                    if (_val[0] === '/' && path.join(ctx.$options.entry, p) === path.join(ctx.$options.entry, _val)) {
+                        let arr = _val.split('/');
+                        arr.splice(-1, 1, componentPages[p].componentName);
+                        _val = arr.join('/');
+                    } else if ( path.join(fileInfo.path,`../${_val}`) === path.join(ctx.$options.entry, p)){
+                        let arr = _val.split('/');
+                        arr.splice(-1, 1, componentPages[p].componentName);
+                        _val = arr.join('/');
+                    }
+
+                })
             json.usingComponents[_key] = _val;
         });
 
