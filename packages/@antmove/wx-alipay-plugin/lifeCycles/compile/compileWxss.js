@@ -6,11 +6,11 @@ const processClassNames = require('./processClassNames');
 const css = require('css');
 const Config = require('../../config');
 
-module.exports = function (fileInfo, ctx, inCompileWxml = false) {
+module.exports = function (fileInfo, ctx, inCompileWxml = false, isComponentPage = false) {
     if (fileInfo.hasCompiledStyle) return false;
-
     let originFileInfo = null;
     let classNamesWrap = false;
+    let xmldistPath = fileInfo.dist;
     if (inCompileWxml) {
         originFileInfo = fileInfo;
 
@@ -28,7 +28,9 @@ module.exports = function (fileInfo, ctx, inCompileWxml = false) {
         classNamesWrap = processClassNames(originFileInfo);
     }
 
-
+    if (isComponentPage) {
+        fileInfo.dist = xmldistPath.replace(/\.wxml/, '.acss');
+    }
     fileInfo.dist = fileInfo.dist.replace(/\.wxss/, '.acss');
     let cssContent = fs.readFileSync(fileInfo.path, 'utf8') || '';
     cssContent = prettierCode(cssContent, 'scss');

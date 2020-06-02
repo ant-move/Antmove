@@ -81,7 +81,7 @@ module.exports = {
     },
     beforeParse: async function (next) {
         setCompileType('wx-alipay');
-        setAppFromId(this/$options/fromId);
+        setAppFromId(this.$options.fromId);
         let ifComponent = false;
         if (this.$options.component === "component") {
             ifComponent = true;
@@ -90,16 +90,16 @@ module.exports = {
             if (!isWechatApp(this.$options.entry, ifComponent)) {
                 let errStr = '[Ops] ' + this.$options.entry + ' is not a wechat miniproramm directory.';
                 if (this.$options.error) {
-                    next(errStr)
+                    next(errStr);
                     throw new Error(errStr);
                 } else {
                     console.log(chalk.red(errStr));
                 }
-                return false
+                return false;
             }
         } catch (err) {
             console.log(err);
-            return false
+            return false;
         }
 
         recordOptions(this.$options);
@@ -202,6 +202,7 @@ module.exports = {
             length: project.fileNum,
             nums: finishFile
         };
+        let isComponentPage = false;
 
 
         if (!fileInfo.parent) {
@@ -219,8 +220,20 @@ module.exports = {
             }
         }
         readtimes++;
+        if (ctx.$options && ctx.$options.componentPages) {
+            Object.keys(ctx.$options.componentPages)
+                .forEach(p => {
+                    if (path.join(fileInfo.entry, p) === fileInfo.path.replace(fileInfo.extname, '')) {
+                        fileInfo.dist = fileInfo.dist.replace(p, ctx.$options.componentPages[p].path);
+                        isComponentPage = {
+                            originPath: p,
+                            ...ctx.$options.componentPages[p]
+                        };
+                    }
+                })
+        }
         if (isTypeFile('.wxml', fileInfo.path)) {
-            compileWxss(fileInfo, ctx, true);
+            compileWxss(fileInfo, ctx, true, isComponentPage);
             const reptempData = getTemplateData(fileInfo, project.name);
             checkCoverView(fileInfo.ast, reptempData);
             let isComponent = false;
@@ -343,7 +356,7 @@ module.exports = {
                 } catch (err) {
                     project.name = dirnameArr[dirnameArr.length - 1];
                 }
-                content = appJsonProcess(content);
+                content = appJsonProcess(content, this.$options);
                 content = prettierCode(content, 'json', {
                     useTabs: true,
                     tabWidth: 4
@@ -450,7 +463,7 @@ module.exports = {
         return fileInfo;
     },
     compiled: async function (ctx, cb = () => {}) {
-        reportError();
+        reportError(null, null, null, null, this.$options.isReport);
         const {
             findOpenAbility,
             statistics,
