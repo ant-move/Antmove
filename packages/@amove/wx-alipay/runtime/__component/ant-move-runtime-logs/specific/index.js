@@ -15,8 +15,8 @@ Page({
     _logNum: 0,
     onLoad (q) {
         my.setNavigationBar({
-          title:q.path
-        })  
+            title: q.path
+        });  
         let logs = JSON.parse(q.logs);
         let logNum = q.logNum;
         this._logNum = q.logNum;
@@ -174,7 +174,7 @@ Page({
 
             for (let j = 0, _len = brr.length; j < _len; j++) {
                 let str = '';
-                brr[j].split(":").length > 1 ? str = brr[j].split(":")[1].toLowerCase() : str = brr[j].split(":")[0].toLowerCase()
+                brr[j].split(":").length > 1 ? str = brr[j].split(":")[1].toLowerCase() : str = brr[j].split(":")[0].toLowerCase();
                 
 
                 if ( str.indexOf(inputValue) !== -1 ) {

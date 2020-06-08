@@ -2,7 +2,7 @@ const fs = require("fs-extra");
 const path = require("path");
 const { useReducer } = require("@amove/next");
 useReducer({
-    ComponentWxss(node, store) {
+    ComponentWxss (node, store) {
         this.$node.content = fs.readFileSync(
             node.body._node.path + ".wxss",
             "utf8"

@@ -11,7 +11,6 @@ module.exports = function (options = {}) {
         entry: inputDirPath,
         ...options
     };
-
     App.use(
         WechatPlugin,
         opts

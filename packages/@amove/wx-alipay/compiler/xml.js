@@ -1,6 +1,7 @@
 const { useReducer } = require("@amove/next");
 let _componentMap = require("./config/componentsInfo/index").descObject;
 const { isSingle, createComponentNode, computedIndexSpaces, transformStr } = require('./utils');
+const path = require("path");
 useReducer({
     ...require('./props/index'),
     XmlTagElement(node, store) {
@@ -20,6 +21,7 @@ useReducer({
         if (
             tagInfo &&
             tagInfo.type === 5 &&
+            nodes[projectPath] && 
             nodes[projectPath].json.usingComponents &&
             !nodes[projectPath].json.usingComponents[type] &&
             appjson.usingComponents &&

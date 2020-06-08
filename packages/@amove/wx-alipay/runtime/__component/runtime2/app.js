@@ -58,7 +58,7 @@ module.exports = {
     
             }
             if (options.onPageNotFound) {
-                warnLife(`There is no onPageNotFound life cycle`,"onPageNotFound");
+                warnLife(`There is no onPageNotFound life cycle`, "onPageNotFound");
     
             }
         };
@@ -93,7 +93,7 @@ module.exports = {
                 warnLife('', 'app/onHide');
                 options.onHide.call(this);
             }
-        }
+        };
         if (options.onError) {
             _opts.onError =function () {
                 options.onError.call(this);

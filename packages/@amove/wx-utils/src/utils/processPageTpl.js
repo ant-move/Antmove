@@ -6,4 +6,4 @@ module.exports = function  (fileInfo = {}, preData) {
     } else if (preData.componentsJson[jsonFile]) {
         fileInfo.isComponent = true;
     }
-}
+};

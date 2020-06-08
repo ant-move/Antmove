@@ -39,4 +39,4 @@ module.exports = {
     handleAfterInit,
     mergeOptions,
     copy
-}
+};

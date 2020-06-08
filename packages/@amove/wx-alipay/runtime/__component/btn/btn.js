@@ -53,7 +53,7 @@ Component({
         testOpenType (opentype) {
             let typeArr = ["share", "launchApp", "getAuthorize", "openSetting"];
             if (this.data.app === "amap") {
-                typeArr = ["share","getAuthorize", "openSetting"];
+                typeArr = ["share", "getAuthorize", "openSetting"];
             }
             if (opentype && typeArr.indexOf(opentype) !== -1) {
                 return opentype;
@@ -116,7 +116,7 @@ Component({
                     if (typeof res.response === "string") {
                         const response = JSON.parse(res.response);
                         if ( response.response.code==="40001") {    
-                            utils.warn("请去小程序开发管理后台的功能列表中添加获取电话功能",{
+                            utils.warn("请去小程序开发管理后台的功能列表中添加获取电话功能", {
                                 apiName: 'button/bindgetphonenumber',
                                 errorType: 1,
                                 type: 'component'
@@ -150,7 +150,7 @@ Component({
                             if (typeof userInfo.response === "string") {
                                 const response = JSON.parse(userInfo.response);
                                 if ( response.response.code==="40006") {    
-                                    utils.warn("请去小程序开发管理后台的功能列表中添加会员信息功能",{
+                                    utils.warn("请去小程序开发管理后台的功能列表中添加会员信息功能", {
                                         apiName: 'button/bindgetuserinfo',
                                         errorType: 1,
                                         type: 'component'
@@ -178,7 +178,7 @@ Component({
         makeDataSet (mydata) {
             let dataSet = {};
             for (let key in mydata) {
-                key.replace(/^data-/,()=>{
+                key.replace(/^data-/, ()=>{
                     const newKey = key.substr(5);
                     dataSet[newKey] = mydata[key];
                 });

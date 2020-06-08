@@ -10,10 +10,10 @@ function collectObservers (observersObj, options, param) {
             its = its.trim(); 
             let attr = {}; 
             if (its.match(/\./)) {
-              let _attr = its.split('.');
-              attr = processChildAttr(self.data,_attr)
+                let _attr = its.split('.');
+                attr = processChildAttr(self.data, _attr);
             } else {
-              attr = self.data[its]
+                attr = self.data[its];
             }          
             arr.push(attr);                                  
         });
@@ -27,12 +27,12 @@ function collectObservers (observersObj, options, param) {
     observersHandle(observersObj, param, self);
 }
 
-function processChildAttr (attr,arr) {
-  let _ = attr;
-  arr.forEach(function (name) {
-      _ = _[name];
-  })
-  return _;
+function processChildAttr (attr, arr) {
+    let _ = attr;
+    arr.forEach(function (name) {
+        _ = _[name];
+    });
+    return _;
 }
 
 module.exports = collectObservers;

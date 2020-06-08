@@ -1,9 +1,9 @@
 const toString = Object.prototype.toString;
-function __type(x, strict = false) {
-    strict = !!strict;
+function __type (x, strict = false) {
+    strict = Boolean(strict);
 
     // fix typeof null = object
-    if(x === null){
+    if (x === null) {
         return 'null';
     }
 
@@ -15,7 +15,7 @@ function __type(x, strict = false) {
     }
 
     // number string boolean undefined symbol
-    if(t !== 'object'){
+    if (t !== 'object') {
         return t;
     }
 
@@ -24,12 +24,12 @@ function __type(x, strict = false) {
     try {
         cls = toString.call(x).slice(8, -1);
         clsLow = cls.toLowerCase();
-    } catch(e) {
+    } catch (e) {
         // ie下的 activex对象
         return 'object';
     }
 
-    if(clsLow !== 'object'){
+    if (clsLow !== 'object') {
         if (strict) {
             // 区分NaN和new Number
             if (clsLow === 'number' && isNaN(x)) {
@@ -43,7 +43,7 @@ function __type(x, strict = false) {
         return clsLow;
     }
 
-    if(x.constructor == Object){
+    if (x.constructor == Object) {
         return clsLow;
     }
 
@@ -53,7 +53,7 @@ function __type(x, strict = false) {
         if (Object.getPrototypeOf(x) === null || x.__proto__ === null) {
             return 'object';
         }
-    } catch(e) {
+    } catch (e) {
         // ie下无Object.getPrototypeOf会报错
     }
 
@@ -64,36 +64,36 @@ function __type(x, strict = false) {
         if (typeof cname === 'string') {
             return cname;
         }
-    } catch(e) {
+    } catch (e) {
         // 无constructor
     }
 
     // function A() {}; A.prototype.constructor = null; new A
     return 'unknown';
 }
-function SimpleWeakmap (){
+function SimpleWeakmap () {
     this.cacheArray = [];
 }
 const UNIQUE_KEY = 'com.yanhaijing.jsmini.clone' + (new Date).getTime();
-SimpleWeakmap.prototype.set = function(key, value){
+SimpleWeakmap.prototype.set = function (key, value) {
     this.cacheArray.push(key);
     key[UNIQUE_KEY] = value;
 };
-SimpleWeakmap.prototype.get = function(key){
+SimpleWeakmap.prototype.get = function (key) {
     return key[UNIQUE_KEY];
 };
-SimpleWeakmap.prototype.clear = function(){
+SimpleWeakmap.prototype.clear = function () {
     for (let i = 0; i < this.cacheArray.length; i++) {
         let key = this.cacheArray[i];
         delete key[UNIQUE_KEY];
     }
     this.cacheArray.length = 0;
 };
-function getWeakMap(){
+function getWeakMap () {
     let result;
-    if(typeof WeakMap !== 'undefined' && __type(WeakMap)== 'function'){
+    if (typeof WeakMap !== 'undefined' && __type(WeakMap)== 'function') {
         result = new WeakMap();
-        if(__type(result) == 'weakmap'){
+        if (__type(result) == 'weakmap') {
             return result;
         }
     }
@@ -101,14 +101,14 @@ function getWeakMap(){
 
     return result;
 }
-function isClone(x) {
+function isClone (x) {
     const t = __type(x);
     return t === 'object' || t === 'array';
 }
-function hasOwnProp(obj, key) {
+function hasOwnProp (obj, key) {
     return Object.prototype.hasOwnProperty.call(obj, key);
 }
-function copy(x) {
+function copy (x) {
     const uniqueData = getWeakMap();
 
     const t = __type(x);
@@ -130,7 +130,7 @@ function copy(x) {
         }
     ];
 
-    while(loopList.length) {
+    while (loopList.length) {
         // 深度优先
         const node = loopList.pop();
         const parent = node.parent;
@@ -170,10 +170,10 @@ function copy(x) {
                     target[i] = source[i];
                 }
             }
-        } else if (tt === 'object'){
-            for(let k in source) {
+        } else if (tt === 'object') {
+            for (let k in source) {
                 if (hasOwnProp(source, k)) {
-                    if(k === UNIQUE_KEY) continue;
+                    if (k === UNIQUE_KEY) continue;
                     if (isClone(source[k])) {
                         // 下一次循环
                         loopList.push({
@@ -197,4 +197,4 @@ function copy(x) {
 
 module.exports = {
     copy
-}
+};

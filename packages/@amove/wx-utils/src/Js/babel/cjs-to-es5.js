@@ -8,7 +8,7 @@ useReducer({
                 [
                     ({ types: t }) => ({
                         visitor: {
-                            CallExpression(path) {
+                            CallExpression (path) {
                                 if (
                                     t.isIdentifier(path.node.callee, {
                                         name: "require"
@@ -121,7 +121,7 @@ useReducer({
                                 }
                             },
 
-                            MemberExpression(path) {
+                            MemberExpression (path) {
                                 if (
                                     t.isIdentifier(path.node.object, {
                                         name: "module"
@@ -383,6 +383,7 @@ useReducer({
                 ]
             ]
         }).code;
+        content = content.replace(/\s*.wxs/g, '.sjs');
         this.addChild({
             type: "outputFile",
             body: {

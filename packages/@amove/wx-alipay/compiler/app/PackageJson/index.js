@@ -6,7 +6,7 @@ const convertedComponents = {
 };
 const convertedNpmName = Object.keys(convertedComponents);
 useReducer({
-    PackageJson(node, store) {
+    PackageJson (node, store) {
         this.$node.content = store.package;
         this.$node.dist = node.body.dist;
         let packageJson = this.$node.content;
@@ -16,17 +16,17 @@ useReducer({
         packageJson = replaceNpmName(packageJson, antmoveJson);
         this.$node.content = packageJson;
     },
-    PackageJsonMounted() {
+    PackageJsonMounted () {
         this.addChild({
             type: 'outputFile',
-            body : {
+            body: {
                 dist: this.$node.dist,
                 content: this.$node.content
             }
         });
     },
     
-})
+});
 
 
 function replaceNpmName (packageJson, antmoveJson) {

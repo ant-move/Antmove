@@ -16,6 +16,7 @@ const wxToTouTiao = require('../cli/wechat-tt/index');
 const wxToQq = require('../cli/wx-qq/index');
 const alipayPolyfill = require('../cli/alipay-polyfill/index');
 const wx2my = require('../cli/wx2my/index');
+const wx2tt = require('../cli/wx2tt/index');
 const inputDirPath = process.cwd() + '/';
 const entryProcess = require('./entry');
 const {
@@ -29,7 +30,7 @@ const {
  */
 const packageJson = require("../package.json");
 let specialtypeCmd = false;
-let options = {
+const options = {
     input: "",
     output: "",
     env: "production",
@@ -158,6 +159,16 @@ program
             type: "wx2my"
         });
     });
+program
+    .version(packageJson.version)
+    .command("wx2tt")
+    .action(function () {
+        specialtypeCmd = true;
+        action({
+            ...options,
+            type: "wx2tt"
+        });
+    });
 
 program
     .version(packageJson.version)
@@ -273,7 +284,8 @@ function action (options) {
         'wx-compiler': wxToWx,
         'alipay-compiler': alipayPolyfill,
         'wx-baidu': wxToBaidu,
-        'wx-my': wx2my
+        'wx-my': wx2my,
+        'wx2tt': wx2tt,
     };
     
     entryProcess(options, function (opts = {}) {
@@ -322,7 +334,6 @@ function action (options) {
             // _input = './';
             // _output = processPath(opts);
             // recordOptions(opts, _input, _output);
-
             buildInfo[opts.type](opts);
         } else {
             console.log(chalk.red("编译类型错误，请选择可用的转换类型。"));

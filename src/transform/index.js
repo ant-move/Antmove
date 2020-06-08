@@ -39,7 +39,6 @@ module.exports = class Transform {
     }
 
     run (inputDir, outputDir, cb = () => {}) {
-
         let self = this;
         this.entry = inputDir;
         this.output = outputDir;

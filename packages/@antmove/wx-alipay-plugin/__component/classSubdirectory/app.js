@@ -19,7 +19,7 @@ module.exports = {
     processTransformationApp (_opts, options) {
         _opts = Object.assign(_opts, options);
         _opts.onLaunch = function (res) {
-            if (!my.canIUse('component2')) console.warn("当前未开启component2,请在详情内勾选启用component2编译.");
+            if (!my.canIUse('component2')) console.warn("《建议用户开启 component2 模式，详情：IDE 中的 详情 > 项目配置 中，勾选 component2》");
             my.removeStorageSync({
                 key: "logInfo"
             });
