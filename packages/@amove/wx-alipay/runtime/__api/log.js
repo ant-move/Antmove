@@ -12,25 +12,25 @@ module.exports = {
      * **/
     warnLife (msg, lifeName) {
         if (env === "prod") return false;
-        let _flag = true
+        let _flag = true;
         let rs = my.getStorageSync({ key: "_pageMsg" });
         if ( lifeName === "app/onHide" ) {
-          flag = true
-          return
+            flag = true;
+            return;
         }
         if ( flag ) {  
-          for (let i = 0 ; i <oldUrl.length ; i ++) {
-            if (oldUrl[i] === rs.data.pagePath) {
-              _flag = false;
-              break
-            } 
-          }   
+            for (let i = 0 ; i <oldUrl.length ; i ++) {
+                if (oldUrl[i] === rs.data.pagePath) {
+                    _flag = false;
+                    break;
+                } 
+            }   
         }
         if (!_flag) {
-          return
-        } else {
-          oldUrl.push(rs.data.pagePath)
+            return;
         } 
+        oldUrl.push(rs.data.pagePath);
+         
         let logInfo = {
             appName: "",
             appVersion: "",

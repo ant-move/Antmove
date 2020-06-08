@@ -34,6 +34,9 @@ module.exports = function (opts = {}, cb = () => {}) {
             name: 'type',
             choices: [
                 {
+                    name: 'wx2tt'
+                },
+                {
                     name: 'wx-alipay'
                 },
                 {

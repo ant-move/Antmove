@@ -4,10 +4,16 @@ const { useReducer } = require("@amove/next");
 const humps = require("humps");
 
 useReducer({
-    PageJson(node, store) {
-        this.$node.content = JSON.parse(
-            fs.readFileSync(node.body._node.path + ".json", "utf8")
-        );
+    PageJson (node, store) {
+        this.$node.content = '';
+        let keyArray = Object.keys(store.config.preAppData.nodes);
+        keyArray.forEach(key => {
+            let _P = path.join(store.config.entry, key);
+            let _np = path.join(store.config.entry, node.body._node.projectPath);
+            if (_P === _np) {
+                this.$node.content = store.config.preAppData.nodes[key].json;
+            }
+        });
         let output =
             path.join(store.config.output, node.body._node.projectPath) +
             ".json";
@@ -28,7 +34,7 @@ useReducer({
             },
         });
     },
-    UsingComponent(node, store) {
+    UsingComponent (node) {
         let json = node.body.json.usingComponents;
         let code = {};
         for (let key in json) {
@@ -36,7 +42,7 @@ useReducer({
         }
         this.$node.content.usingComponents = code;
     },
-    PageJsonMounted() {
+    PageJsonMounted () {
         this.addChild({
             type: "outputFile",
             body: {

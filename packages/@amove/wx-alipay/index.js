@@ -2,7 +2,7 @@ const { runApp, useReducer, App } = require("@amove/next");
 const preApplication = require("@amove/directory-to-ast");
 const AmoveBabel = require("@amove/babel");
 // const Index = require("./index");
-const Preprocess = require("@amove/wx");
+const {WxPre, WxPlugin} = require("@amove/wx");
 // const utils = require("@amove/wx-utils");
 
 let defulatConfig = {
@@ -12,7 +12,7 @@ let defulatConfig = {
     },
     hasWxs: true, // 是否支持 wxs
     wxsPolyfillPath: "api/sjs/",
-    aliAppType: "my",
+    TYPE: "my",
     component2: true,
     target: "_",
     min: false, // minify polyfill api
@@ -47,19 +47,21 @@ let defulatConfig = {
     },
     ex: {
         xml: '.axml',
-        css: '.acss'
+        css: '.acss',
+        _type: '_my'
     }
 };
 
 module.exports = function (options = {}) {
     let preAppData = {};
-
+    options.type = options.type || 'wx2my';
+    options.fromId = options.fromId || '0';
     /**
      * 预处理，解析小程序页面组件结构
      */
     const preApp = new App();
     preApp.useReducer(preApplication, "Application");
-    preApp.useReducer(Preprocess);
+    preApp.useReducer(WxPre);
     preApp.runApp(
         {
             ...options,
@@ -87,6 +89,7 @@ module.exports = function (options = {}) {
     }
     require("./src/index");
     require("@amove/wx-utils");
+    useReducer(WxPlugin);
     runApp(
         {
             ...options,

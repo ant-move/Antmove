@@ -21,7 +21,7 @@ const {
     handleExternalClasses,
     handleAfterInit,
     mergeOptions
-} = require('../utils')
+} = require('../utils');
 
 function getInfo (key, obj) {
     let val = {};
@@ -287,7 +287,7 @@ module.exports = {
             updateData.call(this);
             this.selectComponentApp.connect();
 
-            observerHandle(_opts.observerObj, [_opts.props, this.data], this , true);
+            observerHandle(_opts.observerObj, [_opts.props, this.data], this, true);
         });
         fnApp.bind('onInit', _opts);
         fnApp.add('didMount', _opts.attached);

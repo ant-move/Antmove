@@ -40,9 +40,9 @@ const apiObj = {
              */
             if (ret.platform === "Android") {  
                 ret.screenWidth = ret.screenWidth/ret.pixelRatio;
-                ret.screenHeight = ret.screenHeight/ret.pixelRatio
+                ret.screenHeight = ret.screenHeight/ret.pixelRatio;
             }
-            return ret
+            return ret;
         },
     },
     getSystemInfo: {
@@ -70,7 +70,7 @@ const apiObj = {
                     */
                     if (res.platform === "Android") {
                         res.screenWidth = res.screenWidth/res.pixelRatio;
-                        res.screenHeight = res.screenHeight/res.pixelRatio
+                        res.screenHeight = res.screenHeight/res.pixelRatio;
                     } 
                     obj.success && obj.success(res);
                 }
@@ -994,12 +994,12 @@ const apiObj = {
                 this._selectType = 0; // 0: array, 1: object
                 this.in = function (p) {
                     if (typeof this.query.in === 'function') {
-                        this.query.in(p)
+                        this.query.in(p);
                         return this;
-                    } else {
-                        return this;
-                    }
-                }
+                    } 
+                    return this;
+                    
+                };
                 this.select = function (p) {
                     this.query.select(p);
                     this._selectType = 1;

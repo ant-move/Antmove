@@ -221,9 +221,9 @@ module.exports = {
         
         fnApp.add('didMount', didMount);
         fnApp.add('onInit', options.created);
-        fnApp.add('onInit', function(){
+        fnApp.add('onInit', function () {
             processObservers.call(this, _opts.observersObj, options, this.$antmove._data);
-        })
+        });
         fnApp.insert('onInit', function () {
             this.getRelationNodes = function () {
                 return [];
@@ -240,7 +240,7 @@ module.exports = {
             processRelations(this, Relations);
             this.selectComponentApp.connect();
             addAntmoveData.call(this);
-            observerHandle(_opts.observerObj, _opts, this,true);
+            observerHandle(_opts.observerObj, _opts, this, true);
         });
         fnApp.bind('onInit', _opts);
         fnApp.add('didMount', _opts.attached);
@@ -248,10 +248,10 @@ module.exports = {
         
 
         let didUpdate = function (...param) { 
-           updateData.call(this, param);
-           processObservers.call(this, _opts.observersObj, options, this.$antmove._data);
-           observerHandle(_opts.observerObj, this.$antmove._data, this);
-           addAntmoveData.call(this);
+            updateData.call(this, param);
+            processObservers.call(this, _opts.observersObj, options, this.$antmove._data);
+            observerHandle(_opts.observerObj, this.$antmove._data, this);
+            addAntmoveData.call(this);
         };
         fnApp.add('didUpdate', didUpdate);
         fnApp.add('didUpdate', function () {
@@ -278,10 +278,10 @@ module.exports = {
 function handleData (otps = {}) {
   
 }
-function addAntmoveData() {
-    let _data = [{},{}], ctx = this,_props = {};
+function addAntmoveData () {
+    let _data = [{}, {}], ctx = this, _props = {};
     for (var i in ctx.properties) {
-        _props[i] = ctx.data[i]
+        _props[i] = ctx.data[i];
     }
     _data[0] = copy(_props);
     _data[1] = copy(ctx.data) ;

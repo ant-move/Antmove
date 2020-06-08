@@ -230,7 +230,7 @@ module.exports = {
                             ...ctx.$options.componentPages[p]
                         };
                     }
-                })
+                });
         }
         if (isTypeFile('.wxml', fileInfo.path)) {
             compileWxss(fileInfo, ctx, true, isComponentPage);
@@ -463,7 +463,7 @@ module.exports = {
         return fileInfo;
     },
     compiled: async function (ctx, cb = () => {}) {
-        reportError(null, null, null, null, this.$options.isReport);
+        reportError(null, null, 'log', null, this.$options.isReport);
         const {
             findOpenAbility,
             statistics,

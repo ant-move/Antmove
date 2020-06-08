@@ -1,2 +1,6 @@
 const WxPlugin = require('./src');
-module.exports = WxPlugin;
+const WxPre = require('./src/preProcess')
+module.exports = {
+    WxPlugin,
+    WxPre
+};

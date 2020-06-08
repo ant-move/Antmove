@@ -6,7 +6,7 @@ module.exports = {
         if (!isReprot) return;
         type = type || process.env.compilerType || '';
         appName = appName || process.env.appName || '';
-        let fromId = process.env.fromId || ''
+        let fromId = process.env.fromId || '';
         let msg = `${type}-${appName}-${_msg}-${fromId}`;
         try {
             axios({
@@ -24,7 +24,7 @@ module.exports = {
     setCompileType (type) {
         process.env.compilerType = type || 'wx-alipay';
     },
-    setFromId(type) {
+    setFromId (type) {
         process.env.compilerType = type || 0 ;
     },
     getAppName (pagesPath, baseDirName, attrName) {

@@ -1,211 +1,221 @@
-const fs = require('fs-extra');
+const {matchExcluds} = require ('./utils/matchExcluds');
 const path = require('path');
-const parser = require('../utils/parseXml');
-const {setCompileType, setAppName, getAppName, reportError, setFromId} = require('../utils/index');
-const Json = require('./Json');
-const Wxml = require('./Wxml');
-function getFilePath (filePath, ext) {
-    return filePath.replace(/.json/, ext);
-}
-
+const fs = require('fs-extra');
+const parser =require('./utils/parseXml');
 module.exports = {
-    ...Json,
-    ...Wxml,
-    Directory (node) {
-        if (node.filename === '.tea') {
+    ...require('./Js'),
+    ...require('./Json'),
+    ...require('./Wxml'),
+    ...require('./Wxss'),
+    Application: {
+        hook: "before",
+        body (node, store) {
+            this.addChild({
+                type: "ReadCompileConfigJs",
+            });
+        },
+    },
+    Directory (node, store) {
+        const preData = store.config.preAppData;
+        const nodes = preData.nodes;
+        let _excludes = [".tea"];
+        if (Array.isArray(store.config.excludes)) {
+            _excludes = [..._excludes, ...store.config.excludes];
+        }
+        node = new matchExcluds(_excludes, node).matchArrayFn();
+        if (node.path === ".tea") {
             node.children = [];
         }
-    },
-    File (node) {
-        this.$node = {
-            body: node
-        };
-        if (node.extname) {
-            let type = node.extname.replace(/^\.(\w)/, function (...$) {
-                return $[1].toUpperCase();
-            });
-            this.addChild(type);
-        }
-    },
-    
-    // doc
-    // plugin=@amove/ali-mini-to-react
-    // ## CreateAliPayMiniNode
-    // 解析并创建支付宝小程序页面和组件节点
-    // CreateAliPayMiniNode (node) {
-    //     let arr = [];
-    //     node.children.forEach(child => {
-    //         if (child.)
-    //     });
-    // }
-    readAppJson (node, store) {
-        const info = this.$node.body;
-        const pages = info.content.pages;
-        const components = info.content.usingComponents || {};
-        const json = info.content;
-        const Config = store.config.config;
-        store.nodes = {};
-        store.appInfo = json;
-        setCompileType('wx2my');
-        setFromId(store.config.fromId);
-        if (json.window && json.window.navigationBarTitleText) {
-            setAppName(json.window.navigationBarTitleText);
-        } else {
-            const appName = getAppName(json.pages, store.config.entry, 'navigationBarTitleText');
-            setAppName(appName);
-        }
-        let isReport = store.config.isReport || true;
-        reportError(null, null, null, null, isReport);
-        // 是否支持component2
-        store.config.component2 === false || store.config.component2 === "false" ? Config.component2 = false :  Config.component2 = true;
-        // 是否支持组件scope
-        store.config.scope === false || store.config.scope === "false" ? Config.options.scopeStyle = false :  Config.options.scopeStyle = true;
-        // 组件解析
-        let basePath = info.dirname;
-        store.pages = pages.map((page) => {
-            let p = path.join(basePath, page);
-            p = p.replace(/\/$/, '');
-            return {
-                path: page,
-                fullname: p
-            };
-        });  
-        Object.keys(components)
-            .forEach((c) => {
+        Object.keys(nodes).forEach((n, i) => {
+            const _node = nodes[n];
+            if (_node.dirPath === node.path) {
+                let type = _node.type;
                 this.addChild({
-                    type: 'parseNodes',
-                    key: 'parseNodes' + components[c],
+                    type,
+                    key: node.path + n,
                     body: {
-                        childPath: components[c]
+                        dirpath: node.path,
+                        _node,
+                        _filePath: n,
+                    },
+                });
+            }
+        });
+    },
+    File (node, store) {      
+        let _excludes = ["antmove.config.js"];
+        if (Array.isArray(store.config.excludes)) {
+            _excludes = [..._excludes, ...store.config.excludes];
+        }
+        node = new matchExcluds(_excludes, node, true).matchArrayFn();
+        node.projectPath = path.relative(store.config.entry, node.path);
+        if (node.extname) {
+            if (node.extname === ".wxs") {
+                this.addChild({
+                    type: "Wxs",
+                    body: node,
+                });
+            }
+            let extname = node.extname.replace(/^\./, "");
+            extname = extname.replace(/^\w/, function ($) {
+                1;
+                return $.toUpperCase();
+            });
+            // let basePath = path.relative( store.config.entry, node.path).replace(/.(wxml|wxss|json|js)/,'');
+            let isDirxml = store.config.preAppData.nodes.hasOwnProperty(
+                node.fullname
+            );
+            this.$node.isDirxml = isDirxml;
+            if (!isDirxml) {
+                this.addChild({
+                    ...node,
+                    type: extname,
+                    path: node.path,
+                    parent: node,
+                    children: [],
+                    body: {
+                        path: node.path,
+                        fullname: node.fullname
                     }
                 });
-            });
+            }
+        }
+    },
+    Page (node, store) {
+        let { dirpath, _node, _filePath } = node.body;
+        const typeArr = ["Js", "Wxml", "Json", "Wxss", "Wxs"];
+        typeArr.forEach((t) => {
+            let filePath = path.join(
+                store.config.entry,
+                _node.projectPath + "." + t.toLowerCase()
+            );
+            if (fs.pathExistsSync(filePath)) {
+                this.addChild({
+                    type: "Page" + t,
+                    key: dirpath + _filePath + t,
+                    body: {
+                        dirpath,
+                        _node,
+                    },
+                });
+            }
+        });
+    },
+    Component (node, store) {
+        let { dirpath, _node } = node.body;
+        const typeArr = ["Js", "Wxml", "Json", "Wxss", "Wxs"];
+        typeArr.forEach((t) => {
+            let filePath = path.join(
+                store.config.entry,
+                _node.projectPath + "." + t.toLowerCase()
+            );
+            if (fs.pathExistsSync(filePath)) {
+                this.addChild({
+                    type: "Component" + t,
+                    key: dirpath + t,
+                    body: {
+                        dirpath,
+                        _node,
+                    },
+                });
+            }
+        });
+    },
 
-        this.addChild('computedPageInfo');
-    },
-    computedPageInfo (node, store) {
-        let type = '.json';
-        store.pages
-            .forEach(page => {
-                let jsonPath = page.fullname + type;
-                page.children = [];
-                if (fs.pathExistsSync(jsonPath)) {
-                    let json = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
-                    let xmlPath = getFilePath(jsonPath, '.wxml');
-                    this.addChild({
-                        type: 'parseNodes',
-                        key: 'parseNodes'+  page.path,
-                        body: {
-                            childPath: page.path,
-                            type: 'page'
-                        }
-                    });
-                    if (fs.pathExistsSync(xmlPath)) {
-                        page.ast = parser.parseFile(xmlPath);
-                    }
-                    if (json.usingComponents) {
-                        Object.keys(json.usingComponents)
-                            .forEach((p) => {
-                                this.addChild({
-                                    type: 'ProcessComponentRelations',
-                                    key: 'ProcessComponentRelations' + json.usingComponents[p],
-                                    body: {
-                                        children: page.children,
-                                        parentPath: jsonPath,
-                                        childPath: json.usingComponents[p],
-                                        type
-                                    }
-                                });
-                            });
-                    }
-                }
-            });
-    },
-    ProcessComponentRelations (node, store) {
-        let {children,  parentPath, childPath, type} = node.body;
-        let componentJsonPath = '';
-        // if ( childPath.startsWith('.') ) {
-        componentJsonPath = path.join(parentPath, `../${childPath}`);
-        // } else {
-        //     componentJsonPath = path.join(this.$node.body.dirname, childPath);
-        // }
-        if (!componentJsonPath.endsWith(type)) {
-            componentJsonPath = componentJsonPath + type;
-        }
-        if (fs.pathExistsSync(componentJsonPath)) {
-            let json = JSON.parse(fs.readFileSync(componentJsonPath, 'utf8'));
-            if (!json.component) return false;
-            let projectPath = path.relative(this.$node.body.dirname, componentJsonPath).replace(type, '');
-            let childComponent = {
-                path: projectPath,
-                fullname: componentJsonPath.replace('.json', ''),
-                children: []
-            };
-            // let xmlPath = getFilePath(componentJsonPath, '.wxml');
-            // if (fs.pathExistsSync(xmlPath)) {
-            //     childComponent.ast = parser.parseFile(componentJsonPath);
-            // }
-            if (json.usingComponents) {
-                Object.keys(json.usingComponents)
-                    .forEach((p) => {
-                        this.addChild({
-                            type: 'ProcessComponentRelations',
-                            key: 'ProcessComponentRelations' + json.usingComponents[p],
-                            body: {
-                                children: childComponent.children,
-                                parentPath: componentJsonPath,
-                                childPath: json.usingComponents[p],
-                                type
-                            }
-                        });
-                    });
-            }
+    Js (node, store) {
+        if (node.filename === "app.js" && node.deep === 0) {
             this.addChild({
-                type: 'parseNodes',
-                key: 'parseNodes' + projectPath,
-                body: {
-                    childPath: projectPath
-                }
+                type: "AppJs",
+                key: node.path + "AppJs",
+                body: node,
             });
-            children.push(childComponent);
+        }
+        let output = path.join(store.config.output, node.projectPath);
+        this.$node.content = fs.readFileSync(node.path, "utf8");
+        this.$node.dist = output;
+        this.addChild({
+            type: "ProcessBabel",
+            key: node.parent.path + "ProcessBabel",
+            path: node.path,
+            body: node.parent,
+            dist: output,
+        });
+    },
+    Json (node, store) {
+        if (node.deep === 0 && node.filename === "app.json") {
+            this.addChild({
+                type: "AppJson",
+                body: {
+                    path: node.path,
+                    dist: node.dist,
+                },
+            });
+        }
+        if (node.filename === "package.json" && node.deep === 0) {
+            store.package = JSON.parse(fs.readFileSync(node.path));
+            this.addChild({
+                type: "PackageJson",
+                body: {
+                    dist: node.dist,
+                },
+            });
         }
     },
-    parseNodes (node, store) {
-        let {childPath, type} = node.body;
-        let projectPath = childPath;
-        let componentName = null;
-        // if ( childPath.startsWith('.') ) {
-        childPath = path.join(this.$node.body.path, `../${childPath}`);
-        // } else {
-        // childPath = path.join(this.$node.body.dirname, childPath);
-        // }
-        if (!childPath.endsWith('.json')) {
-            childPath = childPath + '.json';
+    Wxss (node, store) {
+        if (node.filename === "app.wxss" && node.deep === 0) {
+            this.addChild({
+                type: "AppWxss",
+                body: node,
+            });
         }
-        if (fs.pathExistsSync(childPath)) {
-            let json = fs.readJSONSync(childPath);
-            if (type && type === 'page') {
-                type = 'Page';
-            } else if (json.component) {
-                type = 'Component';
-                componentName = projectPath.split('/').join('-');
-            } else {
-                type = "Unknown";
-            }
-            let nodePath = path.relative(this.$node.body.dirname, childPath).replace('.json', '');
-            let dirPath = childPath.split('/').slice(0, -1).join('/');
-            let xmlPath = getFilePath(childPath, '.wxml');
-            store.nodes[nodePath] = {
-                path: childPath.replace('.json', ''),
-                projectPath,
-                dirPath,
-                json,
-                type,
-                componentName
-            };
-            if (fs.pathExistsSync(xmlPath)) {
-                store.nodes[nodePath].ast = parser.parseFile(xmlPath);
-            }
+        this.$node.content = fs.readFileSync(node.path, "utf8");
+        this.$node.dist = node.dist;
+        this.addChild({
+            type: "ProcessCss",
+            key: node.path + "ProcessCss",
+            dist: node.dist,
+            body: node,
+        });
+    },
+    Wxs () {},
+    Wxml (node, store) {
+        let xmlType = store.config.preAppData.config.ex.xml;
+        let xmlAst = parser.parseFile(node.path);
+        this.$node.content = "";
+        this.$node.dist = node.dist.replace(/\.wxml$/, xmlType);
+        this.$node.nodeId = 0;
+        this.addChild({
+            type: "processXmlAst",
+            body: {
+                ast: xmlAst,
+                num: 0,
+                deep: 1,
+                projectPath: node.fullname,
+                isInit: true,
+            },
+        });
+    },
+    WxmlMounted () {
+        this.addChild({
+            type: "outputFile",
+            body: {
+                dist: this.$node.dist,
+                content: this.$node.content,
+            },
+        });
+    },
+    outputFile (node, store) {
+        const body = node.body;
+        if (!body) return false;
+        const { dist, content } = body;
+        if (!dist || !content) return false;
+        fs.outputFileSync(dist, content);
+    },
+    FileMounted (node, store) {
+        if (!this.$node.content && !this.$node.isDirxml) {
+            fs.copy(node.path, node.dist, (err) => {
+                if (err) throw err;
+            });
         }
-    }
-};
+    },
+}

@@ -2,20 +2,20 @@ const utils = require("./utils");
 const descObj = require("./desc.js");
 
 const apiObj = {
-    hideHomeButton : {
+    hideHomeButton: {
         fn (obj = {}) {
-            let hideHomeButtonProps = descObj.hideHomeButton.body.params.props
+            let hideHomeButtonProps = descObj.hideHomeButton.body.params.props;
             let param = utils.defineGetter(obj, hideHomeButtonProps, function (obj, prop) {
-                    utils.warn(
-                        `hideHomeButton的返回值不支持 ${prop} 属性!`,
-                        {
-                            apiName: `hideHomeButton/${prop}`,
-                            errorType: hideHomeButtonProps[prop].type,
-                            type: 'api'
-                        }
-                    )
-                });
-           return my.hideBackHome(param);
+                utils.warn(
+                    `hideHomeButton的返回值不支持 ${prop} 属性!`,
+                    {
+                        apiName: `hideHomeButton/${prop}`,
+                        errorType: hideHomeButtonProps[prop].type,
+                        type: 'api'
+                    }
+                );
+            });
+            return my.hideBackHome(param);
         }
     },
     cloud: {
@@ -27,9 +27,9 @@ const apiObj = {
                     errorType: 0,
                     type: 'api'
                 }
-            )
+            );
         }
     }
-}
+};
 
 module.exports = apiObj;

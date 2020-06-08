@@ -56,13 +56,13 @@ const apiObj = {
                         data: value
                     };
             }
-            return my.reportAnalytics(key,value);
+            return my.reportAnalytics(key, value);
         }
     },
     requestPayment: {
         fn (obj = {}) {
             let requestPaymentParams = descObj.requestPayment.body.params;
-            let params = utils.defineGetter(obj, requestPaymentParams, function (obj,prop) {
+            let params = utils.defineGetter(obj, requestPaymentParams, function (obj, prop) {
                 utils.warn(
                     `requestPayment的参数不支持 ${prop} 属性!`,
                     {
@@ -82,7 +82,7 @@ const apiObj = {
                 delete obj.scope;
                 obj.scopes='auth_user';
             }
-            let params = utils.defineGetter(obj, authorizeParams, function (obj,prop) {
+            let params = utils.defineGetter(obj, authorizeParams, function (obj, prop) {
                 utils.warn(
                     `authorize的参数不支持 ${prop} 属性!`,
                     {
@@ -98,7 +98,7 @@ const apiObj = {
     openCard: {
         fn (obj) {
             let openCardParams = descObj.openCard.body.params;
-            let params = utils.defineGetter(obj, openCardParams, function (obj,prop) {
+            let params = utils.defineGetter(obj, openCardParams, function (obj, prop) {
                 utils.warn(
                     `openCard的参数不支持 ${prop} 属性!`,
                     {
@@ -114,7 +114,7 @@ const apiObj = {
     addCard: {
         fn (obj) {
             let addCardParams = descObj.addCard.body.params;
-            let params = utils.defineGetter(obj, addCardParams, function (obj,prop) {
+            let params = utils.defineGetter(obj, addCardParams, function (obj, prop) {
                 utils.warn(
                     `addCard的参数不支持 ${prop} 属性!`,
                     {
@@ -130,7 +130,7 @@ const apiObj = {
     startSoterAuthentication: {
         fn (obj) {
             let startSoterAuthenticationParams = descObj.startSoterAuthentication.body.params;
-            let params = utils.defineGetter(obj, startSoterAuthenticationParams, function (obj,prop) {
+            let params = utils.defineGetter(obj, startSoterAuthenticationParams, function (obj, prop) {
                 utils.warn(
                     `startSoterAuthentication的参数不支持 ${prop} 属性!`,
                     {

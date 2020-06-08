@@ -61,7 +61,7 @@ module.exports = function (obj = {}) {
                             return myApi[attr].fn(obj, args);
                         }
                         return myApi[attr].fn(obj);
-                  };
+                    };
                 } else {
                     ret = myApi[attr];
                 }
