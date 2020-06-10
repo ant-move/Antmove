@@ -59,6 +59,16 @@ const apiObj = {
             my.writeBLECharacteristicValue(obj);
         }
     },
+    createBLEConnection: {
+      fn(obj = {}) {
+        return my.connectBLEDevice(obj)
+      }
+    },
+    closeBLEConnection: {
+     fn(obj={}) {
+      return my.disconnectBLEDevice(obj)
+     }
+    },
     onBLEConnectionStateChange: {
         fn (obj = {}) {
             return my.onBLEConnectionStateChanged(obj);
