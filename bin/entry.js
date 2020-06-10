@@ -34,13 +34,13 @@ module.exports = function (opts = {}, cb = () => {}) {
             name: 'type',
             choices: [
                 {
-                    name: 'wx2tt'
-                },
-                {
                     name: 'wx-alipay'
                 },
                 {
                     name: 'wx2my'
+                },
+                {
+                    name: 'wx2tt'
                 },
                 {
                     name: 'wx-amap'

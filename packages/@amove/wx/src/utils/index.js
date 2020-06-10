@@ -22,9 +22,9 @@ module.exports = {
         process.env.appName = name;
     },
     setCompileType (type) {
-        process.env.compilerType = type 
+        process.env.compilerType = type; 
     },
-    setFromId(type) {
+    setFromId (type) {
         process.env.fromId = type || 0 ;
     },
     getAppName (pagesPath, baseDirName, attrName) {

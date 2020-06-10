@@ -26,8 +26,7 @@ const apiObj = {
                 getSystemInfoSyncProps,
                 function (obj, prop) {
                     utils.warn(
-                        `getSystemInfoSync的返回值不支持 ${prop} 属性!`,
-                        {
+                        `getSystemInfoSync的返回值不支持 ${prop} 属性!`, {
                             apiName: `getSystemInfoSync/${prop}`,
                             errorType: getSystemInfoSyncProps[prop].type,
                             type: 'api'
@@ -38,9 +37,9 @@ const apiObj = {
             /**
              * 处理Androi屏幕宽度返回值
              */
-            if (ret.platform === "Android") {  
-                ret.screenWidth = ret.screenWidth/ret.pixelRatio;
-                ret.screenHeight = ret.screenHeight/ret.pixelRatio
+            if (ret.platform === "Android") {
+                ret.screenWidth = ret.screenWidth / ret.pixelRatio;
+                ret.screenHeight = ret.screenHeight / ret.pixelRatio
             }
             return ret
         },
@@ -56,8 +55,7 @@ const apiObj = {
                         getSystemInfoProps,
                         function (obj, prop) {
                             utils.warn(
-                                `getSystemInfo的返回值不支持 ${prop} 属性!`,
-                                {
+                                `getSystemInfo的返回值不支持 ${prop} 属性!`, {
                                     apiName: `getSystemInfo/${prop}`,
                                     errorType: getSystemInfoProps[prop].type,
                                     type: 'api'
@@ -66,12 +64,12 @@ const apiObj = {
                         }
                     );
                     /**
-                    * 处理Androi屏幕宽度返回值
-                    */
+                     * 处理Androi屏幕宽度返回值
+                     */
                     if (res.platform === "Android") {
-                        res.screenWidth = res.screenWidth/res.pixelRatio;
-                        res.screenHeight = res.screenHeight/res.pixelRatio
-                    } 
+                        res.screenWidth = res.screenWidth / res.pixelRatio;
+                        res.screenHeight = res.screenHeight / res.pixelRatio
+                    }
                     obj.success && obj.success(res);
                 }
             });
@@ -93,8 +91,7 @@ const apiObj = {
                 } else if (obj.icon === "loading") {
                     obj.type = "none";
                     utils.warn(
-                        "showToast暂不支持loading",
-                        {
+                        "showToast暂不支持loading", {
                             apiName: 'showToast/loading',
                             errorType: 0,
                             type: 'api'
@@ -113,8 +110,7 @@ const apiObj = {
                 showToastProps,
                 function (obj, prop) {
                     utils.warn(
-                        `showToast的参数不支持 ${prop} 属性!`,
-                        {
+                        `showToast的参数不支持 ${prop} 属性!`, {
                             apiName: `showToast/${prop}`,
                             errorType: showToastProps[prop].type,
                             type: 'api'
@@ -144,8 +140,7 @@ const apiObj = {
                 showModalProps,
                 function (obj, prop) {
                     utils.warn(
-                        `showModal的参数不支持 ${prop} 属性!`,
-                        {
+                        `showModal的参数不支持 ${prop} 属性!`, {
                             apiName: `showModal/${prop}`,
                             errorType: showModalProps[prop].type,
                             type: 'api'
@@ -156,7 +151,7 @@ const apiObj = {
 
             my.confirm({
                 ...params,
-                success (res) {
+                success(res) {
                     if (res.confirm) {
                         res.cancel = false;
                     } else {
@@ -179,8 +174,7 @@ const apiObj = {
                 showLoadingProps,
                 function (obj, prop) {
                     utils.warn(
-                        `showLoading的参数不支持 ${prop} 属性!`,
-                        {
+                        `showLoading的参数不支持 ${prop} 属性!`, {
                             apiName: `showLoading/${prop}`,
                             errorType: showLoadingProps[prop].type,
                             type: 'api'
@@ -203,8 +197,7 @@ const apiObj = {
                 showActionSheetProps,
                 function (obj, prop) {
                     utils.warn(
-                        `showActionSheet的参数不支持 ${prop} 属性!`,
-                        {
+                        `showActionSheet的参数不支持 ${prop} 属性!`, {
                             apiName: `showActionSheet/${prop}`,
                             errorType: showActionSheetProps[prop].type,
                             type: 'api'
@@ -226,11 +219,15 @@ const apiObj = {
         fn (obj) {
             try {
                 my.hideToast();
-                obj.success && obj.success({ errMsg: "hideToast: ok" });
+                obj.success && obj.success({
+                    errMsg: "hideToast: ok"
+                });
             } catch (err) {
                 obj.fail && obj.fail(err);
             } finally {
-                obj.complete && obj.complete({ errMsg: "hideToast: ok" });
+                obj.complete && obj.complete({
+                    errMsg: "hideToast: ok"
+                });
             }
         }
     },
@@ -238,11 +235,15 @@ const apiObj = {
         fn (obj) {
             try {
                 my.hideLoading();
-                obj.success && obj.success({ errMsg: "hideLoading: ok" });
+                obj.success && obj.success({
+                    errMsg: "hideLoading: ok"
+                });
             } catch (err) {
                 obj.fail && obj.fail(err);
             } finally {
-                obj.complete && obj.complete({ errMsg: "hideLoading: ok" });
+                obj.complete && obj.complete({
+                    errMsg: "hideLoading: ok"
+                });
             }
         }
     },
@@ -250,11 +251,15 @@ const apiObj = {
         fn (obj = {}) {
             try {
                 my.showNavigationBarLoading();
-                obj.success && obj.success({ errMsg: "showNavigationBarLoading: ok" });
+                obj.success && obj.success({
+                    errMsg: "showNavigationBarLoading: ok"
+                });
             } catch (err) {
                 obj.fail && obj.fail(err);
             } finally {
-                obj.complete && obj.complete({ errMsg: "showNavigationBarLoading: ok" });
+                obj.complete && obj.complete({
+                    errMsg: "showNavigationBarLoading: ok"
+                });
             }
         }
     },
@@ -263,15 +268,24 @@ const apiObj = {
             return my.setNavigationBar(obj);
         }
     },
+    setNavigationBarColor: {
+        fn (obj = {}) {
+            return my.setNavigationBar(obj);
+        }
+    },
     hideNavigationBarLoading: {
         fn (obj = {}) {
             try {
                 my.hideNavigationBarLoading();
-                obj.success && obj.success({ errMsg: "hideNavigationBarLoading: ok" });
+                obj.success && obj.success({
+                    errMsg: "hideNavigationBarLoading: ok"
+                });
             } catch (err) {
                 obj.fail && obj.fail(err);
             } finally {
-                obj.complete && obj.complete({ errMsg: "hideNavigationBarLoading: ok" });
+                obj.complete && obj.complete({
+                    errMsg: "hideNavigationBarLoading: ok"
+                });
             }
         }
     },
@@ -288,8 +302,7 @@ const apiObj = {
         fn (obj = {}) {
             if (!obj.iconPath || !obj.selectedIconPath) {
                 utils.warn(
-                    `setTabBarItem的iconPath和selectedIconPath是必传的!`,
-                    {
+                    `setTabBarItem的iconPath和selectedIconPath是必传的!`, {
                         apiName: 'setTabBarItem/iconPath和selectedIconPath',
                         errorType: 0,
                         type: 'api'
@@ -303,11 +316,15 @@ const apiObj = {
         fn (obj = {}) {
             try {
                 my.stopPullDownRefresh();
-                obj.success && obj.success({ errMsg: "stopPullDownRefresh: ok" });
+                obj.success && obj.success({
+                    errMsg: "stopPullDownRefresh: ok"
+                });
             } catch (err) {
                 obj.fail && obj.fail(err);
             } finally {
-                obj.complete && obj.complete({ errMsg: "stopPullDownRefresh: ok" });
+                obj.complete && obj.complete({
+                    errMsg: "stopPullDownRefresh: ok"
+                });
             }
 
         }
@@ -320,8 +337,7 @@ const apiObj = {
                 pageScrollToParams,
                 function (obj, prop) {
                     utils.warn(
-                        `pageScrollTo的参数不支持 ${prop} 属性!`,
-                        {
+                        `pageScrollTo的参数不支持 ${prop} 属性!`, {
                             apiName: `pageScrollTo/${prop}`,
                             errorType: pageScrollToParams[prop].type,
                             type: 'api'
@@ -332,11 +348,15 @@ const apiObj = {
             my.pageScrollTo(params);
             try {
                 my.pageScrollTo();
-                obj.success && obj.success({ errMsg: "pageScrollTo: ok" });
+                obj.success && obj.success({
+                    errMsg: "pageScrollTo: ok"
+                });
             } catch (err) {
                 obj.fail && obj.fail(err);
             } finally {
-                obj.complete && obj.complete({ errMsg: "pageScrollTo: ok" });
+                obj.complete && obj.complete({
+                    errMsg: "pageScrollTo: ok"
+                });
             }
         },
     },
@@ -353,11 +373,10 @@ const apiObj = {
 
             if (
                 obj.method !== 'GET' &&
-                    obj.method !== 'POST'
+                obj.method !== 'POST'
             ) {
                 utils.warn(
-                    `request暂不支持${obj.method}请求方式`,
-                    {
+                    `request暂不支持${obj.method}请求方式`, {
                         apiName: `request/${obj.method}`,
                         errorType: 0,
                         type: 'api'
@@ -368,8 +387,7 @@ const apiObj = {
 
             if (obj.responseType) {
                 utils.warn(
-                    "支付宝暂不支持responseType",
-                    {
+                    "支付宝暂不支持responseType", {
                         apiName: 'request/responseType',
                         errorType: 0,
                         type: 'api'
@@ -378,24 +396,24 @@ const apiObj = {
             }
             let task = my.request({
                 ...obj,
-                success (res) {
+                success(res) {
                     res.header = res.headers;
                     res.statusCode = res.status;
                     delete res.headers;
                     delete res.status;
                     obj.success && obj.success(res);
                 },
-                fail (err) {
+                fail(err) {
                     obj.fail && obj.fail(err);
                 },
-                complete (res) {
+                complete(res) {
                     obj.complete && obj.complete(res);
                 }
             });
             task = task || {};
-            task.abort = function () { };
-            task.onHeadersReceived = function () { };
-            task.offHeadersReceived = function () { };
+            task.abort = function () {};
+            task.onHeadersReceived = function () {};
+            task.offHeadersReceived = function () {};
             return task;
         },
     },
@@ -405,7 +423,7 @@ const apiObj = {
             let data = my.createMapContext(obj);
             for (let key in createMapContextProps) {
                 if (createMapContextProps[key].type === 0) {
-                    data[key] = () => { };
+                    data[key] = () => {};
                 }
             }
             return utils.defineGetter(
@@ -413,8 +431,7 @@ const apiObj = {
                 createMapContextProps,
                 function (obj, prop) {
                     utils.warn(
-                        `createMapContext的返回值不支持 ${prop} 属性!`,
-                        {
+                        `createMapContext的返回值不支持 ${prop} 属性!`, {
                             apiName: `createMapContext/${prop}`,
                             errorType: createMapContextProps[prop].type,
                             type: 'api'
@@ -426,21 +443,21 @@ const apiObj = {
     },
     createCameraContext: {
         fn (obj) {
-            const res = my.createCameraContext({...obj});
-            res.takePhoto = () => {  
-                utils.warn(            
-                    "支付宝暂不支持takePhoto",
-                    {
+            const res = my.createCameraContext({
+                ...obj
+            });
+            res.takePhoto = () => {
+                utils.warn(
+                    "支付宝暂不支持takePhoto", {
                         apiName: `createCameraContext/takePhoto`,
                         errorType: 0,
                         type: 'api'
                     }
-                ); 
+                );
             };
             res.startRecord = () => {
-                utils.warn(            
-                    "支付宝暂不支持startRecord",
-                    {
+                utils.warn(
+                    "支付宝暂不支持startRecord", {
                         apiName: `createCameraContext/startRecord`,
                         errorType: 0,
                         type: 'api'
@@ -448,9 +465,8 @@ const apiObj = {
                 );
             };
             res.stopRecord = () => {
-                utils.warn(            
-                    "支付宝暂不支持stopRecord",
-                    {
+                utils.warn(
+                    "支付宝暂不支持stopRecord", {
                         apiName: `createCameraContext/stopRecord`,
                         errorType: 0,
                         type: 'api'
@@ -476,7 +492,7 @@ const apiObj = {
             }
             my.compressImage({
                 ...obj,
-                success (res) {
+                success(res) {
                     res.tempFilePath = res.apFilePaths[0];
                     delete res.apFilePath;
                     obj.success && obj.success(res);
@@ -491,12 +507,11 @@ const apiObj = {
             }
             my.chooseImage({
                 ...obj,
-                success (res) {
+                success(res) {
                     res.tempFilePaths = res.apFilePaths;
                     delete res.apFilePath;
                     utils.warn(
-                        "暂不支持tempFiles",
-                        {
+                        "暂不支持tempFiles", {
                             apiName: 'chooseImage/tempFiles',
                             errorType: 0,
                             type: 'api'
@@ -519,8 +534,7 @@ const apiObj = {
         fn (obj = {}) {
             if (obj.scale) {
                 utils.warn(
-                    "支付宝scale的取值为3-19，默认15",
-                    {
+                    "支付宝scale的取值为3-19，默认15", {
                         apiName: 'openLocation/scale',
                         errorType: 4,
                         type: 'api'
@@ -561,8 +575,7 @@ const apiObj = {
                         getLocationProps,
                         function (obj, prop) {
                             utils.warn(
-                                `getLocation的返回值不支持 ${prop} 属性!`,
-                                {
+                                `getLocation的返回值不支持 ${prop} 属性!`, {
                                     apiName: `getLocation/${prop}`,
                                     errorType: getLocationProps[prop].type,
                                     type: 'api'
@@ -576,7 +589,7 @@ const apiObj = {
         },
     },
     openCard: {
-        fn () { },
+        fn () {},
     },
     login: {
         fn (obj = {}) {
@@ -639,7 +652,7 @@ const apiObj = {
         fn (obj = {}) {
             my.getNetworkType({
                 ...obj,
-                success (res) {
+                success(res) {
                     res.networkType = res.networkType.toLowerCase();
                     let typeObjMap = {
                         unknown: "unknown",
@@ -665,7 +678,7 @@ const apiObj = {
             const ctx = my.createCanvasContext(obj.canvasId);
             ctx.toTempFilePath({
                 ...obj,
-                success (res) {
+                success(res) {
                     res.tempFilePath = res.apFilePath;
                     delete res.apFilePath;
                     obj.success && obj.success(res);
@@ -678,7 +691,7 @@ const apiObj = {
             const ctx = my.createCanvasContext(obj.canvasId);
             ctx.putImageData({
                 ...obj,
-                success (res) {
+                success(res) {
                     obj.success && obj.success(res);
                 }
             });
@@ -689,7 +702,7 @@ const apiObj = {
             const ctx = my.createCanvasContext(obj.canvasId);
             ctx.getImageData({
                 ...obj,
-                success (res) {
+                success(res) {
                     obj.success && obj.success(res);
                 }
             });
@@ -703,7 +716,7 @@ const apiObj = {
             }
             my.saveFile({
                 ...obj,
-                success (res) {
+                success(res) {
                     res.savedFilePath = res.apFilePath;
                     delete res.apFilePath;
                     obj.success && obj.success(res);
@@ -723,7 +736,7 @@ const apiObj = {
     getSavedFileList: {
         fn (obj = {}) {
             my.getSavedFileList({
-                success (res) {
+                success(res) {
                     if (res.fileList.length) {
                         let ret = res.fileList.map(item => {
                             item.filePath = item.apFilePath;
@@ -762,8 +775,7 @@ const apiObj = {
             let downloadFileReturnValue = descObj.downloadFile.body.returnValue;
             if (obj.filePath !== undefined) {
                 utils.warn(
-                    "支付宝暂不支持 filePath",
-                    {
+                    "支付宝暂不支持 filePath", {
                         apiName: 'downloadFile/filePath',
                         errorType: 0,
                         type: 'api'
@@ -772,7 +784,7 @@ const apiObj = {
             }
             my.downloadFile({
                 ...obj,
-                success (res) {
+                success(res) {
                     res.tempFilePath = res.apFilePath;
                     if (res.apFilePath) {
                         res.statusCode = 200;
@@ -780,8 +792,7 @@ const apiObj = {
                     delete res.apFilePath;
                     if (!res.statusCode) {
                         utils.warn(
-                            "支付宝暂不支持statusCode",
-                            {
+                            "支付宝暂不支持statusCode", {
                                 apiName: 'downloadFile/statusCode',
                                 errorType: 0,
                                 type: 'api'
@@ -792,19 +803,18 @@ const apiObj = {
                 }
             });
             const task = {
-                abort () { },
-                offHeadersReceived () { },
-                offProgressUpdate () { },
-                onHeadersReceived () { },
-                onProgressUpdate () { },
+                abort() {},
+                offHeadersReceived() {},
+                offProgressUpdate() {},
+                onHeadersReceived() {},
+                onProgressUpdate() {},
             };
             return utils.defineGetter(
                 task,
                 downloadFileReturnValue,
                 function (obj, prop) {
                     utils.warn(
-                        `downloadFile的返回值不支持 ${prop} 属性!`,
-                        {
+                        `downloadFile的返回值不支持 ${prop} 属性!`, {
                             apiName: `downloadFile/${prop}`,
                             errorType: downloadFileReturnValue[prop].type,
                             type: 'api'
@@ -821,15 +831,15 @@ const apiObj = {
                 obj.fileName = obj.name;
                 delete obj.name;
             }
-            const pathArr =  obj.filePath.split('.');
+            const pathArr = obj.filePath.split('.');
             obj.fileType = 'image';
             const fileType = {
                 'video': ['ogg', 'avi', 'wma', 'rmvb', 'rm', 'flash', 'mp4', '3gp'],
                 'audio': ['wav', 'mp3'],
             };
-            let typeName = pathArr[pathArr.length-1];
+            let typeName = pathArr[pathArr.length - 1];
             Object.keys(fileType).forEach(key => {
-                fileType[key].forEach (item => {
+                fileType[key].forEach(item => {
                     if (typeName.toLowerCase() === item) {
                         obj.fileType = key;
                     }
@@ -837,19 +847,18 @@ const apiObj = {
             });
             my.uploadFile(obj);
             const task = {
-                abort () { },
-                offHeadersReceived () { },
-                offProgressUpdate () { },
-                onHeadersReceived () { },
-                onProgressUpdate () { },
+                abort() {},
+                offHeadersReceived() {},
+                offProgressUpdate() {},
+                onHeadersReceived() {},
+                onProgressUpdate() {},
             };
             return utils.defineGetter(
                 task,
                 uploadFileValue,
                 function (obj, prop) {
                     utils.warn(
-                        `uploadFile的返回值不支持 ${prop} 属性!`,
-                        {
+                        `uploadFile的返回值不支持 ${prop} 属性!`, {
                             apiName: `uploadFile/${prop}`,
                             errorType: uploadFileValue[prop].type,
                             type: 'api'
@@ -867,8 +876,7 @@ const apiObj = {
                 connectSocketParams,
                 function (obj, prop) {
                     utils.warn(
-                        `connectSocket的参数不支持 ${prop} 属性!`,
-                        {
+                        `connectSocket的参数不支持 ${prop} 属性!`, {
                             apiName: `connectSocket/${prop}`,
                             errorType: connectSocketParams[prop].type,
                             type: 'api'
@@ -878,24 +886,24 @@ const apiObj = {
             );
             my.connectSocket(params);
             const task = {
-                close (obj = {}) {
+                close(obj = {}) {
                     my.closeSocket(obj);
                 },
-                onClose (fn) {
+                onClose(fn) {
                     my.onSocketClose(fn);
                 },
-                onError (fn) {
+                onError(fn) {
                     my.offSocketOpen(fn);
                 },
-                onMessage (fn) {
+                onMessage(fn) {
                     my.onSocketMessage(fn);
                 },
-                onOpen (fn) {
+                onOpen(fn) {
                     my.onSocketOpen(function (res) {
-                        fn(res);
+                        fn (res);
                     });
                 },
-                send (obj = {}) {
+                send(obj = {}) {
                     my.sendSocketMessage(obj);
                 },
             };
@@ -906,8 +914,7 @@ const apiObj = {
         fn (obj) {
             my.onSocketOpen((res) => {
                 utils.warn(
-                    'onSocketOpen 成功回调缺少header',
-                    {
+                    'onSocketOpen 成功回调缺少header', {
                         apiName: 'onSocketOpen/header',
                         errorType: 0,
                         type: 'api'
@@ -925,8 +932,7 @@ const apiObj = {
                 closeSocketParams,
                 function (obj, prop) {
                     utils.warn(
-                        `closeSocket的参数不支持 ${prop} 属性!`,
-                        {
+                        `closeSocket的参数不支持 ${prop} 属性!`, {
                             apiName: `closeSocket/${prop}`,
                             errorType: closeSocketParams[prop].type,
                             type: 'api'
@@ -943,7 +949,7 @@ const apiObj = {
             const RecorderManager = my.getRecorderManager();
             for (let key in getRecorderManagerProps) {
                 if (getRecorderManagerProps[key]["type"] === 0) {
-                    RecorderManager[key] = () => { };
+                    RecorderManager[key] = () => {};
                 }
             }
             return utils.defineGetter(
@@ -951,8 +957,7 @@ const apiObj = {
                 getRecorderManagerProps,
                 function (obj, prop) {
                     utils.warn(
-                        `getRecorderManager的返回值不支持 ${prop} 属性!`,
-                        {
+                        `getRecorderManager的返回值不支持 ${prop} 属性!`, {
                             apiName: `getRecorderManager/${prop}`,
                             errorType: getRecorderManagerProps[prop].type,
                             type: 'api'
@@ -983,13 +988,16 @@ const apiObj = {
     },
     removeStorageSync: {
         fn (key = "") {
-            return my.removeStorageSync({ key });
+            return my.removeStorageSync({
+                key
+            });
         }
     },
     createSelectorQuery: {
         fn () {
             let SQ = my.createSelectorQuery();
-            function Query () {
+
+            function Query() {
                 this.query = SQ;
                 this._selectType = 0; // 0: array, 1: object
                 this.in = function (p) {
@@ -1064,6 +1072,50 @@ const apiObj = {
             };
             return animation;
         }
+    },
+    showShareMenu: {
+        fn (obj = {}) {
+            return my.showSharePanel()
+        }
+    },
+    saveVideoToPhotosAlbum: {
+        fn (obj = {}) {
+            const params = {
+                ...obj,
+                src: obj.filePath
+            }
+            return my.saveVideoToPhotosAlbum(params)
+        }
+    },
+    chooseAddress: {
+        fn (obj = {}) {
+            my.getAddress({
+                success(res) {
+                  const result = {}
+                  result.address = `${res.provinceName || ''}${res.cityName || ''}${res.countyName || ''}${res.detailInfo || ''}`
+                  result.prov = res.provinceName
+                  result.city = res.cityName
+                  result.area = res.countyName
+                  result.street = res.detailInfo
+                  result.fullname = res.userName
+                  result.mobilePhone = res.telNumber
+                  result.resultStatus = res.errMsg
+                  
+                  obj.success && obj.success(result);
+                }
+            });
+        }
+    },
+    chooseVideo: {
+      fn (obj = {}) {
+        my.chooseVideo({
+            success(result) {
+              result.tempFilePath = result.apFilePath
+              delete result.apFilePath
+              obj.success && obj.success(result);
+            }
+        });
+    }
     }
 };
 

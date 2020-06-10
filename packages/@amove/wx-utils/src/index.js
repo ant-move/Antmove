@@ -10,11 +10,11 @@ useReducer({
             node.dist = node.path.replace(store.config.entry, store.config.output);
             node.filePath = node.path.replace(store.config.entry, "");
             node.filePath = node.filePath.replace(/\.\w+$/, "");
-            node.projectPath = node.path.replace(store.config.entry  , "");
+            node.projectPath = node.path.replace(store.config.entry, "");
             node.fullname = node.projectPath.replace(/\.\w+$/, "");
             this.$node = {
                 body: node,
             };
         }
     }
-})
+});

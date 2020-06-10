@@ -1,13 +1,17 @@
 {
   "name": "@amove/wx-tt",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+},
+  "author": "amap-appx",
+  "license": "GPL-3.0",
   "dependencies": {
     "colornames": "^1.1.1",
     "css": "^2.2.4",
@@ -17,8 +21,8 @@
     "parsimmon": "^1.13.0",
     "prettier": "^2.0.5",
     "@amove/next": "^0.0.3",
-    "@amove/wx-utils": "^0.0.1",
-    "@amove/wx": "^0.0.1",
+    "@amove/wx-utils": "^1.0.57",
+    "@amove/wx": "^1.0.57",
     "@amove/babel": "^0.0.1",
     "@amove/directory-to-ast": "^0.0.1"
   }

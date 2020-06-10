@@ -30,7 +30,7 @@ const {
  */
 const packageJson = require("../package.json");
 let specialtypeCmd = false;
-const options = {
+let options = {
     input: "",
     output: "",
     env: "production",
@@ -334,6 +334,7 @@ function action (options) {
             // _input = './';
             // _output = processPath(opts);
             // recordOptions(opts, _input, _output);
+
             buildInfo[opts.type](opts);
         } else {
             console.log(chalk.red("编译类型错误，请选择可用的转换类型。"));
