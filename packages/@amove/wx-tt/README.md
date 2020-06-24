@@ -6,7 +6,15 @@
 
 - 执行 lerna bootstrap 安装依赖
 
-- npm link(本地命令行)
+- cd @amove/wx-utils 执行 npm link
+
+- cd @amove/wx 执行 npm link
+
+- cd @amove/wx-tt 执行 npm link @amove/wx-utils @amove/wx
+
+- cd @amove/wx-tt npm link
+
+- 在根目录(antmove) npm link @amove/wx-tt
 
 - antmove-cli -t wx2tt
 
