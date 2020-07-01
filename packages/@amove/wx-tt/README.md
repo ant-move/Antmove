@@ -1,4 +1,4 @@
-#### 如何运行  
+#### Windows环境如何运行 
 
 - 执行 npm i lerna -g
 
