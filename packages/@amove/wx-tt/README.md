@@ -14,5 +14,7 @@
 
 - 执行 lerna bootstrap 安装依赖
 
+- 在根目录执行 npm link
+
 - antmove-cli -t wx2tt
 
