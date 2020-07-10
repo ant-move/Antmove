@@ -1,15 +1,15 @@
 {
   "name": "@amove/wx",
-  "version": "1.0.57",
+  "version": "1.0.61",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@amove/next": "^0.0.3",
     "fs-extra": "^9.0.0",
-    "htmlparser2": "^4.1.0",
-    "@amove/next": "^0.0.3"
+    "htmlparser2": "^4.1.0"
   },
   "author": "amap-appx@autonavi.com",
   "license": "GPL-3.0",
