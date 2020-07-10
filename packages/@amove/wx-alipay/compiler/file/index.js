@@ -4,4 +4,5 @@ useReducer({
     ...require('./runGenerateBundleApi'),
     ...require('./generateWrapComponents'),
     ...require('./runGenerateBundleComponent'),
+    ...require('./generateMiniProjectJson')
 });

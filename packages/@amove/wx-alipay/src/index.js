@@ -7,5 +7,6 @@ useReducer({
         this.addChild("runGenerateBundleApi");
         this.addChild("runGenerateBundleComponent");
         this.addChild("generateNodeTrees");
+        this.addChild("generateMiniProjectJson");
     }
 })

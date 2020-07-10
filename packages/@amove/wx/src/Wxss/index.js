@@ -7,7 +7,7 @@ const css = require("css");
 // const customComponentPrefix = Config.library.customComponentPrefix;
 const { useReducer } = require("@amove/next");
 
-const { prettierCode } = require("@antmove/utils");
+const { prettierCode } = require("../utils/preProcessCode");
 const entry = path.join(__dirname, `../../alipay-mini/runtime/static`);
 module.exports = {
     ProcessCss (node, store) {
@@ -49,7 +49,7 @@ module.exports = {
                 let rule = $[1];
                 if (rule[0] !== "/" && rule[0] !== ".") {
                     let tempPath = path.join(
-                        node.body.dirname,
+                        node.body.dirname || node.body.dirpath,
                         rule.replace(Config.ex.css, ".wxss")
                     );
                     if (fs.pathExistsSync(tempPath)) {

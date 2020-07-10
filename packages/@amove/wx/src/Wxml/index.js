@@ -80,7 +80,8 @@ module.exports = {
                 type: 'generateTagProps',
                 key: 'generateTagProps' + num,
                 body: {
-                    noProps: true
+                    noProps: true,
+                    type
                 }
             });
         }
@@ -119,14 +120,14 @@ module.exports = {
         if (props[prop].value && props[prop].type === 'unknown') {
             let singleIndex = props[prop].value[0].indexOf("'");
             let doubleIndex = props[prop].value[0].indexOf('"');
-            singleIndex = singleIndex > -1 ? singleIndex : 0;
-            doubleIndex = doubleIndex > -1 ? doubleIndex : 0;
+            singleIndex = singleIndex > -1 ? singleIndex : -1;
+            doubleIndex = doubleIndex > -1 ? doubleIndex : -1;
 
-            if (singleIndex > doubleIndex) {
+            if (doubleIndex > singleIndex) {
 
-                props[prop].type = 'double';
-            } else {
                 props[prop].type = 'single';
+            } else {
+                props[prop].type = 'double';
             }
         }
         this.addChild({
@@ -162,7 +163,7 @@ module.exports = {
         let single = isSingle(type);
         if (noProps) {
             if (! single) {
-                content += `>\n`;
+                content += `>${type === 'text'? '' : '\n'}`;
             } else if (single) {
                 content += `/>\n`;
             }
@@ -170,14 +171,15 @@ module.exports = {
             Object.keys(props)
                 .forEach((p, i) => {
                     let value = props[p].value;
-                    if (value && Array.isArray(value) && value[0] !== "") {
-                        content += ` ${p}="${value[0]}" `;
+                    let valueType = props[p].type === 'single' ? `'` : `"`;
+                    if (value && Array.isArray(value)) {
+                        content += ` ${p}=${valueType}${value[0]}${valueType} `;
                     } else {
                         content += ` ${p} `;
                     }
                     
-                    if (i === Object.keys(props).length-1 &&! single) {
-                        content += `>\n`;
+                    if (i === Object.keys(props).length-1 && !single) {
+                        content += `>${type === 'text'? '' : '\n'}`;
                     } else if (i ===Object.keys(props).length-1 && single) {
                         content += `/>\n`;
                     }

@@ -13,9 +13,6 @@ const fs = require('fs-extra');
 function generateRuntimeConfig (output, isDev = false, type) {
     
     let code = `
-    ${
-    type === 'dd' ? "dd.clearStorageSync = dd.removeStorageSync;\ndd.clearStorage = dd.removeStorage;\n" : ''
-}
     module.exports = function (type) {
         return type
     }

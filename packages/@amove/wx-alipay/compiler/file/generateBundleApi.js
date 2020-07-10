@@ -57,7 +57,7 @@ function generateRuntimeConfig (output, isDev = false, type) {
 }
     module.exports = {
         env: ${isDev ? '"development"': '"production"'},
-        global: ${type === 'alipay' ? 'my' : type }
+        global: my
     }
     `;
     let outputPath = path.join(output, `${customComponentPrefix}/api/config.js`);
