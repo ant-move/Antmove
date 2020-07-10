@@ -12,6 +12,7 @@ const compileWxss = require('./compile/compileWxss');
 const compileJs = require('./compile/compileJs');
 const saveComponentJs = require('../utils/saveComponentJs');
 const generateBundleComponent = require('../generate/generateWrapComponents');
+const generateMiniProjectJson = require('../generate/generateMiniProjectJson');
 // const generateWxsDeps = require('../generate/generateWxsDep')
 
 
@@ -470,6 +471,7 @@ module.exports = {
             writeReportPage
         } = record(recordConfig);
         generateBundleComponent(ctx.output, Config);
+        generateMiniProjectJson(ctx.output);
         await runGenerateBundleApi(ctx.output);
 
         generateNodeTrees(ctx.output, Config);

@@ -41,13 +41,19 @@ useReducer({
             }
         } else if (tagAst.type === "textContent") {
             deep++;
-            this.$node.content += `${computedIndexSpaces(deep)}${tagAst.value}\n`;
+            this.$node.content += `${tagAst.value}\n`;
         }
     },
     processOrderProp (node) {
         let {props, prop} = node.body;
         props[prop].value[0] = props[prop].value[0].replace(/\.wxml/g, '.ttml').replace(/\.wxs/g, '.sjs');
-        if (/wx:/.test(prop)) {
+        if (prop === 'wx:else' || prop === 'tt:else') {
+            props['tt:else'] = {
+                type: props[prop].type,
+                value: null
+            }
+            delete props[prop]
+        } else if (/wx:/.test(prop)) {
             let newKey  = prop.replace(/wx:/, 'tt:');
             props[newKey] = props[prop];
             delete props[prop]

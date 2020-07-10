@@ -3,6 +3,7 @@ const preApplication = require("@amove/directory-to-ast");
 const AmoveBabel = require("@amove/babel");
 // const Index = require("./index");
 const {WxPre, WxPlugin} = require("@amove/wx");
+const chalk = require('chalk');
 // const utils = require("@amove/wx-utils");
 
 let defulatConfig = {
@@ -96,7 +97,7 @@ module.exports = function (options = {}) {
             preAppData
         },
         () => {
-            console.log("完成");
+            console.log(chalk.green("微信小程序 => 支付宝小程序编译已完成"));
         }
     );
 };
