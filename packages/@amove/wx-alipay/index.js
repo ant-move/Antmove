@@ -87,10 +87,10 @@ module.exports = function (options = {}) {
         options.plugins.forEach(el => {
             useReducer(el);
         });
-    }
+    };
+    useReducer(WxPlugin);
     require("./src/index");
     require("@amove/wx-utils");
-    useReducer(WxPlugin);
     runApp(
         {
             ...options,

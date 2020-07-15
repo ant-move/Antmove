@@ -38,7 +38,7 @@ useReducer({
         let json = node.body.json.usingComponents;
         let code = {};
         for (let key in json) {
-            code[humps.decamelize(key, { separator: "-" })] = "./" + json[key];
+            code[humps.decamelize(key, { separator: "-" })] =  ['.', '/'].indexOf(json[key][0]) === -1 ? './'+ json[key] :  json[key];
         }
         this.$node.content.usingComponents = code;
     },

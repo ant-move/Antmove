@@ -213,33 +213,34 @@ module.exports = {
                 dirPath,
                 json,
                 type,
-                componentName
+                componentName,
+                isHasComponents : false
             };
             if (fs.pathExistsSync(xmlPath)) {
                 let _ast = parser.parseFile(xmlPath);
-                let appUsingComponents = store.appInfo.usingComponents;
+                let appUsingComponents = store.appInfo.usingComponents || {};
                 store.nodes[nodePath].ast = _ast;
-
-                if (appUsingComponents) {
-                    this.addChild({
-                        type: 'processNodeGlobalRelation',
-                        body: {
-                            xmlAst: _ast[0],
-                            appUsingComponents,
-                            nodePath
-                        }
-                    })
-                }
-
+                let nodeInfo = store.nodes[nodePath];
+                this.addChild({
+                    type: 'processNodeGlobalRelation',
+                    body: {
+                        xmlAst: _ast[0],
+                        appUsingComponents,
+                        nodePath,
+                        nodeInfo
+                    }
+                })
             }
         }
     },
     processNodeGlobalRelation(node, store) {
-        let { appUsingComponents, xmlAst, nodePath} = node.body; 
+        let {nodeInfo, appUsingComponents, xmlAst, nodePath} = node.body; 
+        let nodeUsingComponents = nodeInfo.json.usingComponents || {};
         store.nodes[nodePath].json.usingComponents = store.nodes[nodePath].json.usingComponents || {};
         let componentUsingComponents = store.nodes[nodePath].json.usingComponents ;
-        if (appUsingComponents.hasOwnProperty(xmlAst.type) && (componentUsingComponents && !componentUsingComponents.hasOwnProperty(xmlAst.type))) {
-            let gPath = appUsingComponents[xmlAst.type] + '.json';
+        let type = xmlAst.type;
+        if (appUsingComponents.hasOwnProperty(type) && (componentUsingComponents && !componentUsingComponents.hasOwnProperty(type))) {
+            let gPath = appUsingComponents[type] + '.json';
             let nPath = nodePath + '.json';
             gPath = path.join(store.config.entry, gPath);
             nPath = path.join(store.config.entry, nPath);
@@ -247,8 +248,12 @@ module.exports = {
             if (gPath.startsWith('../')) {
                 gPath = gPath.replace('../', '');
             }
-            componentUsingComponents[xmlAst.type] =  gPath.replace('.json', '');
+            componentUsingComponents[type] =  gPath.replace('.json', '');
         } 
+
+        if (appUsingComponents[type] || nodeUsingComponents[type]) {
+            nodeInfo.isHasComponents = true;
+        }
         if (Array.isArray(xmlAst.children) && xmlAst.children.length) {
             this.addChild({
                 type: 'processXmlChildren',
@@ -256,14 +261,15 @@ module.exports = {
                 body:{
                     xmlAst: xmlAst.children,
                     appUsingComponents,
-                    nodePath
+                    nodePath,
+                    nodeInfo
                 }
 
             })
         }
-},
+    },
     processXmlChildren(node, store) {
-        let { xmlAst, appUsingComponents, nodePath} = node.body;
+        let { xmlAst, appUsingComponents, nodePath, nodeInfo} = node.body;
         xmlAst.forEach((x, i) => {
             this.addChild({
                 type:'processNodeGlobalRelation',
@@ -271,7 +277,8 @@ module.exports = {
                 body:{
                     xmlAst: x,
                     appUsingComponents,
-                    nodePath
+                    nodePath,
+                    nodeInfo
                 }
             })
         })

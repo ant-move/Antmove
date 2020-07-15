@@ -5,9 +5,6 @@ const { isSingle, createComponentNode, computedIndexSpaces, transformStr } = req
 global.appNodesTreeStr = `module.exports = {\n`;
 
 function generateRenderFn (route, renderStr = '') {
-    // let route = fileInfo.dist.replace(fileInfo.output, '');
-    // route = route.replace(/\.axml/, '');
-    // route = route.replace(/\\+/g, '/');
     
     appNodesTreeStr += `'${route}': ${renderStr},`;
 }
@@ -28,10 +25,20 @@ module.exports = {
                 let _np = path.join(store.config.entry, _node.projectPath);
                 if (_p === _np) {
                     let xmlAst = nodes[p].ast;
+                    let _type = nodes[p].type;
+                    let nodeNum = -1;
+                    xmlAst.forEach((x, i) => {
+                        if (x.type !== 'import') {
+                            nodeNum = i;
+                            return
+                        }
+                    })
                     this.$node.nodeId = 0;
-                    let refRender = createComponentNode(xmlAst[0], this.$node.nodeId, Config);
+                    let ifRender =  (nodes[p].isHasComponents || _type === 'Page')&& nodeNum !== -1; 
+                    let refRender = ifRender ? createComponentNode(xmlAst[nodeNum], this.$node.nodeId, Config): {};
                     ++this.$node.nodeId;
                     this.$node.refRender = refRender;
+                    this.$node.ifRender = ifRender;
                     this.addChild({
                         type: 'processXmlAst',     
                         body: {
@@ -135,7 +142,8 @@ module.exports = {
             key: 'processOrderProp' + index,
             body: {
                 props,
-                prop
+                prop,
+                type
             }
         });
         this.addChild({
@@ -196,8 +204,8 @@ module.exports = {
             this.$node.content += `${computedIndexSpaces(deep)}</${type}>\n`;
         }
     },
-    processWxmlMounted (node, store) {
-        generateRenderFn(this.$node.projectPath, this.$node.refRender.toJsFile());
+    processWxmlMounted (node, store) { 
+        this.$node.ifRender && generateRenderFn(this.$node.projectPath, this.$node.refRender.toJsFile());
         this.addChild({
             type: 'outputFile',
             body: {

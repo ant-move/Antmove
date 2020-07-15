@@ -1,6 +1,6 @@
 {
     "name": "@antmove/template-plugin",
-    "version": "1.0.61",
+    "version": "1.0.56",
     "description": "transform wechat miniprogram to tt miniprogram tool.",
     "main": "index.js",
     "scripts": {

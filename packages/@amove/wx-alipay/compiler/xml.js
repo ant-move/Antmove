@@ -81,7 +81,7 @@ useReducer({
                 Config
             );
             ++this.$node.nodeId;
-            refRender.appendChild(_parentRenderNode);
+            this.$node.ifRender && refRender.appendChild(_parentRenderNode);
         }
         if (tagAst.type !== "textContent") {
             this.$node.content += `${computedIndexSpaces(deep)}<${tagAst.type}`;
@@ -110,15 +110,19 @@ useReducer({
             }
         } else if (tagAst.type === "textContent") {
             deep++;
-            this.$node.content += `${computedIndexSpaces(deep)}${
-                tagAst.value
-            }\n`;
+            this.$node.content += `${tagAst.value}\n`;
         }
     },
     processOrderProp (node) {
-        let {props, prop} = node.body;
+        let {props, prop, type} = node.body;
         props[prop].value[0] = props[prop].value[0].replace(/\.wxml/g, '.axml')
                             .replace(/\.wxs/g, '.sjs');
+        if (type === 'import' && prop === 'src') {
+            let importValue = props[prop].value;
+            if (importValue[0] && importValue[0][0] !== ('.' || '/')) {
+                importValue[0] = `./${importValue[0]}`;
+            }
+        }
         if (prop === 'wx:key' && !/{{/.test(props[prop].value[0])) {
             props['a:key'] = {
                 type : props[prop.type],

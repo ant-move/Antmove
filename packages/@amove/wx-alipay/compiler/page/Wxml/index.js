@@ -20,15 +20,11 @@ useReducer({
     XmlTagElementMounted:{
         hook: "after",
         body (node, store) {    
-
             const config = store.config.preAppData.config;    
-            let {tagAst, deep, astLast} = node.body;
+            let { deep, astLast} = node.body;
             let cName = this.$node.componentName;
             if (!cName && deep === 1 && astLast) {
-                this.$node.content = `<view class='${config.options.pageContainerClassName}'>
-                        ${this.$node.content}\n
-                    </view>`;
-            
+                this.$node.content = `<view class='${config.options.pageContainerClassName}'>\n${this.$node.content}</view>`;           
             }
         }
     }
