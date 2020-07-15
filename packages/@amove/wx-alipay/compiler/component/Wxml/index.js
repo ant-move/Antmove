@@ -34,13 +34,9 @@ useReducer({
             if (cName && deep === 1 && astLast) {
 
                 if (this.$node.componentIsInline) {
-                    this.$node.content =  `<view class='${cName} {{className}}' style="display: inline-block;{{style}}">
-                        ${this.$node.content}
-                    </view>`;
+                    this.$node.content =  `<view class='${cName} {{className}}' style="display: inline-block;{{style}}">\n${this.$node.content}</view>`;
                 }  else {
-                    this.$node.content =  `<view class='${cName} {{className}}' style='{{style}}'>
-                        ${this.$node.content}
-                    </view>`;
+                    this.$node.content =  `<view class='${cName} {{className}}' style='{{style}}'>\n${this.$node.content}</view>`;
                 }
 
             }         

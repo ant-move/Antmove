@@ -25,10 +25,11 @@ useReducer({
                     json,
                 },
             });
-        }
-        this.$node.content = JSON.stringify(this.$node.content);
+        };
+        this.$node.content
     },
     ComponentJsonMounted () {
+        this.$node.content = JSON.stringify(this.$node.content);
         this.addChild({
             type: "outputFile",
             body: {
