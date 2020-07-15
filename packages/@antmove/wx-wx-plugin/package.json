@@ -1,6 +1,6 @@
 {
     "name": "@antmove/wx-wx",
-    "version": "1.0.56",
+    "version": "1.0.62",
     "description": "transform wechat miniprogram to alipay miniprogram tool.",
     "main": "index.js",
     "scripts": {
@@ -14,7 +14,7 @@
         "registry": "https://registry.npmjs.org/"
     },
     "dependencies": {
-        "@antmove/utils": "^1.0.56",
+        "@antmove/utils": "^1.0.62",
         "@babel/preset-env": "^7.5.5",
         "chalk": "^2.4.2",
         "colornames": "^1.1.1",
