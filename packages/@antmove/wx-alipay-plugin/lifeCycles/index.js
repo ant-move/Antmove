@@ -464,7 +464,9 @@ module.exports = {
         return fileInfo;
     },
     compiled: async function (ctx, cb = () => {}) {
-        reportError(null, null, 'log', null, this.$options.isReport);
+        let isReport = this.$options.isReport;
+        isReport = typeof isReport === 'boolean' ? isReport : true
+        reportError(null, null, 'log', null, isReport);
         const {
             findOpenAbility,
             statistics,

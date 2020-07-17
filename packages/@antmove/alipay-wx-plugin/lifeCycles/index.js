@@ -368,7 +368,9 @@ module.exports = {
         return fileInfo;
     },
     compiled (ctx) {
-        reportError();
+        let isReport = this.$options.isReport;
+        isReport = typeof isReport === 'boolean' ? isReport : true
+        reportError(null, null, 'log', null, isReport);
         generateBundleApi(ctx.output);
         generateBundleComponent(ctx.output);
 

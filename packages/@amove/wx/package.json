@@ -1,6 +1,6 @@
 {
   "name": "@amove/wx",
-  "version": "1.0.62",
+  "version": "1.0.57",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@amove/next": "^0.0.3",
+    "axios": "^0.19.2",
     "fs-extra": "^9.0.0",
     "htmlparser2": "^4.1.0"
   },
