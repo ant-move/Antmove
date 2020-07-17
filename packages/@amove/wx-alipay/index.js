@@ -57,6 +57,8 @@ module.exports = function (options = {}) {
     let preAppData = {};
     options.type = options.type || 'wx2my';
     options.fromId = options.fromId || '0';
+    options.output = options.output || options.dist;
+    options.input = options.input || options.entry;
     /**
      * 预处理，解析小程序页面组件结构
      */

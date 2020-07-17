@@ -1,6 +1,6 @@
 {
     "name": "@amove/wx-alipay",
-    "version": "1.0.62",
+    "version": "1.0.57",
     "description": "",
     "main": "index.js",
     "scripts": {
@@ -16,8 +16,8 @@
         "@amove/babel": "^0.0.1",
         "@amove/directory-to-ast": "^0.0.1",
         "@amove/next": "^0.0.3",
-        "@amove/wx": "^1.0.62",
-        "@amove/wx-utils": "^1.0.62",
+        "@amove/wx": "^1.0.57",
+        "@amove/wx-utils": "^1.0.56",
         "chalk": "^4.1.0",
         "colornames": "^1.1.1",
         "css": "^2.2.4",

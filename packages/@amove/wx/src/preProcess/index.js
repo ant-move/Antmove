@@ -51,7 +51,9 @@ module.exports = {
             const appName = getAppName(json.pages, store.config.entry, 'navigationBarTitleText');
             setAppName(appName);
         }
-        let isReport = store.config.isReport || true;
+        
+        let isReport = store.config.isReport;
+        isReport = typeof isReport === 'boolean' ? isReport : true
         reportError(null, null, 'log', null, isReport);
         // 是否支持component2
         store.config.component2 === false || store.config.component2 === "false" ? Config.component2 = false :  Config.component2 = true;
