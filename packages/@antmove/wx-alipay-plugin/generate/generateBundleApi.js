@@ -50,7 +50,7 @@ function generate (output) {
     }
 }
 
-function generateRuntimeConfig (output, isDev = false, type) {
+function generateRuntimeConfig (output, isDev = false, type, useRuntimeLog = false) {
     
     let code = `
     ${
@@ -58,7 +58,8 @@ function generateRuntimeConfig (output, isDev = false, type) {
 }
     module.exports = {
         env: ${isDev ? '"development"': '"production"'},
-        global: ${type === 'alipay' ? 'my' : type }
+        global: ${type === 'alipay' ? 'my' : type },
+        useRuntimeLog: ${useRuntimeLog === true ? true : false}
     }
     `;
     let outputPath = path.join(output, `${customComponentPrefix}/api/config.js`);
@@ -114,7 +115,7 @@ process.on('message', function (opts) {
     },
     customComponentPrefix = Config.library.customComponentPrefix;
     
-    generateRuntimeConfig(opts.output, Config.isDev(), Config.aliAppType);
+    generateRuntimeConfig(opts.output, Config.isDev(), Config.aliAppType, Config.useRuntimeLog);
     generate(opts.output);
     process.exit(0);
 });

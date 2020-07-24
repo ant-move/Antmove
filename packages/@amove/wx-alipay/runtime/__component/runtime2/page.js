@@ -7,7 +7,7 @@ const processRelationHandle = require('./processRelation');
 const { connectNodes } = require('./utils');
 const selectComponent = require('./selectComponent');
 const {
-    watchShakes,
+    // watchShakes,
     getUrl
 } = require('../utils');
 
@@ -26,9 +26,9 @@ module.exports = {
             }
 
             getUrl();
-            if (config.env === "development") {
-                watchShakes();
-            } 
+            // if (config.env === "development") {
+            //     watchShakes();
+            // } 
             if (options.onResize) {
                 warnLife("There is no onResize life cycle", "onResize");
             }

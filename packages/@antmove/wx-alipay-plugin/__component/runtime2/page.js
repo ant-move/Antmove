@@ -50,7 +50,7 @@ module.exports = {
         };
 
         _opts.onShow = function (param) {
-            if (config.env === "development") {
+            if (config.env === "development" && config.useRuntimeLog) {
                 watchShakes();
             } 
             if (options.onShow) {

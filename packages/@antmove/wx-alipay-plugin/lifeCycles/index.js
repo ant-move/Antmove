@@ -111,7 +111,8 @@ module.exports = {
 
         Config.env = process.env.NODE_ENV ===  "development" ? 'development' : 'production';
         showReport = Config.env === 'development';
-        Config.component2 = this.$options.component2;
+        Config.component2 = typeof this.$options.component2 === 'boolean' ? this.$options.component2 : true;
+        Config.useRuntimeLog = typeof this.$options.useRuntimeLog === 'boolean' ? this.$options.useRuntimeLog : false;
         Config.aliAppType = this.$options.platform || 'alipay';
         if (this.$options.component === "component") {
             Config.min = true;
@@ -345,7 +346,9 @@ module.exports = {
                 let pathInfo = fileInfo.path.split(projectParents)[1].substr(1);
                 const jsonData = getJsonData(pathInfo, content);
                 repData.transforms = Object.assign(repData.transforms, jsonData);
-                content = processAppJson(content);
+                if (Config.useRuntimeLog){
+                    content = processAppJson(content);
+                } 
                 const app = JSON.parse(content);
 
                 let dirnameArr = fileInfo.dirname.split("/");
@@ -473,7 +476,9 @@ module.exports = {
             writeReportPage
         } = record(recordConfig);
         generateBundleComponent(ctx.output, Config);
-        generateMiniProjectJson(ctx.output);
+        if (Config.component2) {
+            generateMiniProjectJson(ctx.output);            
+        }
         await runGenerateBundleApi(ctx.output);
 
         generateNodeTrees(ctx.output, Config);
