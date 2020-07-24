@@ -44,7 +44,8 @@ let options = {
     fromId: 0,
     hooks: {},
     babel: {},
-    plugins: []
+    plugins: [],
+    useRuntimeLog: false
 };
 
 program
@@ -73,7 +74,8 @@ program
     )
     .option("-f --fromId <type>", "Scene value.")
     .option("--platform <type>", "The platform of alipay miniprogram.")
-    .option("-p --isReport <type>", "Report or not.");
+    .option("-p --isReport <type>", "Report or not.")
+    .option("-u --useRuntimeLog <type>", "open runtime log");
 
 program.parse(process.argv);
 
@@ -98,6 +100,7 @@ options.error = program.error || options.error;
 options.empty = program.empty || options.empty;
 options.fromId = program.fromId || options.fromId;
 options.isReport = program.isReport || options.isReport;
+options.useRuntimeLog = program.useRuntimeLog || false; 
 
 if (options.error === "true" || options.error === true ) {
     options.error = true;
@@ -128,6 +131,13 @@ if (options.scope === "true" || options.scope === 1 ||options.scope === true) {
 } else {
     options.scope = false;
 }
+
+if (options.useRuntimeLog === "true" || options.useRuntimeLog === true) {
+    options.useRuntimeLog  = true;
+} else {
+    options.useRuntimeLog = false;
+}
+
 if (antmoveOptions) {
     Object.keys(options).forEach(function (optName) {
         if (options[optName] === undefined) {

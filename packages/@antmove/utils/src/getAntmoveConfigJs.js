@@ -11,7 +11,7 @@ function recordOptions (options) {
         _output = processPath(options);
     let configPath = path.join(options.input, `./antmove.config.js`);
     let _options = {};
-    let newArr = ['env','platform','component2','scope','type','component','error','empty', 'fromId', 'isReport'];
+    let newArr = ['env','platform','component2','scope','type','component','error','empty', 'fromId', 'isReport', 'useRuntimeLog'];
     newArr.forEach ((key) => {
         _options[key] = options[key];
     })

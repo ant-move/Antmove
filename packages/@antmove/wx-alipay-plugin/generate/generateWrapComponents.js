@@ -35,7 +35,9 @@ function copyUtils (readPath, output) {
 }   
 
 module.exports = function (output, config) {
-    generateLogPage(output);
+    if (config.useRuntimeLog) {
+        generateLogPage(output);
+    }    
     copyUtils('/utils', output);
     Object.keys(config.compile.customComponent)
         .forEach(function (item) {
