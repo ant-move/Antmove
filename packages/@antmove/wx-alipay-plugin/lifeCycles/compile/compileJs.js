@@ -20,6 +20,7 @@ const {
 
 
 module.exports = function (fileInfo, ctx, originCode, apis) {
+    originCode = transformClass(originCode);
     originCode = customBabelHandle(originCode, ctx)
     originCode = behavourHandle(originCode);
     // originCode = precessRelativePathOfCode(originCode, fileInfo.path, ctx.entry);
@@ -27,7 +28,6 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
         originCode = processComponentIs(originCode, fileInfo.parent.is);
 
     }
-    originCode = transformClass(originCode);
     originCode = ifProcessHandleFn(originCode, {
         entry: 'wx',
         dist: 'alipay',
@@ -49,14 +49,7 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
      * */
 
     let componentWrapFnPath = customComponentPrefix + '/component/componentClass.js';
-    let matchRet = '';
-    let cbNameInfo = {
-        name: '',
-        constructName: {}
-    };
-    getCbName(originCode, cbNameInfo);
-    
-    matchRet = cbNameInfo.name;
+
     let apiPath = customComponentPrefix + '/api/index.js';
     let _compoentPath = componentWrapFnPath;
     /**
@@ -73,15 +66,11 @@ module.exports = function (fileInfo, ctx, originCode, apis) {
     }
     let insertCode = '';
 
-    if (matchRet) {
-        Object.keys(cbNameInfo.constructName)
-            .forEach(function (name) {
-                insertCode += `const ${Config.target + name} = require('${_compoentPath}')('${name}');\n`;
-            });
-        originCode = ConstructorHandle(originCode, {
-            targetName: Config.target
-        });
+
+    if (fileInfo.filename ==='app.js' && fileInfo.deep === 0) {
+        insertCode += `import '${_compoentPath}';\n`;
     }
+
 
     if (isMatchPlatformApi || (fileInfo.parent && fileInfo.parent.tplInfo)) {
         let type = 'my';

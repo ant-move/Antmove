@@ -38,7 +38,6 @@ function getInfo (key, obj) {
 function processRelations (ctx, relationInfo = {}) {
     let route = ctx.is;
     route = route.replace(/\/node_modules\/[a-z-]+\/[a-z-]+/, '');
-    
     if (route[0] === '/') {
         route = route.substring(1);
     }

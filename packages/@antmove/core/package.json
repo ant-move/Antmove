@@ -1,5 +1,5 @@
 {
-  "name": "@amove/wx",
+  "name": "@antmove/core",
   "version": "1.1.0",
   "description": "",
   "main": "index.js",
@@ -7,13 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@amove/next": "^0.2.2",
-    "axios": "^0.19.2",
-    "fs-extra": "^9.0.0",
-    "htmlparser2": "^4.1.0",
-    "prettier": "^2.0.5"
+    "@antmove/utils": "^1.0.43",
+    "fs-extra": "^9.0.0"
   },
-  "author": "amap-appx@autonavi.com",
+  "author": "amap-appx@service.autonavi.com",
   "license": "GPL-3.0",
   "publishConfig": {
     "access": "public",

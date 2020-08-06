@@ -28,6 +28,11 @@ module.exports = function ({ types: t }, ...p) {
                 }
                 // path.node.arguments = [arg];
                 // path.node = arg;
+            },
+            Identifier (path) {                
+                let name = path.node.name;
+                if (!(name === 'Page' || name === 'App' || name === 'Component')) return false;
+                path.node.name = p[0].targetName + name;
             }
         }
     };

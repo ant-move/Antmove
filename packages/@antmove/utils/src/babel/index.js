@@ -13,6 +13,7 @@ const externalForWx = require('./externalForWx');
 const getCbNameFn = require('./getCallName');
 const replaceCallNames = require("./replaceCallName");
 const sharePath = require('./sharePath');
+const renameFn = require('./reName');
 const fs = require('fs-extra');
 
 function ConstructorHandleFn (code,  opts = {}) {
@@ -25,6 +26,17 @@ function ConstructorHandleFn (code,  opts = {}) {
             ]
         ]
     }).code;
+}
+
+function renamehandleFn (code, opts = {} ) {
+    return babel.transform(code, {
+        plugins:[
+            [
+                renameFn,
+                opts
+            ]
+        ]
+    }).code
 }
 
 function getCbName (code, opts = {}) {
@@ -208,6 +220,7 @@ module.exports = {
     getCbName,
     replaceCallName,
     transSharePath,
+    renamehandleFn,
     customBabelHandle (code, ctx) {
         if (!ctx.$options.babel) {
             return code
