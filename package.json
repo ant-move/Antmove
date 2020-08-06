@@ -1,6 +1,6 @@
 {
     "name": "antmove",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "小程序转换器，基于支付宝/微信小程序转换为多端小程序，让小程序跨平台开发变得简单。",
     "main": "src/index.js",
     "bin": {
@@ -12,17 +12,17 @@
     "author": "amap-appx@service.autonavi.com",
     "license": "GPL-3.0",
     "dependencies": {
-        "@amove/wx-alipay": "^1.1.0",
-        "@amove/wx-tt": "^1.1.0",
-        "@antmove/alipay-baidu": "^1.1.0",
-        "@antmove/alipay-polyfill": "^1.1.0",
-        "@antmove/alipay-wx": "^1.1.0",
-        "@antmove/utils": "^1.1.0",
-        "@antmove/wx-alipay": "^1.1.0",
-        "@antmove/wx-baidu": "^1.1.0",
-        "@antmove/wx-qq": "^1.1.0",
-        "@antmove/wx-tt": "^1.1.0",
-        "@antmove/wx-wx": "^1.1.0",
+        "@amove/wx-alipay": "^1.1.1",
+        "@amove/wx-tt": "^1.1.1",
+        "@antmove/alipay-baidu": "^1.1.1",
+        "@antmove/alipay-polyfill": "^1.1.1",
+        "@antmove/alipay-wx": "^1.1.1",
+        "@antmove/utils": "^1.1.1",
+        "@antmove/wx-alipay": "^1.1.1",
+        "@antmove/wx-baidu": "^1.1.1",
+        "@antmove/wx-qq": "^1.1.1",
+        "@antmove/wx-tt": "^1.1.1",
+        "@antmove/wx-wx": "^1.1.1",
         "@babel/plugin-proposal-class-properties": "^7.5.5",
         "chalk": "^2.4.2",
         "commander": "^2.19.0",
@@ -30,8 +30,8 @@
         "fs-extra": "^8.1.0",
         "inquirer": "^7.0.0",
         "marked": "^0.7.0",
-        "os": "^0.1.1",
-        "minimist": "^1.2.5"
+        "minimist": "^1.2.5",
+        "os": "^0.1.1"
     },
     "devDependencies": {
         "@commitlint/cli": "^8.1.0",
