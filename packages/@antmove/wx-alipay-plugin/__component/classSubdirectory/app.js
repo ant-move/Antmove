@@ -97,7 +97,7 @@ module.exports = {
         }
         if (options.onError) {
             _opts.onError =function () {
-                options.onError.call(this);
+                options.onError.apply(this, arguments);
             };
         }
     }

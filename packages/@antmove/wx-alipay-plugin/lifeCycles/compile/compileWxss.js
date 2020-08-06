@@ -33,6 +33,21 @@ module.exports = function (fileInfo, ctx, inCompileWxml = false, isComponentPage
     }
     fileInfo.dist = fileInfo.dist.replace(/\.wxss/, '.acss');
     let cssContent = fs.readFileSync(fileInfo.path, 'utf8') || '';
+    if (fileInfo.extname === '.wxss') {
+        let _obj = css.parse(cssContent);
+        _obj.stylesheet.rules
+            .forEach((r) => {
+                let keyframes= r.keyframes;
+                if (keyframes) {
+                    let newFframs = keyframes.filter((k) => {
+                        return k.type !== 'comment'
+                    })
+                    r.keyframes = newFframs;
+                }
+            })
+
+        cssContent = css.stringify(_obj);
+    };
     cssContent = prettierCode(cssContent, 'scss');
 
     cssContent = cssContent.replace(/\.wxss"/g, '.acss";').replace(/\.wxss'/g, '.acss\';');
@@ -54,7 +69,6 @@ module.exports = function (fileInfo, ctx, inCompileWxml = false, isComponentPage
 
         return `@import '${rule}';\n`;
     });
-    cssContent = cssContent.replace(/\/\*[^*]*\*+([^/*][^*]*\*+)*\//g, '');
     if (Config.options.scopeStyle && classNamesWrap) {
         const classPrefix = classNamesWrap.classPrefix;
         // let rootClassNames = classNamesWrap.value[0].split(/\s+/);

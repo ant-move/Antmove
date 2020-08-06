@@ -11,6 +11,7 @@ const {
     processMixTemplate
 } = require('@antmove/utils');
 const wxsApp = require('./generateWxsDep');
+const { parseString, parseFile } = require('../parse/parse')
 /**
 * process wxs
 */
@@ -39,7 +40,13 @@ function processSpecialTags (ast = {}) {
 
 global.appNodesTreeStr = `module.exports = {\n`;
 
+const isParseTemplate = true
+
+
 module.exports = function axmlRender (ast = [], fileInfo) {
+    // 保存模板的声明
+    const includeCustomCompTpls = {}
+
     /**
      * container node render
      */
@@ -76,7 +83,104 @@ module.exports = function axmlRender (ast = [], fileInfo) {
     }
 
 
+    function processTempalte(ast) {
+        const { props } = ast
+        const templateName = props.is.value.join('')
+        const replacedChildren = includeCustomCompTpls[templateName]
+
+        // console.log('template is', templateName)
+        ast.type = 'block'
+
+        if (ast.props.data) {
+            ast.props = {
+                ...ast.props,
+                "wx:for": {
+                    type: "unknown",
+                    // value: ast.props.data.value.map(str => str.replace(/(\w+)/, '[ $1 ]')),
+                    value: [processData()]
+                },
+                "wx:for-item": {
+                    type: "unknown",
+                    value: ["item"]
+                }
+            }
+
+            // todo: 表达式没处理
+            ast.children = parseString(replacedChildren.map(childAst => {
+                return renderFn(childAst, fileInfo, refRender)
+            }).join('').replace(/{{\s*(\w+)\s*}}/g, '{{item.$1}}'))
+
+        } else {
+            ast.children = replacedChildren
+        }
+
+        ast.props._is = ast.props.is
+
+        delete ast.props.is
+        delete ast.props.data
+
+        function processData() {
+            try {
+
+                const value = ast.props.data.value[0].match(/\s*\{\s*\{\s*([^}]+)\s*\}\s*\}/)[1]
+
+                // data: item 或者 data, item
+                // 再套一层大括号
+                if (/,|:/.test(value)) {
+                    return `{{ [{ ${value} }] }}`
+                }
+                // data
+                else {
+                    return `{{ [ ${value} ] }}`
+                }
+            } catch (err) {
+                console.log(ast.props)
+                console.log('err', err)
+            }
+        }
+    }
+
+    // todo: 后期优化，只对用了自定义组件的页面使用
+    function includeCustomComp(ast) {
+        return true
+    }
+
+    function parseImportTemplate(ast) {
+        const srcVal = ast.props.src.value[0]
+
+        // console.log('Import template', srcVal)
+
+        const templatePath = path.join(/^\//.test(srcVal) ? fileInfo.entry : fileInfo.dirname, srcVal)
+        const templatesAst = parseFile(templatePath).filter(ast => ast.type === 'template' && ast.props.name)
+
+        templatesAst.forEach(templateAst => {
+           const name = templateAst.props.name.value[0]
+           includeCustomCompTpls[name] = templateAst.children
+        })
+    }
+
     function renderFn (_ast, _fileInfo, parentRenderNode) {
+        // 处理使用自定义模板
+        // 对于template的处理，必须把template的定义或者引入放在使用前
+
+        if (isParseTemplate) {
+            // 处理模板的定义
+            if (_ast.type === 'template' && _ast.props.name && includeCustomComp(_ast)) {
+                includeCustomCompTpls[_ast.props.name.value.join('')] = _ast.children
+            }
+
+            // 处理模板的引入
+            if (_ast.type === 'import' && /wxml$/.test(_ast.props.src.value[0])) {
+                parseImportTemplate(_ast)
+                return ''
+            }
+
+            // 处理模板的使用
+            if (_ast.type === 'template' && _ast.props.is && includeCustomCompTpls[_ast.props.is.value.join('')]) {
+                processTempalte(_ast, _fileInfo)
+            }
+        }
+
         let _parentRenderNode = parentRenderNode;
         _ast.children = _ast.children || [];
         if (!config.hasWxs) {
@@ -95,10 +199,10 @@ module.exports = function axmlRender (ast = [], fileInfo) {
                 _ast.children[0].value = '';
                 let relativePath = filename.split(path.sep);
                 let _relativePath = relativePath[relativePath.length - 1];
-    
+
                 _ast.props.src = { type: 'double', value: [ './' + _relativePath ] };
 
-                
+
             } catch (e) {
                 if (e) {
                     console.error(e);
@@ -122,7 +226,7 @@ module.exports = function axmlRender (ast = [], fileInfo) {
 
             return `${_ast.value}`;
         }
-        
+
         if (_ast.type === 'open-data') {
             console.warn('支付宝暂不支持open-data组件,请检查业务逻辑')
         }
@@ -173,7 +277,7 @@ module.exports = function axmlRender (ast = [], fileInfo) {
                             attrCode += ` ${propInfo.key} `;
                         } else {
                             attrCode += ` ${propInfo.key}="${value}"`;
-                        }                      
+                        }
                     } else {
                         if ((propInfo.key === "a:key" || propInfo.key === "wx:key") && !/{{/.test(value)) {
                             attrCode +=  ` ${propInfo.key}='{{${value}}}'`
@@ -233,7 +337,7 @@ module.exports = function axmlRender (ast = [], fileInfo) {
                 code += (appendChars.startsWith('</') && !/<\/text>/.test(appendChars) ? os.EOL : '') +  String(indentWidth) + appendChars;
             } else if (appendChars.endsWith('>')) {
                 if (/<\/text>/.test(appendChars)) {
-                    code += appendChars 
+                    code += appendChars
                 } else {
                     code += appendChars + os.EOL;
                 }
@@ -267,7 +371,7 @@ function generateRenderFn (fileInfo, renderStr = '') {
     let route = fileInfo.dist.replace(fileInfo.output, '');
     route = route.replace(/\.axml/, '');
     route = route.replace(/\\+/g, '/');
-    
+
     appNodesTreeStr += `'${route}': ${renderStr},`;
 }
 
@@ -307,9 +411,9 @@ function processSjs (_ast, _fileInfo) {
                 fs.outputFileSync(filename + moduleName + 'sjs.js', sjsCode);
                 _ast.children[0].value = '';
 
-                
+
                 wxsApp.createDep(route, wxsPath, moduleName, _fileInfo.output);
-                
+
                 // _ast.props.src = { type: 'double', value: [ './' + _relativePath ] };
                 bool = true;
             } catch (e) {
@@ -339,7 +443,7 @@ function processComponentIs (fileInfo) {
     // let dist = fileInfo.dist.replace(/\.axml$/, '.is.js');
     let isPath = fileInfo.dist.replace(fileInfo.output, '')
         .replace(/\.axml$/, '').replace(/\\/g, "/");
-    
+
     if (fileInfo.parent) {
         fileInfo.parent.is = isPath;
     }

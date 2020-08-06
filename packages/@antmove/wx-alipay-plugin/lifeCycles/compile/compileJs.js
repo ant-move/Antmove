@@ -5,24 +5,24 @@ const path = require('path');
 const {
     customBabelHandle,
     behavourHandle,
-    // precessRelativePathOfCode,
     replaceCalleeHandleFn,
     commentBlock,
     requireModuleFn,
     ifProcessHandleFn,
-    ConstructorHandle,
     prettierCode,
     transformClass,
-    // processFnBodyHandleFn,
     transSharePath,
-    getCbName
+    renamehandleFn,
+    wxConfigHandle
 } = require('@antmove/utils');
 
 
 module.exports = function (fileInfo, ctx, originCode, apis) {
     originCode = transformClass(originCode);
+    originCode = renamehandleFn(originCode);
     originCode = customBabelHandle(originCode, ctx)
     originCode = behavourHandle(originCode);
+    originCode = wxConfigHandle(originCode);
     // originCode = precessRelativePathOfCode(originCode, fileInfo.path, ctx.entry);
     if (!Config.component2 && fileInfo.parent && fileInfo.parent.is) {
         originCode = processComponentIs(originCode, fileInfo.parent.is);

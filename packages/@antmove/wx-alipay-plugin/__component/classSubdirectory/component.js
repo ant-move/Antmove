@@ -221,6 +221,11 @@ module.exports = {
             processObservers.call(this, _opts.observersObj, options, this.$antmove._data);
         });
         fnApp.insert('onInit', function () {
+            for (const method in this) {
+                if (typeof this[method] === 'function') {
+                    this[method] = this[method].bind(this);
+                }
+            };
             this.getRelationNodes = function () {
                 return [];
             };
@@ -262,7 +267,8 @@ module.exports = {
         fnApp.bind('didMount', _opts);
         fnApp.add('didUnmount', options.detached);
         fnApp.add('didUnmount', function () {
-            if (this.$node) {
+            // todo: 暂时这样处理使其不报错
+            if (this.$node && this.$node.$parent) {
                 this.$node.$parent.removeChild(this.$node);
                 let refId = this.$node.$relationNode.$id;
                 this.$antmove[refId]--;

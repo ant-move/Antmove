@@ -12,17 +12,17 @@ const originPage = Page;
 const originComponent = Component;
 
 App = function (options = {}) {
-    let _opts = {};
+    const _opts = {};
     appTransformation.processTransformationApp(_opts, options);
     originApp(_opts);
 },
 Page = function (options = {}) {
-    let _opts = {};
+    const _opts = {};
     pageTransformation.processTransformationPage(_opts, options);
     originPage(_opts);
 },
 Component = function (options = {}) {
-    let _opts = {};
+    const _opts = {};
     componentTransformation.processTransformationComponent(_opts, options);
     
     originComponent(_opts);
