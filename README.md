@@ -107,7 +107,7 @@ antmove wx-alipay -i ./wechat-mini/project -o ./dist/alipay-mini/project --env d
 * `--env,-e`
     * 可选（development/production），编译模式，生产模式代码会压缩，无编译日志及运行时日志
 
-> 更多配置项可参考[配置参数详情](https://ant-move.github.io/config/)。
+> 更多配置项可参考[配置参数详情](../config/)。
 
 
 ### Node.js 使用方式

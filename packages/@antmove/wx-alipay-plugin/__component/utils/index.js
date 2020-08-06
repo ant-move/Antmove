@@ -1,3 +1,4 @@
+
 const getUrl = require('./getUrl');
 const watchShakes = require('./watchShakes');
 const updateData = require('./updateData');
@@ -17,6 +18,7 @@ const handleProps = require('./handleProps');
 const handleExternalClasses = require('./handleExternalClasses');
 const handleAfterInit = require('./handleAfterInit');
 const mergeOptions = require('./mergeOptions');
+const {copy} = require('./cloneDeep');
 
 
 module.exports = {
@@ -36,5 +38,6 @@ module.exports = {
     handleProps,
     handleExternalClasses,
     handleAfterInit,
-    mergeOptions
-}
+    mergeOptions,
+    copy
+};

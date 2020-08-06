@@ -41,6 +41,9 @@ const apiObj = {
                 ret.screenWidth = ret.screenWidth / ret.pixelRatio;
                 ret.screenHeight = ret.screenHeight / ret.pixelRatio
             }
+            // mock的版本，确保微信小程序源码里读取后和目标版本匹配都能通过
+            ret.SDKVersion = '10.0.0'
+
             return ret
         },
     },
@@ -70,6 +73,9 @@ const apiObj = {
                         res.screenWidth = res.screenWidth / res.pixelRatio;
                         res.screenHeight = res.screenHeight / res.pixelRatio
                     }
+
+                    // mock的版本，确保微信小程序源码里读取后和目标版本匹配都能通过
+                    res.SDKVersion = '10.0.0'
                     obj.success && obj.success(res);
                 }
             });
@@ -1100,7 +1106,7 @@ const apiObj = {
                   result.fullname = res.userName
                   result.mobilePhone = res.telNumber
                   result.resultStatus = res.errMsg
-                  
+
                   obj.success && obj.success(result);
                 }
             });

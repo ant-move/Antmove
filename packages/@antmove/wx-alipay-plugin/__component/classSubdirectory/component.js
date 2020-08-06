@@ -19,7 +19,8 @@ const {
     handleProps,
     handleExternalClasses,
     handleAfterInit,
-    mergeOptions
+    mergeOptions,
+    copy
 } = require('../utils');
 function getInfo (key, obj) {
     let val = {};
@@ -37,7 +38,6 @@ function getInfo (key, obj) {
 function processRelations (ctx, relationInfo = {}) {
     let route = ctx.is;
     route = route.replace(/\/node_modules\/[a-z-]+\/[a-z-]+/, '');
-    
     if (route[0] === '/') {
         route = route.substring(1);
     }
@@ -197,9 +197,6 @@ module.exports = {
             _life.move && warnLife(`There is no moved life cycle`, "moved");
             _life.pageLifetimes && warnLife(`There is no page life cycle where the component resides,including(show,hide,resize)`, "pageLifetimes");
             this.props.genericSelectable && warnLife(`generic:selectable is Unsupported`, "generic"); 
-            if (typeof this.triggerEvent !== 'function') {
-                processTriggerEvent.call(this);
-            }
 
             // process relations, get relation ast
             let relationAst = createNode.call(this, null, null, null, null, true).mountedHandles;
@@ -220,9 +217,9 @@ module.exports = {
         
         fnApp.add('didMount', didMount);
         fnApp.add('onInit', options.created);
-        fnApp.add('onInit', function(){
+        fnApp.add('onInit', function () {
             processObservers.call(this, _opts.observersObj, options, this.$antmove._data);
-        })
+        });
         fnApp.insert('onInit', function () {
             this.getRelationNodes = function () {
                 return [];
@@ -239,7 +236,10 @@ module.exports = {
             processRelations(this, Relations);
             this.selectComponentApp.connect();
             addAntmoveData.call(this);
-            observerHandle(_opts.observerObj, this.$antmove._data, this,true);
+            if (typeof this.triggerEvent !== 'function') {
+                processTriggerEvent.call(this);
+            }
+            observerHandle(_opts.observerObj, _opts, this, true);
         });
         fnApp.bind('onInit', _opts);
         fnApp.add('didMount', _opts.attached);
@@ -247,10 +247,10 @@ module.exports = {
         
 
         let didUpdate = function (...param) { 
-           updateData.call(this, param);
-           processObservers.call(this, _opts.observersObj, options, this.$antmove._data);
-           observerHandle(_opts.observerObj, this.$antmove._data, this);
-           addAntmoveData.call(this);
+            updateData.call(this, param);
+            processObservers.call(this, _opts.observersObj, options, this.$antmove._data);
+            observerHandle(_opts.observerObj, this.$antmove._data, this);
+            addAntmoveData.call(this);
         };
         fnApp.add('didUpdate', didUpdate);
         fnApp.add('didUpdate', function () {
@@ -277,29 +277,15 @@ module.exports = {
 function handleData (otps = {}) {
   
 }
-function addAntmoveData() {
-    let _data = [{},{}], ctx = this,_props = {};
+function addAntmoveData () {
+    let _data = [{}, {}], ctx = this, _props = {};
     for (var i in ctx.properties) {
-        _props[i] = ctx.data[i]
+        _props[i] = ctx.data[i];
     }
     _data[0] = copy(_props);
     _data[1] = copy(ctx.data) ;
     this.$antmove = this.$antmove || {};
     this.$antmove._data = _data;
-}
-
-function copy(obj) {
-  var objClone = Array.isArray(obj) ? [] : {};
-    for (var key in obj) {
-     if (obj.hasOwnProperty(key)) {
-        if (obj[key] && typeof obj[key] === "object") {
-          objClone[key] = copy(obj[key]);
-        } else {
-          objClone[key] = obj[key];
-        }
-      }
-    }
-  return objClone;
 }
 
 

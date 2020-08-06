@@ -54,6 +54,7 @@ module.exports = function (fileInfo, ctx, inCompileWxml = false, isComponentPage
 
         return `@import '${rule}';\n`;
     });
+    cssContent = cssContent.replace(/\/\*[^*]*\*+([^/*][^*]*\*+)*\//g, '');
     if (Config.options.scopeStyle && classNamesWrap) {
         const classPrefix = classNamesWrap.classPrefix;
         // let rootClassNames = classNamesWrap.value[0].split(/\s+/);
