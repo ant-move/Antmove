@@ -1,13 +1,13 @@
 {
   "name": "@antmove/core",
-  "version": "1.1.1",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@antmove/utils": "^1.1.1",
+    "@antmove/utils": "^1.0.43",
     "fs-extra": "^9.0.0"
   },
   "author": "amap-appx@service.autonavi.com",

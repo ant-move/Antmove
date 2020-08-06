@@ -1,6 +1,6 @@
 {
     "name": "@antmove/wx-baidu",
-    "version": "1.1.1",
+    "version": "1.1.0",
     "description": "wx-amap plugin for Antmove",
     "main": "index.js",
     "scripts": {
@@ -13,9 +13,9 @@
     "author": "amap-appx@service.autonavi.com",
     "license": "GPL-3.0",
     "dependencies": {
-        "@antmove/alipay-baidu": "^1.1.1",
-        "@antmove/wx-alipay": "^1.1.1",
-        "antmove": "^1.1.1",
+        "@antmove/alipay-baidu": "^1.1.0",
+        "@antmove/wx-alipay": "^1.1.0",
+        "antmove": "^1.1.0",
         "fs-extra": "^8.1.0"
     },
     "gitHead": "d44d3ff6076b0114f4ff8ed0f720d7881de43aa4"
