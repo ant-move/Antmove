@@ -11,7 +11,7 @@ module.exports = function (...p) {
         visitor :{
             Identifier(path) {
                 const _name = path.node.name;
-                if ( aliRervedWord.includes(_name)) {
+                if (aliRervedWord.includes(_name)) {
                     path.scope.rename(_name);
                 }
             }

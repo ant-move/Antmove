@@ -7,8 +7,6 @@ module.exports = function (originCode) {
         }\n ${originCode} ` ;
         
     }
-
-
     return originCode;
 };
 

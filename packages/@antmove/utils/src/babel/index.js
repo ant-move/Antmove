@@ -14,6 +14,7 @@ const getCbNameFn = require('./getCallName');
 const replaceCallNames = require("./replaceCallName");
 const sharePath = require('./sharePath');
 const renameFn = require('./reName');
+const wxConfigHandle = require('./__wxConfigHandle');
 const fs = require('fs-extra');
 
 function ConstructorHandleFn (code,  opts = {}) {
@@ -221,6 +222,7 @@ module.exports = {
     replaceCallName,
     transSharePath,
     renamehandleFn,
+    wxConfigHandle,
     customBabelHandle (code, ctx) {
         if (!ctx.$options.babel) {
             return code

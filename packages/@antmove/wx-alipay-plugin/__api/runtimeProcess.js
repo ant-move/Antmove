@@ -51,16 +51,16 @@ module.exports = function (obj = {}) {
             });
         return _obj;
     }
-    return new _Proxy(obj, {
+    return new _Proxy(_obj, {
         get (target, attr) {
             let ret;
             if (typeof attr === 'string' && myApi[attr]) {
                 if (typeof myApi[attr].fn === 'function') {
-                    ret = function (obj = {}, args = "") {
+                    ret = function (opts = {}, args = "") {
                         if (args) {
-                            return myApi[attr].fn(obj, args);
+                            return myApi[attr].fn(opts, args);
                         }
-                        return myApi[attr].fn(obj);
+                        return myApi[attr].fn(opts);
                   };
                 } else {
                     ret = myApi[attr];
