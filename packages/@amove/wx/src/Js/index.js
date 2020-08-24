@@ -42,7 +42,19 @@ module.exports = {
         });
         this.$node.content = prettierCode(this.$node.content);
     },
-    ProcessBabelMounted (node) {
+    
+    ProcessBabelMounted (node, store) {
+        this.addChild({
+            type: 'compilerLog',
+            body: {
+                _type: 'getScriptData',
+                opts: {
+                    wxoriginCode: this.$node.originCode,
+                    apiObj: this.$node.jsUseApis,
+                    pathInfo: path.join(path.basename(store.config.entry), this.$node.projectPath)
+                }
+            }
+        })
         this.addChild({
             type: "outputFile",
             body: {

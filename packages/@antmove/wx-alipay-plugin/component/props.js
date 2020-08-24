@@ -10,7 +10,7 @@ const { externalForWxFn } = require("@antmove/utils");
 const Config = require('../config');
 
 module.exports = function (ast, fileInfo, renderAxml) {
-    
+
     if (ast.type==='swiper-item') {
         const oldChildren = ast.children;
         ast.children = [
@@ -57,9 +57,12 @@ module.exports = function (ast, fileInfo, renderAxml) {
             }
         });
     }
-
+  
     let originType = type;
     let tagInfo = _componentMap[type];
+    if(tagInfo  && tagInfo.type === 0){
+        console.log(`支付宝暂不支持${type}组件,请检查业务逻辑`);
+    }
     /**
      * 自定义组件预处理 - 事件
      */
@@ -141,9 +144,14 @@ module.exports = function (ast, fileInfo, renderAxml) {
 };
 
 function processEvents (obj = {}) {
+    const bindReg = /^(bind|catch):?/
+
     for (let key in obj) {
         if (eventsMap[key]) {
-            obj[eventsMap[key]] = obj[key];
+            obj[eventsMap[key]] = {
+                value: ['antmoveAction']
+            }
+            obj[`data-antmove-${key.replace(bindReg, '')}`] = obj[key]
             delete obj[key];
         } else if (/^bind:(.+)/.test(key) || /^bind(.+)/.test(key)) {
             let newEvent = RegExp.$1;
@@ -339,16 +347,16 @@ function processExternalClasses (ast, fileInfo) {
                 newClass.push(str);
             }
         });
-            
+
         classInfo.value[0] = newClass.join(' ');
         return classInfo;
     }
-    
+
     function _transform (str = "") {
         str = str.replace(/-(\w)/g, function (...$) {
             return $[1].toUpperCase();
         });
-    
+
         return str;
     }
 }

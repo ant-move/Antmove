@@ -1,5 +1,5 @@
 const Transform = require('./transform/index.js');
-
+const path = require('path');
 module.exports = function () {
     const app = {
         plugins: []
@@ -48,6 +48,7 @@ function preprocessOpts (opts = {}) {
     }
 
     // opts.exclude.push(/__antmove/g);
-    opts.exclude.push(opts.dist);   // 排除输出目录
+    // opts.exclude.push(opts.dist);   // 排除输出目录
+    opts.exclude.push(opts.dist.split(path.sep)[opts.dist.split(path.sep).length-2]);// 排除输出目录
 
 }

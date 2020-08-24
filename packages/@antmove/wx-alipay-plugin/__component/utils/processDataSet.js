@@ -1,3 +1,8 @@
+/**
+ * 把props的data属性，处理成dataset
+ * { 'data-alpha-beta': 3 }
+ * { alphaBeta: 3 }
+ */
 function processDataSet (e, props = {}) {
     if (e.timeStamp === undefined) {
         e = {
@@ -12,18 +17,15 @@ function processDataSet (e, props = {}) {
     }
     Object.keys(props)
         .forEach(function (prop) {
-            if (prop.match(/^data-/)) {
-                let originProp = prop;
-                prop = prop.replace(/[A-Z]/g, function ($) {
-                    return $.toLowerCase();
-                });
+            const matched = prop.match(/^data-(.+)/)
 
+            if (matched) {
+                const key = matched[1].replace(/-(\w)/, function($0,$1) {
+                    return $1.toUpperCase()
+                })
 
-                prop = prop.split('-');
-                prop.shift();
-                prop = prop.join('');
-                e.target.dataset[prop] = props[originProp];
-                e.currentTarget.dataset[prop] = props[originProp];
+                e.target.dataset[key] = props[prop];
+                e.currentTarget.dataset[key] = props[prop];
             }
         });
     return e;

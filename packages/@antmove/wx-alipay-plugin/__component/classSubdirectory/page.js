@@ -4,12 +4,13 @@ const config = require('../../api/config');
 const createNode = require('./relation');
 const Relations = require('../../api/relations');
 const processRelationHandle = require('./processRelation');
-const { connectNodes } = require('./utils');
+const { connectNodes, antmoveAction } = require('./utils');
 const selectComponent = require('./selectComponent');
 const {
     watchShakes,
     getUrl
 } = require('../utils');
+
 
 module.exports = {
     processTransformationPage (_opts, options) {
@@ -46,18 +47,20 @@ module.exports = {
         _opts.onShow = function (param) {
             if (config.env === "development" && config.useRuntimeLog) {
                 watchShakes();
-            } 
+            }
             if (options.onShow) {
                 options.onShow.call(this, param);
             }
         }
+
+        _opts.antmoveAction = antmoveAction
     }
 };
 
 
 function processRelationNodes (ast = {}) {
     let $nodes = ast.$nodes;
-  
+
     /**
      * componentNodes onPageReady
      */
@@ -65,7 +68,7 @@ function processRelationNodes (ast = {}) {
         .forEach(function (item) {
             let node = $nodes[item];
             connectNodes(node, ast);
-        
+
             if (node.$self && typeof node.$self.onPageReady === 'function') {
                 node.$self.onPageReady();
             }
@@ -84,7 +87,7 @@ function processRelations (ctx, relationInfo = {}) {
     route = route.replace(/\/node_modules\/[a-z-]+\/[a-z-]+/, '')
 
     if (route[0] !== '/') route = '/' + route;
-    
+
     let info = relationInfo[route] || relationInfo[route.substring(1)];
     if (info) {
         processRelationHandle(info, function (node) {

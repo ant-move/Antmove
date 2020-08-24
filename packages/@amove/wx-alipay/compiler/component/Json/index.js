@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-08-05 14:22:14
+ * @LastEditTime: 2020-08-21 18:42:33
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /antmove-zqs/packages/@amove/wx-alipay/compiler/component/Json/index.js
+ */
 const fs = require("fs-extra");
 const path = require("path");
 const { useReducer } = require("@amove/next");
@@ -26,7 +34,17 @@ useReducer({
                 },
             });
         };
-        this.$node.content
+        this.addChild({
+            type: 'compilerLog',
+            body: {
+                _type: 'getJsonData',
+                opts: {
+                    pathInfo: path.join(path.basename(store.config.entry), node.body._node.projectPath + '.json'),
+                    content:JSON.stringify(this.$node.content)
+                }
+            }
+        })
+        // this.$node.content
     },
     ComponentJsonMounted () {
         this.$node.content = JSON.stringify(this.$node.content);

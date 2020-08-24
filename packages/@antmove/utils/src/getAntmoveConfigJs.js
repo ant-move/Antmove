@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs-extra');
 const exec = require('child_process').execSync;
-const { comStores } = require('@antmove/utils');
+const comStores = require('./comStores');
 function recordOptions (options) {
     options.input = options.input || options.entry;
     options.output = options.output || options.dist;

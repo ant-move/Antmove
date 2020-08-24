@@ -7,7 +7,6 @@ const SelectComponent = require('./selectComponent');
 const {
     getUrl,
     updateData,
-    processMethods,
     processRelationPath,
     _relationNode,
     findRelationNode,
@@ -22,6 +21,8 @@ const {
     mergeOptions,
     copy
 } = require('../utils');
+const { antmoveAction } = require('./utils');
+
 function getInfo (key, obj) {
     let val = {};
     Object.keys(obj)
@@ -34,7 +35,7 @@ function getInfo (key, obj) {
         });
     return val;
 }
-  
+
 function processRelations (ctx, relationInfo = {}) {
     let route = ctx.is;
     route = route.replace(/\/node_modules\/[a-z-]+\/[a-z-]+/, '');
@@ -98,8 +99,8 @@ function handleRelations () {
                         relation
                     });
                 });
-  
-                
+
+
             });
     }
 }
@@ -117,15 +118,14 @@ function behaviorsAssign (_opts, item, res) {
 }
 
 
-function processObservers (observersObj, options, param) { 
-    if (options.observers) {  
+function processObservers (observersObj, options, param) {
+    if (options.observers) {
         collectObservers.call(this, observersObj, options, param);
-    } 
+    }
 }
 
 function processInit () {
     getUrl();
-    this._currentEvent = {};
 }
 
 
@@ -146,10 +146,10 @@ function preProcesscomponents () {
 }
 
 /**
- * 
- * @param {*} behavior 
- * @param {*} _opts 
- * @param {*} mixins 
+ *
+ * @param {*} behavior
+ * @param {*} _opts
+ * @param {*} mixins
  */
 
 module.exports = {
@@ -162,17 +162,17 @@ module.exports = {
         delete options.behaviors;
         delete options.mixins;
         let retMixins = {};
-        
-        _opts.observerObj = {};  
-        _opts.observersObj = {}; 
+
+        _opts.observerObj = {};
+        _opts.observersObj = {};
         _opts.behaviorsArr = [];
 
         processBehavior(retMixins, behaviors, _opts.behaviorsArr);
-        processBehavior(retMixins, mixins, _opts.behaviorsArr); 
+        processBehavior(retMixins, mixins, _opts.behaviorsArr);
         mergeOptions(retMixins, options);
         processBehaviorId(behaviors);
         processBehaviorId(mixins);
-        
+
         Object.keys(options)
             .forEach(function (key) {
                 _opts[key] = options[key];
@@ -182,31 +182,32 @@ module.exports = {
         handleExternalClasses(_opts);
 
 
-        let _life = compatibleLifetime(options); 
+        let _life = compatibleLifetime(options);
         if (options.properties) {
             collectObserver(_opts.observerObj, options.properties, options);
         }
 
-        if (_opts.methods) {
-            processMethods(_opts);
+        if (!_opts.methods) {
+            _opts.methods = {}
         }
-        // processRef(_opts);
+
+        _opts.methods.antmoveAction = antmoveAction
 
         let didMount = function () {
             _life.error && warnLife(`There is no error life cycle`, "error");
             _life.move && warnLife(`There is no moved life cycle`, "moved");
             _life.pageLifetimes && warnLife(`There is no page life cycle where the component resides,including(show,hide,resize)`, "pageLifetimes");
-            this.props.genericSelectable && warnLife(`generic:selectable is Unsupported`, "generic"); 
+            this.props.genericSelectable && warnLife(`generic:selectable is Unsupported`, "generic");
 
             // process relations, get relation ast
             let relationAst = createNode.call(this, null, null, null, null, true).mountedHandles;
             relationAst.push(()=>{
                 handleRelations.call(this);
             });
-        };      
+        };
         fnApp.add('onInit', function () {
             processIntersectionObserver(this);
-            
+
             this.onPageReady = function (p) {
                 _opts.onPageReady && _opts.onPageReady.call(this, p);
             };
@@ -214,7 +215,7 @@ module.exports = {
 
         fnApp.add('deriveDataFromProps', function () {
         });
-        
+
         fnApp.add('didMount', didMount);
         fnApp.add('onInit', options.created);
         fnApp.add('onInit', function () {
@@ -249,9 +250,9 @@ module.exports = {
         fnApp.bind('onInit', _opts);
         fnApp.add('didMount', _opts.attached);
         fnApp.add('didMount', _opts.ready);
-        
 
-        let didUpdate = function (...param) { 
+
+        let didUpdate = function (...param) {
             updateData.call(this, param);
             processObservers.call(this, _opts.observersObj, options, this.$antmove._data);
             observerHandle(_opts.observerObj, this.$antmove._data, this);
@@ -259,11 +260,11 @@ module.exports = {
         };
         fnApp.add('didUpdate', didUpdate);
         fnApp.add('didUpdate', function () {
-            handleAfterInit.call(this);        
+            handleAfterInit.call(this);
         });
 
         fnApp.bind('deriveDataFromProps', _opts);
-        fnApp.bind('didUpdate', _opts); 
+        fnApp.bind('didUpdate', _opts);
         fnApp.bind('didMount', _opts);
         fnApp.add('didUnmount', options.detached);
         fnApp.add('didUnmount', function () {
@@ -281,7 +282,7 @@ module.exports = {
 
 
 function handleData (otps = {}) {
-  
+
 }
 function addAntmoveData () {
     let _data = [{}, {}], ctx = this, _props = {};
@@ -319,15 +320,15 @@ function processBehavior (_opts = {}, opts, $behaviors) {
             processBehavior.call(self, __opts, opt.behaviors, $behaviors);
             delete opt.behaviors;
         }
-  
+
         if (opt.mixins) {
             processBehavior(__opts, opt.mixins, $behaviors);
             delete opt.mixins;
-        } 
+        }
         mergeOptions(opt, __opts);
     }
 }
-  
+
 
 function processBehaviorId (behavior) {
     if (Array.isArray(behavior)) {
@@ -356,7 +357,7 @@ function processComponentExport (_export, behaviors, self) {
             self._this = _export();
         }
     }
-   
+
 }
 
 function testBehaviors (behaviors) {

@@ -227,26 +227,34 @@ module.exports = function axmlRender (ast = [], fileInfo) {
             return `${_ast.value}`;
         }
 
-        if (_ast.type === 'open-data') {
-            console.warn('支付宝暂不支持open-data组件,请检查业务逻辑')
+        
+        if (_ast.type === 'span') {
+            _ast.type = 'text';
+        }
+        if (_ast.type === 'div') {
+            _ast.type = 'view';
+        }
+        if (_ast.type === 'i') {
+            _ast.type = 'icon';
         }
         let code = '';
         let tagName = _ast.type;
         let children = _ast.children;
-
         appendCode(`<${tagName}`);
         props = props || {};
-
+        
         let attrCode = '';
         Object.keys(props)
             .forEach(function (prop) {
                 let propInfo = propsHandle(prop, props[prop], ast);
-
                 // a:for process
                 if (propInfo.key === 'wx:for-items' || propInfo.key === 'a:for-items') {
                     propInfo.key = 'a:for';
                 }
-
+                // wx-if => a:if  
+                if (propInfo.key === 'wx-if') {
+                    propInfo.key = 'a:if';
+                }
                 if (propInfo.value === null) {
                 // 无值属性
                     attrCode += ` ${propInfo.key}`;

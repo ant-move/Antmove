@@ -24,8 +24,9 @@ module.exports = function (fileInfo, ctx, inCompileWxml = false, isComponentPage
         });
 
         fileInfo.hasCompiledStyle = true;
-
-        classNamesWrap = processClassNames(originFileInfo);
+        if ( Config.options.scopeStyle) {
+            classNamesWrap = processClassNames(originFileInfo);
+        }
     }
 
     if (isComponentPage) {
@@ -99,6 +100,7 @@ module.exports = function (fileInfo, ctx, inCompileWxml = false, isComponentPage
                     }
                 });
             cssContent = css.stringify(cssObj);
+            cssContent = '.' + classPrefix + '{\nheight: inherit;\n}\n' + cssContent;
         } catch (e) {
             console.warn('Invalid wxss file. - ', fileInfo.path);        
         }

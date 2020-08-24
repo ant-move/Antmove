@@ -426,7 +426,7 @@ module.exports = {
         }
     },
     'button': {
-        type: 0,
+        type: 5,
         name: '按钮',
         url: {
             wechat: 'https://developers.weixin.qq.com/miniprogram/dev/component/button.html',

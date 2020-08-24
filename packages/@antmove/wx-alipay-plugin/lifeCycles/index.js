@@ -81,6 +81,11 @@ module.exports = {
         remote: false
     },
     beforeParse: async function (next) {
+        process.on('warning', (w) => {
+            if (process.env.transFile) {
+                console.log(chalk.yellow('(' + process.env.transFile + ')转换失败,请通过Github: https://github.com/ant-move/Antmove 或加钉群(21977588)联系我们'))
+            }
+        })          
         setCompileType('wx-alipay');
         setAppFromId(this.$options.fromId);
         let ifComponent = false;
@@ -89,7 +94,7 @@ module.exports = {
         }
         try {
             if (!isWechatApp(this.$options.entry, ifComponent)) {
-                let errStr = '[Ops] ' + this.$options.entry + ' is not a wechat miniproramm directory.';
+                let errStr = '[Ops] ' + this.$options.entry + ' 不是一个微信小程序目录, 请检查目录或请通过Github: https://github.com/ant-move/Antmove 加钉群(21977588)联系我们.';
                 if (this.$options.error) {
                     next(errStr);
                     throw new Error(errStr);
@@ -195,7 +200,7 @@ module.exports = {
             fs.ensureDirSync(fileInfo.dist);
             return false;
         }
-
+        process.env.transFile = fileInfo.path;
         let date = new Date();
         const reportData = {
             info: fileInfo.dirname,
@@ -236,7 +241,8 @@ module.exports = {
         }
         if (isTypeFile('.wxml', fileInfo.path)) {
             compileWxss(fileInfo, ctx, true, isComponentPage);
-            const reptempData = getTemplateData(fileInfo, project.name);
+            const projectname = fileInfo.entry;
+            const reptempData = getTemplateData(fileInfo, projectname);
             checkCoverView(fileInfo.ast, reptempData);
             let isComponent = false;
             if (this.$options.component === "component") {
@@ -375,7 +381,6 @@ module.exports = {
                 };
                 date = report(date, reportData);
             } else if (fileInfo.deep > 0&&fileInfo.extname === '.json') {
-                const { transformPackage } =require('@antmove/utils');
                 let pathInfo = fileInfo.path.split(projectParents)[1].substr(1);
                 let parent = fileInfo.parent;
                 let bool = false;
@@ -392,9 +397,6 @@ module.exports = {
                     content = pageJsonProcess.call(ctx, content, wxmlFileInfo);
                 } else {
                     content = fs.readFileSync(fileInfo.path, 'utf8');
-                }
-                if (fileInfo.path.includes('package.json')) {
-                    // content = transformPackage(fileInfo);
                 }
                 const jsonData = getJsonData(pathInfo, content);
                 repData.transforms = Object.assign(repData.transforms, jsonData);
@@ -419,6 +421,14 @@ module.exports = {
                 date = report(date, reportData);
             } else {
                 content = fs.readFileSync(fileInfo.path);
+                if (fileInfo.deep === 0 && fileInfo.filename === 'package.json') {
+                    const { transformPackage } =require('@antmove/utils');
+                    content = transformPackage(fileInfo);
+                    content = prettierCode(content, 'json', {
+                        useTabs: true,
+                        tabWidth: 4
+                    });
+                }
                 const reportData = {
                     info: fileInfo.path.split(projectParents)[1].substr(1),
                     type: "compile",

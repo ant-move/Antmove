@@ -50,8 +50,23 @@ module.exports = {
                             refRender
                         }                  
                     });
+                    if (store.config.env === 'development') {
+                        this.addChild({
+                            type: 'compilerLog',
+                            body: {
+                                _type: 'getTemplateData',
+                                opts: {
+                                    fileInfo: {
+                                        path: _node.path + '.wxml',
+                                        ast: xmlAst
+                                    }
+                                }
+                            }
+                        })
+                    }
                 }
             });
+            
     },
     processXmlAst (node, store) {
         let { ast, num, projectPath, deep, isInit, refRender} = node.body;

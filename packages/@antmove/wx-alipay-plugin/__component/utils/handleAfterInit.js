@@ -4,9 +4,11 @@ function handleAfterInit () {
         .forEach((key) => {
             classStr += (this.props[key] || '');
         });
-    this.setData({
-        _classes: classStr
-    });
+        if (this.data._classes !== classStr) {
+            this.setData({
+                _classes: classStr
+            });
+        }
 }
 
 module.exports = handleAfterInit;

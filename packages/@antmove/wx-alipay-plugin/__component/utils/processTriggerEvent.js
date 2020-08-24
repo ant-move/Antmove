@@ -1,15 +1,15 @@
-function processDataSet (e, props = {}) {
-    if (e.timeStamp === undefined) {
-        e = {
-            ...e,
-            target: {
-                dataset: {}
-            },
-            currentTarget: {
-                dataset: {}
-            }
-        };
+function createCustomEvent (props = {}) {
+    const e = {
+        target: {
+            dataset: {}
+        },
+        currentTarget: {
+            dataset: {},
+            // 组件的id
+            id: props.id
+        }
     }
+
     Object.keys(props)
         .forEach(function (prop) {
             if (prop.match(/^data-/)) {
@@ -30,31 +30,21 @@ function processDataSet (e, props = {}) {
 }
 
 function processTriggerEvent () {
-    this.triggerEvent = function (event, data = {}, opts = {}) {
-        let e = this._currentEvent;
+    this.triggerEvent = function (event, data) {
         let eventType = (event[0].toLowerCase() + event.substring(1));
         event = 'on' + event[0].toUpperCase() + event.substring(1);
+
+        const e = createCustomEvent(this.props)
+
         e.type = eventType;
-        e = processDataSet(e, this.props);
+        e.detail = data
         event = event.replace(/-\w+/, function (name) {
             name = name[1].toUpperCase() + name.substring(2);
             return name;
         });
+
         if (typeof this.props[event] === 'function') {
-            if (e) {
-                e.detail = e.detail || {};
-                if (Array.isArray(data)) {
-                    e.detail = data;
-                } else if (typeof data === 'object') {
-                    e.detail = {
-                        ...e.detail,
-                        ...data
-                    };
-                } else {
-                    e.detail = data;
-                }
-            }
-            this.props[event](e, data, opts);
+            this.props[event](e);
         }
     };
 }

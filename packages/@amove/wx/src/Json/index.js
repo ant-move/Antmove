@@ -155,8 +155,8 @@ module.exports = {
     AppSubpackages (node) {
         let json = node.body.json;
         if (json.subPackages) {
-            json.subPackages = json.subpackages;
-            delete json.subpackages;
+            json.subPackages = json.subpackages ? json.subpackages :json.subPackages;
+            delete json.subpackages ? json.subpackages :json.subPackages ;
             if (json.preloadRule) {
                 let subPackages = json.subPackages;
                 let preloadRule = json.preloadRule;

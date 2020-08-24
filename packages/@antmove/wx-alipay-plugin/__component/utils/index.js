@@ -2,7 +2,6 @@
 const getUrl = require('./getUrl');
 const watchShakes = require('./watchShakes');
 const updateData = require('./updateData');
-const processMethods = require('./processMethods');
 const processRelationPath = require('./processRelationPath');
 const _relationNode = require('./_relationNode');
 const findRelationNode = require('./findRelationNode');
@@ -25,7 +24,6 @@ module.exports = {
     getUrl,
     watchShakes,
     updateData,
-    processMethods,
     processRelationPath,
     _relationNode,
     findRelationNode,

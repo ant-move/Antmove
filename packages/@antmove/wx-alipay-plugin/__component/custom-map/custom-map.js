@@ -34,12 +34,15 @@ Component({
             gestureEnable: 0,
         }
     },
-    didUpdate () {
-        this.setData({
-            mapStyle: this.props.style,
-            
-        });
-        this.processProps();
+   
+    deriveDataFromProps (nextProps) {
+        if (nextProps.style !== this.props.style) {
+            this.setData({
+                mapStyle: nextProps.style,
+                
+            });
+            this.processProps();
+        }
     },
     didMount () {
         this.processProps();

@@ -4,16 +4,7 @@
 .mini {
     display: inline-block
 }
-button{
-    color: "#000";
-    line-height: 2.5556;
-    border: 1px solid #ccc;
-    padding-right: 14px;
-    padding-left: 14px;
-    box-sizing: border-box;
-    font-size: 18px;
-    border-radius: 5px;
-}
+
 button:active{
     background-color: #dedede;
     color: rgba(0,0,0,0.6);

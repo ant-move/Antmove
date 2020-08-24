@@ -13,6 +13,26 @@ module.exports = {
             this.addChild({
                 type: "ReadCompileConfigJs",
             });
+            if (store.config.env === 'development') {
+                store.repData = {}
+                node.beginTime = Number(new Date())
+                let types = {
+                    'resDataInit': {},
+                    'getSurrounding': {},
+                    'getToolVs': {}
+                }
+                for (let t in types) {
+                    this.addChild({
+                        type: 'compilerLog',
+                        key: 'compilerLog' + t,
+                        body: {
+                            _type: t,
+                            opts: types[t]
+                        }
+                  
+                  })
+                }
+            };
         },
     },
     Directory (node, store) {
@@ -80,6 +100,9 @@ module.exports = {
                 });
             }
         }
+        if (store.config.env === 'development') {
+            store.repProject.fileNum ++
+        }
     },
     Page (node, store) {
         let { dirpath, _node, _filePath } = node.body;
@@ -100,6 +123,9 @@ module.exports = {
                 });
             }
         });
+        if (store.config.env === 'development') {
+            store.repProject.pageNum++
+        }
     },
     Component (node, store) {
         let { dirpath, _node } = node.body;
@@ -120,6 +146,9 @@ module.exports = {
                 });
             }
         });
+        if (store.config.env === 'development') {
+            store.repProject.componentNum++
+        }
     },
 
     Js (node, store) {
@@ -130,15 +159,16 @@ module.exports = {
                 body: node,
             });
         }
-        let output = path.join(store.config.output, node.projectPath);
         this.$node.content = fs.readFileSync(node.path, "utf8");
-        this.$node.dist = output;
+        this.$node.projectPath = node.projectPath;
+        this.$node.dist = node.dist;
+        this.$node.originCode = this.$node.content;
         this.addChild({
             type: "ProcessBabel",
             key: node.parent.path + "ProcessBabel",
             path: node.path,
             body: node.parent,
-            dist: output,
+            dist: node.dist,
         });
     },
     Json (node, store) {
@@ -170,6 +200,7 @@ module.exports = {
         }
         this.$node.content = fs.readFileSync(node.path, "utf8");
         this.$node.dist = node.dist;
+        this.$node.projectPath = node.projectPath;
         this.addChild({
             type: "ProcessCss",
             key: node.path + "ProcessCss",
@@ -194,6 +225,20 @@ module.exports = {
                 isInit: true,
             },
         });
+        if (store.config.env === 'development') {
+            this.addChild({
+                type: 'compilerLog',
+                body: {
+                    _type: 'getTemplateData',
+                    opts: {
+                        fileInfo: {
+                            path: node.path,
+                            ast: xmlAst
+                        }
+                    }
+                }
+            })
+        }
     },
     WxmlMounted () {
         this.addChild({
@@ -212,7 +257,16 @@ module.exports = {
         fs.outputFileSync(dist, content);
     },
     FileMounted (node, store) {
-        if (!this.$node.content && !this.$node.isDirxml) {
+        if (!this.$node.content && !this.$node.isDirxml) {        
+            this.addChild({
+                type: 'compilerLog',
+                body: {
+                    _type: 'getOthersFile',
+                    opts: {
+                        url: node.projectPath,
+                    }
+                }
+            })
             fs.copy(node.path, node.dist, (err) => {
                 if (err) throw err;
             });

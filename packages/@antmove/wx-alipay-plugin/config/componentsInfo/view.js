@@ -27,14 +27,14 @@ module.exports = {
         props: {
             'direction': createSupportProp('movable-view的移动方向，属性值有all、vertical、horizontal、none'),
             'inertia': {
-                type: 0,
+                type: 7,
                 status: 2,
                 desc: 'movable-view是否带有惯性',
             },
             'out-of-bounds': {
-                type: 0,
+                type: 7,
                 status: 2,
-                desc: 'movable-view是否带有惯性',
+                desc: '超过可移动区域后，movable-view 是否还可以移动。',
             },
             'x': createSupportProp('定义x轴方向的偏移，如果x的值不在可移动范围内，会自动移动到可移动范围；改变x的值会触发动画'),
             'y': createSupportProp('定义y轴方向的偏移，如果y的值不在可移动范围内，会自动移动到可移动范围；改变y的值会触发动画'),
@@ -50,22 +50,22 @@ module.exports = {
             },
             'disabled': createSupportProp('是否禁用'),
             'scale': {
-                type: 0,
+                type: 7,
                 status: 2,
                 desc: '是否支持双指缩放，默认缩放手势生效区域是在movable-view内',
             },
             'scale-min': {
-                type: 0,
+                type: 7,
                 status: 2,
                 desc: '定义缩放倍数最小值',
             },
             'scale-max': {
-                type: 0,
+                type: 7,
                 status: 2,
                 desc: '定义缩放倍数最大值',
             },
             'scale-value': {
-                type: 0,
+                type: 7,
                 status: 2,
                 desc: '定义缩放倍数，取值范围为 0.5 - 10',
             },
@@ -75,13 +75,13 @@ module.exports = {
                 desc: '是否使用动画',
             },
             'bindchange': {
-                type: 1,
+                type: 7,
                 status: 0,
                 desc: '拖动过程中触发的事件，event.detail = {x, y, source}',
                 key: 'onChange',
             },
             'bindscale': {
-                type: 0,
+                type: 7,
                 status: 2,
                 desc: '缩放过程中触发的事件，event.detail = {x, y, scale}，x和y字段在2.1.0之后支持',
             },

@@ -12,7 +12,7 @@ module.exports = {
     defineGetter (obj = {}, descObj = {}, cb = () => {}) {
         if (!hasProxy) {
             return obj;
-        } 
+        }
         return new _Proxy(obj, {
             get (target, attr) {
                 if (typeof attr === 'string' && descObj[attr] && descObj[attr].type === 0) {
@@ -35,7 +35,7 @@ module.exports = {
                     return sourceObj[alipayAttr];
                 }
             });
-    
+
             return sourceObj;
         }
         return new _Proxy(sourceObj, {
@@ -67,29 +67,27 @@ module.exports = {
         }
     },
     // https://github.com/wandergis/coordtransform/blob/master/index.js
-    wgs84togcj02 (lng, lat) {
+    gcj02towgs84 (lng, lat) {
+        var lat = +lat;
+        var lng = +lng;
         var ee = 0.00669342162296594323;
         var a = 6378245.0;
 
-        lat = Number(lat);
-        lng = Number(lng);
-
         if (out_of_china(lng, lat)) {
-            return [lng, lat];
+            return [lng, lat]
+        } else {
+            var dlat = transformlat(lng - 105.0, lat - 35.0);
+            var dlng = transformlng(lng - 105.0, lat - 35.0);
+            var radlat = lat / 180.0 * Math.PI;
+            var magic = Math.sin(radlat);
+            magic = 1 - ee * magic * magic;
+            var sqrtmagic = Math.sqrt(magic);
+            dlat = (dlat * 180.0) / ((a * (1 - ee)) / (magic * sqrtmagic) * Math.PI);
+            dlng = (dlng * 180.0) / (a / sqrtmagic * Math.cos(radlat) * Math.PI);
+            var mglat = lat + dlat;
+            var mglng = lng + dlng;
+            return [lng * 2 - mglng, lat * 2 - mglat]
         }
-
-        var dlat = transformlat(lng - 105.0, lat - 35.0);
-        var dlng = transformlng(lng - 105.0, lat - 35.0);
-        var radlat = lat / 180.0 * Math.PI;
-        var magic = Math.sin(radlat);
-        magic = 1 - ee * magic * magic;
-        var sqrtmagic = Math.sqrt(magic);
-        dlat = (dlat * 180.0) / ((a * (1 - ee)) / (magic * sqrtmagic) * Math.PI);
-        dlng = (dlng * 180.0) / (a / sqrtmagic * Math.cos(radlat) * Math.PI);
-        var mglat = lat + dlat;
-        var mglng = lng + dlng;
-
-        return [mglng, mglat];
     },
 
     ab2hex (buffer) {
@@ -116,7 +114,8 @@ module.exports = {
         return obj;
     },
     fnAppClass,
-    browserPath
+    browserPath,
+    mapAuthSetting
 };
 
 function out_of_china (lng, lat) {
@@ -295,9 +294,9 @@ var posix = {
             return '/';
         } else if (resolvedPath.length > 0) {
             return resolvedPath;
-        } 
+        }
         return '.';
-    
+
     },
 
     normalize: function normalize (path) {
@@ -424,12 +423,12 @@ var posix = {
         // the common path parts
         if (out.length > 0)
             return out + to.slice(toStart + lastCommonSep);
-    
+
         toStart += lastCommonSep;
         if (to.charCodeAt(toStart) === 47 /* /*/)
             ++toStart;
         return to.slice(toStart);
-    
+
     },
 
     _makeLong: function _makeLong (path) {
@@ -510,7 +509,7 @@ var posix = {
 
             if (start === end) end = firstNonSlashEnd;else if (end === -1) end = path.length;
             return path.slice(start, end);
-        } 
+        }
         for (i = path.length - 1; i >= 0; --i) {
             if (path.charCodeAt(i) === 47 /* /*/) {
             // If we reached a path separator that was not part of a set of path
@@ -529,7 +528,7 @@ var posix = {
 
         if (end === -1) return '';
         return path.slice(start, end);
-    
+
     },
 
     extname: function extname (path) {
@@ -674,4 +673,27 @@ posix.posix = posix;
 
 function browserPath () {
     return posix;
+}
+
+
+function mapAuthSetting (obj) {
+    const keys = [
+        ['scope.userLocation', 'location'],
+        ['scope.writePhotosAlbum', 'album'],
+        ['scope.camera', 'camera'],
+        ['scope.userInfo', 'userInfo'],
+        ['scope.address', 'aliaddress'],
+        ['scope.werun', 'alipaysports']
+    ]
+
+    const authSetting = {}
+
+    keys.forEach(item=> {
+        const value = obj[item[1]]
+        if (typeof value !== 'undefined') {
+            authSetting[item[0]] = value
+        }
+    })
+
+    return authSetting
 }

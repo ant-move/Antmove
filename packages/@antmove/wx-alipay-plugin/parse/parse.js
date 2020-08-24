@@ -69,6 +69,7 @@ function parseString (code) {
         onclosetag: function () {
             zIndex--;
             currentNode = currentNode.parent;
+            preTagIsText = false;
         }
     }, {
         decodeEntities: false,

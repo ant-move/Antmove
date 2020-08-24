@@ -8,7 +8,6 @@ let _id = 0;
 const {
     getUrl,
     updateData,
-    processMethods,
     processRelationPath,
     _relationNode,
     findRelationNode,
@@ -101,7 +100,7 @@ function processRelations (ctx, relationInfo = {}) {
                             node.$index = ctx.$antmove[node.$id];
                             node.$route = route;
                             createNode.call(ctx, ref, null, node);
-                    
+
                         }
                     );
 
@@ -113,7 +112,7 @@ function processRelations (ctx, relationInfo = {}) {
                 if (this.saveChildRef0) {
                     this.saveChildRef0();
                 }
-                
+
             };
         });
     } else {
@@ -134,7 +133,7 @@ function handleRelations () {
                 }
                 nodes = findRelationNode(this.$node, _p, relationInfo.type, true);
                 if (!nodes || nodes[0] === undefined) {
-                    
+
                     // 有一个 relations 节点没绑上就表示还未完成
                     isFinished = false;
                     return false;
@@ -152,8 +151,8 @@ function handleRelations () {
                         relation
                     });
                 });
-  
-                
+
+
             });
     }
 
@@ -173,15 +172,14 @@ function behaviorsAssign (_opts, item, res) {
 }
 
 
-function processObservers (observersObj, options, param) { 
-    if (options.observers) {  
+function processObservers (observersObj, options, param) {
+    if (options.observers) {
         collectObservers.call(this, observersObj, options, param);
-    } 
+    }
 }
 
 function processInit () {
     getUrl();
-    this._currentEvent = {};
     this.setData({
         theId: this.$id
     });
@@ -204,10 +202,10 @@ function preProcesscomponents () {
 }
 
 /**
- * 
- * @param {*} behavior 
- * @param {*} _opts 
- * @param {*} mixins 
+ *
+ * @param {*} behavior
+ * @param {*} _opts
+ * @param {*} mixins
  */
 
 module.exports = {
@@ -219,35 +217,33 @@ module.exports = {
         delete options.behaviors;
         delete options.mixins;
         let retMixins = {};
-        
+
         processBehavior(retMixins, behaviors);
-        processBehavior(retMixins, mixins); 
+        processBehavior(retMixins, mixins);
         mergeOptions(retMixins, options);
-        
+
         Object.keys(options)
             .forEach(function (key) {
                 _opts[key] = options[key];
             });
-        _opts.observerObj = {};  
-        _opts.observersObj = {}; 
+        _opts.observerObj = {};
+        _opts.observersObj = {};
 
         handleProps(_opts);
         handleExternalClasses(_opts);
 
-        let _life = compatibleLifetime(options); 
+        let _life = compatibleLifetime(options);
         if (options.properties) {
             collectObserver(_opts.observerObj, options.properties, options);
         }
 
-        if (_opts.methods) {
-            processMethods(_opts);
-        }
+
         processRelations(_opts, Relations);
 
         let didMount = function () {
             /**
              * for child ref
-             * 
+             *
              * 当父级组件挂载后再执行父级组件传递下来的属性回调函数
              */
             this.setData({
@@ -256,18 +252,18 @@ module.exports = {
             _life.error && warnLife(`There is no error life cycle`, "error");
             _life.move && warnLife(`There is no moved life cycle`, "moved");
             _life.pageLifetimes && warnLife(`There is no page life cycle where the component resides,including(show,hide,resize)`, "pageLifetimes");
-            this.props.genericSelectable && warnLife(`generic:selectable is Unsupported`, "generic"); 
+            this.props.genericSelectable && warnLife(`generic:selectable is Unsupported`, "generic");
             if (typeof this.triggerEvent !== 'function') {
                 processTriggerEvent.call(this);
             }
-        };      
+        };
         fnApp.add('onInit', function () {
             processIntersectionObserver(this);
         });
 
         fnApp.add('deriveDataFromProps', function () {
         });
-        
+
         fnApp.add('didMount', didMount);
         fnApp.add('onInit', options.created);
         fnApp.insert('onInit', function () {
@@ -297,9 +293,9 @@ module.exports = {
                 _opts.onInit.call(this);
             }
         });
-        
 
-        let didUpdate = function (...param) { 
+
+        let didUpdate = function (...param) {
             if (this.props._parent_ref && !this.isInitRelation) {
 
                 if (this.props.onChildRef) {
@@ -314,11 +310,11 @@ module.exports = {
         };
         fnApp.add('didUpdate', didUpdate);
         fnApp.add('didUpdate', function () {
-            handleAfterInit.call(this);        
+            handleAfterInit.call(this);
         });
 
         fnApp.bind('deriveDataFromProps', _opts);
-        fnApp.bind('didUpdate', _opts); 
+        fnApp.bind('didUpdate', _opts);
         fnApp.bind('didMount', _opts);
         fnApp.add('didUnmount', options.detached);
         fnApp.add('didUnmount', function () {
@@ -334,7 +330,7 @@ module.exports = {
 
 
 function handleData (otps = {}) {
-  
+
 }
 
 
@@ -354,13 +350,13 @@ function processBehavior (_opts = {}, opts) {
             _process(_opts, opts);
         }
     }
-  
+
     function _process (__opts = {}, opt = {}) {
         if (opt.behaviors) {
             processBehavior(__opts, opt.behaviors);
             delete opt.behaviors;
         }
-  
+
         if (opt.mixins) {
             processBehavior(__opts, opt.mixins);
             delete opt.mixins;
@@ -368,4 +364,3 @@ function processBehavior (_opts = {}, opts) {
         mergeOptions(opt, __opts);
     }
 }
-  

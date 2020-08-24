@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-08-05 14:22:14
+ * @LastEditTime: 2020-08-21 18:43:27
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /antmove-zqs/packages/@amove/wx-alipay/compiler/page/Wxss/index.js
+ */
 const { useReducer } = require("@amove/next");
 const fs = require("fs-extra");
 const path = require("path");
@@ -14,6 +22,7 @@ useReducer({
         if (!this.$node.content) {
             this.$node.content = `/*${node.filePath}*/`;
         }
+        this.$node.projectPath = node.body._node.projectPath + '.wxss';
         this.addChild({
             type: "ProcessCss",
             key: node.path + "ProcessCss",
