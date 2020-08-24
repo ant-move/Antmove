@@ -119,7 +119,7 @@ useReducer({
                             .replace(/\.wxs/g, '.sjs');
         if (type === 'import' && prop === 'src') {
             let importValue = props[prop].value;
-            if (importValue[0] && importValue[0][0] !== ('.' || '/')) {
+            if (importValue[0] && importValue[0][0] !== '.' && importValue[0][0] !=='/') {
                 importValue[0] = `./${importValue[0]}`;
             }
         }

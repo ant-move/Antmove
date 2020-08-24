@@ -4,7 +4,8 @@ const aliRervedWord = [
     'window',
     'document',
     'XmlHttpRequest',
-    'global'
+    'global',
+    'Behavior'
 ]
 module.exports = function (...p) {
     return {

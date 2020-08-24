@@ -5,6 +5,7 @@
  */
 const utils = require("./utils");
 const descObj = require("./desc.js");
+const propsPolyfill = require('./propsPolyfill.js')
 
 const apiObj = {
     canIUse: {
@@ -37,9 +38,26 @@ const apiObj = {
             /**
              * 处理Androi屏幕宽度返回值
              */
-            if (ret.platform === "Android") {
+            if (ret.platform.toLowerCase() === "android") {
+                ret.platform = 'android'
                 ret.screenWidth = ret.screenWidth / ret.pixelRatio;
                 ret.screenHeight = ret.screenHeight / ret.pixelRatio
+            }else if(ret.platform.toLowerCase() === "ios" ){
+                ret.platform = 'ios'
+                // mock的安全区位置信息（模拟器iphonex screenHeight:812）
+                if(ret.screenHeight>=propsPolyfill.screenHeight){
+                    ret.safeArea = propsPolyfill.safeArea
+                    ret.safeArea.bottom = ret.screenHeight -44
+                }else{
+                    ret.safeArea = {
+                        bottom: ret.screenHeight,
+                        height: ret.screenHeight,     
+                        left: 0,
+                        right: ret.screenWidth,
+                        top: ret.statusBarHeight,
+                        width: ret.screenWidth,
+                    }
+                }
             }
             // mock的版本，确保微信小程序源码里读取后和目标版本匹配都能通过
             ret.SDKVersion = '10.0.0'
@@ -69,9 +87,26 @@ const apiObj = {
                     /**
                      * 处理Androi屏幕宽度返回值
                      */
-                    if (res.platform === "Android") {
+                    if (res.platform.toLowerCase() === "android") {
+                        res.platform = 'android'
                         res.screenWidth = res.screenWidth / res.pixelRatio;
                         res.screenHeight = res.screenHeight / res.pixelRatio
+                    }else if(res.platform.toLowerCase() === "ios" ){
+                        res.platform = 'ios'
+                        if(res.screenHeight>=propsPolyfill.screenHeight){
+                            res.safeArea = propsPolyfill.safeArea;
+                            res.safeArea.bottom = res.screenHeight -44
+                        }else{
+                            res.safeArea = {
+                                bottom: res.screenHeight,
+                                height: res.screenHeight,     
+                                left: 0,
+                                right: res.screenWidth,
+                                top: res.statusBarHeight,
+                                width: res.screenWidth,
+                            }
+                        }
+                        
                     }
 
                     // mock的版本，确保微信小程序源码里读取后和目标版本匹配都能通过
@@ -559,14 +594,14 @@ const apiObj = {
     getLocation: {
         fn (obj = {}) {
             let type = obj.type || "wgs84";
-            let getLocationProps = descObj.getLocation.body.returnValue;
+            let getLocationProps = descObj.getLocation.body.returnValue.props;
             my.getLocation({
                 ...obj,
                 type: 0,
                 success: function (res) {
                     let data = res;
                     if (type === "wgs84") {
-                        let lnglat = utils.wgs84togcj02(
+                        let lnglat = utils.gcj02towgs84(
                             res.longitude,
                             res.latitude
                         );
@@ -600,7 +635,7 @@ const apiObj = {
     login: {
         fn (obj = {}) {
             my.getAuthCode({
-                scopes: 'auth_user',
+                scopes: 'auth_base',
                 success: res => {
                     const resObj = {
                         code: res.authCode
@@ -778,7 +813,7 @@ const apiObj = {
     },
     downloadFile: {
         fn (obj = {}) {
-            let downloadFileReturnValue = descObj.downloadFile.body.returnValue;
+            let downloadFileReturnValue = descObj.downloadFile.body.returnValue.props;
             if (obj.filePath !== undefined) {
                 utils.warn(
                     "支付宝暂不支持 filePath", {
@@ -832,7 +867,7 @@ const apiObj = {
     },
     uploadFile: {
         fn (obj = {}) {
-            let uploadFileValue = descObj.uploadFile.body.returnValue;
+            let uploadFileValue = descObj.uploadFile.body.returnValue.props;
             if (obj.name) {
                 obj.fileName = obj.name;
                 delete obj.name;
@@ -876,7 +911,7 @@ const apiObj = {
     },
     connectSocket: {
         fn (obj = {}) {
-            let connectSocketParams = descObj.connectSocket.body.params;
+            let connectSocketParams = descObj.connectSocket.body.params.props;
             let params = utils.defineGetter(
                 obj,
                 connectSocketParams,
@@ -932,7 +967,7 @@ const apiObj = {
     },
     closeSocket: {
         fn (obj = {}) {
-            let closeSocketParams = descObj.closeSocket.body.params;
+            let closeSocketParams = descObj.closeSocket.body.params.props;
             let params = utils.defineGetter(
                 obj,
                 closeSocketParams,
@@ -973,14 +1008,41 @@ const apiObj = {
             );
         },
     },
-    setStorageSync: {
-        fn (key = "", data = "") {
-            if (key && data) {
-                return my.setStorageSync({
-                    "key": key,
-                    "data": data
-                });
-            }
+    setStorageSync:{
+        fn: function fn (key='',data='') {
+            return my.setStorageSync({
+                key,
+                data
+            });
+        },
+    },
+    getStorage:{
+        fn: function fn (obj) {                           
+            return my.getStorage({
+                key: obj.key,
+                success: (res) => {
+                    if (res.message && res.message === '查无此key' && typeof obj.fail === 'function') {
+                        const Msg = {
+                            errMsg: 'getStorage:fail data not found'
+                        }
+                        obj.fail(Msg)
+                    } else if (typeof obj.success === 'function'){
+                        obj.success(res)
+                    }
+                },
+                complete: (res) => {
+                    if (typeof obj.complete === 'function') {
+                        if (res.message && res.message === '查无此key') {
+                            const Msg = {
+                                errMsg: 'getStorage:fail data not found'
+                            }
+                            obj.complete(Msg)
+                        } else {
+                            obj.complete(res)
+                        }
+                    }
+                }
+            })
         }
     },
     getStorageSync: {
@@ -998,6 +1060,26 @@ const apiObj = {
                 key
             });
         }
+    },
+    removeStorage: {
+        fn: function fn (obj) {
+        const Msg = {
+            errMsg: "removeStorage:ok"
+        }
+        return my.removeStorage({
+            ...obj,
+            success: () => {
+                if (typeof obj.success === 'function') {
+                    obj.success(Msg)
+                }
+            },
+            complete: () => {
+                if (typeof obj.complete === 'function') {
+                    obj.complete(Msg)
+                }
+            }
+        })
+    }
     },
     createSelectorQuery: {
         fn () {

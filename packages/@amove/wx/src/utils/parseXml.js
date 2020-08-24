@@ -40,7 +40,7 @@ function parseString (code) {
                 ast[_fn](node);
                 currentNode = node;
             } else {
-                node.parent = currentNode;
+                //node.parent = currentNode;
                 currentNode.children[_fn](node);
                 currentNode = node;
             }
@@ -59,7 +59,7 @@ function parseString (code) {
                 if (zIndex === 0) {
                     ast.push(node);
                 } else {
-                    node.parent = currentNode;
+                    //node.parent = currentNode;
                     currentNode.children.push(node);
                 }
                 preTextNode = node;
@@ -68,7 +68,7 @@ function parseString (code) {
         },
         onclosetag: function () {
             zIndex--;
-            currentNode = currentNode.parent;
+            //currentNode = currentNode.parent;
         }
     }, {
         decodeEntities: false,

@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-08-05 14:22:14
+ * @LastEditTime: 2020-08-21 18:39:26
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /antmove-zqs/packages/@amove/wx/src/Wxss/index.js
+ */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-inner-declarations */
 const fs = require("fs-extra");
@@ -21,6 +29,15 @@ module.exports = {
             body: node.body,
             dist: node.dist
         });
+        this.addChild({
+            type: 'compilerLog',
+            body: {
+                _type: 'getStyleData',
+                opts: {
+                    pathInfo: path.join(path.basename(store.config.entry), this.$node.projectPath)
+                }
+            }
+        })
     },
 
     ProcessCssSemicolon (node) {

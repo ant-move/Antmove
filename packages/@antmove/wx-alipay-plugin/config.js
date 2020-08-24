@@ -21,7 +21,8 @@ module.exports = {
         'index.js',
         'utils.js',
         'log.js',
-        'runtimeProcess.js'
+        'runtimeProcess.js',
+        'propsPolyfill.js'
     ],
     compile: {
         customComponent: {

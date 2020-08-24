@@ -11,9 +11,10 @@ Component({
     didMount () {
         this.processNodes();
     },
-    didUpdate () {
-        this.processNodes();
+    deriveDataFromProps(nextProps){
+        nextProps.nodes !== this.props.nodes && this.processNodes();
     },
+    
     didUnmount () {},
     methods: {
         processNodes () {
@@ -25,6 +26,11 @@ Component({
                         });
                     }
                 });
+            }else if (Array.isArray(this.props.nodes)) {
+                this.setData({
+                    nodesData: this.props.nodes
+                });
+                
             }
         }
     },

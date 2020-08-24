@@ -31,7 +31,7 @@ function generate (output) {
         copyFile(file);
     });
 
-    let myJS = 'const utils = require("./utils");\nconst descObj = require("./desc.js");\nconst apiObj = ' + apiContent + '\nmodule.exports = apiObj;';
+    let myJS = 'const utils = require("./utils");\nconst propsPolyfill = require("./propsPolyfill");\nconst descObj = require("./desc.js");\nconst apiObj = ' + apiContent + '\nmodule.exports = apiObj;';
     let descJs = 'const utils = require("./utils");\nconst infoObj = ' + apiInfo + '\nmodule.exports = infoObj;';
 
     if (Config.aliAppType === 'dd') {

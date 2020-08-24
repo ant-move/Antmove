@@ -1,4 +1,6 @@
 const { createSupportProp } = require('./utils.js');
+const Config = require('../../config.js');
+const customComponentPrefix = Config.library.customComponentPrefix;
 /**
  * type
  * 0 - missing - 不支持该属性
@@ -18,11 +20,14 @@ const { createSupportProp } = require('./utils.js');
  */
 module.exports = {
     'navigator': {
+        type: 5,
         name: '页面链接',
         url: {
             wechat: 'https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html',
             alipay: 'https://docs.alipay.com/mini/component/navigator'
         },
+        path: customComponentPrefix + '/__component/custom-navigator/custom-navigator',
+        tagName: 'custom-navigator',
         desc: '页面链接。',
         props: {
             'target': {
@@ -37,7 +42,7 @@ module.exports = {
                 desc: "当 open-type 为 'navigateBack' 时有效，表示回退的层数",
             },
             'app-id': {
-                type: 0,
+                type: 5,
                 status: 2,
                 desc: '当target="miniProgram"时有效，要打开的小程序 appId',
             },

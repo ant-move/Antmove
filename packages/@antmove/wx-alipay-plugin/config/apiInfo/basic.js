@@ -19,6 +19,10 @@ module.exports = {
             msg: '返回值属性值缺失',
             returnValue: {
                 props: {
+                    safeArea: {
+                        type: 0,
+                        desc: "安全区位置信息"
+                    },
                     SDKVersion: {
                         type: 0,
                         desc: "客户端基础库版本"

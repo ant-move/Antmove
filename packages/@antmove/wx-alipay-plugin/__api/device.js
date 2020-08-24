@@ -10,7 +10,7 @@ const descObj = require("./desc.js");
 const apiObj = {
     startBeaconDiscovery: {
         fn (obj = {}) {
-            let startBeaconDiscoveryParams = descObj.startBeaconDiscovery.body.params;
+            let startBeaconDiscoveryParams = descObj.startBeaconDiscovery.body.params.props;
             let params = utils.defineGetter(obj, startBeaconDiscoveryParams, function (obj, prop) {
                 utils.warn(
                     `startBeaconDiscovery的参数不支持 ${prop} 属性!`,
@@ -244,7 +244,7 @@ const apiObj = {
     },
     scanCode: {
         fn (obj = {}) {
-            let scanCodeSuccessRes = descObj.scanCode.body.successRes;
+            let scanCodeSuccessRes = descObj.scanCode.body.params.props;
             if (obj.scanType) {
                 obj.scanType.forEach(item => {
                     if (item === 'datamatrix' || item === 'pdf417') {
@@ -285,7 +285,7 @@ const apiObj = {
     },
     stopGyroscope: {
         fn (obj = {}) {
-            let stopGyroscopeParams = descObj.stopGyroscope.body.params;
+            let stopGyroscopeParams = descObj.stopGyroscope.body.params.props;
             let params = utils.defineGetter(obj, stopGyroscopeParams, function (obj, prop) {
                 utils.warn(
                     `stopGyroscope的参数不支持 ${prop} 属性!`,
@@ -301,7 +301,7 @@ const apiObj = {
     },
     onCompassChange: {
         fn (cb) {
-            let onCompassChangeReturnValue = descObj.onCompassChange.body.returnValue;
+            let onCompassChangeReturnValue = descObj.onCompassChange.body.returnValue.props;
             my.onCompassChange(function (res) {
                 let _res = utils.defineGetter(res, onCompassChangeReturnValue, function (obj, prop) {
                     utils.warn(
@@ -320,7 +320,7 @@ const apiObj = {
     },
     stopCompass: {
         fn (obj = {}) {
-            let stopCompassParams = descObj.stopCompass.body.params;
+            let stopCompassParams = descObj.stopCompass.body.params.props;
             let params = utils.defineGetter(obj, stopCompassParams, function (obj, prop) {
                 utils.warn(
                     `stopCompass的参数不支持 ${prop} 属性!`,
@@ -336,7 +336,7 @@ const apiObj = {
     },
     stopAccelerometer: {
         fn (obj = {}) {
-            let stopAccelerometerParams = descObj.stopAccelerometer.body.params;
+            let stopAccelerometerParams = descObj.stopAccelerometer.body.params.props;
             let params = utils.defineGetter(obj, stopAccelerometerParams, function (obj, prop) {
                 utils.warn(
                     `stopAccelerometer的参数不支持 ${prop} 属性!`,
@@ -352,7 +352,7 @@ const apiObj = {
     },
     makePhoneCall: {
         fn (obj = {}) {
-            let makePhoneCallParams = descObj.makePhoneCall.body.params;
+            let makePhoneCallParams = descObj.makePhoneCall.body.params.props;
             if (obj.phoneNumber) {
                 obj.number = obj.phoneNumber;
                 delete obj.phoneNumber;

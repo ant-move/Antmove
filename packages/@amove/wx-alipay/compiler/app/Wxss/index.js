@@ -1,9 +1,18 @@
+/*
+ * @Author: your name
+ * @Date: 2020-08-05 14:22:14
+ * @LastEditTime: 2020-08-21 18:41:57
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /antmove-zqs/packages/@amove/wx-alipay/compiler/app/Wxss/index.js
+ */
 const { useReducer } = require("@amove/next");
 const fs = require("fs-extra");
 const path = require("path");
 useReducer({
     AppWxss (node, store) {
         this.$node.content = fs.readFileSync(node.body.path, "utf8");
+        this.$node.projectPath = node.body.projectPath;
         let output = path.join(store.config.output, node.body.projectPath);
         if (!this.$node.content) {
             this.$node.content = `/*${node.filePath}*/`;

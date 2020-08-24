@@ -1,4 +1,6 @@
 const utils = require("../../api/utils");
+const processDataSet = require('../utils/processDataSet')
+
 Component({
     data: {
         "scope": "",
@@ -24,9 +26,9 @@ Component({
         for (let key in this.props) {
             typeof (this.props[key]) === "string" && (this.props[key] = this.props[key].replace(/(^\s*)|(\s*$)/g, ""));
         }
-        let { size, type, plain, disabled, loading, formType, openType, hoverClass, hoverStopPropagation, hoverStartTime, appParameter } = this.props;
+        let { size, type, plain, disabled, loading, formType, openType, hoverClass, hoverStopPropagation, hoverStartTime, appParameter,scope } = this.props;
         this.getSystem(() => {
-            openType = this.testOpenType(openType);
+            openType = this.testOpenType(openType, scope);
             this.setData({
                 size, type, plain, disabled, loading, formType, opentype: openType, hoverClass, hoverStopPropagation, hoverStartTime, appParameter
             });
@@ -50,29 +52,23 @@ Component({
                 },
             });
         },
-        testOpenType (opentype) {
-            let typeArr = ["share", "launchApp", "getAuthorize", "openSetting"];
-            if (this.data.app === "amap") {
-                typeArr = ["share","getAuthorize", "openSetting"];
-            }
-            if (opentype && typeArr.indexOf(opentype) !== -1) {
-                return opentype;
-            } else if (opentype) {
+        testOpenType (opentype, scope) {
+            if (opentype) {
                 const otherType = {
                     "getPhoneNumber": "getAuthorize",
                     "getUserInfo": "getAuthorize"
                 };
-                if (opentype==='getPhoneNumber') {
+                if (scope==='phoneNumber') {
                     this.setData({
                         scope: 'phoneNumber',
-                        getAuthorize: "getPhone"
+                        opentype: "getPhone"
                     });
                     return otherType.getPhoneNumber;
                 }
-                if (opentype==='getUserInfo') {
+                if (scope==='userInfo') {
                     this.setData({
                         scope: 'userInfo',
-                        getAuthorize: "getUserInfo"
+                        opentype: "getUserInfo"
                     });
                     return otherType.getUserInfo;
                 }
@@ -85,37 +81,92 @@ Component({
                     }
                 );
             }
+            let typeArr = ["share", "launchApp", "getAuthorize", "openSetting"];
+            if (this.data.app === "amap") {
+                typeArr = ["share","getAuthorize", "openSetting"];
+            }
+            if (opentype && typeArr.indexOf(opentype) !== -1) {
+                return opentype;
+            }
             return "";
         },
+        onError(err) {
+            if (this.props.onError === "function") {
+                this.props.onError(err);
+            }
+        },
+        getAuthorize(){
+            const that = this;
+            let resObj = {};
+            if (this.props.openType === "getAuthorize" && this.props.scope === 'phoneNumber') {
+                my.getPhoneNumber({
+                    success: (res) => {
+                        if (typeof that.props.onGetAuthorize === 'function') {
+                            resObj.detail = res;
+                            resObj.type = "getphonenumber"
+                            that.props.onGetAuthorize(resObj)
+                        }
+                    },
+                    fail: (res) => {
+                        if (typeof that.props.onGetAuthorize === 'function') {
+                            resObj.detail = res;
+                            resObj.type = "getphonenumber"
+                            that.props.onGetAuthorize(resObj)
+                        }
+                    }
+
+                })
+            }
+            if (this.props.openType === "getAuthorize" && this.props.scope === 'userInfo') {
+                my.getOpenUserInfo({
+                    success: (res) => {
+                        if (typeof that.props.onGetAuthorize === 'function') {
+                            resObj.detail = res;
+                            resObj.type = "getuserinfo"
+                            that.props.onGetAuthorize(resObj)
+                        }
+                    },
+                    fail: (res) => {
+                        if (typeof that.props.onGetAuthorize === 'function') {
+                            resObj.detail = res;
+                            resObj.type = "getuserinfo"
+                            that.props.onGetAuthorize(resObj)
+                        }
+                    }
+                })
+            }
+        },
+        stopEvent(){},
         btnOnTap (e) {
             const that = this;
+            const tapEvent = processDataSet(e, this.props);
+
             if (this.props.openType==="openSetting") {
-                my.getAuthCode({
-                    scopes: 'auth_user',
-                    success: () => {
-                        my.openSetting({
-                            success (res) {
-                                if (typeof that.props.onOpenSetting==="function") {
-                                    that.props.onOpenSetting(res);
+                my.openSetting({
+                    success (res) {
+                        if (typeof that.props.onOpenSetting==="function") {
+                            that.props.onOpenSetting({
+                                ...tapEvent,
+                                type: "opensetting",
+                                detail: {
+                                    authSetting: utils.mapAuthSetting(res.authSetting)
                                 }
-                            }
-                        });
-                    },
+                            });
+                        }
+                    }
                 });
-                return false;
             }
-            const tapEvent = {...e};
-            tapEvent.target.dataset = this.makeDataSet(this.props);
-            this.props.onCatchTap(tapEvent);
-            this.props.onTap(tapEvent);
+
+            this.props.onCatchTap &&this.props.onCatchTap(tapEvent);
+            this.props.onTap && this.props.onTap(tapEvent);
         },
         getPhone (e) {
-            const eve = {...e};      
+            const eve = {...e};
             my.getPhoneNumber({
                 success: (res) => {
                     if (typeof res.response === "string") {
                         const response = JSON.parse(res.response);
-                        if ( response.response.code==="40001") {    
+                        if ( response.response.code==="40001") {
                             utils.warn("请去小程序开发管理后台的功能列表中添加获取电话功能",{
                                 apiName: 'button/bindgetphonenumber',
                                 errorType: 1,
@@ -149,7 +200,7 @@ Component({
                             };
                             if (typeof userInfo.response === "string") {
                                 const response = JSON.parse(userInfo.response);
-                                if ( response.response.code==="40006") {    
+                                if ( response.response.code==="40006") {
                                     utils.warn("请去小程序开发管理后台的功能列表中添加会员信息功能",{
                                         apiName: 'button/bindgetuserinfo',
                                         errorType: 1,
@@ -162,33 +213,23 @@ Component({
                             eve.detail.userInfo.avatarUrl =  eve.detail.userInfo.avatar;
                             delete eve.detail.userInfo.avatar;
                             eve.detail.rawData = JSON.stringify(eve.detail.userInfo);
-                        
+
                             if (typeof that.props.onGetuserInfo ==="function") {
                                 that.props.onGetuserInfo(eve);
                             }
                         },
                         fail (err) {
                             throw  err;
-                        }     
+                        }
                     });
                 }
             });
-        
-        },
-        makeDataSet (mydata) {
-            let dataSet = {};
-            for (let key in mydata) {
-                key.replace(/^data-/,()=>{
-                    const newKey = key.substr(5);
-                    dataSet[newKey] = mydata[key];
-                });
-            }
-            return dataSet;
-        },
+
+        }
     },
     didUpdate () {
         let { size, type, plain, disabled, loading, formType, openType, hoverClass, hoverStopPropagation, hoverStartTime, appParameter } = this.props;
-  
+
         this.setData({
             size, type, plain, disabled, loading, formType, openType, hoverClass, hoverStopPropagation, hoverStartTime, appParameter
         });

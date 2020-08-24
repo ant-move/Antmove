@@ -59,6 +59,9 @@ module.exports = function (options = {}) {
     options.fromId = options.fromId || '0';
     options.output = options.output || options.dist;
     options.input = options.input || options.entry;
+    if (options.env === 'dev') {
+        options.env = 'development';
+    }
     /**
      * 预处理，解析小程序页面组件结构
      */
@@ -77,9 +80,7 @@ module.exports = function (options = {}) {
                 pages: ctx.store.pages,
                 config: defulatConfig
             };
-        }
-    );
-    /**
+            /**
      * 正式编译转换处理
      */
     useReducer(preApplication, "Application");
@@ -90,6 +91,9 @@ module.exports = function (options = {}) {
             useReducer(el);
         });
     };
+    preAppData = {
+        ...preAppData
+    }
     useReducer(WxPlugin);
     require("./src/index");
     require("@amove/wx-utils");
@@ -102,4 +106,7 @@ module.exports = function (options = {}) {
             console.log(chalk.green("微信小程序 => 支付宝小程序编译已完成"));
         }
     );
+        }
+    );
 };
+

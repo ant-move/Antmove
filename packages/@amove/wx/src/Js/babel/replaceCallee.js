@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-08-05 14:22:14
+ * @LastEditTime: 2020-08-21 18:37:16
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /antmove-zqs/packages/@amove/wx/src/Js/babel/replaceCallee.js
+ */
 const babel = require("@babel/core");
 module.exports = {
     AppGlobalObject (node) {
@@ -48,5 +56,6 @@ module.exports = {
                 ]
             ]
         }).code;
+        this.$node.jsUseApis = opts;
     }
 };
