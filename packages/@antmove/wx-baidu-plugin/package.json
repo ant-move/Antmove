@@ -15,7 +15,7 @@
     "dependencies": {
         "@antmove/alipay-baidu": "^1.1.6",
         "@antmove/wx-alipay": "^1.1.6",
-        "antmove": "^1.1.6",
+        "antmove": "^1.1.0",
         "fs-extra": "^8.1.0"
     },
     "gitHead": "aa12723be1437d52c528d82ca57dd04f0da80f64"
