@@ -28,5 +28,6 @@
         "open": "^7.1.0",
         "parsimmon": "^1.13.0",
         "prettier": "^2.0.5"
-    }
+    },
+    "gitHead": "aa12723be1437d52c528d82ca57dd04f0da80f64"
 }

@@ -70,5 +70,6 @@
     "repository": {
         "type": "git",
         "url": "git+https://github.com/ant-move/antmove"
-    }
+    },
+    "gitHead": "aa12723be1437d52c528d82ca57dd04f0da80f64"
 }

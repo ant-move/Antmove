@@ -22,5 +22,6 @@
         "css": "^2.2.4",
         "fs-extra": "^8.1.0",
         "htmlparser2": "^3.10.1"
-    }
+    },
+    "gitHead": "aa12723be1437d52c528d82ca57dd04f0da80f64"
 }
