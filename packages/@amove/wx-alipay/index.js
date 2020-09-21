@@ -91,9 +91,6 @@ module.exports = function (options = {}) {
             useReducer(el);
         });
     };
-    preAppData = {
-        ...preAppData
-    }
     useReducer(WxPlugin);
     require("./src/index");
     require("@amove/wx-utils");

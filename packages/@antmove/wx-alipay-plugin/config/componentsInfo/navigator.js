@@ -47,13 +47,13 @@ module.exports = {
                 desc: '当target="miniProgram"时有效，要打开的小程序 appId',
             },
             'path': {
-                type: 0,
-                status: 2,
+                type: 5,
+                status: 0,
                 desc: '当target="miniProgram"时有效，打开的页面路径，如果为空则打开首页',
             },
             'extra-data': {
-                type: 0,
-                status: 2,
+                type: 5,
+                status: 0,
                 desc: '当target="miniProgram"时有效，需要传递给目标小程序的数据，目标小程序可在 App.onLaunch()，App.onShow() 中获取到这份数据',
             },
             'version': {
@@ -68,18 +68,18 @@ module.exports = {
                 desc: '指定是否阻止本节点的祖先节点出现点击态',
             },
             'bindsuccess': {
-                type: 0,
-                status: 2,
+                type: 5,
+                status: 0,
                 desc: '当target="miniProgram"时有效，跳转小程序成功',
             },
             'bindfail': {
-                type: 0,
-                status: 2,
+                type: 5,
+                status: 0,
                 desc: '当target="miniProgram"时有效，跳转小程序失败',
             },
             'bindcomplete': {
-                type: 0,
-                status: 2,
+                type: 5,
+                status: 0,
                 desc: '当target="miniProgram"时有效，跳转小程序完成',
             },
             'aria-label': {

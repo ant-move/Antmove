@@ -1,0 +1,9 @@
+.checkboxWap {
+    display:inline-block;  
+}
+.innerbox{
+    display:inline-flex;
+    align-items:center;
+    /* vertical-align:text-bottom; */
+    vertical-align:middle;
+}

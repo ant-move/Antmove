@@ -1,0 +1,10 @@
+<view catchTap='stopEvent'>
+    <form class="{{className}}"  onSubmit="submitHandler" onReset="resetHandler" reportSubmit='{{reportSubmit}}' >
+        <slot></slot>
+    </form>
+<view> 
+  
+
+
+
+

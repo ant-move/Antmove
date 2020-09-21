@@ -70,7 +70,7 @@ let repData = {};
 // let isUpdata = true;
 // let baseurl = 'http://cache.amap.com/ecology/tool/antmove/wechat-alipay/';
 
-module.exports = {
+const exportObj = {
     defaultOptions: {
         exclude: [
             'project.config.json',
@@ -162,10 +162,56 @@ module.exports = {
             }
         }
         if (isTypeFile('.wxml', fileInfo.path)) {
-            let ast = wxmlParser.parseFile(fileInfo.path);
-            fileInfo.ast = ast;
+            const {
+                restWxmlCode,
+                wxsAsts
+            } = exportObj.pickupWxs(fs.readFileSync(fileInfo.path, 'utf8'))
+
+            const ast = wxmlParser.parseString(restWxmlCode)
+
+            fileInfo.ast = [
+                ...wxsAsts,
+                ...ast,
+            ];
+        }
+    },
+
+    // htmlParser2 解析内联wxs时可能出错，所以将wxs单独提取出来
+    pickupWxs(wxmlCode) {
+        const Reg = /(<wxs\s*module=["']([^'"]+)["']\s*>([\s\S]*?)<\/wxs>)/
+        const wxsAsts = []
+
+        while(Reg.test(wxmlCode)) {
+            const wxsCode = RegExp.$1
+
+            wxsAsts.push(exportObj.parseWxsCode2Ast(RegExp.$2, RegExp.$3))
+            wxmlCode = wxmlCode.replace(wxsCode, '')
         }
 
+        return {
+            wxsAsts,
+            restWxmlCode: wxmlCode
+        }
+    },
+    parseWxsCode2Ast(moduleName, wxsContent) {
+        const ast = {
+            type: 'wxs',
+            props: {
+                module: {
+                    type: 'unknown',
+                    value: [ moduleName ]
+                }
+            },
+            children: [{
+                value: wxsContent,
+                type: 'textContent',
+            }],
+            parent: null,
+        }
+
+        ast.children[0].parent = ast
+
+        return ast
     },
     onParsed () {
         const {packageData, antmovePackageData} = getPackageJson();
@@ -517,6 +563,8 @@ module.exports = {
         cb ();
     }
 };
+
+module.exports = exportObj
 
 /**
  * Run generateBundleApi in child_process

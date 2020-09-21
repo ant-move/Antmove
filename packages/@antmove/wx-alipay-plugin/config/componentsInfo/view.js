@@ -1,4 +1,6 @@
 const { createSupportProp } = require('./utils.js');
+const Config = require('../../config.js');
+const customComponentPrefix = Config.library.customComponentPrefix;
 /**
  * type
  * 0 - missing - 不支持该属性
@@ -224,11 +226,59 @@ module.exports = {
                         status: 2,
                     }
                 }
-            }
+            },
+            'refresher-enabled':{
+                type: 0,
+                status: 2,
+                desc: '开启自定义下拉刷新',
+            },
+            'refresher-threshold':{
+                type: 0,
+                status: 2,
+                desc: '设置自定义下拉刷新阈值',
+            },
+            'refresher-default-style':{
+                type: 0,
+                status: 2,
+                desc: '设置自定义下拉刷新默认样式，支持设置 black | white | none， none 表示不使用默认样式',
+            },
+            'refresher-background':{
+                type: 0,
+                status: 2,
+                desc: '设置自定义下拉刷新区域背景颜色',
+            },
+            'refresher-triggered':{
+                type: 0,
+                status: 2,
+                desc: '设置当前下拉刷新状态，true 表示下拉刷新已经被触发，false 表示下拉刷新未被触发',
+            },
+            'bindrefresherpulling':{
+                type: 0,
+                status: 2,
+                desc: '自定义下拉刷新控件被下拉',
+            },
+            'bindrefresherrefresh':{
+                type: 0,
+                status: 2,
+                desc: '自定义下拉刷新被触发',
+            },
+            'bindrefresherrestore':{
+                type: 0,
+                status: 2,
+                desc: '自定义下拉刷新被复位',
+            },
+            'bindrefresherabort':{
+                type: 0,
+                status: 2,
+                desc: '自定义下拉刷新被中止',
+            },
         }
     },
     'swiper': {
         name: '滑块视图容器',
+        type: 5,
+        path: customComponentPrefix + '/__component/custom-swiper/custom-swiper',
+        tagName: 'custom-swiper',
         url: {
             wechat: 'https://developers.weixin.qq.com/miniprogram/dev/component/swiper.html',
             alipay: 'https://docs.alipay.com/mini/component/swiper'
@@ -295,6 +345,9 @@ module.exports = {
     },
     'swiper-item': {
         name: '仅可放置在swiper组件中，宽高自动设置为100%',
+        type: 5,
+        path: customComponentPrefix + '/__component/custom-swiper-item/custom-swiper-item',
+        tagName: 'custom-swiper-item',
         url: {
             wechat: 'https://developers.weixin.qq.com/miniprogram/dev/component/swiper-item.html',
             alipay: 'https://docs.alipay.com/mini/component/swiper-item'
@@ -319,13 +372,14 @@ module.exports = {
             'hover-class': createSupportProp('指定按下去的样式类。当 hover-class="none" 时，没有点击态效果'),
             'hover-stop-propagation': createSupportProp('指定是否阻止本节点的祖先节点出现点击态'),
             'aria-role': {
-                type: 0,
-                status: 2,
+                type: 1,
+                status: 0,
                 desc: '无障碍访问，（角色）标识元素的作用',
+                key:'role'
             },
             'aria-label': {
-                type: 0,
-                status: 2,
+                type: 7,
+                status: 0,
                 desc: '无障碍访问，（属性）元素的额外描述',
             },
             'hover-start-time': {

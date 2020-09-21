@@ -259,7 +259,7 @@ module.exports = {
                 }
             },
             'subkey': {
-                type: 0,
+                type: 5,
                 status: 2,
                 desc: '个性化地图使用的key',
             },
@@ -279,37 +279,37 @@ module.exports = {
                 desc: '倾斜角度，范围 0 ~ 40 , 关于 z 轴的倾角',
             },
             'enable-3D': {
-                type: 0,
+                type: 5,
                 status: 2,
                 desc: '展示3D楼块(工具暂不支持）',
             },
             'show-compass': {
-                type: 0,
+                type: 5,
                 status: 2,
                 desc: '显示指南针',
             },
             'enable-overlooking': {
-                type: 0,
+                type: 5,
                 status: 2,
                 desc: '开启俯视',
             },
             'enable-zoom': {
-                type: 0,
+                type: 5,
                 status: 2,
                 desc: '是否支持缩放',
             },
             'enable-rotate': {
-                type: 0,
+                type: 5,
                 status: 2,
                 desc: '是否支持旋转',
             },
             'enable-satellite': {
-                type: 0,
+                type: 5,
                 status: 2,
                 desc: '是否开启卫星图',
             },
             'enable-traffic': {
-                type: 0,
+                type: 5,
                 status: 2,
                 desc: '是否开启实时路况',
             },
@@ -362,7 +362,7 @@ module.exports = {
                 status: 0,
                 desc: '点击地图时触发',
                 key: 'onTap',
-            }
+            },
         }
     }
 };

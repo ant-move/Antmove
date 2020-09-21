@@ -25,22 +25,19 @@ Component({
         onRegionChange: () => { },
         onTap: () => { },
         onUpdated: () => { },
-        onPoiTap: () => { }
+        onPoiTap: () => { },
     },
     data: {
+        // 支付宝 map组件 setting属性支持属性值列表
+        settingList: ['showScale','showCompass'],
         alMakers: [],
-        mapStyle: '',
         setting: {
             gestureEnable: 0,
         }
     },
    
-    deriveDataFromProps (nextProps) {
-        if (nextProps.style !== this.props.style) {
-            this.setData({
-                mapStyle: nextProps.style,
-                
-            });
+    didUpdate (prevProps) {
+        if(!this.compare(prevProps,this.props)){
             this.processProps();
         }
     },
@@ -165,13 +162,20 @@ Component({
                 }
                 return el;
             });
-            const setting = {
+            let setting = {
                 gestureEnable: 0,
             };
             if (this.props["enableScroll"]) {
                 setting.gestureEnable = 1;
             } else {
                 setting.gestureEnable = 0;
+            }
+            // 支付宝setting已支持属性
+            if(this.props.setting){
+                this.data.settingList.forEach(item => {
+                    this.props.setting[item] ? setting[item] = 1 : setting[item] = 0;
+                })
+                this.props.setting.enableTraffic ? setting.trafficEnabled = 1 : setting.trafficEnabled = 0;
             }
             this.setData({
                 alMakers: alMarkers,
@@ -233,7 +237,7 @@ Component({
             }
             if (this.props['enable3D']) {
                 utils.warn('暂不支持enable-3D',{
-                    apiName: 'map/nable-3D',
+                    apiName: 'map/enable-3D',
                     errorType: 0,
                     type: 'component'
                 });
@@ -267,6 +271,13 @@ Component({
                     type: 'component'
                 });
             }
+            if (this.props['enableSatellite']) {
+                utils.warn('暂不支持enable-satellite',{
+                    apiName: 'map/enable-satellite',
+                    errorType: 0,
+                    type: 'component'
+                });
+            }
             if (this.props['onUpdated']) {
                 utils.warn('暂不支持onupdated',{
                     apiName: 'map/onupdated',
@@ -277,6 +288,20 @@ Component({
             if (this.props['onPoiTap']) {
                 utils.warn('暂不支持onpoitap',{
                     apiName: 'map/onpoitap',
+                    errorType: 0,
+                    type: 'component'
+                });
+            }
+            if (this.props['showScale']) {
+                utils.warn('暂不支持show-scale',{
+                    apiName: 'map/show-scale',
+                    errorType: 0,
+                    type: 'component'
+                });
+            }
+            if (this.props['enableTraffic']) {
+                utils.warn('暂不支持enable-traffic',{
+                    apiName: 'map/enable-traffic',
                     errorType: 0,
                     type: 'component'
                 });
@@ -318,6 +343,21 @@ Component({
         },
         onTapFn (e) {
             this.props.onTap && this.props.onTap(e);
+        },
+ 
+        compare(origin, target) {
+            if (typeof target === 'object' && target !== null && origin !== null) {
+                if (typeof origin !== 'object') return false;
+                if (Object.keys(origin).length !== Object.keys(target).length) return false;
+                for (let key in target){
+                    if (!this.compare(origin[key], target[key])) return false;
+                }
+                return true;
+            } else {
+                return origin === target;
+            }
         }
+
+
     }
 });

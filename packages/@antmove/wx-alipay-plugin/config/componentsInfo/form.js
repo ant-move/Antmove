@@ -35,12 +35,40 @@ module.exports = {
             }
         }
     },
+    "checkbox": {
+        type: 5,
+        path: customComponentPrefix + '/__component/custom-checkbox/custom-checkbox',
+        tagName: 'custom-checkbox',
+        name: "多项选择器",
+        url: {
+            "wechat": "http://www.ionic.wang/weixin/component/checkbox.html",
+            "alipay": "https://docs.alipay.com/mini/component/checkbox"
+        },
+        "desc": "多项选择器",
+        props: {
+            "value": {
+                "type": 7,
+                "status": 0,
+                "desc": "<checkbox/>标识，选中时触发<checkbox-group/>的 change 事件，并携带 <checkbox/> 的 value"
+            },
+            "disabled": { "type": 7, "status": 0, "desc": "是否禁用" },
+            "checked": {
+                "type": 7,
+                "status": 0,
+                "desc": "当前是否选中，可用来设置默认选中"
+            }
+        },
+        
+    },
     'form': {
+        type: 5,
         name: '表单',
         url: {
             wechat: 'https://developers.weixin.qq.com/miniprogram/dev/component/form.html',
             alipay: 'https://docs.alipay.com/mini/component/form'
         },
+        path: customComponentPrefix + '/__component/custom-form/custom-form',
+        tagName: 'custom-form',
         desc: '将组件内的用户输入的switch input checkbox slider radio picker 提交。当点击 form 表单中 form-type 为 submit 的 button 组件时，会将表单组件中的 value 值进行提交，需要在表单组件中加上 name 来作为 key。',
         props: {
             'report-submit': createSupportProp('是否返回 formId 用于发送模板消息'),
@@ -51,6 +79,18 @@ module.exports = {
                 key: 'onSubmit',
             },
             'bindreset': {
+                type: 1,
+                status: 0,
+                desc: '表单重置时会触发 reset 事件',
+                key: 'onReset',
+            },
+            'catchsubmit': {
+                type: 1,
+                status: 0,
+                desc: "携带 form 中的数据触发 submit 事件，event.detail = {value : {'name': 'value'} , formId: ''}",
+                key: 'onSubmit',
+            },
+            'catchreset': {
                 type: 1,
                 status: 0,
                 desc: '表单重置时会触发 reset 事件',
@@ -346,6 +386,7 @@ module.exports = {
                 type: 1,
                 status: 0,
                 desc: 'focus',
+                key:'focus'
             },
             'focus': createSupportProp('获取焦点'),
             'auto-height': createSupportProp('是否自动增高，设置auto-height时，style.height不生效'),

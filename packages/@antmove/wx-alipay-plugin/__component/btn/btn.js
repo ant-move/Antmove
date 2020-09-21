@@ -121,7 +121,12 @@ Component({
                 my.getOpenUserInfo({
                     success: (res) => {
                         if (typeof that.props.onGetAuthorize === 'function') {
-                            resObj.detail = res;
+                            const _res = JSON.parse(res.response).response;
+                            _res.gender && _res.gender === 'm' ? _res.gender = 1 : _res.gender = 2;
+                            _res.avatarUrl = _res.avatar;
+                            delete _res.avatar;
+                            resObj.detail = {};
+                            resObj.detail.userInfo = _res;
                             resObj.type = "getuserinfo"
                             that.props.onGetAuthorize(resObj)
                         }
@@ -157,7 +162,7 @@ Component({
                 });
             }
 
-            this.props.onCatchTap &&this.props.onCatchTap(tapEvent);
+            this.props.catchTap &&this.props.catchTap(tapEvent);
             this.props.onTap && this.props.onTap(tapEvent);
         },
         getPhone (e) {

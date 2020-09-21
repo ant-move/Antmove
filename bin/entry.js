@@ -6,9 +6,6 @@ const os = require('os');
 const fs = require('fs-extra');
 
 const {
-    returnOptions
-} = require('../cli/utils');
-const {
     getVersion
 } = require('@antmove/utils');
 const packagePath = path.join(__dirname, '../package.json');

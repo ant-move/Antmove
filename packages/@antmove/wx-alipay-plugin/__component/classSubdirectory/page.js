@@ -30,19 +30,26 @@ module.exports = {
             if (options.onResize) {
                 warnLife("There is no onResize life cycle", "onResize");
             }
+            this.createSelectorQuery = function() {
+                return my.createSelectorQuery()
+            }
             if (options.onLoad) {
                 options.onLoad.call(this, res);
             }
         };
 
         _opts.onReady = function (param) {
-            let ast = this.$node.getRootNode();
-            processRelationNodes(ast);
-
+            let ast = null;
+            if (this.$node) {
+                ast = this.$node.getRootNode();
+            }
+            ast && processRelationNodes(ast);
             if (options.onReady) {
                 options.onReady.call(this, param);
             }
-            ast.isPageReady = true;
+            if (ast) {
+                ast.isPageReady = true;
+            }
         };
         _opts.onShow = function (param) {
             if (config.env === "development" && config.useRuntimeLog) {

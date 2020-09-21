@@ -227,7 +227,7 @@ module.exports = {
         if (!ctx.$options.babel) {
             return code
         }
-        let babels = ctx.$options.babel.plugins|| [];
+        let babels = typeof ctx.$options.babel.plugins === 'function' ? ctx.$options.babel.plugins() : [];
         return babel.transform(code, {
             plugins :[
                 ...babels
