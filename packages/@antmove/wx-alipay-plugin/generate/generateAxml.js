@@ -62,7 +62,7 @@ module.exports = function axmlRender (ast = [], fileInfo) {
         _code += renderFn(tagAst, fileInfo, refRender);
     });
 
-    if (fileInfo.isPage) {
+    if (fileInfo.isPage && ast.length > 1) {
         /**
          * page
          */
@@ -104,7 +104,7 @@ module.exports = function axmlRender (ast = [], fileInfo) {
                     value: ["item"]
                 }
             }
-
+            
             // todo: 表达式没处理
             ast.children = parseString(replacedChildren.map(childAst => {
                 return renderFn(childAst, fileInfo, refRender)
@@ -127,6 +127,7 @@ module.exports = function axmlRender (ast = [], fileInfo) {
                 // data: item 或者 data, item
                 // 再套一层大括号
                 if (/,|:/.test(value)) {
+
                     return `{{ [{ ${value} }] }}`
                 }
                 // data
@@ -134,7 +135,6 @@ module.exports = function axmlRender (ast = [], fileInfo) {
                     return `{{ [ ${value} ] }}`
                 }
             } catch (err) {
-                console.log(ast.props)
                 console.log('err', err)
             }
         }
@@ -210,7 +210,6 @@ module.exports = function axmlRender (ast = [], fileInfo) {
             }
         }
         let {props} = _ast;
-
         let isComponentRender = proccessComponentProps(_ast, _fileInfo, axmlRender);
 
         if (isComponentRender) {

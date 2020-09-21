@@ -1,0 +1,13 @@
+<view  class="{{className}} checkboxWap" style='{{style}}'>
+    <view class='innerbox'>
+        <checkbox value='{{value}}' disabled='{{disabled}}' checked='{{checked}}' color='{{color}}'></checkbox>
+        <view>
+            <slot></slot>
+        </view>
+    </view>
+<view> 
+  
+
+
+
+

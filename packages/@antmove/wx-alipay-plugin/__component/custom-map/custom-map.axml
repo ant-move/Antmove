@@ -18,7 +18,7 @@
         onRegionChange="onRegionChangeFn"
         onTap="onTapFn"
         markers="{{alMakers}}"
-        style="{{mapStyle}}"
+        style="{{style}}"
     />
     <cover-view class="coverview-wrap">
         <slot></slot>

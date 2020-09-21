@@ -46,8 +46,8 @@ const apiObj = {
                 ret.platform = 'ios'
                 // mock的安全区位置信息（模拟器iphonex screenHeight:812）
                 if(ret.screenHeight>=propsPolyfill.screenHeight){
-                    ret.safeArea = propsPolyfill.safeArea
-                    ret.safeArea.bottom = ret.screenHeight -44
+                    ret.safeArea = propsPolyfill.safeArea;
+                    ret.safeArea.bottom = ret.screenHeight - propsPolyfill.safeHeight;
                 }else{
                     ret.safeArea = {
                         bottom: ret.screenHeight,
@@ -95,7 +95,7 @@ const apiObj = {
                         res.platform = 'ios'
                         if(res.screenHeight>=propsPolyfill.screenHeight){
                             res.safeArea = propsPolyfill.safeArea;
-                            res.safeArea.bottom = res.screenHeight -44
+                            res.safeArea.bottom = res.screenHeight -propsPolyfill.safeHeight
                         }else{
                             res.safeArea = {
                                 bottom: res.screenHeight,
@@ -445,6 +445,12 @@ const apiObj = {
                     obj.success && obj.success(res);
                 },
                 fail(err) {
+                    const errMsg = 'request:fail abort';
+                    if (err.errorMessage === errMsg) {
+                        err = {
+                            errMsg
+                        }
+                    }
                     obj.fail && obj.fail(err);
                 },
                 complete(res) {
@@ -452,7 +458,6 @@ const apiObj = {
                 }
             });
             task = task || {};
-            task.abort = function () {};
             task.onHeadersReceived = function () {};
             task.offHeadersReceived = function () {};
             return task;
@@ -483,37 +488,17 @@ const apiObj = {
         },
     },
     createCameraContext: {
-        fn (obj) {
-            const res = my.createCameraContext({
-                ...obj
-            });
-            res.takePhoto = () => {
-                utils.warn(
-                    "支付宝暂不支持takePhoto", {
-                        apiName: `createCameraContext/takePhoto`,
-                        errorType: 0,
-                        type: 'api'
-                    }
-                );
-            };
-            res.startRecord = () => {
-                utils.warn(
-                    "支付宝暂不支持startRecord", {
-                        apiName: `createCameraContext/startRecord`,
-                        errorType: 0,
-                        type: 'api'
-                    }
-                );
-            };
-            res.stopRecord = () => {
-                utils.warn(
-                    "支付宝暂不支持stopRecord", {
-                        apiName: `createCameraContext/stopRecord`,
-                        errorType: 0,
-                        type: 'api'
-                    }
-                );
-            };
+        fn (id = '') {
+            const res = my.createCameraContext(id);
+                res.setZoom = () => {
+                    utils.warn(
+                        `支付宝暂不支持setZoom`, {
+                            apiName: `createCameraContext/setZoom`,
+                            errorType: 0,
+                            type: 'api'
+                        }
+                    );
+                }
             return res;
         }
     },
@@ -1175,21 +1160,23 @@ const apiObj = {
             return my.saveVideoToPhotosAlbum(params)
         }
     },
-    chooseAddress: {
+    chooseAddress:{
         fn (obj = {}) {
             my.getAddress({
-                success(res) {
-                  const result = {}
-                  result.address = `${res.provinceName || ''}${res.cityName || ''}${res.countyName || ''}${res.detailInfo || ''}`
-                  result.prov = res.provinceName
-                  result.city = res.cityName
-                  result.area = res.countyName
-                  result.street = res.detailInfo
-                  result.fullname = res.userName
-                  result.mobilePhone = res.telNumber
-                  result.resultStatus = res.errMsg
+                success(_res) {               
+                    const result = {};
+                    const res = _res.result;
+                    result.cityName = res.city;
+                    result.countyName = res.area;
+                    result.detailInfo = res.street;
+                    result.errMsg = "chooseAddress:ok";
+                    result.nationalCode = "";
+                    result.postalCode = "";
+                    result.provinceName = res.prov;
+                    result.telNumber = res.mobilePhone;
+                    result.userName = res.fullname;
 
-                  obj.success && obj.success(result);
+                    obj.success && obj.success(result);
                 }
             });
         }

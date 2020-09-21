@@ -11,12 +11,6 @@ const Config = require('../config');
 
 module.exports = function (ast, fileInfo, renderAxml) {
 
-    if (ast.type==='swiper-item') {
-        const oldChildren = ast.children;
-        ast.children = [
-            { props: {}, type: 'view', children: oldChildren }
-        ];
-    }
     let isComponentTag = false;
     processButton(ast, fileInfo);
     let { type, props } = ast;
@@ -50,9 +44,10 @@ module.exports = function (ast, fileInfo, renderAxml) {
                 props["ref-numbers"] = props[key];
             }
 
-            // 数字文本兼容
+            // 数字文本兼容 
             let val = props[key].value[0].trim();
-            if (val && !isNaN(Number(val))) {
+            const matched = key.match(/^data-(.+)/)
+            if (val && !isNaN(Number(val))&& !matched) {
                 props[key].value[0] = `{{${val}}}`;
             }
         });
@@ -61,7 +56,7 @@ module.exports = function (ast, fileInfo, renderAxml) {
     let originType = type;
     let tagInfo = _componentMap[type];
     if(tagInfo  && tagInfo.type === 0){
-        console.log(`支付宝暂不支持${type}组件,请检查业务逻辑`);
+        console.log(`支付宝暂不支持${type}组件`);
     }
     /**
      * 自定义组件预处理 - 事件

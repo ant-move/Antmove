@@ -34,7 +34,7 @@ function scopeStyle (fileInfo) {
     classPrefix = setClassName(componentName);
     
     let _ast = parseTpl.parseString(`
-    <view class='${classPrefix} {{className}}'></view>
+    <view class='${classPrefix} {{className}}' style='{{style}}'></view>
     `);
     // const prop = {
     //     class: {
@@ -59,7 +59,7 @@ function scopeStyle (fileInfo) {
 
             if (node && node.props && node.props['is-inline'] !== undefined) {
                 _ast = parseTpl.parseString(`
-        <view class='${classPrefix} {{className}}' style="display: inline-block;"></view>
+        <view class='${classPrefix} {{className}}' style="display: inline-block;{{style}}"></view>
         `);
             }
         });

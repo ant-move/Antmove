@@ -15,7 +15,7 @@
     "dependencies": {
         "@amove/babel": "^0.0.1",
         "@amove/directory-to-ast": "^0.0.1",
-        "@amove/next": "^0.2.10",
+        "@amove/next": "0.0.12",
         "@amove/wx": "^1.1.0",
         "@amove/wx-utils": "^1.1.0",
         "chalk": "^4.1.0",

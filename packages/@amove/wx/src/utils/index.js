@@ -17,6 +17,15 @@ module.exports = {
             });
         } catch (error) {}
     },
+    ignoreFile (distArr, excludes) {
+        let isExclude = false;
+        excludes.forEach((e) => {
+            if (distArr.includes(e)) {
+                isExclude = true;
+            }
+        })
+        return isExclude
+    },
     setAppName (name) {
         process.env.appName = name;
     },

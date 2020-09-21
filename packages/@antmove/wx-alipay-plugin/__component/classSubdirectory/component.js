@@ -194,6 +194,9 @@ module.exports = {
         _opts.methods.antmoveAction = antmoveAction
 
         let didMount = function () {
+            this.createIntersectionObserver = function(){
+                return my.createIntersectionObserver()
+            }
             _life.error && warnLife(`There is no error life cycle`, "error");
             _life.move && warnLife(`There is no moved life cycle`, "moved");
             _life.pageLifetimes && warnLife(`There is no page life cycle where the component resides,including(show,hide,resize)`, "pageLifetimes");
@@ -211,13 +214,20 @@ module.exports = {
             this.onPageReady = function (p) {
                 _opts.onPageReady && _opts.onPageReady.call(this, p);
             };
+            this.createSelectorQuery = function() {
+                return my.createSelectorQuery()
+            }
         });
 
         fnApp.add('deriveDataFromProps', function () {
         });
 
         fnApp.add('didMount', didMount);
-        fnApp.add('onInit', options.created);
+        if (_opts.lifetimes && _opts.lifetimes.created) {
+            fnApp.add('onInit ', _opts.lifetimes.created);
+        } else {
+            fnApp.add('onInit', _opts.created);
+        }
         fnApp.add('onInit', function () {
             processObservers.call(this, _opts.observersObj, options, this.$antmove._data);
         });
@@ -241,6 +251,8 @@ module.exports = {
             updateData.call(this);
             processRelations(this, Relations);
             this.selectComponentApp.connect();
+            this.selectOwnerComponent = processSelectOwnerComponent.bind(this);
+            this.getPageId = processGetPageId.bind(this);
             addAntmoveData.call(this);
             if (typeof this.triggerEvent !== 'function') {
                 processTriggerEvent.call(this);
@@ -248,7 +260,11 @@ module.exports = {
             observerHandle(_opts.observerObj, _opts, this, true);
         });
         fnApp.bind('onInit', _opts);
-        fnApp.add('didMount', _opts.attached);
+        if (_opts.lifetimes && _opts.lifetimes.attached) {
+            fnApp.add('didMount', _opts.lifetimes.attached);
+        } else {
+            fnApp.add('didMount', _opts.attached);
+        }
         fnApp.add('didMount', _opts.ready);
 
 
@@ -266,7 +282,11 @@ module.exports = {
         fnApp.bind('deriveDataFromProps', _opts);
         fnApp.bind('didUpdate', _opts);
         fnApp.bind('didMount', _opts);
-        fnApp.add('didUnmount', options.detached);
+        if (_opts.lifetimes && _opts.lifetimes.detached) {
+            fnApp.add('didUnmount', _opts.lifetimes.detached);
+        } else {
+            fnApp.add('didUnmount', options.detached);
+        }
         fnApp.add('didUnmount', function () {
             // todo: 暂时这样处理使其不报错
             if (this.$node && this.$node.$parent) {
@@ -295,7 +315,27 @@ function addAntmoveData () {
     this.$antmove._data = _data;
 }
 
+/**
+ * selectOwnerComponent
+ */
+function processSelectOwnerComponent () {
+    const node = this.$node;
+    if (node && node.$parent && node.$parent.$self) {
+        return node.$parent.$self
+    }
+    return {}
+}
 
+/**
+ * getPageId
+ */
+
+function processGetPageId () {
+    if (this.$page && this.$page.$id) {
+        return 'pageId:' + this.$page.$id
+    }
+    return "pageId: undefined"
+}
 
 /**
  * behavior

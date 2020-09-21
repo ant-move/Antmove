@@ -108,33 +108,33 @@ module.exports = {
         desc: '扫码二维码功能，需升级微信客户端至6.7.3。需要用户授权 scope.camera。相关api：wx.createCameraContext',
         props: {
             'mode': {
-                type: 0,
-                status: 2,
+                type: 7,
+                status: 0,
                 desc: '应用模式，只在初始化时有效，不能动态变更',
             },
             'device-position': {
-                type: 0,
-                status: 2,
+                type: 7,
+                status: 0,
                 desc: '摄像头朝向',
             },
             'frame-size': {
-                type: 0,
-                status: 2,
+                type: 7,
+                status: 0,
                 desc: '指定期望的相机帧数据尺寸',
             },
             'takePhoto': {
-                type: 0,
-                status: 2,
+                type: 7,
+                status: 0,
                 desc: '拍照',
             },
             'startRecord': {
-                tyoe: 0,
-                status: 2,
+                tyoe: 7,
+                status: 0,
                 desc: '开始录像',
             },
             'stopRecord': {
-                tyoe: 0,
-                status: 2,
+                tyoe: 7,
+                status: 0,
                 desc: '结束录像',
             },
             'bindstop': {
@@ -150,10 +150,21 @@ module.exports = {
                 key: 'onError',
             },
             'bindscancode': {
-                type: 0,
+                type: 1,
                 status: 2,
                 desc: '在扫码识别成功时触发，仅在 mode="scanCode" 时生效',
-            }
+                key:'onScanCode',
+            },
+            'bindinitdone': {
+                type: 0,
+                status: 2,
+                desc: '相机初始化完成时触发',
+            },
+            'flash': {
+                type: 7,
+                status: 0,
+                desc: '闪光灯，值为auto, on, off',
+            },
         }
     },
     'live-player': {
@@ -170,7 +181,7 @@ module.exports = {
         name: '实时音视频录制',
         url: {
             wechat: 'https://developers.weixin.qq.com/miniprogram/dev/component/live-pusher.html',
-            alipay: ''
+            alipay: 'https://yuque.antfin-inc.com/tiny-tmp/api/ryieba'
         },
         type: 0,
         status: 2,
@@ -319,7 +330,32 @@ module.exports = {
                 status: 0,
                 desc: '播放进度变化时触发',
                 key: 'onTimeUpdate',
-            }
+            },
+            'picture-in-picture-mode':{
+                type: 0,
+                status: 2,
+                desc: '小窗模式',
+            },
+            'enable-auto-rotation':{
+                type: 0,
+                status: 2,
+                desc: '是否开启手机横屏时自动全屏，当系统设置开启自动旋转时生效',
+            },
+            'picture-in-picture-show-progress':{
+                type: 0,
+                status: 2,
+                desc: '是否在小窗模式下显示播放进度',
+            },
+            'bindenterpictureinpicture':{
+                type: 0,
+                status: 2,
+                desc: '播放器进入小窗',
+            },
+            'bindleavepictureinpicture':{
+                type: 0,
+                status: 2,
+                desc: '播放器退出小窗',
+            },
         }
     }
 };

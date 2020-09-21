@@ -1,7 +1,7 @@
-const {matchExcluds} = require ('./utils/matchExcluds');
 const path = require('path');
 const fs = require('fs-extra');
 const parser =require('./utils/parseXml');
+const {ignoreFile} = require('./utils');
 module.exports = {
     ...require('./Js'),
     ...require('./Json'),
@@ -13,14 +13,16 @@ module.exports = {
             this.addChild({
                 type: "ReadCompileConfigJs",
             });
+            const defaultExcludes = ["node_modules", "antmove.config.js", 'project.config.json', '.DS_Store'];
+            store.excludes = defaultExcludes;
             if (store.config.env === 'development') {
-                store.repData = {}
-                node.beginTime = Number(new Date())
+                store.repData = {};
+                node.beginTime = Number(new Date());
                 let types = {
                     'resDataInit': {},
                     'getSurrounding': {},
                     'getToolVs': {}
-                }
+                };
                 for (let t in types) {
                     this.addChild({
                         type: 'compilerLog',
@@ -28,9 +30,8 @@ module.exports = {
                         body: {
                             _type: t,
                             opts: types[t]
-                        }
-                  
-                  })
+                        }                 
+                    })
                 }
             };
         },
@@ -38,11 +39,6 @@ module.exports = {
     Directory (node, store) {
         const preData = store.config.preAppData;
         const nodes = preData.nodes;
-        let _excludes = [".tea"];
-        if (Array.isArray(store.config.excludes)) {
-            _excludes = [..._excludes, ...store.config.excludes];
-        }
-        node = new matchExcluds(_excludes, node).matchArrayFn();
         if (node.path === ".tea") {
             node.children = [];
         }
@@ -63,11 +59,6 @@ module.exports = {
         });
     },
     File (node, store) {      
-        let _excludes = ["antmove.config.js"];
-        if (Array.isArray(store.config.excludes)) {
-            _excludes = [..._excludes, ...store.config.excludes];
-        }
-        node = new matchExcluds(_excludes, node, true).matchArrayFn();
         node.projectPath = path.relative(store.config.entry, node.path);
         if (node.extname) {
             if (node.extname === ".wxs") {
@@ -81,7 +72,6 @@ module.exports = {
                 1;
                 return $.toUpperCase();
             });
-            // let basePath = path.relative( store.config.entry, node.path).replace(/.(wxml|wxss|json|js)/,'');
             let isDirxml = store.config.preAppData.nodes.hasOwnProperty(
                 node.fullname
             );
@@ -113,6 +103,10 @@ module.exports = {
                 _node.projectPath + "." + t.toLowerCase()
             );
             if (fs.pathExistsSync(filePath)) {
+                const distArr = (_node.projectPath + "." + t.toLowerCase()).split('/');
+                if (ignoreFile(distArr, store.excludes)) {
+                    return
+                }
                 this.addChild({
                     type: "Page" + t,
                     key: dirpath + _filePath + t,
@@ -136,6 +130,10 @@ module.exports = {
                 _node.projectPath + "." + t.toLowerCase()
             );
             if (fs.pathExistsSync(filePath)) {
+                const distArr = (_node.projectPath + "." + t.toLowerCase()).split('/');
+                if (ignoreFile(distArr, store.excludes)) {
+                    return
+                }
                 this.addChild({
                     type: "Component" + t,
                     key: dirpath + t,
@@ -251,12 +249,26 @@ module.exports = {
     },
     outputFile (node, store) {
         const body = node.body;
-        if (!body) return false;
+        if (!body) {
+            return false;
+        }
         const { dist, content } = body;
-        if (!dist || !content) return false;
+        if (!dist || !content) {
+            return false;   
+        }
+        let excludes = store.excludes;
+        let distArr = dist.replace(store.config.output,'').split('/');
+        if (ignoreFile(distArr, excludes)) {
+            return false;
+        }
         fs.outputFileSync(dist, content);
     },
     FileMounted (node, store) {
+        let excludes = store.excludes;
+        let distArr = node.dist.replace(store.config.output,'').split('/');
+        if (ignoreFile(distArr, excludes)) {
+            return false;
+        }
         if (!this.$node.content && !this.$node.isDirxml) {        
             this.addChild({
                 type: 'compilerLog',

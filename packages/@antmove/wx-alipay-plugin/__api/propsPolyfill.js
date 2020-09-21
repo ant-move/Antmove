@@ -1,4 +1,5 @@
 const screenHeight = 812;
+const safeHeight = 44;
 const safeArea = {
     bottom: 862,
     height: 818,     
@@ -9,5 +10,6 @@ const safeArea = {
 };
 module.exports = {
     screenHeight,
-    safeArea
+    safeArea,
+    safeHeight
 }
