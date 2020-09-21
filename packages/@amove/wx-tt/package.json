@@ -1,6 +1,6 @@
 {
   "name": "@amove/wx-tt",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -16,8 +16,8 @@
     "@amove/babel": "^0.0.1",
     "@amove/directory-to-ast": "^0.0.1",
     "@amove/next": "^0.2.2",
-    "@amove/wx": "^1.1.5",
-    "@amove/wx-utils": "^1.1.5",
+    "@amove/wx": "^1.1.6",
+    "@amove/wx-utils": "^1.1.6",
     "colornames": "^1.1.1",
     "css": "^2.2.4",
     "fs-extra": "^9.0.0",
