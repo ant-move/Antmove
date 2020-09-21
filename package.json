@@ -19,7 +19,7 @@
         "@antmove/alipay-wx": "^1.1.6",
         "@antmove/utils": "^1.1.6",
         "@antmove/wx-alipay": "^1.1.6",
-        "@antmove/wx-baidu": "^1.1.6",
+        "@antmove/wx-baidu": "^1.1.0",
         "@antmove/wx-qq": "^1.1.6",
         "@antmove/wx-tt": "^1.1.6",
         "@antmove/wx-wx": "^1.1.6",
