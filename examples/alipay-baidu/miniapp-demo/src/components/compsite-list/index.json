@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "list": "mini-antui/es/list/index",
+    "list-item": "mini-antui/es/list/list-item/index"
+  }
+}

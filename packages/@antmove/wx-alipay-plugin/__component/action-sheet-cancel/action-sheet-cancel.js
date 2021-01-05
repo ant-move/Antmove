@@ -1,6 +1,6 @@
 Component({
-    props: {
-        textContent: "",
-        slot: "footer"
-    }
-});
+  props: {
+    textContent: '',
+    slot: 'footer',
+  },
+})

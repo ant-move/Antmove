@@ -1,0 +1,4 @@
+<view class='page-container-classname'>
+                <web-view src='https://developers.weixin.qq.com/miniprogram/introduction/' onChildRef='saveChildRef0' onMessage='bindmessage'>
+</web-view>
+            </view>

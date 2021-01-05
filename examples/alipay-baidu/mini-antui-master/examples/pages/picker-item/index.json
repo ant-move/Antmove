@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "list": "../../es/list/index",
+    "input-item": "../../es/input-item/index",
+    "picker-item": "../../es/picker-item/index"
+  }
+}

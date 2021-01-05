@@ -1,0 +1,69 @@
+.main{
+    background: #F9F9F9;
+    padding-bottom: 74rpx;
+    overflow: hidden;
+  }
+  .tab{
+    margin: 74rpx 0 0 40rpx;
+    line-height: 30px;
+    font-family: PingFangSC-Regular;
+    font-size: 20px;
+    color: #000000;
+  }
+  .name{
+    line-height: 21px;
+    opacity: 0.54;
+    font-family: PingFangSC-Light;
+    font-size: 14px;
+    color: #000000;
+    margin: 20rpx 0 68rpx 40rpx;
+  }
+  .L{
+    text-align: left;
+    line-height: 20px;
+    font-family: PingFangSC-Light;
+    font-size: 14px;
+    color: #000000;
+    height: 20px;
+    margin: 40rpx 0 16rpx 40rpx;
+  }
+  .yang{
+    background: #FFFFFF;
+    width: 100%;
+    height: 110rpx;
+    line-height: 54px;
+    font-family: PingFangSC-Medium;
+    font-size: 36rpx;
+    color: rgba(0,0,0,0.54);
+    padding-left: 40rpx;
+    display: flex;
+  }
+  .ta{
+    margin-right: 56rpx;
+  }
+  .te{
+    border-bottom: 4rpx solid #000000;
+    color: rgba(0,0,0,0.87);
+  }
+  .yang-m{
+    background: #FFFFFF;
+    width: 100%;
+    height: 96rpx;
+    line-height: 48px;
+    font-family: PingFangSC-Medium;
+    font-size: 28rpx;
+    color: rgba(0,0,0,0.54);
+    padding-left: 40rpx;
+    display: flex;
+  }
+  .yang-s{
+    background: #FFFFFF;
+    width: 100%;
+    height: 82rpx;
+    line-height: 42px;
+    font-family: PingFangSC-Medium;
+    font-size: 28rpx;
+    color: rgba(0,0,0,0.54);
+    padding-left: 40rpx;
+    display: flex;
+  }

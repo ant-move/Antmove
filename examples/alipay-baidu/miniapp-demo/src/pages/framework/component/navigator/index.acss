@@ -1,0 +1,13 @@
+.navigator-hover button {
+  background-color:blue;
+  color: #fff;
+}
+
+.other-navigator-hover button {
+  background-color:red;
+  color: #fff;
+}
+
+.active {
+  color: red;
+}

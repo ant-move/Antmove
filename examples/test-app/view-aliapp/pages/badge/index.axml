@@ -1,0 +1,30 @@
+<view class='page-container-classname'>
+                <view class='container' ref='saveChildRef0'>
+  <view class='demo'>
+    <i-badge dot=" " ref='saveChildRef1'>
+      <view class='demo-badge'>
+      </view>
+    </i-badge>
+  </view>
+  <view class='demo'>
+    <i-badge count='{{3}}' ref='saveChildRef2'>
+      <view class='demo-badge'>
+      </view>
+    </i-badge>
+  </view>
+  <view class='demo'>
+    <i-badge count='{{123}}' overflow-count='{{100}}' ref='saveChildRef3'>
+      <view class='demo-badge'>
+      </view>
+    </i-badge>
+  </view>
+  <view class='demo'>
+    <i-badge count='{{66}}' ref='saveChildRef4'>
+    </i-badge>
+  </view>
+  <view class='demo'>
+    <i-badge count='{{66}}' i-class-alone='demo-badge-alone' ref='saveChildRef5'>
+    </i-badge>
+  </view>
+</view>
+            </view>

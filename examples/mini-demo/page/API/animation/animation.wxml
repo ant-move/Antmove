@@ -1,0 +1,25 @@
+<!--page/API/animation/animation.wxml-->
+<slot-demo date="创建动画 API" title="wx.createAnimation">
+  <view class="page-section">
+    <view class="page-section-demo">
+      <view class="animation-element" animation="{{animation}}"></view>
+    </view>
+    <view class="page-section-btns">
+      <view type="primary" bindtap="rotate">旋转</view>
+      <view type="primary" bindtap="scale"> 缩放</view>
+      <view type="primary" bindtap="translate">移动</view>
+    </view>
+    <view class="page-section-btns">
+      <view type="primary" bindtap="skew">倾斜</view>
+      <view type="primary" bindtap="rotateAndScale">旋转并缩放</view>
+      <view type="primary" bindtap="rotateThenScale">旋转后缩放</view>
+    </view>
+    <view class="page-section-btns">
+      <view type="primary" bindtap="all">同时展示全部</view>
+      <view type="primary" bindtap="allInQueue">顺序展示全部</view>
+      <view type="primary" bindtap="reset">还原</view>
+      <view type="primary" bindtap="style">样式</view>
+    </view>
+  </view>
+</slot-demo>
+

@@ -1,0 +1,99 @@
+/*
+ * @desc 微信小程序组件的默认样式
+ */
+input {
+  display: block;
+  background: rgba(0, 0, 0, 0);
+  margin-left: 0;
+  padding-left: 0;
+  text-indent: 0;
+  cursor: auto;
+  text-overflow: clip;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+button {
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 14px;
+  padding-right: 14px;
+  box-sizing: border-box;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  line-height: 2.55555556;
+  border-radius: 5px;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+  color: #000000;
+  background-color: #F8F8F8;
+}
+
+checkbox {
+  margin-top: 1rpx;
+  background-color: #fff;
+}
+
+radio {
+  background-color: #fff;
+}
+
+slider {
+  margin: 10px 18px;
+}
+
+switch {
+  padding-right: 5px;
+}
+
+textarea {
+  cursor: auto;
+  width: 300px;
+  height: 150px;
+  display: block;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+image {
+  width: 320px;
+  height: 240px;
+  display: inline-block;
+  overflow: hidden;
+}
+
+canvas {
+  width: 300px;
+  height: 150px;
+  display: block;
+  position: relative;
+}
+
+map {
+  position: relative;
+  width: 300px;
+  height: 150px;
+  display: block;
+}
+
+cover-image {
+  display: block;
+  line-height: 1.2;
+  overflow: hidden;
+  pointer-events: auto;
+  height: 100%;
+  width: 100%;
+}
+
+cover-view {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  pointer-events: auto;
+  background: rgba(0, 0, 0, 0);
+}

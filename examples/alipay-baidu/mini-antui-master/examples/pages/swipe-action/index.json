@@ -1,0 +1,8 @@
+{
+  "defaultTitle": "Swipe-Action",
+  "usingComponents":{
+    "list": "../../es/list/index",
+    "list-item": "../../es/list/list-item/index",
+    "swipe-action": "../../es/swipe-action/index"
+  }
+}

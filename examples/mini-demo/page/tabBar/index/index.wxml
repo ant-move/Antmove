@@ -1,0 +1,6 @@
+<view>
+  <view class="mean">
+    <header headline="{{headline}}" subtitle="{{subtitle}}"/>
+    <list list="{{basicComponentList}}"/>
+  </view>
+</view>

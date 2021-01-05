@@ -1,0 +1,24 @@
+<view class="page">
+  <view class="page-description">客户端获取会员信息</view>
+  <view class="page-section">
+    <view class="page-section-title">
+      <view class="page-section-name">getAuthUserInfo</view>
+      请先设置高德的头像和昵称后生效
+    </view>
+    <view class="page-section-demo">
+      <block a:if="{{hasUserInfo === false}}">
+        <text>点击 [获取] 可获取用户头像及昵称</text>
+      </block>
+      <block a:if="{{hasUserInfo === true}}">
+        <view class="userinfo-avatar">
+          <image class="userinfo-avatar-img" src="{{userInfo.avatar}}"></image>
+        </view>
+        <view class="userinfo-nickname">{{userInfo.nickName}}</view>
+      </block>
+    </view>
+    <view class="page-section-btns">
+      <view><button type="primay" plain onTap="getUserInfo">获取</button></view>
+      <view><button type="primay" plain onTap="clear">清空</button></view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,4 @@
+@import "/__antmove/static/app.acss";
+page {
+    background: #f9f9f9;
+}

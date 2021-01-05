@@ -1,0 +1,69 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'getTempFileURL'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <block a:if='{{fileTempURLDone}}'>
+        <view class='weui-cells weui-cells_after-title'>
+          <view class='weui-cell weui-cell_input'>
+            <view class='weui-cell__hd'>
+              <view class='weui-label'>
+                文件 ID
+              </view>
+            </view>
+            <view class='weui-cell__bd'>
+              <textarea class='weui-textarea' value='{{fileId}}' style='height: 3.3em' disabled=" ">
+              </textarea>
+            </view>
+          </view>
+          <view class='weui-cell weui-cell_input'>
+            <view class='weui-cell__hd'>
+              <view class='weui-label'>
+                临时链接
+              </view>
+            </view>
+            <view class='weui-cell__bd'>
+              <textarea class='weui-textarea' value='{{tempFileURL}}' style='height: 3.3em' disabled=" ">
+              </textarea>
+            </view>
+          </view>
+          <view class='weui-cell'>
+            <view class='page-section-ctn'>
+              <image src='{{tempFileURL}}' class='image' mode='aspectFit'>
+              </image>
+            </view>
+          </view>
+        </view>
+      </block>
+      <block a:else >
+        <view class='weui-cells__title'>
+          点击按钮即可根据文件 ID 换取临时网络链接
+        </view>
+        <view class='weui-cells weui-cells_after-title'>
+          <view class='weui-cell weui-cell_input'>
+            <view class='weui-cell__hd'>
+              <view class='weui-label'>
+                文件 ID
+              </view>
+            </view>
+            <view class='weui-cell__bd'>
+              <textarea class='weui-textarea' value='{{fileId}}' style='height: 3.3em' disabled=" ">
+              </textarea>
+            </view>
+          </view>
+        </view>
+        <view class='btn-area'>
+          <button type='primary' size='{{40}}' loading='{{loading}}' class=' primary-style 40-style' onTap='getTempFileURL'>
+            换取临时链接
+          </button>
+        </view>
+      </block>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

@@ -1,0 +1,14 @@
+<view>
+  <view class="page">
+  <view class="page-section">
+    <view class="page-section-btns">
+      <view onTap="chooseImage">选择照片</view>
+    </view>
+  </view>
+</view>
+  <button size="default" type="primary" onTap="getFileInfo">getFileInfo</button>
+  <button size="default" type="primary" onTap="getSavedFileInfo">getSavedFileInfo</button>
+  <button size="default" type="primary" onTap="getSavedFileList">getSavedFileList</button>
+  <button size="default" type="primary" onTap="removeSavedFile">removeSavedFile</button>
+  <button size="default" type="primary" onTap="saveFile">saveFile</button>
+</view>

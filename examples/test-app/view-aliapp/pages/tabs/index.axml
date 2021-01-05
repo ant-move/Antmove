@@ -1,0 +1,47 @@
+<view class='page-container-classname'>
+                <i-panel title='基本用法' ref='saveChildRef1'>
+</i-panel><i-tabs current='{{ current }}' onChange='handleChange' ref='saveChildRef2'>
+  <i-tab key='tab1' title='选项1' ref='saveChildRef3'>
+  </i-tab>
+  <i-tab key='tab2' title='选项2' ref='saveChildRef4'>
+  </i-tab>
+  <i-tab key='tab3' title='选项3' ref='saveChildRef5'>
+  </i-tab>
+</i-tabs><i-panel title='自定义主题色' ref='saveChildRef6'>
+</i-panel><i-tabs current='{{ current }}' color='#f759ab' onChange='handleChange' ref='saveChildRef7'>
+  <i-tab key='tab1' title='选项1' ref='saveChildRef8'>
+  </i-tab>
+  <i-tab key='tab2' title='选项2' ref='saveChildRef9'>
+  </i-tab>
+  <i-tab key='tab3' title='选项3' ref='saveChildRef10'>
+  </i-tab>
+</i-tabs><i-panel title='徽标' ref='saveChildRef11'>
+</i-panel><i-tabs current='{{ current }}' onChange='handleChange' ref='saveChildRef12'>
+  <i-tab key='tab1' title='选项1' count='{{3}}' ref='saveChildRef13'>
+  </i-tab>
+  <i-tab key='tab2' title='选项2' ref='saveChildRef14'>
+  </i-tab>
+  <i-tab key='tab3' title='选项3' dot=" " ref='saveChildRef15'>
+  </i-tab>
+</i-tabs><i-panel title='滚动' ref='saveChildRef16'>
+</i-panel><i-tabs current='{{ current_scroll }}' scroll=" " onChange='handleChangeScroll' ref='saveChildRef17'>
+  <i-tab key='tab1' title='选项1' ref='saveChildRef18'>
+  </i-tab>
+  <i-tab key='tab2' title='选项2' ref='saveChildRef19'>
+  </i-tab>
+  <i-tab key='tab3' title='选项3' ref='saveChildRef20'>
+  </i-tab>
+  <i-tab key='tab4' title='选项4' ref='saveChildRef21'>
+  </i-tab>
+  <i-tab key='tab5' title='选项5' ref='saveChildRef22'>
+  </i-tab>
+  <i-tab key='tab6' title='选项6' ref='saveChildRef23'>
+  </i-tab>
+  <i-tab key='tab7' title='选项7' ref='saveChildRef24'>
+  </i-tab>
+  <i-tab key='tab8' title='选项8' ref='saveChildRef25'>
+  </i-tab>
+  <i-tab key='tab9' title='选项9' ref='saveChildRef26'>
+  </i-tab>
+</i-tabs>
+            </view>

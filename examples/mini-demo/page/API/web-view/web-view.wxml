@@ -1,0 +1,6 @@
+<!--page/API/web-view/web-view.wxml-->
+<text>page/API/web-view/web-view.wxml</text>
+<view>
+  <web-view id="web-view-1" src="https://mp.weixin.qq.com" bindmessage="bindmessage" bindload="bindload" binderror="binderror">
+  </web-view>
+</view>

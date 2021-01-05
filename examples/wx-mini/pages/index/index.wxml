@@ -1,0 +1,13 @@
+<!--index.wxml-->
+<view class="content">
+  <view class='apilist' wx:for="{{apiList}}" wx:key="{{index}}" bindtap='currentTap' data-item="{{item}}">
+    <view class='apiItem'>{{item}}</view>
+  </view>
+  <toast hidden="{{toast2Hidden}}" duration="2000" >
+    {{ "设置duration" + theTime }}
+  </toast>
+  <modal title="标题" confirm-text="confirm" cancel-text="cancel" hidden="{{modalHidden}}" bindconfirm="modalChange" bindcancel="modalChange">
+  这是对话框的内容。
+</modal>
+  <lifeCycles></lifeCycles>
+</view>

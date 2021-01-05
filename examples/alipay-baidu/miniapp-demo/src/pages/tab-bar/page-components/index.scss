@@ -1,0 +1,55 @@
+@import "../../../styles/abstracts/mixins";
+
+@b(page-components) {
+  @e(banner) {
+    position: relative;
+    width: 100%;
+    height: 283rpx;
+    background: #0093fd;
+  }
+
+  @e(logo) {
+    width: 100%;
+    height: 130rpx;
+    text-align: center;
+
+    & image {
+      height: 100%;
+    }
+  }
+
+  @e(title) {
+    font-size: 46rpx;
+    color: #fff;
+    position: absolute;
+    top: 138rpx;
+    left: 50%;
+    font-weight: bold;
+    transform: translate(-50%);
+  }
+
+  @e(sub-title) {
+    color: rgba(255, 255, 255, 0.48);
+    font-size: 24rpx;
+    position: absolute;
+    top: 330rpx;
+    left: 50%;
+    transform: translate(-50%);
+  }
+
+  @e(search--fake) {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    z-index: 2;
+  }
+
+  @e(hot) {
+    padding-top: 60px;
+    padding-bottom: 30rpx;
+    padding-left: 4.26%;
+    padding-right: 4.26%;
+    box-sizing: border-box;
+  }
+}

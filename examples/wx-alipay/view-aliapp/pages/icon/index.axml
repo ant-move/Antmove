@@ -1,0 +1,11 @@
+<view class='page-container-classname'>
+                <i-grid ref='saveChildRef1'>
+  <view class='icon-item' a:for='{{ list }}' a:key='{{ item }}' ref-numbers='{{ list }}'>
+    <i-icon type='{{ item }}' size='{{28}}' color='#80848f' ref='saveChildRef2'>
+    </i-icon>
+    <view class='icon-item-name'>
+      {{ item }}
+    </view>
+  </view>
+</i-grid>
+            </view>

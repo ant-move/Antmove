@@ -1,0 +1,21 @@
+{
+  "name": "@antmove/wx-quickapp",
+  "version": "1.2.2",
+  "description": "transform wechat miniprogram to quickapp tool.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "amap-appx@service.autonavi.com",
+  "license": "GPL-3.0",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "@antmove/utils": "^1.2.2",
+    "fs-extra": "^9.0.1",
+    "qa-adapter": "^1.3.1"
+  },
+  "gitHead": "d3eab5657b5b44b09cc23402feee06c67e9beef2"
+}

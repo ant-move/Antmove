@@ -1,0 +1,18 @@
+<view class='page-container-classname'>
+                <view class='page' ref='saveChildRef0'>
+  <view class='page__hd'>
+    <view class='page__title'>
+      Slider
+    </view>
+    <view class='page__desc'>
+      滑块，这里采用小程序原生的slider。
+    </view>
+  </view>
+  <view class='page__bd page__bd_spacing'>
+    <slider>
+    </slider>
+    <slider show-value=" " value='{{50}}'>
+    </slider>
+  </view>
+</view>
+            </view>

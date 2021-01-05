@@ -1,0 +1,10 @@
+@import "../../../common/lib/weui.acss";
+.page-section-ctn {
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.image {
+    max-width: 100%;
+}

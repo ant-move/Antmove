@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "flex": "../../es/flex/index",
+    "flex-item": "../../es/flex/flex-item/index"
+  }
+}

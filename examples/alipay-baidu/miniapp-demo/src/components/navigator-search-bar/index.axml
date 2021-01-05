@@ -1,0 +1,4 @@
+<navigator url="/pages/page-search/index" class="navigator-search-bar {{className}}">
+  <icon type="search" size="14" color="#1D1D1D" />
+  <text class="navigator-search-bar__placeholder">{{placeholder}}</text>
+</navigator>

@@ -1,0 +1,35 @@
+<view
+  class="am-collapse-item {{className}} {{isActive ? activeClass : ''}} {{disabled ? 'am-collapse-item--disabled' : ''}}"
+  key="{{id}}"
+>
+  <view
+    class="am-collapse-item-title {{titleClass}} {{isActive ? 'title--active' : ''}}"
+    onTap="onCollapseTap"
+    data-key="{{id}}"
+    data-title="{{title}}"
+    data-isActive="{{isActive}}"
+  >
+    <view class="am-collapse-item-title-container">
+      <view class="am-collapse-item-title-text-wrapper">
+        <slot name="am-collapse-item-title">
+          <text>{{header}}</text>
+        </slot>
+      </view>
+      <am-icon
+        a:if="{{showArrow}}"
+        size="{{16}}"
+        color="#ccc"
+        class="am-collapse-item-title-arrow arrow--{{isActive ? 'down' : 'right'}}"
+        type="arrow-up"
+      />
+    </view>
+  </view>
+  <view
+    class="am-collapse-item-content-wrapper"
+    style="max-height: {{contentHeight}}px"
+  >
+    <view class="am-collapse-item-content am-collapse-item-content-{{contentId}} {{contentClass}}">
+      <slot></slot>
+    </view>
+  </view>
+</view>

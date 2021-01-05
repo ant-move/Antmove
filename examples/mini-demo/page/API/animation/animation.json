@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "animation",
+  "usingComponents": {
+    "slot-demo": "/page/common/components/slot-demo/slot-demo"
+  }
+}

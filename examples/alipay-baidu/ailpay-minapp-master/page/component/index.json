@@ -1,0 +1,11 @@
+{
+  "defaultTitle": "",
+  "allowsBounceVertical": "NO",
+  "transparentTitle": "auto",
+  "titleBarColor": "#262833",
+  "usingComponents": {
+    "block-list": "/page/common/components/block-list/block-list",
+    "list":"mini-antui/es/list/index",
+    "list-item":"mini-antui/es/list/list-item/index"
+  }
+}

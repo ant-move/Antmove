@@ -1,0 +1,22 @@
+.bold{
+  text-align: left;
+  line-height: 60rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 48rpx;
+  color: #FFFFFF;
+  line-height: 60rpx;
+  height: 60rpx;
+  margin: 70rpx 0 0 40rpx;
+  font-weight: 100
+}
+.txt{
+  text-align: left;
+  line-height: 42rpx;
+  font-family: PingFangSC-Light;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  line-height: 42rpx;
+  height: 84rpx;
+  opacity: 0.8;
+  margin: 24rpx 70rpx 140rpx 40rpx;
+}

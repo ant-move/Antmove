@@ -1,0 +1,68 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'swiper'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section page-section-spacing swiper'>
+      <swiper indicator-dots='{{indicatorDots}}' indicator-color='rgba(255, 0, 0, .3)' indicator-active-color='rgba(0, 0, 0, .3)' current='{{2}}' circular='true' previous-margin='0px' next-margin='0px' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' onChange='bindchange' onTransition='bindtransition' onAnimationEnd='bindanimationfinish'>
+        <block a:for='{{background}}' a:key='*this' ref-numbers='{{background}}'>
+          <swiper-item>
+            <view>
+              <view class='swiper-item {{item}}'>
+              </view>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view class='page-section' style='margin-top: 40rpx;margin-bottom: 0;'>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='weui-cell weui-cell_switch'>
+          <view class='weui-cell__bd'>
+            指示点
+          </view>
+          <view class='weui-cell__ft'>
+            <switch checked='{{indicatorDots}}' onChange='changeIndicatorDots'>
+            </switch>
+          </view>
+        </view>
+        <view class='weui-cell weui-cell_switch'>
+          <view class='weui-cell__bd'>
+            自动播放
+          </view>
+          <view class='weui-cell__ft'>
+            <switch checked='{{autoplay}}' onChange='changeAutoplay'>
+            </switch>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='page-section page-section-spacing'>
+      <view class='page-section-title'>
+        <text>
+          幻灯片切换时长(ms)
+        </text>
+        <text class='info'>
+          {{duration}}
+        </text>
+      </view>
+      <slider value='{{duration}}' min='{{500}}' max='{{2000}}' onChange='durationChange'>
+      </slider>
+      <view class='page-section-title'>
+        <text>
+          自动播放间隔时长(ms)
+        </text>
+        <text class='info'>
+          {{interval}}
+        </text>
+      </view>
+      <slider value='{{interval}}' min='{{2000}}' max='{{10000}}' onChange='intervalChange'>
+      </slider>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

@@ -1,0 +1,7 @@
+{
+  "defaultTitle": "Popover气泡",
+  "usingComponents": {
+    "popover": "../../es/popover/index",
+    "popover-item": "../../es/popover/popover-item/index"
+  }
+}

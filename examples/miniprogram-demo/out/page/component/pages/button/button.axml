@@ -1,0 +1,81 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'button'}}">
+  </template>
+  <view class='page-body'>
+    <view class='btn-area' id='buttonContainer'>
+      <button type='primary' class=' primary-style' onTap='showLoading'>
+        loading
+      </button>
+      <button type='primary' class=' primary-style' onTap='showactionsheet'>
+        showactionsheet
+      </button>
+      <button type='primary' open-type='getAuthorize' class=' primary-style' onGetAuthorize='getuserinfo' scope='userInfo'>
+        获取用户信息
+      </button>
+      <button type='default' open-type='contact' class=' default-style'>
+        打开客服对话
+      </button>
+      <button type='primary' open-type='getAuthorize' class=' primary-style' onGetAuthorize='onGetPhoneNumber' scope='phoneNumber'>
+        打电话
+      </button>
+      <button open-type='launchApp' app-parameter='app'>
+        launchApp
+      </button>
+      <button open-type='openSetting' aria-label='aria-label' onOpenSetting='onOpenSetting'>
+        openSetting
+      </button>
+      <button type='primary' loading='true' class=' primary-style'>
+        页面主操作 Loading
+      </button>
+      <button type='primary' disabled='true' class=' primary-style'>
+        页面主操作 Disabled
+      </button>
+      <button type='warn' class=' warn-style'>
+        警告类操作 Normal
+      </button>
+      <button type='warn' disabled='true' class=' warn-style'>
+        警告类操作 Disabled
+      </button>
+      <view class='button-sp-area'>
+        <button type='primary' plain='true' class=' primary-style'>
+          按钮
+        </button>
+        <button type='primary' disabled='true' plain='true' class=' primary-style'>
+          不可点击的按钮
+        </button>
+        <button type='default' plain='true' class=' default-style'>
+          按钮
+        </button>
+        <button type='default' disabled='true' plain='true' class=' default-style'>
+          按钮
+        </button>
+        <button class='mini-btn primary-style mini-style' type='primary' size='mini'>
+          按钮
+        </button>
+        <button class='mini-btn default-style mini-style' type='default' size='mini'>
+          按钮
+        </button>
+        <button class='mini-btn warn-style mini-style' type='warn' size='mini'>
+          按钮
+        </button>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view><custom-loading hidden='{{hidden}}' onLoadChange='loadingChange'>
+  加载中...
+</custom-loading><custom-action-sheet hidden='{{actionSheetHidden}}' onChange='actionSheetChange'>
+  <block a:for='{{actionSheetItems}}' ref-numbers='{{actionSheetItems}}'>
+    <action-sheet-item class='item' data-name='{{item}}' onTap='bindItemTap'>
+      {{item}}
+    </action-sheet-item>
+  </block>
+  <action-sheet-cancel class='cancel'>
+    取消
+  </action-sheet-cancel>
+</custom-action-sheet>
+            </view>

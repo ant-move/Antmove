@@ -1,0 +1,81 @@
+@import '../style/mixins/hairline.less';
+
+.am-picker {
+  &-item {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding-left: 15px;
+  }
+
+  &-line {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding-right: 15px;
+    min-height: 47px;
+    overflow: hidden;
+  }
+
+  &-label {
+    min-width: 80px;
+    margin-right: 2px;
+    color: #333;
+  }
+
+  &-wrapper {
+    display: flex;
+    flex: 1;
+    height: 33px;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  &-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    height: 33px;
+    color: #000;
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  &-clear {
+    display: flex;
+  }
+
+  &-line-bottom {
+    .hairline('bottom');
+  }
+
+  /* 最后一行 */
+  &-item.last .am-picker-line-bottom::after {
+    display: none;
+  }
+
+  &-text {
+    padding-left: 8px;
+  }
+
+  &-content-placeholder {
+    color: #ccc;
+  }
+
+  &-content-value {
+    color: #333;
+  }
+
+  &-arrow {
+    display: block;
+    width: 13px;
+    height: 13px;
+    margin-left: 8px;
+    background-image: url('https://gw.alipayobjects.com/zos/rmsportal/nGMpTwTjtKMbOeeQIucS.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+  }
+}

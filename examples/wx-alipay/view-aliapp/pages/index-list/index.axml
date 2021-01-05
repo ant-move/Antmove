@@ -1,0 +1,11 @@
+<view class='page-container-classname'>
+                <view class='i-index-demo' ref='saveChildRef0'>
+  <i-index height='100%' onChange='onChange' ref='saveChildRef1'>
+    <i-index-item a:for='{{ cities }}' a:for-index='index' a:key='*this' a:for-item='item' name='{{item.key}}' ref-numbers='{{ cities }}' ref='saveChildRef2'>
+      <view class='i-index-demo-item' a:for='{{item.list}}' a:for-index='_in' a:key='{{_in}}' a:for-item='it' ref-numbers='{{item.list}}'>
+        {{it.name}}
+      </view>
+    </i-index-item>
+  </i-index>
+</view>
+            </view>

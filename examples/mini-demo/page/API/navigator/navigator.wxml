@@ -1,0 +1,9 @@
+<!--page/API/navigator/navigator.wxml-->
+<slot-demo date="跳转页面" >
+    <button type="primary" bindtap="navigateTo" wx:if="{{navigateTo}}">跳转新页面</button>
+    <button type="primary" bindtap="navigateBack" wx:if="{{navigateBack}}">返回上一页</button>
+    <button type="primary" bindtap="redirectTo" wx:if="{{redirectTo}}">在当前页面打开 - 获取用户信息</button>
+    <button type="primary" bindtap="reLaunch" wx:if="{{reLaunch}}">关闭所有页面，打开到应用内的某个页面</button>
+    <button type="primary" bindtap="switchTab" wx:if="{{switchTab}}">跳转 Tab - 组件</button>
+</slot-demo>
+

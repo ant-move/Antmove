@@ -1,0 +1,5 @@
+<view>
+  <page-result
+    type="empty"
+    title="空白页" />
+</view>

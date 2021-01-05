@@ -1,0 +1,55 @@
+@import '../style/themes/default.less';
+
+.am-badge {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  line-height: 1;
+
+  &-text {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    transform: translate(50%, -50%);
+    top: 0;
+    min-width: 16px;
+    padding: 0;
+    height: 16px;
+    text-align: center;
+    background-color: @brand-error;
+    border-radius: 16px;
+    color: #fff;
+
+    &-padding {
+      font-size: 10px;
+      opacity: 0;
+    }
+
+    &-inner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: 20px;
+      transform: translate(-50%, -50%) scale(0.5);
+      white-space: nowrap;
+    }
+
+    &.am-badge-double {
+      padding: 0 4px;
+    }
+  }
+
+  &-not-a-wrapper .am-badge-text {
+    position: relative;
+    top: auto;
+    right: auto;
+    transform: translateX(0);
+  }
+
+  &-text.is-dot {
+    padding: 0;
+    width: 10px;
+    min-width: 10px;
+    height: 10px;
+  }
+}

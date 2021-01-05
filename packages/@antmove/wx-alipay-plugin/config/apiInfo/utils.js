@@ -17,7 +17,8 @@
  */
 
 module.exports = {
-    /**
+
+  /**
      * 类型描述对象创建
      * opts = {
      *      msg: '缺少对某某参数的支持',
@@ -25,15 +26,15 @@ module.exports = {
      *      returnValue: {}
      * }
      */
-    createDescObj (status, desc, wxUrl, alipayUrl, opts = {}) {
-        return {
-            status,
-            desc,
-            url: {
-                wechat: wxUrl,
-                alipay: alipayUrl
-            },
-            body: opts
-        };
+  createDescObj(status, desc, wxUrl, alipayUrl, opts = {}) {
+    return {
+      status,
+      desc,
+      url: {
+        wechat: wxUrl,
+        alipay: alipayUrl,
+      },
+      body: opts,
     }
-};
+  },
+}

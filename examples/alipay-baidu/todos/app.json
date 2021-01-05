@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/todos/todos",
+    "pages/add-todo/add-todo",
+    "pages/animation/animation",
+    "pages/map/map",
+    "pages/file/file",
+    "pages/lifeCircle/lifeCircle",
+    "pages/form/form",
+    "pages/chooseAddress/chooseAddress"
+  ],
+  "window": {
+    "defaultTitle": "Todo App",
+    "titleBarColor": "#323239"
+  }
+}

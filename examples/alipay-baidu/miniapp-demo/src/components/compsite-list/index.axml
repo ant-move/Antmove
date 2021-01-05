@@ -1,0 +1,22 @@
+<list class="compsite-list {{className}}">
+  <block a:for="{{objArr}}" a:for-item="obj" a:for-index="objIndex">
+    <list-item
+      class="compsite-list__sub-list"
+      disabled="{{true}}"
+    >
+      <list>
+        <view slot="header">{{obj.title}}</view>
+        <block  a:for="{{obj.list}}" a:for-item="listItem" a:for-index="listItemIndex">
+          <navigator url="{{listItem.path}}">
+            <list-item
+              arrow="{{true}}"
+              thumb="{{listItem.thumb}}"
+            >
+              <view class="compsite-list__text compsite-list--ellipsis">{{listItem.title}}<view class="compsite-list__text--en compsite-list--ellipsis">{{listItem.titleEn}}</view></view>
+            </list-item>
+          </navigator>
+        </block>
+      </list>
+    </list-item>
+  </block>
+</list>

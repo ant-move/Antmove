@@ -1,0 +1,13 @@
+<view class="page">
+  <view class="page-description">小程序跳转</view>
+  <view class="page-section">
+    <view class="page-section-title">
+      <view class="page-section-name">navigateMiniProgram</view>
+      navigateBackMiniProgram必须在navigateToMiniProgram跳转的小程序中设置，此处无效，仅作为展示
+    </view>
+    <view class="page-section-demo">
+      <button type="primary" onTap="navigateToMiniProgram">跳转到其他小程序</button>
+      <button type="primary" onTap="navigateBackMiniProgram">跳转回上一个小程序</button>
+    </view>
+  </view>
+</view>

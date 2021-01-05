@@ -1,0 +1,4 @@
+@import "../../../common/lib/weui.acss";
+.page-section {
+    margin-bottom: 20rpx;
+}

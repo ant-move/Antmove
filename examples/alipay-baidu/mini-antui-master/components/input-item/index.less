@@ -1,0 +1,68 @@
+@import '../style/mixins/hairline.less';
+
+.am-input {
+  &-item {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding-left: 15px;
+
+    .a-input-content {
+      padding-left: 2px;
+    }
+  }
+
+  &-line {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding-right: 15px;
+    min-height: 47px;
+    overflow: hidden;
+  }
+
+  &-label {
+    min-width: 80px;
+    margin-right: 2px;
+    color: #333;
+  }
+
+  &-content {
+    flex: 1;
+    display: flex;
+    height: 33px;
+    color: #000;
+    text-align: left;
+  }
+
+  &-content .a-input-wrap {
+    flex: 1;
+  }
+
+  &-clear {
+    display: flex;
+    height: 33px;
+    width: 33px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-clear.show {
+    visibility: visible;
+  }
+
+  &-clear.hidden {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  &-line-bottom {
+    .hairline('bottom');
+  }
+
+  /* 最后一行 */
+  &-item.last .am-input-line-bottom::after {
+    display: none;
+  }
+}

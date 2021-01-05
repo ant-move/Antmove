@@ -1,0 +1,16 @@
+@import "../../../common/lib/weui.acss";
+.permission-select {
+    display: flex;
+    align-items: center;
+    height: initial;
+    line-height: initial;
+}
+.weui-panel {
+    margin-top: 60rpx;
+}
+.input-area {
+    margin-top: 60rpx;
+}
+.btn-area {
+    margin-bottom: 60rpx;
+}

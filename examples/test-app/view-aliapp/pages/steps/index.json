@@ -1,0 +1,8 @@
+{
+	"usingComponents": {
+		"i-steps": "../../dist/steps/index",
+		"i-step": "../../dist/step/index",
+		"i-button": "../../dist/button/index"
+	},
+	"defaultTitle": "Steps 步骤条"
+}

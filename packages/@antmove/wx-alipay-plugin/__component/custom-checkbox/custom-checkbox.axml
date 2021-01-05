@@ -1,0 +1,13 @@
+<view  class="{{className}} am_checkbox_wrap" style='{{style}}'>
+    <view class='am_innerbox'>
+        <checkbox value='{{value}}' disabled='{{disabled}}' checked='{{checked}}' color='{{color}}'></checkbox>
+        <view>
+            <slot></slot>
+        </view>
+    </view>
+</view>
+
+
+
+
+

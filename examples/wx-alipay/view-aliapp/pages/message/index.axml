@@ -1,0 +1,20 @@
+<view class='page-container-classname'>
+                <view style='margin-top: 100px' ref='saveChildRef0'>
+  <i-button type='ghost' onClick='handleDefault' ref='saveChildRef1'>
+    默认提醒
+  </i-button>
+  <i-button type='ghost' onClick='handleSuccess' ref='saveChildRef2'>
+    成功提醒
+  </i-button>
+  <i-button type='ghost' onClick='handleWarning' ref='saveChildRef3'>
+    警告提醒
+  </i-button>
+  <i-button type='ghost' onClick='handleError' ref='saveChildRef4'>
+    错误提醒
+  </i-button>
+  <i-button type='ghost' onClick='handleDuration' ref='saveChildRef5'>
+    自定义持续时间
+  </i-button>
+</view><i-message id='message' ref='saveChildRef6'>
+</i-message>
+            </view>

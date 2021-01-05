@@ -1,2 +1,3 @@
-const aprData = require("../config/apiInfo");
-module.exports = aprData;
+const aprData = require('../config/apiInfo')
+
+module.exports = aprData

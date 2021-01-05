@@ -1,0 +1,66 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'bluetooth'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <view class='page-body-info'>
+        <view class='devices_summary'>
+          已发现 {{devices.length}} 个外围设备：
+        </view>
+        <scroll-view class='device_list' scroll-y=" " scroll-with-animation=" ">
+          <view a:for='{{devices}}' a:key='index' data-device-id='{{item.deviceId}}' data-name='{{item.name || item.localName}}' class='device_item' hover-class='device_item_hover' ref-numbers='{{devices}}' onTap='createBLEConnection'>
+            <view style='font-size: 16px; color: #333;'>
+              {{item.name}}
+            </view>
+            <view style='font-size: 10px'>
+              信号强度: {{item.RSSI}}dBm ({{item.RSSI}}%)
+            </view>
+            <view style='font-size: 10px'>
+              UUID: {{item.deviceId}}
+            </view>
+            <view style='font-size: 10px'>
+              Service数量: {{item.advertisServiceUUIDs.length}}
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+      <view class='btn-area'>
+        <button type='primary' class=' primary-style' onTap='openBluetoothAdapter'>
+          开始扫描
+        </button>
+        <button onTap='stopBluetoothDevicesDiscovery'>
+          停止扫描
+        </button>
+      </view>
+    </view>
+  </view>
+  <view class='connected_info' a:if='{{connected}}'>
+    <view>
+      <text>
+        已连接到 {{name}}
+      </text>
+      <view class='operation'>
+        <button a:if='{{canWrite}}' size='mini' class=' mini-style' onTap='writeBLECharacteristicValue'>
+          写数据
+        </button>
+        <button size='mini' class=' mini-style' onTap='closeBLEConnection'>
+          断开连接
+        </button>
+      </view>
+    </view>
+    <view a:for='{{chs}}' a:key='index' style='font-size: 12px; margin-top: 10px;' ref-numbers='{{chs}}'>
+      <view>
+        特性UUID: {{item.uuid}}
+      </view>
+      <view>
+        特性值: {{item.value}}
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

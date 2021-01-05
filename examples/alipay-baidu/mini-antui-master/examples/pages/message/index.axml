@@ -1,0 +1,17 @@
+<list>
+  <list-item arrow="horizontal" index="success" key="items-success">
+    <navigator class="oneLine" url="./success/index">success状态（默认）</navigator>
+  </list-item>
+  <list-item arrow="horizontal" index="fail" key="items-fail">
+    <navigator class="oneLine" url="./fail/index">fail状态</navigator>
+  </list-item>
+  <list-item arrow="horizontal" index="info" key="items-info">
+    <navigator class="oneLine" url="./info/index">info状态</navigator>
+  </list-item>
+  <list-item arrow="horizontal" index="warn" key="items-warn">
+    <navigator class="oneLine" url="./warn/index">warn状态</navigator>
+  </list-item>
+  <list-item arrow="horizontal" index="waiting" key="items-waiting" last="{{true}}">
+    <navigator class="oneLine" url="./waiting/index">waiting状态</navigator>
+  </list-item>
+</list>

@@ -1,0 +1,194 @@
+.hide{
+  height: auto;
+}
+.circl image{
+  width: 16rpx;
+  height: 16rpx;
+}
+.daima:hover{
+  /* background: #F8F8F8; */
+}
+.daima:hover .yuan{
+ 
+  /* position: absolute; */
+}
+.variety{
+  background: rgb(232,233,232);
+}
+.variety .yuan{
+    background: rgb(81,113,254);
+    width:12rpx;
+    height: 12rpx;
+    border-radius: 50%;
+    margin-top: 45rpx;
+    margin-left: 34rpx;
+    margin-right: 14rpx;
+    border: none;
+}
+.variety .yuan image{
+  display: none;
+}
+
+.active .list-item{
+  animation: move 3s linear 0s 1;
+}
+
+.list{
+  background: #FFFFFF;
+  border-radius: 24rpx 24rpx 0 0;
+}
+
+.list-item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left:40rpx;
+}
+.list-item-name{
+  text-align: left;
+  line-height: 42rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 32rpx;
+  color: #000000;
+  line-height: 42rpx;
+}
+.active .list-item-name{
+  padding-left: 40rpx; 
+}
+.item-background{
+  /* background: url(/image/Unchecked-L.png) center left no-repeat; */
+  background-size:  20rpx 20rpx; 
+  margin:0 40rpx;
+  border-bottom: 1rpx solid rgb(237,237,237);
+  /* animation: itemHide 0.25s linear  1; */
+}
+.bg{
+  width: 20rpx;
+  height: 20rpx
+}
+.active .list-item{
+  /* background: url(/image/Selection-L.png) left no-repeat; */
+  background-size:  20rpx 20rpx; 
+  border-bottom: 1rpx solid rgb(237,237,237);
+  margin-right: 40rpx;
+}
+.rightArrow{
+  /* background: url(/image/ic-arrowleft.png) center right no-repeat;  */
+  background-size: 25rpx;
+  width: 96rpx;
+  height: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.item-right{
+  width: 0.4rem;
+  height: 0.5rem;
+}
+.active .item-info .yuan{
+   
+}
+.active .item-info .right{
+  /* padding-top: 30rpx; */
+  /* padding-top: 20rpx; */
+}
+.active .rightArrow{
+  /* background: url(/image/ic-arrowleft.png) center left no-repeat;  */
+  background-size: 25rpx;
+  transform: rotate(180deg);
+}
+.active .bomArrow{
+  transform: rotate(90deg);
+  width: 96rpx;
+  height: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.item-info{
+  line-height: 30px;
+  color: #fff;
+  animation: itemHide 0.25s linear  1;
+  height: 0;
+  overflow: hidden;
+}
+.active .item-info{
+  animation: itemShow 0.25s linear  1;
+  height: 96rpx;
+}
+.active .daima{
+  border-bottom: 1rpx solid rgb(237,237,237);
+}
+@keyframes itemShow{
+  from{
+    height: 0;
+    opacity: 0;
+  }
+  to{
+    height: 96rpx;
+    opacity: 1;
+  }
+}
+@keyframes itemHide{
+  from{
+    height: 96rpx;
+    opacity: 1;
+  }
+  to{
+    height: 0;
+    opacity: 0;
+  }
+}
+
+
+.circl{
+  /* opacity: 0.2; */
+  float: left;
+  margin-top: 43rpx;
+}
+.zu{
+  float: left;
+  margin-left: 16rpx;
+}
+.daima{
+  border-bottom: 2rpx solid rgb(237,237,237);
+  margin: 0 auto;
+  overflow: hidden;
+  line-height: 90rpx;
+  margin-right:40rpx;
+  margin-left:38rpx; 
+}
+.show{
+  float: right;
+}
+.show image{
+  width: 25rpx;
+  height: 25rpx;
+}
+
+.right image{
+  width: 25rpx;
+  height: 25rpx;
+  /* margin-left: 70rpx;
+  margin-top: 40rpx; */
+}
+.yuan{
+  float: left;
+}
+.titl{
+  float: left;
+  margin:4rpx 0 0 0;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #000000;
+}
+.right{
+  float: right;
+  transform: rotate(270deg);
+}
+.yuan image {
+  width: 12rpx;
+  height: 12rpx;
+  margin-left: 34rpx;
+  margin-right: 14rpx;
+}

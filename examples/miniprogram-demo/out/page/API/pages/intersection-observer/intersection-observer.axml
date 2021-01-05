@@ -1,0 +1,33 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'intersectionObserver'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section message'>
+      <text a:if='{{appear}}'>
+        小球出现
+      </text>
+      <text a:else >
+        小球消失
+      </text>
+    </view>
+    <view class='page-section'>
+      <scroll-view class='scroll-view' scroll-y=" ">
+        <view class='scroll-area' style="{{appear ? 'background: #ccc' : ''}}">
+          <text class='notice'>
+            向下滚动让小球出现
+          </text>
+          <view class='filling'>
+          </view>
+          <view class='ball'>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

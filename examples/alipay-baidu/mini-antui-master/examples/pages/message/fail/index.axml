@@ -1,0 +1,9 @@
+<view>
+  <message
+    title="{{title}}" 
+    type="cancel" 
+    mainButton="{{messageButton.mainButton}}" 
+    subButton="{{messageButton.subButton}}" 
+    onTapMain="goBack" onTapSub="doNothing">
+  </message>
+</view>

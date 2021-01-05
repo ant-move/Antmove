@@ -1,0 +1,1 @@
+<web-view src="https://developers.weixin.qq.com/miniprogram/introduction/" bindmessage="bindmessage" bindload="bindload" binderror="binderror"></web-view>

@@ -1,0 +1,58 @@
+{
+	"pages": [
+		"pages/index/index",
+		"pages/discovery/discovery",
+		"pages/notify/notify",
+		"pages/chat/chat",
+		"pages/more/more",
+		"pages/answer/answer",
+		"pages/question/question"
+	],
+	"window": {
+		"backgroundTextStyle": "light",
+		"navigationBarTextStyle": "white",
+		"titleBarColor": "#0068C4",
+		"defaultTitle": "知乎",
+		"pullRefresh": true
+	},
+	"tabBar": {
+		"selectedColor": "#2A8CE5",
+		"backgroundColor": "#FBFBFB",
+		"borderStyle": "white",
+		"textColor": "#626567",
+		"items": [
+			{
+				"pagePath": "pages/index/index",
+				"name": "首页",
+				"icon": "images/index.png",
+				"activeIcon": "images/index_focus.png"
+			},
+			{
+				"pagePath": "pages/discovery/discovery",
+				"name": "发现",
+				"icon": "images/discovery.png",
+				"activeIcon": "images/discovery_focus.png"
+			},
+			{
+				"pagePath": "pages/notify/notify",
+				"name": "通知",
+				"icon": "images/ring.png",
+				"activeIcon": "images/ring_focus.png"
+			},
+			{
+				"pagePath": "pages/chat/chat",
+				"name": "私信",
+				"icon": "images/chat.png",
+				"activeIcon": "images/chat_focus.png"
+			},
+			{
+				"pagePath": "pages/more/more",
+				"name": "更多",
+				"icon": "images/burger.png",
+				"activeIcon": "images/burger_focus.png"
+			}
+		]
+	},
+	"networkTimeout": { "request": 10000, "downloadFile": 10000 },
+	"debug": true
+}

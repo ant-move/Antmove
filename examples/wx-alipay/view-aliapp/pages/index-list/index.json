@@ -1,0 +1,7 @@
+{
+	"usingComponents": {
+		"i-index": "../../dist/index/index",
+		"i-index-item": "../../dist/index-item/index"
+	},
+	"defaultTitle": "index 索引选择器"
+}

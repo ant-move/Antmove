@@ -1,0 +1,20 @@
+<view class="page">
+  <view class="page-description">用户截图</view>
+  <view class="page-section">
+    <view class="page-section-title">
+      <view class="page-section-name">onUserCaptureScreen</view>
+      用于监听用户发起的主动截屏事件，请先点击监听按钮后，进行截屏操作，可监听到回调
+    </view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="onUserCaptureScreen">
+        onUserCaptureScreen
+      </button>
+    </view>
+    <view class="page-section-title">offUserCaptureScreen</view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="offUserCaptureScreen">
+        offUserCaptureScreen
+      </button>
+    </view>
+  </view>
+</view>

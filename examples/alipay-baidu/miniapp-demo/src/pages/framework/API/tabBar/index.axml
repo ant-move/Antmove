@@ -1,0 +1,18 @@
+<view class="page">
+  <view class="page-description">tabBar</view>
+  <view class="page-section">
+    <view class="page-section-title">
+      <view class="page-section-name">tabBar</view>
+      请将页面添加到app.json中的tabBar进行测试。
+      iOS 10.00版本及以下API不可用。
+    </view>
+    <view class="page-section-demo">
+      <button type="primary" onTap="setTabBarBadge">设置tabBar右上角的文本</button>
+      <button type="primary" onTap="removeTabBarBadge">移除tabBar右上角的文本</button>
+      <button type="primary" onTap="setTabBarStyle">设置tabBar样式</button>
+      <button type="primary" onTap="setTabBarItem">设置tabBar某一项内容</button>
+      <button type="primary" onTap="showTabBar">显示tabBar</button>
+      <button type="primary" onTap="hideTabBar">隐藏tabBar</button>
+    </view>
+  </view>
+</view>

@@ -3,4 +3,4 @@
  * 转发
  */
 module.exports = {
-};
+}

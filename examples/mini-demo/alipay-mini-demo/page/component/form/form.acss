@@ -1,0 +1,6 @@
+button + button {
+    margin-top: 32rpx;
+}
+button {
+    display: block;
+}

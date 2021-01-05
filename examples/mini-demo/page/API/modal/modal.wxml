@@ -1,0 +1,5 @@
+<!--page/API/modal/modal.wxml-->
+<slot-demo date="确认框 API" title="wx.showModal" prompt="提示">
+      <button type="primary" bindtap="showModal">显示确认框
+      </button>
+</slot-demo>

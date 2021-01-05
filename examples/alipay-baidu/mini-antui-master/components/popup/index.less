@@ -1,0 +1,61 @@
+.am-popup {
+  &-content {
+    position: fixed;
+  }
+
+  &-mask {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &-left {
+    transform: translateX(-100%);
+    left: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  &-right {
+    transform: translateX(100%);
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  &-top {
+    top: 0;
+    width: 100vw;
+    transform: translateY(-100%);
+  }
+
+  &-bottom {
+    bottom: 0;
+    width: 100vw;
+    transform: translateY(100%);
+  }
+
+  &-show &-content {
+    transform: none;
+  }
+
+  &-show &-mask {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &.animation &-content {
+    transition: all 0.15s linear;
+  }
+
+  &.animation &-mask {
+    transition: all 0.15s linear;
+  }
+}

@@ -1,6 +1,6 @@
 Component({
-    properties: {
-        textContent: String,
-        slot: String
-    }
-});
+  properties: {
+    textContent: String,
+    slot: String,
+  },
+})

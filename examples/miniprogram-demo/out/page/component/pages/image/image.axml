@@ -1,0 +1,30 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'image'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section page-section-gap'>
+      <view class='page-section-title'>
+        Local Image
+      </view>
+      <view class='page-section-ctn'>
+        <image class='image' src='/page/component/resources/pic/1.jpg'>
+        </image>
+      </view>
+    </view>
+    <view class='page-section page-section-gap'>
+      <view class='page-section-title'>
+        Internet Image
+      </view>
+      <view class='page-section-ctn'>
+        <image class='image' src='{{imageUrl}}' mode='center' lazy-load='{{true}}' onError='binderror' onLoad='bindload'>
+        </image>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

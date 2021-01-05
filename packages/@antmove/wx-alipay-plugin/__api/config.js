@@ -2,6 +2,7 @@
  * default runtime config
  */
 module.exports = {
-    env: "development",
-    global: null
-};
+  useRuntimeLog: false,
+  env: 'development',
+  global: null,
+}

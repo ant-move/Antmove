@@ -1,0 +1,7 @@
+{
+  "defaultTitle": "Collapse",
+  "usingComponents": {
+    "collapse": "../../es/collapse/index",
+    "collapse-item": "../../es/collapse/collapse-item/index"
+  }
+}

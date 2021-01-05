@@ -1,0 +1,43 @@
+@import '../style/themes/default.less';
+@import '../style/mixins/hairline.less';
+
+.am-message {
+  background-color: #fff;
+  margin-bottom: 30px;
+  padding: 30px 15px;
+  text-align: center;
+  height: 199px;
+  box-sizing: border-box;
+  position: relative;
+  .hairline('bottom');
+
+  & .am-icon {
+    display: block;
+  }
+
+  &-main {
+    font-size: @font-size-page-result;
+    margin: 16px 0 9px;
+    line-height: 28px;
+  }
+
+  &-sub {
+    padding: 0 30px;
+    font-size: @font-size-caption;
+    line-height: 19px;
+    margin-top: 6px;
+    color: @color-text-caption;
+  }
+
+  &-button-wrap {
+    padding: 0 15px;
+
+    & .a-button {
+      margin-bottom: 15px;
+    }
+
+    & .a-button:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

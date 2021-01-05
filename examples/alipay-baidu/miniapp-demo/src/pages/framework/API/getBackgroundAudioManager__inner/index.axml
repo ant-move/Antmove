@@ -1,0 +1,17 @@
+<view class="page">
+    <view class="page-description">背景音频管理器</view>
+    <view class="page-section">
+        <view class="page-section-title">
+            <view class="page-section-name">getBackgroundAudioManager</view>
+            请先确认是否有权限使用该功能
+        </view>
+        <view class="page-section-demo">
+            <button onTap="audioPlay" type="primary">播放</button>
+            <button onTap="audioPause" type="primary">暂停</button>
+            <button onTap="audioStop" type="primary">停止</button>
+            <button onTap="audio14" type="primary">seek到14秒</button>
+            <button onTap="audioStart" type="primary">seek开头</button>
+            <button onTap="getAllProps" type="primary">获取后台音频属性</button>
+        </view>
+    </view>
+</view>

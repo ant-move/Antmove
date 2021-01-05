@@ -1,0 +1,23 @@
+<view class="page">
+  <view class="page-description">屏幕亮度</view>
+  <view class="page-section">
+    <view class="page-section-title">setKeepScreenOn</view>
+    <view class="page-section-demo">
+      <button type="primary" onTap="setKeepScreenOn">
+        setKeepScreenOn
+      </button>
+    </view>
+    <view class="page-section-title">getScreenBrightness</view>
+    <view class="page-section-demo">
+      <button type="primary" onTap="getScreenBrightness">
+        getScreenBrightness
+      </button>
+    </view>
+    <view class="page-section-title">setScreenBrightness</view>
+    <view class="page-section-demo">
+      <button type="primary" onTap="setScreenBrightness">
+        setScreenBrightness
+      </button>      
+    </view>
+  </view>
+</view>

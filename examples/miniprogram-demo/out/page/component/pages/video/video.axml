@@ -1,0 +1,34 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'video'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section tc'>
+      <video id='myVideo' duration='{{200}}' autoplay='{{false}}' loop='{{false}}' muted='{{false}}' initial-time='{{0}}' direction='{{90}}' show-fullscreen-btn='{{true}}' src='http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400' show-center-play-btn='{{false}}' show-play-btn='{{true}}' controls=" " show-mute-btn='{{true}}' enableProgressGesture='{{true}}' onFullScreenChange='bindfullscreenchange' onErrorll='videoErrorCallback' onPlay='bindplay' onPause='bindpause' onEnded='bindended' onTimeUpdate='bindtimeupdate'>
+      </video>
+      <view class='weui-cells'>
+        <view class='weui-cell weui-cell_input'>
+          <view class='weui-cell__hd'>
+            <view class='weui-label'>
+              弹幕内容
+            </view>
+          </view>
+          <view class='weui-cell__bd'>
+            <input class='weui-input' type='text' placeholder='在此处输入弹幕内容' onBlur='bindInputBlur'>
+            </input>
+          </view>
+        </view>
+      </view>
+      <view class='btn-area'>
+        <button class='page-body-button primary-style' type='primary' formType='submit' onTap='bindSendDanmu'>
+          发送弹幕
+        </button>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

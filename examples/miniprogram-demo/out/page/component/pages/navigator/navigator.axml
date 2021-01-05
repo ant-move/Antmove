@@ -1,0 +1,29 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'navigator'}}">
+  </template>
+  <view class='page-body'>
+    <view class='btn-area'>
+      <navigator url='navigate?title=navigate' hover-class='navigator-hover' hover-start-time='{{100}}' hover-stay-time='{{100}}'>
+        <button type='default' class=' default-style'>
+          跳转到新页面
+        </button>
+      </navigator>
+      <navigator url='redirect?title=redirect' redirect=" " hover-class='other-navigator-hover'>
+        <button type='default' class=' default-style'>
+          在当前页打开
+        </button>
+      </navigator>
+      <navigator open-type='navigate'>
+        <button type='default' class=' default-style'>
+          打开小程序
+        </button>
+      </navigator>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

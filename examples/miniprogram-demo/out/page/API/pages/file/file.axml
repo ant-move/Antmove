@@ -1,0 +1,58 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'saveFile'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <view class='page-body-info'>
+        <block a:if="{{tempFilePath != ''}}">
+          <image src='{{tempFilePath}}' class='image' mode='aspectFit'>
+          </image>
+        </block>
+        <block a:if="{{tempFilePath === '' && savedFilePath != ''}}">
+          <image src='{{savedFilePath}}' class='image' mode='aspectFit'>
+          </image>
+        </block>
+        <block a:if="{{tempFilePath === '' && savedFilePath === ''}}">
+          <view class='image-plus image-plus-nb' onTap='chooseImage'>
+            <view class='image-plus-horizontal'>
+            </view>
+            <view class='image-plus-vertical'>
+            </view>
+          </view>
+          <view class='image-plus-text'>
+            请选择文件
+          </view>
+        </block>
+      </view>
+      <view class='btn-area'>
+        <button type='primary' class=' primary-style' onTap='saveFile'>
+          保存文件
+        </button>
+        <button type='primary' class=' primary-style' onTap='removeSavedFile'>
+          移除保存文件
+        </button>
+        <button type='primary' class=' primary-style' onTap='getSavedFileList'>
+          获取保存文件列表
+        </button>
+        <button type='primary' class=' primary-style' onTap='getSavedFileInfo'>
+          获取已保存到本地文件信息
+        </button>
+        <button type='primary' class=' primary-style' onTap='getFileInfo'>
+          获取文件信息
+        </button>
+        <button onTap='clear'>
+          删除文件
+        </button>
+      </view>
+    </view>
+  </view>
+  <custom-modal hidden='{{dialog.hidden}}' onModalClick='confirm'>
+    {{dialog.content}}
+  </custom-modal>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

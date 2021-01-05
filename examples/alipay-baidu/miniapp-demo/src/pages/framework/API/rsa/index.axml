@@ -1,0 +1,21 @@
+<view class="page">
+  <view class="page-section">
+    <view class="page-section-title">输入：</view>
+    <view class="page-section-demo">
+      <textarea placeholder="请输入..." value="{{inputValue}}" maxlength="500" onInput="onInput" />
+    </view>
+
+    <view class="page-section-title">输出：</view>
+    <view class="page-section-demo">
+      <textarea value="{{outputValue}}" disabled maxlength="500" />
+    </view>
+    <view class="page-section-btns">
+      <view>
+        <button plain type="primary" onTap="onEncrypt">加密</button>
+      </view>
+      <view>
+        <button plain type="primary" onTap="onDecrypt">解密</button>
+      </view>
+    </view>
+  </view>
+</view>

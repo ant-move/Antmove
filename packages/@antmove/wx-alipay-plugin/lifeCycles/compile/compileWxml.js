@@ -1,10 +1,12 @@
-const generateAxml = require('../../generate/generateAxml.js');
-const { precessRelativePathOfCode } = require('@antmove/utils');
-const fs = require('fs-extra');
+const fs = require('fs-extra')
+const generateAxml = require('../../generate/generateAxml.js')
 
-module.exports = function (fileInfo, ctx, isComponent = false) {
-    fileInfo.dist = fileInfo.dist.replace(/\.wxml/, '.axml');
-    let originCode = generateAxml(fileInfo.ast, fileInfo);
-    originCode = precessRelativePathOfCode(originCode, fileInfo.path, ctx.entry, isComponent);
-    fs.outputFileSync(fileInfo.dist, originCode);
-};
+module.exports = function(fileInfo, ctx) {
+  fileInfo.dist = fileInfo.dist.replace(/\.wxml/, '.axml')
+  let originCode = generateAxml(fileInfo.ast, fileInfo, ctx.$options.appPages)
+  if (fileInfo.parent) {
+    fileInfo.parent.hasAntmoveAction = originCode.includes('antmoveAction')
+  }
+  originCode = generateAxml(fileInfo.ast, fileInfo, ctx.$options.appPages)
+  fs.outputFileSync(fileInfo.dist, originCode)
+}

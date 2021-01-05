@@ -1,0 +1,48 @@
+.am-swipe {
+  position: relative;
+  overflow: hidden;
+
+  &-content {
+    position: relative;
+    transition: all 250ms;
+  }
+
+  &-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    right: 0;
+  }
+
+  &-btn {
+    padding: 0 14px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    color: #fff;
+
+    &-delete {
+      background-color: rgb(244, 51, 60);
+    }
+
+    &-edit {
+      background-color: #108ee9;
+    }
+  }
+  //=== v2 ===
+  &-movable {
+
+    &-area {
+      position: absolute;
+    }
+
+    &-area .am-swipe-content {
+      transition: none;
+    }
+  }
+}
+
+.am-swiping .am-swipe-content {
+  transition: none;
+}

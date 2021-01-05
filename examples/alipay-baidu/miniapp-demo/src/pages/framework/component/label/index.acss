@@ -1,0 +1,8 @@
+checkbox-group > view,
+radio-group > view {
+  margin-bottom: 12rpx;
+}
+
+.label {
+  background: #ccc;
+}

@@ -1,20 +1,26 @@
 {
   "name": "@amove/wx",
-  "version": "0.0.1",
+  "version": "1.2.2",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@amove/next": "^0.2.13",
+    "@babel/core": "^7.11.1",
+    "axios": "^0.19.2",
+    "colornames": "^1.1.1",
+    "css": "^3.0.0",
     "fs-extra": "^9.0.0",
     "htmlparser2": "^4.1.0",
-    "@amove/next": "^0.0.3"
+    "prettier": "^2.0.5"
   },
   "author": "amap-appx@autonavi.com",
   "license": "GPL-3.0",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
-  }
+  },
+  "gitHead": "d3eab5657b5b44b09cc23402feee06c67e9beef2"
 }

@@ -1,0 +1,8 @@
+{
+  "defaultTitle": "Stepper",
+  "usingComponents":{
+    "stepper":"../../es/stepper/index",
+    "list":"../../es/list/index",
+    "list-item":"../../es/list/list-item/index"
+  }
+}

@@ -1,0 +1,7 @@
+<view class='page-container-classname'>
+                <slot-demo date='确认框 API' title='wx.showModal' prompt='提示' ref='saveChildRef1'>
+  <button type='primary' class=' primary-style' onTap='showModal'>
+    显示确认框
+  </button>
+</slot-demo>
+            </view>

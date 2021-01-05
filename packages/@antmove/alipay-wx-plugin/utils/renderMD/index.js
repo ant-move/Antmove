@@ -1,4 +1,4 @@
-const antMoveUtils = require('ant-move-utils');
-const config = require('./config');
+const antMoveUtils = require('ant-move-utils')
+const config = require('./config')
 
-antMoveUtils.transformDoc(config);
+antMoveUtils.transformDoc(config)

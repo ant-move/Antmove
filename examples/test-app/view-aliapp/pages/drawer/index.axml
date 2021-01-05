@@ -1,0 +1,40 @@
+<view class='page-container-classname'>
+                <view class='demo' ref='saveChildRef0'>
+  <i-button type='ghost' onClick='toggleLeft1' ref='saveChildRef1'>
+    左边弹出1
+  </i-button>
+  <i-button type='primary' onClick='toggleLeft2' ref='saveChildRef2'>
+    左边弹出2
+  </i-button>
+  <i-button type='ghost' onClick='toggleRight1' ref='saveChildRef3'>
+    右边弹出1
+  </i-button>
+  <i-button type='primary' onClick='toggleRight2' ref='saveChildRef4'>
+    右边弹出2
+  </i-button>
+  <i-drawer mode='left' visible='{{showLeft1}}' onClose='toggleLeft1' ref='saveChildRef5'>
+    <view class='demo-container'>
+      单击遮罩层关闭
+    </view>
+  </i-drawer>
+  <i-drawer mode='left' visible='{{showLeft2}}' mask-closable='{{false}}' ref='saveChildRef6'>
+    <view class='demo-container'>
+      禁止单击遮罩关闭      <i-button type='primary' onClick='toggleLeft2' ref='saveChildRef7'>
+        关闭
+      </i-button>
+    </view>
+  </i-drawer>
+  <i-drawer mode='right' visible='{{showRight1}}' onClose='toggleRight1' ref='saveChildRef8'>
+    <view class='demo-container'>
+      单击遮罩层关闭
+    </view>
+  </i-drawer>
+  <i-drawer mode='right' visible='{{showRight2}}' mask-closable='{{false}}' ref='saveChildRef9'>
+    <view class='demo-container'>
+      禁止单击遮罩关闭      <i-button type='primary' onClick='toggleRight2' ref='saveChildRef10'>
+        关闭
+      </i-button>
+    </view>
+  </i-drawer>
+</view>
+            </view>

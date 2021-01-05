@@ -1,0 +1,123 @@
+<view class='page-container-classname'>
+                <view class='i-steps-demo' ref='saveChildRef0'>
+  <view class='one-tag'>
+    基本用法
+  </view>
+  <i-steps ref='saveChildRef1'>
+    <i-step status='finish' ref='saveChildRef2'>
+      <view slot='title'>
+        已完成
+      </view>
+      <view slot='content'>
+        这里是该步骤的描述信息
+      </view>
+    </i-step>
+    <i-step status='process' ref='saveChildRef3'>
+      <view slot='title'>
+        进行中
+      </view>
+      <view slot='content'>
+        这里是该步骤的描述信息
+      </view>
+    </i-step>
+    <i-step status=" " ref='saveChildRef4'>
+      <view slot='title'>
+        错误
+      </view>
+      <view slot='content'>
+        这里是该步骤的描述信息
+      </view>
+    </i-step>
+  </i-steps>
+  <view class='one-tag'>
+    使用 icon 图标
+  </view>
+  <i-steps ref='saveChildRef5'>
+    <i-step status='finish' icon='barrage' ref='saveChildRef6'>
+      <view slot='title'>
+        已完成
+      </view>
+      <view slot='content'>
+        这里是该步骤的描述信息
+      </view>
+    </i-step>
+    <i-step status='process' icon='brush' ref='saveChildRef7'>
+      <view slot='title'>
+        进行中
+      </view>
+      <view slot='content' icon='camera'>
+        这里是该步骤的描述信息
+      </view>
+    </i-step>
+    <i-step icon='collection' ref='saveChildRef8'>
+      <view slot='title'>
+        错误
+      </view>
+      <view slot='content'>
+        这里是该步骤的描述信息
+      </view>
+    </i-step>
+  </i-steps>
+  <view class='one-tag'>
+    步骤进度
+  </view>
+  <i-steps current='{{current}}' ref='saveChildRef9'>
+    <i-step ref='saveChildRef10'>
+      <view slot='title'>
+        已完成
+      </view>
+      <view slot='content'>
+        这里是该步骤的描述信息
+      </view>
+    </i-step>
+    <i-step ref='saveChildRef11'>
+      <view slot='title'>
+        进行中
+      </view>
+      <view slot='content'>
+        这里是该步骤的描述信息
+      </view>
+    </i-step>
+    <i-step ref='saveChildRef12'>
+      <view slot='title'>
+        错误
+      </view>
+      <view slot='content'>
+        这里是该步骤的描述信息
+      </view>
+    </i-step>
+  </i-steps>
+  <i-button onClick='handleClick' ref='saveChildRef13'>
+    下一步
+  </i-button>
+  <view class='one-tag'>
+    垂直方向
+  </view>
+  <i-steps current='{{verticalCurrent}}' direction='vertical' ref='saveChildRef14'>
+    <i-step ref='saveChildRef15'>
+      <view slot='title'>
+        已完成
+      </view>
+      <view slot='content'>
+        这里是该步骤的描述信息
+      </view>
+    </i-step>
+    <i-step ref='saveChildRef16'>
+      <view slot='title'>
+        进行中
+      </view>
+      <view slot='content'>
+        这里是该步骤的描述信息
+      </view>
+    </i-step>
+    <i-step ref='saveChildRef17'>
+      <view slot='title'>
+        错误
+      </view>
+      <view slot='content'>
+        这里是该步骤的描述信息
+      </view>
+    </i-step>
+  </i-steps>
+</view>
+            </view>

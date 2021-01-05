@@ -1,4 +1,5 @@
-const { createSupportProp } = require('./utils.js');
+const { createSupportProp } = require('./utils.js')
+
 /**
  * type
  * 0 - missing - 不支持该属性
@@ -17,27 +18,27 @@ const { createSupportProp } = require('./utils.js');
  * desc - 组件或属性作用描述
  */
 module.exports = {
-    'canvas': {
-        name: '画布',
-        url: {
-            original: 'https://developers.weixin.qq.com/miniprogram/dev/component/canvas.html',
-            target: 'https://developer.toutiao.com/dev/miniapp/ukDOx4SO4EjL5gTM'
-        },
-        desc: '相关api：wx.createCanvasContext。',
-        props: {
-            'type': {
-                type: 0,
-                status: 2,
-                desc: '指定 canvas 类型，当前仅支持 webgl'
-            },
-            'canvas-id': createSupportProp('canvas 组件的唯一标识符，若指定了 type 则无需再指定该属性'),
-            'disable-scroll': createSupportProp('当在 canvas 中移动时且有绑定手势事件时，禁止屏幕滚动以及下拉刷新'),
-            'bindtouchstart': createSupportProp('手指触摸动作开始'),
-            'bindtouchmove': createSupportProp('手指触摸动作移动'),
-            'bindtouchend': createSupportProp('手指触摸动作结束'),
-            'bindtouchcancel': createSupportProp('手指触摸动作被打断，如来电提醒，弹窗'),
-            'bindlongtap': createSupportProp('手指长按 500ms 之后触发，触发了长按事件后进行移动不会触发屏幕的滚动'),
-            'binderror': createSupportProp('当发生错误时触发 error 事件'),
-        }
-    }
-};
+  canvas: {
+    name: '画布',
+    url: {
+      original: 'https://developers.weixin.qq.com/miniprogram/dev/component/canvas.html',
+      target: 'https://developer.toutiao.com/dev/miniapp/ukDOx4SO4EjL5gTM',
+    },
+    desc: '相关api：wx.createCanvasContext。',
+    props: {
+      type: {
+        type: 0,
+        status: 2,
+        desc: '指定 canvas 类型，当前仅支持 webgl',
+      },
+      'canvas-id': createSupportProp('canvas 组件的唯一标识符，若指定了 type 则无需再指定该属性'),
+      'disable-scroll': createSupportProp('当在 canvas 中移动时且有绑定手势事件时，禁止屏幕滚动以及下拉刷新'),
+      bindtouchstart: createSupportProp('手指触摸动作开始'),
+      bindtouchmove: createSupportProp('手指触摸动作移动'),
+      bindtouchend: createSupportProp('手指触摸动作结束'),
+      bindtouchcancel: createSupportProp('手指触摸动作被打断，如来电提醒，弹窗'),
+      bindlongtap: createSupportProp('手指长按 500ms 之后触发，触发了长按事件后进行移动不会触发屏幕的滚动'),
+      binderror: createSupportProp('当发生错误时触发 error 事件'),
+    },
+  },
+}

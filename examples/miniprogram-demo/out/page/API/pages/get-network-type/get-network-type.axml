@@ -1,0 +1,40 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'getNetworkType'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <view class='page-body-info'>
+        <view class='page-body-title'>
+          网络状态
+        </view>
+        <block a:if='{{hasNetworkType === false}}'>
+          <text class='page-body-text'>
+            未获取
+          </text>
+          <text class='page-body-text'>
+            点击绿色按钮可获取网络状态
+          </text>
+        </block>
+        <block a:if='{{hasNetworkType === true}}'>
+          <text class='page-body-text-network-type'>
+            {{networkType}}
+          </text>
+        </block>
+      </view>
+      <view class='btn-area'>
+        <button type='primary' class=' primary-style' onTap='getNetworkType'>
+          获取手机网络状态
+        </button>
+        <button onTap='clear'>
+          清空
+        </button>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

@@ -1,0 +1,24 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'makePhoneCall'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <view class='desc'>
+        请在下方输入电话号码
+      </view>
+      <input class='input' type='number' name='input' onInput='bindInput'>
+      </input>
+      <view class='btn-area'>
+        <button type='primary' disabled='{{disabled}}' class=' primary-style' onTap='makePhoneCall'>
+          拨打
+        </button>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

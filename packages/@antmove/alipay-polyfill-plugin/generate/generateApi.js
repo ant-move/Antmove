@@ -1,12 +1,12 @@
-const Config = require('../config');
-const fs = require('fs-extra');
-const path = require('path');
+const path = require('path')
+const fs = require('fs-extra')
+const Config = require('../config')
 
-let customComponentPrefix = Config.library.customComponentPrefix;
-let entry = path.join(__dirname, '../__api');
+const customComponentPrefix = Config.library.customComponentPrefix
+const entry = path.join(__dirname, '../__api')
 
-module.exports = function generate (output) {
-    let outputPath = path.join(output, `${customComponentPrefix}/api`);
+module.exports = function generate(output) {
+  const outputPath = path.join(output, `${customComponentPrefix}/api`)
 
-    fs.copySync(entry, outputPath);
-};
+  fs.copySync(entry, outputPath)
+}

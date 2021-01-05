@@ -1,0 +1,3 @@
+<view>
+  <view animation="{{animationInfo}}" style="background:yellow;height:100rpx;width:100rpx"></view>
+</view>

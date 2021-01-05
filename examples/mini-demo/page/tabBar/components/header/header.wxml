@@ -1,0 +1,4 @@
+<view class="above">
+  <view class="bold">{{headline}}</view>
+  <view class="txt">{{subtitle}}</view>
+</view>

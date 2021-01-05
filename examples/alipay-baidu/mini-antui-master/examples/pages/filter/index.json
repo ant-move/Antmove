@@ -1,0 +1,7 @@
+{
+  "defaultTitle": "筛选",
+  "usingComponents": {
+    "list": "../../es/list/index",
+    "list-item": "../../es/list/list-item/index"
+  }
+}

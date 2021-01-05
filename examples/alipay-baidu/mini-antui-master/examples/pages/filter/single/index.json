@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "单选",
+  "usingComponents": {
+    "filter": "../../../es/filter/index"
+  }
+}

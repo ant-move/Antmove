@@ -1,0 +1,10 @@
+<list>
+  <block a:for="{{components}}">
+    <list-item arrow="{{true}}" multipleLine="{{true}}" key="items-{{item.name}}" last="{{index===components.length - 1}}">
+      <navigator url="{{item.path}}">
+        {{item.name}}
+        <view class="am-list-brief">{{item.nameZN}}</view>
+      </navigator>
+    </list-item>
+  </block>
+</list>

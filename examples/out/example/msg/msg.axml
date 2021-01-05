@@ -1,0 +1,28 @@
+<view class='page-container-classname'>
+                <view class='page' ref='saveChildRef0'>
+  <view class='page__hd'>
+    <view class='page__title'>
+      Msg
+    </view>
+    <view class='page__desc'>
+      提示页
+    </view>
+  </view>
+  <view class='page__bd'>
+    <view class='weui-btn-area'>
+      <button class='weui-btn default-style' type='default' onTap='openSuccess'>
+        成功提示页
+      </button>
+      <button class='weui-btn default-style' type='default' onTap='openFail'>
+        失败提示页
+      </button>
+      <button class='weui-btn default-style' type='default' onTap='openText'>
+        无图标提示页
+      </button>
+      <button class='weui-btn default-style' type='default' onTap='openTextPrimary'>
+        无图标提示页
+      </button>
+    </view>
+  </view>
+</view>
+            </view>

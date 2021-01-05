@@ -1,0 +1,8 @@
+<view class="page">
+  <view class="page-section">
+    <view class="page-section-title">my.httpRequest</view>
+    <view class="page-section-btns">
+      <view onTap="requestHttp">发起请求</view>
+    </view>
+  </view>
+</view>

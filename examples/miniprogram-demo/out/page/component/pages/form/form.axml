@@ -1,0 +1,83 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'form'}}">
+  </template>
+  <view class='page-body'>
+    <form onSubmit='formSubmit' onReset='formReset'>
+      <view class='page-section page-section-gap'>
+        <view class='page-section-title'>
+          switch
+        </view>
+        <switch name='switch'>
+        </switch>
+      </view>
+      <view class='page-section page-section-gap'>
+        <view class='page-section-title'>
+          radio
+        </view>
+        <radio-group name='radio'>
+          <label>
+            <radio value='radio1'>
+            </radio>
+            选项一
+          </label>
+          <label>
+            <radio value='radio2'>
+            </radio>
+            选项二
+          </label>
+        </radio-group>
+      </view>
+      <view class='page-section page-section-gap'>
+        <view class='page-section-title'>
+          checkbox
+        </view>
+        <checkbox-group name='checkbox'>
+          <label>
+            <checkbox value='checkbox1'>
+            </checkbox>
+            选项一
+          </label>
+          <label>
+            <checkbox value='checkbox2'>
+            </checkbox>
+            选项二
+          </label>
+        </checkbox-group>
+      </view>
+      <view class='page-section page-section-gap'>
+        <view class='page-section-title'>
+          slider
+        </view>
+        <slider value='{{50}}' name='slider' show-value=" ">
+        </slider>
+      </view>
+      <view class='page-section'>
+        <view class='page-section-title'>
+          input
+        </view>
+        <view class='weui-cells weui-cells_after-title'>
+          <view class='weui-cell weui-cell_input'>
+            <view class='weui-cell__bd'>
+              <input class='weui-input' name='input' placeholder='这是一个输入框'>
+              </input>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='btn-area'>
+        <button type='primary' formType='submit' class=' primary-style'>
+          Submit
+        </button>
+        <button formType='reset'>
+          Reset
+        </button>
+      </view>
+    </form>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

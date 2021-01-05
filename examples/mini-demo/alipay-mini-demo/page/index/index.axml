@@ -1,0 +1,18 @@
+<view class='page-container-classname'>
+                <view class='container' ref='saveChildRef0'>
+  <view class='userinfo'>
+    <button a:if='{{!hasUserInfo && canIUse}}' open-type='getAuthorize' onGetAuthorize='getUserInfo' scope='userInfo'>
+      获取头像昵称
+    </button>
+    <block a:else >
+      <image class='userinfo-avatar' src='{{userInfo.avatarUrl}}' mode='cover' onTap='bindViewTap'>
+      </image>
+      <text class='userinfo-nickname'>
+        {{userInfo.nickName}}      </text>
+    </block>
+  </view>  <view class='usermotto'>
+    <text class='user-motto'>
+      {{motto}}    </text>
+  </view>
+</view>
+            </view>

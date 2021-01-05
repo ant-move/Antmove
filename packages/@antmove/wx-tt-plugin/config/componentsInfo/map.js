@@ -1,4 +1,5 @@
-const { createSupportProp } = require('./utils.js');
+const { createSupportProp } = require('./utils.js')
+
 /**
  * type
  * 0 - missing - 不支持该属性
@@ -17,14 +18,14 @@ const { createSupportProp } = require('./utils.js');
  * desc - 组件或属性作用描述
  */
 module.exports = {
-    'map': {
-        name: '地图',
-        url: {
-            original: 'https://developers.weixin.qq.com/miniprogram/dev/component/map.html',
-            target: ''
-        },
-        type: 0,
-        status: 2,
-        desc: 'use custom map component instead default map component.',
-    }
-};
+  map: {
+    name: '地图',
+    url: {
+      original: 'https://developers.weixin.qq.com/miniprogram/dev/component/map.html',
+      target: '',
+    },
+    type: 0,
+    status: 2,
+    desc: 'use custom map component instead default map component.',
+  },
+}

@@ -1,0 +1,11 @@
+<view class="am-badge {{className}} {{!$slots.inner ? 'am-badge-not-a-wrapper' : ''}}">
+  <view
+    class="am-badge-text
+    {{ text.toString().length > 1 ? 'am-badge-double' : ''}}"
+    a:if="{{!dot}}">
+    <text class="am-badge-text-padding">{{typeof text === 'number' && text > overflowCount ? overflowCount + '+' : text }}</text>
+    <text class="am-badge-text-inner">{{typeof text === 'number' && text > overflowCount ? overflowCount + '+' : text }}</text>
+  </view>
+  <view class="am-badge-text is-dot" a:if="{{dot}}"></view>
+  <slot name="inner" />
+</view>

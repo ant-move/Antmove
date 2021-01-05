@@ -1,0 +1,16 @@
+<view class='page-container-classname'>
+                <view class='page' ref='saveChildRef0'>
+  <view class='page-description'>
+    图片
+  </view>
+  <view class='page-section' a:for='{{array}}' a:for-item='item' ref-numbers='{{array}}'>
+    <view class='page-section-title'>
+      {{item.text}}
+    </view>
+    <view class='page-section-demo' onTap='onTap'>
+      <image class='image' data-name='{{item.mode}}' onTap='onTap' mode='{{item.mode}}' src='{{src}}' onError='imageError' onLoad='imageLoad'>
+      </image>
+    </view>
+  </view>
+</view>
+            </view>

@@ -1,0 +1,48 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'map'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section page-section-gap'>
+      <view class='page-section-title'>
+        经典
+      </view>
+      <view class='page-section-ctn'>
+        <image class='image' src='/page/component/resources/pic/custom_map_template_1.png'>
+        </image>
+      </view>
+    </view>
+    <view class='page-section page-section-gap'>
+      <view class='page-section-title'>
+        墨渊
+      </view>
+      <view class='page-section-ctn'>
+        <image class='image' src='/page/component/resources/pic/custom_map_template_2.png'>
+        </image>
+      </view>
+    </view>
+    <view class='page-section page-section-gap'>
+      <view class='page-section-title'>
+        白浅
+      </view>
+      <view class='page-section-ctn'>
+        <image class='image' src='/page/component/resources/pic/custom_map_template_3.png'>
+        </image>
+      </view>
+    </view>
+    <view class='page-section page-section-gap'>
+      <view class='page-section-title'>
+        玉露
+      </view>
+      <view class='page-section-ctn'>
+        <image class='image' src='/page/component/resources/pic/custom_map_template_4.png'>
+        </image>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

@@ -1,0 +1,90 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'start/stopRecord、play/stopVoice'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <block a:if='{{recording === false && playing === false && hasRecord === false}}'>
+        <view class='page-body-time'>
+          <text class='time-big'>
+            {{formatedRecordTime}}
+          </text>
+        </view>
+        <view class='page-body-buttons'>
+          <view class='page-body-button'>
+          </view>
+          <view class='page-body-button' onTap='startRecord'>
+            <image src='/image/record.png'>
+            </image>
+          </view>
+          <view class='page-body-button'>
+          </view>
+        </view>
+      </block>
+      <block a:if='{{recording === true}}'>
+        <view class='page-body-time'>
+          <text class='time-big'>
+            {{formatedRecordTime}}
+          </text>
+        </view>
+        <view class='page-body-buttons'>
+          <view class='page-body-button'>
+          </view>
+          <view class='page-body-button' onTap='stopRecord'>
+            <view class='button-stop-record'>
+            </view>
+          </view>
+          <view class='page-body-button'>
+          </view>
+        </view>
+      </block>
+      <block a:if='{{hasRecord === true && playing === false}}'>
+        <view class='page-body-time'>
+          <text class='time-big'>
+            {{formatedPlayTime}}
+          </text>
+          <text class='time-small'>
+            {{formatedRecordTime}}
+          </text>
+        </view>
+        <view class='page-body-buttons'>
+          <view class='page-body-button'>
+          </view>
+          <view class='page-body-button' onTap='playVoice'>
+            <image src='/image/play.png'>
+            </image>
+          </view>
+          <view class='page-body-button' onTap='clear'>
+            <image src='/image/trash.png'>
+            </image>
+          </view>
+        </view>
+      </block>
+      <block a:if='{{hasRecord === true && playing === true}}'>
+        <view class='page-body-time'>
+          <text class='time-big'>
+            {{formatedPlayTime}}
+          </text>
+          <text class='time-small'>
+            {{formatedRecordTime}}
+          </text>
+        </view>
+        <view class='page-body-buttons'>
+          <view class='page-body-button' onTap='stopVoice'>
+            <image src='/image/stop.png'>
+            </image>
+          </view>
+          <view class='page-body-button' onTap='clear'>
+            <image src='/image/trash.png'>
+            </image>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

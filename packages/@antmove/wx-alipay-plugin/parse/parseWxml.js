@@ -103,7 +103,7 @@ const Wxml = P.createLanguage({
         return P.seqMap(
             P.optWhitespace,
             // P.string('{{'),
-            P.regexp(/[^<]/),
+            P.regexp(/[^<]+/),
             //P.regex(/(?!<\/)/),
             //P.regex(/.+/),
                 //.notFollowedBy(P.regex(/<\w+.*>/)),
@@ -178,7 +178,7 @@ const Wxml = P.createLanguage({
         let anyString = P.any.notFollowedBy(P.string('-->'));
         return P.seqMap(
             P.string('<!--'),
-            anyString.many(),
+            P.regexp(/[\s\S]*?-->/),
             function (...r) {
                 return {
                     typeof: 'wxml.Element',

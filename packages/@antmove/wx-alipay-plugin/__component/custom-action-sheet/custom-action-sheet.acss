@@ -1,4 +1,4 @@
-.action_sheet {
+.am_action_sheet {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -8,7 +8,7 @@
     background-color: rgba(0,0,0,0.6);
     z-index: 999999;
 }
-.sheet_box {
+.am_sheet_box {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -18,6 +18,6 @@
     flex-direction: column-reverse;
 }
 
-.text_content { 
+.am_text_content {
     line-height: 42px;
 }

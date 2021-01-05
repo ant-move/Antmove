@@ -1,0 +1,53 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'uploadFile'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <block a:if='{{fileUploaded}}'>
+        <view class='weui-cells weui-cells_after-title'>
+          <view class='weui-cell weui-cell_input'>
+            <view class='weui-cell__hd'>
+              <view class='weui-label'>
+                文件 ID
+              </view>
+            </view>
+            <view class='weui-cell__bd'>
+              <textarea class='weui-textarea' value='{{fileId}}' style='height: 3.3em' disabled=" ">
+              </textarea>
+            </view>
+          </view>
+          <view class='weui-cell page-section-ctn'>
+            <image src='{{filePath}}' class='image' mode='aspectFit'>
+            </image>
+          </view>
+        </view>
+        <view class='btn-area' a:if='{{fromOtherPage}}'>
+          <navigator open-type='navigateBack'>
+            <button type='primary' size='{{40}}' class=' primary-style 40-style'>
+              返回
+            </button>
+          </navigator>
+        </view>
+      </block>
+      <block a:else >
+        <view class='page-body-info'>
+          <view class='image-plus image-plus-nb' onTap='chooseImage'>
+            <view class='image-plus-horizontal'>
+            </view>
+            <view class='image-plus-vertical'>
+            </view>
+          </view>
+          <view class='image-plus-text'>
+            选择图片
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

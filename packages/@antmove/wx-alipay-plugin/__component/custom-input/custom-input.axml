@@ -1,0 +1,25 @@
+<view onTap='tapHandler' catchTap='catchtapHandler'>
+    <input
+        value='{{value}}'
+        class='{{className}}'
+        type='{{type}}',
+        style='{{style}}',
+        name='{{name}}',    
+        password='{{password}}',
+        placeholder='{{placeholder}}',
+        placeholder-style='{{placeholderStyly}}',
+        placeholder-class='{{placeholderClass}}',
+        disabled='{{disabled}}',
+        maxlength='{{maxlength}}',
+        focus='{{focus}}',
+        confirm-type='{{confirmType}}',
+        confirm-hold='{{confirmHold}}',
+        cursor='{{cursor}}',
+        selection-start='{{selectionStart}}',
+        selection-end='{{selectionEnd}}',
+        onInput='inputHandler',
+        onFocus='focusHandler',
+        onConfirm='confirmHandler',
+        onBlur='blurHandler'
+        />
+</view>

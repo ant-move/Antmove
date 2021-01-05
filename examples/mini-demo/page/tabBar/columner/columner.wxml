@@ -1,0 +1,25 @@
+<view class="main">
+  <view class="tab">TabBar</view>
+  <view class="name">分栏器</view>
+  <view class="L">L尺寸</view>
+  <view class="yang">
+    <view class="ta te">TAB1</view>
+    <view class="ta">TAB2</view>
+    <view class="ta">TAB3</view>
+    <view class="ta">TAB2</view>
+  </view>
+  <view class="L">M尺寸</view>
+  <view class="yang-m">
+    <view class="ta te">TAB1</view>
+    <view class="ta">TAB2</view>
+    <view class="ta">TAB3</view>
+    <view class="ta">TAB2</view>
+  </view>
+  <view class="L">S尺寸</view>
+  <view class="yang-s">
+    <view class="ta te">TAB1</view>
+    <view class="ta">TAB2</view>
+    <view class="ta">TAB3</view>
+    <view class="ta">TAB2</view>
+  </view>
+</view>

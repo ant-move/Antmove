@@ -1,0 +1,16 @@
+<view class="page">
+  <view class="page-description">发起HTTP请求</view>
+  <view class="page-section">
+    <view class="page-section-title">request</view>
+    <view class="page-section-demo">
+      <view class="page-section-btns">
+        <view>
+          <button onTap="requestHttp" plain type="primary">httpRequest</button>
+        </view>
+        <view>
+          <button onTap="request" plain type="primary">request</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

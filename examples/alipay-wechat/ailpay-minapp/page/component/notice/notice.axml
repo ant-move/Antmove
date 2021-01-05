@@ -1,0 +1,16 @@
+<view class="demo-title">NoticeBar 通告栏</view>
+<view class="demo-item">
+    <notice>因全国公民身份系统升级，添加银行卡银行卡银行卡银行卡</notice>
+</view>
+<view class="demo-item">
+    <notice mode="link" onClick="linkClick">因全国公民身份系统升级，添加银行卡银行卡银行卡银行卡</notice>
+</view>
+<view class="demo-item">
+    <notice mode="closable" onClick="closableClick" show="{{closeShow}}">因全国公民身份系统升级，添加银行卡银行卡银行卡银行卡</notice>
+</view>
+<view class="demo-item">
+    <notice mode="link" action="去看看" onClick="linkActionClick">因全国公民身份系统升级，添加银行卡银行卡银行卡银行卡</notice>
+</view>
+<view class="demo-item">
+    <notice mode="closable" action="不再提示" onClick="closableActionClick" show="{{closeActionShow}}">因全国公民身份系统升级，添加银行卡银行卡银行卡银行卡</notice>
+</view>

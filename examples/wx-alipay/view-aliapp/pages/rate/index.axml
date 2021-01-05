@@ -1,0 +1,31 @@
+<view class='page-container-classname'>
+                <i-cell-group ref='saveChildRef1'>
+  <i-cell title='基本用法' ref='saveChildRef2'>
+    <i-rate value='{{starIndex1}}' onChange='onChange1' ref='saveChildRef3'>
+    </i-rate>
+  </i-cell>
+  <i-cell title='自定义星星个数' ref='saveChildRef4'>
+    <i-rate count='{{10}}' value='{{starIndex5}}' onChange='onChange5' ref='saveChildRef5'>
+    </i-rate>
+  </i-cell>
+  <i-cell title='自定义星星大小' ref='saveChildRef6'>
+    <i-rate value='{{starIndex2}}' size='{{32}}' onChange='onChange2' ref='saveChildRef7'>
+    </i-rate>
+  </i-cell>
+  <i-cell title='自定义文字说明' ref='saveChildRef8'>
+    <i-rate value='{{starIndex2}}' onChange='onChange2' ref='saveChildRef9'>
+      {{starIndex2}}星
+    </i-rate>
+  </i-cell>
+  <i-cell title='手势touch选择星' ref='saveChildRef10'>
+    <i-rate value='{{starIndex3}}' onChange='onChange3' ref='saveChildRef11'>
+      {{starIndex3}}星
+    </i-rate>
+  </i-cell>
+  <i-cell title='禁用点击和手势选择星' ref='saveChildRef12'>
+    <i-rate disabled='{{true}}' value='{{starIndex4}}' ref='saveChildRef13'>
+      {{starIndex4}}星
+    </i-rate>
+  </i-cell>
+</i-cell-group>
+            </view>

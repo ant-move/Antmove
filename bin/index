@@ -1,434 +1,392 @@
 #!/usr/bin/env node
-var fs = require('fs-extra');
-var path = require('path');
-var program = require('commander');
-const chalk = require('chalk');
-const buildScript = require('../cli/index.js');
-const alipayWxCli = require('./alipay-wx');
-const alipayBaiduCli = require('./alipay-baidu');
-const wxWxCli = require('./wx-wx');
-const alipayToBaidu = require('../cli/alipay-baidu/index');
-const alipayToWx = require('../cli/alipay-wechat/index');
-const wxToWx = require('../cli/wechat-wechat/index');
-const wxToBaidu = require('../cli/wechat-baidu/index');
-const wxToBaiduCli = require('./wx-baidu');
-const wxToTouTiao = require('../cli/wechat-tt/index');
-const wxToQq = require('../cli/wx-qq/index');
-const alipayPolyfill = require('../cli/alipay-polyfill/index');
-const wx2my = require('../cli/wx2my/index');
-const inputDirPath = process.cwd() + '/';
-const entryProcess = require('./entry');
+const path = require('path')
+const fs = require('fs-extra')
+const program = require('commander')
+const chalk = require('chalk')
+const packageJson = require('../package.json')
+const buildScript = require('../cli/index.js')
 const {
-    // recordOptions,
-    returnOptions
-} = require('../cli/utils');
-
+  // recordOptions,
+  returnOptions,
+} = require('../cli/utils')
+const alipayToBaidu = require('../cli/alipay-baidu/index')
+const alipayToWx = require('../cli/alipay-wechat/index')
+const wxToWx = require('../cli/wechat-wechat/index')
+const wxToBaidu = require('../cli/wechat-baidu/index')
+const wxToTouTiao = require('../cli/wechat-tt/index')
+const wxToQq = require('../cli/wx-qq/index')
+const alipayPolyfill = require('../cli/alipay-polyfill/index')
+const wx2my = require('../cli/wx2my/index')
+const wx2tt = require('../cli/wx2tt/index')
+const wxToQuickapp = require('../cli/wechat-quickapp')
+const entryProcess = require('./entry')
+const alipayWxCli = require('./alipay-wx')
+const alipayBaiduCli = require('./alipay-baidu')
+const wxWxCli = require('./wx-wx')
+const wxToBaiduCli = require('./wx-baidu')
+const inputDirPath = `${process.cwd()}/`
 
 /**
  * read packageJson
  */
-const packageJson = require("../package.json");
-let specialtypeCmd = false;
+let specialtypeCmd = false
 const options = {
-    input: "",
-    output: "",
-    env: "production",
-    remote: false,
-    component2: true,
-    platform: "alipay",
-    scope: true,
-    error: false,
-    empty: false,
-    fromId: 0,
-    hooks: {},
-    babel: {},
-    plugins:[]
-};
+  input: '',
+  output: '',
+  env: 'production',
+  remote: false,
+  component2: true,
+  platform: 'alipay',
+  scope: true,
+  error: false,
+  empty: false,
+  isReport: true,
+  fromId: 0,
+  hooks: {},
+  babel: {},
+  plugins: [],
+  useRuntimeLog: false,
+  watch: false,
+  ignoreNpm: true,
+  libraryName: '',
+  useCompileLog: true
+}
 
 program
-    .version(packageJson.version)
-    .option("-t, --type <type>", "Which plugin to be used.")
-    .option("-i, --input <type>", "Input path of compiled code.")
-    .option("-o, --output <type>", "Output path of compiled code.")
-    .option("-c, --component <type>", "Which plugin to be used.")
-    .option(
-        "-e, --env <type>",
-        "Compiling in development mode or production mode."
-    )
-    .option("-s, --scope <type>", "Compiling component in scope mode.")
-    .option("-r, --remote <type>", "Pull ployfill from remote sources.")
-    .option(
-        "--component2 <type>",
-        "Is support component2 for alipay miniprogram."
-    )
-    .option(
-        "--error <type>",
-        "Whether to throw error."
-    )
-    .option(
-        "--empty <type>",
-        "Empty directory or not."
-    )
-    .option("-f --fromId <type>", "Scene value.")
-    .option("--platform <type>", "The platform of alipay miniprogram.");
+  .version(packageJson.version)
+  .option('-t, --type <type>', 'Which plugin to be used.')
+  .option('-i, --input <type>', 'Input path of compiled code.')
+  .option('-o, --output <type>', 'Output path of compiled code.')
+  .option('-c, --component <type>', 'Which plugin to be used.')
+  .option(
+    '-e, --env <type>',
+    'Compiling in development mode or production mode.'
+  )
+  .option('-s, --scope <type>', 'Compiling component in scope mode.')
+  .option('-r, --remote <type>', 'Pull ployfill from remote sources.')
+  .option(
+    '--component2 <type>',
+    'Is support component2 for alipay miniprogram.'
+  )
+  .option('--error <type>', 'Whether to throw error.')
+  .option('--empty <type>', 'Empty directory or not.')
+  .option('-f --fromId <type>', 'Scene value.')
+  .option('--platform <type>', 'The platform of alipay miniprogram.')
+  .option('-p --isReport <type>', 'Report or not.')
+  .option('-w --watch <type>', 'Watch code changes')
+  .option('-d --ignoreNpm <type>', 'ignore npm detection')
+  .option('-u --useRuntimeLog <type>', 'open runtime log')
+  .option('-l --libraryName <type>', 'custom npm name')
+  .option('--useCompileLog <type>', 'open compile log')
 
-program.parse(process.argv);
-
-let antmoveOptions = returnOptions(process.cwd());
+program.parse(process.argv)
+const antmoveOptions = returnOptions(process.cwd())
 
 if (antmoveOptions) {
-    Object.keys(options).forEach(function (optName) {
-        options[optName] = antmoveOptions[optName];       
-    });
+  Object.keys(options).forEach((optName) => {
+    options[optName] = antmoveOptions[optName]
+  })
 }
-options.input = program.input;
-options.defaultInput = inputDirPath;
-options.output = program.output;
-options.env = program.env || options.env;
-options.remote = program.remote || options.remote;
-options.scope = program.scope || options.scope;
-options.type = program.type;
-options.component = program.component || false;
-options.component2 = program.component2 || options.component2;
-options.platform = program.platform || options.platform;
-options.error = program.error || options.error;
-options.empty = program.empty || options.empty;
-options.fromId = program.fromId || options.fromId;
+options.input = program.input
+options.defaultInput = inputDirPath
+options.output = program.output
+options.env = program.env || options.env
+options.remote = program.remote || options.remote
+options.scope = program.scope || options.scope
+options.type = program.type
+options.component = program.component || options.component
+options.component2 = program.component2 || options.component2
+options.platform = program.platform || options.platform
+options.error = program.error || options.error
+options.empty = program.empty || options.empty
+options.fromId = program.fromId || options.fromId
+options.isReport = program.isReport || options.isReport
+options.useRuntimeLog = program.useRuntimeLog || options.useRuntimeLog
+options.watch = program.watch || options.watch
+options.ignoreNpm = program.ignoreNpm || options.ignoreNpm
+options.libraryName = program.libraryName || options.libraryName
+options.useCompileLog  = program.useCompileLog  || options.useCompileLog 
 
-if (options.error === "true" || options.error === true ) {
-    options.error = true;
-}  else {
-    options.error = false;
-}
-
-if (options.empty === "true" || options.empty === true ) {
-    options.empty = true;
-}  else {
-    options.empty = false;
-}
-
-if (options.component2 === "true" || options.component2 === 1 ||options.component2 === true) {
-    options.component2 = true;
+if (options.error === 'true' || options.error === true) {
+  options.error = true
 } else {
-    options.component2 = false;
+  options.error = false
 }
 
-if (options.scope === "true" || options.scope === 1 ||options.scope === true) {
-    options.scope = true;
+if (options.empty === 'true' || options.empty === true) {
+  options.empty = true
 } else {
-    options.scope = false;
+  options.empty = false
 }
+
+if (options.isReport === 'true' || options.isReport === true) {
+  options.isReport = true
+} else {
+  options.isReport = false
+}
+
+// scope/component2 默认值为true
+if (
+  options.component2 === 'false' ||
+  options.component2 === 0 ||
+  options.component2 === false
+) {
+  options.component2 = false
+} else {
+  options.component2 = true
+}
+
+if (
+  options.scope === 'false' ||
+  options.scope === 0 ||
+  options.scope === false
+) {
+  options.scope = false
+} else {
+  options.scope = true
+}
+
+if (options.useRuntimeLog === 'true' || options.useRuntimeLog === true) {
+  options.useRuntimeLog = true
+} else {
+  options.useRuntimeLog = false
+}
+
+if (options.watch === 'true' || options.watch === true) {
+  options.watch = true
+} else {
+  options.watch = false
+}
+
+if (options.ignoreNpm === 'false' || options.ignoreNpm === false) {
+  options.ignoreNpm = false
+} else {
+  options.ignoreNpm = true
+}
+
+if (options.useCompileLog === 'false' || options.useCompileLog === false) {
+  options.useCompileLog = false
+} else {
+  options.useCompileLog = true
+}
+
 if (antmoveOptions) {
-    Object.keys(options).forEach(function (optName) {
-        if (options[optName] === undefined) {
-            options[optName] = antmoveOptions[optName];
-        }
-    });
+  Object.keys(options).forEach((optName) => {
+    if (options[optName] === undefined) {
+      options[optName] = antmoveOptions[optName]
+    }
+  })
 }
 
 /**
  * $ antmove wx-alipay ../alipay-app
  * */
 program
-    .version(packageJson.version)
-    .command("wx-alipay")
-    .action(function () {
-        specialtypeCmd = true;
-        action({
-            ...options,
-            type: "wx-alipay"
-        });
-    });
+  .version(packageJson.version)
+  .command('wx-alipay')
+  .action(() => {
+    specialtypeCmd = true
+    action({
+      ...options,
+      type: 'wx-alipay',
+    })
+  })
 program
-    .version(packageJson.version)
-    .command("wx2my")
-    .action(function () {
-        specialtypeCmd = true;
-        action({
-            ...options,
-            type: "wx2my"
-        });
-    });
+  .version(packageJson.version)
+  .command('wx2my')
+  .action(() => {
+    specialtypeCmd = true
+    action({
+      ...options,
+      type: 'wx2my',
+    })
+  })
+program
+  .version(packageJson.version)
+  .command('wx2tt')
+  .action(() => {
+    specialtypeCmd = true
+    action({
+      ...options,
+      type: 'wx2tt',
+    })
+  })
 
 program
-    .version(packageJson.version)
-    .command("wx-amap")
-    .action(function () {
-        specialtypeCmd = true;
-        action({
-            ...options,
-            type: "wx-amap"
-        });
-    });
+  .version(packageJson.version)
+  .command('wx-amap')
+  .action(() => {
+    specialtypeCmd = true
+    action({
+      ...options,
+      type: 'wx-amap',
+    })
+  })
 
 program
-    .version(packageJson.version)
-    .command('wx-tt')
-    .action(function () {
-        specialtypeCmd = true;
-        action({
-            ...options,
-            type: 'wx-tt'
-        });
-    });
+  .version(packageJson.version)
+  .command('wx-tt')
+  .action(() => {
+    specialtypeCmd = true
+    action({
+      ...options,
+      type: 'wx-tt',
+    })
+  })
 
 program
-    .version(packageJson.version)
-    .command('wx-qq')
-    .action(function () {
-        specialtypeCmd = true;
-        action({
-            ...options,
-            type: 'wx-qq'
-        });
-    });
+  .version(packageJson.version)
+  .command('wx-qq')
+  .action(() => {
+    specialtypeCmd = true
+    action({
+      ...options,
+      type: 'wx-qq',
+    })
+  })
 program
-    .version(packageJson.version)
-    .command('alipay-compiler')
-    .action(function () {
-        specialtypeCmd = true;
-        action({
-            ...options,
-            type: 'alipay-compiler'
-        });
-    });
+  .version(packageJson.version)
+  .command('alipay-compiler')
+  .action(() => {
+    specialtypeCmd = true
+    action({
+      ...options,
+      type: 'alipay-compiler',
+    })
+  })
+program
+  .version(packageJson.version)
+  .command('wx')
+  .action(() => {
+    specialtypeCmd = true
+    action({
+      ...options,
+      type: 'wx',
+    })
+  })
 
 /**
  * antmove-cli alipay-wx ../wx-app
  */
-alipayWxCli(program, function () {
-    specialtypeCmd = true;
+alipayWxCli(program, () => {
+  specialtypeCmd = true
 
-    action({
-        ...options,
-        type: "alipay-wx"
-    });
-});
+  action({
+    ...options,
+    type: 'alipay-wx',
+  })
+})
 
 /**
  * antmove-cli alipay-baidu ../baidu-app
  */
-alipayBaiduCli(program, function () {
-    specialtypeCmd = true;
+alipayBaiduCli(program, () => {
+  specialtypeCmd = true
 
-    action({
-        ...options,
-        type: "alipay-baidu"
-    });
-});
+  action({
+    ...options,
+    type: 'alipay-baidu',
+  })
+})
 
 /**
  * antmove-cli wx-compiler ../wx-app
  */
-wxWxCli(program, function () {
-    specialtypeCmd = true;
+wxWxCli(program, () => {
+  specialtypeCmd = true
 
-    action({
-        ...options,
-        type: 'wx-compiler'
-    }
-    );
-});
+  action({
+    ...options,
+    type: 'wx',
+  })
+})
 
-wxToBaiduCli (program, function () {
-    specialtypeCmd = true;
+wxToBaiduCli(program, () => {
+  specialtypeCmd = true
 
-    action({
-        ...options,
-        type: 'wx-baidu'
-    }
-    );
-});
+  action({
+    ...options,
+    type: 'wx-baidu',
+  })
+})
 
-program.parse(process.argv);
+program.parse(process.argv)
 
 if (!specialtypeCmd) {
-    action(options);
+  action(options)
 }
 
 /**
  * cmd options
- * @param opts
+ * @param params
  */
-function action (options) {
-    /**
-     * preprocess ouput path
-     */
-    let buildInfo = {
-        'wx-alipay': buildScript,
-        'wx-amap': buildScript,
-        'wx-tt': wxToTouTiao,
-        'wx-qq': wxToQq,
-        'alipay-wx': alipayToWx,
-        'alipay-baidu': alipayToBaidu,
-        'wx-compiler': wxToWx,
-        'alipay-compiler': alipayPolyfill,
-        'wx-baidu': wxToBaidu,
-        'wx-my': wx2my
-    };
-    
-    entryProcess(options, function (opts = {}) {
-        // let _input = opts.input,
-        //     _output = opts.output;
-        opts.input = toAbsolutePath(opts.input);
-        opts.output = toAbsolutePath(opts.output);
-        if (!opts.output) {
-            program.help();
-            return false;
-        }
+function action(params) {
+  /**
+   * preprocess ouput path
+   */
+  const buildInfo = {
+    'wx-alipay': buildScript,
+    'wx-amap': buildScript,
+    'wx-tt': wxToTouTiao,
+    'wx-qq': wxToQq,
+    'alipay-wx': alipayToWx,
+    'alipay-baidu': alipayToBaidu,
+    wx: wxToWx,
+    'alipay-compiler': alipayPolyfill,
+    'wx-baidu': wxToBaidu,
+    'wx-my': wx2my,
+    wx2tt: wx2tt,
+    'wx-quickapp': wxToQuickapp,
+  }
 
-        if (opts.input === opts.output) {
-            console.log(chalk.red("输入输出目录不能为同一个地址。"));
-        }
-        if (opts.type === 'wx2my') {
-            opts.type = 'wx-my';
-        }
-        if (buildInfo[opts.type]) {
-            if (opts.component === 'component') {
-                let cachePath = getCachePath(opts.input);
-                let originalProgram = opts.type.split("-")[0];
-                let isOriginalComponents = ifOriginalComponent(opts.input, originalProgram);
-                let program = getProgramName(originalProgram);
-                if  (!isOriginalComponents) {
-                    console.log(chalk.red(`如需使用一键转换${program.name}组件功能，请选择${program.name}小程序的组件`));
-                    return false;
-                }
-                fs.outputFileSync(`${cachePath}app.${program.css}`, " ");
-                fs.outputFileSync(`${cachePath}app.js`, " ");
-                fs.outputFileSync(`${cachePath}app.json`, "{}");
-                copyFolder(opts.input, cachePath);
-                opts.input = cachePath;
-            }
-            if (opts.type === "wx-amap") {
-                opts.aliType = "amap";
-                process.env.aliType = "amap";
-            }
-            if (opts.type === 'alipay-wx') {
-                if (program.scope === "true" || program.scope === 1 ||program.scope === true) {
-                    opts.scope = true;
-                } else {
-                    opts.scope = false;
-                }
-            }
-            // _input = './';
-            // _output = processPath(opts);
-            // recordOptions(opts, _input, _output);
-            buildInfo[opts.type](opts);
+  entryProcess(params, (opts = {}) => {
+    // let _input = opts.input,
+    //     _output = opts.output;
+    opts.input = toAbsolutePath(opts.input)
+    opts.output = toAbsolutePath(opts.output)
+    if (!opts.output) {
+      program.help()
+      return false
+    }
+
+    if (opts.input === opts.output) {
+      console.log(chalk.red('输入输出目录不能为同一个地址。'))
+    }
+    if (opts.type === 'wx2my') {
+      opts.type = 'wx-my'
+    }
+    if (buildInfo[opts.type]) {
+      if (opts.type === 'wx-amap') {
+        opts.aliType = 'amap'
+        process.env.aliType = 'amap'
+      }
+      if (opts.type === 'alipay-wx') {
+        if (
+          program.scope === 'true' ||
+          program.scope === 1 ||
+          program.scope === true
+        ) {
+          opts.scope = true
         } else {
-            console.log(chalk.red("编译类型错误，请选择可用的转换类型。"));
+          opts.scope = false
         }
-    });
-}
+      }
+      // _input = './';
+      // _output = processPath(opts);
+      // recordOptions(opts, _input, _output);
 
-function toAbsolutePath (target) {
-    let dist = target;
-    if (!path.isAbsolute(target)) {
-        dist = path.join(inputDirPath, target);
-    }
-
-    return dist;
-}
-
-function copyFolder (from, to) {
-    let files = [];
-    if (fs.existsSync(to)) {
-        files = fs.readdirSync(from);
-        files.forEach(function (file) {
-            var targetPath = from + "/" + file;
-            var toPath = to + "/" + file;
-            if (fs.statSync(targetPath).isDirectory()) {
-                copyFolder(targetPath, toPath);
-            } else {
-                fs.copyFileSync(targetPath, toPath);
-            }
-        });
+      buildInfo[opts.type](opts)
     } else {
-        fs.mkdirSync(to);
-        copyFolder(from, to);
+      console.log(chalk.red('编译类型错误，请选择可用的转换类型。'))
     }
+  })
 }
 
-function ifOriginalComponent (from, type) {
-    let _tem = "";
-    switch (type) {
-    case "wx" : 
-        _tem = "wxml";
-        break;
-    case "alipay": 
-        _tem = "axml";
-        break;
-    case "baidu": 
-        _tem = "swan";
-        break;
-    case "qq":
-        _tem = "qml";
-        break;
-    default:
-        _tem = "axml";
-    }
-    let isWx = false ;
-    testIsWxComponents(from);
-    function testIsWxComponents (from) {
-        let files = fs.readdirSync(from);
-        files.forEach(function (file) {
-            var targetPath = from + "/" + file;
-            var reg = new RegExp("\\S*\\." + _tem);
-            if (fs.statSync(targetPath).isDirectory()) {
-                testIsWxComponents(targetPath);
-            } else {
-                var ifWxml = reg.test(targetPath.split('/')[targetPath.split('/').length-1]);
-                if (ifWxml) {
-                    isWx = true;
-                    return;
-                }
-            }
-        });
-    }
-    return isWx;
-}
+function toAbsolutePath(target) {
+  let dist = target
+  if (!path.isAbsolute(target)) {
+    dist = path.join(inputDirPath, target)
+  }
 
-function getProgramName (type = "wx") {
-    let pro = {};
-    switch (type) {
-    case "wx" : 
-        pro.name = "微信";
-        pro.css = "wxss";
-        break;
-    case "alipay": 
-        pro.name = "支付宝";
-        pro.css = "acss";
-        break;
-    case "baidu": 
-        pro.name = "百度";
-        pro.css = "css";
-        break;
-    case "qq":
-        pro.name = "qq";
-        pro.css = "qss";
-        break;
-    default : 
-        pro.name = "微信";
-        pro.css = "wxss";
-    }
-    return pro;
-}
-
-// function processPath ( opts ) {
-//     let _path = "";
-//     _path = path.relative(opts.input, opts.output);
-//     return _path;
-// }
-
-function getCachePath (from) {
-    let _path = from;
-    let tail = _path.charAt(_path.length-1);
-    let sep = path.sep;
-    let arr = _path.split(sep);
-    if (tail === '/' || '\\') {
-        arr.splice(-2, 2, 'cache', '.antmove');
-    } else {
-        arr.splice(-1, 1, 'cache', '.antmove');
-    }
-    _path = arr.join(sep) + sep;
-    return _path;
+  return dist
 }

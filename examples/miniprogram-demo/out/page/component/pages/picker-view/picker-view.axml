@@ -1,0 +1,42 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'picker-view'}}">
+  </template>
+  <view class='page-body'>
+    <view class='selected-date'>
+      {{year}}年{{month}}月{{day}}日{{isDaytime ? "白天" : "夜晚"}}
+    </view>
+    <picker-view indicator-style='height: 50px;' indicator-class='pickview' style='width: 100%; height: 300px;' mask-class='mask' mask-style='opacity:0.5;' value='{{value}}' onChange='bindChange'>
+      <picker-view-column>
+        <view a:for='{{years}}' a:key='{{years}}' style='line-height: 50px; text-align: center;' ref-numbers='{{years}}'>
+          {{item}}年
+        </view>
+      </picker-view-column>
+      <picker-view-column>
+        <view a:for='{{months}}' a:key='{{months}}' style='line-height: 50px; text-align: center;' ref-numbers='{{months}}'>
+          {{item}}月
+        </view>
+      </picker-view-column>
+      <picker-view-column>
+        <view a:for='{{days}}' a:key='{{days}}' style='line-height: 50px; text-align: center;' ref-numbers='{{days}}'>
+          {{item}}日
+        </view>
+      </picker-view-column>
+      <picker-view-column>
+        <view class='icon-container'>
+          <image class='picker-icon' src='/page/component/resources/kind/daytime.png'>
+          </image>
+        </view>
+        <view class='icon-container'>
+          <image class='picker-icon' src='/page/component/resources/kind/night.png'>
+          </image>
+        </view>
+      </picker-view-column>
+    </picker-view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

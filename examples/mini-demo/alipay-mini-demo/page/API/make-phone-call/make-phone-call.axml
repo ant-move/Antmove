@@ -1,0 +1,11 @@
+<view class='page-container-classname'>
+                <slot-demo date='打电话 API' title='wx.makePhoneCall' ref='saveChildRef1'>
+  <view class='page-section'>
+    <view class='page-section-btns'>
+      <view onTap='makePhoneCall'>
+        打电话
+      </view>
+    </view>
+  </view>
+</slot-demo>
+            </view>

@@ -1,0 +1,28 @@
+<view class="page">
+  <view class="page-description">文件</view>
+  <view class="page-section">
+    <view class="page-section-title">保存文件到本地</view>
+    <view class="page-section-demo">
+      <button type="primary" onTap="saveFile">saveFile</button>
+    </view>
+    <view class="page-section-title">获取文件信息</view>
+    <view class="page-section-demo">
+      <button type="primary" onTap="getFileInfo">getFileInfo</button>
+    </view>
+
+    <view class="page-section-title">获取保存的文件信息</view>
+    <view class="page-section-demo">
+      <button type="primary" onTap="getSavedFileInfo">getSavedFileInfo</button>
+    </view>
+
+    <view class="page-section-title">获取保存的所有文件信息</view>
+    <view class="page-section-demo">
+      <button type="primary" onTap="getSavedFileList">getSavedFileList</button>
+    </view>
+
+    <view class="page-section-title">删除某个保存文件</view>
+    <view class="page-section-demo">
+      <button type="primary" onTap="removeSavedFile">removeSavedFile</button>
+    </view>
+  </view>
+</view>

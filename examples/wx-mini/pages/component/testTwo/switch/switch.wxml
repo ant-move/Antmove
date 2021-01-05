@@ -1,0 +1,4 @@
+<view class="body-view">
+  <switch checked bindchange="switch1Change" aria-label="aria-label" type="switch"/>
+  <switch bindchange="switch2Change" />
+</view>

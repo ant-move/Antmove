@@ -1,0 +1,11 @@
+<view class="am-navigator-wrap" onTap='navHandler'>
+    <navigator class="{{className}}"  open-type="{{openType}}" hover-class="{{hoverClass}}" hover-start-time='{{hoverStartTime}}' hover-stay-time='{{hoverStayTime}}' url='{{url}}'>
+        <slot></slot>
+    </navigator>
+ </view>
+
+
+
+
+
+

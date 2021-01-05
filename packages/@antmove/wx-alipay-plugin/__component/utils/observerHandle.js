@@ -1,82 +1,96 @@
-function observerHandle (observerObj, args, that,isInit = false) {
-    Object.keys(observerObj).forEach(function (obs) {      
-        if (isInit && that.props[obs] === undefined ) return false;
-        if (args[0][obs] !== that.props[obs] && typeof observerObj[obs] === 'function') { 
-            observerObj[obs].call(that, that.props[obs], args[0][obs]);
-        }
-    });
+const equals = function(x, y) {
+  if (x === y) {
+    return true
+  }
+
+  if (!(x instanceof Object) || !(y instanceof Object)) {
+    return false
+  }
+  if (x.constructor !== y.constructor) {
+    return false
+  }
+
+  for (const p in x) {
+    if (x.hasOwnProperty(p)) {
+      if (!y.hasOwnProperty(p)) {
+        return false
+      }
+
+      if (x[p] === y[p]) {
+        continue
+      }
+
+      if (typeof x[p] !== 'object') {
+        return false
+      }
+      if (!equals(x[p], y[p])) {
+        return false
+      }
+    }
+  }
+
+  for (const p in y) {
+    if (y.hasOwnProperty(p) && !x.hasOwnProperty(p)) {
+      return false
+    }
+  }
+  return true
 }
 
-function observersHandle (observersObj, args, that) {
-    Object.keys(observersObj).forEach(function (obs) {
-        let left = {};
-        let right = {};
-        if (obs.match(/\./)) {
-            let _dataArr = obs.split('.');
-            left = processChildAttr(args[1],_dataArr);
-            right = processChildAttr(that.data,_dataArr);
-        } else {
-          left = args[1][obs];
-          right = that.data[obs];
-        }
-        if (typeof left ==='object' && typeof right === 'object') {
-            let dif = deep(left,right);
-            if (dif && typeof observersObj[obs].fn === "function" ) {
-                observersObj[obs].fn.call(that, ...observersObj[obs].arr);
-            }
-        } else if (typeof observersObj[obs].fn === "function" &&left!== right ) {
-            observersObj[obs].fn.call(that, ...observersObj[obs].arr);
-        }
-    });
-}
-
-function processChildAttr (attr,arr) {
-  let _ = attr;
-  arr.forEach(function (name) {
-      _ = _[name];
+function observerHandle(observerObj, args, that) {
+  Object.keys(observerObj).forEach((obs) => {
+    if (typeof observerObj[obs] === 'function') {
+      let props
+      if (args.props) {
+        props = args.props
+      }
+      if (args[0]) {
+        props = args[0]
+      }
+      if (!props) {
+        return
+      }
+      if (!equals(props[obs], that.props[obs])) {
+        observerObj[obs].call(that, that.props[obs], props[obs])
+      }
+    }
   })
-  return _;
 }
-function deep(args,props) {
-    if (args === props === null) return false;
-    if (args === null || args === null) return true;
-    let isDif = false;
-    for (var v in props) {
-        if (args.hasOwnProperty(v)) {
-            if (typeof args[v] !== typeof props[v]) {
-                isDif = true;
-                return isDif
-            } else if (typeof args[v] === "object" && typeof props[v] === "object" ) {
-                deep(args[v],props[v]);
-            } else if (typeof args[v] === "Number" || typeof props[v] === "Number") {
 
-            } else if (args[v] !== props[v]) {
-                isDif = true;
-            }
-        } else {
-            isDif = true;
-            return isDif
-        }
+function observersHandle(observersObj, args, that) {
+  let preData = null
+  if (Array.isArray(args)) {
+    preData = args[1]
+  } else {
+    preData = args.props
+  }
+  Object.keys(observersObj).forEach((obs) => {
+    let left = {}
+    let right = {}
+    if (obs.match(/\./)) {
+      const _dataArr = obs.split('.')
+      left = processChildAttr(preData, _dataArr)
+      right = processChildAttr(that.data, _dataArr)
+    } else {
+      left = preData[obs]
+      right = that.data[obs]
     }
-    for (var v in args) {
-        if (props.hasOwnProperty(v)) {
-            if (typeof args[v] !== typeof props[v]) {
-                isDif = true;
-                return isDif
-            } else if (typeof args[v] === "object" || typeof props[v] === "object" ) {
-                deep(args[v],props[v]);
-            } else if (args[v] !== props[v]) {
-                isDif = true;
-            }
-        } else {
-            isDif = true;
-            return isDif
-        }
+    const dif = equals(left, right)
+    if (!dif) {
+      observersObj[obs].fn.call(that, ...observersObj[obs].arr)
     }
-    return isDif
+  })
+}
+
+function processChildAttr(attr, arr) {
+  let _ = attr
+  arr.forEach((name) => {
+    _ = _[name]
+  })
+  return _
 }
 
 module.exports = {
-    observerHandle,
-    observersHandle
+  observerHandle,
+  observersHandle,
 }

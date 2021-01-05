@@ -8,5 +8,5 @@
 // const descObj = require("./desc.js");
 
 const apiObj = {
-};
-module.exports = apiObj;
+}
+module.exports = apiObj

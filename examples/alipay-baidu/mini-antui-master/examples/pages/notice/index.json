@@ -1,0 +1,7 @@
+{
+    "defaultTitle": "Notice-公告",
+    "usingComponents":{
+      "notice": "../../es/notice/index"
+    }
+  }
+  

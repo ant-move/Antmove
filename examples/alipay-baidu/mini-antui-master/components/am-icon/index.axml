@@ -1,0 +1,4 @@
+<text
+  class="am-icon {{className}} am-icon-{{type}}"
+  style="font-size: {{size}}px; color:{{color}};">
+</text>

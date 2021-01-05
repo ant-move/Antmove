@@ -3,4 +3,4 @@
  * 第三方平台
  */
 module.exports = {
-};
+}

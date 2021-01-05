@@ -1,0 +1,27 @@
+<view class="list">
+  <view wx:for="{{list}}" class="{{ active === index ? 'active' : 'item-background'}}">
+ 
+    <view class="list-item" data-index="{{index}}" bindtap="Change">
+     <!-- <image class = 'bg' src='{{active === index ? "../../../../image/Selection-L.png" :  "../../../../image/Unchecked-L.png"}}'></image> -->
+      <view class="list-item-name">{{item.type}}
+      </view>
+      <view class="{{active === index ? 'bomArrow' :'rightArrow' }}">
+      <image class='item-right' src="../../../../image/ic-arrowleft.png" ></image>
+      </view>
+    </view>
+    <view class="item-info {{ variety === index ? 'variety' : ''}}" wx:for="{{item.list}}" wx:for-item="apiItem" data-index="{{index}}" bindTouchStart="Getstyle" bindTouchEnd="Nostyle">
+      <navigator url="{{apiItem.path}}">
+        <view class="daima">
+          <view class="yuan {{ variety === index ? 'variety' : ''}}">
+            <image src="../../../../image/Unchecked-s.png" mode="aspectFit" />
+          </view>
+          <text class="titl">{{ apiItem.name }}                                                        
+            </text>
+          <view class="right">
+            <image src="../../../../image/ic-arrowleft.png" mode="aspectFit" />
+          </view>
+        </view>
+      </navigator>
+    </view>
+    </view>
+    </view>

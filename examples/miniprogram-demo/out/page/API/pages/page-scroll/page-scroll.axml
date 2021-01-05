@@ -1,0 +1,26 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'pageScrollTo'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <view class='btn-area'>
+        <button type='primary' class=' primary-style' onTap='scrollToBottom'>
+          滚动到页面底部
+        </button>
+      </view>
+      <view class='filling-area'>
+      </view>
+      <view class='btn-area'>
+        <button type='primary' class=' primary-style' onTap='scrollToTop'>
+          返回顶部
+        </button>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

@@ -1,0 +1,29 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'onNetworkStatusChange'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <view class='page-body-info'>
+        <view class='page-body-title'>
+          网络状态
+        </view>
+        <block a:if='{{isConnected === false}}'>
+          <text class='page-body-text'>
+            没有网络连接
+          </text>
+        </block>
+        <block a:if='{{isConnected === true}}'>
+          <text class='page-body-text-network-type'>
+            {{networkType}}
+          </text>
+        </block>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

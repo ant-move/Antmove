@@ -1,0 +1,14 @@
+<view class="box">
+  <view class="date" wx:if="{{date}}">{{date}}    
+  </view>
+  <view class="prompt" wx:if="{{prompt}}">{{prompt}}    
+  </view>
+  <view class="frame">
+    <view class="title" wx:if="{{title}}">{{title}}            
+    </view>
+    <view class="content">
+      <slot>
+      </slot>
+    </view>
+  </view>
+</view>

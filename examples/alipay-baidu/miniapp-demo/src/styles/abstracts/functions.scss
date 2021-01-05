@@ -1,0 +1,50 @@
+@import "./configs";
+
+@function selectorToString($selector) {
+  $selector: inspect($selector);
+
+  @debug $selector;
+
+  @return $selector;
+}
+
+@function containModifier($selector) {
+  $selector: selectortostring($selector);
+
+  @if str_index($selector, $modifier-separator) {
+    @return true;
+  }
+
+  @else {
+    @return false;
+  }
+}
+
+@function containWhenFlag($selector) {
+  $selector: selectortostring($selector);
+
+  @if str_index($selector, "." + $state-prefix) {
+    @return true;
+  }
+
+  @else {
+    @return false;
+  }
+}
+
+@function containPseudoClass($selector) {
+  $selector: selectortostring($selector);
+
+  @if str_index($selector, ":") {
+    @return true;
+  }
+
+  @else {
+    @return false;
+  }
+}
+
+@function hitAllSpecialNestRule($selector) {
+  @return containModifier($selector) or containWhenFlag($selector) or
+    containPseudoClass($selector);
+}

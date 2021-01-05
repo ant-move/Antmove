@@ -1,0 +1,19 @@
+<view class="page">
+  <view class="page-description">创建绘画</view>
+  <view class="page-section">
+    <view class="page-section-title">createCanvasContext</view>
+    <view class="page-section-demo">
+      <canvas class="canvas-element" id="canvas" onTap="log" onTouchStart="log"></canvas>
+    </view>
+    <view class="page-section-btns" a:for="{{methods}}">
+      <view a:for="{{item}}" a:for-item="method">
+        <button type="primary" plain onTap="{{method}}">{{method}}</button>
+      </view>
+    </view>
+    <view class="page-section-btns">
+      <view><button plain type="primary" onTap="toTempFilePath">toTempFilePath</button></view>
+      <view><button plain type="primary" onTap="getImageData">getImageData</button></view>
+      <view><button plain type="primary" onTap="putImageData">putImageData</button></view>
+    </view>
+  </view>
+</view>

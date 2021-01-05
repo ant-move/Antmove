@@ -1,0 +1,16 @@
+.page-section-demo {
+  display: flex;
+  align-items: center;
+}
+.page-section-demo > text {
+  white-space: nowrap;
+}
+.page-section-demo > input {
+  width: 95%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.page-section-demo > button {
+  width: 100%;
+}

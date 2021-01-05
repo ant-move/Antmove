@@ -1,0 +1,29 @@
+<view>
+  <view class="icon-title">基础</view>
+  <view class="icon-list">
+    <block a:for="{{basicTypes}}">
+      <view class="icon-item">
+        <am-icon type="{{item}}" />
+        <text class="icon-desc">{{item}}</text>
+      </view>
+    </block>
+  </view>
+  <view class="icon-title">描边风格</view>
+  <view class="icon-list">
+    <block a:for="{{strokeTypes}}">
+      <view class="icon-item">
+        <am-icon type="{{item}}" />
+        <text class="icon-desc">{{item}}</text>
+      </view>
+    </block>
+  </view>
+  <view class="icon-title">实心风格</view>
+  <view class="icon-list">
+    <block a:for="{{solidTypes}}">
+      <view class="icon-item">
+        <am-icon type="{{item}}" />
+        <text class="icon-desc">{{item}}</text>
+      </view>
+    </block>
+  </view>
+</view>

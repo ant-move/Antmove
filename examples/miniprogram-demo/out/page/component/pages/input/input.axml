@@ -1,0 +1,122 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'input'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <view class='weui-cells__title'>
+        可以自动聚焦的input
+      </view>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='weui-cell weui-cell_input'>
+          <input class='weui-input' auto-focus=" " placeholder='将会获取焦点' onBlur='blurinput'>
+          </input>
+        </view>
+      </view>
+    </view>
+    <view class='page-section'>
+      <view class='weui-cells__title'>
+        控制最大输入长度的input
+      </view>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='weui-cell weui-cell_input'>
+          <input class='weui-input' maxlength='{{10}}' placeholder='最大输入长度为10' onFocus='focusinput'>
+          </input>
+        </view>
+      </view>
+    </view>
+    <view class='page-section'>
+      <view class='weui-cells__title'>
+        实时获取输入值：{{inputValue}}
+      </view>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='weui-cell weui-cell_input'>
+          <input class='weui-input' maxlength='{{10}}' placeholder='输入同步到view中' onInput='bindKeyInput'>
+          </input>
+        </view>
+      </view>
+    </view>
+    <view class='page-section'>
+      <view class='weui-cells__title'>
+        控制输入的input
+      </view>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='weui-cell weui-cell_input'>
+          <input class='weui-input' value='{{putvalue}}' placeholder='连续的两个1会变成2' onInput='bindReplaceInput'>
+          </input>
+        </view>
+      </view>
+    </view>
+    <view class='page-section'>
+      <view class='weui-cells__title'>
+        控制键盘的input
+      </view>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='weui-cell weui-cell_input'>
+          <input class='weui-input' placeholder='输入123自动收起键盘' onInput='bindHideKeyboard'>
+          </input>
+        </view>
+      </view>
+    </view>
+    <view class='page-section'>
+      <view class='weui-cells__title'>
+        数字输入的input
+      </view>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='weui-cell weui-cell_input'>
+          <input class='weui-input' type='number' placeholder='这是一个数字输入框' onConfirm='onconfirm'>
+          </input>
+        </view>
+      </view>
+    </view>
+    <view class='page-section'>
+      <view class='weui-cells__title'>
+        密码输入的input
+      </view>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='weui-cell weui-cell_input'>
+          <input class='weui-input' password=" " type='text' placeholder='这是一个密码输入框'>
+          </input>
+        </view>
+      </view>
+    </view>
+    <view class='page-section'>
+      <view class='weui-cells__title'>
+        带小数点的input
+      </view>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='weui-cell weui-cell_input'>
+          <input class='weui-input' type='digit' placeholder='带小数点的数字键盘'>
+          </input>
+        </view>
+      </view>
+    </view>
+    <view class='page-section'>
+      <view class='weui-cells__title'>
+        身份证输入的input
+      </view>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='weui-cell weui-cell_input'>
+          <input class='weui-input' type='idcard' placeholder='身份证输入键盘'>
+          </input>
+        </view>
+      </view>
+    </view>
+    <view class='page-section'>
+      <view class='weui-cells__title'>
+        控制占位符颜色的input
+      </view>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='weui-cell weui-cell_input'>
+          <input class='weui-input' placeholder-style='color:#F76260' placeholder='占位符字体是红色的'>
+          </input>
+        </view>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

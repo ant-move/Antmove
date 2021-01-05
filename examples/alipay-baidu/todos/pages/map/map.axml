@@ -1,0 +1,22 @@
+<view class="page-section">
+      <map
+        id="map"
+        customMapStyle="light"
+        longitude="{{longitude}}"
+        latitude="{{latitude}}"
+        scale="{{scale}}"
+        controls="{{controls}}"
+        onControlTap="controltap"
+        markers="{{markers}}"
+        onMarkerTap="markertap"
+        polyline="{{polyline}}"
+        polygon="{{polygon}}"
+        circles="{{circles}}"
+        onRegionChange="regionchange"
+        onTap="tap"
+        onCalloutTap="callouttap"
+        show-location style="width: 100%; height: 200px;"
+        include-points="{{includePoints}}"
+        ground-overlays="{{ground-overlays}}">
+      </map>
+  </view>

@@ -1,0 +1,30 @@
+<view class='list-list {{className}}' ref='saveChildRef0'>
+  <view class='list'>
+    <view a:for='{{list}}' class="{{ active === index ? 'active' : 'item-background'}}" ref-numbers='{{list}}'>
+      <view class='list-item' data-index='{{index}}' onTap='Change'>
+        <view class='list-item-name'>
+          {{item.type}}
+        </view>
+        <view class="{{active === index ? 'bomArrow' :'rightArrow' }}">
+          <image class='item-right' src='/image/ic-arrowleft.png'>
+          </image>
+        </view>
+      </view>
+      <view class="item-info {{ variety === index ? 'variety' : ''}}" a:for='{{item.list}}' a:for-item='apiItem' data-index='{{index}}' ref-numbers='{{item.list}}' onTouchStart='Getstyle' onTouchEnd='Nostyle'>
+        <navigator url='{{apiItem.path}}'>
+          <view class='daima'>
+            <view class="yuan {{ variety === index ? 'variety' : ''}}">
+              <image src='/image/Unchecked-s.png' mode='aspectFit'>
+              </image>
+            </view>
+            <text class='titl'>
+              {{ apiItem.name }}            </text>            <view class='right'>
+              <image src='/image/ic-arrowleft.png' mode='aspectFit'>
+              </image>
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+</view>

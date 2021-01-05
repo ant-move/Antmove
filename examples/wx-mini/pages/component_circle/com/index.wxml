@@ -1,0 +1,13 @@
+<view class='test-class'>
+  <view>{{min}}</view>
+  <button bindtap='onWXClick'>微信组件通信</button>
+  <button onTap="onClick">支付宝组件通信</button>
+  <text>年龄：{{age}}</text>
+  <view>名字：{{nba}}</view>
+  <text>和：{{sum}}</text>
+  <button bindtap='count'>count</button>
+  <slot name='before'></slot>
+  <slot name='after'></slot>
+  <view>movie:{电影名称:{{ name }},类型：{{ type }}}</view>
+  <child></child>
+</view>

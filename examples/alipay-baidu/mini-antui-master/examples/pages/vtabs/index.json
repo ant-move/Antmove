@@ -1,0 +1,8 @@
+{
+  "defaultTitle": "纵向选项卡",
+  "usingComponents": {
+    "vtabs": "../../es/vtabs/index",
+    "vtab-content": "../../es/vtabs/vtab-content/index"
+  },
+  "allowsBounceVertical": false
+}

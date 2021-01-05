@@ -3,4 +3,4 @@
  * 位置
  */
 module.exports = {
-};
+}

@@ -1,0 +1,9 @@
+@import "../../../common/lib/weui.acss";
+.page-body-info {
+    padding: 30rpx 0 30rpx 0;
+}
+
+.page-body-text {
+    padding: 0 30rpx;
+    text-align: center;
+}

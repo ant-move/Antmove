@@ -1,0 +1,82 @@
+
+<view>
+	<view style="margin-top: 10px;" />
+	<button onTap="openModal21" style="margin: 0 10px;">带图弹窗</button>
+	<view style="margin-top: 10px;" />
+	<button onTap="openModal22" style="margin: 0 10px;">带图弹窗-小图</button>
+	<view style="margin-top: 10px;" />
+	<button onTap="openModal2" style="margin: 0 10px;">带图弹窗-大图</button>
+	<view style="margin-top: 10px;" />
+	<button onTap="openModal" style="margin: 0 10px;">通用modal</button>
+	<view style="margin-top: 10px;" />
+	<button onTap="openModal3" style="margin: 0 10px;">运营活动弹窗-大</button>
+	<view style="margin-top: 10px;" />
+	<button onTap="openModal4" style="margin: 0 10px;">运营活动弹窗-小</button>
+	<modal
+		show="{{modalOpened21}}"
+		onModalClick="onModalClick21"
+		onModalClose="onModalClose21"
+		topImage="https://gw.alipayobjects.com/zos/rmsportal/yFeFExbGpDxvDYnKHcrs.png"
+	>
+		<view slot="header">标题单行</view>
+		说明当前状态、提示用户解决方案，最好不要超过两行。
+		<view slot="footer">确定</view>
+	</modal>
+	<modal
+		show="{{modalOpened2}}"
+		onModalClick="onModalClick2"
+		onModalClose="onModalClose2"
+		topImage="https://gw.alipayobjects.com/zos/rmsportal/yFeFExbGpDxvDYnKHcrs.png"
+		topImageSize="lg"
+		closeType="1"
+	>
+		<view slot="header">标题单行</view>
+		说明当前状态、提示用户解决方案，最好不要超过两行。
+		<view slot="footer">确定</view>
+	</modal>
+	<modal
+		show="{{modalOpened22}}"
+		onModalClick="onModalClick22"
+		onModalClose="onModalClose22"
+		topImage="https://gw.alipayobjects.com/zos/rmsportal/yFeFExbGpDxvDYnKHcrs.png"
+		topImageSize="sm"
+	>
+		<view slot="header">标题单行</view>
+		说明当前状态、提示用户解决方案，最好不要超过两行。
+		<view slot="footer">确定</view>
+	</modal>
+	<modal
+		show="{{modalOpened}}"
+		onModalClick="onModalClick"
+		onModalClose="onModalClose"
+	>
+		<view style="margin: 20px 0 10px 0;">让员工用支付宝扫一扫，添加为店员</view>
+		<image mode="widthFix" style="width: 100%;" src="https://tfsimg.alipay.com/images/mobilecodec/TB1JjWmXkyEDuNjme6tXXXIKXXa" />
+		二维码每分钟自动更新
+		<view slot="footer">确定</view>
+	</modal>
+	<modal
+		show="{{modalOpened3}}"
+		onModalClose="onModalClick3"
+		advice="{{true}}"
+		>
+		<view style="display: flex; height: 465px; width: 319px;">
+			<image
+				style="height: 465px;width: 319px;"
+				src="https://gw.alipayobjects.com/zos/rmsportal/vJzAWQLgeDLGOMKiIgZt.png"
+			/>
+		</view>
+	</modal>
+	<modal
+		show="{{modalOpened4}}"
+		onModalClose="onModalClick4"
+		advice="{{true}}"
+		>
+		<view style="display: flex; width: 270px; height: 350px;">
+			<image
+				style="width: 270px;height: 350px;"
+				src="https://gw.alipayobjects.com/zos/rmsportal/vJzAWQLgeDLGOMKiIgZt.png"
+			/>
+		</view>
+	</modal>
+</view>

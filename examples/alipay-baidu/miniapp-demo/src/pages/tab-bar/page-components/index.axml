@@ -1,0 +1,31 @@
+<view class="page-components">
+  <view class="page-components__banner">
+    <view class="page-components__logo" style="opacity: {{titleOpacity}}"><image src="/image/logo-transparent.png" mode="aspectFit" /></view>
+    <view class="page-components__title" style="opacity: {{titleOpacity}}">小程序官方示例</view>
+    <navigator-search-bar
+      className="page-components__search--fake"
+    ></navigator-search-bar>
+  </view>
+
+  <hot-list list="{{hot}}" className="page-components__hot"></hot-list>
+
+  <!--
+  <tabs
+    tabs="{{tabs}}"
+    showPlus="{{false}}"
+    onTabClick="handleTabChange"
+    onChange="handleTabChange"
+    activeTab="{{activeTab}}"
+  >
+    <block a:for="{{tabs}}" a:for-index="tabIndex">
+      <tab-content key="{{tabIndex}}">
+        <compsite-list objArr="{{item.categories}}"></compsite-list>
+      </tab-content>
+    </block>
+  </tabs>
+  -->
+
+  <block a:for="{{tabs}}" a:for-index="tabIndex">
+    <compsite-list objArr="{{item.categories}}"></compsite-list>
+  </block>
+</view>

@@ -1,0 +1,18 @@
+<view style="margin-top: 10px;" />
+<grid onGridItemClick="onItemClick" columnNum="{{2}}" list="{{list1}}">
+    <view class="am-grid-item-wrapper" slot-scope="props">
+      <view class="am-grid-icon-container">
+        <image src="{{props.item.icon}}" class="am-grid-icon" mode="aspectFit" />
+      </view>
+      <view class="am-grid-text-wrapper">
+        <text class="am-grid-text">{{props.item.text}}</text>
+        <text	class="am-grid-desc">{{props.item.desc}}</text>
+      </view>
+    </view>
+</grid>
+
+<view style="margin-top: 10px;" />
+<grid onGridItemClick="onItemClick" columnNum="{{2}}" list="{{list1}}" />
+
+<view style="margin-top: 10px;" />
+<grid onGridItemClick="onItemClick" columnNum="{{2}}" list="{{list2}}" />

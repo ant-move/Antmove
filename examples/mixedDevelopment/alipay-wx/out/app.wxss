@@ -1,0 +1,5 @@
+@import "/__antmove_wechat/static/app.wxss";
+
+page {
+    background: #fff;
+}

@@ -3,4 +3,4 @@
  * 媒体
  */
 module.exports = {
-};
+}

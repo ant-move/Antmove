@@ -1,0 +1,8 @@
+{
+  "defaultTitle": "徽标",
+  "usingComponents": {
+    "list": "mini-antui/es/list/index",
+    "list-item": "mini-antui/es/list/list-item/index",
+    "badge": "mini-antui/es/badge/index"
+  }
+}

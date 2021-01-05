@@ -1,0 +1,22 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'vibrate/Long/Short'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <view class='btn-area'>
+        <button type='primary' class=' primary-style' onTap='vibrateLong'>
+          长振动
+        </button>
+        <button type='default' class=' default-style' onTap='vibrateShort'>
+          短振动
+        </button>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

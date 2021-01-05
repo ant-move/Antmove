@@ -1,0 +1,165 @@
+<view class='page-container-classname'>
+                <i-panel title='主色' ref='saveChildRef1'>
+</i-panel><i-row ref='saveChildRef2'>
+  <i-col i-class='color-col' span='{{12}}' ref='saveChildRef3'>
+    <i-card i-class='color' ref='saveChildRef4'>
+      <view slot='content' class='color-item primary'>
+        <view class='color-item-title'>
+          Primary
+        </view>
+        <view class='color-item-content'>
+          #2d8cf0
+        </view>
+      </view>
+    </i-card>
+  </i-col>
+  <i-col i-class='color-col' span='{{12}}' ref='saveChildRef5'>
+    <i-card i-class='color' ref='saveChildRef6'>
+      <view slot='content' class='color-item light-primary'>
+        <view class='color-item-title'>
+          Light Primary
+        </view>
+        <view class='color-item-content'>
+          #5cadff
+        </view>
+      </view>
+    </i-card>
+  </i-col>
+  <i-col i-class='color-col' span='{{12}}' ref='saveChildRef7'>
+    <i-card i-class='color' ref='saveChildRef8'>
+      <view slot='content' class='color-item dark-primary'>
+        <view class='color-item-title'>
+          Dark Primary
+        </view>
+        <view class='color-item-content'>
+          #2b85e4
+        </view>
+      </view>
+    </i-card>
+  </i-col>
+</i-row><i-panel title='辅助色' ref='saveChildRef9'>
+</i-panel><i-row ref='saveChildRef10'>
+  <i-col i-class='color-col' span='{{12}}' ref='saveChildRef11'>
+    <i-card i-class='color' ref='saveChildRef12'>
+      <view slot='content' class='color-item success'>
+        <view class='color-item-title'>
+          Success
+        </view>
+        <view class='color-item-content'>
+          #19be6b
+        </view>
+      </view>
+    </i-card>
+  </i-col>
+  <i-col i-class='color-col' span='{{12}}' ref='saveChildRef13'>
+    <i-card i-class='color' ref='saveChildRef14'>
+      <view slot='content' class='color-item warning'>
+        <view class='color-item-title'>
+          Warning
+        </view>
+        <view class='color-item-content'>
+          #ff9900
+        </view>
+      </view>
+    </i-card>
+  </i-col>
+  <i-col i-class='color-col' span='{{12}}' ref='saveChildRef15'>
+    <i-card i-class='color' ref='saveChildRef16'>
+      <view slot='content' class='color-item error'>
+        <view class='color-item-title'>
+          Error
+        </view>
+        <view class='color-item-content'>
+          #ed3f14
+        </view>
+      </view>
+    </i-card>
+  </i-col>
+</i-row><i-panel title='中性色' ref='saveChildRef17'>
+</i-panel><i-row ref='saveChildRef18'>
+  <i-col i-class='color-col' span='{{12}}' ref='saveChildRef19'>
+    <i-card i-class='color' ref='saveChildRef20'>
+      <view slot='content' class='color-item title'>
+        <view class='color-item-title'>
+          标题 Title
+        </view>
+        <view class='color-item-content'>
+          #1c2438
+        </view>
+      </view>
+    </i-card>
+  </i-col>
+  <i-col i-class='color-col' span='{{12}}' ref='saveChildRef21'>
+    <i-card i-class='color' ref='saveChildRef22'>
+      <view slot='content' class='color-item content'>
+        <view class='color-item-title'>
+          正文 Content
+        </view>
+        <view class='color-item-content'>
+          #495060
+        </view>
+      </view>
+    </i-card>
+  </i-col>
+  <i-col i-class='color-col' span='{{12}}' ref='saveChildRef23'>
+    <i-card i-class='color' ref='saveChildRef24'>
+      <view slot='content' class='color-item sub-color'>
+        <view class='color-item-title'>
+          辅助 Sub Color
+        </view>
+        <view class='color-item-content'>
+          #ed3f14
+        </view>
+      </view>
+    </i-card>
+  </i-col>
+  <i-col i-class='color-col' span='{{12}}' ref='saveChildRef25'>
+    <i-card i-class='color' ref='saveChildRef26'>
+      <view slot='content' class='color-item disabled'>
+        <view class='color-item-title'>
+          失效 Disabled
+        </view>
+        <view class='color-item-content'>
+          #bbbec4
+        </view>
+      </view>
+    </i-card>
+  </i-col>
+  <i-col i-class='color-col' span='{{12}}' ref='saveChildRef27'>
+    <i-card i-class='color' ref='saveChildRef28'>
+      <view slot='content' class='color-item border dark'>
+        <view class='color-item-title'>
+          边框 Border
+        </view>
+        <view class='color-item-content'>
+          #dddee1
+        </view>
+      </view>
+    </i-card>
+  </i-col>
+  <i-col i-class='color-col' span='{{12}}' ref='saveChildRef29'>
+    <i-card i-class='color' ref='saveChildRef30'>
+      <view slot='content' class='color-item divider dark'>
+        <view class='color-item-title'>
+          分割线 Divider
+        </view>
+        <view class='color-item-content'>
+          #e9eaec
+        </view>
+      </view>
+    </i-card>
+  </i-col>
+  <i-col i-class='color-col' span='{{12}}' ref='saveChildRef31'>
+    <i-card i-class='color' ref='saveChildRef32'>
+      <view slot='content' class='color-item background dark'>
+        <view class='color-item-title'>
+          背景 Background
+        </view>
+        <view class='color-item-content'>
+          #f8f8f9
+        </view>
+      </view>
+    </i-card>
+  </i-col>
+</i-row>
+            </view>

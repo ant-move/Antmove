@@ -1,0 +1,7 @@
+{
+	"usingComponents": {
+		"i-message": "../../dist/message/index",
+		"i-button": "../../dist/button/index"
+	},
+	"defaultTitle": "Message 全局提醒"
+}

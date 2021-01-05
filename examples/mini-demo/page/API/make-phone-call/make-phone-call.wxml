@@ -1,0 +1,9 @@
+<!--page/API/make-phone-call/make-phone-call.wxml-->
+<slot-demo date="打电话 API" title="wx.makePhoneCall">
+  <view class="page-section">
+    <view class="page-section-btns">
+      <view bindtap="makePhoneCall">打电话</view>
+    </view>
+  </view>
+</slot-demo>
+

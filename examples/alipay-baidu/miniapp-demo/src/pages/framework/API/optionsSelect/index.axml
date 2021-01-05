@@ -1,0 +1,10 @@
+<view class="page">
+  <view class="page-description">选项选择</view>
+  <view class="page-section">
+    <view class="page-section-title">optionsSelect</view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="optionsSelect1">单列</button>
+      <button size="default" type="primary" onTap="optionsSelect2">多列</button>
+    </view>
+  </view>
+</view>

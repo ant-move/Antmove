@@ -1,0 +1,14 @@
+{
+  "root": "amapuri://applets/platformapi/startapp",
+  "appId": "2019071265849122",
+  "appId__outer": "2019071265849122",
+  "appId__inner": "2019071865818969",
+  "page": "",
+  "url": "",
+  "type": "png",
+  "logoUrl": "./src/image/logo.png",
+  "ratio": 4,
+  "width": 250,
+  "margin": 2,
+  "force": false
+}

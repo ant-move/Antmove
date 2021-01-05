@@ -1,0 +1,46 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'rich-text'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <view class='page-section-title'>
+        通过HTML String渲染
+      </view>
+      <view class='page-content'>
+        <scroll-view scroll-y=" ">
+          {{htmlSnip}}
+        </scroll-view>
+        <button type='primary' class=' primary-style' onTap='renderHtml'>
+          渲染HTML
+        </button>
+        <block a:if='{{renderedByHtml}}'>
+          <custom-rich-text nodes='{{htmlSnip}}'>
+          </custom-rich-text>
+        </block>
+      </view>
+    </view>
+    <view class='page-section'>
+      <view class='page-section-title'>
+        通过节点渲染
+      </view>
+      <view class='page-content'>
+        <scroll-view scroll-y=" ">
+          {{nodeSnip}}
+        </scroll-view>
+        <button type='primary' class=' primary-style' onTap='renderNode'>
+          渲染Node
+        </button>
+        <block a:if='{{renderedByNode}}'>
+          <custom-rich-text nodes='{{nodes}}'>
+          </custom-rich-text>
+        </block>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

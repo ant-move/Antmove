@@ -1,0 +1,40 @@
+
+<view class="page">
+  <view class="page-description">websocket</view>
+  <view class="page-section">
+    <view class="page-section-title">connectSocket</view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="connectSocket">connectSocket</button>
+    </view>
+
+    <view class="page-section-title">sendSocketMessage</view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="sendSocketMessage">sendSocketMessage</button>
+    </view>
+
+    <view class="page-section-title">closeSocket</view>
+    <view class="page-section-demo">
+       <button size="default" type="primary" onTap="closeSocket">closeSocket</button>
+    </view>
+
+    <view class="page-section-title">offSocketClose</view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="offSocketClose">offSocketClose</button>
+    </view>
+
+    <view class="page-section-title">offSocketOpen</view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="offSocketOpen">offSocketOpen</button>
+    </view>
+
+    <view class="page-section-title">offSocketError</view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="offSocketError">offSocketError</button>
+    </view>
+
+    <view class="page-section-title">offSocketMessage</view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="offSocketMessage">offSocketMessage</button>
+    </view>
+  </view>
+</view>

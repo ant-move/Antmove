@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "@ali/stylelint-config-ali"
+  ],
+  "rules": {
+    "selector-type-no-unknown": null,
+    "at-rule-no-unknown": null,
+    "unit-no-unknown": null,
+    "at-rule-name-space-after": null
+  }
+}

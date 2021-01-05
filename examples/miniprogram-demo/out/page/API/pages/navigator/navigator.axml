@@ -1,0 +1,29 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'navigateTo/Back, redirectTo'}}">
+  </template>
+  <view class='page-body'>
+    <view class='btn-area'>
+      <button onTap='navigateTo'>
+        跳转新页面
+      </button>
+      <button onTap='navigateBack'>
+        返回上一页
+      </button>
+      <button onTap='redirectTo'>
+        在当前页面打开
+      </button>
+      <button onTap='switchTab'>
+        跳转到组件Tab页
+      </button>
+      <button onTap='reLaunch'>
+        关闭所有页面并跳转
+      </button>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

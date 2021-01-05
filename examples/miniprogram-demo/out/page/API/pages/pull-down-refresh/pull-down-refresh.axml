@@ -1,0 +1,24 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'on/stopPullDownRefresh'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <view class='page-body-info'>
+        <text class='page-body-text'>
+          下滑页面即可刷新
+        </text>
+      </view>
+      <view class='btn-area'>
+        <button onTap='stopPullDownRefresh'>
+          停止刷新
+        </button>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

@@ -1,0 +1,11 @@
+<view class="btn-area">
+    <navigator url="../logs/logs"  hover-stop-propagation="false" aria-label="aria-label" >
+        跳转到新页面
+    </navigator>
+    <navigator url="../logs/logs"  open-type="navigate" hover-class="other-navigator-hover">
+        在当前页打开
+    </navigator>
+    <navigator target="miniProgram" open-type="navigate" app-id="app-id" path="path" extra-data="extra-data" version="release">
+        打开绑定的小程序
+    </navigator>
+</view>

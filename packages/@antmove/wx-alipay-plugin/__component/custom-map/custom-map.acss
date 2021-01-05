@@ -1,10 +1,10 @@
-.map-wrap {
+.am-map-wrap {
     position: relative;
 }
 
-.coverview-wrap {
-    position: absolute;
+.am-coverview-wrap {
+     /* position: absolute;
     top: 0;
     left: 0;
-    z-index: 2;
+    z-index: 2; */
 }

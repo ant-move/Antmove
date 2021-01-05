@@ -1,0 +1,14 @@
+<view class="page">
+  <view class="page-description">设置窗口的背景色</view>
+  <view class="page-section">
+    <view class="page-section-title">
+      <view class="page-section-name">setBackgroundColor</view>
+      设置窗口的背景色，请先点击按钮，然后进行下拉操作，查看展示效果
+    </view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="setBackgroundColor">
+        setBackgroundColor
+      </button>
+    </view>
+  </view>
+</view>

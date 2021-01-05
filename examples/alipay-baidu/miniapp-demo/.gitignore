@@ -1,0 +1,12 @@
+test/
+.idea/
+.vscode/
+~lib
+.tea
+.DS_Store
+.entry/
+node_modules/
+dist/
+!.gitkeep
+docs/
+yuque-docs/

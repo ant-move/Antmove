@@ -1,0 +1,6 @@
+<template name='foot' onChildRef='saveChildRef0'>
+  <navigator class='page-foot' openType='switchTab' url='/page/component/index' hover-class='none'>
+    <image class='icon-foot' src='/icon_foot.png'>
+    </image>
+  </navigator>
+</template>

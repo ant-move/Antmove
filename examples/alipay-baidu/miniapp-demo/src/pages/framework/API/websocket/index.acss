@@ -1,0 +1,16 @@
+page {
+  background: #f7f7f7;
+}
+
+.page-content{
+  background-color: white;
+  padding: 40rpx;
+}
+.api-title{
+  color: #666666;
+  margin: 40rpx 0;
+}
+
+button{
+  margin: 30rpx 0;
+}

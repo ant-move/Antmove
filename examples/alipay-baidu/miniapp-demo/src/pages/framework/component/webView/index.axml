@@ -1,0 +1,3 @@
+<view class="page">
+  <web-view src="https://cache.amap.com/ecology/tool/miniapp/miniapp-demo/h5/webview.html" onMessage="onMessage"></web-view>
+</view>

@@ -1,6 +1,6 @@
-const lifeCycles = require('./lifeCycles/index');
+const lifeCycles = require('./lifeCycles/index')
 
 module.exports = {
-    name: 'alipay-ployfill',
-    lifeCycles,
-};
+  name: 'alipay-ployfill',
+  lifeCycles,
+}

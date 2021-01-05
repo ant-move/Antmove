@@ -1,0 +1,67 @@
+.am-vtabs {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+
+  &-bar {
+    width: 110px;
+    overflow: hidden;
+  }
+
+  &-bar-content {
+    height: 100%;
+    width: 120px;
+  }
+
+  &-bar-tab {
+    box-sizing: border-box;
+    height: 55px;
+    width: 110px;
+    text-align: center;
+    line-height: 55px;
+    font-size: 14px;
+    border-left-width: 4px;
+    border-left-style: solid;
+    border-left-color: transparent;
+    border-right-width: 4px;
+    border-right-style: solid;
+    border-right-color: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  &-bar-title {
+    position: relative;
+    display: inline-block;
+  }
+
+  &-bar-badge.dot {
+    position: absolute;
+    top: 11px;
+    right: 0;
+    transform: translateX(8px);
+  }
+
+  &-bar-badge.text {
+    position: absolute;
+    top: 8px;
+    right: 2px;
+    transform: translateX(100%);
+  }
+
+  &-content-wrap {
+    overflow: hidden;
+    flex: 1;
+    height: 100%;
+    background-color: #fff;
+  }
+
+  &-slides {
+    height: 100%;
+  }
+
+  &-slides.animate {
+    transition-duration: 500ms;
+  }
+}

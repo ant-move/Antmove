@@ -3,4 +3,4 @@
  * 设备相关
  */
 module.exports = {
-};
+}

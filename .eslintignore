@@ -1,6 +1,6 @@
 dist
 docs
 node_modules
-examples/wx-zhihu
-examples/wechat-v2ex
-examples/keyboard
+examples
+test
+scripts

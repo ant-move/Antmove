@@ -1,0 +1,7 @@
+<view class='web-view-web-view {{className}}' ref='saveChildRef0'>
+  <text>
+    page/API/web-view/web-view.wxml  </text>  <view>
+    <web-view id='web-view-1' src='https://mp.weixin.qq.com' onMessage='bindmessage'>
+    </web-view>
+  </view>
+</view>

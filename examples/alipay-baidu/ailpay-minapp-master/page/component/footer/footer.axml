@@ -1,0 +1,16 @@
+<view>
+  <view style="margin-top: 50px;" />
+  <footer
+    copyright="{{copyright}}" />
+  <view style="margin-top: 50px;" />
+  <footer
+    copyright="{{copyright}}"
+    links="{{links}}" />
+  <view style="margin-top: 50px;" />
+  <footer
+    copyright="{{copyright}}"
+    links="{{singleLink}}" />
+  <view style="margin-top: 50px" />
+ <footer
+    links="{{links}}" /> 
+</view>

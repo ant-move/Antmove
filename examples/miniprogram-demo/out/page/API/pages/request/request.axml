@@ -1,0 +1,22 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'request'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-body-wording'>
+      <text class='page-body-text'>
+        点击向服务器发起请求
+      </text>
+    </view>
+    <view class='btn-area'>
+      <button type='primary' disabled='{{buttonDisabled}}' loading='{{loading}}' class=' primary-style' onTap='makeRequest'>
+        request
+      </button>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

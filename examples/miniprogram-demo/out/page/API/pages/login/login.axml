@@ -1,0 +1,30 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'Login'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <block a:if='{{hasLogin === true}}'>
+        <text class='page-body-title'>
+          已登录
+        </text>
+        <text class='page-body-text'>
+          每个微信号中仅需登录 1 次，后续每次进入页面即可根据微信 id 自动拉取用户信息
+        </text>
+      </block>
+      <block a:if='{{hasLogin === false}}'>
+        <text class='page-body-text'>
+          每个微信号中仅需登录一次
+        </text>
+        <button class='page-body-button primary-style' type='primary' onTap='login'>
+          微信登录
+        </button>
+      </block>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

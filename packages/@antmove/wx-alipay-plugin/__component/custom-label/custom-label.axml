@@ -1,0 +1,6 @@
+<view class="{{className}} custom_label_box" style="{{style}}" onTap='tapHandler'>
+    <view a:if='{{catchTap}}' class='custom_label_mark' catchTap='catchtapHandler'></view>
+    <label for="{{for}}">
+      <slot></slot>
+    </label>
+</view>

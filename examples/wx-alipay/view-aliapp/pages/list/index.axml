@@ -1,0 +1,51 @@
+<view class='page-container-classname'>
+                <i-panel class='cell-panel-demo' ref='saveChildRef1'>
+  <i-cell title='单行列表' ref='saveChildRef2'>
+  </i-cell>
+</i-panel><i-panel class='cell-panel-demo' ref='saveChildRef3'>
+  <i-cell title='单行列表' is-link=" " value='详细信息' ref='saveChildRef4'>
+  </i-cell>
+</i-panel><i-panel class='cell-panel-demo' ref='saveChildRef5'>
+  <i-cell title='单行列表' label='附加描述' value='详细信息' ref='saveChildRef6'>
+  </i-cell>
+</i-panel><i-panel class='cell-panel-demo' title='带 icon 的 Cell' ref='saveChildRef7'>
+  <i-cell title='单行列表' value='详细信息' ref='saveChildRef8'>
+    <i-icon type='like_fill' slot='icon' ref='saveChildRef9'>
+    </i-icon>
+  </i-cell>
+</i-panel><i-panel class='cell-panel-demo' title='带箭头的 cell' ref='saveChildRef10'>
+  <i-cell title='只显示箭头' is-link=" " ref='saveChildRef11'>
+  </i-cell>
+</i-panel><i-panel class='cell-panel-demo' ref='saveChildRef12'>
+  <i-cell title='跳转到首页' is-link=" " url='/pages/index/index' ref='saveChildRef13'>
+  </i-cell>
+</i-panel><i-panel class='cell-panel-demo' title='cell 组' ref='saveChildRef14'>
+  <i-cell-group ref='saveChildRef15'>
+    <i-cell title='只显示箭头' is-link=" " ref='saveChildRef16'>
+    </i-cell>
+    <i-cell title='跳转到首页' is-link=" " url='/pages/index/index' ref='saveChildRef17'>
+    </i-cell>
+    <i-cell title='只有 footer 点击有效' is-link=" " url='/pages/index/index' only-tap-footer=" " ref='saveChildRef18'>
+    </i-cell>
+    <block a:if='{{ switch1 }}'>
+      <i-cell title='单行列表' label='附加描述' value='详细信息' ref='saveChildRef19'>
+      </i-cell>
+      <i-cell title='表单' ref='saveChildRef20'>
+        <input slot='footer' type='digit' placeholder='带小数点的数字键盘'>
+        </input>
+      </i-cell>
+    </block>
+    <i-cell title='开关' ref='saveChildRef21'>
+      <i-switch value='{{ switch1 }}' slot='footer' onChange='onChange' ref='saveChildRef22'>
+        <i-icon type='right' slot='open' ref='saveChildRef23'>
+        </i-icon>
+        <i-icon type='close' slot='close' ref='saveChildRef24'>
+        </i-icon>
+      </i-switch>
+    </i-cell>
+  </i-cell-group>
+</i-panel><i-panel class='cell-panel-demo' ref='saveChildRef25'>
+  <i-cell title='单行列表' label='附加描述' value='详细信息' ref='saveChildRef26'>
+  </i-cell>
+</i-panel>
+            </view>

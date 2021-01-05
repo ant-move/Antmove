@@ -1,0 +1,9 @@
+<view class="page">
+  <view class="page-description">更新管理</view>
+  <view class="page-section">
+    <view class="page-section-title">
+      <view class="page-section-name">请通过扫码查看使用效果</view>
+      getUpdateManager
+    </view>
+  </view>
+</view>

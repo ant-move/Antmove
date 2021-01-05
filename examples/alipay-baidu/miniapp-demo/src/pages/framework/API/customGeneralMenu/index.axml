@@ -1,0 +1,38 @@
+<view class="page">
+  <view class="page-description">自定义通用菜单</view>
+  <view class="page-section">
+    <view class="page-section-title">
+      <view class="page-section-name">hideShareMenu</view>
+        隐藏当前页面通用菜单（右上角）中的功能。
+    </view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="hideShareMenu">
+        hideShareMenu
+      </button>      
+    </view>
+    <view class="page-section-title">hideAddToDesktopMenu</view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="hideAddToDesktopMenu">
+        hideAddToDesktopMenu
+      </button>
+    </view>
+    <view class="page-section-title">hideAllAddToDesktopMenu</view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="hideAllAddToDesktopMenu">
+        hideAllAddToDesktopMenu
+      </button>
+    </view>
+    <view class="page-section-title">hideFavoriteMenu</view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="hideFavoriteMenu">
+        hideFavoriteMenu
+      </button>
+    </view>
+    <view class="page-section-title">hideAllFavoriteMenu</view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="hideAllFavoriteMenu">
+        hideAllFavoriteMenu
+      </button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,16 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'audio'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section page-section-gap' style='text-align: center;'>
+      <audio style='text-align: left' src='{{current.src}}' id='audio1' loop='{{true}}' poster='{{current.poster}}' name='{{current.name}}' author='{{current.author}}' action='{{audioAction}}' controls=" " onError='binderror' onPlay='bindplay' onPause='bindpause' onTimeUpdate='bindtimeupdate' onEnded='bindended'>
+      </audio>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

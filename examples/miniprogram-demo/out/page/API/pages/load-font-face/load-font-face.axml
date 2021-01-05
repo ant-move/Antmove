@@ -1,0 +1,30 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'loadFontFace'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <view class="page-body-info display-area {{ loaded ? 'font-loaded' : '' }}">
+        <text a:if='{{!loaded}}'>
+          Load {{ fontFamily }}
+        </text>
+        <text a:else >
+          {{ fontFamily }} is loaded
+        </text>
+      </view>
+      <view class='btn-area'>
+        <button type='primary' class=' primary-style' onTap='loadFontFace'>
+          加载字体
+        </button>
+        <button type='default' class=' default-style' onTap='clear'>
+          清除
+        </button>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

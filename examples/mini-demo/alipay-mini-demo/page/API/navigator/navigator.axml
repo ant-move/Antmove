@@ -1,0 +1,19 @@
+<view class='page-container-classname'>
+                <slot-demo date='跳转页面' ref='saveChildRef1'>
+  <button type='primary' a:if='{{navigateTo}}' class=' primary-style' onTap='navigateTo'>
+    跳转新页面
+  </button>
+  <button type='primary' a:if='{{navigateBack}}' class=' primary-style' onTap='navigateBack'>
+    返回上一页
+  </button>
+  <button type='primary' a:if='{{redirectTo}}' class=' primary-style' onTap='redirectTo'>
+    在当前页面打开 - 获取用户信息
+  </button>
+  <button type='primary' a:if='{{reLaunch}}' class=' primary-style' onTap='reLaunch'>
+    关闭所有页面，打开到应用内的某个页面
+  </button>
+  <button type='primary' a:if='{{switchTab}}' class=' primary-style' onTap='switchTab'>
+    跳转 Tab - 组件
+  </button>
+</slot-demo>
+            </view>

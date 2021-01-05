@@ -3,4 +3,4 @@
  * wxml 模板
  */
 module.exports = {
-};
+}

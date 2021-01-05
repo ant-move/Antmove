@@ -1,0 +1,6 @@
+{
+	"defaultTitle": "cover-view",
+	"usingComponents": {
+		"custom-map": "/__antmove/component/custom-map/custom-map"
+	}
+}

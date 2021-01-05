@@ -1,15 +1,15 @@
-<view class="action_sheet {{className}}" a:if="{{!hidden}}" onTap="cancel">
-    <view class="sheet_box" catchTap="stopbable">
+<view class="am_action_sheet {{className}}" a:if="{{!hidden}}" onTap="cancel">
+    <view class="am_sheet_box" catchTap="stopbable">
         <view>
-            <view class="text_content" a:if="textContent">
+            <view class="am_text_content" a:if="textContent">
                 <text>{{textContent}}</text>
             </view>
             <slot></slot>
             <view catchTap="cancel">
                 <slot name="footer"></slot>
             </view>
-            
+
         </view>
     </view>
-  
+
 </view>

@@ -1,0 +1,47 @@
+<view class='page-container-classname'>
+                <view class='page' ref='saveChildRef0'>
+  <view class='page__hd'>
+    <view class='page__title'>
+      Dialog
+    </view>
+    <view class='page__desc'>
+      对话框
+    </view>
+  </view>
+  <view class='page__bd'>
+    <view class='weui-btn-area'>
+      <button class='weui-btn default-style' type='default' onTap='openConfirm'>
+        原生 Dialog
+      </button>
+      <button class='weui-btn default-style' type='default' onTap='openDialog'>
+        模拟 Dialog
+      </button>
+    </view>
+    <view class="weui-demo-dialog {{istrue ? 'weui-demo-dialog_show' : ''}}">
+      <view class='weui-mask' onTap='closeDialog'>
+      </view>
+      <view class='weui-dialog__wrp' onTap='closeDialog'>
+        <view class='weui-dialog' catchTap='stopEvent'>
+          <view class='weui-dialog__hd'>
+            <view class='weui-dialog__title'>
+              标题
+            </view>
+          </view>
+          <view class='weui-dialog__bd'>
+            <image class='weui-article__img' src='../images/pic_article.png' mode='aspectFill' style='max-width:100%;'>
+            </image>
+          </view>
+          <view class='weui-dialog__ft'>
+            <view class='weui-dialog__btn weui-dialog__btn_default' onTap='closeDialog'>
+              取消
+            </view>
+            <view class='weui-dialog__btn' onTap='closeDialog'>
+              确定
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+            </view>

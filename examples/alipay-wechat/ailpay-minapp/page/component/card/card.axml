@@ -1,0 +1,26 @@
+<view class="container">
+  <card
+    title="卡片标题1"
+    subTitle="副标题非必填1"
+    onClick="onCardClick"
+    info="点击了第一个card"
+  />
+  <view style="margin-top: 10px;" />
+  <card
+    thumb="{{thumb}}"
+    title="卡片标题2"
+    subTitle="副标题非必填2"
+    onClick="onCardClick"
+    info="点击了第二个card"
+  />
+  <view style="margin-top: 10px;" />
+  <card
+    thumb="{{thumb}}"
+    title="卡片标题3"
+    subTitle="副标题非必填3"
+    onClick="onCardClick"
+    footer="描述文字"
+    footerImg="{{footerImg}}"
+    info="点击了第三个card"
+  />
+</view>

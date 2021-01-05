@@ -1,0 +1,25 @@
+<!-- 小程序收藏组件，更多高级用法请参考文档：https://docs.alipay.com/mini/component/component-favorite -->
+<favorite>收藏小程序，下次使用更方便</favorite>
+
+<view>
+  <view class="banner" style="height:60rpx">
+    <view class="fake-searchbar" onTap="onSearchBarTap">
+      <icon type="search" size="14" color="#1D1D1D" />
+      <text class="fake-placeholder">搜索你想要的组件和API</text>
+    </view>
+  </view>
+  <view class="list" style="padding-top: 80rpx">
+    <block a:for="{{APIList}}" a:for-item="list">
+      <list className="list-item">
+        <view slot="header" class="list-header">{{list.type}}</view>
+        <block a:for="{{list.list}}">
+          <list-item arrow="{{true}}" multipleLine="{{false}}" key="items-{{item.name}}" last="{{index === list.list.length - 1}}">
+            <navigator url="{{item.path}}" style="display: flex; align-items: center">
+              <text class="component-name">{{item.name}}</text>
+            </navigator>
+          </list-item>
+        </block>
+      </list>
+    </block>
+  </view>
+</view>

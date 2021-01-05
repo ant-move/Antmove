@@ -1,0 +1,4 @@
+{
+	"usingComponents": { "i-load-more": "../../dist/load-more/index" },
+	"defaultTitle": "LoadMore 页底提示"
+}

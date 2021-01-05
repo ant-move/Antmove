@@ -1,0 +1,50 @@
+@import '../../style/mixins/hairline.less';
+
+.am-collapse-item {
+  border-radius: 4px;
+  background-color: #fff;
+  &-title-container {
+    width: 100%;
+    display: flex;
+    color: #333;
+    font-size: 17px;
+    line-height: 24px;
+    position: relative;
+    text-align: justify;
+    align-items: center;
+    padding: 0 16px 14px 0;
+    justify-content: space-between;
+    transition: all 0.3s ease-in-out;
+    .hairline('bottom', #fff);
+  }
+
+  &--disabled .am-collapse-title {
+    opacity: 0.5;
+  }
+
+  &-title {
+    background-color: #fff;
+    padding: 14px 16px 0 16px;
+    border-top: 1px solid #eee;
+    &.title--active .am-collapse-item-title-container {
+      .hairline('bottom');
+    }
+  }
+
+  &-title-text-wrapper {
+    padding-right: 16px;
+  }
+  &-content-wrapper {
+    overflow-y: hidden;
+    box-sizing: border-box;
+    will-change: max-height;
+    transition: max-height 0.3s ease-in-out;
+  }
+  &-title-arrow {
+    transform: rotate(0deg);
+    transition: all 0.2s ease-out;
+  }
+  .arrow--down {
+    transform: rotate(180deg);
+  }
+}

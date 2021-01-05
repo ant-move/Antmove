@@ -1,0 +1,15 @@
+<view class="add-button-all">
+  <button class="add-button" hover-class="none" onTap="onClickMe">
+      <text class="add-icon">+</text>
+      <text>{{text}}</text>
+      <text style="margin: 5rpx;">{{message}}</text>
+  </button>
+  <button bindtap='onWXClick'>微信组件通信</button>
+  <slot name="header"></slot>
+  <slot>
+    <view>default slot & default value</view>
+  </slot>
+  <slot name="footer"></slot>
+  <text>{{age}}</text>
+  <text>{{sum}}</text>
+</view>

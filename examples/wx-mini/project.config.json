@@ -1,0 +1,121 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.6.2",
+	"appid": "wx84b6a2e6e57c3dd6",
+	"projectname": "wechat-mini",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 11,
+			"list": [
+				{
+					"id": -1,
+					"name": "component",
+					"pathName": "pages/component/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "components",
+					"pathName": "pages/components/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "components",
+					"pathName": "pages/logs/logs",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "api",
+					"pathName": "pages/index/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "api",
+					"pathName": "pages/equipment/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "api",
+					"pathName": "pages/equipment/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "myapi",
+					"pathName": "pages/equipment/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "component",
+					"pathName": "pages/openinterface/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "manage",
+					"pathName": "pages/manage/manage",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "index-page",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "index",
+					"pathName": "pages/index/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "login-page",
+					"pathName": "pages/login/login",
+					"scene": null
+				}
+			]
+		}
+	}
+}

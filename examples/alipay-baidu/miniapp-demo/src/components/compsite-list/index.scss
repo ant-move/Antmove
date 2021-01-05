@@ -1,0 +1,38 @@
+@import "../../styles/abstracts/mixins";
+
+@b(compsite-list) {
+  @e(text--en) {
+    //width: 100%;
+    flex-flow: 1;
+    margin-left: 10rpx;
+    color: #ccc;
+    font-size: 34rpx;
+  }
+
+  @m(ellipsis) {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  @e(sub-list) {
+    background-color: rgba(245, 245, 245, 0.71);
+  }
+
+  .am-list-body::before {
+    display: none;
+  }
+
+  .am-list-header {
+    background: #fff;
+  }
+
+  .am-list-line-bottom::after {
+    height: 0;
+  }
+
+  @e(text) {
+    display: flex;
+    width: 100%;
+  }
+}

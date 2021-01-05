@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "my-view": "./test/view/view",
+    "my-scroll-view": "./test/scroll-view/scroll-view",
+    "my-swiper": "./test/swiper/swiper",
+    "my-movable-view": "./test/movable-view/movable-view",
+    "my-cover-view": "./test/cover-view/cover-view",
+    "my-navigator": "./test/navigator/navigator",
+    "my-image": "./test/image/image",
+    "my-web-view": "./test/web-view/web-view"
+  }
+}

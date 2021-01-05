@@ -1,0 +1,20 @@
+{
+  "usingComponents": {
+    "icon-content": "./testTwo/icon/icon",
+    "text-content":"./testTwo/text/text",
+    "richtext-content":"./testTwo/richtext/richtext",
+    "progress-content":"./testTwo/progress/progress",
+    "button-content":"./testTwo/button/button",
+    "checkbox-content":"./testTwo/checkbox/checkbox",
+    "form-content":"./testTwo/form/form",
+    "input-content":"./testTwo/input/input",
+    "picker-content":"./testTwo/picker/picker",
+    "picker-view-content":"./testTwo/pickview/pickview",
+    "radio-content":"./testTwo/radio/radio",
+    "slider-content":"./testTwo/slider/slider",
+    "switch-content":"./testTwo/switch/switch",
+    "textarea-content":"./testTwo/textarea/textarea",
+    "map-content":"./testTwo/map/map",
+    "canvas-content":"./testTwo/canvas/canvas"
+  }
+}

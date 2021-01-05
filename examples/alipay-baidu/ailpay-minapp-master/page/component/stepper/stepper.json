@@ -1,0 +1,8 @@
+{
+  "defaultTitle": "Stepper",
+  "usingComponents":{
+    "stepper": "mini-antui/es/stepper/index",
+    "list": "mini-antui/es/list/index",
+    "list-item": "mini-antui/es/list/list-item/index"
+  }
+}

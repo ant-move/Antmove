@@ -1,0 +1,21 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'customMessage'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-body-wrapper'>
+      <text class='page-body-title'>
+        点击气泡icon打开客服消息界面
+      </text>
+      <view class='page-body-line'>
+        <contact-button size='{{40}}' session-from='weapp'>
+        </contact-button>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

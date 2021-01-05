@@ -1,0 +1,3 @@
+<view>
+    <!-- <web-view src="https://mp.weixin.qq.com/" bindmessage="bindmessage" bindload="bindload" binderror="binderror"></web-view> -->
+</view> 

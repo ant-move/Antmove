@@ -1,0 +1,5 @@
+.canvas-element {
+  width: 300px;
+  align-self: stretch;
+  height: 400px;
+}

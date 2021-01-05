@@ -1,0 +1,20 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'modal'}}">
+  </template>
+  <view class='page-body'>
+    <view class='btn-area'>
+      <button type='default' class=' default-style' onTap='modalTap'>
+        有标题的modal
+      </button>
+      <button type='default' class=' default-style' onTap='noTitlemodalTap'>
+        无标题的modal
+      </button>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

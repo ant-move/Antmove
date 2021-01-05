@@ -1,0 +1,61 @@
+.am-filter {
+  &-show {
+    height: 100vh;
+    display: block;
+    position: relative;
+  }
+
+  &-hide {
+    display: none;
+  }
+
+  &-mask, &-document {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  &-mask {
+    background: rgba(0, 0, 0, 0.65);
+  }
+
+  &-content {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  &-list {
+    flex: 1;
+    padding: 10px 5px 23px;
+    overflow-x: hidden;
+    min-height: 200px;
+    overflow-y: scroll;
+    max-height: 515px;
+    box-sizing: border-box;
+  }
+
+  &-btn {
+    width: 100%;
+    display: flex;
+  }
+
+  &-default, &-primary {
+    flex: 1;
+    height: 48px;
+    font-size: 18px;
+    box-sizing: border-box;
+    width: 50%;
+    border: 0;
+    border-radius: 0;
+  }
+
+  &-default {
+    border-top: 1px solid #eee;
+    border-right: none;
+  }
+}

@@ -1,0 +1,14 @@
+<view class="index_page">
+    <button size="default" type="primary" onTap="setNavigationBar">setNavigationBar</button>
+    <button size="default" type="primary" onTap="alert">alert</button>
+    <button size="default" type="primary" onTap="confirm">confirm</button>
+    <button size="default" type="primary" onTap="showActionSheet">showActionSheet</button>
+    <button size="default" type="primary" onTap="showLoading">showLoading (3000ms后hideLoading)</button>
+    <button size="default" type="primary" onTap="animation">animation</button>
+    <button size="default" type="primary" onTap="createMapContext">createMapContext</button>
+    <button size="default" type="primary" onTap="file">file</button>
+    <button size="default" type="primary" onTap="life">life</button>
+    <button size="default" type="primary" onTap="form">form</button>
+    <button size="default" type="primary" onTap="chooseAddress">chooseAddress</button>
+    <add-button text="{{addtext}}" onClickMe="onClickMe"></add-button>
+</view>

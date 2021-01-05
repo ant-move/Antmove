@@ -1,0 +1,3 @@
+<view class="am-collapse {{className}} am-collapse-container-{{id}}">
+  <slot></slot>
+</view>

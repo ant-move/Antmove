@@ -1,0 +1,31 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'createSelectorQuery'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <movable-area>
+        <movable-view class='target' x='{{x}}' y='{{y}}' direction='all' onChange='getNodeInfo'>
+          Drag
+        </movable-view>
+      </movable-area>
+    </view>
+    <view class='page-section'>
+      <view class='metric'>
+        <view a:for='{{ metrics }}' a:key='{{item.key}}' ref-numbers='{{ metrics }}'>
+          <text class='b'>
+            {{ item.key }}
+          </text>
+          <text class='span'>
+            {{ item.val }}
+          </text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

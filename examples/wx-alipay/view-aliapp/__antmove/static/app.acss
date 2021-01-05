@@ -1,0 +1,269 @@
+.page-container-classname {
+    cursor: default;
+    -webkit-user-select: none;
+    user-select: none;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+view {
+    display: block;
+}
+
+scroll-view {
+    display: block;
+    width: 100%;
+}
+
+swiper {
+    display: block;
+    height: 150px;
+}
+
+swiper-item {
+    display: block;
+    overflow: hidden;
+    will-change: transform;
+}
+
+movable-area {
+    display: block;
+    position: relative;
+    width: 10px;
+    height: 10px;
+}
+
+movable-view {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+}
+
+cover-view {
+    display: block;
+    line-height: 1.2;
+    overflow: hidden;
+    white-space: nowrap;
+    pointer-events: auto;
+    background-color: rgba(255,255,255,0);
+}
+
+icon {
+    display: inline-block;
+    font-size: 0;
+}
+
+progress {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+button {
+    position: relative;
+display: block;
+margin-left: auto;
+margin-right: auto;
+padding-left: 14px;
+padding-right: 14px;
+box-sizing: border-box;
+font-size: 18px;
+text-align: center;
+text-decoration: none;
+line-height: 2.55555556;
+border-radius: 5px;
+-webkit-tap-highlight-color: transparent;
+overflow: hidden;
+color: #000;
+background-color: #f8f8f8;
+}
+button[type=primary] {
+    color: #FFFFFF;
+    background-color: #1AAD19;
+}
+
+button[loading][type=primary] {
+    color: rgba(255, 255, 255, 0.6);
+    background-color: #179B16;
+}
+
+button[disabled][type=primary] {
+    background-color: #9ED99D;
+}
+
+button[disabled] {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+button[type=default] {
+    color: #000000;
+    background-color: #F8F8F8;
+}
+
+button[disabled][type=default] {
+    color: rgba(0, 0, 0, 0.3);
+    background-color: #F7F7F7;
+}
+
+button[type=warn] {
+    color: #FFFFFF;
+    background-color: #E64340;
+}
+
+button[disabled][type=warn] {
+    background-color: #EC8B89;
+}
+
+button[plain] {
+    color: #353535;
+    border: 1px solid #353535;
+    background-color: transparent;
+}
+
+button[type=primary][plain] {
+    color: #1aad19;
+    border: 1px solid #1aad19;
+    background-color: transparent;
+}
+
+button[plain][disabled] {
+    color: rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+button[type=default][plain] {
+    color: #353535;
+    border: 1px solid #353535;
+    background-color: transparent;
+}
+
+button[size=mini] {
+    display: inline-block;
+    line-height: 2.3;
+    font-size: 13px;
+    padding: 0 1.34em;
+}
+
+checkbox {
+    -webkit-tap-highlight-color: transparent;
+    display: inline-block;
+}
+
+checkbox-group {
+    display: block;
+}
+
+input {
+    display: block;
+    text-overflow: clip;
+    overflow: hidden;
+    white-space: nowrap;
+    background-color: rgba(255,255,255,0)
+}
+
+picker {
+    display: block;
+}
+
+
+
+picker-view-column {
+    -webkit-flex: 1;
+    flex: 1;
+    position: relative;
+    z-index: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+radio {
+    -webkit-tap-highlight-color: transparent;
+    display: inline-block;
+}
+
+radio-group {
+    display: block;
+}
+
+slider {
+    margin: 10px 18px;
+    padding: 0;
+    display: block;
+}
+
+switch {
+    -webkit-tap-highlight-color: transparent;
+    display: inline-block;
+}
+
+textarea {
+    width: 300px;
+    height: 150px;
+    display: block;
+    position: relative;
+}
+
+navigator {
+    height: auto;
+    width: auto;
+    display: block;
+}
+
+image {
+    width: 320px;
+    height: 240px;
+    display: inline-block;
+    overflow: hidden;
+    background-origin: content-box;
+}
+
+
+video {
+    width: 300px;
+    height: 225px;
+    line-height: 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+    background: #000;
+    margin: 0 auto;
+}
+
+camera {
+    position: relative;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+}
+
+map {
+    position: relative;
+    width: 300px;
+    height: 150px;
+    display: block;
+}
+
+canvas {
+    width: 300px;
+    height: 150px;
+    display: block;
+    position: relative;
+}
+
+ad {
+    display: block !important;
+    width: 100%;
+    overflow: hidden;
+    pointer-events: auto;
+    opacity: 1 !important;
+}
+
+
+web-view {
+    width: 100%;
+    height: 100%;
+}

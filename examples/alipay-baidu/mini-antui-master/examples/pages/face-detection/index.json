@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "人脸检测",
+  "usingComponents": {
+    "face-detection": "../../es/face-detection/index"
+  }
+}

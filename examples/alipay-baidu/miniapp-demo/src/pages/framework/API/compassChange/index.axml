@@ -1,0 +1,16 @@
+<view class="page">
+  <view class="page-description">罗盘</view>
+  <view class="page-section">
+    <view class="page-section-demo">
+      <view>值：{{currentValue}}</view>
+    </view>
+    <view class="page-section-title">onCompassChange</view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="onCompassChange">onCompassChange</button>
+    </view>
+    <view class="page-section-title">offCompassChange</view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="offCompassChange">offCompassChange</button>
+    </view>
+  </view>
+</view>

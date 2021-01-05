@@ -1,0 +1,5 @@
+<view>{{port}}</view>
+<com test-class='ex-test' min='{{port}}' type='1' bind:onPort="onport" onMessage="onport">
+  <view slot='before'>每天起床第一问</view>
+  <view slot='after'>今天要吃啥</view>
+</com>

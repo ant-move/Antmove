@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "Notice",
+  "usingComponents":{
+    "notice": "mini-antui/es/notice/index"
+  }
+}
