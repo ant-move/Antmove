@@ -1,0 +1,7 @@
+{
+  "defaultTitle": "信息状态",
+  "usingComponents": {
+    "list": "../../es/list/index",
+    "list-item": "../../es/list/list-item/index"
+  }
+}

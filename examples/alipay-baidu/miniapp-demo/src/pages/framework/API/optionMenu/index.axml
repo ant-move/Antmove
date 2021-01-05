@@ -1,0 +1,9 @@
+<view class="page">
+  <view class="page-description">设置optionMenu</view>
+  <view class="page-section">
+    <view class="page-section-title">optionMenu</view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="setOptionMenu">设置</button>
+    </view>
+  </view>
+</view>

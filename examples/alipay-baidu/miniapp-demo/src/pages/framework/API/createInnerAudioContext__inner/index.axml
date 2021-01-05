@@ -1,0 +1,30 @@
+<view class="page">
+    <view class="page-description">前景音频播放</view>
+    <view class="page-section">
+        <view class="page-section-title">
+            <view class="page-section-name">createInnerAudioContext</view>
+            请先确认是否有权限使用该功能
+        </view>
+        <view class="page-section-demo">
+            <view class="page-current-title">{{title}}</view>
+            <button type="primary" onTap="play">播放</button>
+            <button type="primary" onTap="pause">暂停</button>
+            <button type="primary" onTap="seek">seek{{seek}}s播放</button>
+            <button type="primary" onTap="stop">停止播放</button>
+            <button type="primary" onTap="destroy">destroy</button>
+            <button type="primary" onTap="getAllProps">显示属性</button>
+
+            <picker onChange="offCallback" value="{{callbackIndex}}" range="{{callbackArr}}">
+                <view class="row">
+                    <view class="row-title">offCallback</view>
+                    <view class="row-extra">当前选择：{{callback}}</view>
+                </view>
+            </picker>
+
+            <button type="primary" onTap="play2">播放audio2</button>
+            <button type="primary" onTap="pause2">暂停audio2</button>
+            <button type="primary" onTap="getAllProps2">显示属性2</button>
+
+        </view>
+    </view>
+</view>

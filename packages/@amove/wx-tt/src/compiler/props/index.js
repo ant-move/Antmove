@@ -1,3 +1,3 @@
 module.exports = {
-    ...require('./eventsMap')
-};
+  ...require('./eventsMap'),
+}

@@ -1,0 +1,17 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'action-sheet'}}">
+  </template>
+  <view class='page-body'>
+    <view class='btn-area'>
+      <button type='default' class=' default-style' onTap='actionSheetTap'>
+        弹出action sheet
+      </button>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

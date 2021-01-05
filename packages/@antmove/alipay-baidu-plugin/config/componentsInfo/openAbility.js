@@ -1,4 +1,5 @@
-const { createSupportProp } = require('./utils.js');
+const { createSupportProp } = require('./utils.js')
+
 /**
  * type
  * 0 - missing - 不支持该createSupportProp属性
@@ -17,42 +18,42 @@ const { createSupportProp } = require('./utils.js');
  * desc - 组件或属性作用描述
  */
 module.exports = {
-    'web-view': {
-        name: 'H5页面承载组件',
-        url: {
-            target: 'https://smartprogram.baidu.com/docs/develop/component/open/#web-view/',
-            original: 'https://docs.alipay.com/mini/component/web-view'
-        },
+  'web-view': {
+    name: 'H5页面承载组件',
+    url: {
+      target: 'https://smartprogram.baidu.com/docs/develop/component/open/#web-view/',
+      original: 'https://docs.alipay.com/mini/component/web-view',
+    },
       
-        desc: '组件用于承载 H5 网页，自动铺满整个小程序页面',
-        props: {
-            src: {
-                type: 7,
-                status: 1,
-                desc: "主语及时修改h5页面的相关jssdk",
-            },
-            onMessage: createSupportProp("网页向小程序 postMessage 时，会在特定时机（小程序后退、组件销毁、分享）触发并收到消息",1),
-        }
+    desc: '组件用于承载 H5 网页，自动铺满整个小程序页面',
+    props: {
+      src: {
+        type: 7,
+        status: 1,
+        desc: '主语及时修改h5页面的相关jssdk',
+      },
+      onMessage: createSupportProp('网页向小程序 postMessage 时，会在特定时机（小程序后退、组件销毁、分享）触发并收到消息', 1),
     },
-    lifestyle: {
-        name: '关注生活号',
-        url: {
-            target: '',
-            original: 'https://docs.alipay.com/mini/component/lifestyle'
-        },
-        desc: '关注生活号',
-        type: 0,
-        status: 2
+  },
+  lifestyle: {
+    name: '关注生活号',
+    url: {
+      target: '',
+      original: 'https://docs.alipay.com/mini/component/lifestyle',
     },
-    'contact-button': {
-        name: '智能客服',
-        url: {
-            target: '',
-            original: 'https://docs.alipay.com/mini/component/contact-button'
-        },
-        desc: '智能客服',
-        type: 0,
-        status: 2
-    }
+    desc: '关注生活号',
+    type: 0,
+    status: 2,
+  },
+  'contact-button': {
+    name: '智能客服',
+    url: {
+      target: '',
+      original: 'https://docs.alipay.com/mini/component/contact-button',
+    },
+    desc: '智能客服',
+    type: 0,
+    status: 2,
+  },
 
-};
+}

@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "Page-result",
+  "usingComponents":{
+    "page-result": "mini-antui/es/page-result/index"
+  }
+}

@@ -1,0 +1,5 @@
+<import-sjs name="classnames" from="./index.sjs"/>
+<view
+  class="am-flexbox {{className}} {{classnames(direction, wrap, justify, align, alignContent)}}">
+  <slot />
+</view>

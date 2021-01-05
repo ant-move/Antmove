@@ -1,0 +1,43 @@
+<view class='page-container-classname'>
+                <view class='tag-example' ref='saveChildRef0'>
+  <view class='one-tag'>
+    基本用法
+  </view>
+  <i-tag ref='saveChildRef1'>
+    标签一
+  </i-tag>
+  <view class='one-tag'>
+    设置边框配置
+  </view>
+  <i-tag class='i-tags' name='标签一' type='border' color='red' ref='saveChildRef2'>
+    标签一
+  </i-tag>
+  <i-tag class='i-tags' name='标签一' color='green' type='border' ref='saveChildRef3'>
+    标签一
+  </i-tag>
+  <view class='one-tag'>
+    各种颜色配置
+  </view>
+  <i-tag class='i-tags' name='单个标签' ref='saveChildRef4'>
+    标签一
+  </i-tag>
+  <i-tag class='i-tags' name='单个标签' color='red' ref='saveChildRef5'>
+    标签一
+  </i-tag>
+  <i-tag class='i-tags' name='标签一' color='green' ref='saveChildRef6'>
+    标签一
+  </i-tag>
+  <i-tag class='i-tags' name='标签一' color='blue' ref='saveChildRef7'>
+    标签一
+  </i-tag>
+  <i-tag class='i-tags' name='标签一' color='yellow' ref='saveChildRef8'>
+    标签一
+  </i-tag>
+  <view class='one-tag'>
+    多个标签
+  </view>
+  <i-tag a:for='{{tags}}' a:key='*this' checkable='{{true}}' name='{{index}}' color='{{item.color}}' checked='{{item.checked}}' type='border' style='margin-right:5px;' ref-numbers='{{tags}}' onChange='onChange' ref='saveChildRef9'>
+    {{item.name}}
+  </i-tag>
+</view>
+            </view>

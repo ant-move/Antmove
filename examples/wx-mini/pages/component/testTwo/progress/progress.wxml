@@ -1,0 +1,4 @@
+<progress percent="20" show-info="false" aria-label="aria-label" border-radius="5px" font-size="26px" color="red" stroke-width="10px"/>
+<progress percent="40" stroke-width="12" activeColor="black"/>
+<progress percent="60" color="pink" />
+<progress percent="100" active="true" bindactiveend="tapactiveend" backgroundColor="yellow"/>

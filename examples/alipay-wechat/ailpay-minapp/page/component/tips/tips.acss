@@ -1,0 +1,36 @@
+.rectangle {
+  position: fixed;
+  bottom: 100px;
+}
+
+.dialog {
+  position: fixed;
+  bottom: 10px;
+}
+
+.content {
+  font-size: 14px;
+  color: #fff;
+}
+
+.opt-button {
+  width: 51px;
+  height: 27px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 12px;
+  border: #68BAF7 solid 1rpx;
+}
+
+.add-home {
+  width: 72px;
+  height: 27px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #56ADEB;
+  color: #fff;
+  font-size: 14px;
+}

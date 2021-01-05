@@ -1,0 +1,22 @@
+<view>
+  <view>{{year}}年{{month}}月{{day}}日</view>
+  <picker-view
+    indicator-style="height: 50px;"
+    style="width: 100%; height: 300px;"
+    value="{{value}}"
+    bindchange="bindChange"
+    aria-label="aria-label"
+    bindpickstart="onpickstart"
+    bindpickend="onpickend"
+  >
+    <picker-view-column>
+      <view wx:for="{{years}}" style="line-height: 50px">{{item}}年</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{months}}" style="line-height: 50px">{{item}}月</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{days}}" style="line-height: 50px">{{item}}日</view>
+    </picker-view-column>
+  </picker-view>
+</view>

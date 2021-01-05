@@ -1,0 +1,10 @@
+@import "../../../common/lib/weui.acss";
+.canvas {
+    width: 305px;
+    height: 305px;
+    background-color: #fff;
+}
+
+.page-section-title {
+    margin-top: 30rpx;
+}

@@ -1,0 +1,8 @@
+<<<<<<< HEAD:examples/out/example/badge/badge.json
+{ "usingComponents": {} }
+=======
+{
+  "component": true,
+  "usingComponents": {}
+}
+>>>>>>> wx-tt/dev:examples/wx-tt-test/components/demo/demo.json

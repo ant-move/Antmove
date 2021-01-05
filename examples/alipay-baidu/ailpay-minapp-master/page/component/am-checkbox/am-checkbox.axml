@@ -1,0 +1,48 @@
+<list>
+  <view slot="header">
+    列表+复选框
+  </view>
+  <block a:for="{{items}}">
+    <list-item
+      thumb=""
+      arrow="{{false}}"
+      index="{{index}}"
+      key="items-{{index}}"
+      last="{{index === (items.length - 1)}}"
+    >
+      <view slot="prefix" style="display: flex; align-items: center;">
+        <am-checkbox id="{{item.id}}" data-name="{{item.value}}" disabled="{{item.disabled}}" checked="{{item.checked}}" onChange="onChange" />
+      </view>
+      <label for="{{item.id}}">{{item.title}}</label>
+    </list-item>
+  </block>
+</list>
+<view style="padding: 16px;">
+  <view style="color: #888; font-size: 14px;">
+    协议
+  </view>
+  <view style="margin-top: 10px;">
+    <label style="display: flex; line-height: 24px;">
+      <am-checkbox />
+      <text style="text-indent: 8px; color: #888">同意 《信用支付服务合同》</text>
+    </label>
+  </view>
+</view>
+<view style="padding: 16px; background-color: #fff;">
+  <form onSubmit="onSubmit" onReset="onReset">
+    <view>
+      <view style="color: #666; font-size: 14px; margin-bottom: 5px;">选择你用过的框架：</view>
+      <view>
+        <checkbox-group name="libs">
+          <label a:for="{{items2}}" style="display: flex; align-items: center; height: 30px;">
+            <am-checkbox value="{{item.name}}" checked="{{item.checked}}" disabled="{{item.disabled}}" />
+            <text style="color: #888; font-size: 14px; margin-left: 8px;">{{item.value}}</text>
+          </label>
+        </checkbox-group>
+      </view>
+      <view style="margin-top: 10px;">
+        <button type="primary" size="mini" formType="submit">submit</button>
+      </view>
+    </view>
+  </form>
+</view>

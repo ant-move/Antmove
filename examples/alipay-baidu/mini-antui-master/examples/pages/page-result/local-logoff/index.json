@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "异常反馈",
+  "usingComponents":{
+    "page-result": "../../../es/page-result/index"
+  }
+}

@@ -1,7 +1,10 @@
 node_modules/
+.git
+.vscode
 dist/
 .DS_Store
 *.log
 bus/
+build
 packages
 examples

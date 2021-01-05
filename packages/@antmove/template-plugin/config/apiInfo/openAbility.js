@@ -3,4 +3,4 @@
  * 开放能力
  */
 module.exports = {
-};
+}

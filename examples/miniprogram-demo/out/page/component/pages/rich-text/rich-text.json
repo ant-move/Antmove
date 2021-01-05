@@ -1,0 +1,6 @@
+{
+	"defaultTitle": "rich-text",
+	"usingComponents": {
+		"custom-rich-text": "/__antmove/component/custom-rich-text/custom-rich-text"
+	}
+}

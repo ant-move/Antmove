@@ -3,4 +3,4 @@
  * 画布
  */
 module.exports = {
-};
+}

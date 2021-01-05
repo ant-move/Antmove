@@ -1,0 +1,100 @@
+@import '../style/themes/default.less';
+@import '../style/mixins/hairline.less';
+
+.am-amount {
+  box-sizing: border-box;
+  height: 173px;
+  width: 100%;
+  padding: 16px;
+  background: #fff;
+
+  &-title {
+    height: 24px;
+    line-height: 24px;
+    color: @color-text-title;
+    font-size: @font-size-title-sm;
+  }
+
+  &-synthetic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+  }
+
+  &-input {
+    box-sizing: content-box;
+    margin-top: 16px;
+    padding-bottom: 16px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 48px;
+    position: relative;
+    line-height: 48px;
+    .hairline('bottom');
+  }
+
+  &-symbol {
+    width: 18px;
+    /* stylelint-disable font-family-no-missing-generic-family-keyword */
+    font-family: PingFang SC;
+    font-size: 30px;
+    color: @color-text-title;
+  }
+
+  &-placeholder {
+    margin-left: 6px;
+    color: @color-text-dark;
+    font-size: 24px;
+  }
+
+  &-value {
+    padding: 0 0 0 24px;
+    box-sizing: border-box;
+    z-index: 2;
+    height: 48px;
+    line-height: 48px;
+    vertical-align: middle;
+    background-color: transparent;
+    font-size: @font-size-amount;
+    font-weight: 500;
+  }
+
+  &-clear {
+    visibility: hidden;
+    width: 28px;
+    height: 28px;
+
+    &-icon {
+      display: flex;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-show {
+      visibility: visible;
+    }
+  }
+
+  &-footer {
+    padding: 16px 0;
+    display: flex;
+  }
+
+  &-extra {
+    flex: 1;
+    height: 20px;
+    line-height: 20px;
+    color: @color-text-caption;
+    font-size: @font-size-caption;
+  }
+
+  &-btn {
+    width: 120px;
+    text-align: right;
+    color: @brand-primary;
+    font-size: @font-size-caption;
+  }
+}

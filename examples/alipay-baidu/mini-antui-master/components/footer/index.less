@@ -1,0 +1,33 @@
+@import '../style/themes/default.less';
+
+.am-footer {
+  &-links {
+    display: flex;
+    justify-content: center;
+  }
+  &-link {
+    height: 17px;
+    line-height: 17px;
+    color: @color-link;
+    font-size: 12px;
+    &::after {
+      content: '｜';
+      padding: 0 5px;
+      height: 17px;
+      color: @color-text-dark;
+    }
+    &:last-child {
+      &::after {
+        display: none;
+      }
+    }
+  }
+  &-copyright {
+    margin-top: 3px;
+    height: 17px;
+    line-height: 17px;
+    color: @color-text-dark;
+    font-size: 14px;
+    text-align: center;
+  }
+}

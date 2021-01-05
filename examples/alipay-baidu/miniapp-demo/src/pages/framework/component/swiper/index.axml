@@ -1,0 +1,48 @@
+<view class="page">
+  <view class="page-description">滑动视图</view>
+  <view class="page-section">
+    <view class="page-section-demo">
+      <swiper 
+        style="height:150px"
+        class="demo-swiper"
+        previousMargin="10px"
+        nextMargin="10px"
+        indicator-dots="{{indicatorDots}}"
+        indicator-color="skyblue"
+        indicator-active-color="red"
+        current="{{current}}"
+        previous-margin="20px"
+        next-margin="20px"
+        autoplay="{{autoplay}}"
+        vertical="{{vertical}}"
+        interval="{{interval}}"
+        circular="{{circular}}"
+        onChange="change"
+        active-class="activeClass"
+        changing-class="changeClass"
+        acceleration="true"
+        onTransition="transition"
+        onAnimationEnd="end"
+      >
+        <block a:for="{{background}}">
+          <swiper-item key="swiper-item-{{index}}">
+            <view class="swiper-item bc_{{item}}"></view>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="margin-t">
+        <slider onChange="intervalChange" value="{{interval}}" show-value min="500" max="2000"/>
+        <view>interval</view>
+      </view>
+    </view>
+    <view class="page-section-btns">
+      <view><button size="mini" plain type="primary" onTap="changeIndicatorDots">indicator-dots</button></view>
+      <view><button size="mini" plain type="primary" onTap="changeAutoplay">autoplay</button></view>
+      <view><button size="mini" plain type="primary" onTap="changeVertical">vertical</button></view>
+    </view>
+    <view class="page-section-btns">
+      <view><button size="mini" plain type="primary" onTap="changeCircular">circular</button></view>
+      <view><button size="mini" plain type="primary" onTap="disableSwitch">切换到第三张</button></view>
+    </view>
+  </view>
+</view>

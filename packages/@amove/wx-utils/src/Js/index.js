@@ -1,2 +1,2 @@
-require("./babel/cjs-to-es5");
-require("./babel/behavourHandle");
+require('./babel/cjs-to-es5')
+require('./babel/behavourHandle')

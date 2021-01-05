@@ -3,4 +3,4 @@
  * 数据缓存
  */
 module.exports = {
-};
+}

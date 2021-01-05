@@ -1,5 +1,6 @@
-const template = require("@babel/template");
-const defineHelper = template.program({ placeholderPattern: false });
+const template = require('@babel/template')
+
+const defineHelper = template.program({ placeholderPattern: false })
 
 /**
  * require语法转成import
@@ -19,15 +20,16 @@ const defineHelper = template.program({ placeholderPattern: false });
  * const foo4 = antmove_2_module.baz;
  */
 function requireToImport(body, deps) {
-  let code = []
+  const code = []
 
-  for (let moduleName in deps) {
-    code.push(`import ${deps[moduleName]} from '${moduleName}'`)
+  for (const moduleName in deps) {
+    if (deps.hasOwnProperty(moduleName)) {
+      code.push(`import ${deps[moduleName]} from '${moduleName}'`)
+    }
   }
 
-  const importAst = defineHelper(code.join('\n'))();
-
-  body.unshift.apply(body, importAst.body);
+  const importAst = defineHelper(code.join('\n'))()
+  body.unshift(...importAst.body)
 }
 
 /**
@@ -47,11 +49,10 @@ function requireToImport(body, deps) {
  * export default _moduleExports
  */
 function moduleExportsToExportDefault(body) {
-  const defineVar = defineHelper(`var antmove_export = {}`)();
-  const exportDefault = defineHelper("export default antmove_export;")();
-
-  body.unshift.apply(body, defineVar.body);
-  body.push.apply(body, exportDefault.body);
+  const defineVar = defineHelper('var antmove_export = {}')()
+  const exportDefault = defineHelper('export default antmove_export;')()
+  body.unshift(...defineVar.body)
+  body.push(...exportDefault.body)
 }
 
 function cjsToes({ types: t }) {
@@ -62,12 +63,12 @@ function cjsToes({ types: t }) {
     },
     visitor: {
       CallExpression(path) {
-        let caller = path.get("callee");
+        const caller = path.get('callee')
 
         if (
-          caller.isIdentifier() &&
-          caller.node.name === "require" &&
-          t.isStringLiteral(path.node.arguments[0])
+          caller.isIdentifier()
+          && caller.node.name === 'require'
+          && t.isStringLiteral(path.node.arguments[0])
         ) {
           const moduleName = path.node.arguments[0].value
           let moduleVariable = this.deps[moduleName]
@@ -83,10 +84,10 @@ function cjsToes({ types: t }) {
       MemberExpression(path) {
         // module.exports
         if (
-          path.get("object.name").node === "module" &&
-          path.get("property.name").node === "exports"
+          path.get('object.name').node === 'module'
+          && path.get('property.name').node === 'exports'
         ) {
-          path.replaceWith(t.Identifier("antmove_export"));
+          path.replaceWith(t.Identifier('antmove_export'))
         }
       },
     },
@@ -94,9 +95,9 @@ function cjsToes({ types: t }) {
       const body = state.ast.program.body
 
       requireToImport(body, this.deps)
-      moduleExportsToExportDefault(body);
+      moduleExportsToExportDefault(body)
     },
-  };
+  }
 }
 
 module.exports = cjsToes

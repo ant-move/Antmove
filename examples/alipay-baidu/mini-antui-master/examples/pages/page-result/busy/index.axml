@@ -1,0 +1,6 @@
+<view>
+  <page-result
+    type="busy"
+    title="系统正忙，稍后再试"
+    brief="耽误您的时候，我们深感歉意" />
+</view>

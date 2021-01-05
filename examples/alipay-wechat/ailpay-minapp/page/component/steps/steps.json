@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "Steps",
+  "usingComponents":{
+    "steps": "mini-antui/es/steps/index"
+  }
+}

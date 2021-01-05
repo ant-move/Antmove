@@ -1,0 +1,6 @@
+{
+	"defaultTitle": "文件",
+	"usingComponents": {
+		"custom-modal": "/__antmove/component/custom-modal/custom-modal"
+	}
+}

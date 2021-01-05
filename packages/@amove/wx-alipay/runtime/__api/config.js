@@ -2,6 +2,6 @@
  * default runtime config
  */
 module.exports = {
-    env: "development",
-    global: null
-};
+  env: 'development',
+  global: null,
+}

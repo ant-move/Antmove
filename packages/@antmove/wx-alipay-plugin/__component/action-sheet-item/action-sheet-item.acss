@@ -1,9 +1,9 @@
-.sheet_item {
+.am_sheet_item {
     border-top: 1px solid #eee;
     line-height: 42px;
     text-align: center;
     overflow: hidden;
 }
-.sheet_item view {
+.am_sheet_item view {
     overflow: hidden;
 }

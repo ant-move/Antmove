@@ -1,4 +1,5 @@
-const { createSupportProp } = require('./utils.js');
+const { createSupportProp } = require('./utils.js')
+
 /**
  * type
  * 0 - missing - 不支持该属性
@@ -18,23 +19,23 @@ const { createSupportProp } = require('./utils.js');
  */
 
 module.exports = {
-    'aria-component': {
-        name: '无障碍访问',
-        url: {
-            original: 'https://docs.alipay.com/mini/component/accessibility',
-            target: ''
-        },
-        desc: 'aria 属性是 WAI-ARIA 标准提供无障碍访问动态、可交互 Web 内容的技术规范。从 基础库 1.18.0 版本开始，小程序架的部分基础组件支持 aria 属性，可满足视障人士对于小程序的无障碍访问需求',
-        props: {
-            'role': {
-                type: 0,
-                status: 2,
-                desc: '表示组件的语义角色'
-            },
-            'aria-label': createSupportProp('可以代替组件内的文本内容',0),
-            'aria-labelledby': createSupportProp('一些组件和其他组件是有关联的，需要一起朗读才能表达出完整的含义',0),
-            'aria-checked': createSupportProp('表示 checkbox、switch 等组件是否被选中',0),
-            'aria-expanded': createSupportProp('可折叠的组件 的展开信息',0)
-        }
-    }
-};
+  'aria-component': {
+    name: '无障碍访问',
+    url: {
+      original: 'https://docs.alipay.com/mini/component/accessibility',
+      target: '',
+    },
+    desc: 'aria 属性是 WAI-ARIA 标准提供无障碍访问动态、可交互 Web 内容的技术规范。从 基础库 1.18.0 版本开始，小程序架的部分基础组件支持 aria 属性，可满足视障人士对于小程序的无障碍访问需求',
+    props: {
+      role: {
+        type: 0,
+        status: 2,
+        desc: '表示组件的语义角色',
+      },
+      'aria-label': createSupportProp('可以代替组件内的文本内容', 0),
+      'aria-labelledby': createSupportProp('一些组件和其他组件是有关联的，需要一起朗读才能表达出完整的含义', 0),
+      'aria-checked': createSupportProp('表示 checkbox、switch 等组件是否被选中', 0),
+      'aria-expanded': createSupportProp('可折叠的组件 的展开信息', 0),
+    },
+  },
+}

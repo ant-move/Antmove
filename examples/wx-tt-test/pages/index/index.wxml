@@ -1,0 +1,7 @@
+<!--index.wxml-->
+<view class="container">
+<demo></demo>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+</view>

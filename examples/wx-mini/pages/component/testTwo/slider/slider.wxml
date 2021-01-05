@@ -1,0 +1,6 @@
+<view class="section section_gap">
+  <text class="section__title">显示当前value</text>
+  <view class="body-view">
+    <slider bindchange="slider3change" show-value backgroundColor="red" activeColor="green" block-size="15" block-color="yellow" aria-label="aria-label" bindchanging="onchanging"/>
+  </view>
+</view>

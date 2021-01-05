@@ -1,0 +1,1 @@
+<rich-text nodes="{{nodes}}" bindtap="tapnodes" space="ensp"></rich-text>

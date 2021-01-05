@@ -1,0 +1,52 @@
+<view class="page">
+  <view class="page-description">创建地图</view>
+  <view class="page-section">
+    <view class="page-section-title">createMapContext</view>
+    <view class="page-section-demo">
+      <map
+        id="map"
+        scale="{{scale}}"
+        longitude="{{longitude}}",
+        latitude="{{latitude}}",
+        markers="{{markers}}"
+        show-location
+        style="width: 100%; height: 200px;"
+        onTap="tap"
+        onRegionChange="regionchange"
+        setting="{{setting}}"
+        onMarkerTap="markertap"
+        onCalloutTap="callouttap"
+      >
+      </map>
+    </view>
+    <scroll-view style="width: 100%;height:600rpx" scroll-y="{{true}}" scroll-x="{{true}}">
+      <view class="page-section-btns">
+        <view><button type="primay" plain onTap="move">移动</button></view>
+        <view><button type="primay" plain onTap="cursor">手势</button></view>
+        <view><button type="primay" plain onTap="showScale">比例尺</button></view>
+      </view>
+      <view class="page-section-btns">
+        <view><button type="primay" plain onTap="showCompass">指南针</button></view>
+        <view><button type="primay" plain onTap="showRoute">步行路线规划</button></view>
+        <view><button type="primay" plain onTap="clearRoute">清除步行路线规划</button></view>
+      </view>
+      <view class="page-section-btns">
+        <view><button type="primay" plain onTap="getCenterLocation">获取中心位置</button></view>
+        <view><button type="primay" plain onTap="update">更新地图接口</button></view>
+        <view><button type="primay" plain onTap="getScale">获取缩放级别</button></view>
+      </view>
+      <view class="page-section-btns">
+        <view><button type="primay" plain onTap="screenToMap">屏幕坐标转经纬度</button></view>
+        <view><button type="primay" plain onTap="mapToScreen">经纬度转屏幕坐标</button></view>
+        <view><button type="primay" plain onTap="getRegion">获取当前视野范围</button></view>
+      </view>
+      <view class="page-section-btns">
+        <view><button type="primay" plain onTap="changeCenter2">updateComponents改变经纬度</button></view>
+      </view>
+      <view class="page-section-btns">
+        <view><button type="primay" plain onTap="translateMarker">平移Markers</button></view>
+        <view><button type="primay" plain onTap="changeCenter1">setData改变经纬度</button></view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

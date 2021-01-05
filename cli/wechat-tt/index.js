@@ -1,20 +1,8 @@
-const transformFramework = require('../../src/index');
-const WxToutiaoPlugin = require('@antmove/wx-tt');
+// const transformFramework = require('../../src/index');
+// const WxToutiaoPlugin = require('@antmove/wx-tt');
 
-const App = transformFramework();
+const transform = require('@antmove/wx-tt')
 
-module.exports = function (options = {}) {
-    const inputDirPath = options.input;
-    const outputDirPath = options.output || options.defaultOutput;
-    const opts = {
-        dist: outputDirPath,
-        entry: inputDirPath,
-        ...options
-    };
-
-    App.use(
-        WxToutiaoPlugin,
-        opts
-    )
-        .start();
-};
+module.exports = function(opts = {}) {
+  transform(opts)
+}

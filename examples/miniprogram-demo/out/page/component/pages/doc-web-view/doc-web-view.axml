@@ -1,0 +1,4 @@
+<view class='page-container-classname'>
+                <web-view src='https://developers.weixin.qq.com/miniprogram/dev/component/' onChildRef='saveChildRef0'>
+</web-view>
+            </view>

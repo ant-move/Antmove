@@ -1,0 +1,10 @@
+<view>
+  <list>
+    <list-item arrow="horizontal" index="filter" key="items-filter1">
+      <navigator url="single/index">单选</navigator>
+    </list-item>
+    <list-item arrow="horizontal" index="filter" key="items-filter2">
+      <navigator url="alternative/index">多选</navigator>
+    </list-item>
+  </list>
+</view>

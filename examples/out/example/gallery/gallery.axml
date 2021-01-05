@@ -1,0 +1,33 @@
+<view class='page-container-classname'>
+                <view class='page' ref='saveChildRef0'>
+  <view class='page__hd'>
+    <view class='page__title'>
+      Gallery
+    </view>
+    <view class='page__desc'>
+      画廊，模拟小程序原生的wx.previewImage。
+    </view>
+  </view>
+  <view class='page__bd'>
+    <view class='weui-btn-area'>
+      <button class='weui-btn default-style' type='default' onTap='openGallery'>
+        Gallery
+      </button>
+    </view>
+    <view class="weui-gallery {{istrue ? 'weui-gallery_show' : ''}}" onTap='closeGallery'>
+      <view class='weui-gallery__info'>
+        1/17
+      </view>
+      <view class='weui-gallery__img__wrp'>
+        <image mode='aspectFit' class='weui-gallery__img' src='../images/pic_160.png'>
+        </image>
+      </view>
+      <view class='weui-gallery__opr'>
+        <navigator href='javascript:' class='weui-gallery__del'>
+          删除
+        </navigator>
+      </view>
+    </view>
+  </view>
+</view>
+            </view>

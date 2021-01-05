@@ -1,0 +1,4 @@
+@import "../../../common/lib/weui.acss";
+.checkbox {
+    margin-right: 20rpx;
+}

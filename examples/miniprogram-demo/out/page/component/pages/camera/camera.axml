@@ -1,0 +1,50 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'camera'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-body-wrapper'>
+      <camera flash='off' onError='error'>
+      </camera>
+      <view class='btn-area first-btn'>
+        <button type='primary' class=' primary-style' onTap='togglePosition'>
+          切换摄像头
+        </button>
+      </view>
+      <view class='btn-area'>
+        <button type='primary' class=' primary-style' onTap='takePhoto'>
+          拍照
+        </button>
+      </view>
+      <view class='btn-area'>
+        <button type='primary' class=' primary-style' onTap='startRecord'>
+          开始录像
+        </button>
+      </view>
+      <view class='btn-area'>
+        <button type='primary' class=' primary-style' onTap='stopRecord'>
+          结束录像
+        </button>
+      </view>
+      <view class='btn-area'>
+        <navigator url='/page/component/pages/camera-scan-code/camera-scan-code'>
+          <button type='primary' class=' primary-style'>
+            扫描一维码
+          </button>
+        </navigator>
+      </view>
+      <view class='preview-tips'>
+        预览
+      </view>
+      <image a:if='{{src}}' mode='widthFix' class='photo' src='{{src}}'>
+      </image>
+      <video a:if='{{videoSrc}}' class='video' src='{{videoSrc}}'>
+      </video>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

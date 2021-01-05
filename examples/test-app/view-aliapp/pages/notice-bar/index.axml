@@ -1,0 +1,26 @@
+<view class='page-container-classname'>
+                <i-panel title='通告栏' ref='saveChildRef1'>
+  <i-notice-bar ref='saveChildRef2'>
+    2018年世界杯,将于6月14日至7月15日举行
+  </i-notice-bar>
+</i-panel><i-panel title='自定义颜色 通告栏' ref='saveChildRef3'>
+  <i-notice-bar backgroundcolor='#99cc66' color='#ffff66' ref='saveChildRef4'>
+    2018年世界杯,将于6月14日至7月15日举行
+  </i-notice-bar>
+</i-panel><i-panel title='icon 通告栏' ref='saveChildRef5'>
+  <i-notice-bar icon='systemprompt' ref='saveChildRef6'>
+    2018年世界杯,将于6月14日至7月15日举行
+  </i-notice-bar>
+</i-panel><i-panel title='关闭 通告栏' ref='saveChildRef7'>
+  <i-notice-bar icon='systemprompt' closable=" " ref='saveChildRef8'>
+    2018年世界杯,将于6月14日至7月15日举行
+  </i-notice-bar>
+</i-panel><i-panel title='滚动 通告栏' ref='saveChildRef9'>
+  <i-notice-bar icon='systemprompt' loop=" " ref='saveChildRef10'>
+    2018年世界杯,将于6月14日至7月15日举行;2018年世界杯,将于6月14日至7月15日举行;
+  </i-notice-bar>
+  <i-notice-bar icon='systemprompt' loop=" " speed='{{200}}' ref='saveChildRef11'>
+    2018年世界杯,将于6月14日至7月15日举行;2018年世界杯,将于6月14日至7月15日举行;
+  </i-notice-bar>
+</i-panel>
+            </view>

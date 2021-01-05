@@ -1,0 +1,3 @@
+types/**/*.ts
+es/**/*.js
+examples/es/**/*.js

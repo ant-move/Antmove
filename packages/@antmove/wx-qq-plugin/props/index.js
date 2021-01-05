@@ -1,8 +1,8 @@
-module.exports = function (key, value) {
-    let newKey = key.replace(/wx:/, 'qq:');
+module.exports = function(key, value) {
+  const newKey = key.replace(/wx:/, 'qq:')
 
-    return {
-        key: newKey,
-        value
-    };
-};
+  return {
+    key: newKey,
+    value,
+  }
+}

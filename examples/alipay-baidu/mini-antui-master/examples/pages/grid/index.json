@@ -1,0 +1,8 @@
+{
+  "defaultTitle": "宫格",
+  "usingComponents":{
+    "list": "../../es/list/index",
+    "list-item": "../../es/list/list-item/index",
+    "grid":"../../es/grid/index"
+  }
+}

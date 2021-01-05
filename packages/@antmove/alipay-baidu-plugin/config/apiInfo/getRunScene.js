@@ -1,4 +1,4 @@
-const { createDescObj } = require('./utils');
+const { createDescObj } = require('./utils')
 
 /**
  * 小程序当前运行版本
@@ -6,13 +6,13 @@ const { createDescObj } = require('./utils');
 
 module.exports = {
 
-    getRunScene: createDescObj(
-        2,
-        '用于获取当前小程序的运行版本',
-        'https://docs.alipay.com/mini/api/runscene',
-        '',
-        {
-            msg: '不支持'
-        }
-    ),
-};
+  getRunScene: createDescObj(
+    2,
+    '用于获取当前小程序的运行版本',
+    'https://docs.alipay.com/mini/api/runscene',
+    '',
+    {
+      msg: '不支持',
+    },
+  ),
+}

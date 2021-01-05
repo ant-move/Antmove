@@ -1,4 +1,5 @@
-const device = require('./base');
+const device = require('./base')
+
 module.exports = {
-    ...device,
-};
+  ...device,
+}

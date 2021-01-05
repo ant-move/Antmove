@@ -1,0 +1,22 @@
+<view class="page">
+  <view class="page-description">加速度计</view>
+  <view class="page-section">
+    <view class="page-section-title">onAccelerometerChange</view>
+    <view class="page-section-demo">
+      <view>X: {{currentX}}</view>
+      <view>Y: {{currentY}}</view>
+      <view>Z: {{currentZ}}</view>
+    </view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="onAccelerometerChange">
+        onAccelerometerChange
+      </button>
+    </view>
+    <view class="page-section-title">offAccelerometerChange</view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="offAccelerometerChange">
+        offAccelerometerChange
+      </button>
+    </view>
+  </view>
+</view>

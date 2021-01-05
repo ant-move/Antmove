@@ -1,0 +1,5 @@
+<button lang="zh_CN" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">获取用户信息</button>
+<button open-type="contact" bindcontact="onContact" session-from="1" send-message-title="2" send-message-path="3" send-message-img="4" show-message-card="true">打开客服对话</button>
+<button open-type="getPhoneNumber" bindgetphonenumber="onGetPhoneNumber">打电话</button>
+<button open-type="launchApp" app-parameter="app" binderror="onError" bindlaunchapp="onLanuchApp">launchApp</button>
+<button open-type="openSetting" bindopensetting="onOpenSetting" aria-label="aria-label">openSetting</button>

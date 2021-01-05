@@ -1,0 +1,7 @@
+{
+  "extends": ["@ali/tslint-config-ali"],
+  "rules": {
+    "semicolon": [true, "never"],
+    "no-empty": false
+  }
+}

@@ -1,0 +1,175 @@
+<view>
+	<scroll-view style="height: 100vh;" scroll-y onScrollToLower="onScrollToLower">
+		<list>
+			<view slot="header">
+				列表头部
+			</view>
+			<block a:for="{{items}}">
+				<list-item
+					thumb="{{item.thumb}}"
+					arrow="{{item.arrow}}"
+					align="{{item.align}}"
+					index="{{index}}"
+					onClick="onItemClick"
+					key="items-{{index}}"
+					last="{{index === (items.length - 1)}}"
+				>
+					{{item.title}}
+					<view class="am-list-brief">{{item.brief}}</view>
+					<view slot="extra">
+						{{item.extra}}
+					</view>
+			 </list-item>
+			</block>
+			<view slot="footer">
+				列表尾部
+			</view>
+		</list>
+		<list>
+			<view slot="header">
+				列表头部
+			</view>
+			<block a:for="{{items2}}">
+				<list-item
+					thumb="{{item.thumb}}"
+					arrow="{{item.arrow}}"
+					onClick="onItemClick"
+					index="items2-{{index}}"
+					key="items2-{{index}}"
+					last="{{index === (items2.length - 1)}}"
+				>
+					{{item.title}}
+					<view class="am-list-brief">{{item.brief}}</view>
+					<view a:if="{{item.extra}}" slot="extra">
+						{{item.extra}}
+					</view>
+				</list-item>
+			</block>
+			<view slot="footer">
+				列表尾部
+			</view>
+		</list>
+		<list>
+			<view slot="header">
+				列表头部
+			</view>
+			<block a:for="{{items3}}">
+				<list-item
+					thumb="{{item.thumb}}"
+					arrow="{{item.arrow}}"
+					index="items3-{{index}}"
+					onClick="onItemClick"
+					key="items3-{{index}}"
+					last="{{index === (items3.length - 1)}}"
+					multipleLine="{{true}}"
+				>
+					{{item.title}}
+					<view class="am-list-brief">{{item.brief}}</view>
+					<view a:if="{{item.extra}}" slot="extra">
+						{{item.extra}}
+					</view>
+				</list-item>
+			</block>
+			<view slot="footer">
+				列表尾部
+			</view>
+		</list>
+		<list>
+			<view slot="header">
+				列表头部
+			</view>
+			<block a:for="{{items4}}">
+				<list-item
+					thumb="{{item.thumb}}"
+					arrow="{{item.arrow}}"
+					onClick="onItemClick"
+					index="items4-{{index}}"
+					last="{{index === (items4.length - 1)}}"
+					key="items4-{{index}}"
+					multipleLine="{{true}}"
+				>
+					{{item.title}}
+					<view class="am-list-brief">{{item.brief}}</view>
+					<view a:if="{{item.extra}}" slot="extra">
+						{{item.extra}}
+					</view>
+				</list-item>
+			</block>
+			<view slot="footer">
+				列表尾部
+			</view>
+		</list>
+		<list>
+			<view slot="header">
+				小图文列表
+			</view>
+			<block a:for="{{itemsThumb}}">
+				<list-item
+					thumb="{{item.thumb}}"
+					arrow="{{item.arrow}}"
+					onClick="onItemClick"
+					index="itemsThumb-{{index}}"
+					last="{{index === (itemsThumb.length - 1)}}"
+					key="itemsThumb-{{index}}"
+				>
+					{{item.title}}
+					<view class="am-list-brief">{{item.brief}}</view>
+					<view a:if="{{item.extra}}" slot="extra">
+						{{item.extra}}
+					</view>
+				</list-item>
+			</block>
+		</list>
+		<list>
+			<view slot="header">
+				小图文双行列表
+			</view>
+			<block a:for="{{itemsThumbMultiple}}">
+				<list-item
+					thumb="{{item.thumb}}"
+					arrow="{{item.arrow}}"
+					onClick="onItemClick"
+					index="items-multiple-{{index}}"
+					last="{{index === (itemsThumbMultiple.length - 1)}}"
+					key="items-multiple-{{index}}"
+					multipleLine="{{true}}"
+				>
+					{{item.title}}
+					<view class="am-list-brief">{{item.brief}}</view>
+					<view a:if="{{item.extra}}" slot="extra">
+						{{item.extra}}
+					</view>
+				</list-item>
+			</block>
+		</list>
+		<list >
+			<view slot="header">
+				无限滚动列表
+			</view>
+			<block a:for="{{items5}}">
+				<list-item
+					className="{{item.sticky ? 'am-list-sticky' : ''}}"
+					thumb="{{item.thumb}}"
+					arrow="{{item.arrow}}"
+					align="{{item.align}}"
+					last="{{index === (items5.length - 1)}}"
+					index="{{index}}"
+					key="items5-{{index}}"
+					onClick="onItemClick"
+					disabled="{{item.sticky}}"
+					wrap="{{true}}"
+				>
+					{{item.title}}{{index}}
+					<view a:if="{{item.extra}}" slot="extra">
+						{{item.extra}}
+					</view>
+				</list-item>
+			</block>
+			<view slot="footer">
+				列表尾部
+			</view>
+		</list>
+	</scroll-view>
+</view>
+
+

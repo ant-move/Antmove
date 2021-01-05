@@ -1,0 +1,11 @@
+<view class="page" style="height:1500rpx;">
+  <view class="page-description">滚动页面</view>  
+  <view class="page-section">
+    <view class="page-section-title">pageScrollTo</view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="pageScrollTo">
+        pageScrollTo
+      </button>
+    </view>
+  </view>
+</view>

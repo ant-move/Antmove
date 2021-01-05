@@ -1,0 +1,20 @@
+<view class='page-container-classname'>
+                <i-button type='ghost' ref='saveChildRef1' onClick='handleText'>
+  只显示文本
+</i-button><i-button type='ghost' onClick='handleSuccess' ref='saveChildRef2'>
+  成功
+</i-button><i-button type='ghost' onClick='handleWarning' ref='saveChildRef3'>
+  警告
+</i-button><i-button type='ghost' onClick='handleError' ref='saveChildRef4'>
+  错误
+</i-button><i-button type='ghost' onClick='handleLoading' ref='saveChildRef5'>
+  Loading
+</i-button><i-button type='ghost' onClick='handleIcon' ref='saveChildRef6'>
+  使用图标
+</i-button><i-button type='ghost' onClick='handleImage' ref='saveChildRef7'>
+  使用自定义图片
+</i-button><i-button type='ghost' onClick='handleMask' ref='saveChildRef8'>
+  无遮罩层
+</i-button><i-toast id='toast' ref='saveChildRef9'>
+</i-toast>
+            </view>

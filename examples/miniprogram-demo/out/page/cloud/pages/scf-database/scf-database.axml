@@ -1,0 +1,94 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'Database'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <view class='weui-cells__title'>
+        <view>
+          云函数为管理端，通过调用云函数可操作原先在小程序端无法操作的数据。
+        </view>
+        <view>
+          后台流水数据：权限为仅管理端可写
+        </view>
+      </view>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='page-body-info'>
+          <view class='progress-figure'>
+            <image src='/page/API/resources/kind/device.png' class='progress-icon'>
+            </image>
+            <text class="progress-line lg {{clientLoading && 'pending'}} {{serverDataClient && 'success'}} {{serverDataClientError && 'fail'}}">
+            </text>
+            <image src='/page/cloud/resources/kind/database.png' class='progress-icon'>
+            </image>
+          </view>
+          <view class='data-area'>
+            <view class='data-text' a:if='{{serverDataClient}}'>
+              <icon type='success' class=' iconsuccess-style'>
+              </icon>
+              <text>
+                获取成功
+              </text>
+            </view>
+            <view class='data-text' a:elif='{{serverDataClientError}}'>
+              <icon type='warn' color='#F43530' class=' iconwarn-style'>
+              </icon>
+              <text>
+                获取失败
+              </text>
+            </view>
+          </view>
+          <view class='btn-area'>
+            <button loading='{{clientLoading}}' onTap='queryServerDataViaClient'>
+              小程序端获取后台流水数据
+            </button>
+          </view>
+        </view>
+      </view>
+      <view class='weui-cells__title'>
+      </view>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='page-body-info'>
+          <view class='progress-figure'>
+            <image src='/page/API/resources/kind/device.png' class='progress-icon'>
+            </image>
+            <text class="progress-line {{cloudLoading && 'pending'}} {{serverDataCloud && 'success'}} {{serverDataCloudError && 'fail'}}">
+            </text>
+            <image src='/page/cloud/resources/kind/scf.png' class='progress-icon'>
+            </image>
+            <text class="progress-line {{cloudLoading && 'pending'}} {{serverDataCloud && 'success'}} {{serverDataCloudError && 'fail'}}">
+            </text>
+            <image src='/page/cloud/resources/kind/database.png' class='progress-icon'>
+            </image>
+          </view>
+          <view class='data-area'>
+            <view class='data-text' a:if='{{serverDataCloud}}'>
+              <icon type='success' class=' iconsuccess-style'>
+              </icon>
+              <text>
+                获取成功
+              </text>
+            </view>
+            <view class='data-text' a:elif='{{serverDataCloudError}}'>
+              <icon type='warn' color='#F43530' class=' iconwarn-style'>
+              </icon>
+              <text>
+                获取失败
+              </text>
+            </view>
+          </view>
+          <view class='btn-area'>
+            <button loading='{{cloudLoading}}' onTap='queryServerDataViaCloudFunction'>
+              调用云函数获取后台流水数据
+            </button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

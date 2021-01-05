@@ -1,0 +1,24 @@
+<view class="page">
+  <view class="page-description">弱提示</view>
+  <view class="page-section">
+    <view class="page-section-title">showToast</view>
+    <view class="page-section-btns">
+      <view><button type="primay" plain onTap="showToastSuccess">显示 success 提示</button></view>
+      <view><button type="primay" plain onTap="showToastFail">显示 fail 提示</button></view>
+
+    </view>
+    <view class="page-section-btns">
+      <view><button type="primay" plain onTap="showToastException">显示 exception 提示</button></view>
+      <view><button type="primay" plain onTap="showToastNone">显示 none 提示</button></view>
+    </view>
+  </view>
+  <view class="page-section">
+    <view class="page-section-title">
+      <view class="page-section-name">hideToast</view>
+      请先点击弹出toast按钮，然后点击该按钮进行隐藏
+    </view>
+    <view class="page-section-btns">
+      <view><button type="primay" plain onTap="hideToast">隐藏弱提示</button></view>
+    </view>
+  </view>
+</view>

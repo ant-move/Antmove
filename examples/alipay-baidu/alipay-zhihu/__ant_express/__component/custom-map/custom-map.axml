@@ -1,0 +1,23 @@
+<view class="map-wrap">
+    <map
+        id='{{id}}'
+        class='{{class}}'
+        longitude="{{longitude}}"
+        latitude="{{latitude}}"
+        scale="{{scale}}"
+        polyline="{{polyline}}"
+        polygon="{{polygons}}"
+        circles="{{circles}}"
+        controls="{{controls}}"
+        include-points="{{includePoints}}"
+        show-location="{{showLocation}}"
+        onMarkerTap="onMarkerTapFn"
+        onCalloutTap="onCalloutTapFn"
+        onControlTap="onControlTapFn"
+        onRegionChange="onRegionChangeFn"
+        onTap="onTapFn"
+        markers="{{alMakers}}"
+        style="{{mapStyle}}"
+    ></map>
+    <view class="coverview-wrap"><slot></slot></view>
+</view>

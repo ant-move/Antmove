@@ -1,0 +1,5 @@
+.demo-title {
+  color: #333;
+  padding: 15px;
+  font-size: 14px;
+}

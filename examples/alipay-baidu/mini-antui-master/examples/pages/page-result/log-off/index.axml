@@ -1,0 +1,5 @@
+<view>
+  <page-result
+    type="logoff"
+    title="用户已注销" />
+</view>

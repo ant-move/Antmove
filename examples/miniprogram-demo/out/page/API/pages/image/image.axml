@@ -1,0 +1,99 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'choose/previewImage'}}">
+  </template>
+  <view class='page-body'>
+    <form>
+      <view class='page-section'>
+        <view class='weui-cells weui-cells_after-title'>
+          <view class='weui-cell weui-cell_input'>
+            <view class='weui-cell__hd'>
+              <view class='weui-label'>
+                图片来源
+              </view>
+            </view>
+            <view class='weui-cell__bd'>
+              <picker range='{{sourceType}}' value='{{sourceTypeIndex}}' mode='selector' onChange='sourceTypeChange'>
+                <view class='weui-input'>
+                  {{sourceType[sourceTypeIndex]}}
+                </view>
+              </picker>
+            </view>
+          </view>
+          <view class='weui-cell weui-cell_input'>
+            <view class='weui-cell__hd'>
+              <view class='weui-label'>
+                图片质量
+              </view>
+            </view>
+            <view class='weui-cell__bd'>
+              <picker range='{{sizeType}}' value='{{sizeTypeIndex}}' mode='selector' onChange='sizeTypeChange'>
+                <view class='weui-input'>
+                  {{sizeType[sizeTypeIndex]}}
+                </view>
+              </picker>
+            </view>
+          </view>
+          <view class='weui-cell weui-cell_input'>
+            <view class='weui-cell__hd'>
+              <view class='weui-label'>
+                数量限制
+              </view>
+            </view>
+            <view class='weui-cell__bd'>
+              <picker range='{{count}}' value='{{countIndex}}' mode='selector' onChange='countChange'>
+                <view class='weui-input'>
+                  {{count[countIndex]}}
+                </view>
+              </picker>
+            </view>
+          </view>
+        </view>
+        <view class='weui-cells'>
+          <view class='weui-cell'>
+            <view class='weui-cell__bd'>
+              <view class='weui-uploader'>
+                <view class='weui-uploader__hd'>
+                  <view class='weui-uploader__title'>
+                    点击可预览选好的图片
+                  </view>
+                  <view class='weui-uploader__info'>
+                    {{imageList.length}}/{{count[countIndex]}}
+                  </view>
+                </view>
+                <view class='weui-uploader__bd'>
+                  <view class='weui-uploader__files'>
+                    <block a:for='{{imageList}}' a:for-item='image' ref-numbers='{{imageList}}'>
+                      <view class='weui-uploader__file'>
+                        <image class='weui-uploader__img' src='{{image}}' data-src='{{image}}' onTap='previewImage'>
+                        </image>
+                      </view>
+                    </block>
+                  </view>
+                  <view class='weui-uploader__input-box'>
+                    <view class='weui-uploader__input' onTap='chooseImage'>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </form>
+  </view>
+  <button onTap='compressImage'>
+    compressImage
+  </button>
+  <button onTap='getImageInfo'>
+    getImageInfo
+  </button>
+  <button onTap='saveImageToPhotosAlbum'>
+    saveImageToPhotosAlbum
+  </button>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/component_circle/index",
+    "pages/login/login",
+    "pages/openinterface/index",   
+    "pages/equipment/index",
+    "pages/component/index",
+    "pages/components/index",
+    "pages/index/index",
+    "pages/manage/manage",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "测试"
+    }
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "日志"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

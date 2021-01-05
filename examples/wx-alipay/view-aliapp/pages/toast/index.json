@@ -1,0 +1,7 @@
+{
+	"usingComponents": {
+		"i-toast": "../../dist/toast/index",
+		"i-button": "../../dist/button/index"
+	},
+	"defaultTitle": "Toast 轻提示"
+}

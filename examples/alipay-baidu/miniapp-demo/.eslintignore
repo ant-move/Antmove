@@ -1,0 +1,11 @@
+.idea/
+.vscode/
+_*
+~lib
+.tea
+.DS_Store
+.entry/
+node_modules/
+**/*.min.js
+dist/
+docs/

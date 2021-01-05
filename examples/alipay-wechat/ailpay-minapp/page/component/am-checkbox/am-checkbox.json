@@ -1,0 +1,8 @@
+{
+  "defaultTitle": "复选框",
+  "usingComponents": {
+    "am-checkbox": "mini-antui/es/am-checkbox/index",
+    "list": "mini-antui/es/list/index",
+    "list-item": "mini-antui/es/list/list-item/index"
+  }
+}

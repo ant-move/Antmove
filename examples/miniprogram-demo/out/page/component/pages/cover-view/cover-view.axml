@@ -1,0 +1,30 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'cover-view'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section page-section-gap'>
+      <custom-map style='width: 100%; height: 300px;' latitude='{{latitude}}' longitude='{{longitude}}'>
+        <cover-view class='cover-view'>
+          <cover-view class='container'>
+            <cover-view class='flex-wrp' style='flex-direction:row;'>
+              <cover-view class='flex-item demo-text-1'>
+              </cover-view>
+              <cover-view class='flex-item demo-text-2'>
+              </cover-view>
+              <cover-view class='flex-item demo-text-3'>
+              </cover-view>
+            </cover-view>
+            <cover-image class='img' src='/image/green_tri.png'>
+            </cover-image>
+          </cover-view>
+        </cover-view>
+      </custom-map>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

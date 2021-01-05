@@ -1,0 +1,8 @@
+{
+	"usingComponents": {
+		"i-icon": "../../dist/icon/index",
+		"i-grid": "../../dist/grid/index",
+		"i-grid-item": "../../dist/grid-item/index"
+	},
+	"defaultTitle": "Icon 图标"
+}

@@ -1,0 +1,21 @@
+<view class="container chat"
+    ><view class="chat-item flex-wrp"
+        ><view class="avatar flex-item"
+            ><image src="/images/icon8.jpg"></image></view
+        ><view class="chat-content flex-item"
+            ><view class="chat-source"
+                ><text class="chatmate"><text>Alex</text></text
+                ><text class="lasttime"><text>1 个月前</text></text></view
+            ><text class="chat-txt"><text>你好~ 你好~ 你好~</text></text></view
+        ></view
+    ><view class="chat-item flex-wrp"
+        ><view class="avatar flex-item"
+            ><image src="/images/icon9.jpeg"></image></view
+        ><view class="chat-content flex-item"
+            ><view class="chat-source"
+                ><text class="chatmate"><text>George</text></text
+                ><text class="lasttime"><text>3 个月前</text></text></view
+            ><text class="chat-txt"><text>你好~ 你好~ 你好~</text></text></view
+        ></view
+    ></view
+>

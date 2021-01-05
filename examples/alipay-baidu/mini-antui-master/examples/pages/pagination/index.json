@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "Pagination",
+  "usingComponents": {
+    "pagination": "../../es/pagination/index"
+  }
+}

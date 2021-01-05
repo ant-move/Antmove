@@ -1,0 +1,17 @@
+<view class="page">
+  <view class="page-description">iBeacon</view>
+  <view class="page-section">
+    <view class="page-section-title">iBeacon设备功能</view>
+    <view class="page-section-demo">
+      <text>{{accuracy}}</text>
+      <button type="primary" onTap="startBeaconDiscovery">搜索附近的iBeacon设备</button>
+      <button type="primary" onTap="startBeaconDiscovery_null">搜索设备_参数为空</button>
+      <button type="primary" onTap="startBeaconDiscovery_number">搜索设备_参数为数字</button>
+      <button type="primary" onTap="startBeaconDiscovery_error">搜索设备_参数为错误</button>
+      <button type="primary" onTap="stopBeaconDiscovery">停止搜索附近的iBeacon设备</button>
+      <button type="primary" onTap="getBeacons">获取所有已搜索到的iBeacon设备</button>
+      <button type="primary" onTap="onBeaconUpdate">监听 iBeacon 设备的更新事件</button>
+      <button type="primary" onTap="onBeaconServiceChange">监听 iBeacon 服务的状态变化</button>
+    </view>
+  </view>
+</view>

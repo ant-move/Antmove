@@ -1,0 +1,30 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'textarea'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <view class='page-section-title'>
+        输入区域高度自适应，不会出现滚动条
+      </view>
+      <view class='textarea-wrp'>
+        <textarea auto-height=" " placeholder='自动变高' undefined='onlinechange' onFocus='bindfocus' onBlur='bindTextAreaBlur'>
+        </textarea>
+      </view>
+    </view>
+    <view class='page-section'>
+      <view class='page-section-title'>
+        这是一个可以自动聚焦的textarea
+      </view>
+      <view class='textarea-wrp'>
+        <textarea style='height: 3em' undefined='true'>
+        </textarea>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

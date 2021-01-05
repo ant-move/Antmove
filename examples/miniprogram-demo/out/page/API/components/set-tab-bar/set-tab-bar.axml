@@ -1,0 +1,36 @@
+<view class='set-tab-bar-set-tab-bar {{className}}' onChildRef='saveChildRef0'>
+  <import src='/page/common/head.axml'>
+  </import>
+  <import src='/page/common/foot.axml'>
+  </import>
+  <view class='container'>
+    <template is='head' data="{{title: 'tabBar'}}">
+    </template>
+    <view class='page-body'>
+      <view class='btn-area'>
+        <button onTap='setTabBarBadge'>
+          {{ !hasSetTabBarBadge ? '设置tab徽标' : '移除tab徽标' }}
+        </button>
+        <button onTap='showTabBarRedDot'>
+          {{ !hasShownTabBarRedDot ?  '显示红点' : '移除红点'}}
+        </button>
+        <button onTap='customStyle'>
+          {{ !hasCustomedStyle ? '自定义Tab样式' : '移除自定义样式'}}
+        </button>
+        <button onTap='customItem'>
+          {{ !hasCustomedItem ? '自定义Tab信息' : '移除自定义信息' }}
+        </button>
+        <button onTap='hideTabBar'>
+          {{ !hasHiddenTabBar ? '隐藏TabBar' : '显示TabBar' }}
+        </button>
+      </view>
+      <view class='btn-area'>
+        <button type='primary' class=' primary-style' onTap='navigateBack'>
+          返回上一级
+        </button>
+      </view>
+    </view>
+    <template is='foot'>
+    </template>
+  </view>
+</view>

@@ -1,0 +1,49 @@
+<view class='page-container-classname'>
+                <set-tab-bar a:if='{{isSetTabBarPage}}' onChildRef='saveChildRef1' _parent_ref="{{isMounted}}" onUnmount='leaveSetTabBarPage'>
+</set-tab-bar><view a:else  class='index'>
+  <view class='index-hd'>
+    <image class='index-logo' src='resources/kind/logo.png'>
+    </image>
+    <view class='index-desc'>
+      以下将演示小程序接口能力，具体属性参数详见      <navigator url='pages/doc-web-view/doc-web-view' class='weui-agree__link'>
+        小程序开发文档。
+      </navigator>
+    </view>
+  </view>
+  <view class='index-bd'>
+    <view class='kind-list'>
+      <block a:for='{{list}}' a:key='{{item.id}}'>
+        <view class='kind-list-item'>
+          <view id='{{item.id}}' class="kind-list-item-hd {{item.open ? 'kind-list-item-hd-show' : ''}}" onTap='kindToggle'>
+            <view class='kind-list-text'>
+              {{item.name}}
+            </view>
+            <image class='kind-list-img' src='resources/kind/{{item.id}}.png'>
+            </image>
+          </view>
+          <view class="kind-list-item-bd {{item.open ? 'kind-list-item-bd-show' : ''}}">
+            <view class="navigator-box {{item.open ? 'navigator-box-show' : ''}}">
+              <block a:for='{{item.pages}}' a:for-item='page' a:key='*item'>
+                <navigator url='pages/{{page.url}}' class='navigator' a:if="{{page.url !== '@set-tab-bar'}}">
+                  <view class='navigator-text'>
+                    {{page.zh}}
+                  </view>
+                  <view class='navigator-arrow'>
+                  </view>
+                </navigator>
+                <view a:else  class='navigator' onTap='enterSetTabBarPage'>
+                  <view class='navigator-text'>
+                    {{page.zh}}
+                  </view>
+                  <view class='navigator-arrow'>
+                  </view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+            </view>

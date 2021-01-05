@@ -1,83 +1,96 @@
-function observerHandle (observerObj, args, that, isInit = false) {
-    Object.keys(observerObj).forEach(function (obs) {  
-        if (isInit && !equals(args.props[obs], that.props[obs]) && typeof observerObj[obs] === 'function') {
-            observerObj[obs].call(that, that.props[obs], args.props[obs]); 
-        }  else if (!isInit &&!equals(args[0][obs], that.props[obs]) && typeof observerObj[obs] === 'function') {
-            observerObj[obs].call(that, that.props[obs], args[0][obs]);      
-        } 
+const equals = function(x, y) {
+  if (x === y) {
+    return true
+  }
 
-    });
+  if (!(x instanceof Object) || !(y instanceof Object)) {
+    return false
+  }
+  if (x.constructor !== y.constructor) {
+    return false
+  }
+
+  for (const p in x) {
+    if (x.hasOwnProperty(p)) {
+      if (!y.hasOwnProperty(p)) {
+        return false
+      }
+
+      if (x[p] === y[p]) {
+        continue
+      }
+
+      if (typeof x[p] !== 'object') {
+        return false
+      }
+      if (!equals(x[p], y[p])) {
+        return false
+      }
+    }
+  }
+
+  for (const p in y) {
+    if (y.hasOwnProperty(p) && !x.hasOwnProperty(p)) {
+      return false
+    }
+  }
+  return true
 }
 
-function observersHandle (observersObj, args, that) {
-    Object.keys(observersObj).forEach(function (obs) {
-        let left = {};
-        let right = {};
-        if (obs.match(/\./)) {
-            let _dataArr = obs.split('.');
-            left = processChildAttr(args[1], _dataArr);
-            right = processChildAttr(that.data, _dataArr);
-        } else {
-            left = args[1][obs];
-            right = that.data[obs];
-        }
-        let dif = equals(left, right);
-        if (!dif) {
-            observersObj[obs].fn.call(that, ...observersObj[obs].arr);
-        }
-
-    });
+function observerHandle(observerObj, args, that) {
+  Object.keys(observerObj).forEach((obs) => {
+    if (typeof observerObj[obs] === 'function') {
+      let props
+      if (args.props) {
+        props = args.props
+      }
+      if (args[0]) {
+        props = args[0]
+      }
+      if (!props) {
+        return
+      }
+      if (!equals(props[obs], that.props[obs])) {
+        observerObj[obs].call(that, that.props[obs], props[obs])
+      }
+    }
+  })
 }
 
-function processChildAttr (attr, arr) {
-    let _ = attr;
-    arr.forEach(function (name) {
-        _ = _[name];
-    });
-    return _;
+function observersHandle(observersObj, args, that) {
+  let preData = null
+  if (Array.isArray(args)) {
+    preData = args[1]
+  } else {
+    preData = args.props
+  }
+  Object.keys(observersObj).forEach((obs) => {
+    let left = {}
+    let right = {}
+    if (obs.match(/\./)) {
+      const _dataArr = obs.split('.')
+      left = processChildAttr(preData, _dataArr)
+      right = processChildAttr(that.data, _dataArr)
+    } else {
+      left = preData[obs]
+      right = that.data[obs]
+    }
+    const dif = equals(left, right)
+    if (!dif) {
+      observersObj[obs].fn.call(that, ...observersObj[obs].arr)
+    }
+  })
 }
 
-
-const equals = function (x, y) { 
-    if (x===y) { 
-        return true; 
-    } 
-   
-    if (!(x instanceof Object) || ! (y instanceof Object)) { 
-        return false; 
-    } 
-    if (x.constructor!==y.constructor) { 
-        return false; 
-    } 
-    
-    for (var p in x) { 
-        if (x.hasOwnProperty(p)) { 
-            if (! y.hasOwnProperty(p)) { 
-                return false; 
-            } 
-   
-            if (x[p]===y[p]) { 
-                continue; 
-            } 
-   
-            if (typeof( x[ p ] ) !== "object") { 
-                return false; 
-            } 
-            if (!equals(x[p], y[p])) { 
-                return false; 
-            } 
-        } 
-    } 
-   
-    for (p in y) { 
-        if (y.hasOwnProperty(p) && ! x.hasOwnProperty(p)) { 
-            return false; 
-        } 
-    } 
-    return true; 
-};
+function processChildAttr(attr, arr) {
+  let _ = attr
+  arr.forEach((name) => {
+    _ = _[name]
+  })
+  return _
+}
 
 module.exports = {
-    observerHandle,
-    observersHandle
-};
+  observerHandle,
+  observersHandle,
+}

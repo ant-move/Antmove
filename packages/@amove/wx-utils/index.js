@@ -1,1 +1,1 @@
-require("./src");
+require('./src')

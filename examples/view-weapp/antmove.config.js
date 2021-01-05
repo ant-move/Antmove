@@ -1,10 +1,22 @@
 module.exports = {
-    "input": "./",
-    "output": "../wx-alipay/view-aliapp",
     "env": "production",
-    "component2": true,
     "platform": "alipay",
+    "component2": true,
     "scope": true,
-    "type": "wx-alipay",
-    "component": false
-}
+    "type": "wx2my",
+    "component": false,
+    "error": false,
+    "empty": false,
+    "input": "./",
+    "output": "../out"
+,
+        "hooks": {
+            "appJson": function plugin (appJson) {
+                        return appJson;
+                    }
+
+        },
+        "babel": {
+            "plugins": []
+        }
+    }

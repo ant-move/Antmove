@@ -1,0 +1,6 @@
+/* page/tabBar/index/index.wxss */
+.mean {
+    background-image: linear-gradient(-180deg, #698eff 0%, #547eff 79%);
+    width: 100%;
+    overflow: hidden;
+}

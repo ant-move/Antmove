@@ -1,5 +1,7 @@
-const Config = require('../../config.js');
-const customComponentPrefix = Config.library.customComponentPrefix;
+const Config = require('../../config.js')
+
+const customComponentPrefix = Config.library.customComponentPrefix
+
 /**
  * type
  * 0 - missing - 不支持该属性
@@ -18,69 +20,69 @@ const customComponentPrefix = Config.library.customComponentPrefix;
  * desc - 组件或属性作用描述
  */
 module.exports = {
-    'modal': {
-        type: 1,
-        name: '模态弹窗',
-        url: {
-            wechat: 'http://www.ionic.wang/weixin/component/modal.html',
-            alipay: ''
-        },
-        desc: '模态弹窗。',
-        props: {
-        }
+  modal: {
+    type: 1,
+    name: '模态弹窗',
+    url: {
+      wechat: 'http://www.ionic.wang/weixin/component/modal.html',
+      alipay: '',
     },
-    'toast': {
-        type: 1,
-        name: '消息提示框',
-        url: {
-            wechat: 'http://www.ionic.wang/weixin/component/toast.html',
-            alipay: ''
-        },
-        desc: '消息提示框。',
-        props: {
-        }
+    desc: '模态弹窗。',
+    props: {
     },
-    'loading': {
-        type: 1,
-        name: '加载提示',
-        url: {
-            wechat: 'http://www.ionic.wang/weixin/component/loading.html',
-            alipay: ''
-        },
-        desc: '加载提示。',
-        props: {
-        }
+  },
+  toast: {
+    type: 1,
+    name: '消息提示框',
+    url: {
+      wechat: 'http://www.ionic.wang/weixin/component/toast.html',
+      alipay: '',
     },
-    'action-sheet': {
-        type: 1,
-        name: '从屏幕底部出现的菜单表',
-        url: {
-            wechat: 'http://www.ionic.wang/weixin/component/action-sheet.html',
-            alipay: ''
-        },
-        desc: '从屏幕底部出现的菜单表。',
-        props: {
-        }
+    desc: '消息提示框。',
+    props: {
+    },
+  },
+  loading: {
+    type: 1,
+    name: '加载提示',
+    url: {
+      wechat: 'http://www.ionic.wang/weixin/component/loading.html',
+      alipay: '',
+    },
+    desc: '加载提示。',
+    props: {
+    },
+  },
+  'action-sheet': {
+    type: 1,
+    name: '从屏幕底部出现的菜单表',
+    url: {
+      wechat: 'http://www.ionic.wang/weixin/component/action-sheet.html',
+      alipay: '',
+    },
+    desc: '从屏幕底部出现的菜单表。',
+    props: {
+    },
        
+  },
+  'action-sheet-item': {
+    type: 1,
+    name: '底部菜单表的子选项',
+    url: {
+      wechat: 'http://www.ionic.wang/weixin/component/action-sheet.html',
+      alipay: '',
     },
-    'action-sheet-item': {
-        type: 1,
-        name: '底部菜单表的子选项',
-        url: {
-            wechat: 'http://www.ionic.wang/weixin/component/action-sheet.html',
-            alipay: ''
-        },
-        desc: '底部菜单表的子选项。',
-        props: {
-        }
+    desc: '底部菜单表的子选项。',
+    props: {
     },
-    'action-sheet-cancel': {
-        type: 1,
-        name: '底部菜单表的取消按钮',
-        url: {
-            wechat: 'http://www.ionic.wang/weixin/component/action-sheet.html',
-            alipay: ''
-        },
-        desc: '底部菜单表的取消按钮，和action-sheet-item的区别是，点击它会触发action-sheet的change事件，并且外观上会同它上面的内容间隔开来。',
-    }
-};
+  },
+  'action-sheet-cancel': {
+    type: 1,
+    name: '底部菜单表的取消按钮',
+    url: {
+      wechat: 'http://www.ionic.wang/weixin/component/action-sheet.html',
+      alipay: '',
+    },
+    desc: '底部菜单表的取消按钮，和action-sheet-item的区别是，点击它会触发action-sheet的change事件，并且外观上会同它上面的内容间隔开来。',
+  },
+}

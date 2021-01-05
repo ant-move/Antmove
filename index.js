@@ -1,3 +1,3 @@
-var buildScript = require('./scripts/build.js');
+const buildScript = require('./scripts/build.js')
 
-module.exports = buildScript;
+module.exports = buildScript

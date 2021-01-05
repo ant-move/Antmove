@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "3列宫格",
+  "usingComponents":{
+    "grid":"../../../es/grid/index"
+  }
+}

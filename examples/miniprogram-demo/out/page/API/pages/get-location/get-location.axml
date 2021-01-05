@@ -1,0 +1,42 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'getLocation'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <view class='page-body-info'>
+        <text class='page-body-text-small'>
+          当前位置经纬度
+        </text>
+        <block a:if='{{hasLocation === false}}'>
+          <text class='page-body-text'>
+            未获取
+          </text>
+        </block>
+        <block a:if='{{hasLocation === true}}'>
+          <view class='page-body-text-location'>
+            <text>
+              E: {{location.longitude[0]}}°{{location.longitude[1]}}′
+            </text>
+            <text>
+              N: {{location.latitude[0]}}°{{location.latitude[1]}}′
+            </text>
+          </view>
+        </block>
+      </view>
+      <view class='btn-area'>
+        <button type='primary' class=' primary-style' onTap='getLocation'>
+          获取位置
+        </button>
+        <button onTap='clear'>
+          清空
+        </button>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

@@ -1,0 +1,8 @@
+{
+	"usingComponents": {
+		"i-page": "../../dist/page/index",
+		"i-icon": "../../dist/icon/index",
+		"i-panel": "../../dist/panel/index"
+	},
+	"defaultTitle": "Page 分页"
+}

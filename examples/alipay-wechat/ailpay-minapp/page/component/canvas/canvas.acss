@@ -1,0 +1,21 @@
+/* .canvas-view {
+  display: flex;
+  justify-content: center;
+} */
+
+.canvas {
+  width: 305px;
+  height: 305px;
+  /* background-color: #fff; */
+  position: absolute;
+}
+.canvas-over{
+  /* position: absolute; */
+  background: transparent;
+  z-index: 1;
+}
+
+
+.canvas-bg{
+ /* background: red; */
+}

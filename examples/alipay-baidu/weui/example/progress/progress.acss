@@ -1,0 +1,6 @@
+.page-container-classname {
+    background-color: #ffffff;
+}
+.weui-progress {
+    margin-bottom: 24px;
+}

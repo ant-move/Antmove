@@ -1,0 +1,7 @@
+.page-section-btns {
+  padding: 26rpx;
+}
+
+.item {
+  line-height: 25px;
+}

@@ -1,4 +1,4 @@
-<view class="sheet_item {{className}}"  catchTap="tapItem">
+<view class="am_sheet_item {{className}}"  catchTap="tapItem">
     <view a:if="textContent">
         {{textContent}}
     </view>

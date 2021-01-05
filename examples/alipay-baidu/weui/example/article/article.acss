@@ -1,0 +1,6 @@
+.page-container-classname {
+    background-color: #ffffff;
+}
+image {
+    margin: 4px 0;
+}

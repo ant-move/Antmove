@@ -1,37 +1,37 @@
-const parse = require('./parser').parse.default;
+const parse = require('./parser').parse.default
 
 Component({
-    mixins: [],
-    data: {
-        nodesData: []
+  mixins: [],
+  data: {
+    nodesData: [],
+  },
+  props: {
+    nodes: [],
+  },
+  onInit() {
+    this.processNodes(this.props.nodes)
+  },
+  deriveDataFromProps(nextProps) {
+    nextProps.nodes !== this.props.nodes && this.processNodes(nextProps.nodes)
+  },
+
+  didUnmount() {},
+  methods: {
+    processNodes(nodes) {
+      if (typeof nodes === 'string') {
+        nodes = nodes.replace(/<br>/g, '<br/>')
+        parse(nodes, (err, _nodes) => {
+          if (!err) {
+            this.setData({
+              nodesData: _nodes,
+            })
+          }
+        })
+      } else if (Array.isArray(nodes)) {
+        this.setData({
+          nodesData: nodes,
+        })
+      }
     },
-    props: {
-        nodes: []
-    },
-    didMount () {
-        this.processNodes();
-    },
-    deriveDataFromProps(nextProps){
-        nextProps.nodes !== this.props.nodes && this.processNodes();
-    },
-    
-    didUnmount () {},
-    methods: {
-        processNodes () {
-            if (typeof this.props.nodes === 'string') {
-                parse(this.props.nodes, (err, nodes) => {
-                    if (!err) {
-                        this.setData({
-                            nodesData: nodes,
-                        });
-                    }
-                });
-            }else if (Array.isArray(this.props.nodes)) {
-                this.setData({
-                    nodesData: this.props.nodes
-                });
-                
-            }
-        }
-    },
-});
+  },
+})

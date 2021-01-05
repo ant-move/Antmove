@@ -1,0 +1,9 @@
+<view class="page">
+  <view class="page-description">自定义分享</view>
+  <view class="page-section">
+    <view class="page-section-title">onShareAppMessage</view>
+    <view class="page-section-demo">
+      <button size="default" open-type="share" type="primary">分享</button>
+    </view>
+  </view>
+</view>

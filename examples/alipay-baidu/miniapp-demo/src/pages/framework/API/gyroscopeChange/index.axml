@@ -1,0 +1,22 @@
+<view class="page">
+  <view class="page-description">陀螺仪</view>
+  <view class="page-section">
+    <view class="page-section-title">onGyroscopeChange</view>
+    <view class="page-section-demo">
+      <view>X: {{currentX}}</view>
+      <view>Y: {{currentY}}</view>
+      <view>Z: {{currentZ}}</view>
+    </view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="onGyroscopeChange">
+        onGyroscopeChange
+      </button>
+    </view>
+    <view class="page-section-title">offGyroscopeChange</view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="offGyroscopeChange">
+        offGyroscopeChange
+      </button>
+    </view>
+  </view>
+</view>

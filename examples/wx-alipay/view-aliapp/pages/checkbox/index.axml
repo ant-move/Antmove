@@ -1,0 +1,15 @@
+<view class='page-container-classname'>
+                <i-panel title='group-水果' ref='saveChildRef1'>
+  <i-checkbox-group current='{{current}}' onChange='handleFruitChange' ref='saveChildRef2'>
+    <i-checkbox a:for='{{fruit}}' position='{{position}}' a:key='*this' value='{{item.name}}' ref-numbers='{{fruit}}' ref='saveChildRef3'>
+    </i-checkbox>
+  </i-checkbox-group>
+</i-panel><i-button type='ghost' onClick='handleClick' ref='saveChildRef4'>
+  切换复选框位置
+</i-button><i-panel title='checkbox-动物' ref='saveChildRef5'>
+  <i-checkbox value='{{animal}}' disabled='{{disabled}}' checked='{{checked}}' onChange='handleAnimalChange' ref='saveChildRef6'>
+  </i-checkbox>
+</i-panel><i-button type='ghost' onClick='handleDisabled' ref='saveChildRef7'>
+  切换disabled状态
+</i-button>
+            </view>

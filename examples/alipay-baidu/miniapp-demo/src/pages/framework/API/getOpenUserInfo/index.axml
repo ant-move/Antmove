@@ -1,0 +1,17 @@
+<view class="page">
+  <view class="page-description">获取会员的基础信息</view>
+  <view class="page-section">
+    <view class="page-section-title">getOpenUserInfo</view>
+    <view class="page-section-demo">
+      <button
+        open-type="getAuthorize"
+        type="primary"
+        onGetAuthorize="onGetAuthorize"
+        onError="onAuthError"
+        scope='userInfo'
+      >
+        会员基础信息授权
+      </button>
+    </view>
+  </view>
+</view>

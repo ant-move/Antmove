@@ -1,0 +1,11 @@
+@import "../../../common/lib/weui.acss";
+.page-body-info {
+    display: flex;
+    margin-top: 40rpx;
+    padding: 0;
+    height: 360rpx;
+    border-top: 1rpx solid #d9d9d9;
+    border-bottom: 1rpx solid #d9d9d9;
+    align-items: center;
+    justify-content: center;
+}

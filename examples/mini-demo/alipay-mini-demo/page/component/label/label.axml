@@ -1,0 +1,75 @@
+<view class='page-container-classname'>
+                <view class='page' ref='saveChildRef0'>
+  <view class='page-section'>
+    <view class='page-section-title'>
+      Checkbox
+    </view>
+    <view class='page-section-demo'>
+      <checkbox-group>
+        <view>
+          <label>
+            <checkbox value='AngularJS'>
+            </checkbox>
+            <text>
+              AngularJS            </text>
+          </label>
+        </view>        <view>
+          <label>
+            <checkbox value='React'>
+            </checkbox>
+            <text>
+              React            </text>
+          </label>
+        </view>
+      </checkbox-group>
+    </view>
+  </view>  <view class='page-section'>
+    <view class='page-section-title'>
+      Radio
+    </view>
+    <view class='page-section-demo'>
+      <radio-group>
+        <view>
+          <radio id='AngularJS' value='AngularJS'>
+          </radio>
+          <label for='AngularJS'>
+            AngularJS
+          </label>
+        </view>
+        <view>
+          <radio id='React' value='React'>
+          </radio>
+          <label for='React'>
+            React
+          </label>
+        </view>
+      </radio-group>
+    </view>
+  </view>
+  <view class='page-section'>
+    <view class='page-section-title'>
+      多个 Checkbox 只选中一个
+    </view>
+    <view class='page-section-demo'>
+      <label>
+        <checkbox>
+          选中我
+        </checkbox>
+        <checkbox>
+          选不中
+        </checkbox>
+        <checkbox>
+          选不中
+        </checkbox>
+        <checkbox>
+          选不中
+        </checkbox>
+        <view>
+          <text>
+            Click Me          </text>
+        </view>
+      </label>
+    </view>
+  </view>
+</view>
+            </view>

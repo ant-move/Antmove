@@ -1,0 +1,5 @@
+<view class="group">
+  <block wx:for="{{iconType}}">
+    <icon type="{{item}}" size="40" aria-label="aria-label"/>
+  </block>
+</view>

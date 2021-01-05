@@ -1,0 +1,31 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'uploadFile'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <view class='page-body-info'>
+        <block a:if='{{imageSrc}}'>
+          <image src='{{imageSrc}}' class='image' mode='aspectFit'>
+          </image>
+        </block>
+        <block a:else >
+          <view class='image-plus image-plus-nb' onTap='chooseImage'>
+            <view class='image-plus-horizontal'>
+            </view>
+            <view class='image-plus-vertical'>
+            </view>
+          </view>
+          <view class='image-plus-text'>
+            选择图片
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

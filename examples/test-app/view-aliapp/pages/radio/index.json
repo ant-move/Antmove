@@ -1,0 +1,9 @@
+{
+	"usingComponents": {
+		"i-panel": "../../dist/panel/index",
+		"i-button": "../../dist/button/index",
+		"i-radio-group": "../../dist/radio-group/index",
+		"i-radio": "../../dist/radio/index"
+	},
+	"defaultTitle": "Radio 单选"
+}

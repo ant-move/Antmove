@@ -1,8 +1,8 @@
-const { useReducer } = require('@amove/next');
+const { useReducer } = require('@amove/next')
 
 useReducer({
-    ...require('./runGenerateBundleApi'),
-    ...require('./generateWrapComponents'),
-    ...require('./runGenerateBundleComponent'),
-    ...require('./generateMiniProjectJson')
-});
+  ...require('./runGenerateBundleApi'),
+  ...require('./generateWrapComponents'),
+  ...require('./runGenerateBundleComponent'),
+  ...require('./generateMiniProjectJson'),
+})

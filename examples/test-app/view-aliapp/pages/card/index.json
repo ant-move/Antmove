@@ -1,0 +1,4 @@
+{
+	"usingComponents": { "i-card": "../../dist/card/index" },
+	"defaultTitle": "Card 卡片"
+}

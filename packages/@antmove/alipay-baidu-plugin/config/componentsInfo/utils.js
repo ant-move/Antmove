@@ -18,19 +18,19 @@
 
 module.exports = {
 
-    createSupportProp (desc,type=7,key="") {
-        let status = 1;
-        (type===0)&&(status=2);
-        (type===1)&&(status=0);
-        (type===7)&&(status=0);
-        const retData = {
-            type: type,
-            status,
-            desc
-        };
-        if ( key ) {
-            retData.key = key;
-        }
-        return retData;
+  createSupportProp(desc, type = 7, key = '') {
+    let status = 1;
+    (type === 0) && (status = 2);
+    (type === 1) && (status = 0);
+    (type === 7) && (status = 0)
+    const retData = {
+      type,
+      status,
+      desc,
     }
-};
+    if (key) {
+      retData.key = key
+    }
+    return retData
+  },
+}

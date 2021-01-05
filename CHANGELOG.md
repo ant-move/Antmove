@@ -1,3 +1,28 @@
+## 1.2.2(2021-01-05)
+
+* wx-aliapp
+  * 模版：
+    1. 修复template中参数以表达式出现时的转换异常问题
+    2. 修复template中引入内联wxs时的问题
+  * 组件：
+    1. 支持第三方组件库转换，转换后路径为/__anatmove_miniprogarm_npm
+    2. 支持 useExtendLib 写法 引入weui
+    3. labe以自定义组件的形式支持点击事件
+    4. 修复scroll-view组件的scrolltolower属性的转换异常问题
+    5. rich-text渲染问题修复
+    6. swiper高度问题修复
+    7. label类名问题修复
+    8. 生命周期
+    9. lifetimes中ready不执行问题修复
+  * 其他：
+    1. 支持全局对象global
+    2. 修复条件编译不写else时报错问题
+    3. 添加统一的报错信息
+    4. 修复antmove.config.js中的内容注释后，再转换会报错问题
+    5. 支持style v2样式
+    6. 支持wx-else
+    7. import-sjs转换后ref不符合规范问题修复
+    8. antmoveAction造成的p1问题 修复
 ## 1.0.4(2019-09-26)
 ### Features
 

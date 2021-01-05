@@ -1,0 +1,11 @@
+<view class="page">
+  <view class="page-description">动态加载网络字体</view>
+  <view class="page-section">
+    <view class="page-section-title">loadFontFace</view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="loadFontFace">
+        loadFontFace
+      </button>
+    </view>
+  </view>
+</view>

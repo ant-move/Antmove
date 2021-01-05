@@ -1,0 +1,50 @@
+<view class='page-container-classname'>
+                <view class='page' ref='saveChildRef0'>
+  <view class='page-description'>
+    图标
+  </view>
+  <view class='page-section'>
+    <view class='page-section-title'>
+      Type
+    </view>
+    <view class='page-section-demo icon-list'>
+      <block a:for='{{iconType}}' ref-numbers='{{iconType}}'>
+        <view class='item'>
+          <icon type='{{item}}' size='{{45}}' class=' icon{{item}}-style 45-style'>
+          </icon>
+          <text>
+            {{item}}          </text>
+        </view>
+      </block>
+    </view>
+  </view>  <view class='page-section'>
+    <view class='page-section-title'>
+      Size
+    </view>
+    <view class='page-section-demo icon-list'>
+      <block a:for='{{iconSize}}' ref-numbers='{{iconSize}}'>
+        <view class='item'>
+          <icon type='success' size='{{item}}' class=' iconsuccess-style {{item}}-style'>
+          </icon>
+          <text>
+            {{item}}          </text>
+        </view>
+      </block>
+    </view>
+  </view>  <view class='page-section'>
+    <view class='page-section-title'>
+      Color
+    </view>
+    <view class='page-section-demo icon-list'>
+      <block a:for='{{iconColor}}' ref-numbers='{{iconColor}}'>
+        <view class='item'>
+          <icon type='success' size='{{45}}' color='{{item}}' class=' iconsuccess-style 45-style'>
+          </icon>
+          <text style='color:{{item}}'>
+            {{item}}          </text>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+            </view>

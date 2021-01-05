@@ -1,0 +1,5 @@
+@import "../../../common/lib/weui.acss";
+.picker {
+    padding: 19rpx 26rpx;
+    background-color: #ffffff;
+}

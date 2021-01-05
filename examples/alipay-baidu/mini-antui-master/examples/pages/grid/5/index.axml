@@ -1,0 +1,2 @@
+<view style="margin-top: 10px;" />
+<grid onGridItemClick="onItemClick" columnNum="{{5}}" list="{{list5}}" />

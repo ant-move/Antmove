@@ -1,0 +1,8 @@
+<view class='page-container-classname'>
+                <view class='container log-list' ref='saveChildRef0'>
+  <block a:for='{{logs}}' a:for-item='log' ref-numbers='{{logs}}'>
+    <text class='log-item'>
+      {{index + 1}}. {{log}}    </text>
+  </block>
+</view>
+            </view>

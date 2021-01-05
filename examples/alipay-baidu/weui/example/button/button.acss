@@ -1,0 +1,11 @@
+.page-container-classname {
+    background-color: #ededed;
+}
+.button-sp-area {
+    margin: 0 auto;
+    padding-top: 15px;
+    text-align: center;
+}
+.mini-btn {
+    margin: 0 4px;
+}

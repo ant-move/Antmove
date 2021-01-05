@@ -1,0 +1,9 @@
+<view class="page">
+  <view class="page-description">获取加密用户标示</view>
+  <view class="page-section">
+    <view class="page-section-title">getAmapUserData</view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="getAmapUserData">getAmapUserData</button>
+    </view>
+  </view>
+</view>

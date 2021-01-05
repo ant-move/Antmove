@@ -1,9 +1,9 @@
-.checkboxWap {
-    display:inline-block;  
+.am_checkbox_wrap {
+  display: inline-block;
 }
-.innerbox{
-    display:inline-flex;
-    align-items:center;
-    /* vertical-align:text-bottom; */
-    vertical-align:middle;
+.am_innerbox {
+  display: inline-flex;
+  align-items: center;
+  /* vertical-align:text-bottom; */
+  vertical-align: middle;
 }

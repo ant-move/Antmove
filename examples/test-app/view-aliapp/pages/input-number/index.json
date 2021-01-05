@@ -1,0 +1,7 @@
+{
+	"usingComponents": {
+		"i-input-number": "../../dist/input-number/index",
+		"i-panel": "../../dist/panel/index"
+	},
+	"defaultTitle": "InputNumber 数字输入框"
+}

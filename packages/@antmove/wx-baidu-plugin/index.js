@@ -1,69 +1,38 @@
-const transformFramework = require('antmove');
-const AlipayWxPlugin = require('@antmove/wx-alipay');
-const path = require('path');
-const AlipayBaiduPlugin = require('@antmove/alipay-baidu');
-const fs = require('fs-extra');
-const App = transformFramework();
-const BaiduApp = transformFramework();
-module.exports = function (options = {}) {
-    const inputDirPath = options.input;
-    let outputDirPath = options.output || options.defaultOutput;
+const path = require('path')
+const transform = require('wx2')
+const chalk = require('chalk')
+const fs = require('fs-extra')
+const {
+  recordOptions,
+  parserDirInfo,
+  emptyFiles,
+  explorerSync,
+} = require('@antmove/utils')
 
-    if (outputDirPath.charAt(outputDirPath.length-1)===path.sep) {
-        outputDirPath = outputDirPath.substr(0, outputDirPath.length-1);
-    }
-    
-    const dirArr = outputDirPath.split(path.sep);
-    dirArr.pop();
-    dirArr.push('.antmove');
-    const newoutPath =  dirArr.join(path.sep);
-    options.isWx2Baidu = true;
-    options.output = newoutPath;
-    const opts = {
-        dist: newoutPath,
-        entry: inputDirPath,
-        ...options
-    };
 
-    App.use(
-        AlipayWxPlugin,
-        opts
-    )
-        .start(
-            () => {
-                options.input = newoutPath;
-                options.output = outputDirPath;
-                options.dirpath = newoutPath;
-                BaiduApp.use(
-                    AlipayBaiduPlugin, 
-                    {
-                        entry: newoutPath,
-                        dist: outputDirPath,
-                        env: options.env,
-                        ...options
-                    })
-                    .start(() => {
-                        if (newoutPath.includes('.antmove')) {
-                            deleteall (newoutPath);
-                        }
-                    });
-            }
-        );
-
-};
-
-function deleteall (newoutPath) {
-    var files = [];
-    if (fs.existsSync(newoutPath)) {
-        files = fs.readdirSync(newoutPath);
-        files.forEach(function (file) {
-            var curPath = newoutPath + path.sep + file;
-            if (fs.statSync(curPath).isDirectory()) { 
-                deleteall(curPath);
-            } else {
-                fs.unlinkSync(curPath);
-            }
-        });
-        fs.rmdirSync(newoutPath);
-    }
-}  
+module.exports = async function(options = {}) {
+  const entry = options.input
+  const dist = options.output
+  const antmoveDist = path.resolve(path.dirname(dist), '_antmoveDist')
+  logFor = dist,
+  target = 'wx2swan'
+  options.dirpath = entry
+  options.exclude = [
+    'antmove.config.js',
+    'node_modules',
+    'project.config.json'
+  ]
+  options.antmoveDist = antmoveDist
+  const inputProjectInfo = parserDirInfo(options, (info) => {
+    info.dist = path.join(dist, info.path.split(entry)[1]).replace('//', '/')
+  })
+  const ver = fs.readJSONSync(path.join(__dirname, './package.json')).version
+  process.env.compilerType = `wx-baidu@${ver}`
+  recordOptions(options)
+  explorerSync(inputProjectInfo, options, 'swan')
+  await transform({ entry: antmoveDist, dist, logFor, target }).catch((e) => {
+    console.log(chalk.red('run error: ', `${e.message}\n${e.stack}`))
+  })
+  await emptyFiles(antmoveDist)
+  fs.rmdirSync(antmoveDist)
+}

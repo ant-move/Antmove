@@ -1,5 +1,5 @@
-const lifeCycles = require('./lifeCycles/index');
+const lifeCycles = require('./lifeCycles/index')
 
 module.exports = {
-    lifeCycles
-};
+  lifeCycles,
+}

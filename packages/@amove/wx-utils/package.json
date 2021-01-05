@@ -1,6 +1,6 @@
 {
   "name": "@amove/wx-utils",
-  "version": "1.1.6",
+  "version": "1.2.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@amove/next": "^0.2.2",
+    "@amove/next": "^0.2.13",
     "@babel/core": "^7.9.6",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-export-default-from": "^7.8.3",
@@ -22,5 +22,5 @@
     "colornames": "^1.1.1",
     "fs-extra": "^9.0.0"
   },
-  "gitHead": "aa12723be1437d52c528d82ca57dd04f0da80f64"
+  "gitHead": "d3eab5657b5b44b09cc23402feee06c67e9beef2"
 }

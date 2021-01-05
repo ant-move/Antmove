@@ -1,0 +1,10 @@
+<view class='page-container-classname'>
+                <view ref='saveChildRef0'>
+  <view class='main'>
+    <header headline='{{headline}}' subtitle='{{subtitle}}' ref='saveChildRef1'>
+    </header>
+    <list list='{{APIList}}' ref='saveChildRef2'>
+    </list>
+  </view>
+</view>
+            </view>

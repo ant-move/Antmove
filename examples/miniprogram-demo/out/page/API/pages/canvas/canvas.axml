@@ -1,0 +1,32 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'createContext'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <canvas class='canvas-element' id='canvas'>
+      </canvas>
+      <scroll-view class='canvas-buttons' scroll-y='true'>
+        <block a:for='{{methods}}' a:for-item='method' ref-numbers='{{methods}}'>
+          <button class='canvas-button' onTap='{{method}}'>
+            {{method}}
+          </button>
+        </block>
+        <button class='canvas-button primary-style' type='primary' onTap='toTempFilePath'>
+          toTempFilePath
+        </button>
+        <button class='canvas-button primary-style' type='primary' onTap='canvasPutImageData'>
+          canvasPutImageData
+        </button>
+        <button class='canvas-button primary-style' type='primary' onTap='canvasGetImageData'>
+          canvasGetImageData
+        </button>
+      </scroll-view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

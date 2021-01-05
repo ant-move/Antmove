@@ -1,0 +1,39 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'onCompassChange'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section page-section_center'>
+      <text class='page-body-text'>
+        旋转手机即可获取方位信息
+      </text>
+      <view class='direction'>
+        <view class='bg-compass-line'>
+        </view>
+        <image class='bg-compass' src='compass.png' style='transform: rotate({{direction}}deg)'>
+        </image>
+        <view class='direction-value'>
+          <text>
+            {{direction}}
+          </text>
+          <text class='direction-degree'>
+            o
+          </text>
+        </view>
+      </view>
+      <view class='controls'>
+        <button disabled='{{enabled}}' onTap='startCompass'>
+          开始监听
+        </button>
+        <button disabled='{{!enabled}}' onTap='stopCompass'>
+          停止监听
+        </button>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

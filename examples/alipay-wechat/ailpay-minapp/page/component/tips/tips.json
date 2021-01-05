@@ -1,0 +1,7 @@
+{
+  "defaultTitle": "Tips",
+  "usingComponents":{
+    "tips-dialog": "mini-antui/es/tips/tips-dialog/index",
+    "tips-plain": "mini-antui/es/tips/tips-plain/index"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "env": {
+    "es6": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "globals": {
+    "my": true,
+    "App": true,
+    "getApp": true,
+    "Page": true,
+    "Component": true,
+    "getCurrentPages": true
+  },
+  "extends": [
+    "eslint-config-ali"
+  ],
+  "rules": {
+    "semi":["error", "never"],
+    "no-lonely-if": "off",
+    "no-param-reassign": ["error", { "props": false }],
+    "no-console": "off",
+    "no-bitwise": ["error", { "int32Hint": true }]
+  }
+}

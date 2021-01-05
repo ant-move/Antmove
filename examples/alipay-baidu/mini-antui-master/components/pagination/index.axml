@@ -1,0 +1,28 @@
+<import-sjs name="index" from="./index.sjs"/>
+<view class="am-pagination-container am-pagination-border-top {{className}}">
+  <view class="am-pagination-content am-pagination-prev">
+    <view
+      class="am-pagination-button-left"
+      onTap="onTapPrev">
+      <view
+        a:if="{{mode === 'text'}}"
+        class="{{btnClass}} {{disabled || index.calcCurrent(current, currentPage) === 1 ? 'button-text-disabled' : ''}} am-pagination-text-ellipsis"
+      >{{prevText}}</view>
+      <view a:else class="am-pagination-arrow arrow-left" />
+    </view>
+  </view>
+  <view a:if="{{!simple}}" class="am-pagination-page">
+    <text class="text-current">{{index.calcCurrent(current, currentPage)}}</text>/<text class="text-total">{{total}}</text>
+  </view>
+  <view class="am-pagination-content am-pagination-next">
+    <view
+      class="am-pagination-button-right"
+      onTap="onTapNext">
+      <view
+        a:if="{{mode === 'text'}}"
+        class="{{btnClass}} {{disabled || index.calcCurrent(current, currentPage) === total ? 'button-text-disabled' : ''}} am-pagination-text-ellipsis"
+      >{{nextText}}</view>
+      <view a:else class="am-pagination-arrow arrow-right" />
+    </view>
+  </view>
+</view>

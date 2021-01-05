@@ -1,0 +1,101 @@
+<view class='page-container-classname'>
+                <view class='logo' ref='saveChildRef0'>
+  <image src='../images/logo.png' mode='aspectFit'>
+  </image>
+</view><i-panel title='布局' ref='saveChildRef1'>
+  <i-cell-group ref='saveChildRef2'>
+    <i-cell title='Layout 栅格布局' is-link=" " url='/pages/layout/index' ref='saveChildRef3'>
+    </i-cell>
+    <i-cell title='Grid 宫格' is-link=" " url='/pages/grid/index' ref='saveChildRef4'>
+    </i-cell>
+    <i-cell title='Panel 面板' is-link=" " url='/pages/panel/index' ref='saveChildRef5'>
+    </i-cell>
+    <i-cell title='List 列表' is-link=" " url='/pages/list/index' ref='saveChildRef6'>
+    </i-cell>
+    <i-cell title='Card 卡片' is-link=" " url='/pages/card/index' ref='saveChildRef7'>
+    </i-cell>
+  </i-cell-group>
+</i-panel><i-panel title='基础组件' ref='saveChildRef8'>
+  <i-cell-group ref='saveChildRef9'>
+    <i-cell title='Button 按钮' is-link=" " url='/pages/button/index' ref='saveChildRef10'>
+    </i-cell>
+    <i-cell title='Color 色彩' is-link=" " url='/pages/color/index' ref='saveChildRef11'>
+    </i-cell>
+    <i-cell title='Icon 图标' is-link=" " url='/pages/icon/index' ref='saveChildRef12'>
+    </i-cell>
+  </i-cell-group>
+</i-panel><i-panel title='导航' ref='saveChildRef13'>
+  <i-cell-group ref='saveChildRef14'>
+    <i-cell title='TabBar 标签栏' is-link=" " url='/pages/tab-bar/index' ref='saveChildRef15'>
+    </i-cell>
+    <i-cell title='Tabs 标签页' is-link=" " url='/pages/tabs/index' ref='saveChildRef16'>
+    </i-cell>
+    <i-cell title='Drawer 抽屉' is-link=" " url='/pages/drawer/index' ref='saveChildRef17'>
+    </i-cell>
+    <i-cell title='Page 分页' is-link=" " url='/pages/page/index' ref='saveChildRef18'>
+    </i-cell>
+    <i-cell title='Steps 步骤条' is-link=" " url='/pages/steps/index' ref='saveChildRef19'>
+    </i-cell>
+    <i-cell title='NoticeBar 通告栏' is-link=" " url='/pages/notice-bar/index' ref='saveChildRef20'>
+    </i-cell>
+    <i-cell title='Index 索引选择器' is-link=" " url='/pages/index-list/index' ref='saveChildRef21'>
+    </i-cell>
+    <i-cell title='Sticky 吸顶容器' is-link=" " url='/pages/sticky/index' ref='saveChildRef22'>
+    </i-cell>
+  </i-cell-group>
+</i-panel><i-panel title='操作反馈' ref='saveChildRef23'>
+  <i-cell-group ref='saveChildRef24'>
+    <i-cell title='ActionSheet 动作面板' is-link=" " url='/pages/action-sheet/index' ref='saveChildRef25'>
+    </i-cell>
+    <i-cell title='Toast 轻提示' is-link=" " url='/pages/toast/index' ref='saveChildRef26'>
+    </i-cell>
+    <i-cell title='Modal 对话框' is-link=" " url='/pages/modal/index' ref='saveChildRef27'>
+    </i-cell>
+    <i-cell title='Message 全局提醒' is-link=" " url='/pages/message/index' ref='saveChildRef28'>
+    </i-cell>
+    <i-cell title='Spin 加载中' is-link=" " url='/pages/spin/index' ref='saveChildRef29'>
+    </i-cell>
+    <i-cell title='Swipeout 滑动菜单' is-link=" " url='/pages/swipeout/index' ref='saveChildRef30'>
+    </i-cell>
+  </i-cell-group>
+</i-panel><i-panel title='视图' ref='saveChildRef31'>
+  <i-cell-group ref='saveChildRef32'>
+    <i-cell title='Badge 徽章' is-link=" " url='/pages/badge/index' ref='saveChildRef33'>
+    </i-cell>
+    <i-cell title='Alert 警告提示' is-link=" " url='/pages/alert/index' ref='saveChildRef34'>
+    </i-cell>
+    <i-cell title='Tag 标签' is-link=" " url='/pages/tag/index' ref='saveChildRef35'>
+    </i-cell>
+    <i-cell title='Progress 进度条' is-link=" " url='/pages/progress/index' ref='saveChildRef36'>
+    </i-cell>
+    <i-cell title='Avatar 头像' is-link=" " url='/pages/avatar/index' ref='saveChildRef37'>
+    </i-cell>
+    <i-cell title='CountDown 倒计时' is-link=" " url='/pages/count-down/index' ref='saveChildRef38'>
+    </i-cell>
+    <i-cell title='Divider 分隔符' is-link=" " url='/pages/divider/index' ref='saveChildRef39'>
+    </i-cell>
+    <i-cell title='Collapse 折叠面板' is-link=" " url='/pages/collapse/index' ref='saveChildRef40'>
+    </i-cell>
+    <i-cell title='LoadMore 页底提示' is-link=" " url='/pages/load-more/index' ref='saveChildRef41'>
+    </i-cell>
+  </i-cell-group>
+</i-panel><i-panel title='表单' ref='saveChildRef42'>
+  <i-cell-group ref='saveChildRef43'>
+    <i-cell title='Input 输入框' is-link=" " url='/pages/input/index' ref='saveChildRef44'>
+    </i-cell>
+    <i-cell title='Radio 单选' is-link=" " url='/pages/radio/index' ref='saveChildRef45'>
+    </i-cell>
+    <i-cell title='Checkbox 复选' is-link=" " url='/pages/checkbox/index' ref='saveChildRef46'>
+    </i-cell>
+    <i-cell title='Switch 开关' is-link=" " url='/pages/switch/index' ref='saveChildRef47'>
+    </i-cell>
+    <i-cell title='Rate 评分' is-link=" " url='/pages/rate/index' ref='saveChildRef48'>
+    </i-cell>
+    <i-cell title='InputNumber 数字输入框' is-link=" " url='/pages/input-number/index' ref='saveChildRef49'>
+    </i-cell>
+  </i-cell-group>
+</i-panel><view style='margin-top: 16px'>
+  <ad unit-id='adunit-afe5e164cf94a7aa'>
+  </ad>
+</view>
+            </view>

@@ -1,0 +1,44 @@
+<view class='page-container-classname'>
+                <i-panel title='一般用法' ref='saveChildRef1'>
+</i-panel><i-button inline=" " onClick='handleClick' ref='saveChildRef2'>
+  行内按钮
+</i-button><i-button inline=" " type='primary' onClick='handleClick' ref='saveChildRef3'>
+  行内按钮
+</i-button><i-button inline=" " type='success' onClick='handleClick' ref='saveChildRef4'>
+  行内按钮
+</i-button><i-button onClick='handleClick' ref='saveChildRef5'>
+  默认按钮
+</i-button><i-button type='error' long='true' onClick='handleClick' ref='saveChildRef6'>
+  联通两边按钮
+</i-button><i-button type='primary' onClick='handleClick' ref='saveChildRef7'>
+  Primary
+</i-button><i-button type='ghost' onClick='handleClick' ref='saveChildRef8'>
+  Ghost
+</i-button><i-button type='info' onClick='handleClick' ref='saveChildRef9'>
+  Info
+</i-button><i-button type='success' onClick='handleClick' ref='saveChildRef10'>
+  Success
+</i-button><i-button type='warning' onClick='handleClick' ref='saveChildRef11'>
+  Warning
+</i-button><i-button type='error' onClick='handleClick' ref='saveChildRef12'>
+  Error
+</i-button><i-panel title='不同尺寸' ref='saveChildRef13'>
+</i-panel><i-button type='primary' size='large' onClick='handleClick' ref='saveChildRef14'>
+  大尺寸
+</i-button><i-button type='primary' size='default' onClick='handleClick' ref='saveChildRef15'>
+  默认尺寸
+</i-button><i-button type='primary' size='small' onClick='handleClick' ref='saveChildRef16'>
+  小尺寸
+</i-button><i-panel title='圆角的不同尺寸' ref='saveChildRef17'>
+</i-panel><i-button type='success' shape='circle' size='large' onClick='handleClick' ref='saveChildRef18'>
+  大尺寸
+</i-button><i-button type='success' shape='circle' onClick='handleClick' ref='saveChildRef19'>
+  默认尺寸
+</i-button><i-button type='success' shape='circle' size='small' onClick='handleClick' ref='saveChildRef20'>
+  小尺寸
+</i-button><i-button type='primary' loading='true' onClick='handleClick' ref='saveChildRef21'>
+  加载中按钮
+</i-button><i-button type='primary' disabled=" " onClick='handleClick' ref='saveChildRef22'>
+  禁用按钮
+</i-button>
+            </view>

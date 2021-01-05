@@ -1,0 +1,16 @@
+<view class="page">
+  <view class="page-description">获取用户手机号</view>
+  <view class="page-section">
+    <view class="page-section-title">getPhoneNumber</view>    
+    <view class="page-section-demo">
+        <button a:if="{{canIUseAuthButton}}" 
+          open-type="getAuthorize"
+          type="primary"
+          onGetAuthorize="onGetAuthorize" onError="onAuthError" 
+          scope='phoneNumber'
+        >
+          授权手机号
+        </button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,22 @@
+<view>
+  <list>
+    <block a:for="{{items}}">
+      <list-item
+        arrow="{{true}}"
+        index="{{index}}"
+        key="items-{{index}}"
+        last="{{index === (items.length - 1)}}"
+      >
+        <view>
+          <badge a:if="{{item.isWrap}}" text="{{item.text}}" dot="{{item.dot}}">
+            <view slot="inner" style="height: 24px; width: 24px; background-color: #ddd;"></view>
+          </badge>
+          <text style="margin-left: {{ item.isWrap ? '12px' : '0' }}">{{item.intro}}</text>
+        </view>
+        <view slot="extra">
+          <badge a:if="{{!item.isWrap}}" text="{{item.text}}" dot="{{item.dot}}" overflowCount="{{item.overflowCount}}" /> 
+        </view>
+      </list-item>
+    </block>
+  </list>
+</view>

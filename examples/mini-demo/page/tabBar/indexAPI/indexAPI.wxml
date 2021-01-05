@@ -1,0 +1,6 @@
+<view>
+  <view class="main">
+    <header headline="{{headline}}" subtitle="{{subtitle}}"/>   
+    <list list="{{APIList}}"/>   
+  </view>
+</view>

@@ -1,0 +1,128 @@
+.slot-demo-slot-demo .main {
+    /* padding: 0 40rpx; */
+    overflow: hidden;
+}
+
+.slot-demo-slot-demo .date {
+    font-family: PingFangSC-Regular;
+    font-size: 40rpx;
+    color: #000000;
+    line-height: 60rpx;
+    height: 60rpx;
+    margin: 74rpx 0 20rpx 40rpx;
+}
+
+.slot-demo-slot-demo .prompt {
+    font-family: PingFangSC-Light;
+    font-size: 32rpx;
+    color: #000000;
+    line-height: 42rpx;
+    height: auto;
+    opacity: 0.54;
+    margin-left: 40rpx;
+    margin-bottom: 108rpx;
+}
+
+.slot-demo-slot-demo .box {
+    overflow: hidden;
+}
+
+.slot-demo-slot-demo .frame {
+    background: #ffffff;
+    width: 670rpx;
+    height: auto;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 34rpx 0 74rpx 0;
+    /* margin-bottom: 40rpx; */
+}
+
+.slot-demo-slot-demo .title {
+    line-height: 40rpx;
+    font-family: PingFangSC-Light;
+    font-size: 32rpx;
+    color: #000000;
+    height: 40rpx;
+    margin: 0 0 46rpx 40rpx;
+}
+
+.slot-demo-slot-demo .btn {
+    background: #547eff;
+    border-radius: 100rpx;
+    width: 590rpx;
+    height: 78rpx;
+    border-radius: 100rpx;
+    text-align: center;
+    line-height: 78rpx;
+    font-family: PingFangSC-Medium;
+    font-size: 36rpx;
+    color: #ffffff;
+    margin: 0 auto;
+    margin-top: 40rpx;
+    /* margin-top: 46rpx; */
+}
+
+.slot-demo-slot-demo .big {
+    padding: 0 80rpx;
+    display: flex;
+    justify-content: space-between;
+}
+
+.slot-demo-slot-demo .content {
+    margin-top: 40rpx;
+}
+
+.slot-demo-slot-demo .big-btn {
+    background: #547eff;
+    background: #547eff 100%;
+    border-radius: 22px;
+    width: 224rpx;
+    height: 88rpx;
+    border-radius: 44rpx;
+    text-align: center;
+    line-height: 88rpx;
+    font-family: PingFangSC-Medium;
+    font-size: 36rpx;
+    color: #ffffff;
+    text-align: center;
+}
+
+.slot-demo-slot-demo .big-m {
+    padding: 0 114rpx;
+    display: flex;
+    justify-content: space-between;
+}
+
+.slot-demo-slot-demo .mid {
+    background: #547eff;
+    border-radius: 100rpx;
+    width: 192rpx;
+    height: 72rpx;
+    border-radius: 100rpx;
+    text-align: center;
+    line-height: 72rpx;
+    font-family: PingFangSC-Medium;
+    font-size: 32rpx;
+    color: #ffffff;
+    margin-top: 46rpx;
+}
+
+.slot-demo-slot-demo .big-s {
+    padding: 0 148rpx;
+    display: flex;
+    justify-content: space-between;
+}
+
+.slot-demo-slot-demo .small {
+    background: #547eff;
+    border-radius: 100rpx;
+    width: 162rpx;
+    height: 56rpx;
+    border-radius: 100rpx;
+    text-align: center;
+    line-height: 56rpx;
+    font-family: PingFangSC-Medium;
+    font-size: 28rpx;
+    color: #ffffff;
+    margin-top: 60rpx;
+}

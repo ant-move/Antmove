@@ -1,0 +1,4 @@
+<view class='page-container-classname'>
+                <web-view src='https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html' onChildRef='saveChildRef0'>
+</web-view>
+            </view>

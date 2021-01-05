@@ -1,0 +1,17 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'scanCode'}}">
+  </template>
+  <view class='page-body'>
+    <view class='btn-area'>
+      <button type='primary' class=' primary-style'>
+        联系客服
+      </button>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

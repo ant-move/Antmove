@@ -1,0 +1,12 @@
+<view>
+  <view class="demo-title">基础用法</view>
+  <pagination total="{{20}}" current="{{1}}"/>
+  <view class="demo-title">箭头按钮</view>
+  <pagination mode="icon" total="{{20}}" current="{{10}}"/>
+  <view class="demo-title">简单模式</view>
+  <pagination simple total="{{20}}" current="{{1}}"/>
+  <view class="demo-title">按钮禁用</view>
+  <pagination total="{{20}}" current="{{1}}" disabled/>
+  <view class="demo-title">自定义按钮文案</view>
+  <pagination prevText="上一篇" nextText="下一篇" total="{{20}}" current="{{1}}"/>
+</view>

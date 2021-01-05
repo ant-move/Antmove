@@ -1,0 +1,9 @@
+{
+	"defaultTitle": "button",
+	"usingComponents": {
+		"custom-loading": "/__antmove/component/custom-loading/custom-loading",
+		"custom-action-sheet": "/__antmove/component/custom-action-sheet/custom-action-sheet",
+		"action-sheet-item": "/__antmove/component/action-sheet-item/action-sheet-item",
+		"action-sheet-cancel": "/__antmove/component/action-sheet-cancel/action-sheet-cancel"
+	}
+}

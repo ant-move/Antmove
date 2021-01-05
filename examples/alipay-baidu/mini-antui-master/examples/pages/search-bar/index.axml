@@ -1,0 +1,15 @@
+<view>
+  <search-bar
+    value="{{value}}"
+    focus="{{true}}"
+    disabled="{{false}}"
+    maxLength="{{20}}"
+    placeholder="搜索"
+    onInput="handleInput"
+    onClear="handleClear"
+    onFocus="handleFocus"
+    onBlur="handleBlur"
+    onCancel="handleCancel"
+    onSubmit="handleSubmit"
+    showCancelButton="{{false}}" />
+</view>

@@ -1,0 +1,8 @@
+{
+	"usingComponents": {
+		"i-tabs": "../../dist/tabs/index",
+		"i-tab": "../../dist/tab/index",
+		"i-panel": "../../dist/panel/index"
+	},
+	"defaultTitle": "Tabs 标签页"
+}

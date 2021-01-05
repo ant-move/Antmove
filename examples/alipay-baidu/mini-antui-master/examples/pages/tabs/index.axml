@@ -1,0 +1,17 @@
+<view>
+  <tabs
+    tabs="{{tabs}}"
+    showPlus="{{true}}"
+    onTabClick="handleTabClick"
+    onChange="handleTabChange"
+    onPlusClick="handlePlusClick"
+    activeTab="{{activeTab}}"
+    swipeable="{{true}}"
+  >
+    <block a:for="{{tabs}}">
+      <tab-content key="{{index}}">
+        <view class="tab-content">content of {{item.title}}</view>
+      </tab-content>
+    </block>
+  </tabs>
+</view>

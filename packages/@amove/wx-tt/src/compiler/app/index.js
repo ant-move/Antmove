@@ -1,3 +1,3 @@
-require('./Json');
-require('./Wxss');
-require('./Js');
+require('./Json')
+require('./Wxss')
+require('./Js')

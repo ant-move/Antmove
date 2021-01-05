@@ -1,0 +1,28 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'share-button'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-body-wrapper'>
+      <text class='page-body-title'>
+        轻触下方图标即可转发
+      </text>
+      <view class='page-body-line'>
+        <button open-type='share' class='button-share' id='share-button' onTap='handleTapShareButton'>
+          <label for='share-button'>
+            <image style='width: 27px; height: 27px' src='/image/share.png'>
+            </image>
+          </label>
+        </button>
+        <button onTap='hideShare'>
+          隐藏分享
+        </button>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

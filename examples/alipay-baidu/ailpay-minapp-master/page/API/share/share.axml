@@ -1,0 +1,9 @@
+<view class="page" onTap="tapPage">
+  <view
+    class="page-description"
+    >点击右上角开始自定义分享{{ name }}
+   
+  </view>
+  <button type="primary" open-type="share"> show share</button>
+  
+</view>

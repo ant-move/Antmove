@@ -1,8 +1,8 @@
-<view class="map-wrap {{className}}">
+<view class="am-map-wrap">
     <map
         id='{{id}}'
         setting='{{setting}}'
-        class='{{class}}'
+        class='{{className}}'
         longitude="{{longitude}}"
         latitude="{{latitude}}"
         scale="{{scale}}"
@@ -20,7 +20,7 @@
         markers="{{alMakers}}"
         style="{{style}}"
     />
-    <cover-view class="coverview-wrap">
+    <cover-view class="am-coverview-wrap">
         <slot></slot>
     </cover-view>
 </view>

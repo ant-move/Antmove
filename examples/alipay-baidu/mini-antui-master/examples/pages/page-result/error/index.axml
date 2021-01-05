@@ -1,0 +1,6 @@
+<view>
+  <page-result
+    type="error"
+    title="系统出错，正在排查"
+    brief="耽误您的时候，我们深感歉意" />
+</view>

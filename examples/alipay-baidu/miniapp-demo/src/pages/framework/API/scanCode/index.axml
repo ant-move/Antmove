@@ -1,0 +1,13 @@
+<view class="page">
+  <view class="page-description">扫码Scan</view>
+  <view class="page-section">
+    <view class="page-section-title">scan</view>
+    <view class="page-section-demo">
+      <form onSubmit="scanCode">
+        <view>
+          <button type="primary" onTap="scan">扫码</button>
+        </view>
+      </form>
+    </view>
+  </view>
+</view>

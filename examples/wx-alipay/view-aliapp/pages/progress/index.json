@@ -1,0 +1,7 @@
+{
+	"usingComponents": {
+		"i-progress": "../../dist/progress/index",
+		"i-button": "../../dist/button/index"
+	},
+	"defaultTitle": "Progress 进度条"
+}

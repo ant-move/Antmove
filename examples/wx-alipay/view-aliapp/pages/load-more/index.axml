@@ -1,0 +1,6 @@
+<view class='page-container-classname'>
+                <i-load-more ref='saveChildRef1'>
+</i-load-more><i-load-more tip='暂无数据' loading='{{ false }}' ref='saveChildRef2'>
+</i-load-more><i-load-more loading='{{ false }}' ref='saveChildRef3'>
+</i-load-more>
+            </view>

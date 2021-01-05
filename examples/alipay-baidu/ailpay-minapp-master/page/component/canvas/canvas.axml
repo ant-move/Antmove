@@ -1,0 +1,7 @@
+<view class="page">
+  <view class="canvas-view">
+    <canvas id="canvas" class="canvas-over canvas" width="610" height="610" onTouchStart="log" onTouchMove="log" onTouchEnd="log" />
+    <canvas id="bg" width="610" height="610" class="canvas-bg canvas" />
+  </view>
+</view>
+

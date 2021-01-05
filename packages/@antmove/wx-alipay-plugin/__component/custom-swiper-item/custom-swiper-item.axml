@@ -1,11 +1,11 @@
-<swiper-item class='{{className}} ' style='{{style}}'>
-    <view a:if="{{onTap}}"  onTap='tapHandler'>
+<swiper-item class='{{className}}' style='{{style}}'>
+    <view class="am-swiper-item-wrap" a:if="{{onTap}}"  onTap='tapHandler'>
         <slot></slot>
     </view>
-    <view a:if="{{catchTap}}" catchTap="catchTapHandler">
+    <view class="am-swiper-item-wrap" a:if="{{catchTap}}" catchTap="catchTapHandler">
         <slot></slot>
     </view>
-    <view a:else>
+    <view class="am-swiper-item-wrap" a:else>
         <slot></slot>
     </view>
 </swiper-item>

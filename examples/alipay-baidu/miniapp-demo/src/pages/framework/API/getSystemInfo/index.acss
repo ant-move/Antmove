@@ -1,0 +1,8 @@
+.page-section-demo {
+  display: flex;
+  align-items: center;
+}
+
+.page-section-demo > text {
+  white-space: nowrap;
+}

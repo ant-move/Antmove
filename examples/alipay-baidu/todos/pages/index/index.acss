@@ -1,0 +1,4 @@
+.index_page {
+    background-color: #fff;
+    width: 100%;
+}

@@ -1,2 +1,3 @@
-const descObject = require("../config/apiInfo").descObject;
-module.exports = descObject;
+const descObject = require('../config/apiInfo').descObject
+
+module.exports = descObject

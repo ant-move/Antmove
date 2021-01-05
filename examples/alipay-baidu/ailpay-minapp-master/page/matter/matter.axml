@@ -1,0 +1,5 @@
+<view>
+  New Pages's's'ßßß
+      <canvas id="canvas" width="610" height="610" onTouchStart="log" onTouchMove="log" onTouchEnd="log" />
+
+</view>

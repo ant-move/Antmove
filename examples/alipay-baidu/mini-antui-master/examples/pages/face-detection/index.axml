@@ -1,0 +1,12 @@
+<view>
+  <face-detection
+    appName="demo小程序"
+    serviceName="身份录入"
+    onFaceStatusChange="onFaceStatusChange"
+    onFail="onFail"
+    useLiveFaceCheck="{{true}}"
+    btnText="成功了"
+    onSuccessBtnTap="onSuccessBtnTap"
+    minRotate="{{10}}"
+  />
+</view>

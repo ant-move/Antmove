@@ -1,0 +1,68 @@
+<view class='page-container-classname'>
+                <view class='page' ref='saveChildRef0'>
+  <view class='page__hd'>
+    <view class='page__title'>
+      SearchBar
+    </view>
+    <view class='page__desc'>
+      搜索栏
+    </view>
+  </view>
+  <view class='page__bd'>
+    <view class='weui-search-bar'>
+      <view class='weui-search-bar__form'>
+        <view class='weui-search-bar__box'>
+          <icon class='weui-icon-search_in-box iconsearch-style 14-style' type='search' size='{{14}}'>
+          </icon>
+          <input type='text' class='weui-search-bar__input' placeholder='搜索' value='{{inputVal}}' focus='{{inputShowed}}' onInput='inputTyping'>
+          </input>
+          <view class='weui-icon-clear' a:if='{{inputVal.length > 0}}' onTap='clearInput'>
+            <icon type='clear' size='{{14}}' class=' iconclear-style 14-style'>
+            </icon>
+          </view>
+        </view>
+        <label class='weui-search-bar__label' hidden='{{inputShowed}}' onTap='showInput'>
+          <icon class='weui-icon-search iconsearch-style 14-style' type='search' size='{{14}}'>
+          </icon>
+          <view class='weui-search-bar__text'>
+            搜索
+          </view>
+        </label>
+      </view>
+      <view class='weui-search-bar__cancel-btn' hidden='{{!inputShowed}}' onTap='hideInput'>
+        取消
+      </view>
+    </view>
+    <view class='weui-cells searchbar-result' a:if='{{inputVal.length > 0}}'>
+      <navigator url=" " class='weui-cell' hover-class='weui-cell_active'>
+        <view class='weui-cell__bd'>
+          <view>
+            实时搜索文本
+          </view>
+        </view>
+      </navigator>
+      <navigator url=" " class='weui-cell' hover-class='weui-cell_active'>
+        <view class='weui-cell__bd'>
+          <view>
+            实时搜索文本
+          </view>
+        </view>
+      </navigator>
+      <navigator url=" " class='weui-cell' hover-class='weui-cell_active'>
+        <view class='weui-cell__bd'>
+          <view>
+            实时搜索文本
+          </view>
+        </view>
+      </navigator>
+      <navigator url=" " class='weui-cell' hover-class='weui-cell_active'>
+        <view class='weui-cell__bd'>
+          <view>
+            实时搜索文本
+          </view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+</view>
+            </view>

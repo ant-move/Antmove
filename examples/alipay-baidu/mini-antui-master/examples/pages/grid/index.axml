@@ -1,0 +1,16 @@
+<view>
+  <list>
+    <list-item arrow="horizontal" index="grid" key="items-grid">
+      <navigator url="2/index">2列宫格</navigator>
+    </list-item>
+    <list-item arrow="horizontal" index="grid" key="items-grid">
+      <navigator url="3/index">3列宫格</navigator>
+    </list-item>
+    <list-item arrow="horizontal" index="grid" key="items-grid">
+      <navigator url="4/index">4列宫格</navigator>
+    </list-item>
+    <list-item arrow="horizontal" index="notice" key="items-notice" last="{{true}}">
+      <navigator url="5/index">5列宫格</navigator>
+    </list-item>
+  </list>
+</view>

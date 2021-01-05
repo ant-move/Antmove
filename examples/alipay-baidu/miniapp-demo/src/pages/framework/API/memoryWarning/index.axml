@@ -1,0 +1,13 @@
+<view class="page">
+  <view class="page-description">内存不足告警</view>
+  <view class="page-section">
+    <view class="page-section-title">
+      <view class="page-section-name">memoryWarning</view>
+      请保证您当前的设备符合要求： 内存不足
+    </view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="onMemoryWarning">onMemoryWarning</button>
+      <button size="default" type="primary" onTap="offMemoryWarning">offMemoryWarning</button>
+    </view>
+  </view>
+</view>

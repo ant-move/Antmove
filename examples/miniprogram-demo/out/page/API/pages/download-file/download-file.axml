@@ -1,0 +1,26 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'downloadFile'}}">
+  </template>
+  <view class='page-body'>
+    <image a:if='{{imageSrc}}' src='{{imageSrc}}' mode='center'>
+    </image>
+    <block a:else >
+      <view class='page-body-wording'>
+        <text class='page-body-text'>
+          点击按钮下载服务端示例图片
+        </text>
+      </view>
+      <view class='btn-area'>
+        <button type='primary' class=' primary-style' onTap='downloadImage'>
+          下载
+        </button>
+      </view>
+    </block>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

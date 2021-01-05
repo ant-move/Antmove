@@ -7,10 +7,10 @@
  */
 
 module.exports = {
-    Component: {
-        created: {
-            type: 1,
-            name: 'onInit'
-        }
-    }
-};
+  Component: {
+    created: {
+      type: 1,
+      name: 'onInit',
+    },
+  },
+}

@@ -1,4 +1,4 @@
 module.exports = {
-    processEvents (node) {
-    }
-};
+  processEvents(node) {
+  },
+}

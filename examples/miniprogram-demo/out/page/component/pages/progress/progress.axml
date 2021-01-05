@@ -1,0 +1,32 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'progress'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section page-section-gap'>
+      <view class='progress-box'>
+        <progress percent='{{20}}' show-info=" " stroke-width='{{3}}'>
+        </progress>
+      </view>
+      <view class='progress-box'>
+        <progress percent='{{40}}' active=" " stroke-width='{{3}}' active-color='black'>
+        </progress>
+        <icon class='progress-cancel iconcancel-style' type='cancel'>
+        </icon>
+      </view>
+      <view class='progress-box'>
+        <progress percent='{{60}}' active=" " stroke-width='{{3}}' background-color='black'>
+        </progress>
+      </view>
+      <view class='progress-box'>
+        <progress percent='{{80}}' color='#10AEFF' active=" " stroke-width='{{3}}'>
+        </progress>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

@@ -1,0 +1,43 @@
+<view class='page-container-classname'>
+                <view class='page' ref='saveChildRef0'>
+  <view class='page__hd'>
+    <view class='page__title'>
+      Button
+    </view>
+    <view class='page__desc'>
+      按钮，WeUI采用小程序原生的按钮为主体，加入一些间距的样式。
+    </view>
+  </view>
+  <view class='page__bd page__bd_spacing'>
+    <button class='weui-btn primary-style' type='primary'>
+      页面主操作
+    </button>
+    <button class='weui-btn primary-style' type='primary' disabled='true'>
+      页面主操作
+    </button>
+    <button class='weui-btn default-style' type='default'>
+      页面次要操作
+    </button>
+    <button class='weui-btn default-style' type='default' disabled='true'>
+      页面次要操作
+    </button>
+    <button class='weui-btn warn-style' type='warn'>
+      警告类操作
+    </button>
+    <button class='weui-btn warn-style' type='warn' disabled='true'>
+      警告类操作
+    </button>
+    <view class='button-sp-area'>
+      <button class='weui-btn mini-btn primary-style mini-style' type='primary' size='mini'>
+        按钮
+      </button>
+      <button class='weui-btn mini-btn default-style mini-style' type='default' size='mini'>
+        按钮
+      </button>
+      <button class='weui-btn mini-btn warn-style mini-style' type='warn' size='mini'>
+        按钮
+      </button>
+    </view>
+  </view>
+</view>
+            </view>

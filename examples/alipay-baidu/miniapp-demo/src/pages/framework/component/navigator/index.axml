@@ -1,0 +1,23 @@
+<view class="page">
+  <view class="page-description">导航</view>
+  <view class="page-section">
+    <view class="page-section-demo">
+      <navigator url="/pages/framework/component/view/index?title=navigate" hover-class="active" hover-start-time="5000" hover-stay-time="5000">
+        <button type="primary">跳转到新页面</button>
+      </navigator>
+      <view onTap="navigate" data-url="/pages/framework/component/text/index?title=redirect" data-open-type="redirectTo">
+        <button type="primary">在当前页打开</button>
+      </view>
+      <view onTap="navigate" data-url="/pages/tab-bar/page-APIs/index" data-open-type="switchTab">
+        <button type="primary">跳转到另外一个 Tab - “组件”</button>
+      </view>
+      <view a:if="{{canReLaunch}}" onTap="navigate" data-url="/pages/framework/component/icon/index" data-open-type="reLaunch">
+        <button type="primary">reLaunch</button>
+      </view>
+      <view onTap="navigate" data-open-type="navigateBack">
+        <button type="primary">navigateBack</button>
+      </view>
+      <button type="primary" onTap="index">点击回到首页</button>
+    </view>
+  </view>
+</view>

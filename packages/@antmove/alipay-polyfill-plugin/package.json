@@ -1,6 +1,6 @@
 {
   "name": "@antmove/alipay-polyfill",
-  "version": "1.1.6",
+  "version": "1.2.2",
   "description": "alipay miniprograrmm ployfill for antmove",
   "main": "index.js",
   "scripts": {
@@ -13,10 +13,10 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@antmove/utils": "^1.1.6",
+    "@antmove/utils": "^1.2.2",
     "chalk": "^2.4.2",
     "fs-extra": "^8.1.0",
     "htmlparser2": "^4.1.0"
   },
-  "gitHead": "aa12723be1437d52c528d82ca57dd04f0da80f64"
+  "gitHead": "d3eab5657b5b44b09cc23402feee06c67e9beef2"
 }

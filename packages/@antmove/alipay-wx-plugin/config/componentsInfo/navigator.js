@@ -1,4 +1,5 @@
-const { createSupportProp } = require('./utils.js');
+const { createSupportProp } = require('./utils.js')
+
 /**
  * type
  * 0 - missing - 不支持该属性
@@ -17,27 +18,27 @@ const { createSupportProp } = require('./utils.js');
  * desc - 组件或属性作用描述
  */
 module.exports = {
-    'navigator': {
-        name: '页面链接',
-        url: {
-            original: 'https://docs.alipay.com/mini/component/navigator',
-            target: 'https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html'
-        },
-        desc: '页面链接',
-        props: {
-            'open-type': createSupportProp('跳转方式'),
-            'hover-class': createSupportProp('点击后的样式类'),
-            'hover-start-time': {
-                type: 4,
-                status: 0,
-                desc: 'alipay: 按住后多久出现点击态，单位毫秒, wx: 默认值50ms',
-            },
-            'hover-stay-time': {
-                type: 4,
-                status: 0,
-                desc: 'alipay: 手指松开后点击态保留时间，单位毫秒, wx: 默认值600ms',
-            },
-            'url': createSupportProp('当前小程序内的跳转链接')
-        }
-    }
-};
+  navigator: {
+    name: '页面链接',
+    url: {
+      original: 'https://docs.alipay.com/mini/component/navigator',
+      target: 'https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html',
+    },
+    desc: '页面链接',
+    props: {
+      'open-type': createSupportProp('跳转方式'),
+      'hover-class': createSupportProp('点击后的样式类'),
+      'hover-start-time': {
+        type: 4,
+        status: 0,
+        desc: 'alipay: 按住后多久出现点击态，单位毫秒, wx: 默认值50ms',
+      },
+      'hover-stay-time': {
+        type: 4,
+        status: 0,
+        desc: 'alipay: 手指松开后点击态保留时间，单位毫秒, wx: 默认值600ms',
+      },
+      url: createSupportProp('当前小程序内的跳转链接'),
+    },
+  },
+}

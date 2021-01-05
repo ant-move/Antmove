@@ -1,3 +1,3 @@
 module.exports = {
-    "generic:selectable": "genericSelectable"
-};
+  'generic:selectable': 'genericSelectable',
+}

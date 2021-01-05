@@ -1,0 +1,12 @@
+<template name='head' onChildRef='saveChildRef0'>
+  <view class='page-head'>
+    <view class='page-head-title'>
+      {{title}}
+    </view>
+    <view class='page-head-line'>
+    </view>
+    <view a:if='{{desc}}' class='page-head-desc'>
+      {{desc}}
+    </view>
+  </view>
+</template>

@@ -1,0 +1,5 @@
+<button class=" base_btn size_{{size}} type_{{type}} plain {{plain?'plain_b':''}}" a:if="{{!disabled}}" loading="{{loading}}" formType="{{formType}}" open-type="{{opentype}}" app-parameter="{{appParameter}}"> <slot></slot> </button>
+<view class="btn_box" a:if="{{disabled}}">
+    <button class=" base_btn size_{{size}} type_{{type}} plain {{plain?'plain_b':''}} disabled"  disabled="{{disabled}}" loading="{{loading}}" formType="{{formType}}"><slot></slot> </button>
+    <view class="btn_mark" a:if="{{disabled}}" catchTap="stopEvent"></view>
+</view>

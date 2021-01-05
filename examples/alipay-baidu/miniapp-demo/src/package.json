@@ -1,0 +1,5 @@
+{
+    "name": "miniapp-template-src",
+    "version": "1.0.18",
+    "dependencies": { "@alipay/lux": "^0.3.3", "mini-antui": "^0.4.27" }
+}

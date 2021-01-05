@@ -1,0 +1,6 @@
+<radio-group class="radio-group" bindchange="radioChange">
+  <label class="radio" wx:for="{{groups}}">
+    <radio value="{{item.name}}" checked="{{item.checked}}" aria-label="aria-label"/>
+    <text>{{item.value}}</text>
+</label>
+</radio-group>

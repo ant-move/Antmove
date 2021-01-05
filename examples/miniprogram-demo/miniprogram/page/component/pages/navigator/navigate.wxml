@@ -1,0 +1,9 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: '新建的页面'}}"/>
+  <navigator open-type= 'navigateBack'  delta>
+    <button>返回</button>
+  </navigator>
+</view>

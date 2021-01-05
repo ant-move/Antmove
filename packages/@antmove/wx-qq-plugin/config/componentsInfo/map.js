@@ -1,4 +1,5 @@
-const { createSupportProp } = require('./utils.js');
+const { createSupportProp } = require('./utils.js')
+
 /**
  * type
  * 0 - missing - 不支持该属性
@@ -17,18 +18,18 @@ const { createSupportProp } = require('./utils.js');
  * desc - 组件或属性作用描述
  */
 module.exports = {
-    'map': {
-        name: '地图',
-        type: 1,
-        url: {
-            wechat: 'https://developers.weixin.qq.com/miniprogram/dev/component/map.html',
-            alipay: 'https://docs.alipay.com/mini/component/map'
-        },
-        desc: 'use custom map component instead default map component.',
-        props: {
-            'longitude': createSupportProp('中心经度'),
-            'latitude': createSupportProp('中心纬度'),
-            'scale': createSupportProp('缩放级别'),
-        }
-    }
-};
+  map: {
+    name: '地图',
+    type: 1,
+    url: {
+      wechat: 'https://developers.weixin.qq.com/miniprogram/dev/component/map.html',
+      alipay: 'https://docs.alipay.com/mini/component/map',
+    },
+    desc: 'use custom map component instead default map component.',
+    props: {
+      longitude: createSupportProp('中心经度'),
+      latitude: createSupportProp('中心纬度'),
+      scale: createSupportProp('缩放级别'),
+    },
+  },
+}

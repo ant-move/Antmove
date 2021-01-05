@@ -1,0 +1,3 @@
+<view class="am-flexbox-item">
+  <slot />
+</view>

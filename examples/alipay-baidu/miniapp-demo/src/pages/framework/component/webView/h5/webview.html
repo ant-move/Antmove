@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html class="no-js" lang="" style="font-size: 64px;">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>嵌入web-view</title>
+		<meta name="description" content="web-view page">
+		<meta name="keywords" content="web-webview">
+		<link rel="stylesheet" href="./webview.css" />
+	</head>
+	<body>
+
+
+
+
+		<script>
+			var audioFilePath;
+
+			function postMessage() {
+				console.log("调用了postMessage");
+				my.postMessage({
+					name: "测试web-view"
+				});
+				// 接收来自小程序的消息
+				my.onMessage = function(e) {
+					console.log(e)
+					window.alert(JSON.stringify(e))
+				}
+			}
+
+			function getEnv() {
+				my.getEnv(function(result) {
+					console.log("调用了getEnv" + JSON.stringify(result));
+					window.alert(JSON.stringify(result));
+				});
+			};
+
+			function getNetworkType() {
+				my.getNetworkType({
+					success: function(result) {
+						console.log("调用了getNetworkType" + JSON.stringify(result));
+						window.alert(JSON.stringify(result));
+					}
+				});
+			}
+
+			function showLoadingAndHide() {
+				my.showLoading({
+					text: '加载中, 五秒后自动关闭',
+				});
+				window.setTimeout(function() {
+					my.hideLoading();
+				}, 5 * 1000);
+			}
+
+			function getLocation() {
+				my.getLocation({
+					type: 1,
+					success: function(result) {
+						console.log("调用了getLocation" + JSON.stringify(result));
+						window.alert(JSON.stringify(result));
+					}
+				});
+			}
+
+			function openLocation() {
+				my.openLocation({
+					longitude: '120.126293',
+					latitude: '30.274653',
+					name: '黄龙万科中心',
+					address: '学院路77号',
+					scale: 5,
+					success: function(result) {
+						console.log("调用了openLocation" + JSON.stringify(result));
+						window.alert(JSON.stringify(result));
+					}
+				});
+			}
+
+			function alert(content) {
+				my.alert({
+					title: '亲',
+					content: content || '您本月的出行历史已出',
+					buttonText: '我知道了',
+				});
+			}
+
+			function showActionSheet() {
+				my.showActionSheet({
+					title: '支付宝-ActionSheet',
+					items: ['菜单一', '菜单二', '菜单三'],
+					cancelButtonText: '取消',
+					success: function(result) {
+						console.log("调用了openLocation" + JSON.stringify(result));
+						window.alert(JSON.stringify(result));
+					}
+				});
+			}
+
+			function chooseImage() {
+				my.chooseImage({
+					count: 3,
+					sourceType: ['camera', 'album'],
+					success: function(result) {
+						console.log("调用了chooseImage" + JSON.stringify(result));
+						window.alert(result);
+					}
+				});
+			}
+
+			function previewImage() {
+				my.previewImage({
+					current: 2,
+					urls: [
+						'https://img.alicdn.com/tps/TB1sXGYIFXXXXc5XpXXXXXXXXXX.jpg',
+						'https://img.alicdn.com/tps/TB1pfG4IFXXXXc6XXXXXXXXXXXX.jpg',
+						'https://img.alicdn.com/tps/TB1h9xxIFXXXXbKXXXXXXXXXXXX.jpg',
+					]
+				});
+			}
+
+			function saveImage() {
+				my.saveImage({
+					url: "https://img.alicdn.com/tps/TB1h9xxIFXXXXbKXXXXXXXXXXXX.jpg",
+					success: function(res) {
+						console.log("调用了saveImage" + JSON.stringify(res));
+						window.alert('操作结果' + JSON.stringify(res));
+					}
+				});
+			}
+
+			function uploadFile() {
+				my.chooseImage(3, function(res) {
+					if (res.apFilePath) {
+						my.uploadFile({
+							url: 'http://httpbin.org/post',
+							fileType: 'image',
+							fileName: 'file',
+							filePath: res.apFilePath,
+							success: function(res) {
+								if (!res.hasOwnProperty('error')) {
+									console.log("调用了uploadFile" + JSON.stringify(res));
+									window.alert('上传成功' + JSON.stringify(res));
+								}
+							}
+						});
+					}
+				});
+			}
+
+			function downloadFile() {
+				my.downloadFile({
+					url: 'https://zos.alipayobjects.com/rmsportal/MMpnSrfxpnMhBKlECDDv.jpg',
+					success: function(result) {
+						console.log("调用了downloadFile" + JSON.stringify(result));
+						window.alert('上传成功' + JSON.stringify(result));
+					}
+				});
+			}
+			//开始录音
+			function startRecord() {
+				my.startRecord(function(res) {
+					audioFilePath = res.apFilePath;
+				});
+			}
+			//
+			function stopRecord() {
+				my.stopRecord();
+			}
+
+			function playVoice() {
+				if (audioFilePath) {
+					my.playVoice(audioFilePath);
+				} else {
+					window.alert('不妨先录一段');
+				}
+			}
+
+			function pauseVoice() {
+				my.pauseVoice();
+			}
+
+			function stopVoice() {
+				my.stopVoice();
+			}
+
+			//---------------Beacon-------------------------
+			function startBeaconDiscovery() {
+				var beaconID = document.getElementById("beaconId").value;
+				if (beaconID.length == 0)
+					document.getElementById("statusDesc").innerText = "beaconID 为空，请检查输入";
+				AlipayJSBridge.call("startBeaconDiscovery", {
+					"uuids": [beaconID]
+				}, function(result) {
+					document.getElementById("statusDesc").innerText = "开启开始搜索" + JSON.stringify(result);
+				});
+
+				document.addEventListener("beaconUpdate", function(data) {
+					document.getElementById("statusDesc").innerText = "beaconUpdate" + JSON.stringify(data);
+				});
+			}
+
+			function stopBeaconDiscovery() {
+				AlipayJSBridge.call("stopBeaconDiscovery", {}, function(result) {
+					document.getElementById("statusDesc").innerText = "stopBeaconDiscovery = " + JSON.stringify(
+						result);
+				});
+			}
+
+
+			function navigateTo() {
+				my.navigateTo({
+					url: '/pages/framework/component/button/index',
+					success: function(res) {
+						// window.alert('操作结果' + JSON.stringify(res));
+					}
+				})
+			}
+
+			function navigateBack() {
+				my.navigateBack();
+			}
+
+			function switchTab() {
+				my.switchTab({
+					url: '/pages/tab-bar/page-APIs/index',
+					success: function(res) {
+						console.log('switchTab操作结果' + JSON.stringify(res));
+						// window.alert('操作结果' + JSON.stringify(res));
+					}
+				});
+			}
+
+			function reLaunch() {
+				my.reLaunch({
+					url: '/pages/tab-bar/page-APIs/index'
+				});
+			}
+
+			function redirectTo() {
+				my.redirectTo({
+					url: '/pages/framework/component/button/index',
+					success: function(res) {
+						console.log("调用了redirectTo" + JSON.stringify(res));
+						// window.alert('操作结果' + JSON.stringify(res));
+					}
+				})
+			}
+
+			function tradePay() {
+				my.tradePay({
+					orderStr: 'timestamp=....', // 即上述服务端已经加签的orderSr参数
+					success: function(result) {
+						console.log("调用了tradePay" + JSON.stringify(result));
+						window.alert('"调用了tradePay"' + JSON.stringify(result));
+					}
+				});
+			}
+
+
+			function getUserInfo() {
+				my.getAuthCode({
+					scopes: 'auth_user',
+					fail: function(error) {
+						console.error('getAuthCode', error);
+						window.alert("获取授权码失败");
+					},
+					success: function() {
+						my.getAuthUserInfo({
+							success: function(result) {
+								window.alert("调用getAuthUserInfo" + JSON.stringify(result));
+							}
+						});
+					}
+				});
+			}
+
+			function navigateToMiniProgram() {
+				my.navigateToMiniProgram({
+					appId: '2017070707674703',
+					success: function(result) {
+						console.log(JSON.stringfy(result))
+					},
+				});
+			}
+
+			function getSystemInfo() {
+				my.getSystemInfo({
+					success: function(result) {
+						window.alert('调用getSystemInfo' + JSON.stringify(result));
+					}
+				});
+			}
+		</script>
+		<div class=" a-view page">
+			<div class=" a-view page-description">Webview API</div>
+			<div class=" a-view page-section">
+				<div class=" a-view page-section-demo">
+					<a role="button" onclick="alert()" class="a-button a-button-primary">alert</a>
+					<a role="button" onclick="navigateTo()" class="a-button a-button-primary">navigateTo</a>
+					<a role="button" onclick="navigateBack()" class="a-button a-button-primary">navigateBack</a>
+					<a role="button" onclick="switchTab()" class="a-button a-button-primary">switchTab</a>
+					<a role="button" onclick="reLaunch()" class="a-button a-button-primary">reLaunch</a>
+					<a role="button" onclick="redirectTo()" class="a-button a-button-primary">redirectTo</a>
+					<a role="button" onclick="postMessage()" class="a-button a-button-primary">postMessage</a>
+					<a role="button" onclick="getEnv()" class="a-button a-button-primary">getEnv</a>
+					<a role="button" onclick="getNetworkType()" class="a-button a-button-primary">getNetworkType</a>
+					<a role="button" onclick="getLocation()" class="a-button a-button-primary">getLocation</a>
+					<a role="button" onclick="openLocation()" class="a-button a-button-primary">openLocation</a>
+					<a role="button" onclick="showLoadingAndHide()" class="a-button a-button-primary">showLoading和hideLoading</a>
+					<a role="button" onclick="chooseImage()" class="a-button a-button-primary">chooseImage</a>
+					<a role="button" onclick="previewImage()" class="a-button a-button-primary">previewImage</a>
+				</div>
+			</div>
+		</div>
+
+		<script src=" https://appx/web-view.min.js"></script>
+	</body>
+</html>

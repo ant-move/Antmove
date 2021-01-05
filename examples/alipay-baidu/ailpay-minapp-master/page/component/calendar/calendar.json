@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "Calendar",
+  "usingComponents":{
+    "calendar": "mini-antui/es/calendar/index"
+  }
+}

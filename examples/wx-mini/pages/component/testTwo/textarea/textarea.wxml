@@ -1,0 +1,3 @@
+<view class="section">
+  <textarea bindblur="bindTextAreaBlur" bindfocus="bindfocus" auto-height="true" placeholder="自动变高" auto-focus="true" fixed="false" cursor-spacing="1" cursor="1" show-confirm-bar="true" selection-start="1" selection-end="1" adjust-position="true" bindlinechange="onlinechange" aria-label="aria-label" />
+</view>

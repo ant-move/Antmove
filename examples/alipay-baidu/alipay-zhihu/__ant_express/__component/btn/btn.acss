@@ -1,0 +1,65 @@
+.btn_box{
+    position: relative
+}
+.base_btn{
+    background-color: #f8f8f8;
+    color: "#000";
+    line-height: 2.5556;
+    border: 1px solid #ccc;
+    padding-right: 14px;
+    padding-left: 14px;
+    box-sizing: border-box;
+    font-size: 18px;
+    border-radius: 5px;
+}
+.base_btn:active{
+    background-color: #dedede;
+    color: rgba(0,0,0,0.6);
+}
+.base_btn.size_mini{
+    display: inline-block;
+    border:1px solid #ccc;
+    line-height: 2.3;
+    padding: 0 1.34em;
+    font-size: 13px;
+    height: auto;
+}
+.base_btn.type_primary{
+    background-color: #179b16;
+    color:#fff;
+    border-color: #179b16;
+}
+.base_btn.type_primary:active{
+    opacity: 0.6
+}
+.base_btn.type_warn{
+    background-color: #e64340;
+    color:#fff;
+    border-color: #e64340;
+}
+.base_btn.type_warn:active{
+    opacity: 0.6
+}
+.base_btn.plain.plain_b  {
+    background-color: #fff;
+}
+.base_btn.plain.plain_b.type_warn{
+    color: #e64340;
+}
+
+.base_btn.plain.plain_b.type_primary{
+    color: #179b16;
+}
+.base_btn.disabled{
+    border: none;
+}
+.base_btn.type_primary.disabled{
+    background-color: #9ed99d;
+}
+.btn_mark{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%
+}

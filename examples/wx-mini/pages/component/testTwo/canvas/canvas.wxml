@@ -1,0 +1,8 @@
+<canvas style="width: 300px; height: 200px;background-color:red;" canvas-id="firstCanvas" bindtouchstart="ontouchstart" bindtouchmove="ontouchmove" bindtouchend="ontouchend" bindtouchcancel="ontouchcancel" bindlongtap="onlongtap"></canvas>
+
+<canvas style="width: 400px; height: 500px;background-color:green;" canvas-id="secondCanvas"></canvas>
+<canvas
+  style="width: 400px; height: 500px;background-color:yellow;"
+  canvas-id="secondCanvas"
+  binderror="canvasIdErrorCallback"
+></canvas>

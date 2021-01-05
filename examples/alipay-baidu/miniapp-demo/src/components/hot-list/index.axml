@@ -1,0 +1,10 @@
+<view class="hot-list-container {{className}}">
+  <view class="hot-list">
+    <block a:for="{{list}}">
+      <navigator a:if="{{item.path}}" url="{{item.path}}">
+        <view class="hot-item" onTap="onItemTap" data-title="{{item.title}}">{{item.title}}</view>
+      </navigator>
+      <view a:else class="hot-item" onTap="onItemTap" data-title="{{item.title}}">{{item.title}}</view>
+    </block>
+  </view>
+</view>

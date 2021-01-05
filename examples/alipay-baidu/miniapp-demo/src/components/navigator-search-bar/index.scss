@@ -1,0 +1,18 @@
+@import "../../styles/abstracts/mixins";
+
+@b(navigator-search-bar) {
+  height: 92rpx;
+  width: 91.4%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 4rpx;
+  box-shadow: rgba(153, 153, 153, 0.24) 0 2px 7px;
+
+  @e(placeholder) {
+    margin-left: 12rpx;
+    color: rgba(153, 153, 153, 0.89);
+    font-size: 28rpx;
+  }
+}

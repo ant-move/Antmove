@@ -1,0 +1,8 @@
+{
+  "auth": {
+     "clientId": "eHinMzuWcCjKbTlxfuor",
+     "clientSecret": "qlWFqIX2AnnMeoCnZP98UJrYFr1qyf9vzB0cYzPn",
+     "scope": "group,topic,repo,doc",
+      "host": "https://yuque.antfin-inc.com"
+  }
+}

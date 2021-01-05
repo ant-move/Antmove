@@ -1,0 +1,15 @@
+<view class='page-container-classname'>
+                <i-panel title='标题' hide-top=" " ref='saveChildRef1'>
+  <view style='padding: 15px;'>
+    头部距离为 0 的 Panel
+  </view>
+</i-panel><i-panel title='标题' ref='saveChildRef2'>
+  <view style='padding: 15px;'>
+    带有标题的 Panel
+  </view>
+</i-panel><i-panel title='标题' hide-border='{{ true }}' ref='saveChildRef3'>
+  <view style='padding: 15px;'>
+    无边框的 Panel
+  </view>
+</i-panel>
+            </view>

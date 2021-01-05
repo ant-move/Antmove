@@ -1,0 +1,8 @@
+{
+	"usingComponents": {
+		"i-rate": "../../dist/rate/index",
+		"i-cell-group": "../../dist/cell-group/index",
+		"i-cell": "../../dist/cell/index"
+	},
+	"defaultTitle": "Rate 评分"
+}

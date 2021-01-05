@@ -1,0 +1,6 @@
+<!--index.wxml-->
+<view class="content">
+  <view class='apilist' wx:for="{{apiList}}" wx:key="{{index}}" bindtap='currentTap' data-item="{{item}}">
+    <view class='apiItem'>{{item}}</view>
+  </view>
+</view>

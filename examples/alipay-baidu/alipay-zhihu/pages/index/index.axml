@@ -1,0 +1,65 @@
+<scroll-view
+    scroll-y="true"
+    class="container"
+    upper-threshold="10"
+    lower-threshold="5"
+    scroll-into-view="{{toView}}"
+    scroll-top="{{scrollTop}}"
+    onScrollToUpper="upper"
+    onScrollToLower="lower"
+    ><view class="search flex-wrp"
+        ><view class="search-left flex-item"
+            ><image src="/images/search.png"></image
+            ><input
+                placeholder="搜索话题, 问题或人"
+                placeholder-class="search-placeholder"/></view
+        ><view class="search-right flex-item" onTap="upper"
+            ><image src="/images/lighting.png"></image></view></view
+    ><block
+        a:for="{{feed}}"
+        a:for-index="idx"
+        a:for-item="item"
+        data-idx="{{idx}}"
+        ><view class="feed-item"
+            ><view class="feed-source"
+                ><view class=""
+                    ><view class="avatar"
+                        ><image src="{{item.feed_source_img}}"></image></view
+                    ><text
+                        ><text
+                            >{{item.feed_source_name}}{{item.feed_source_txt}}</text
+                        ></text
+                    ></view
+                ><image
+                    class="item-more"
+                    mode="aspectFit"
+                    src="/images/more.png"
+                ></image></view
+            ><view class="feed-content"
+                ><view class="question" qid="{{question_id}}" onTap="bindQueTap"
+                    ><view class="question-link"
+                        ><text><text>{{item.question}}</text></text></view
+                    ></view
+                ><view class="answer-body"
+                    ><view onTap="bindItemTap"
+                        ><text class="answer-txt" aid="{{answer_id}}"
+                            ><text>{{item.answer_ctnt}}</text></text
+                        ></view
+                    ><view class="answer-actions" onTap="bindItemTap"
+                        ><view class="like dot"
+                            ><view
+                                ><text>{{item.good_num}} 赞同 </text></view
+                            ></view
+                        ><view class="comments dot"
+                            ><view
+                                ><text>{{item.comment_num}} 评论 </text></view
+                            ></view
+                        ><view class="follow-it"
+                            ><view><text>关注问题</text></view></view
+                        ></view
+                    ></view
+                ></view
+            ></view
+        ></block
+    ></scroll-view
+>

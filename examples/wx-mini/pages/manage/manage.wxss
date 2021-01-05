@@ -1,0 +1,4 @@
+/* pages/manage/manage.wxss */
+.content{
+  height: 1000px;
+}

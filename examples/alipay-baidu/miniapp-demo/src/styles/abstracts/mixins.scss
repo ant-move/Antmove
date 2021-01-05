@@ -1,0 +1,76 @@
+@import "./configs";
+@import "./functions";
+
+@mixin b($block) {
+  @if $namespace == "" {
+    $B: $block !global;
+  }
+
+  @else {
+    $B: $namespace + "-" + $block !global;
+  }
+
+  .#{$B} {
+    @content;
+  }
+}
+
+@mixin e($element) {
+  $E: $element !global;
+  $selector: &;
+  $currentSelector: "";
+
+  @if hitAllSpecialNestRule($selector) {
+    @at-root {
+      #{$selector} {
+        .#{$B + $element-separator + $E} {
+          @content;
+        }
+      }
+    }
+  }
+
+  @else {
+    @at-root {
+      .#{$B + $element-separator + $E} {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin m($modifier) {
+  $selector: &;
+
+  @at-root {
+    #{$selector + $modifier-separator + $modifier} {
+      @content;
+    }
+  }
+}
+
+@mixin w($state) {
+  @at-root {
+    &.#{$state-prefix + $state} {
+      @content;
+    }
+  }
+}
+
+@mixin p($pseudo) {
+  @at-root #{&}:#{$pseudo} {
+    @content;
+  }
+}
+
+@mixin extend-rule($name) {
+  @extend #{"%shared-" + $name};
+}
+
+@mixin share-rule($name) {
+  $rule-name: "%shared-" + $name;
+
+  @at-root #{$rule-name} {
+    @content;
+  }
+}

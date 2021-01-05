@@ -1,0 +1,6 @@
+<view class="page-APIs">
+  <view class="page-APIs__banner">
+    <navigator-search-bar className="page-APIs__search"></navigator-search-bar>
+  </view>
+  <compsite-list objArr="{{APIs}}" className="page-APIs__list"></compsite-list>
+</view>

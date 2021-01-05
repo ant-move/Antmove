@@ -1,0 +1,12 @@
+<!--pages/login/login.wxml-->
+<view>
+    <text>pages/login/login.wxml</text>
+    <button
+  wx:if="{{canIUse}}"
+  open-type="getUserInfo"
+  bindgetuserinfo="bindGetUserInfo"
+  onTap='getUserInfoCb'
+>
+  授权登录
+</button>
+</view>

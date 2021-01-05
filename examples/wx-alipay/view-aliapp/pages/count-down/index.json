@@ -1,0 +1,4 @@
+{
+	"usingComponents": { "i-count-down": "../../dist/count-down/index" },
+	"defaultTitle": "倒计时"
+}

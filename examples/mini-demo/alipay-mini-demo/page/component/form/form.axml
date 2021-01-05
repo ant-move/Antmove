@@ -1,0 +1,90 @@
+<view class='page-container-classname'>
+                <view class='page' ref='saveChildRef0'>
+  <view class='page-description'>
+    表单
+  </view>
+  <form onSubmit='onSubmit' onReset='onReset'>
+    <view class='page-section'>
+      <view class='page-section-title'>
+        Slider
+      </view>
+      <view class='page-section-demo'>
+        <slider value='{{80}}' name='slider' show-value=" ">
+        </slider>
+      </view>
+    </view>
+    <view class='page-section'>
+      <view class='form-row'>
+        <view class='form-row-label'>
+          Switch
+        </view>
+        <view class='form-row-content' style='text-align: right'>
+          <switch name='switch'>
+          </switch>
+        </view>
+      </view>
+      <view class='form-line'>
+      </view>
+      <view class='form-row'>
+        <view class='form-row-label'>
+          Input
+        </view>
+        <view class='form-row-content'>
+          <input name='input' class='input' placeholder='input something'>
+          </input>
+        </view>
+      </view>
+    </view>
+    <view class='page-section'>
+      <view class='page-section-title'>
+        Radio
+      </view>
+      <view class='page-section-demo'>
+        <radio-group name='radio-group'>
+          <label>
+            <radio value='radio1'>
+            </radio>
+            radio1
+          </label>
+          <label>
+            <radio value='radio2'>
+            </radio>
+            radio2
+          </label>
+        </radio-group>
+      </view>
+    </view>
+    <view class='page-section'>
+      <view class='page-section-title'>
+        Checkbox
+      </view>
+      <view class='page-section-demo'>
+        <checkbox-group name='checkbox'>
+          <label>
+            <checkbox value='checkbox1'>
+            </checkbox>
+            checkbox1
+          </label>
+          <label>
+            <checkbox value='checkbox2'>
+            </checkbox>
+            checkbox2
+          </label>
+        </checkbox-group>
+      </view>
+      <view class='page-section-btns'>
+        <view>
+          <button type='ghost' size='mini' formType='reset' class=' ghost-style mini-style'>
+            Reset
+          </button>
+        </view>
+        <view>
+          <button type='primary' size='mini' formType='submit' class=' primary-style mini-style'>
+            Submit
+          </button>
+        </view>
+      </view>
+    </view>
+  </form>
+</view>
+            </view>

@@ -1,3 +1,3 @@
 module.exports = [
-    'custom-rich-text'
-];
+  'custom-rich-text'
+]

@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "am-icon": "../../es/am-icon/index"
+  }
+}

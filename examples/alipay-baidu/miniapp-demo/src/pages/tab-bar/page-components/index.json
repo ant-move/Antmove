@@ -1,0 +1,12 @@
+{
+  "defaultTitle": "",
+  "allowsBounceVertical": "NO",
+  "transparentTitle": "auto",
+  "usingComponents": {
+    "hot-list": "/components/hot-list/index",
+    "compsite-list": "/components/compsite-list/index",
+    "navigator-search-bar": "/components/navigator-search-bar/index",
+    "tabs": "mini-antui/es/tabs/index",
+    "tab-content": "mini-antui/es/tabs/tab-content/index"
+  }
+}

@@ -1,0 +1,77 @@
+<view class='page-container-classname'>
+                <view ref='saveChildRef0'>
+  <view class='banner'>
+    <view class='logo' style='opacity: {{titleOpacity}}'>
+      <image src='/image/component_logo.png' mode='aspectFit'>
+      </image>
+    </view>
+    <view class='title' style='opacity: {{titleOpacity}}'>
+      小程序官方示例
+    </view>
+    <view class='sub-title' style='opacity: {{titleOpacity}}'>
+      以下展示小程序官方组件和API
+    </view>
+    <view class='fake-searchbar' onTap='onSearchBarTap'>
+      <icon type='search' size='{{14}}' color='#1D1D1D' class=' iconsearch-style 14-style'>
+      </icon>
+      <text class='fake-placeholder'>
+        搜索你想要的组件和API      </text>
+    </view>
+  </view>  <block-list listData='{{hot}}' className='hot' ref='saveChildRef1'>
+  </block-list>
+  <view class="tabs {{shadow ? 'shadow' : ''}}" style='top: {{top}}px'>
+    <view class='tabs-bar'>
+      <block a:for='{{tabs}}' ref-numbers='{{tabs}}'>
+        <view class='tabs-bar-tab' data-index='{{index}}' onTap='onTabBarTap'>
+          <view class="tabs-bar-tab-title {{activeTab === index ? 'active' : ''}}">
+            {{item}}
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class='list-wrap'>
+    <view class='list-container'>
+      <view class='list'>
+        <block a:for='{{basicComponentList}}' a:for-item='list' ref-numbers='{{basicComponentList}}'>
+          <list className='list-item' ref='saveChildRef2'>
+            <view slot='header' class='list-header'>
+              {{list.type}}
+            </view>
+            <block a:for='{{list.list}}' ref-numbers='{{list.list}}'>
+              <list-item arrow='{{true}}' multipleLine='{{false}}' key='items-{{item.name}}' last='{{true}}' ref='saveChildRef3'>
+                <navigator url='{{item.path}}' style='display: flex; align-items: center'>
+                  <image src='{{item.thumb}}' class='thumb' mode='aspectFit'>
+                  </image>
+                  <text class='component-name'>
+                    {{item.name}}                  </text>                  <text class='component-brief'>
+                    {{item.nameEn}}                  </text>
+                </navigator>
+              </list-item>
+            </block>
+          </list>
+        </block>
+      </view>      <view class='list' style="{{ height: activeTab === 1 ? 'auto' : 0 }}">
+        <block a:for='{{extComponentList}}' a:for-item='list' ref-numbers='{{extComponentList}}'>
+          <list className='list-item' ref='saveChildRef4'>
+            <view slot='header' class='list-header'>
+              {{list.type}}
+            </view>
+            <block a:for='{{list.list}}' ref-numbers='{{list.list}}'>
+              <list-item arrow='{{true}}' multipleLine='{{false}}' key='items-{{item.name}}' last='{{true}}' ref='saveChildRef5'>
+                <navigator url='{{item.path}}' style='display: flex; align-items: center'>
+                  <image src='{{item.thumb}}' class='thumb' mode='aspectFit'>
+                  </image>
+                  <text class='component-name'>
+                    {{item.name}}                  </text>                  <text class='component-brief'>
+                    {{item.nameEn}}                  </text>
+                </navigator>
+              </list-item>
+            </block>
+          </list>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>
+            </view>

@@ -1,0 +1,55 @@
+<view>
+  <view style="margin-top: 10px;" />
+  <list>
+    <input-item
+      data-field="cardNo"
+      clear="{{true}}"
+      value="{{cardNo}}"
+      className="dadada"
+      placeholder="银行卡号"
+      focus="{{inputFocus}}"
+      onInput="onItemInput"
+      onFocus="onItemFocus"
+      onBlur="onItemBlur"
+      onConfirm="onItemConfirm"
+      onClear="onClear"
+    >
+      卡号
+      <view slot="extra" class="extra" onTap="onExtraTap"></view>
+    </input-item>
+    <picker-item
+      data-field="bank"
+      placeholder="选择发卡银行"
+      value="{{bank}}"
+      onPickerTap="onPickerTap"
+    >
+      发卡银行
+    </picker-item>
+    <input-item
+      data-field="name"
+      placeholder="姓名"
+      type="text"
+      value="{{name}}"
+      clear="{{true}}"
+      onInput="onItemInput"
+      onClear="onClear"
+    >
+      姓名
+    </input-item>
+    <input-item
+      data-field="password"
+      placeholder="密码"
+      password
+    >
+      密码
+    </input-item>
+    <input-item
+      data-field="remark"
+      placeholder="备注"
+      last="{{true}}"
+    />
+  </list>
+  <view style="margin: 10px;">
+    <button type="primary" onTap="onAutoFocus">聚焦</button>
+  </view>
+</view>

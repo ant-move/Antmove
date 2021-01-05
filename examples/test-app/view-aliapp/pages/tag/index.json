@@ -1,0 +1,4 @@
+{
+	"usingComponents": { "i-tag": "../../dist/tag/index" },
+	"defaultTitle": "tag"
+}

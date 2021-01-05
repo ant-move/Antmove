@@ -1,0 +1,34 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'toast'}}">
+  </template>
+  <view class='page-body'>
+    <view class='btn-area'>
+      <view class='body-view'>
+        <button type='default' class=' default-style' onTap='toast1Tap'>
+          点击弹出默认toast
+        </button>
+      </view>
+      <view class='body-view'>
+        <button type='default' class=' default-style' onTap='toast2Tap'>
+          点击弹出设置duration的toast
+        </button>
+      </view>
+      <view class='body-view'>
+        <button type='default' class=' default-style' onTap='toast3Tap'>
+          点击弹出显示loading的toast
+        </button>
+      </view>
+      <view class='body-view'>
+        <button type='default' class=' default-style' onTap='hideToast'>
+          点击隐藏toast
+        </button>
+      </view>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

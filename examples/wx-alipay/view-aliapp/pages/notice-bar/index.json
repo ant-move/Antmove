@@ -1,0 +1,7 @@
+{
+	"usingComponents": {
+		"i-panel": "../../dist/panel/index",
+		"i-notice-bar": "../../dist/notice-bar/index"
+	},
+	"defaultTitle": "NoticeBar 通告栏"
+}

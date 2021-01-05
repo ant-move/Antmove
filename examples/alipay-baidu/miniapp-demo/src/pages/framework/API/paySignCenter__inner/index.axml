@@ -1,0 +1,9 @@
+<view class="page">
+  <view class="page-description">支付代扣签约</view>
+  <view class="page-section">
+    <view class="page-section-title">paySignCenter</view>
+    <view class="page-section-demo">
+      <button size="default" type="primary" onTap="paySignCenter">paySignCenter</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,29 @@
+<list>
+  <list-item disabled="{{true}}">
+    Show number value
+    <view slot="extra">
+      <stepper onChange="callBackFn" step="{{1}}" showNumber readOnly="{{false}}" value="{{value}}" min="{{2}}" max="{{12}}" />
+    </view>
+  </list-item>
+  <list-item disabled="{{true}}">
+    Do not show number value
+    <view slot="extra">
+      <stepper onChange="callBackFn" step="{{1}}" readOnly="{{false}}" value="{{value}}" min="{{2}}" max="{{12}}" />
+    </view>
+  </list-item>
+  <list-item disabled="{{true}}">
+    Disabled
+    <view slot="extra">
+      <stepper onChange="callBackFn" showNumber value="{{11}}" min="{{2}}" max="{{12}}" disabled />
+    </view>
+  </list-item>
+  <list-item disabled="{{true}}">
+    readOnly
+    <view slot="extra">
+      <stepper onChange="callBackFn" showNumber value="{{11}}" min="{{2}}" max="{{12}}" readOnly />
+    </view>
+  </list-item>
+  <list-item>
+    <button onTap="modifyValue">修改setper初始值</button>
+  </list-item>
+</list>

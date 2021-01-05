@@ -1,0 +1,24 @@
+<!--pages/manage/manage.wxml-->
+<!-- <view bindtap='back'>navogateBack</view>
+<view>
+  <canvas canvas-id='myCanvas'></canvas>
+</view>
+<view bindtap='choose'>choose image</view> -->
+<!-- <modal title="{{title}}" confirm-text="{{confirm}}" cancel-text="{{cancel}}" hidden="{{modalHidden}}" no-cancel="{{nocancel}}" bindconfirm="bindconfirm" bindcancel="bindcancel">
+  这是对话框的内容。
+</modal> -->
+<view class='content'>
+<button bindtap='showToast'>showToast</button>
+<button bindtap='showModal'>showModal</button>
+<button bindtap='showActionSheet'>showActionSheet</button>
+<button bindtap='showLoading'>showLoading</button>
+<button bindtap='hideToast'>hideToast</button>
+<button bindtap='pageScrollTo'>pageScrollTo</button>
+<button bindtap='compressImage'>compressImage</button>
+<button bindtap='chooseImage'>chooseImage</button>
+<!-- <image src='http://5b0988e595225.cdn.sohucs.com/images/20170810/482d98e064194561955bddb73f61384c.png'></image> -->
+<button bindtap='saveImageToPhotosAlbum'>saveImageToPhotosAlbum</button>
+
+</view>
+
+

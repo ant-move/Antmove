@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "header": "/page/tabBar/components/header/header",
+    "list": "/page/tabBar/components/list/list"
+  }
+}

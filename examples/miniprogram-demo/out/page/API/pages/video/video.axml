@@ -1,0 +1,73 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'chooseVideo'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section'>
+      <view class='weui-cells weui-cells_after-title'>
+        <view class='weui-cell weui-cell_input'>
+          <view class='weui-cell__hd'>
+            <view class='weui-label'>
+              视频来源
+            </view>
+          </view>
+          <view class='weui-cell__bd'>
+            <picker range='{{sourceType}}' value='{{sourceTypeIndex}}' onChange='sourceTypeChange'>
+              <view class='weui-input'>
+                {{sourceType[sourceTypeIndex]}}
+              </view>
+            </picker>
+          </view>
+        </view>
+        <view class='weui-cell weui-cell_input'>
+          <view class='weui-cell__hd'>
+            <view class='weui-label'>
+              摄像头
+            </view>
+          </view>
+          <view class='weui-cell__bd'>
+            <picker range='{{camera}}' value='{{cameraIndex}}' onChange='cameraChange'>
+              <view class='weui-input'>
+                {{camera[cameraIndex]}}
+              </view>
+            </picker>
+          </view>
+        </view>
+        <view class='weui-cell weui-cell_input'>
+          <view class='weui-cell__hd'>
+            <view class='weui-label'>
+              拍摄长度
+            </view>
+          </view>
+          <view class='weui-cell__bd'>
+            <picker range='{{duration}}' value='{{durationIndex}}' onChange='durationChange'>
+              <view class='weui-input'>
+                {{duration[durationIndex]}}
+              </view>
+            </picker>
+          </view>
+        </view>
+      </view>
+      <view class='page-body-info'>
+        <block a:if="{{src === ''}}">
+          <view class='image-plus image-plus-nb' onTap='chooseVideo'>
+            <view class='image-plus-horizontal'>
+            </view>
+            <view class='image-plus-vertical'>
+            </view>
+          </view>
+          <view class='image-plus-text'>
+            添加视频
+          </view>
+        </block>
+        <block a:if="{{src != ''}}">
+          <video src='{{src}}' class='video'>
+          </video>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>
+            </view>

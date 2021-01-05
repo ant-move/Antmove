@@ -1,0 +1,15 @@
+<view class="page">
+  <view class="page-description">文本</view>
+  <view class="page-section">
+    <view class="page-section-title">这是一段文本。\n可以换行</view>
+    <view class="page-section-demo">
+      <text
+        selectable="true"
+        space="emsp"
+        decode="true"
+      >
+        {{text}}
+      </text>
+    </view>
+  </view>
+</view>

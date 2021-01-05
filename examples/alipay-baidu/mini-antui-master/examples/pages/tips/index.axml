@@ -1,0 +1,10 @@
+<view>
+  <list>
+    <list-item arrow="horizontal" index="tips" key="items-tips">
+      <navigator url="1/index">提示1</navigator>
+    </list-item>
+    <list-item arrow="horizontal" index="tips" key="items-tips">
+      <navigator url="2/index">提示2</navigator>
+    </list-item>
+  </list>
+</view>

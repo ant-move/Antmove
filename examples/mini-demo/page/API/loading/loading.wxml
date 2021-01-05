@@ -1,0 +1,11 @@
+<!--page/API/loading/loading.wxml-->
+
+<slot-demo date="加载中 API" title="wx.showLoading" prompt="">
+  <!-- <view class="page-section">
+    <view class="page-section-demo"> -->
+      <button type="primary" bindtap="showLoading">显示确认框
+      </button>
+      
+    <!-- </view>
+  </view> -->
+</slot-demo>

@@ -1,0 +1,25 @@
+<view class='page-container-classname'>
+                <import src='/page/common/head.axml' onChildRef='saveChildRef0'>
+</import><import src='/page/common/foot.axml'>
+</import><view class='container'>
+  <template is='head' data="{{title: 'text'}}">
+  </template>
+  <view class='page-body'>
+    <view class='page-section page-section-spacing'>
+      <view class='text-box' scroll-y='true' scroll-top='{{scrollTop}}'>
+        <text selectable='false' decode='false' space='emsp'>
+          {{text}}
+        </text>
+      </view>
+      <button disabled='{{!canAdd}}' onTap='add'>
+        add line
+      </button>
+      <button disabled='{{!canRemove}}' onTap='remove'>
+        remove line
+      </button>
+    </view>
+  </view>
+  <template is='foot'>
+  </template>
+</view>
+            </view>

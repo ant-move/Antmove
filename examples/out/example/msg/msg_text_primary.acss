@@ -1,0 +1,7 @@
+.page-container-classname {
+    background-color: #ffffff;
+}
+page,
+.page {
+    height: 100%;
+}

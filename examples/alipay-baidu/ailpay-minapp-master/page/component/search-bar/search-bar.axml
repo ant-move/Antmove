@@ -1,0 +1,12 @@
+<view>
+  <search-bar
+    value="{{value}}"
+    placeholder="搜索"
+    onInput="handleInput"
+    onClear="handleClear"
+    onFocus="handleFocus"
+    onBlur="handleBlur"
+    onCancel="handleCancel"
+    onSubmit="handleSubmit"
+    showCancelButton="{{false}}" />
+</view>

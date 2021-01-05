@@ -1,4 +1,4 @@
-require('./Wxml');
-require('./Js');
-require('./Json');
-require('./Wxss');
+require('./Wxml')
+require('./Js')
+require('./Json')
+require('./Wxss')

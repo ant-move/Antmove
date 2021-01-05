@@ -1,0 +1,19 @@
+@import '../style/mixins/hairline.less';
+
+.am-list {
+  &-header,&-footer {
+    font-size: 14px;
+    color: #888;
+  }
+  &-header {
+    padding: 16px 16px 8px;
+  }
+  &-body {
+    position: relative;
+    .hairline('top');
+    .hairline('bottom');
+  }
+  &-footer {
+    padding: 8px 16px 16px 16px;
+  }
+}

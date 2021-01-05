@@ -1,0 +1,9 @@
+<view class="page">
+  <view class="page-description">开放认证</view>
+  <view class="page-section">
+    <view class="page-section-title">startAPVerify</view>
+    <view class="page-section-demo">
+      <button type="primary" onTap="startAPVerify">唤起认证页面</button>
+    </view>
+  </view>
+</view>

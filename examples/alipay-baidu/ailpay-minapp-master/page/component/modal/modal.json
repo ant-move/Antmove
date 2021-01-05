@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "Modal",
+  "usingComponents":{
+    "modal": "mini-antui/es/modal/index"
+  }
+}

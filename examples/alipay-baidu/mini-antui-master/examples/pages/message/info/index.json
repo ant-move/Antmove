@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "信息状态-提示",
+  "usingComponents": {
+    "message": "../../../es/message/index"
+  }
+}

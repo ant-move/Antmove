@@ -1,0 +1,10 @@
+<view class="page">
+  <view class="page-description">设置页面是否支持下拉</view>
+    <view class="page-section">
+      <view class="page-section-title">setCanPullDown</view>
+      <view class="page-section-demo">  
+        设置页面是否支持下拉（小程序内页面默认支持下拉）
+        <button type="primary" onTap="pullDown"> {{isSupport}} </button>
+      </view>
+    </view>
+</view>

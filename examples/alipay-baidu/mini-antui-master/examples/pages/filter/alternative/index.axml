@@ -1,0 +1,3 @@
+<filter show="{{show}}" max="{{5}}" showData="{{items}}" onChange="handleCallBack">
+  
+</filter>
