@@ -161,5 +161,5 @@ App.use(
 
 ## [联系](https://github.com/ant-move/Antmove/issues/23)
 
-* <img width='300' src='https://cache.amap.com/ecology/tool/antmove/web/assets/contact-dingding.jpg'/>
+* <img width='300' src='https://cache.amap.com/ecology/tool/antmove/web/assets/contact-dd.jpg'/>
 * Email：amap-appx@service.autonavi.com
