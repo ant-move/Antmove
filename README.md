@@ -133,6 +133,18 @@ App.use(
     .start();
 ```
 
+## 注意事项
+
+### 使用Vant-liapp组件库
+* 当你项目中引入Vant-aliapp组件库，运行时报‘identifi(arguments) is disallowed in sjs’错误时, 可以取消IDE界面 详情 > 启用基础库2.0构建的勾选来解决
+* 支付宝上使用vant的checkbox、collapse、dropdown-menu、goods-action、grid、radio、tab、tabbar、index-bar、sidebar等组件的解决方法，按以下步骤进行：
+    1. npm下载Antmove命令行工具
+    > npm install antmove -g
+    2. 在你的项目根目录下，使用 alipay-compiler 对项目进行转换
+    > antmove -t alipay-compiler
+    3. 转换后的支付宝小程序即可支持以上组件
+* 如引入某个组件发现渲染失败时，可以参照 [示例](https://github.com/ant-move/Vant-Aliapp/tree/master/alipay/vant-app)中的例子仿写，如还有疑问可以扫描下方钉钉二维码联系我们
+
 ## [谁在使用](https://github.com/ant-move/antmove/issues/1)
 
 ### 微信小程序
