@@ -135,7 +135,7 @@ App.use(
 
 ## 注意事项
 
-### 使用Vant-liapp组件库
+### 使用Vant-aliapp组件库
 * 当你项目中引入Vant-aliapp组件库，运行时报‘identifi(arguments) is disallowed in sjs’错误时, 可以取消IDE界面 详情 > 启用基础库2.0构建的勾选来解决
 * 支付宝上使用vant的checkbox、collapse、dropdown-menu、goods-action、grid、radio、tab、tabbar、index-bar、sidebar等组件的解决方法，按以下步骤进行：
     1. npm下载Antmove命令行工具
