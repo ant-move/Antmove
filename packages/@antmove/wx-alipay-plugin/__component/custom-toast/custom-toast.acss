@@ -1,0 +1,33 @@
+.am_toast_mask view,
+.am_toast_mask text {
+  color: #fff;
+}
+
+.am_toast_mask {
+  position: fixed;
+  color: #fff;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  overflow: hidden;
+  z-index: 99999;
+}
+
+.am_toast_box {
+  color: #fff;
+  width: 94px;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 136px;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 20px 1px;
+}
+
+.icon {
+  color: #fff;
+  text-align: center;
+}

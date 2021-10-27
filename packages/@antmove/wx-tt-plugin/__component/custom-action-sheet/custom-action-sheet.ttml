@@ -1,0 +1,13 @@
+<view class="action_sheet {{className}}" tt:if="{{!hidden}}" bindtap="cancel">
+    <view class="sheet_box" catchtap="stopbable">
+        <view>
+            <view class="text_content" tt:if="textContent">
+                <text>{{textContent}}</text>
+            </view>
+            <slot></slot>
+            <view catchtap="cancel">
+                <slot name="footer"></slot>
+            </view>
+        </view>
+    </view>
+</view>

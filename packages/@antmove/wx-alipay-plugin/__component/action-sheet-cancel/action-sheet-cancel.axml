@@ -1,0 +1,6 @@
+<view class="am_sheet_cancel {{className}}" slot="footer">
+    <view a:if="textContent">
+        {{textContent}}
+    </view>
+    <slot></slot>
+</view>

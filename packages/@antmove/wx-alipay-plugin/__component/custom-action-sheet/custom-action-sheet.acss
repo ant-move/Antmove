@@ -1,0 +1,23 @@
+.am_action_sheet {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 999999;
+}
+.am_sheet_box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.am_text_content {
+    line-height: 42px;
+}

@@ -1,0 +1,128 @@
+#!/usr/bin/env node
+
+var path = require('path');
+var program = require('commander');
+const chalk = require('chalk');
+var buildScript = require('../src/index.js');
+const alipayWxCli = require('./alipay-wx');
+const alipayBaiduCli = require('./alipay-baidu');
+const inputDirPath = process.cwd();
+const entryProcess = require('./entry');
+/**
+ * read packageJson
+ */
+const packageJson = require('../package.json');
+let specialtypeCmd = false;
+const options = {
+    input: '',
+    output: '',
+    env: 'production',
+    remote: false
+};
+
+
+
+program
+    .version(packageJson.version)
+    .option('-t, --type <type>', 'Which plugin to be used.')
+    .option('-i, --input <type>', 'Input path of compiled code.')
+    .option('-o, --output <type>', 'Output path of compiled code.')
+    .option('-e, --env <type>', 'Compiling in development mode or production mode.')
+    .option('-s, --scope <type>', 'Compiling component in scope mode.')
+    .option('-r, --remote <type>', 'Pull ployfill from remote sources.');
+
+/**
+ * $ antmove wx-alipay ../alipay-app
+ * */
+program
+    .version(packageJson.version)
+    .command('wx-alipay')
+    .action(function (...params) {
+        specialtypeCmd = true;
+        action({
+            ...options,
+            input: inputDirPath,
+            output: params[0],
+            env: params[1] || 'prod'
+        });
+    });
+
+/**
+ * antmove-cli alipay-wx ../wx-app
+ */
+alipayWxCli(program, function (params, plugin) {
+    specialtypeCmd = true;
+
+    action({
+        ...options,
+        input: inputDirPath,
+        output: params[0],
+        env: params[1] || 'prod'
+    },
+    plugin
+    );
+});
+
+/**
+ * antmove-cli alipay-baidu ../baidu-app
+ */
+alipayBaiduCli(program, function (params, plugin) {
+    specialtypeCmd = true;
+
+    action({
+        ...options,
+        input: inputDirPath,
+        output: params[0],
+        env: params[1] || 'prod'
+    },
+    plugin
+    );
+});
+ 
+program.parse(process.argv);
+
+options.input = program.input;
+options.defaultInput = inputDirPath;
+options.output = program.output;
+options.env = program.env || options.env;
+options.remote = program.remote || options.remote;
+options.scope = program.scope || true;
+options.type = program.type;
+
+if (!specialtypeCmd) {
+    action(options);
+}
+
+/**
+ * cmd options
+ * @param opts 
+ */
+function action (options, script = buildScript) {
+    /**
+     * preprocess ouput path
+     */
+    entryProcess(options, function (opts = {}) {
+        opts.input = toAbsolutePath(opts.input);
+        opts.output = toAbsolutePath(opts.output);
+    
+        if (!opts.output) {
+            program.help();
+            return false;
+        }
+
+        if (opts.input === opts.output) {
+            console.log(chalk.red('输入输出目录不能为同一个地址。'));
+        }
+        script(opts);
+    });
+}
+
+
+function toAbsolutePath (target) {
+    let dist = target;
+    if (!path.isAbsolute(target)) {
+        dist = path.join(inputDirPath, target);
+    }
+
+    return dist;
+}

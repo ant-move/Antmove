@@ -1,0 +1,11 @@
+<view class='{{className}}'>
+    <view class="toast_mask" a:if="{{!hidden}}">
+        <view class="toast_box">
+            <view class="icon" >
+                <icon type="success_no_circle" color="#fff" aria-label="success_no_circle" size="45"/>
+            </view>
+            <view a:if="{{textContent}}">{{textContent}}</view>
+            <slot></slot>
+          </view>
+    </view>
+</view>

@@ -1,0 +1,13 @@
+<view class='{{className}}'>
+    <view class="am_loading_mask" a:if="{{!hidden}}">
+        <view class="am_loading_box">
+            <view class="icon" >
+                <view class="am_loading_icon">
+                    <image class="am_loading_img"  src="/__antmove/component/custom-loading/Loading.png" mode="aspectFill" />
+                </view>
+            </view>
+            <view a:if="{{textContent}}">{{textContent}}</view>
+            <slot></slot>
+          </view>
+    </view>
+</view>

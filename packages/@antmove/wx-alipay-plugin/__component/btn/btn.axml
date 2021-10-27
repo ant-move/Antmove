@@ -1,0 +1,9 @@
+<view class="btn_box {{antmoveClass}} {{size}} {{disabled?'disabled':''}} {{styleV2 ? 'styleV2Btn' : 'notStyleV2Btn'}} {{hoverClass === 'none' ? '' : 'active'}}"  >
+    <button style="{{style}}" class="base_btn size_{{size}} type_{{type}}  {{plain?'plain':''}} {{className}}"  loading="{{loading}}" formType="{{formType}}" open-type="{{opentype}}"  app-parameter="{{appParameter}}" scope='{{scope}}' onGetAuthorize="getAuthorize" onError='onError' onTap="btnOnTap" hover-class='{{hoverClass}}'> <slot></slot> </button>
+    <view class="btn_mark" a:if="{{catchTap}}" catchTap="btnOnTap"></view>
+    <view class="btn_mark" a:if="{{disabled}}" catchTap="stopEvent"></view>
+</view>
+
+
+
+

@@ -1,0 +1,24 @@
+<view class="am_swiper_box" onTap='tapHandler'>
+    <view class="am_swiper_mask" a:if="{{catchTap}}" catchTap="catchTapHandler"></view>
+    <swiper
+        style='{{style}}'
+        class="{{className}}"
+        indicator-dots='{{indicatorDots}}'
+        interval='{{interval}}'
+        current='{{current}}'
+        indicator-color='{{indicatorColor}}'
+        indicator-active-color='{{indicatorActiveColor}}'
+        autoplay='{{autoplay}}'
+        circular='{{circular}}'
+        previousMargin='{{previousMargin}}'
+        nextMargin='{{nextMargin}}'
+        vertical='{{vertical}}'
+        duration='{{duration}}'
+        onChange='changeHandler'
+        onTransition='transitionHandler'
+        onAnimationEnd='animationEndHandler'
+    >
+        <slot></slot>
+    </swiper>
+ </view>
+

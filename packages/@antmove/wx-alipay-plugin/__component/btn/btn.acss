@@ -1,0 +1,129 @@
+.btn_box{
+    position: relative; 
+}
+.mini {
+    display: inline-block
+}
+.styleV2Btn button{
+    padding-left: 24px;
+    padding-right: 24px;
+    font-weight: 700;
+}
+.styleV2Btn.active button:active{
+    background-color: #dedede;
+}
+.size_mini{
+    display: inline-block;
+    line-height: 2.3;
+    padding: 0 1.34em;
+    font-size: 13px;
+    height: auto;
+}
+.styleV2Btn .size_default{
+    width: 184px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.styleV2Btn .type_primary{
+    background-color: #07c160;
+    color:#fff;
+    border-color: #07c160;
+}
+.styleV2Btn.active .type_primary:active{
+    background-color:rgb(28,172,89);
+}
+.styleV2Btn .type_warn{
+    color: #fa5151 ;
+    background-color:#f2f2f2;
+}
+.styleV2Btn .type_default{
+    background-color: #f2f2f2;
+    color:#06ae56 ;
+}
+.plain.type_warn{
+    color: #e64340;
+    background-color: #fff;
+    border-color: #e64340;
+}
+
+.styleV2Btn .plain.type_primary{
+    color: #06ae56 ;
+    background-color: #fff;
+}
+
+.styleV2Btn .plain.type_default{
+    color: #353535 ;
+    border-color:  #353535;
+    background-color: transparent;
+}
+
+.styleV2Btn.active .plain:active {
+    background-color: #dedede;
+}
+.active .plain.type_warn:active{
+    background-color: #fff;
+    opacity: 0.6;
+}
+
+.disabled{
+    opacity: 0.6
+}
+
+.btn_mark,.btn_catch{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%
+}
+.active .btn_catch:active {
+  background-color: rgba(255,255,255,.3)
+}
+.hovers{
+    background-color: blue;
+}
+/* 旧版本样式 */
+.notStyleV2Btn button{
+    font-weight: 400;
+}
+
+.notStyleV2Btn .type_primary{
+    background-color: #1aad19;
+    color:#fff;
+}
+.notStyleV2Btn.active .type_primary:active{
+    background-color: rgb(33,153,35);
+    color:rgb(166,214,167);
+}
+.notStyleV2Btn .plain.type_primary{
+    color: #1aad19;
+    background-color: #fff;
+    border-color: #1aad19;
+}
+.notStyleV2Btn .plain.type_default{
+    background-color: #fff;
+    border-color: #353535;
+}
+.notStyleV2Btn.active .type_default:active{
+    background-color: rgb(221,221,221);
+    color:rgb(154,154,154);
+}
+.notStyleV2Btn .plain.type_warn{
+    color: #e64340;
+    border-color: #e64340;
+    background-color: #fff;
+}
+.notStyleV2Btn.active .plain:active, .notStyleV2Btn.active .plain.type_warn:active{
+    background-color: #fff;
+    opacity: 0.6;
+}
+.notStyleV2Btn .type_warn{
+    background-color: #e64340;
+    color: #fff;
+}
+.notStyleV2Btn.active .type_warn:active{
+    background-color: rgb(204,61,61);
+    color: rgb(215,117,117);
+}
+
+

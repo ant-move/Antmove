@@ -1,0 +1,9 @@
+.am_checkbox_wrap {
+  display: inline-block;
+}
+.am_innerbox {
+  display: inline-flex;
+  align-items: center;
+  /* vertical-align:text-bottom; */
+  vertical-align: middle;
+}

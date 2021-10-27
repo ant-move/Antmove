@@ -1,0 +1,25 @@
+<view class="container">
+    <!--  s-if="{{mapShow}}" -->
+    <map
+        s-if="{{mapShow}}"
+        id= "{{mapId}}"
+        longitude="{{longitude}}"
+        latitude="{{latitude}}"
+        scale="{{ascale}}"
+        markers="{{markers}}"
+        show-location 
+        polyline="{{polyline}}"
+        polygons="{{ polygon }}"
+        circles="{{circles}}"
+        controls="{{controls}}"
+        include-points="{{include-points}}"
+        enable-3D="{{enable3d}}"
+        show-compass="{{showCompass}}"
+        enable-overlooking="{{enableOverlooking}}"
+        enable-zoom="{{enableZoom}}"
+        enable-scroll="{{enableScroll}}"
+        enable-rotate="{{enableRotate}}"
+        bindmarkertap="onMarkertap" bindcallouttap="onCallouttap" bindcontroltap="onControltap" bindregionchange="onRegionchange" bindtap="onTap" bindupdated="onUpdated">
+        <slot></slot>
+    </map>
+</view>

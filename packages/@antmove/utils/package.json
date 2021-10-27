@@ -1,0 +1,44 @@
+{
+  "name": "@antmove/utils",
+  "version": "1.2.2",
+  "description": "antmove helper functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "amap-appx@service.autonavi.com",
+  "license": "GPL-3.0",
+  "peerDependencies": {
+    "@antmove/core": "^1.1.6"
+  },
+  "dependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-export-default-from": "^7.5.2",
+    "@babel/plugin-syntax-top-level-await": "^7.7.0",
+    "@babel/plugin-transform-async-to-generator": "^7.5.0",
+    "@babel/template": "^7.10.4",
+    "chalk": "^2.4.2",
+    "chokidar": "^3.4.3",
+    "clean-css": "^4.2.1",
+    "cli-table3": "^0.5.1",
+    "clui": "^0.3.6",
+    "css": "^3.0.0",
+    "figlet": "^1.2.3",
+    "fs-extra": "^8.1.0",
+    "htmlparser2": "^5.0.1",
+    "open": "^6.4.0",
+    "prettier": "^1.18.2",
+    "single-line-log": "^1.1.2",
+    "uglify-js": "^3.6.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.5.5",
+    "axios": "^0.19.0"
+  },
+  "gitHead": "d3eab5657b5b44b09cc23402feee06c67e9beef2"
+}

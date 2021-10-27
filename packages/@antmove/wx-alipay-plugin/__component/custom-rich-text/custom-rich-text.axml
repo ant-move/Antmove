@@ -1,0 +1,1 @@
+<rich-text class="{{className}}" nodes="{{nodesData}}"></rich-text>

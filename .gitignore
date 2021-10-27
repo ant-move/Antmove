@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+bus/
+.vscode
+.eslintcache
+build
+example
